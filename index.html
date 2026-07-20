@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кухонная шпаргалка — крупы, мясо, советы, рецепты</title>
+<meta name="description" content="Личная кулинарная шпаргалка: крупы, мясо, советы шеф-поваров и рецепты.">
+<meta name="theme-color" content="#1B1713">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Кухонная шпаргалка — sol-chef">
+<meta property="og:description" content="Личная кулинарная шпаргалка: крупы, мясо, советы и рецепты.">
+<meta property="og:url" content="https://sol-chef.ru/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top" id="site-header">
+    <div class="eyebrow" id="site-eyebrow">Личная кулинарная шпаргалка</div>
+    <h1 id="site-heading">Кухонная шпаргалка</h1>
+    <p id="site-tagline">Соотношения, температуры, нюансы по способам приготовления, база практических приёмов и проверенные рецепты — всё в одном месте.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="active" data-tab="grains" data-accent="gold">🌾 Крупы</button>
+    <button data-tab="beef" data-accent="ember">🥩 Говядина</button>
+    <button data-tab="pork" data-accent="pork">🐖 Свинина</button>
+    <button data-tab="bird" data-accent="bird">🐔 Птица</button>
+    <button data-tab="tips" data-accent="sage">📋 Советы Энди</button>
+    <button data-tab="recipes" data-accent="walnut">📖 Рецепты</button>
+  </nav>
+
+  <section class="panel active" id="grains">
+    <p class="intro" id="grains-intro">Загрузка…</p>
+    <div id="grains-content"><div class="empty-state">Загрузка…</div></div>
+  </section>
+
+  <section class="panel" id="beef">
+    <p class="intro" id="beef-intro">Загрузка…</p>
+    <div id="beef-content"><div class="empty-state">Загрузка…</div></div>
+  </section>
+
+  <section class="panel" id="pork">
+    <p class="intro" id="pork-intro">Загрузка…</p>
+    <div id="pork-content"><div class="empty-state">Загрузка…</div></div>
+  </section>
+
+  <section class="panel" id="bird">
+    <p class="intro" id="bird-intro">Загрузка…</p>
+    <div id="bird-content"><div class="empty-state">Загрузка…</div></div>
+  </section>
+
+  <section class="panel" id="tips">
+    <p class="intro" id="tips-intro">Загрузка советов…</p>
+    <div id="tips-list"><div class="empty-state">Загрузка…</div></div>
+  </section>
+
+  <section class="panel" id="recipes">
+    <p class="intro"><b>Проверенные рецепты</b> — со ссылкой на исходное видео или статью и кратким конспектом сути. Список пополняется.</p>
+    <div class="recipe-toolbar">
+      <input type="search" id="recipe-search" class="recipe-search" placeholder="Поиск по названию, тексту, тегам…" autocomplete="off">
+      <div class="recipe-tag-filters" id="recipe-tag-filters"></div>
+      <div class="recipe-count" id="recipe-count"></div>
+    </div>
+    <div class="recipe-grid" id="recipe-list">
+      <div class="empty-state">Загрузка…</div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

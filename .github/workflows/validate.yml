@@ -1,0 +1,26 @@
+name: Validate recipes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate data/recipes.json
+        run: node scripts/validate-recipes.js
+
+      - name: Validate data/tips.json
+        run: node scripts/validate-tips.js
+
+      - name: Validate reference JSON
+        run: node scripts/validate-reference.js

@@ -1,0 +1,70 @@
+:root {
+  /* Шрифты */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Цвета */
+  --bg: #1B1713;
+  --surface: #262019;
+  --surface-2: #322A20;
+  --line: #3D3226;
+  --text: #EDE4D6;
+  --text-dim: #A89A85;
+
+  --ember: #C15A1F;
+  --ember-soft: #C15A1F33;
+  --gold: #C9A034;
+  --gold-soft: #C9A03433;
+  --pork: #C97C6B;
+  --pork-soft: #C97C6B33;
+  --bird: #D6A24A;
+  --bird-soft: #D6A24A33;
+  --sage: #7E9463;
+  --sage-soft: #7E946333;
+  --wal: #A6763E;
+  --wal-soft: #A6763E33;
+
+  /* Акцент вкладки (переключается JS) */
+  --accent: var(--gold);
+  --accent-soft: var(--gold-soft);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(30px, 5vw, 44px);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
