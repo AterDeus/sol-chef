@@ -60,7 +60,44 @@
     },
     "steps": {
       "type": "array",
-      "items": { "type": "string", "minLength": 1 }
+      "items": {
+        "oneOf": [
+          { "type": "string", "minLength": 1 },
+          {
+            "type": "object",
+            "required": ["text"],
+            "additionalProperties": false,
+            "properties": {
+              "text": { "type": "string", "minLength": 1 },
+              "timer_min": { "type": "number", "minimum": 0 },
+              "timer_sec": { "type": "number", "minimum": 0, "maximum": 3599 },
+              "timer_label": { "type": "string" }
+            }
+          }
+        ]
+      }
+    },
+    "prep": {
+      "type": "array",
+      "description": "Напоминания до начала готовки (разморозка, маринад, комнатная температура)",
+      "items": {
+        "type": "object",
+        "required": ["text"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string", "minLength": 1 },
+          "before_min": { "type": "number", "minimum": 1 },
+          "before_hours": { "type": "number", "minimum": 1 },
+          "type": {
+            "type": "string",
+            "enum": ["thaw", "fridge", "room_temp", "marinate", "soak", "custom"]
+          }
+        },
+        "anyOf": [
+          { "required": ["before_min"] },
+          { "required": ["before_hours"] }
+        ]
+      }
     },
     "notes": {
       "type": "string"

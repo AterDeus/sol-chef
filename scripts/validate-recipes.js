@@ -25,8 +25,9 @@ const CATEGORIES = new Set([
 ]);
 const ALLOWED_FIELDS = new Set([
   'id', 'title', 'source_type', 'source_url', 'source_name',
-  'tags', 'category', 'summary', 'ingredients', 'steps', 'notes', 'added',
+  'tags', 'category', 'summary', 'ingredients', 'steps', 'prep', 'notes', 'added',
 ]);
+const PREP_TYPES = new Set(['thaw', 'fridge', 'room_temp', 'marinate', 'soak', 'custom']);
 
 function fail(message){
   console.error(`ERROR: ${message}`);
@@ -126,6 +127,68 @@ function validateTags(recipe, prefix){
   }
 }
 
+function validateStep(item, path){
+  if (typeof item === 'string'){
+    if (!item.trim()){
+      fail(`${path}: must be a non-empty string`);
+    }
+    return;
+  }
+  if (!item || typeof item !== 'object' || Array.isArray(item)){
+    fail(`${path}: must be a string or step object`);
+    return;
+  }
+  if (!item.text || typeof item.text !== 'string' || !item.text.trim()){
+    fail(`${path}.text: required non-empty string`);
+  }
+  const allowed = new Set(['text', 'timer_min', 'timer_sec', 'timer_label']);
+  for (const key of Object.keys(item)){
+    if (!allowed.has(key)){
+      fail(`${path}: unknown field "${key}"`);
+    }
+  }
+  if (item.timer_min != null && (typeof item.timer_min !== 'number' || item.timer_min < 0)){
+    fail(`${path}.timer_min: must be a non-negative number`);
+  }
+  if (item.timer_sec != null && (typeof item.timer_sec !== 'number' || item.timer_sec < 0 || item.timer_sec > 3599)){
+    fail(`${path}.timer_sec: must be 0–3599`);
+  }
+  const totalSec = (Number(item.timer_min) || 0) * 60 + (Number(item.timer_sec) || 0);
+  if ((item.timer_min != null || item.timer_sec != null) && totalSec <= 0){
+    fail(`${path}: timer_min/timer_sec must total more than 0 when set`);
+  }
+}
+
+function validatePrepItem(item, path){
+  if (!item || typeof item !== 'object' || Array.isArray(item)){
+    fail(`${path}: must be an object`);
+    return;
+  }
+  if (!item.text || typeof item.text !== 'string' || !item.text.trim()){
+    fail(`${path}.text: required non-empty string`);
+  }
+  const beforeMin = Number(item.before_min) || 0;
+  const beforeHours = Number(item.before_hours) || 0;
+  if (beforeMin + beforeHours <= 0){
+    fail(`${path}: set before_min and/or before_hours (> 0)`);
+  }
+  if (item.before_min != null && (typeof item.before_min !== 'number' || item.before_min < 1)){
+    fail(`${path}.before_min: must be >= 1`);
+  }
+  if (item.before_hours != null && (typeof item.before_hours !== 'number' || item.before_hours < 1)){
+    fail(`${path}.before_hours: must be >= 1`);
+  }
+  if (item.type != null && !PREP_TYPES.has(item.type)){
+    fail(`${path}.type: invalid value "${item.type}"`);
+  }
+  const allowed = new Set(['text', 'before_min', 'before_hours', 'type']);
+  for (const key of Object.keys(item)){
+    if (!allowed.has(key)){
+      fail(`${path}: unknown field "${key}"`);
+    }
+  }
+}
+
 function validateRecipe(recipe, index, labelPrefix){
   const prefix = `${labelPrefix}[${index}]`;
   if (!recipe || typeof recipe !== 'object' || Array.isArray(recipe)){
@@ -187,9 +250,17 @@ function validateRecipe(recipe, index, labelPrefix){
       fail(`${prefix}: steps must be an array`);
     } else {
       recipe.steps.forEach((item, i) => {
-        if (typeof item !== 'string' || !item.trim()){
-          fail(`${prefix}.steps[${i}]: must be a non-empty string`);
-        }
+        validateStep(item, `${prefix}.steps[${i}]`);
+      });
+    }
+  }
+
+  if (recipe.prep != null){
+    if (!Array.isArray(recipe.prep)){
+      fail(`${prefix}: prep must be an array`);
+    } else {
+      recipe.prep.forEach((item, i) => {
+        validatePrepItem(item, `${prefix}.prep[${i}]`);
       });
     }
   }

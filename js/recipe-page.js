@@ -1,9 +1,15 @@
 import { escapeHtml, safeHref, fetchJson } from './utils.js';
+import { initCookMode, renderPrepSection, renderStepsWithTimers } from './cook-mode.js';
+import { startAlertPoller } from './notifications.js';
+import { normalizePrep, normalizeSteps } from './step-utils.js';
 
 const SOURCE_LABELS = {
   video: '🎥 видео',
   article: '📄 статья',
+  original: '📝 авторский',
 };
+
+let cookModeController = null;
 
 function getRecipeId() {
   const params = new URLSearchParams(window.location.search);
@@ -43,23 +49,31 @@ function renderRecipe(recipe) {
 
   const sourceUrl = safeHref(recipe.source_url);
   const sourceName = escapeHtml(recipe.source_name || 'Открыть источник');
+  const hasSteps = normalizeSteps(recipe.steps).length > 0;
+  const hasPrep = normalizePrep(recipe.prep).length > 0;
+
   let html = `<p class="recipe-lead">${escapeHtml(recipe.summary)}</p>`;
+
+  if (hasPrep) {
+    html += renderPrepSection(recipe.prep);
+  }
 
   if (recipe.ingredients?.length) {
     html += `<section class="recipe-section"><h2>Ингредиенты</h2>${renderList(recipe.ingredients, false)}</section>`;
   }
   if (recipe.steps?.length) {
-    html += `<section class="recipe-section"><h2>Шаги</h2>${renderList(recipe.steps, true)}</section>`;
+    html += `<section class="recipe-section"><h2>Шаги</h2>${renderStepsWithTimers(recipe.steps)}</section>`;
   }
   if (recipe.notes) {
     html += `<section class="recipe-section recipe-notes"><h2>Заметки</h2><p>${escapeHtml(recipe.notes)}</p></section>`;
   }
 
-  html += `
-    <div class="recipe-actions">
-      <a class="btn-primary" href="${sourceUrl}" target="_blank" rel="noopener">${sourceName}</a>
-      <button type="button" class="btn-secondary" id="copy-link">Скопировать ссылку</button>
-    </div>`;
+  html += `<div class="recipe-actions">`;
+  if (hasSteps) {
+    html += `<button type="button" class="btn-primary btn-cook" id="start-cook-mode">Режим готовки</button>`;
+  }
+  html += `<button type="button" class="btn-secondary" id="copy-link">Скопировать ссылку</button>`;
+  html += `</div>`;
 
   document.getElementById('recipe-content').innerHTML = html;
 
@@ -80,6 +94,14 @@ function renderRecipe(recipe) {
       prompt('Скопируйте ссылку:', window.location.href);
     }
   });
+
+  const cookRoot = document.getElementById('cook-mode-root');
+  if (hasSteps && cookRoot) {
+    cookModeController = initCookMode(recipe, cookRoot);
+    document.getElementById('start-cook-mode')?.addEventListener('click', () => {
+      cookModeController?.open();
+    });
+  }
 }
 
 function showError(message) {
@@ -89,6 +111,16 @@ function showError(message) {
     <div class="empty-state">${escapeHtml(message)}</div>
     <p style="margin-top:16px"><a class="back-link" href="index.html#recipes">← К списку рецептов</a></p>`;
 }
+
+startAlertPoller((alert) => {
+  if (document.hidden) return;
+  const toast = document.getElementById('cook-mode-toast');
+  if (toast) {
+    toast.textContent = `${alert.title}: ${alert.body}`;
+    toast.hidden = false;
+    setTimeout(() => { toast.hidden = true; }, 6000);
+  }
+});
 
 const id = getRecipeId();
 
