@@ -218,18 +218,24 @@ table.grains td.name {
 
 .acc-item .acc-body ul {
   margin: 0;
-  padding-left: 18px;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  line-height: 1.5;
 }
 
 .acc-item .acc-body li {
   font-size: clamp(14px, 1.1vw, 16px);
   color: var(--text);
-  margin-bottom: 9px;
-  line-height: 1.55;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--line);
 }
 
 .acc-item .acc-body li:last-child {
   margin-bottom: 0;
+  border: 0;
+  padding: 0;
 }
 
 .acc-item .acc-body li b {
@@ -855,6 +861,9 @@ body.cook-mode-open .mobile-bar {
   font-size: 13px;
   color: var(--text-dim);
   margin: 0 0 12px;
+}
+.cook-notify-hint {
+  padding-top: 10px;
 }
 
 .cook-start-options {
