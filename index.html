@@ -17,17 +17,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="has-mobile-bar">
 <div class="wrap">
 
-  <header class="top" id="site-header">
+  <header class="top site-header" id="site-header">
     <div class="eyebrow" id="site-eyebrow">Личная кулинарная шпаргалка</div>
     <h1 id="site-heading">Кухонная шпаргалка</h1>
-    <p id="site-tagline">Соотношения, температуры, нюансы по способам приготовления, база практических приёмов и проверенные рецепты — всё в одном месте.</p>
+    <p class="site-tagline" id="site-tagline">Соотношения, температуры, нюансы по способам приготовления, база практических приёмов и проверенные рецепты — всё в одном месте.</p>
   </header>
 
-  <nav class="tabs">
-    <button class="active" data-tab="grains" data-accent="gold">🌾 Крупы</button>
+  <nav class="tabs tabs--desktop" aria-label="Разделы">
+    <button data-tab="grains" data-accent="gold">🌾 Крупы</button>
     <button data-tab="beef" data-accent="ember">🥩 Говядина</button>
     <button data-tab="pork" data-accent="pork">🐖 Свинина</button>
     <button data-tab="bird" data-accent="bird">🐔 Птица</button>
@@ -35,7 +35,16 @@
     <button data-tab="recipes" data-accent="walnut">📖 Рецепты</button>
   </nav>
 
-  <section class="panel active" id="grains">
+  <div class="ref-subnav-wrap" id="ref-subnav-wrap" hidden>
+    <nav class="ref-subnav" id="ref-subnav" aria-label="Справочник">
+      <button type="button" data-tab="grains" data-accent="gold">Крупы</button>
+      <button type="button" data-tab="beef" data-accent="ember">Говядина</button>
+      <button type="button" data-tab="pork" data-accent="pork">Свинина</button>
+      <button type="button" data-tab="bird" data-accent="bird">Птица</button>
+    </nav>
+  </div>
+
+  <section class="panel" id="grains">
     <p class="intro" id="grains-intro">Загрузка…</p>
     <div id="grains-content"><div class="empty-state">Загрузка…</div></div>
   </section>
@@ -64,7 +73,19 @@
     <p class="intro"><b>Проверенные рецепты</b> — со ссылкой на исходное видео или статью и кратким конспектом сути. Список пополняется.</p>
     <div class="recipe-toolbar">
       <input type="search" id="recipe-search" class="recipe-search" placeholder="Поиск по названию, тексту, тегам…" autocomplete="off">
-      <div class="recipe-tag-filters" id="recipe-tag-filters"></div>
+      <div class="recipe-tag-filters-wrap" id="recipe-tag-filters-wrap">
+        <div class="recipe-tag-filters-head">
+          <div class="recipe-tag-filters recipe-tag-filters--primary" id="recipe-tag-filters-primary"></div>
+          <button type="button" class="tag-filters-toggle" id="tag-filters-toggle" aria-expanded="false" aria-label="Показать все теги" hidden>
+            <span class="tag-filters-toggle__icon" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="recipe-tag-filters-extra-wrap" id="recipe-tag-filters-extra-wrap">
+          <div class="recipe-tag-filters-extra-inner">
+            <div class="recipe-tag-filters recipe-tag-filters--extra" id="recipe-tag-filters-extra"></div>
+          </div>
+        </div>
+      </div>
       <div class="recipe-count" id="recipe-count"></div>
     </div>
     <div class="recipe-grid" id="recipe-list">
@@ -73,6 +94,21 @@
   </section>
 
 </div>
+
+<nav class="bottom-nav" aria-label="Главное меню">
+  <button type="button" class="bottom-nav__btn" data-section="reference" aria-label="Справочник">
+    <span class="bottom-nav__icon" aria-hidden="true">📚</span>
+    <span class="bottom-nav__label">Справочник</span>
+  </button>
+  <button type="button" class="bottom-nav__btn" data-section="recipes" data-tab="recipes" aria-label="Рецепты">
+    <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+    <span class="bottom-nav__label">Рецепты</span>
+  </button>
+  <button type="button" class="bottom-nav__btn" data-section="tips" data-tab="tips" aria-label="Советы">
+    <span class="bottom-nav__icon" aria-hidden="true">💡</span>
+    <span class="bottom-nav__label">Советы</span>
+  </button>
+</nav>
 
 <script type="module" src="js/main.js"></script>
 </body>

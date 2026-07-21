@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="has-mobile-bar">
 <div class="wrap">
 
   <header class="top recipe-page-header">
@@ -30,6 +30,12 @@
   </article>
 
 </div>
+
+<nav class="mobile-bar" aria-label="Навигация">
+  <a class="mobile-bar__link" href="index.html#recipes">← Рецепты</a>
+  <a class="mobile-bar__link" href="index.html#grains" data-nav="reference">Справочник</a>
+  <a class="mobile-bar__link mobile-bar__link--accent" id="recipe-source-bar" href="#" target="_blank" rel="noopener" hidden>Источник</a>
+</nav>
 
 <script type="module" src="js/recipe-page.js"></script>
 </body>

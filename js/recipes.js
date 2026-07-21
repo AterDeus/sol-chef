@@ -5,8 +5,11 @@ const SOURCE_LABELS = {
   article: '📄 статья',
 };
 
+const PRIMARY_TAG_COUNT = 6;
+
 let allRecipes = [];
 let activeTags = new Set();
+let tagsExpanded = false;
 
 function isValidRecipe(r) {
   return Boolean(
@@ -112,29 +115,29 @@ function renderRecipes(list, total) {
   container.innerHTML = list.map(renderRecipeCard).join('');
 }
 
-function renderTagFilters(recipes) {
-  const container = document.getElementById('recipe-tag-filters');
-  if (!container) return;
-
+function collectTagCounts(recipes) {
   const tagCounts = new Map();
   recipes.forEach(r => {
     (r.tags || []).forEach(t => {
       tagCounts.set(t, (tagCounts.get(t) || 0) + 1);
     });
   });
+  return tagCounts;
+}
 
-  const tags = [...tagCounts.keys()].sort((a, b) => a.localeCompare(b, 'ru'));
-  if (tags.length === 0) {
-    container.innerHTML = '';
-    return;
-  }
+function sortTagsByPopularity(tagCounts) {
+  return [...tagCounts.entries()].sort((a, b) => {
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return a[0].localeCompare(b[0], 'ru');
+  });
+}
 
-  container.innerHTML = tags.map(tag => {
-    const active = activeTags.has(tag) ? ' active' : '';
-    const count = tagCounts.get(tag);
-    return `<button type="button" class="tag-filter${active}" data-tag="${escapeAttr(tag)}">${escapeHtml(tag)} <span class="tag-count">${count}</span></button>`;
-  }).join('');
+function renderTagButton(tag, count) {
+  const active = activeTags.has(tag) ? ' active' : '';
+  return `<button type="button" class="tag-filter${active}" data-tag="${escapeAttr(tag)}">${escapeHtml(tag)} <span class="tag-count">${count}</span></button>`;
+}
 
+function bindTagButtons(container) {
   container.querySelectorAll('.tag-filter').forEach(btn => {
     btn.addEventListener('click', () => {
       const tag = btn.dataset.tag;
@@ -146,6 +149,63 @@ function renderTagFilters(recipes) {
   });
 }
 
+function setTagsExpanded(expanded) {
+  tagsExpanded = expanded;
+  const wrap = document.getElementById('recipe-tag-filters-wrap');
+  const toggle = document.getElementById('tag-filters-toggle');
+  const extraWrap = document.getElementById('recipe-tag-filters-extra-wrap');
+  if (!wrap || !toggle || !extraWrap) return;
+  wrap.classList.toggle('is-expanded', expanded);
+  extraWrap.classList.toggle('is-open', expanded);
+  toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  toggle.setAttribute('aria-label', expanded ? 'Скрыть теги' : 'Показать все теги');
+}
+
+function renderTagFilters(recipes) {
+  const primaryEl = document.getElementById('recipe-tag-filters-primary');
+  const extraEl = document.getElementById('recipe-tag-filters-extra');
+  const toggle = document.getElementById('tag-filters-toggle');
+  if (!primaryEl || !extraEl) return;
+
+  const tagCounts = collectTagCounts(recipes);
+  const sorted = sortTagsByPopularity(tagCounts);
+
+  if (sorted.length === 0) {
+    primaryEl.innerHTML = '';
+    extraEl.innerHTML = '';
+    if (toggle) toggle.hidden = true;
+    setTagsExpanded(false);
+    return;
+  }
+
+  const primaryTags = sorted.slice(0, PRIMARY_TAG_COUNT);
+  const primarySet = new Set(primaryTags.map(([tag]) => tag));
+  const extraTags = sorted.filter(([tag]) => !primarySet.has(tag));
+
+  for (const [tag] of extraTags) {
+    if (activeTags.has(tag)) {
+      tagsExpanded = true;
+      break;
+    }
+  }
+
+  primaryEl.innerHTML = primaryTags
+    .map(([tag, count]) => renderTagButton(tag, count))
+    .join('');
+
+  extraEl.innerHTML = extraTags
+    .map(([tag, count]) => renderTagButton(tag, count))
+    .join('');
+
+  if (toggle) {
+    toggle.hidden = extraTags.length === 0;
+  }
+
+  setTagsExpanded(tagsExpanded && extraTags.length > 0);
+  bindTagButtons(primaryEl);
+  bindTagButtons(extraEl);
+}
+
 function applyRecipeFilters() {
   const query = document.getElementById('recipe-search')?.value || '';
   const filtered = filterRecipes(allRecipes, query, activeTags);
@@ -155,6 +215,11 @@ function applyRecipeFilters() {
 function initRecipeToolbar() {
   const search = document.getElementById('recipe-search');
   if (search) search.addEventListener('input', applyRecipeFilters);
+
+  const toggle = document.getElementById('tag-filters-toggle');
+  toggle?.addEventListener('click', () => {
+    setTagsExpanded(!tagsExpanded);
+  });
 }
 
 export function loadRecipes() {

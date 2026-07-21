@@ -15,7 +15,17 @@ function renderTips(data) {
   }
 
   container.innerHTML = data.sections.map(section => {
-    const items = (section.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
+    const items = (section.items || []).map(item => {
+      if (typeof item === 'string') {
+        return `<li>${escapeHtml(item)}</li>`;
+      }
+      const hint = escapeHtml(item.hint || '');
+      const explanation = (item.explanation || '').trim();
+      const explHtml = explanation
+        ? `<span class="tip-explanation">${escapeHtml(explanation)}</span>`
+        : '';
+      return `<li>${hint}${explHtml}</li>`;
+    }).join('');
     return `
       <details class="acc-item">
         <summary><span class="num">${escapeHtml(section.id)}</span> ${escapeHtml(section.title)}<span class="chev">▾</span></summary>

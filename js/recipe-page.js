@@ -63,6 +63,13 @@ function renderRecipe(recipe) {
 
   document.getElementById('recipe-content').innerHTML = html;
 
+  const sourceBar = document.getElementById('recipe-source-bar');
+  if (sourceBar && sourceUrl && sourceUrl !== '#') {
+    sourceBar.href = sourceUrl;
+    sourceBar.hidden = false;
+    sourceBar.textContent = recipe.source_type === 'video' ? 'Видео' : 'Статья';
+  }
+
   document.getElementById('copy-link')?.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -84,6 +91,13 @@ function showError(message) {
 }
 
 const id = getRecipeId();
+
+const refLink = document.querySelector('[data-nav="reference"]');
+if (refLink) {
+  const refTab = localStorage.getItem('sol-chef-last-ref-tab') || 'grains';
+  refLink.href = `index.html#${refTab}`;
+}
+
 if (!id) {
   showError('Не указан id рецепта. Пример: recipe.html?id=stejk-reverse-sear');
 } else {

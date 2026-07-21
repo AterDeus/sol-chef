@@ -64,8 +64,16 @@ data.sections.forEach((section, index) => {
     fail(`${prefix}: items must be a non-empty array`);
   } else {
     section.items.forEach((item, i) => {
-      if (typeof item !== 'string' || !item.trim()){
-        fail(`${prefix}.items[${i}]: must be a non-empty string`);
+      const itemPrefix = `${prefix}.items[${i}]`;
+      if (!item || typeof item !== 'object' || Array.isArray(item)){
+        fail(`${itemPrefix}: must be an object with hint and explanation`);
+        return;
+      }
+      if (typeof item.hint !== 'string' || !item.hint.trim()){
+        fail(`${itemPrefix}: hint must be a non-empty string`);
+      }
+      if (item.explanation != null && typeof item.explanation !== 'string'){
+        fail(`${itemPrefix}: explanation must be a string`);
       }
     });
   }
