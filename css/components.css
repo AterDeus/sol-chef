@@ -412,6 +412,7 @@ table.grains td.name {
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .recipe-card h3,
@@ -419,35 +420,35 @@ table.grains td.name {
   font-family: var(--font-serif);
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 8px;
+  margin: 0;
   display: flex;
   align-items: baseline;
   gap: 8px;
   flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--line);
 }
 
 .recipe-card h3 a {
   color: var(--text);
-  text-decoration: none;
-  border-bottom: 1px solid var(--line);
+  text-decoration: none; 
+  transition: color 0.25s ease;
 }
 
 .recipe-card h3 a:hover {
-  border-color: var(--accent, var(--wal));
+  color: var(--accent, var(--wal));
 }
 
 .recipe-meta {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
 .recipe-card .summary {
   font-size: 14px;
   color: var(--text);
-  margin: 0 0 10px;
   flex-grow: 1;
 }
 

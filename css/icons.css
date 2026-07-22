@@ -1,0 +1,107 @@
+.ui-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  flex-shrink: 0;
+  color: inherit;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.25s ease;
+}
+
+.ui-icon--nav {
+  width: 22px;
+  height: 22px;
+  flex-basis: 22px;
+}
+
+.ui-icon--tab {
+  width: 18px;
+  height: 18px;
+  flex-basis: 18px;
+}
+
+nav.tabs button[data-accent="gold"],
+.ref-subnav button[data-accent="gold"] {
+  --tab-accent: var(--gold);
+}
+
+nav.tabs button[data-accent="ember"],
+.ref-subnav button[data-accent="ember"] {
+  --tab-accent: var(--ember);
+}
+
+nav.tabs button[data-accent="pork"],
+.ref-subnav button[data-accent="pork"] {
+  --tab-accent: var(--pork);
+}
+
+nav.tabs button[data-accent="bird"],
+.ref-subnav button[data-accent="bird"] {
+  --tab-accent: var(--bird);
+}
+
+nav.tabs button[data-accent="sage"],
+.ref-subnav button[data-accent="sage"] {
+  --tab-accent: var(--sage);
+}
+
+nav.tabs button[data-accent="walnut"],
+.ref-subnav button[data-accent="walnut"] {
+  --tab-accent: var(--wal);
+}
+
+nav.tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--tab-accent, var(--text));
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+  transform: translateZ(0);
+}
+
+nav.tabs button:hover,
+nav.tabs button.active {
+  opacity: 1;
+}
+
+.ref-subnav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.ref-subnav button:hover,
+.ref-subnav button.active {
+  color: var(--tab-accent, var(--text));
+}
+
+.ref-subnav button:hover {
+  border-color: color-mix(in srgb, var(--tab-accent, var(--line)) 55%, var(--line));
+}
+
+.bottom-nav__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.bottom-nav__btn {
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.bottom-nav__btn:hover {
+  color: var(--accent, var(--wal));
+}
+
+.bottom-nav__btn.active {
+  color: var(--accent, var(--wal));
+}

@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/images/icons.svg" as="fetch" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="has-mobile-bar">
@@ -27,20 +28,21 @@
   </header>
 
   <nav class="tabs tabs--desktop" aria-label="Разделы">
-    <button data-tab="grains" data-accent="gold">🌾 Крупы</button>
-    <button data-tab="beef" data-accent="ember">🥩 Говядина</button>
-    <button data-tab="pork" data-accent="pork">🐖 Свинина</button>
-    <button data-tab="bird" data-accent="bird">🐔 Птица</button>
-    <button data-tab="tips" data-accent="sage">📋 Советы Энди</button>
-    <button data-tab="recipes" data-accent="walnut">📖 Рецепты</button>
+    <button type="button" data-tab="grains" data-accent="gold"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-wheat"></use></svg>Крупы</button>
+    <button type="button" data-tab="beef" data-accent="ember"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-beef"></use></svg>Говядина</button>
+    <button type="button" data-tab="pork" data-accent="pork"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-ham"></use></svg>Свинина</button>
+    <button type="button" data-tab="bird" data-accent="bird"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-drumstick"></use></svg>Птица</button>
+    <button type="button" data-tab="tips" data-accent="sage"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-chef-hat"></use></svg>Советы Энди</button>
+    <button type="button" data-tab="recipes" data-accent="walnut"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-book-open-text"></use></svg>Рецепты</button>
+    <span class="tabs-indicator" id="tabs-indicator" aria-hidden="true"></span>
   </nav>
 
   <div class="ref-subnav-wrap" id="ref-subnav-wrap" hidden>
     <nav class="ref-subnav" id="ref-subnav" aria-label="Справочник">
-      <button type="button" data-tab="grains" data-accent="gold">Крупы</button>
-      <button type="button" data-tab="beef" data-accent="ember">Говядина</button>
-      <button type="button" data-tab="pork" data-accent="pork">Свинина</button>
-      <button type="button" data-tab="bird" data-accent="bird">Птица</button>
+      <button type="button" data-tab="grains" data-accent="gold"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-wheat"></use></svg>Крупы</button>
+      <button type="button" data-tab="beef" data-accent="ember"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-beef"></use></svg>Говядина</button>
+      <button type="button" data-tab="pork" data-accent="pork"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-ham"></use></svg>Свинина</button>
+      <button type="button" data-tab="bird" data-accent="bird"><svg class="ui-icon ui-icon--tab" aria-hidden="true"><use href="assets/images/icons.svg#icon-drumstick"></use></svg>Птица</button>
     </nav>
   </div>
 
@@ -97,15 +99,15 @@
 
 <nav class="bottom-nav" aria-label="Главное меню">
   <button type="button" class="bottom-nav__btn" data-section="reference" aria-label="Справочник">
-    <span class="bottom-nav__icon" aria-hidden="true">📚</span>
+    <span class="bottom-nav__icon" aria-hidden="true"><svg class="ui-icon ui-icon--nav"><use href="assets/images/icons.svg#icon-wheat"></use></svg></span>
     <span class="bottom-nav__label">Справочник</span>
   </button>
   <button type="button" class="bottom-nav__btn" data-section="recipes" data-tab="recipes" aria-label="Рецепты">
-    <span class="bottom-nav__icon" aria-hidden="true">📖</span>
+    <span class="bottom-nav__icon" aria-hidden="true"><svg class="ui-icon ui-icon--nav"><use href="assets/images/icons.svg#icon-book-open-text"></use></svg></span>
     <span class="bottom-nav__label">Рецепты</span>
   </button>
   <button type="button" class="bottom-nav__btn" data-section="tips" data-tab="tips" aria-label="Советы">
-    <span class="bottom-nav__icon" aria-hidden="true">💡</span>
+    <span class="bottom-nav__icon" aria-hidden="true"><svg class="ui-icon ui-icon--nav"><use href="assets/images/icons.svg#icon-chef-hat"></use></svg></span>
     <span class="bottom-nav__label">Советы</span>
   </button>
 </nav>

@@ -42,10 +42,8 @@ function renderRecipe(recipe) {
   document.getElementById('recipe-title').innerHTML =
     `${escapeHtml(recipe.title)}${triedBadgeHtml(recipe.tried)}`;
 
-  const badge = escapeHtml(SOURCE_LABELS[recipe.source_type] || '🔗 источник');
   const tags = (recipe.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
   document.getElementById('recipe-meta-top').innerHTML = `
-    <span class="src-badge">${badge}</span>
     ${tags}
   `;
 

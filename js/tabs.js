@@ -45,6 +45,40 @@ export function initTabs() {
   const sectionButtons = document.querySelectorAll('.bottom-nav [data-section]');
   const desktopNav = document.querySelector('.tabs--desktop');
   const refSubnav = document.getElementById('ref-subnav');
+  const tabIndicator = document.getElementById('tabs-indicator');
+
+  function isDesktopTabs() {
+    return window.matchMedia('(min-width: 769px)').matches;
+  }
+
+  function updateTabIndicator(tabId, { animate = true } = {}) {
+    if (!desktopNav || !tabIndicator) return;
+
+    if (!isDesktopTabs()) {
+      tabIndicator.hidden = true;
+      return;
+    }
+
+    const btn = desktopNav.querySelector(`button[data-tab="${tabId}"]`);
+    if (!btn) {
+      tabIndicator.hidden = true;
+      return;
+    }
+
+    tabIndicator.hidden = false;
+
+    if (!animate) {
+      tabIndicator.classList.add('is-static');
+    }
+
+    tabIndicator.style.left = `${btn.offsetLeft}px`;
+    tabIndicator.style.width = `${btn.offsetWidth}px`;
+
+    if (!animate) {
+      tabIndicator.offsetHeight;
+      tabIndicator.classList.remove('is-static');
+    }
+  }
 
   function updateMobileChrome(section) {
     document.body.classList.toggle('ref-subnav-visible', section === 'reference');
@@ -56,7 +90,7 @@ export function initTabs() {
     });
   }
 
-  function activateTab(tabId, { persist = true, updateHash = true } = {}) {
+  function activateTab(tabId, { persist = true, updateHash = true, animateIndicator = true } = {}) {
     const id = normalizeTabId(tabId);
     const panel = document.getElementById(id);
     if (!panel) return;
@@ -70,6 +104,7 @@ export function initTabs() {
 
     const accentBtn = document.querySelector(`[data-tab="${id}"]`);
     setAccent(accentBtn?.dataset.accent || 'walnut');
+    updateTabIndicator(id, { animate: animateIndicator });
 
     const section = getSection(id);
     updateMobileChrome(section);
@@ -127,5 +162,33 @@ export function initTabs() {
     }
   });
 
-  activateTab(resolveInitialTab(), { updateHash: !window.location.hash });
+  window.addEventListener('resize', () => {
+    const active = desktopNav?.querySelector('button[data-tab].active');
+    if (active) {
+      updateTabIndicator(active.dataset.tab, { animate: false });
+    }
+  });
+
+  if (desktopNav && tabIndicator && typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => {
+      const active = desktopNav.querySelector('button[data-tab].active');
+      if (active) {
+        updateTabIndicator(active.dataset.tab, { animate: false });
+      }
+    });
+    ro.observe(desktopNav);
+    desktopNav.querySelectorAll('button[data-tab]').forEach(btn => ro.observe(btn));
+  }
+
+  document.fonts?.ready?.then(() => {
+    const active = desktopNav?.querySelector('button[data-tab].active');
+    if (active) {
+      updateTabIndicator(active.dataset.tab, { animate: false });
+    }
+  });
+
+  activateTab(resolveInitialTab(), {
+    updateHash: !window.location.hash,
+    animateIndicator: false,
+  });
 }
