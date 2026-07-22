@@ -20,7 +20,7 @@ data/
   meat-pork.json        — свинина
   meat-poultry.json     — птица
   tips.json             — советы Энди
-  recipes.json          — рецепты
+  recipes/              — рецепты (index.json + файлы по методу/продукту)
   schemas/              — JSON Schema
 docs/                   — промпты для ИИ
 scripts/                — валидация JSON

@@ -414,11 +414,16 @@ table.grains td.name {
   flex-direction: column;
 }
 
-.recipe-card h3 {
+.recipe-card h3,
+.recipe-card__title {
   font-family: var(--font-serif);
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .recipe-card h3 a {
@@ -474,6 +479,30 @@ table.grains td.name {
 /* --- Recipe detail page --- */
 .recipe-page-header {
   margin-bottom: 24px;
+}
+
+.recipe-page-header h1 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tried-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--sage);
+  background: var(--sage-soft);
+  border: 1px solid color-mix(in srgb, var(--sage) 35%, transparent);
+  border-radius: 50%;
 }
 
 .back-link {

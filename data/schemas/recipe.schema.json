@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://sol-chef.ru/schemas/recipe.schema.json",
   "title": "Recipe",
-  "description": "Запись рецепта в data/recipes.json",
+  "description": "Запись рецепта в data/recipes/<метод>/<продукт>.json",
   "type": "object",
   "required": ["id", "title", "source_url", "summary", "tags"],
   "additionalProperties": false,
@@ -40,8 +40,10 @@
         "птица",
         "говядина",
         "свинина",
+        "баранина",
         "крупы",
         "гарнир",
+        "паста",
         "суп",
         "выпечка",
         "десерт",
@@ -105,6 +107,10 @@
     "added": {
       "type": "string",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "tried": {
+      "type": "boolean",
+      "description": "Рецепт уже готовил сам — показывается метка у названия"
     }
   }
 }

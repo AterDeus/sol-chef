@@ -1,4 +1,5 @@
-import { escapeHtml, escapeAttr, safeHref, fetchJson } from './utils.js';
+import { escapeHtml, escapeAttr, safeHref, triedBadgeHtml } from './utils.js';
+import { loadAllRecipes } from './recipe-data.js';
 
 const SOURCE_LABELS = {
   video: '🎥 видео',
@@ -73,9 +74,10 @@ function renderRecipeCard(r) {
   const badge = escapeHtml(SOURCE_LABELS[r.source_type] || '🔗 источник');
   const tags = (r.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
   const detailLink = `recipe.html?id=${encodeURIComponent(r.id)}`;
+  const triedMark = triedBadgeHtml(r.tried);
   return `
     <div class="recipe-card">
-      <h3><a href="${detailLink}">${title}</a></h3>
+      <h3 class="recipe-card__title"><a href="${detailLink}">${title}</a>${triedMark}</h3>
       <div class="recipe-meta">
         <span class="src-badge">${badge}</span>
         ${tags}
@@ -223,7 +225,7 @@ function initRecipeToolbar() {
 }
 
 export function loadRecipes() {
-  fetchJson('data/recipes.json')
+  loadAllRecipes()
     .then(prepareRecipes)
     .then(recipes => {
       allRecipes = recipes;

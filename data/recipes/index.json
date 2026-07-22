@@ -1,0 +1,33 @@
+{
+  "comment": "Рецепты по методу готовки (папка) и типу продукта (файл)",
+  "methods": {
+    "duhovka": "Духовка / запекание",
+    "skovoroda": "Сковорода / обжарка",
+    "grill": "Гриль / мангал",
+    "tushenie": "Тушение / долгое томление",
+    "kastryulya": "Кастрюля / варка на плите"
+  },
+  "products": {
+    "ptitsa": "Птица",
+    "govyadina": "Говядина",
+    "krupy": "Крупы",
+    "baranina": "Баранина",
+    "pasta": "Паста",
+    "zavtrak": "Завтрак",
+    "desert": "Десерт"
+  },
+  "files": [
+    "data/recipes/duhovka/desert.json",
+    "data/recipes/duhovka/govyadina.json",
+    "data/recipes/duhovka/ptitsa.json",
+    "data/recipes/grill/govyadina.json",
+    "data/recipes/kastryulya/krupy.json",
+    "data/recipes/kastryulya/pasta.json",
+    "data/recipes/skovoroda/govyadina.json",
+    "data/recipes/skovoroda/krupy.json",
+    "data/recipes/skovoroda/zavtrak.json",
+    "data/recipes/tushenie/baranina.json",
+    "data/recipes/tushenie/govyadina.json",
+    "data/recipes/tushenie/ptitsa.json"
+  ]
+}

@@ -1,4 +1,5 @@
-import { escapeHtml, safeHref, fetchJson } from './utils.js';
+import { escapeHtml, safeHref, triedBadgeHtml } from './utils.js';
+import { loadAllRecipes } from './recipe-data.js';
 import { initCookMode, renderPrepSection, renderStepsWithTimers } from './cook-mode.js';
 import { startAlertPoller } from './notifications.js';
 import { normalizePrep, normalizeSteps } from './step-utils.js';
@@ -38,7 +39,8 @@ function renderRecipe(recipe) {
   setOgMeta('og:title', `${recipe.title} — sol-chef`);
   setOgMeta('og:description', recipe.summary);
 
-  document.getElementById('recipe-title').textContent = recipe.title;
+  document.getElementById('recipe-title').innerHTML =
+    `${escapeHtml(recipe.title)}${triedBadgeHtml(recipe.tried)}`;
 
   const badge = escapeHtml(SOURCE_LABELS[recipe.source_type] || '🔗 источник');
   const tags = (recipe.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
@@ -133,7 +135,7 @@ if (refLink) {
 if (!id) {
   showError('Не указан id рецепта. Пример: recipe.html?id=stejk-reverse-sear');
 } else {
-  fetchJson('data/recipes.json')
+  loadAllRecipes()
     .then(list => {
       if (!Array.isArray(list)) throw new Error('invalid data');
       const recipe = list.find(r => r.id === id);

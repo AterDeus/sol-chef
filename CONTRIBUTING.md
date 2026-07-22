@@ -9,7 +9,7 @@
 
 ## Структура данных
 
-- `data/recipes.json` — все рецепты (массив объектов)
+- `data/recipes/` — рецепты: `index.json` + файлы `метод/продукт.json` (см. [docs/ADD_RECIPE.md](docs/ADD_RECIPE.md))
 - `data/schemas/recipe.schema.json` — формат записи
 
 ## Публикация

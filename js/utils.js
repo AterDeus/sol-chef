@@ -52,6 +52,11 @@ export function setOg(property, content) {
   el.setAttribute('content', content);
 }
 
+export function triedBadgeHtml(tried) {
+  if (!tried) return '';
+  return '<span class="tried-badge" title="Опробовано" aria-label="Опробовано">✓</span>';
+}
+
 export function renderIntro(introEl, data) {
   if (!introEl || !data) return;
   if (data.intro_lead && data.intro) {

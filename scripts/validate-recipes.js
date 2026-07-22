@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const RECIPES_FILE = path.join(__dirname, '..', 'data', 'recipes.json');
+const RECIPES_DIR = path.join(__dirname, '..', 'data', 'recipes');
+const RECIPES_INDEX = path.join(RECIPES_DIR, 'index.json');
 const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const REQUIRED = ['id', 'title', 'source_url', 'summary', 'tags'];
@@ -14,8 +15,10 @@ const CATEGORIES = new Set([
   'птица',
   'говядина',
   'свинина',
+  'баранина',
   'крупы',
   'гарнир',
+  'паста',
   'суп',
   'выпечка',
   'десерт',
@@ -25,7 +28,7 @@ const CATEGORIES = new Set([
 ]);
 const ALLOWED_FIELDS = new Set([
   'id', 'title', 'source_type', 'source_url', 'source_name',
-  'tags', 'category', 'summary', 'ingredients', 'steps', 'prep', 'notes', 'added',
+  'tags', 'category', 'summary', 'ingredients', 'steps', 'prep', 'notes', 'added', 'tried',
 ]);
 const PREP_TYPES = new Set(['thaw', 'fridge', 'room_temp', 'marinate', 'soak', 'custom']);
 
@@ -233,6 +236,10 @@ function validateRecipe(recipe, index, labelPrefix){
     fail(`${prefix}: added must be YYYY-MM-DD`);
   }
 
+  if (recipe.tried != null && typeof recipe.tried !== 'boolean'){
+    fail(`${prefix}: tried must be a boolean`);
+  }
+
   if (recipe.ingredients != null){
     if (!Array.isArray(recipe.ingredients)){
       fail(`${prefix}: ingredients must be an array`);
@@ -308,13 +315,51 @@ function readFileOrExit(filePath){
   }
 }
 
+function loadRecipeDatabase(){
+  const indexRaw = readFileOrExit(RECIPES_INDEX);
+  const index = loadJson(indexRaw, RECIPES_INDEX);
+  if (!index || !Array.isArray(index.files) || index.files.length === 0){
+    fail('data/recipes/index.json must contain a non-empty "files" array');
+    process.exit(1);
+  }
+
+  const recipes = [];
+  for (const relPath of index.files){
+    if (typeof relPath !== 'string' || !relPath.startsWith('data/recipes/') || !relPath.endsWith('.json')){
+      fail(`invalid recipe file path in index: "${relPath}"`);
+      continue;
+    }
+    const filePath = path.join(__dirname, '..', relPath);
+    const raw = readFileOrExit(filePath);
+    const chunk = loadJson(raw, filePath);
+    if (!Array.isArray(chunk)){
+      fail(`${relPath} must be a JSON array`);
+      continue;
+    }
+    chunk.forEach((recipe, index) => {
+      validateRecipe(recipe, index, relPath);
+    });
+    recipes.push(...chunk);
+  }
+
+  const ids = new Set();
+  recipes.forEach(recipe => {
+    if (recipe.id){
+      if (ids.has(recipe.id)){
+        fail(`duplicate id "${recipe.id}"`);
+      }
+      ids.add(recipe.id);
+    }
+  });
+
+  return recipes;
+}
+
 const options = parseArgs();
 let validatedCount = 0;
 
 if (options.mode === 'database'){
-  const raw = readFileOrExit(RECIPES_FILE);
-  const data = loadJson(raw, RECIPES_FILE);
-  validateRecipeList(data, 'recipes');
+  const data = loadRecipeDatabase();
   validatedCount = data.length;
 } else {
   const raw = unwrapMarkdownJson(readInput(options.source));

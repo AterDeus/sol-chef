@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Validate data/recipes.json
+      - name: Validate data/recipes/
         run: node scripts/validate-recipes.js
 
       - name: Validate data/tips.json
