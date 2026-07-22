@@ -15,6 +15,17 @@ export function getUnitPair(unit) {
   return null;
 }
 
+const SCALE_STEP_SMALL = 50;
+const SCALE_STEP_LARGE = 250;
+const SCALE_STEP_THRESHOLD = 500;
+
+/** Шаг кнопок ± для масштаба порции (г/мл в базовых единицах). */
+export function scaleStepForBase(baseValue) {
+  const n = Number(baseValue);
+  if (!Number.isFinite(n) || n <= 0) return SCALE_STEP_LARGE;
+  return n >= SCALE_STEP_THRESHOLD ? SCALE_STEP_LARGE : SCALE_STEP_SMALL;
+}
+
 export function toBaseAmount(amount, unit) {
   const n = Number(amount);
   if (!Number.isFinite(n)) return null;
@@ -24,10 +35,9 @@ export function toBaseAmount(amount, unit) {
   return { value: n, baseUnit: u || 'г' };
 }
 
-function stepForUnit(unit) {
+function stepForUnit(unit, baseValue) {
   const u = String(unit || '').trim();
-  if (u === 'кг' || u === 'л') return 0.25;
-  if (u === 'г' || u === 'мл') return 250;
+  if (u === 'г' || u === 'мл' || u === 'кг' || u === 'л') return scaleStepForBase(baseValue);
   if (u === 'шт' || u === 'зубчик' || u === 'стебля' || u === 'порции') return 1;
   return 0.25;
 }
@@ -104,7 +114,7 @@ export function findScaleAnchor(ingredients) {
     originalUnit: unit,
     baseValue: base.value,
     baseUnit: base.baseUnit,
-    step: stepForUnit(unit),
+    step: stepForUnit(unit, base.value),
   };
 }
 

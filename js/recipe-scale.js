@@ -6,11 +6,10 @@ import {
   formatScaleFactor,
   getUnitPair,
   scaleIngredients,
+  scaleStepForBase,
 } from './ingredient-utils.js';
 import { escapeHtml } from './utils.js';
 import { normalizeSteps } from './step-utils.js';
-
-const BASE_STEP = 250;
 
 function scaleStorageKey(recipeId) {
   return `sol-chef-scale:${recipeId}`;
@@ -95,14 +94,15 @@ function baseValueFromInput(raw, unitPair, useLargeUnit) {
   return n * unitPair.factor;
 }
 
-function inputStep(unitPair, useLargeUnit, anchorStep) {
+function inputStep(unitPair, useLargeUnit, baseValue, anchorStep) {
   if (!unitPair) return anchorStep;
-  if (!useLargeUnit) return BASE_STEP;
-  return BASE_STEP / unitPair.factor;
+  const step = scaleStepForBase(baseValue);
+  if (!useLargeUnit) return step;
+  return step / unitPair.factor;
 }
 
-function stepBase(unitPair, anchorStep) {
-  return unitPair ? BASE_STEP : anchorStep;
+function stepBase(unitPair, baseValue, anchorStep) {
+  return unitPair ? scaleStepForBase(baseValue) : anchorStep;
 }
 
 function formatInputValue(value) {
@@ -128,8 +128,8 @@ export function renderIngredientsSection(recipe) {
 
   let scaleBlock = '';
   if (anchor) {
-    const step = inputStep(unitPair, useLargeUnit, anchor.step);
-    const minBase = Math.max(stepBase(unitPair, anchor.step), anchor.baseValue * 0.1);
+    const step = inputStep(unitPair, useLargeUnit, targetBase, anchor.step);
+    const minBase = Math.max(stepBase(unitPair, targetBase, anchor.step), anchor.baseValue * 0.1);
     const minDisplay = displayValue(minBase, unitPair, useLargeUnit);
     scaleBlock = `
       <div class="recipe-scale" id="recipe-scale" data-recipe-id="${escapeHtml(recipe.id)}">
@@ -192,10 +192,11 @@ export function wireIngredientsScale(recipe) {
     unitSwitchEl.classList.toggle('is-large', useLargeUnit);
   }
 
-  function syncInputConstraints() {
-    const step = stepBase(unitPair, anchor.step);
+  function syncInputConstraints(currentBase) {
+    const base = Number(currentBase) || anchor.baseValue;
+    const step = stepBase(unitPair, base, anchor.step);
     const minBase = Math.max(step, anchor.baseValue * 0.1);
-    inputEl.step = String(inputStep(unitPair, useLargeUnit, anchor.step));
+    inputEl.step = String(inputStep(unitPair, useLargeUnit, base, anchor.step));
     inputEl.min = String(displayValue(minBase, unitPair, useLargeUnit));
   }
 
@@ -209,7 +210,7 @@ export function wireIngredientsScale(recipe) {
     listEl.innerHTML = renderIngredientList(scaleIngredients(recipe.ingredients, factor));
 
     inputEl.value = formatInputValue(displayValue(nextBase, unitPair, useLargeUnit));
-    syncInputConstraints();
+    syncInputConstraints(nextBase);
     syncUnitSwitchUi();
 
     const factorLabel = formatScaleFactor(factor);
@@ -231,7 +232,7 @@ export function wireIngredientsScale(recipe) {
   }
 
   syncUnitSwitchUi();
-  syncInputConstraints();
+  syncInputConstraints(readSavedBaseValue(recipe.id, anchor.baseValue));
 
   inputEl.addEventListener('change', () => {
     const base = baseValueFromInput(inputEl.value.replace(',', '.'), unitPair, useLargeUnit);
@@ -250,7 +251,7 @@ export function wireIngredientsScale(recipe) {
       const delta = Number(btn.dataset.delta) || 0;
       const currentBase = baseValueFromInput(inputEl.value.replace(',', '.'), unitPair, useLargeUnit)
         ?? anchor.baseValue;
-      applyBaseValue(currentBase + delta * stepBase(unitPair, anchor.step));
+      applyBaseValue(currentBase + delta * stepBase(unitPair, currentBase, anchor.step));
     });
   });
 
