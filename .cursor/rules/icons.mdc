@@ -1,0 +1,32 @@
+---
+description: Иконки UI — Lucide, stroke 1px, спрайт assets/images/icons.svg
+globs: assets/images/**,css/icons.css,index.html,js/tabs.js
+alwaysApply: false
+---
+
+# Иконки sol-chef
+
+Источник: [Lucide Icons](https://lucide.dev/icons/) (ISC License).
+
+## Конвенция
+
+- `viewBox="0 0 24 24"`, `fill="none"`, `stroke="currentColor"`
+- **stroke-width: 1** (на сайте Lucide по умолчанию 2px — у нас всегда 1)
+- `stroke-linecap="round"`, `stroke-linejoin="round"`
+- Цвет только через `currentColor` (hover/актив — CSS)
+
+## Куда класть
+
+1. Отдельный файл: `assets/images/icons/{имя}.svg` (kebab-case, как в Lucide: `book-open-text.svg`)
+2. Символ в спрайте: `assets/images/icons.svg` → `<symbol id="icon-{имя}">`
+3. Использование: `<use href="assets/images/icons.svg#icon-{имя}">`
+
+## Как агент добавляет иконку
+
+1. Взять SVG из репозитория Lucide (GitHub `lucide-icons/lucide`, каталог `icons/`) или с lucide.dev
+2. Привести к конвенции выше (stroke-width **1**)
+3. Обновить спрайт и места использования (табы, bottom-nav и т.д.)
+
+## Если не получается
+
+Попросить пользователя экспортировать SVG с [lucide.dev](https://lucide.dev/icons/): **Stroke width = 1px**, Size 24px, и положить в `assets/images/icons/`.

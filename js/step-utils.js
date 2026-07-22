@@ -1,15 +1,22 @@
 /** Нормализация шагов и подготовительных напоминаний рецепта. */
 
+import { spriteIconHtml } from './icons.js';
+
 const PREP_TYPES = new Set(['thaw', 'fridge', 'room_temp', 'marinate', 'soak', 'custom']);
 
-const PREP_ICONS = {
-  thaw: '❄️→🧊',
-  fridge: '🧊',
-  room_temp: '🌡️',
-  marinate: '🫙',
-  soak: '💧',
-  custom: '📋',
+const PREP_ICON_IDS = {
+  thaw: 'snowflake',
+  fridge: 'refrigerator',
+  room_temp: 'thermometer',
+  marinate: 'flask-conical',
+  soak: 'droplets',
+  custom: 'clipboard-list',
 };
+
+export function prepIconHtml(type) {
+  const id = PREP_ICON_IDS[type] || PREP_ICON_IDS.custom;
+  return spriteIconHtml(id, 'ui-icon ui-icon--prep');
+}
 
 export function normalizeStep(step, index) {
   if (typeof step === 'string') {
@@ -52,7 +59,6 @@ export function normalizePrepItem(item, index) {
     text,
     before_min: leadMin,
     type,
-    icon: PREP_ICONS[type],
   };
 }
 

@@ -1,11 +1,6 @@
 import { escapeHtml, escapeAttr, safeHref, triedBadgeHtml } from './utils.js';
 import { loadAllRecipes } from './recipe-data.js';
 
-const SOURCE_LABELS = {
-  video: '🎥 видео',
-  article: '📄 статья',
-};
-
 const PRIMARY_TAG_COUNT = 6;
 
 let allRecipes = [];

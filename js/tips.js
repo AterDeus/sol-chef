@@ -1,4 +1,5 @@
 import { escapeHtml, fetchJson } from './utils.js';
+import { spriteIconHtml } from './icons.js';
 
 function renderTips(data) {
   const container = document.getElementById('tips-list');
@@ -28,7 +29,7 @@ function renderTips(data) {
     }).join('');
     return `
       <details class="acc-item">
-        <summary><span class="num">${escapeHtml(section.id)}</span> ${escapeHtml(section.title)}<span class="chev">▾</span></summary>
+        <summary><span class="num">${escapeHtml(section.id)}</span> ${escapeHtml(section.title)}<span class="chev">${spriteIconHtml('chevron-down', 'ui-icon ui-icon--chev')}</span></summary>
         <div class="acc-body"><ul>${items}</ul></div>
       </details>`;
   }).join('');

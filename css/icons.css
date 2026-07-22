@@ -25,6 +25,53 @@
   flex-basis: 18px;
 }
 
+.ui-icon--prep {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+  color: var(--wal);
+}
+
+.ui-icon--cook-ctrl {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+}
+
+.ui-icon--tried {
+  width: 12px;
+  height: 12px;
+  flex-basis: 12px;
+}
+
+.ui-icon--complete {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+}
+
+.ui-icon--inline {
+  width: 14px;
+  height: 14px;
+  flex-basis: 14px;
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.ui-icon--badge {
+  width: 12px;
+  height: 12px;
+  flex-basis: 12px;
+  display: inline-block;
+  vertical-align: -1px;
+}
+
+.ui-icon--chev {
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
+}
+
 nav.tabs button[data-accent="gold"],
 .ref-subnav button[data-accent="gold"] {
   --tab-accent: var(--gold);

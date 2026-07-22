@@ -1,3 +1,7 @@
+import { spriteIconHtml } from './icons.js';
+
+export { spriteIconHtml } from './icons.js';
+
 export function escapeHtml(text) {
   if (text == null) return '';
   return String(text)
@@ -54,7 +58,7 @@ export function setOg(property, content) {
 
 export function triedBadgeHtml(tried) {
   if (!tried) return '';
-  return '<span class="tried-badge" title="Опробовано" aria-label="Опробовано">✓</span>';
+  return `<span class="tried-badge" title="Опробовано" aria-label="Опробовано">${spriteIconHtml('check', 'ui-icon ui-icon--tried')}</span>`;
 }
 
 export function renderIntro(introEl, data) {

@@ -1,10 +1,12 @@
 import { escapeHtml } from './utils.js';
+import { spriteIconHtml } from './icons.js';
 import {
   normalizeSteps,
   normalizePrep,
   formatDuration,
   formatDurationShort,
   prepFireTime,
+  prepIconHtml,
   formatDateTime,
   formatRelativeToNow,
 } from './step-utils.js';
@@ -55,12 +57,12 @@ export function initCookMode(recipe, rootEl) {
 
   shell.innerHTML = `
     <header class="cook-mode__header">
-      <button type="button" class="cook-mode__close" aria-label="Закрыть режим готовки">✕</button>
+      <button type="button" class="cook-mode__close" aria-label="Закрыть режим готовки">${spriteIconHtml('x', 'ui-icon ui-icon--cook-ctrl')}</button>
       <div class="cook-mode__header-text">
         <div class="cook-mode__eyebrow">Режим готовки</div>
         <div class="cook-mode__title">${escapeHtml(recipe.title)}</div>
       </div>
-      <button type="button" class="cook-mode__wake" aria-pressed="false" title="Не гасить экран">☀️</button>
+      <button type="button" class="cook-mode__wake" aria-pressed="false" title="Не гасить экран">${spriteIconHtml('sun', 'ui-icon ui-icon--cook-ctrl')}</button>
     </header>
     <div class="cook-mode__body" id="cook-mode-body"></div>
     <div class="cook-mode__toast" id="cook-mode-toast" hidden></div>
@@ -96,7 +98,7 @@ export function initCookMode(recipe, rootEl) {
         const fireMs = prepFireTime(state.cookStartMs, p.before_min);
         return `
           <li class="cook-prep-item" data-before="${p.before_min}">
-            <span class="cook-prep-item__icon" aria-hidden="true">${p.icon}</span>
+            <span class="cook-prep-item__icon">${prepIconHtml(p.type)}</span>
             <div class="cook-prep-item__body">
               <span class="cook-prep-item__type">${escapeHtml(PREP_TYPE_LABELS[p.type] || 'Подготовка')}</span>
               <p class="cook-prep-item__text">${escapeHtml(p.text)}</p>
@@ -254,7 +256,7 @@ export function initCookMode(recipe, rootEl) {
           <div class="cook-step-timer__actions">
             ${timerRunning
               ? '<button type="button" class="btn-secondary cook-timer-pause">Пауза</button><button type="button" class="btn-secondary cook-timer-reset">Сброс</button>'
-              : `<button type="button" class="btn-primary cook-timer-start">▶ ${activeTimer?.remaining != null && activeTimer.remaining < step.timer_sec ? 'Продолжить' : 'Таймер'} ${formatDuration(step.timer_sec)}</button>`
+              : `<button type="button" class="btn-primary cook-timer-start">${spriteIconHtml('play', 'ui-icon ui-icon--inline')} ${activeTimer?.remaining != null && activeTimer.remaining < step.timer_sec ? 'Продолжить' : 'Таймер'} ${formatDuration(step.timer_sec)}</button>`
             }
           </div>
         </div>`;
@@ -396,7 +398,7 @@ export function initCookMode(recipe, rootEl) {
       actions.querySelector('.cook-timer-reset')?.addEventListener('click', () => resetTimer(timerId, step));
     } else {
       const cont = activeTimer?.remaining != null && activeTimer.remaining < step.timer_sec;
-      actions.innerHTML = `<button type="button" class="btn-primary cook-timer-start">▶ ${cont ? 'Продолжить' : 'Таймер'} ${formatDuration(step.timer_sec)}</button>`;
+      actions.innerHTML = `<button type="button" class="btn-primary cook-timer-start">${spriteIconHtml('play', 'ui-icon ui-icon--inline')} ${cont ? 'Продолжить' : 'Таймер'} ${formatDuration(step.timer_sec)}</button>`;
       actions.querySelector('.cook-timer-start')?.addEventListener('click', () => startTimer(timerId, step));
     }
   }
@@ -420,7 +422,7 @@ export function initCookMode(recipe, rootEl) {
     state.phase = 'done';
     bodyEl.innerHTML = `
       <div class="cook-complete">
-        <div class="cook-complete__icon" aria-hidden="true">✓</div>
+        <div class="cook-complete__icon" aria-hidden="true">${spriteIconHtml('circle-check', 'ui-icon ui-icon--complete')}</div>
         <h2 class="cook-complete__title">Готово!</h2>
         <p class="cook-complete__text">${escapeHtml(recipe.title)} — все шаги пройдены.</p>
         <button type="button" class="btn-primary" id="cook-finish-close">Закрыть</button>
@@ -501,8 +503,8 @@ export function renderPrepSection(prep, cookStartMs = Date.now() + 3600000) {
     const fireMs = prepFireTime(cookStartMs, p.before_min);
     return `
       <li class="recipe-prep-item">
-        <span class="recipe-prep-item__icon" aria-hidden="true">${p.icon}</span>
-        <div>
+        <span class="recipe-prep-item__icon">${prepIconHtml(p.type)}</span>
+        <div class="recipe-prep-item__body">
           <span class="recipe-prep-item__type">${escapeHtml(PREP_TYPE_LABELS[p.type] || 'Подготовка')}</span>
           <p class="recipe-prep-item__text">${escapeHtml(p.text)}</p>
           <span class="recipe-prep-item__when">за ${formatDuration(p.before_min * 60)} до готовки</span>
@@ -524,7 +526,7 @@ export function renderStepsWithTimers(steps) {
 
   const lis = normalized.map(s => {
     const timerBadge = s.timer_sec
-      ? `<span class="step-timer-badge" title="Есть таймер">⏱ ${escapeHtml(s.timer_label || formatDuration(s.timer_sec))}</span>`
+      ? `<span class="step-timer-badge" title="Есть таймер">${spriteIconHtml('timer', 'ui-icon ui-icon--badge')} ${escapeHtml(s.timer_label || formatDuration(s.timer_sec))}</span>`
       : '';
     return `<li>${escapeHtml(s.text)}${timerBadge}</li>`;
   }).join('');

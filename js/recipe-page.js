@@ -1,14 +1,8 @@
-import { escapeHtml, safeHref, triedBadgeHtml } from './utils.js';
+import { escapeHtml, triedBadgeHtml } from './utils.js';
 import { loadAllRecipes } from './recipe-data.js';
 import { initCookMode, renderPrepSection, renderStepsWithTimers } from './cook-mode.js';
 import { startAlertPoller } from './notifications.js';
 import { normalizePrep, normalizeSteps } from './step-utils.js';
-
-const SOURCE_LABELS = {
-  video: '🎥 видео',
-  article: '📄 статья',
-  original: '📝 авторский',
-};
 
 let cookModeController = null;
 
@@ -47,8 +41,6 @@ function renderRecipe(recipe) {
     ${tags}
   `;
 
-  const sourceUrl = safeHref(recipe.source_url);
-  const sourceName = escapeHtml(recipe.source_name || 'Открыть источник');
   const hasSteps = normalizeSteps(recipe.steps).length > 0;
   const hasPrep = normalizePrep(recipe.prep).length > 0;
 
@@ -77,13 +69,6 @@ function renderRecipe(recipe) {
 
   document.getElementById('recipe-content').innerHTML = html;
 
-  const sourceBar = document.getElementById('recipe-source-bar');
-  if (sourceBar && sourceUrl && sourceUrl !== '#') {
-    sourceBar.href = sourceUrl;
-    sourceBar.hidden = false;
-    sourceBar.textContent = recipe.source_type === 'video' ? 'Видео' : 'Статья';
-  }
-
   document.getElementById('copy-link')?.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -98,9 +83,13 @@ function renderRecipe(recipe) {
   const cookRoot = document.getElementById('cook-mode-root');
   if (hasSteps && cookRoot) {
     cookModeController = initCookMode(recipe, cookRoot);
-    document.getElementById('start-cook-mode')?.addEventListener('click', () => {
-      cookModeController?.open();
-    });
+    const openCook = () => cookModeController?.open();
+    document.getElementById('start-cook-mode')?.addEventListener('click', openCook);
+    const barBtn = document.getElementById('start-cook-mode-bar');
+    if (barBtn) {
+      barBtn.hidden = false;
+      barBtn.addEventListener('click', openCook);
+    }
   }
 }
 
