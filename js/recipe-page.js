@@ -1,4 +1,6 @@
-import { escapeHtml, triedBadgeHtml } from './utils.js';
+import { escapeHtml, triedBadgeHtml, safeHref, sanitizeVariationHtml } from './utils.js';
+import { renderIngredientsSection, wireIngredientsScale } from './recipe-scale.js';
+import { spriteIconHtml } from './icons.js';
 import { loadAllRecipes } from './recipe-data.js';
 import { initCookMode, renderPrepSection, renderStepsWithTimers } from './cook-mode.js';
 import { startAlertPoller } from './notifications.js';
@@ -11,13 +13,6 @@ function getRecipeId() {
   return (params.get('id') || '').trim();
 }
 
-function renderList(items, ordered) {
-  if (!items || items.length === 0) return '';
-  const tag = ordered ? 'ol' : 'ul';
-  const lis = items.map(i => `<li>${escapeHtml(i)}</li>`).join('');
-  return `<${tag} class="recipe-list">${lis}</${tag}>`;
-}
-
 function setOgMeta(property, content) {
   let el = document.querySelector(`meta[property="${property}"]`);
   if (!el) {
@@ -26,6 +21,51 @@ function setOgMeta(property, content) {
     document.head.appendChild(el);
   }
   el.setAttribute('content', content);
+}
+
+function renderVariationsSection(variations) {
+  if (!Array.isArray(variations) || variations.length === 0) return '';
+
+  const count = variations.length;
+  const countLabel = count === 1 ? '1 вариант' : count < 5 ? `${count} варианта` : `${count} вариантов`;
+  const items = variations.map(v => `
+    <article class="recipe-variation">
+      <h3 class="recipe-variation__title">${escapeHtml(v.title)}</h3>
+      <div class="recipe-variation__text">${sanitizeVariationHtml(v.text)}</div>
+    </article>`).join('');
+
+  return `
+    <details class="recipe-variations acc-item">
+      <summary>
+        <span class="recipe-variations__heading">Вариации</span>
+        <span class="recipe-variations__count">${countLabel}</span>
+        <span class="chev">${spriteIconHtml('chevron-down', 'ui-icon ui-icon--chev')}</span>
+      </summary>
+      <div class="recipe-variations__body">${items}</div>
+    </details>`;
+}
+
+function renderSourceLine(recipe) {
+  const rawUrl = (recipe.source_url || '').trim();
+  const name = (recipe.source_name || '').trim();
+  if (!rawUrl && !name) return '';
+
+  let href = '#';
+  try {
+    const u = new URL(rawUrl);
+    if (u.protocol === 'http:' || u.protocol === 'https:') href = u.href;
+  } catch (_) { /* invalid URL */ }
+
+  const isExternal = href !== '#' && !href.includes('sol-chef.ru');
+  const label = escapeHtml(name || 'Источник');
+
+  if (isExternal) {
+    return `<p class="recipe-source">Источник: <a class="recipe-source__link" href="${safeHref(rawUrl)}" target="_blank" rel="noopener">${label}</a></p>`;
+  }
+  if (name) {
+    return `<p class="recipe-source">${label}</p>`;
+  }
+  return '';
 }
 
 function renderRecipe(recipe) {
@@ -45,16 +85,20 @@ function renderRecipe(recipe) {
   const hasPrep = normalizePrep(recipe.prep).length > 0;
 
   let html = `<p class="recipe-lead">${escapeHtml(recipe.summary)}</p>`;
+  html += renderSourceLine(recipe);
 
   if (hasPrep) {
     html += renderPrepSection(recipe.prep);
   }
 
   if (recipe.ingredients?.length) {
-    html += `<section class="recipe-section"><h2>Ингредиенты</h2>${renderList(recipe.ingredients, false)}</section>`;
+    html += renderIngredientsSection(recipe);
   }
   if (recipe.steps?.length) {
     html += `<section class="recipe-section"><h2>Шаги</h2>${renderStepsWithTimers(recipe.steps)}</section>`;
+  }
+  if (recipe.variations?.length) {
+    html += renderVariationsSection(recipe.variations);
   }
   if (recipe.notes) {
     html += `<section class="recipe-section recipe-notes"><h2>Заметки</h2><p>${escapeHtml(recipe.notes)}</p></section>`;
@@ -68,6 +112,8 @@ function renderRecipe(recipe) {
   html += `</div>`;
 
   document.getElementById('recipe-content').innerHTML = html;
+
+  wireIngredientsScale(recipe);
 
   document.getElementById('copy-link')?.addEventListener('click', async () => {
     try {

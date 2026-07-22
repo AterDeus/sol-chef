@@ -17,6 +17,7 @@ const CATEGORIES = new Set([
   'свинина',
   'баранина',
   'крупы',
+  'рис',
   'гарнир',
   'паста',
   'суп',
@@ -28,7 +29,7 @@ const CATEGORIES = new Set([
 ]);
 const ALLOWED_FIELDS = new Set([
   'id', 'title', 'source_type', 'source_url', 'source_name',
-  'tags', 'category', 'summary', 'ingredients', 'steps', 'prep', 'notes', 'added', 'tried',
+  'tags', 'category', 'summary', 'ingredients', 'steps', 'prep', 'notes', 'variations', 'added', 'tried',
 ]);
 const PREP_TYPES = new Set(['thaw', 'fridge', 'room_temp', 'marinate', 'soak', 'custom']);
 
@@ -144,7 +145,7 @@ function validateStep(item, path){
   if (!item.text || typeof item.text !== 'string' || !item.text.trim()){
     fail(`${path}.text: required non-empty string`);
   }
-  const allowed = new Set(['text', 'timer_min', 'timer_sec', 'timer_label']);
+  const allowed = new Set(['text', 'timer_min', 'timer_sec', 'timer_label', 'timer_note']);
   for (const key of Object.keys(item)){
     if (!allowed.has(key)){
       fail(`${path}: unknown field "${key}"`);
@@ -159,6 +160,9 @@ function validateStep(item, path){
   const totalSec = (Number(item.timer_min) || 0) * 60 + (Number(item.timer_sec) || 0);
   if ((item.timer_min != null || item.timer_sec != null) && totalSec <= 0){
     fail(`${path}: timer_min/timer_sec must total more than 0 when set`);
+  }
+  if (item.timer_note != null && typeof item.timer_note !== 'string'){
+    fail(`${path}.timer_note: must be a string`);
   }
 }
 
@@ -185,6 +189,70 @@ function validatePrepItem(item, path){
     fail(`${path}.type: invalid value "${item.type}"`);
   }
   const allowed = new Set(['text', 'before_min', 'before_hours', 'type']);
+  for (const key of Object.keys(item)){
+    if (!allowed.has(key)){
+      fail(`${path}: unknown field "${key}"`);
+    }
+  }
+}
+
+function validateIngredientItem(item, path){
+  if (!item || typeof item !== 'object' || Array.isArray(item)){
+    fail(`${path}: must be an object`);
+    return;
+  }
+  if (!item.name || typeof item.name !== 'string' || !item.name.trim()){
+    fail(`${path}.name: required non-empty string`);
+  }
+  const allowed = new Set(['name', 'amount', 'amount_max', 'unit', 'detail', 'scalable', 'scale_mode']);
+  for (const key of Object.keys(item)){
+    if (!allowed.has(key)){
+      fail(`${path}: unknown field "${key}"`);
+    }
+  }
+  if (item.amount != null && typeof item.amount !== 'number'){
+    fail(`${path}.amount: must be a number`);
+  }
+  if (item.amount_max != null && typeof item.amount_max !== 'number'){
+    fail(`${path}.amount_max: must be a number`);
+  }
+  if (item.amount_max != null && (item.amount == null || item.amount >= item.amount_max)){
+    fail(`${path}.amount_max: must be greater than amount`);
+  }
+  if (item.unit != null && (typeof item.unit !== 'string' || !item.unit.trim())){
+    fail(`${path}.unit: must be a non-empty string`);
+  }
+  if (item.detail != null && typeof item.detail !== 'string'){
+    fail(`${path}.detail: must be a string`);
+  }
+  if (item.scalable != null && typeof item.scalable !== 'boolean'){
+    fail(`${path}.scalable: must be a boolean`);
+  }
+  if (item.scale_mode != null){
+    const modes = new Set(['linear', 'gentle', 'whole']);
+    if (typeof item.scale_mode !== 'string' || !modes.has(item.scale_mode)){
+      fail(`${path}.scale_mode: must be linear, gentle, or whole`);
+    }
+  }
+}
+
+const DISALLOWED_VARIATION_HTML = /<\s*(script|style|iframe|object|embed|link|meta|svg|math)\b|on\w+\s*=|javascript:/i;
+
+function validateVariationItem(item, path){
+  if (!item || typeof item !== 'object' || Array.isArray(item)){
+    fail(`${path}: must be an object`);
+    return;
+  }
+  if (!item.title || typeof item.title !== 'string' || !item.title.trim()){
+    fail(`${path}.title: required non-empty string`);
+  }
+  if (!item.text || typeof item.text !== 'string' || !item.text.trim()){
+    fail(`${path}.text: required non-empty string`);
+  }
+  if (DISALLOWED_VARIATION_HTML.test(item.text)){
+    fail(`${path}.text: disallowed HTML (only p, br, strong, b, em, i, ul, ol, li without attributes)`);
+  }
+  const allowed = new Set(['title', 'text']);
   for (const key of Object.keys(item)){
     if (!allowed.has(key)){
       fail(`${path}: unknown field "${key}"`);
@@ -245,9 +313,7 @@ function validateRecipe(recipe, index, labelPrefix){
       fail(`${prefix}: ingredients must be an array`);
     } else {
       recipe.ingredients.forEach((item, i) => {
-        if (typeof item !== 'string' || !item.trim()){
-          fail(`${prefix}.ingredients[${i}]: must be a non-empty string`);
-        }
+        validateIngredientItem(item, `${prefix}.ingredients[${i}]`);
       });
     }
   }
@@ -268,6 +334,18 @@ function validateRecipe(recipe, index, labelPrefix){
     } else {
       recipe.prep.forEach((item, i) => {
         validatePrepItem(item, `${prefix}.prep[${i}]`);
+      });
+    }
+  }
+
+  if (recipe.variations != null){
+    if (!Array.isArray(recipe.variations)){
+      fail(`${prefix}: variations must be an array`);
+    } else if (recipe.variations.length === 0){
+      fail(`${prefix}: variations must not be empty when set`);
+    } else {
+      recipe.variations.forEach((item, i) => {
+        validateVariationItem(item, `${prefix}.variations[${i}]`);
       });
     }
   }

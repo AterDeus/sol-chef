@@ -1,4 +1,5 @@
-import { escapeHtml, escapeAttr, safeHref, triedBadgeHtml } from './utils.js';
+import { escapeHtml, escapeAttr, triedBadgeHtml } from './utils.js';
+import { ingredientSearchText } from './ingredient-utils.js';
 import { loadAllRecipes } from './recipe-data.js';
 
 const PRIMARY_TAG_COUNT = 6;
@@ -44,7 +45,7 @@ function recipeSearchText(r) {
     r.source_name,
     r.category,
     ...(r.tags || []),
-    ...(r.ingredients || []),
+    ...(r.ingredients || []).map(ingredientSearchText),
     ...(r.steps || []),
     r.notes,
   ];
@@ -63,22 +64,19 @@ function filterRecipes(list, query, tags) {
 
 function renderRecipeCard(r) {
   const title = escapeHtml(r.title);
-  const url = safeHref(r.source_url);
   const summary = escapeHtml(r.summary);
-  const sourceName = escapeHtml(r.source_name || '');
   const tags = (r.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
   const detailLink = `recipe.html?id=${encodeURIComponent(r.id)}`;
   const triedMark = triedBadgeHtml(r.tried);
   return `
     <div class="recipe-card">
-      <h3 class="recipe-card__title"><a href="${detailLink}">${title}</a>${triedMark}</h3>
+      <h3 class="recipe-card__title"><a class="recipe-card__title-link" href="${detailLink}">${title}</a>${triedMark}</h3>
       <div class="recipe-meta">
         ${tags}
       </div>
       <p class="summary">${summary}</p>
       <div class="recipe-card-footer">
-        <div class="source-name">${sourceName}</div>
-        <a class="recipe-source-link" href="${url}" target="_blank" rel="noopener">Источник</a>
+        <a class="btn-secondary recipe-card__more" href="${detailLink}">Подробнее</a>
       </div>
     </div>`;
 }

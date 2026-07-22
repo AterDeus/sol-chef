@@ -19,6 +19,45 @@ export function escapeAttr(text) {
     .replace(/</g, '&lt;');
 }
 
+const VARIATION_HTML_TAGS = new Set([
+  'P', 'BR', 'STRONG', 'B', 'EM', 'I', 'UL', 'OL', 'LI',
+]);
+
+function sanitizeVariationElement(el) {
+  [...el.childNodes].forEach(child => {
+    if (child.nodeType === Node.TEXT_NODE) return;
+    if (child.nodeType !== Node.ELEMENT_NODE) {
+      child.remove();
+      return;
+    }
+    if (!VARIATION_HTML_TAGS.has(child.tagName)) {
+      child.replaceWith(el.ownerDocument.createTextNode(child.textContent || ''));
+      return;
+    }
+    [...child.attributes].forEach(attr => child.removeAttribute(attr.name));
+    if (child.tagName !== 'BR') sanitizeVariationElement(child);
+  });
+}
+
+/** Безопасный HTML для текста вариаций: только базовая разметка без атрибутов. */
+export function sanitizeVariationHtml(raw) {
+  if (raw == null) return '';
+  const str = String(raw).trim();
+  if (!str) return '';
+
+  if (typeof DOMParser === 'undefined') {
+    return escapeHtml(str);
+  }
+
+  const doc = new DOMParser().parseFromString(`<div>${str}</div>`, 'text/html');
+  const root = doc.body.firstElementChild;
+  if (!root) return escapeHtml(str);
+
+  sanitizeVariationElement(root);
+  const html = root.innerHTML.trim();
+  return html || escapeHtml(str);
+}
+
 export function safeHref(url) {
   try {
     const u = new URL(url);

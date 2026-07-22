@@ -20,7 +20,7 @@ export function prepIconHtml(type) {
 
 export function normalizeStep(step, index) {
   if (typeof step === 'string') {
-    return { index, text: step.trim(), timer_sec: 0, timer_label: '' };
+    return { index, text: step.trim(), timer_sec: 0, timer_label: '', timer_note: '' };
   }
   if (step && typeof step === 'object') {
     const timerMin = Number(step.timer_min) || 0;
@@ -31,9 +31,10 @@ export function normalizeStep(step, index) {
       text: String(step.text || '').trim(),
       timer_sec: totalSec > 0 ? totalSec : 0,
       timer_label: String(step.timer_label || '').trim(),
+      timer_note: String(step.timer_note || '').trim(),
     };
   }
-  return { index, text: '', timer_sec: 0, timer_label: '' };
+  return { index, text: '', timer_sec: 0, timer_label: '', timer_note: '' };
 }
 
 export function normalizeSteps(steps) {

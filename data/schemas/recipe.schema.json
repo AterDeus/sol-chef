@@ -42,6 +42,7 @@
         "свинина",
         "баранина",
         "крупы",
+        "рис",
         "гарнир",
         "паста",
         "суп",
@@ -58,7 +59,24 @@
     },
     "ingredients": {
       "type": "array",
-      "items": { "type": "string", "minLength": 1 }
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "amount": { "type": "number" },
+          "amount_max": { "type": "number" },
+          "unit": { "type": "string", "minLength": 1 },
+          "detail": { "type": "string" },
+          "scalable": { "type": "boolean" },
+          "scale_mode": {
+            "type": "string",
+            "enum": ["linear", "gentle", "whole"],
+            "description": "linear — пропорционально; gentle — слабее (сода); whole — целые шт (яйца)"
+          }
+        }
+      }
     },
     "steps": {
       "type": "array",
@@ -73,7 +91,8 @@
               "text": { "type": "string", "minLength": 1 },
               "timer_min": { "type": "number", "minimum": 0 },
               "timer_sec": { "type": "number", "minimum": 0, "maximum": 3599 },
-              "timer_label": { "type": "string" }
+              "timer_label": { "type": "string" },
+              "timer_note": { "type": "string", "description": "Оговорка к таймеру: для какой порции, когда ориентир неточен" }
             }
           }
         ]
@@ -103,6 +122,24 @@
     },
     "notes": {
       "type": "string"
+    },
+    "variations": {
+      "type": "array",
+      "description": "Вариации базового рецепта — чем отличается приготовление",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["title", "text"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Отличия от базового рецепта. Допускается ограниченный HTML: p, br, strong, b, em, i, ul, ol, li (без атрибутов)"
+          }
+        }
+      }
     },
     "added": {
       "type": "string",

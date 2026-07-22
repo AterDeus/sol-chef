@@ -45,6 +45,7 @@ export function initCookMode(recipe, rootEl) {
     wakeLock: null,
     timers: new Map(),
     timerIntervals: new Map(),
+    timerDurations: new Map(),
   };
 
   rootEl.innerHTML = '';
@@ -236,30 +237,57 @@ export function initCookMode(recipe, rootEl) {
     }
   }
 
+  function getTimerDuration(timerId, step) {
+    return state.timerDurations.get(timerId) ?? step.timer_sec;
+  }
+
+  function timerAdjustStep(step) {
+    return step.timer_sec >= 3600 ? 300 : step.timer_sec >= 600 ? 60 : 30;
+  }
+
+  function renderTimerBlock(step, timerId) {
+    const activeTimer = state.timers.get(timerId);
+    const timerRunning = state.timerIntervals.has(timerId);
+    const durationSec = getTimerDuration(timerId, step);
+    const label = step.timer_label || formatDuration(durationSec);
+    const displaySec = activeTimer?.remaining ?? durationSec;
+    const stepSec = timerAdjustStep(step);
+    const noteBlock = step.timer_note
+      ? `<p class="cook-step-timer__note">${escapeHtml(step.timer_note)}</p>`
+      : '';
+    const adjustBlock = timerRunning
+      ? ''
+      : `<div class="cook-step-timer__adjust">
+          <button type="button" class="btn-secondary cook-timer-minus" aria-label="Уменьшить">−${formatDuration(stepSec)}</button>
+          <button type="button" class="btn-secondary cook-timer-plus" aria-label="Увеличить">+${formatDuration(stepSec)}</button>
+        </div>`;
+    const cont = activeTimer?.remaining != null && activeTimer.remaining < durationSec;
+
+    return `
+        <div class="cook-step-timer ${timerRunning ? 'is-running' : ''}" data-timer-id="${timerId}">
+          <div class="cook-step-timer__label">${escapeHtml(label)}</div>
+          <div class="cook-step-timer__display" aria-live="polite">${formatDurationShort(displaySec)}</div>
+          ${noteBlock}
+          ${adjustBlock}
+          <div class="cook-step-timer__actions">
+            ${timerRunning
+              ? '<button type="button" class="btn-secondary cook-timer-pause">Пауза</button><button type="button" class="btn-secondary cook-timer-reset">Сброс</button>'
+              : `<button type="button" class="btn-primary cook-timer-start">${spriteIconHtml('play', 'ui-icon ui-icon--inline')} ${cont ? 'Продолжить' : 'Старт'} ${formatDuration(durationSec)}</button>`
+            }
+          </div>
+        </div>`;
+  }
+
   function renderSteps() {
     state.phase = 'steps';
     const step = steps[state.stepIndex];
     const progress = ((state.stepIndex + 1) / steps.length) * 100;
     const isDone = state.completed.has(state.stepIndex);
     const timerId = `step-${state.stepIndex}`;
-    const activeTimer = state.timers.get(timerId);
-    const timerRunning = state.timerIntervals.has(timerId);
 
     let timerBlock = '';
     if (step.timer_sec > 0) {
-      const label = step.timer_label || formatDuration(step.timer_sec);
-      const displaySec = activeTimer?.remaining ?? step.timer_sec;
-      timerBlock = `
-        <div class="cook-step-timer ${timerRunning ? 'is-running' : ''}" data-timer-id="${timerId}">
-          <div class="cook-step-timer__label">${escapeHtml(label)}</div>
-          <div class="cook-step-timer__display" aria-live="polite">${formatDurationShort(displaySec)}</div>
-          <div class="cook-step-timer__actions">
-            ${timerRunning
-              ? '<button type="button" class="btn-secondary cook-timer-pause">Пауза</button><button type="button" class="btn-secondary cook-timer-reset">Сброс</button>'
-              : `<button type="button" class="btn-primary cook-timer-start">${spriteIconHtml('play', 'ui-icon ui-icon--inline')} ${activeTimer?.remaining != null && activeTimer.remaining < step.timer_sec ? 'Продолжить' : 'Таймер'} ${formatDuration(step.timer_sec)}</button>`
-            }
-          </div>
-        </div>`;
+      timerBlock = renderTimerBlock(step, timerId);
     }
 
     bodyEl.innerHTML = `
@@ -332,11 +360,28 @@ export function initCookMode(recipe, rootEl) {
     bodyEl.querySelector('.cook-timer-start')?.addEventListener('click', () => startTimer(timerId, step));
     bodyEl.querySelector('.cook-timer-pause')?.addEventListener('click', () => pauseTimer(timerId));
     bodyEl.querySelector('.cook-timer-reset')?.addEventListener('click', () => resetTimer(timerId, step));
+    bodyEl.querySelector('.cook-timer-minus')?.addEventListener('click', () => adjustTimerDuration(timerId, step, -timerAdjustStep(step)));
+    bodyEl.querySelector('.cook-timer-plus')?.addEventListener('click', () => adjustTimerDuration(timerId, step, timerAdjustStep(step)));
+  }
+
+  function adjustTimerDuration(timerId, step, deltaSec) {
+    if (state.timerIntervals.has(timerId)) return;
+    const next = Math.max(30, getTimerDuration(timerId, step) + deltaSec);
+    state.timerDurations.set(timerId, next);
+    state.timers.delete(timerId);
+    const block = bodyEl.querySelector('.cook-step-timer');
+    if (!block) return;
+    block.querySelector('.cook-step-timer__display').textContent = formatDurationShort(next);
+    const startBtn = block.querySelector('.cook-timer-start');
+    if (startBtn) {
+      startBtn.innerHTML = `${spriteIconHtml('play', 'ui-icon ui-icon--inline')} Старт ${formatDuration(next)}`;
+    }
   }
 
   function startTimer(timerId, step) {
     pauseTimer(timerId);
-    let remaining = state.timers.get(timerId)?.remaining ?? step.timer_sec;
+    const durationSec = getTimerDuration(timerId, step);
+    let remaining = state.timers.get(timerId)?.remaining ?? durationSec;
     const endAt = Date.now() + remaining * 1000;
 
     scheduleTimerAlert(
@@ -360,12 +405,16 @@ export function initCookMode(recipe, rootEl) {
         if (navigator.vibrate) navigator.vibrate([300, 100, 300, 100, 300]);
         bodyEl.querySelector('.cook-step-timer')?.classList.remove('is-running');
         bodyEl.querySelector('.cook-step-timer')?.classList.add('is-finished');
+        const adjustEl = bodyEl.querySelector('.cook-step-timer__adjust');
+        if (adjustEl) adjustEl.hidden = false;
       }
     }, 250);
 
     state.timerIntervals.set(timerId, interval);
     const block = bodyEl.querySelector('.cook-step-timer');
     block?.classList.add('is-running');
+    const adjust = block?.querySelector('.cook-step-timer__adjust');
+    if (adjust) adjust.hidden = true;
     const actions = block?.querySelector('.cook-step-timer__actions');
     if (actions) {
       actions.innerHTML = `
@@ -386,7 +435,7 @@ export function initCookMode(recipe, rootEl) {
     const actions = block.querySelector('.cook-step-timer__actions');
     if (!actions) return;
     const activeTimer = state.timers.get(timerId);
-    const label = step.timer_label || formatDuration(step.timer_sec);
+    const durationSec = getTimerDuration(timerId, step);
     if (running) {
       actions.innerHTML = `
         <button type="button" class="btn-secondary cook-timer-pause">Пауза</button>
@@ -397,8 +446,10 @@ export function initCookMode(recipe, rootEl) {
       });
       actions.querySelector('.cook-timer-reset')?.addEventListener('click', () => resetTimer(timerId, step));
     } else {
-      const cont = activeTimer?.remaining != null && activeTimer.remaining < step.timer_sec;
-      actions.innerHTML = `<button type="button" class="btn-primary cook-timer-start">${spriteIconHtml('play', 'ui-icon ui-icon--inline')} ${cont ? 'Продолжить' : 'Таймер'} ${formatDuration(step.timer_sec)}</button>`;
+      const cont = activeTimer?.remaining != null && activeTimer.remaining < durationSec;
+      const adjust = block.querySelector('.cook-step-timer__adjust');
+      if (adjust) adjust.hidden = false;
+      actions.innerHTML = `<button type="button" class="btn-primary cook-timer-start">${spriteIconHtml('play', 'ui-icon ui-icon--inline')} ${cont ? 'Продолжить' : 'Старт'} ${formatDuration(durationSec)}</button>`;
       actions.querySelector('.cook-timer-start')?.addEventListener('click', () => startTimer(timerId, step));
     }
   }
@@ -415,6 +466,7 @@ export function initCookMode(recipe, rootEl) {
   function resetTimer(timerId, step) {
     pauseTimer(timerId);
     state.timers.delete(timerId);
+    state.timerDurations.delete(timerId);
     renderSteps();
   }
 
