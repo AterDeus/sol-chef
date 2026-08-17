@@ -4,7 +4,7 @@
   "title": "Recipe",
   "description": "Запись рецепта в data/recipes/<метод>/<продукт>.json",
   "type": "object",
-  "required": ["id", "title", "source_url", "summary", "tags"],
+  "required": ["id", "title", "summary", "tags"],
   "additionalProperties": false,
   "properties": {
     "id": {
@@ -22,7 +22,7 @@
     },
     "source_url": {
       "type": "string",
-      "format": "uri"
+      "description": "Ссылка на видео или статью; если нет внешнего источника — поле можно опустить или оставить пустым"
     },
     "source_name": {
       "type": "string"

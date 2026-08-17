@@ -8,7 +8,7 @@ const RECIPES_DIR = path.join(__dirname, '..', 'data', 'recipes');
 const RECIPES_INDEX = path.join(RECIPES_DIR, 'index.json');
 const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-const REQUIRED = ['id', 'title', 'source_url', 'summary', 'tags'];
+const REQUIRED = ['id', 'title', 'summary', 'tags'];
 const TAGS_MIN = 2;
 const TAGS_MAX = 5;
 const CATEGORIES = new Set([
@@ -289,9 +289,10 @@ function validateRecipe(recipe, index, labelPrefix){
     }
   }
 
-  if (recipe.source_url){
+  const sourceUrl = recipe.source_url != null ? String(recipe.source_url).trim() : '';
+  if (sourceUrl){
     try {
-      const url = new URL(recipe.source_url);
+      const url = new URL(sourceUrl);
       if (!['http:', 'https:'].includes(url.protocol)){
         fail(`${prefix}: source_url must be http or https`);
       }

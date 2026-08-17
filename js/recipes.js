@@ -13,7 +13,6 @@ function isValidRecipe(r) {
     r &&
     r.id &&
     r.title &&
-    r.source_url &&
     r.summary &&
     Array.isArray(r.tags) &&
     r.tags.length > 0

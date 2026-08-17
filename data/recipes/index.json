@@ -10,20 +10,24 @@
   "products": {
     "ptitsa": "Птица",
     "govyadina": "Говядина",
+    "svinina": "Свинина",
     "krupy": "Крупы",
     "ris": "Рис / ризотто",
     "baranina": "Баранина",
     "pasta": "Паста",
     "zavtrak": "Завтрак",
-    "desert": "Десерт"
+    "desert": "Десерт",
+    "sousy": "Соусы"
   },
   "files": [
     "data/recipes/duhovka/desert.json",
     "data/recipes/duhovka/govyadina.json",
     "data/recipes/duhovka/ptitsa.json",
+    "data/recipes/duhovka/svinina.json",
     "data/recipes/grill/govyadina.json",
     "data/recipes/kastryulya/krupy.json",
     "data/recipes/kastryulya/pasta.json",
+    "data/recipes/kastryulya/sousy.json",
     "data/recipes/skovoroda/govyadina.json",
     "data/recipes/skovoroda/krupy.json",
     "data/recipes/skovoroda/zavtrak.json",
