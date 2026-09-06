@@ -1,0 +1,294 @@
+{
+  "id": "tefteli-iz-govyadiny",
+  "title": "Тефтели из говядины в соусе",
+  "summary": "Говяжий фарш смешивают с отваренным до полуготовности рисом, луком и яйцом, катают шарики и тушат в томатном соусе с 400 мл жидкости до 71 °C в центре. Это не плоские котлеты: рис в фарше, форма круглая, соус обязателен.",
+  "recipe_family": "kotlety",
+  "protein_base": "beef",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": ["mince"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": ["ground_meat"],
+  "caution_text": "Говяжий фарш доводить до 71 °C в центре каждой тефтели: бактерии распределены по всему объёму, сырая серединка недопустима. Rare запрещён. Не давать детям непротушенными.",
+  "time_profile": {
+    "total_minutes": 55,
+    "active_minutes": 30
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["batch", "easy", "budget"],
+  "new_ingredients": [
+    {
+      "canonical_id": "beef_mince",
+      "title": "говяжий фарш",
+      "aliases": ["фарш говяжий"],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": ["сметана 15–20%"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "stew", "to": "oven", "quality": 0.88 },
+    { "type": "equipment", "from": "pot", "to": "baking_dish", "quality": 0.88 },
+    { "type": "omission", "ingredient": "sour_cream", "quality": 0.95 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_mince",
+      "display_name": "говяжий фарш",
+      "amount": 500,
+      "unit": "g",
+      "detail": "размороженный, не ледяным комом",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": 80,
+      "unit": "g",
+      "detail": "круглозёрный; отварить 8 минут и остудить — в сыром виде в шарике останется жёстким",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 120,
+      "unit": "g",
+      "detail": "репчатый, натереть или очень мелко порубить",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "egg",
+      "display_name": "яйцо",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "tomato_paste",
+      "display_name": "томатная паста",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "около 30 г; развести в жидкости соуса",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 400,
+      "unit": "ml",
+      "detail": "горячая, для соуса; шарики должны быть покрыты хотя бы наполовину",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для обжарки шариков",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.25,
+      "unit": "tsp",
+      "detail": "в фарш и в соус вместе",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 80,
+      "unit": "g",
+      "detail": "15–20%; вмешаться в соус в конце, по желанию",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Промыть рис, залить 250 мл кипятка (это не 400 мл соуса) и варить без крышки, затем откинуть на сито и остудить.",
+      "timer_seconds": 480,
+      "timer_label": "Рис",
+      "timer_note": "8 минут: полуготовность. Сырой рис в тефтели не класть — к 71 °C в фарше зёрна ещё твёрдые"
+    },
+    {
+      "position": 2,
+      "text": "Смешать фарш, остывший рис, лук, яйцо, 1 ч. л. соли и перец. Месить коротко, пока масса не станет липкой, не выбивать как котлетный фарш."
+    },
+    {
+      "position": 3,
+      "text": "Мокрыми руками скатать шарики диаметром около 4 см. Не плющить — это не котлеты."
+    },
+    {
+      "position": 4,
+      "text": "Разогреть кастрюлю с маслом на среднем огне. Обжарить шарики партиями, перекатывая, только до лёгкой корочки, не продавливая лопаткой.",
+      "timer_seconds": 300,
+      "timer_label": "Партия",
+      "timer_note": "4–5 минут на партию; внутри ещё сырые — дойдут в соусе",
+      "equipment_note": "Партии в один слой. Полная кастрюля сомнёт шарики и даст пар вместо корочки."
+    },
+    {
+      "position": 5,
+      "text": "Развести томатную пасту в 400 мл горячей воды, посолить оставшейся солью. Вернуть все тефтели в кастрюлю и залить соусом: жидкость должна покрывать хотя бы половину шариков."
+    },
+    {
+      "position": 6,
+      "text": "Накрыть и тушить на слабом огне. Проверить центр самой крупной тефтели: не ниже 71 °C. Сметану, если кладёте, вмешайте в соус после снятия с огня.",
+      "timer_seconds": 1500,
+      "timer_label": "Тушение",
+      "timer_note": "25 минут; не бурлить — шарики развалятся. Готовность по термометру, не по цвету",
+      "target_internal_temperature_c": 71
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "baking_dish",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 500,
+            "unit": "ml",
+            "detail": "горячая; в форме жидкости нужно больше, чем в кастрюле, иначе соус выкипит",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать форму; обжарка на плите не нужна",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Разогреть духовку до 180 °C. Форму смазать маслом. Обжарка на плите не нужна: шарики дойдут в соусе в камере."
+          },
+          {
+            "position": 5,
+            "text": "Развести томатную пасту в 500 мл горячей воды, посолить. Вылить соус на дно формы, уложить шарики в один слой сверху — они стоят в жидкости, не на сухом противне."
+          },
+          {
+            "position": 6,
+            "text": "Накрыть форму крышкой или фольгой и запекать. Проверить центр самой крупной тефтели: не ниже 71 °C. Сметану, если кладёте, вмешайте в соус после духовки.",
+            "timer_seconds": 2100,
+            "timer_label": "В духовке",
+            "timer_note": "35 минут под крышкой или фольгой при 180 °C; без укрытия верх пересохнет, низ не наберёт 71 °C",
+            "target_internal_temperature_c": 71,
+            "equipment_note": "Соус на дне формы, шарики в один слой. Противень без бортиков не подходит — жидкость убежит."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Рис в фарше",
+      "text": "В тефтелях рис есть: 80 г круглозёрного на 500 г фарша, отваренный 8 минут. Без риса это уже котлеты другого slug. Сырой рис к готовности фарша не успевает."
+    },
+    {
+      "title": "Форма",
+      "text": "Шарик около 4 см, не лепёшка. Плоские — котлеты волны 3.2, они жарятся, а не тушатся в соусе."
+    },
+    {
+      "title": "Соус",
+      "text": "400 мл воды на 2 ст. л. пасты в кастрюле; в форме — 500 мл. Мало жидкости — тефтели сухие снаружи и сырые внутри. Это не «смазать томатом», а тушение."
+    },
+    {
+      "title": "Температура",
+      "text": "Фарш — 71 °C в центре шарика. Цвет и «сок прозрачный» недостаточны: бактерии по всему объёму, rare запрещён."
+    },
+    {
+      "title": "Сметана",
+      "text": "По желанию, в конце, с огня. Без неё соус томатный и блюдо собирается. Молоко на карточке из обязательного состава не вешать: строка optional."
+    },
+    {
+      "title": "Духовка",
+      "text": "Соус сначала на дно формы, шарики сверху в один слой, укрытие фольгой. Обжарка на плите для этого варианта лишняя посуда и сушит корочку до того, как соус успеет."
+    }
+  ]
+}

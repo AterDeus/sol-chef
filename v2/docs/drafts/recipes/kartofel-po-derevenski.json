@@ -1,0 +1,337 @@
+{
+  "id": "kartofel-po-derevenski",
+  "title": "Картофель по-деревенски",
+  "summary": "Дольки картофеля с кожурой запекают на противне с маслом, паприкой и чесноком до хрустящих краёв и мягкой середины. Куски держат форму — это гарнир, не пюре.",
+  "recipe_family": "roast_potato",
+  "protein_base": "vegetables",
+  "cook_method": "oven",
+  "dish_type": "side",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 45,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": ["easy", "one_pan", "budget", "fast"],
+  "adaptations": [
+    {"type": "method", "from": "oven", "to": "air_fryer", "quality": 0.90},
+    {"type": "method", "from": "oven", "to": "pan_fry", "quality": 0.80},
+    {"type": "equipment", "from": "oven", "to": "skillet", "quality": 0.80}
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 1000,
+      "unit": "g",
+      "detail": "обычный столовый; кожуру оставить, тщательно вымыть",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "около 45 мл, чтобы покрыть дольки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 2,
+      "unit": "tsp",
+      "detail": "сладкая, не копчёная",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "detail": "измельчить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "dried_rosemary",
+      "display_name": "сушёный розмарин",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "из пакетика супермаркета; по желанию",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 220 °C."
+    },
+    {
+      "position": 2,
+      "text": "Картофель тщательно вымыть щёткой, кожуру не снимать. Нарезать дольками 2–3 см — не кубиком под пюре и не ломтиками чипсов."
+    },
+    {
+      "position": 3,
+      "text": "Смешать дольки прямо на противне с 3 ст. л. масла, паприкой, солью и перцем. Сушёный розмарин добавить, если есть. Измельчённый чеснок отложить: при 220 °C с первой минуты сгорит."
+    },
+    {
+      "position": 4,
+      "text": "Распределить в один слой срезом вниз, с зазорами между дольками.",
+      "equipment_note": "Один слой. В два ряда дольки будут варёные, без корочки."
+    },
+    {
+      "position": 5,
+      "text": "Запекать без крышки, пока края не схватятся и не начнут румяниться.",
+      "timer_seconds": 1200,
+      "timer_label": "Первый проход",
+      "timer_note": "20 минут; середина ещё плотная — так и должно быть"
+    },
+    {
+      "position": 6,
+      "text": "Перевернуть дольки, рассыпать измельчённый чеснок и запекать до хрустящих краёв и мягкой середины: нож входит без сопротивления, куски держат форму. Чеснок только на этот проход, не с первой минуты.",
+      "timer_seconds": 1200,
+      "timer_label": "До корочки",
+      "timer_note": "Ещё около 20 минут; ориентир — цвет и нож, не внутренняя температура мяса"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "cook_method_override": "air_fryer",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "potato",
+            "display_name": "картофель",
+            "amount": 500,
+            "unit": "g",
+            "detail": "не больше 500 г в чашу за раз; кожуру оставить, тщательно вымыть",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 2,
+            "unit": "tbsp",
+            "detail": "на 500 г в чаше; не 3 ст. л. базы",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть аэрогриль до 200 °C."
+          },
+          {
+            "position": 3,
+            "text": "Смешать 500 г долек с 2 ст. л. масла, паприкой, солью и перцем. Это вся закладка варианта, не остаток от килограмма базы. Чеснок отложить."
+          },
+          {
+            "position": 4,
+            "text": "Уложить в чашу в один слой: в этом варианте 500 г — одна закладка. Если готовите килограмм базы — две одинаковые партии по 500 г с той же приправой.",
+            "equipment_note": "Не больше 500 г в чашу. Стенки и дно должны продуваться, иначе дольки будут варёные, без корочки."
+          },
+          {
+            "position": 5,
+            "text": "Готовить, пока края не подсохнут.",
+            "timer_seconds": 600,
+            "timer_label": "До встряхивания",
+            "timer_note": "10 минут; короче духовки — воздух в чаше жарче"
+          },
+          {
+            "position": 6,
+            "text": "Сильно встряхнуть чашу, рассыпать измельчённый чеснок и готовить до хрустящих краёв и мягкой середины. Чеснок с первой минуты при 200 °C сгорит.",
+            "timer_seconds": 720,
+            "timer_label": "После встряхивания",
+            "timer_note": "Ещё 10–12 минут; ориентир — цвет и нож, не таймер"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть широкую сковороду на среднем огне и влить масло."
+          },
+          {
+            "position": 2,
+            "text": "Картофель тщательно вымыть щёткой, кожуру не снимать. Нарезать дольками 1.5–2 см: на сковороде толстая долька останется сырой внутри."
+          },
+          {
+            "position": 3,
+            "text": "Смешать дольки с паприкой, солью, перцем и розмарином, если есть. Масло уже на сковороде — не поливать сверху ещё раз. Чеснок отложить: его — после крышки, иначе сгорит к корочке."
+          },
+          {
+            "position": 4,
+            "text": "Выложить дольки партиями в один слой срезом вниз. Полную сковороду не забивать.",
+            "equipment_note": "Не перегружать сковороду: партии в один слой. Полная сковорода — тушение в пару, без корочки."
+          },
+          {
+            "position": 5,
+            "text": "Накрыть крышкой, чтобы середина дошла, не снимая крышку каждые две минуты.",
+            "timer_seconds": 540,
+            "timer_label": "Под крышкой",
+            "timer_note": "8–10 минут на партию; пар варит середину, иначе корочка будет, а внутри сыро"
+          },
+          {
+            "position": 6,
+            "text": "Снять крышку, рассыпать измельчённый чеснок, огонь чуть сильнее, переворачивать до румяной корочки со всех сторон. Нож входит, кусок держит форму. Следующая партия — в ту же сковороду.",
+            "timer_seconds": 360,
+            "timer_label": "Корочка",
+            "timer_note": "5–7 минут без крышки; ориентир — цвет, не таймер"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "только чтобы покрыть дольки",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Смешать дольки прямо на противне с 1 ст. л. масла, паприкой, солью и перцем. Сушёный розмарин добавить, если есть. Чеснок — на второй проход, как в базе. Если противень липнет — застелить пергаментом."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Кожура",
+      "text": "Деревенский смысл блюда — кожура остаётся. Её моют щёткой до чистой кожи, не скоблят ножом. Очищенный картофель здесь уже другой гарнир."
+    },
+    {
+      "title": "Не пюре",
+      "text": "Дольки должны держать форму после духовки. Если разваливаются в кашу — сорт слишком рассыпчатый или передержали. Для пюре этот рецепт не подходит."
+    },
+    {
+      "title": "Противень",
+      "text": "Один слой и зазоры. Куча в центре даёт пар, не корочку. Бумага не обязательна: прямой контакт с металлом румянит лучше."
+    },
+    {
+      "title": "Масло",
+      "text": "3 ст. л. на 1 кг — плёнка, не лужа. Без масла края не хрустят. Лишнее можно не класть, но тогда противень липнет, а корочка бледнее."
+    },
+    {
+      "title": "Готовность",
+      "text": "Нож легко входит, края румяные, середина мягкая. Внутренний термометр мяса не нужен: это овощи."
+    },
+    {
+      "title": "Аэрогриль",
+      "text": "Чаша маленькая: 500 г за закладку и обязательное встряхивание. Килограмм сразу — влажный пар и бледные бока."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Сначала крышка — середина доходит. Потом без крышки — корочка. Только сильный огонь без крышки даёт румяный низ и сырую сердцевину. Партии, не гора."
+    }
+  ]
+}

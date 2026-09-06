@@ -1,0 +1,299 @@
+{
+  "id": "ryba-s-kartofelem",
+  "title": "Рыба с картофелем в одной форме",
+  "summary": "Картофель и лук сначала запекают одни, затем сверху кладут филе минтая, хека или трески и доводят рыбу до 63 °C. Один противень, без лосося и без четырёх slug по виду рыбы.",
+  "recipe_family": "one_pan_potato",
+  "protein_base": "fish_white_sea",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "baking_dish",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 55,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["one_pan", "budget", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "pollock",
+      "title": "минтай",
+      "aliases": ["филе минтая", "минтай филе"],
+      "allergens_contains": ["fish"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "hake",
+      "title": "хек",
+      "aliases": ["филе хека", "хек филе"],
+      "allergens_contains": ["fish"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "cod",
+      "title": "треска",
+      "aliases": ["филе трески", "треска филе"],
+      "allergens_contains": ["fish"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "oven", "to": "stew", "quality": 0.86 },
+    { "type": "equipment", "from": "baking_dish", "to": "pot", "quality": 0.86 },
+    { "type": "substitution", "from": "pollock", "to": "hake", "quality": 0.95 },
+    { "type": "substitution", "from": "hake", "to": "pollock", "quality": 0.95 },
+    { "type": "substitution", "from": "pollock", "to": "cod", "quality": 0.92 },
+    { "type": "substitution", "from": "cod", "to": "pollock", "quality": 0.92 }
+  ],
+  "prep": [
+    {
+      "text": "Замороженное филе разморозить в холодильнике и хорошо обсушить. Мокрая рыба на уже запечённом картофеле даст лужу и размягчит корочку."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "pollock",
+      "display_name": "филе минтая",
+      "amount": 600,
+      "unit": "g",
+      "detail": "без кожи и костей; взять минтай, хек или треску, не все сразу и не лосось",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "choice_group": "white_fish"
+    },
+    {
+      "position": 2,
+      "canonical_id": "hake",
+      "display_name": "филе хека",
+      "amount": 600,
+      "unit": "g",
+      "detail": "без кожи и костей; та же порция, что у минтая",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "white_fish"
+    },
+    {
+      "position": 3,
+      "canonical_id": "cod",
+      "display_name": "филе трески",
+      "amount": 600,
+      "unit": "g",
+      "detail": "без кожи и костей; та же порция, что у минтая",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "white_fish"
+    },
+    {
+      "position": 4,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 800,
+      "unit": "g",
+      "detail": "обычный, не молодой; куски около 2 см",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 200,
+      "unit": "g",
+      "detail": "дольками",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "обвалять картофель и лук",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 80,
+      "unit": "ml",
+      "detail": "на дно формы, чтобы картофель не присох до закладки рыбы",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "detail": "часть на картофель, часть на рыбу",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 200 °C."
+    },
+    {
+      "position": 2,
+      "text": "Картофель очистить и нарезать кусками около 2 см, лук — дольками. Филе обсушить и проверить на кости."
+    },
+    {
+      "position": 3,
+      "text": "Смешать картофель и лук в форме с маслом, большей частью соли и перцем. Влить воду на дно. Рыбу пока не класть.",
+      "equipment_note": "Форма, картофель в один слой. Горка оставит сырую середину, пока тонкие куски по краям уже сухие."
+    },
+    {
+      "position": 4,
+      "text": "Запекать картофель с луком без рыбы, пока края кусков не станут матовыми и вилка не будет входить с усилием, не насквозь.",
+      "timer_seconds": 1500,
+      "timer_label": "Картофель",
+      "timer_note": "24–26 минут при 200 °C; картофель ещё плотный. Вместе с сырой рыбой на 40 минут филе пересохнет"
+    },
+    {
+      "position": 5,
+      "text": "Выложить филе минтая, хека или трески сверху в один слой, посолить оставшейся солью. Запекать до 63 °C в толще рыбы и мягкого картофеля вилкой.",
+      "timer_seconds": 900,
+      "timer_label": "С рыбой",
+      "timer_note": "14–16 минут; ориентир — 63 °C в рыбе и мягкий картофель. Треска чуть плотнее минтая — ближе к 16 минутам",
+      "target_internal_temperature_c": 63
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "pot",
+      "title": "Тушение",
+      "cook_method_override": "stew",
+      "equipment": "pot",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 300,
+            "unit": "ml",
+            "detail": "кастрюля выше формы: жидкости больше, иначе пригорит",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть кастрюлю с маслом на среднем огне. Духовку не включать."
+          },
+          {
+            "position": 2,
+            "text": "Картофель кусками около 2 см, лук полукольцами. Филе обсушить."
+          },
+          {
+            "position": 3,
+            "text": "Пассеровать лук 3 минуты, выложить картофель слоем, посолить большей частью соли, поперчить. Влить 300 мл воды — жидкость почти покрывает картофель, не рыбу: её ещё нет.",
+            "timer_seconds": 180,
+            "timer_label": "Слой",
+            "timer_note": "Лук снизу, картофель сверху. Это слои кастрюли, не россыпь формы"
+          },
+          {
+            "position": 4,
+            "text": "Накрыть крышкой и тушить на слабом огне, пока картофель не начнёт прокалываться вилкой.",
+            "timer_seconds": 1080,
+            "timer_label": "Картофель",
+            "timer_note": "18 минут под крышкой — короче открытой духовки: жидкость ведёт жар внутрь куска"
+          },
+          {
+            "position": 5,
+            "text": "Выложить филе сверху слоем, посолить. Накрыть и томить до 63 °C в толще рыбы. Не мешать: филе сломается, картофель станет кашей.",
+            "timer_seconds": 720,
+            "timer_label": "Рыба",
+            "timer_note": "10–12 минут; ориентир — 63 °C. Соус влажный, корочки духовки нет",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Кастрюля с крышкой, рыба верхним слоем. Не противень и не перемешивание «как жаркое»."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Какая рыба",
+      "text": "База — минтай. Хек или треска — тот же вес, одна рыба на форму. Лосось сюда не класть: жир и время другие, это был бы другой slug."
+    },
+    {
+      "title": "Картофель первым",
+      "text": "800 г кусками 2 см без рыбы 24–26 минут. Молодой развалится. Вместе с сырым филе на весь цикл рыба сухая, картофель сырой в середине."
+    },
+    {
+      "title": "Сливки",
+      "text": "Ложка сливок на дно формы в конце — по желанию, в состав не входит. Без них блюдо уже сочное за счёт воды и лука."
+    },
+    {
+      "title": "Готовность",
+      "text": "Рыба 63 °C в толще, картофель мягкий вилкой. Дальше филе крошится. Сырая серединка недопустима."
+    },
+    {
+      "title": "Кастрюля",
+      "text": "Слои: лук, картофель, 300 мл воды, рыба сверху в конце. Мешать после закладки филе нельзя."
+    },
+    {
+      "title": "Соль",
+      "text": "Соль растёт слабее картофеля: 1.5 ч. л. на эту закладку, на удвоенную не два раза. Часть оставить на рыбу, иначе сверху пресно."
+    }
+  ]
+}

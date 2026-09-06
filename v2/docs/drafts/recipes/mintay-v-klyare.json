@@ -1,0 +1,439 @@
+{
+  "id": "mintay-v-klyare",
+  "title": "Минтай в кляре",
+  "summary": "Куски филе минтая обмакивают в кляр из муки, яйца и молока или воды и жарят партиями на сковороде до 63 °C. Масло только на дне сковороды, не фритюр: в духовке и аэрогриле кляр гуще, чтобы не стек.",
+  "recipe_family": "white_fish",
+  "protein_base": "fish_white_sea",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 3,
+  "use_cases": ["fast", "budget"],
+  "new_ingredients": [
+    {
+      "canonical_id": "pollock",
+      "title": "минтай",
+      "aliases": ["филе минтая", "минтай филе"],
+      "allergens_contains": ["fish"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "milk",
+      "title": "молоко",
+      "aliases": ["молоко 2.5%", "молоко 3.2%"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "pan_fry", "to": "oven", "quality": 0.88 },
+    { "type": "method", "from": "pan_fry", "to": "air_fryer", "quality": 0.86 },
+    { "type": "equipment", "from": "skillet", "to": "oven", "quality": 0.88 },
+    { "type": "substitution", "from": "milk", "to": "water", "quality": 0.9 },
+    { "type": "substitution", "from": "water", "to": "milk", "quality": 0.9 },
+    { "type": "substitution", "from": "milk", "to": "sparkling_mineral_water", "quality": 0.88 }
+  ],
+  "prep": [
+    {
+      "text": "Замороженное филе разморозить в холодильнике и очень хорошо обсушить бумагой: мокрый минтай разбавляет кляр, и он стекает в масло."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "pollock",
+      "display_name": "филе минтая",
+      "amount": 600,
+      "unit": "g",
+      "detail": "без кожи и костей, куски около 2 см; не лосось и не запекание без кляра",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "wheat_flour",
+      "display_name": "пшеничная мука",
+      "amount": 110,
+      "unit": "g",
+      "detail": "на кляр; должен стекать медленной лентой. Если жиже — ещё 1–2 ст. л. муки",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "egg",
+      "display_name": "яйцо",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "в кляр",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "milk",
+      "display_name": "молоко",
+      "amount": 80,
+      "unit": "ml",
+      "detail": "2.5–3.2%; взять молоко, воду или газировку, не всё сразу",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "batter_liquid"
+    },
+    {
+      "position": 5,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 80,
+      "unit": "ml",
+      "detail": "холодная; та же порция, что у молока",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "batter_liquid"
+    },
+    {
+      "position": 6,
+      "canonical_id": "sparkling_mineral_water",
+      "display_name": "газированная вода",
+      "amount": 80,
+      "unit": "ml",
+      "detail": "сильногазированная, только что открытая; та же порция, что у молока",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "batter_liquid"
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "половину на рыбу, половину в кляр",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 0.5,
+      "unit": "tsp",
+      "detail": "сладкая, в кляр",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 80,
+      "unit": "ml",
+      "detail": "на дно сковороды: покрыть дно ровным слоем, куски не тонут. Это не фритюр и не «5 мм в любой сковороде»",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Филе обсушить, проверить на кости и нарезать кусками около 2 см. Посолить половиной соли."
+    },
+    {
+      "position": 2,
+      "text": "Смешать муку, паприку и оставшуюся соль. Влить яйцо и 80 мл молока, воды или газировки, размешать венчиком. Кляр должен стекать медленной лентой: если ручьём — ещё 1–2 ст. л. муки, если комком — чайная ложка жидкости."
+    },
+    {
+      "position": 3,
+      "text": "Оставить кляр на столе, чтобы мука набухла.",
+      "timer_seconds": 300,
+      "timer_label": "Кляр",
+      "timer_note": "5 минут; дольше 15 — кляр загустеет комком, разбавить чайной ложкой жидкости"
+    },
+    {
+      "position": 4,
+      "text": "Разогреть широкую сковороду с 80 мл масла на средне-сильном огне: дно покрыто, куски не тонут. Ориентир готовности масла — капля кляра сразу шипит, не дымит; линейку на 5 мм не мерять."
+    },
+    {
+      "position": 5,
+      "text": "Обмакнуть куски в кляр, дать стечь лишнему. Выложить небольшими партиями в один слой и жарить до золотистой корочки с обеих сторон и 63 °C в толще, один раз перевернуть. Готовые снимать на бумагу.",
+      "timer_seconds": 360,
+      "timer_label": "Партия",
+      "timer_note": "3–4 минуты с первой стороны, 2–3 со второй; ориентир — 63 °C в центре куска, не цвет кляра",
+      "target_internal_temperature_c": 63,
+      "equipment_note": "Не перегружать сковороду: партии в один слой. Полная сковорода — кляр раскисает, рыба тушится в масле. Это не фритюрница: масло не покрывает куски."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "wheat_flour",
+            "display_name": "пшеничная мука",
+            "amount": 110,
+            "unit": "g",
+            "detail": "густой кляр: на противне жидкий стечёт лужей",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "milk",
+            "display_name": "молоко",
+            "amount": 45,
+            "unit": "ml",
+            "detail": "меньше, чем на сковороде; густой кляр держится на куске",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 45,
+            "unit": "ml",
+            "detail": "та же порция, что у молока",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "sparkling_mineral_water",
+            "display_name": "газированная вода",
+            "amount": 45,
+            "unit": "ml",
+            "detail": "та же порция, что у молока",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать противень и верх кусков, не слой на сковороде",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Смешать 110 г муки, паприку и оставшуюся соль. Влить яйцо и 45 мл жидкости, размешать до густого кляра: он должен облеплять кусок и не капать ручьём. Жидкий кляр сковороды на противне стечёт."
+          },
+          {
+            "position": 3,
+            "text": "Оставить кляр на столе.",
+            "timer_seconds": 300,
+            "timer_label": "Кляр",
+            "timer_note": "5 минут"
+          },
+          {
+            "position": 4,
+            "text": "Разогреть духовку до 210 °C. Застелить противень бумагой и смазать маслом. Сковороду не ставить."
+          },
+          {
+            "position": 5,
+            "text": "Обмакнуть куски в густой кляр, уложить на противень в один слой с промежутком, слегка смазать верх маслом. Запекать до 63 °C в толще, один раз перевернуть.",
+            "timer_seconds": 1080,
+            "timer_label": "Запекание",
+            "timer_note": "16–18 минут; перевернуть на 10-й; ориентир — 63 °C. Корочка светлее сковороды, лужи кляра быть не должно",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Противень, один слой, густой кляр. Жидкий кляр сковороды здесь стечёт — это другой состав, не «та же сковорода в духовке»."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "cook_method_override": "air_fryer",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "wheat_flour",
+            "display_name": "пшеничная мука",
+            "amount": 80,
+            "unit": "g",
+            "detail": "сухая обвалка, не кляр: кляр в чаше не пропекается снизу",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать верх кусков, не слой на дне",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ],
+        "remove": [
+          {"canonical_id": "milk"},
+          {"canonical_id": "water"},
+          {"canonical_id": "sparkling_mineral_water"}
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Смешать муку, паприку и оставшуюся соль на тарелке. Яйцо взбить в миске. Это сухая обвалка: кляр в аэрогриле не делать — низ останется сырым, воздух снизу не пройдёт."
+          },
+          {
+            "position": 3,
+            "text": "Разогреть аэрогриль до 190 °C. Корзину не застилать сплошным пергаментом: для сухой обвалки нужна сетка."
+          },
+          {
+            "position": 4,
+            "text": "Обмакнуть кусок в яйцо, обвалять в муке, стряхнуть лишнее. Уложить в один слой на решётку, слегка смазать верх маслом."
+          },
+          {
+            "position": 5,
+            "text": "Готовить до 63 °C в толще, один раз перевернуть. Остальное — следующей партией.",
+            "timer_seconds": 720,
+            "timer_label": "Партия",
+            "timer_note": "10–12 минут; перевернуть на 6-й; ориентир — 63 °C. Не копировать 16 минут духовки",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Один слой на сетке. Мокрый кляр сюда не переносить."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": ["milk"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "energy_profile": "light",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать антипригарную сковороду, не слой 5 мм",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Смазать антипригарную сковороду 1 ст. л. масла и разогреть на средне-сильном огне. Слоя масла на дне нет."
+          },
+          {
+            "position": 5,
+            "text": "Обмакнуть куски, дать стечь лишнему кляру. Жарить партиями в один слой до 63 °C, один раз перевернуть. Корочка тоньше, чем у базы: масла меньше, слой не фритюр.",
+            "timer_seconds": 360,
+            "timer_label": "Партия",
+            "timer_note": "3–4 минуты с первой стороны; ориентир — 63 °C. Без слоя масла кляр легко прилипает — не двигать первые 2 минуты",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Партии в один слой на антипригарной. Это не духовка и не аэрогриль: метод тот же, масла меньше."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Кляр",
+      "text": "На 600 г рыбы — 110 г муки, 1 яйцо и 80 мл жидкости. Жиже — досыпать муку до ленты. Гуще комком — чайная ложка жидкости. Молоко даёт мягче корочку, вода — нейтральнее, газировка — пузыри и хруст."
+    },
+    {
+      "title": "Не фритюр",
+      "text": "80 мл масла покрывают дно, куски не утоплены. Фритюрница и глубокая кастрюля с маслом — другой метод, в этой карточке его нет."
+    },
+    {
+      "title": "Партии",
+      "text": "Один слой. Полная сковорода остужает масло: кляр впитывает жир, середина сырая."
+    },
+    {
+      "title": "Готовность",
+      "text": "63 °C в толще куска. Золотой кляр снаружи не значит, что внутри готово. Дальше рыба сухая."
+    },
+    {
+      "title": "Духовка",
+      "text": "Кляр гуще: 110 г муки и 45 мл жидкости, противень 210 °C, 16–18 минут. Жидкий кляр сковороды на бумаге стечёт лужей — это не «та же сковорода в духовке»."
+    },
+    {
+      "title": "Аэрогриль",
+      "text": "Не мокрый кляр: яйцо и сухая мука, сетка без вкладыша, 10–12 минут. Кляр духовки или сковороды в чаше даст липкий низ."
+    },
+    {
+      "title": "Не путать",
+      "text": "Минтай в духовке без кляра — соседний slug. Здесь корочка из теста, не лимонная подушка."
+    }
+  ]
+}

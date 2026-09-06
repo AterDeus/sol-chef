@@ -1,0 +1,109 @@
+{
+  "id": "vzbitoe-slivochnoe-maslo",
+  "title": "Взбитое сливочное масло",
+  "summary": "Размягчённое сливочное масло взбивают до пышной лёгкой массы: воздух внутри делает текстуру ультра-намазываемой. Такое масло тает быстрее и равномернее обычного бруска и лучше всего подходит для утренней подачи — панкейки, вафли, тосты.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "no_cook",
+  "dish_type": "sauce",
+  "equipment": "mixer",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "video",
+  "source_url": "https://www.youtube.com/watch?v=6aWbZTmuj30",
+  "source_name": "Epicurious",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 65,
+    "active_minutes": 5
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": [
+    "easy",
+    "pantry",
+    "budget"
+  ],
+  "adaptations": [],
+  "prep": [
+    {
+      "text": "Достать масло — комнатная температура, иначе не взобьётся в пышную массу",
+      "before_min": 60
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 100,
+      "unit": "g",
+      "detail": "размягчённое",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Взбить размягчённое масло венчиком или миксером до пышной светлой массы — масло должно насытиться воздухом."
+    },
+    {
+      "position": 2,
+      "text": "Подавать сразу к панкейкам, вафлям или тостам."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "for_sandwiches",
+      "title": "Для сэндвичей",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Намазать тонким слоем на хлеб: масло держит влагу начинки и не даёт мякишу размокнуть."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Температура",
+      "text": "Масло должно быть мягким, но не растопленным: из лужи воздух не взбить. Час при комнатной температуре — рабочий ориентир."
+    },
+    {
+      "title": "Из холодильника",
+      "text": "Микроволновка короткими импульсами по 5–10 секунд на высокой мощности (всего около 20 секунд); горячий стакан — прогреть кипятком, вылить воду, накрыть брусок на 10–15 минут; натереть на крупной тёрке; расплющить скалкой между двумя листами пергамента."
+    },
+    {
+      "title": "Видео",
+      "text": "Таймкод Epicurious: взбивание 09:08–09:18, сэндвичи 12:45."
+    },
+    {
+      "title": "Сэндвичи",
+      "text": "Тонкий слой на хлебе — гидрофобный барьер. Майонез со временем наоборот отсыревает мякиш. Тот же принцип у jambon-beurre и английских tea sandwiches."
+    },
+    {
+      "title": "Посуда",
+      "text": "Жарки нет: готовят в миске венчиком или миксером."
+    }
+  ]
+}

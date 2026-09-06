@@ -1,0 +1,46 @@
+[project]
+name = "sol-chef-backend"
+version = "0.1.0"
+description = "sol-chef 2.0 Django API — catalog, scale, search"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.2,<5.3",
+    "djangorestframework>=3.15",
+    "drf-spectacular>=0.28",
+    "whitenoise>=6.8",
+    "psycopg[binary]>=3.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-django>=4.9",
+    "ruff>=0.9",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+pythonpath = ["."]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = [
+    ".venv",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"apps/**/migrations/*.py" = ["E501", "I001"]
+"manage.py" = ["E402", "I001"]
+"apps/recipes/etl/_gen_ingredient_map.py" = ["E501"]
+
+[tool.uv]
+package = false

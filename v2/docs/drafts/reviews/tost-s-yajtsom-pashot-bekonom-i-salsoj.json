@@ -1,0 +1,11 @@
+{
+  "slug": "tost-s-yajtsom-pashot-bekonom-i-salsoj",
+  "verdict": "accept",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [],
+  "minor": [],
+  "comment": "Рецепт воспроизводим: таймеры, последовательность и варианты согласованы; пашот с жидким желтком не является raw_egg, так как белок сварен.",
+  "recipe_json": null
+}

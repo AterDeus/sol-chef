@@ -1,0 +1,190 @@
+{
+  "id": "ris-na-garnir",
+  "title": "Рис на гарнир",
+  "summary": "Рассыпчатый длиннозёрный рис в кастрюле: крупу промывают, варят в поглощении 1:1.6 по весу и 10 минут настаивают под крышкой. Не ризотто и не плов.",
+  "recipe_family": "rice",
+  "protein_base": "vegetables",
+  "cook_method": "boil",
+  "dish_type": "side",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 10
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": ["easy", "pantry", "budget"],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": 300,
+      "unit": "g",
+      "detail": "длиннозёрный шлифованный; круглозёрный — см. заметку, не рис для ризотто",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 480,
+      "unit": "ml",
+      "detail": "соотношение сухого риса к воде 1:1.6; не сливать",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "плёнка на зёрнах, чтобы гарнир не слипся",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Промыть рис в холодной воде, меняя воду, пока она не станет почти прозрачной. Откинуть на сито."
+    },
+    {
+      "position": 2,
+      "text": "Сложить рис в кастрюлю, влить 480 мл воды, масло и соль. Довести до кипения на среднем огне."
+    },
+    {
+      "position": 3,
+      "text": "Убавить огонь до минимального, плотно закрыть крышкой и варить, не мешая и не поднимая крышку.",
+      "timer_seconds": 780,
+      "timer_label": "Варка",
+      "timer_note": "12–15 минут; ориентир — вода ушла, на дне нет лужи"
+    },
+    {
+      "position": 4,
+      "text": "Снять с огня и оставить под крышкой. Затем разрыхлить вилкой.",
+      "timer_seconds": 600,
+      "timer_label": "Настаивание",
+      "timer_note": "10 минут; без этого шага середина зерна сыровата"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_vegetables",
+      "title": "С овощами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "onion",
+            "display_name": "лук",
+            "amount": 1,
+            "unit": "pcs",
+            "detail": "репчатый, мелкий кубик",
+            "scale_mode": "whole",
+            "scalable": true
+          },
+          {
+            "canonical_id": "carrot",
+            "display_name": "морковь",
+            "amount": 150,
+            "unit": "g",
+            "detail": "мелкий кубик, не тёрка — иначе раскиснет",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "дополнительно для пассеровки овощей",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 1,
+            "text": "Нарезать лук и морковь мелким кубиком. В кастрюле пассеровать на 1 ст. л. масла до мягкости, всыпать промытый рис и помешать 1 минуту, пока зёрна не заблестят.",
+            "timer_seconds": 360,
+            "timer_label": "Овощи",
+            "timer_note": "5–6 минут до мягкости моркови по краю"
+          }
+        ],
+        "replace": [
+          {
+            "position": 2,
+            "text": "Влить 480 мл воды, посолить. Масло базы уже на овощах — вторую ложку из базы не лить сверху на воду. Довести до кипения."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Промывка",
+      "text": "Мучная пыль со шлифованного риса склеивает гарнир. 4–5 смен воды обычно хватает: вода мутная — ещё раз."
+    },
+    {
+      "title": "Соотношение",
+      "text": "На 300 г длиннозёрного — 480 мл воды. При масштабе якоря держать 1:1.6, не доливать «на глаз». Круглозёрный возьмёт около 1:1.8 и будет мягче, не рассыпчатый как база."
+    },
+    {
+      "title": "Не мешать",
+      "text": "После закипания крышку не открывать и рис не ворошить — выйдет пар и размажется крахмал. Вилка только после настаивания."
+    },
+    {
+      "title": "Для жареного риса",
+      "text": "Остывший в холодильнике гарнир — заготовка под жареный рис: тёплый слипается на сковороде. Свежий горячий — к мясу и рыбе."
+    },
+    {
+      "title": "Не рисоварка",
+      "text": "Рецепт для кастрюли с плотной крышкой. Рисоварка и мультиварка здесь не описаны: другие пропорции и другой пар."
+    },
+    {
+      "title": "Не плов и не ризотто",
+      "text": "Плов — мясо, зирвак и томление. Ризотто — помешивание и бульон. Этот гарнир варят без мяса, один раз залили и не трогают."
+    }
+  ]
+}

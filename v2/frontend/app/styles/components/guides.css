@@ -1,0 +1,199 @@
+@layer components {
+  table.grains {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-14);
+
+    th {
+      text-align: start;
+      font-family: var(--font-mono);
+      font-size: var(--fs-11);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 500;
+      padding: 0 var(--space-3) 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    td {
+      padding: 0.875rem var(--space-3);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+
+      &.name {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        font-size: 1rem;
+      }
+    }
+
+    @media (width < 701px) {
+      display: none;
+    }
+  }
+
+  .ratio {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .note {
+    color: var(--text-dim);
+    font-size: var(--fs-13);
+  }
+
+  .grain-cards {
+    display: none;
+
+    @media (width < 701px) {
+      display: grid;
+      gap: var(--space-3);
+    }
+  }
+
+  .grain-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+
+    h3 {
+      margin-block-end: var(--space-2);
+    }
+  }
+
+  .method-block {
+    margin-block-end: 2.5rem;
+  }
+
+  .method-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-block-end: 1.125rem;
+    padding-block-end: 10px;
+    border-bottom: 1px solid var(--line);
+
+    h2 {
+      font-size: var(--fs-22);
+      margin: 0;
+    }
+
+    .sub {
+      color: var(--text-dim);
+      font-size: var(--fs-13);
+    }
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
+    gap: 0.875rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) 1.125rem;
+
+    h3 {
+      font-size: var(--fs-17);
+      margin: 0 0 10px;
+    }
+
+    .pitfall {
+      font-size: var(--fs-13);
+      color: var(--text-dim);
+      border-top: 1px dashed var(--line);
+      padding-block-start: var(--space-2);
+      margin-block-start: 10px;
+
+      b {
+        color: var(--accent, var(--ember));
+        font-weight: 600;
+      }
+    }
+  }
+
+  .readout {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-13);
+    font-weight: 600;
+    background: var(--accent-soft, var(--ember-soft));
+    color: var(--accent, var(--ember));
+    padding: var(--space-1) 10px;
+    border-radius: var(--radius-sm);
+    margin-block-end: 10px;
+
+    .lbl {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: var(--fs-11);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  .hub-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
+    gap: 0.875rem;
+  }
+
+  .hub-tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7) var(--space-5);
+    font-family: var(--font-serif);
+    font-size: var(--fs-22);
+    color: var(--text);
+    text-align: center;
+    transition:
+      border-color var(--duration-fast) var(--ease),
+      color var(--duration-fast) var(--ease);
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+    }
+  }
+
+  .tips-acc {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    margin-block-end: 10px;
+    scroll-margin-top: 5rem;
+
+    summary {
+      cursor: pointer;
+      padding: 0.875rem var(--space-4);
+      font-weight: 600;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0 var(--space-4) var(--space-4) var(--space-8);
+    }
+
+    li {
+      margin-block-end: var(--space-2);
+    }
+
+    .expl {
+      display: block;
+      color: var(--text-dim);
+      font-size: var(--fs-13);
+    }
+  }
+}

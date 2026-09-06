@@ -1,0 +1,1030 @@
+{
+  "базилик свежий": {
+    "canonical_id": "fresh_basil",
+    "title": "базилик свежий",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "бальзамический уксус": {
+    "canonical_id": "balsamic_vinegar",
+    "title": "бальзамический уксус",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "баранья лопатка": {
+    "canonical_id": "lamb_shoulder",
+    "title": "баранья лопатка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "бекон": {
+    "canonical_id": "bacon",
+    "title": "бекон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "болгарский перец": {
+    "canonical_id": "bell_pepper",
+    "title": "болгарский перец",
+    "aliases": ["перец болгарский", "сладкий перец"],
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "брокколи": {
+    "canonical_id": "broccoli",
+    "title": "брокколи",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "белое вино": {
+    "canonical_id": "white_wine",
+    "title": "белое вино",
+    "contains": [
+      "sulfite"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "бульон": {
+    "canonical_id": "stock",
+    "title": "бульон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": [
+      "celery"
+    ]
+  },
+  "бульон или вода": {
+    "canonical_id": "stock_or_water",
+    "title": "бульон или вода",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "бульон овощной": {
+    "canonical_id": "vegetable_stock",
+    "title": "бульон овощной",
+    "contains": [],
+    "may_contain": [],
+    "unknown": [
+      "celery"
+    ]
+  },
+  "бёдра куриные": {
+    "canonical_id": "chicken_thighs",
+    "title": "бёдра куриные",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "ванильное мороженое": {
+    "canonical_id": "vanilla_ice_cream",
+    "title": "ванильное мороженое",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": [
+      "egg"
+    ]
+  },
+  "ветчина": {
+    "canonical_id": "ham",
+    "title": "ветчина",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "вода": {
+    "canonical_id": "water",
+    "title": "вода",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Вода": {
+    "canonical_id": "water",
+    "title": "вода",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "вода и яблочный уксус": {
+    "canonical_id": "water_and_apple_vinegar",
+    "title": "вода и яблочный уксус",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "вода или бульон": {
+    "canonical_id": "water_or_stock",
+    "title": "вода или бульон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "гарам масала": {
+    "canonical_id": "garam_masala",
+    "title": "гарам масала",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "гвоздика": {
+    "canonical_id": "cloves",
+    "title": "гвоздика",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "глутамат натрия": {
+    "canonical_id": "msg",
+    "title": "глутамат натрия",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "говядина": {
+    "canonical_id": "beef",
+    "title": "говядина",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "говяжий огузок": {
+    "canonical_id": "beef_rump",
+    "title": "говяжий огузок",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "говяжьи рёбра": {
+    "canonical_id": "beef_ribs",
+    "title": "говяжьи рёбра",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "говяжья голяшка на кости": {
+    "canonical_id": "beef_shank_bone_in",
+    "title": "говяжья голяшка на кости",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "говяжья лопатка": {
+    "canonical_id": "beef_chuck",
+    "title": "говяжья лопатка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "горошек": {
+    "canonical_id": "green_peas",
+    "title": "горошек",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "горчица": {
+    "canonical_id": "mustard",
+    "title": "горчица",
+    "contains": [
+      "mustard"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Горчица": {
+    "canonical_id": "mustard",
+    "title": "горчица",
+    "contains": [
+      "mustard"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Грецкие орехи": {
+    "canonical_id": "walnuts",
+    "title": "грецкие орехи",
+    "contains": [
+      "tree_nut"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "гречка": {
+    "canonical_id": "buckwheat",
+    "title": "гречка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "зелёный лук": {
+    "canonical_id": "green_onion",
+    "title": "зелёный лук",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "зира": {
+    "canonical_id": "cumin",
+    "title": "зира",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "имбирная паста": {
+    "canonical_id": "ginger_paste",
+    "title": "имбирная паста",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "имбирь": {
+    "canonical_id": "ginger",
+    "title": "имбирь",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "йогурт": {
+    "canonical_id": "yogurt",
+    "title": "йогурт",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кабачки": {
+    "canonical_id": "zucchini",
+    "title": "кабачки",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кардамон": {
+    "canonical_id": "cardamom",
+    "title": "кардамон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Картофель": {
+    "canonical_id": "potato",
+    "title": "картофель",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кашмирский чили": {
+    "canonical_id": "kashmiri_chili",
+    "title": "кашмирский чили",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кинза": {
+    "canonical_id": "cilantro",
+    "title": "кинза",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кориандр": {
+    "canonical_id": "coriander",
+    "title": "кориандр",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "корица": {
+    "canonical_id": "cinnamon",
+    "title": "корица",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "красное вино или бальзамический уксус": {
+    "canonical_id": "red_wine_or_balsamic",
+    "title": "красное вино или бальзамический уксус",
+    "contains": [
+      "sulfite"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кукуруза": {
+    "canonical_id": "corn",
+    "title": "кукуруза",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кукурузный крахмал": {
+    "canonical_id": "corn_starch",
+    "title": "кукурузный крахмал",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Кукурузный крахмал": {
+    "canonical_id": "corn_starch",
+    "title": "кукурузный крахмал",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кулинарная нить": {
+    "canonical_id": "butcher_twine",
+    "title": "кулинарная нить",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кумин": {
+    "canonical_id": "cumin",
+    "title": "кумин",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кунжут": {
+    "canonical_id": "sesame",
+    "title": "кунжут",
+    "contains": [
+      "sesame"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Куриная грудка": {
+    "canonical_id": "chicken_breast",
+    "title": "куриная грудка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "куриные бедра": {
+    "canonical_id": "chicken_thighs",
+    "title": "куриные бедра",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "курица": {
+    "canonical_id": "whole_chicken",
+    "title": "курица",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "куркума": {
+    "canonical_id": "turmeric",
+    "title": "куркума",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "кусок свиной шеи": {
+    "canonical_id": "pork_neck",
+    "title": "кусок свиной шеи",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Лавровый лист": {
+    "canonical_id": "bay_leaf",
+    "title": "лавровый лист",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "лавровый лист": {
+    "canonical_id": "bay_leaf",
+    "title": "лавровый лист",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Лимон": {
+    "canonical_id": "lemon",
+    "title": "лимон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "лимон": {
+    "canonical_id": "lemon",
+    "title": "лимон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "лук": {
+    "canonical_id": "onion",
+    "title": "лук",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Лук": {
+    "canonical_id": "onion",
+    "title": "лук",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "лук-шалот": {
+    "canonical_id": "shallot",
+    "title": "лук-шалот",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Миндаль": {
+    "canonical_id": "almond",
+    "title": "миндаль",
+    "contains": [
+      "tree_nut"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "минеральная вода сильногазированная": {
+    "canonical_id": "sparkling_mineral_water",
+    "title": "минеральная вода сильногазированная",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "морковь": {
+    "canonical_id": "carrot",
+    "title": "морковь",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Морковь": {
+    "canonical_id": "carrot",
+    "title": "морковь",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "мука": {
+    "canonical_id": "wheat_flour",
+    "title": "мука",
+    "contains": [
+      "gluten"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "мука и вода": {
+    "canonical_id": "flour_and_water_dough",
+    "title": "мука и вода",
+    "contains": [
+      "gluten"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "мята": {
+    "canonical_id": "mint",
+    "title": "мята",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "мёд": {
+    "canonical_id": "honey",
+    "title": "мёд",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Овощной бульон": {
+    "canonical_id": "vegetable_stock",
+    "title": "овощной бульон",
+    "contains": [],
+    "may_contain": [],
+    "unknown": [
+      "celery"
+    ]
+  },
+  "Огурец": {
+    "canonical_id": "cucumber",
+    "title": "огурец",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "оливковое масло": {
+    "canonical_id": "olive_oil",
+    "title": "оливковое масло",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Оливковое масло": {
+    "canonical_id": "olive_oil",
+    "title": "оливковое масло",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "паприка": {
+    "canonical_id": "paprika",
+    "title": "паприка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Паприка": {
+    "canonical_id": "paprika",
+    "title": "паприка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "пармезан": {
+    "canonical_id": "parmesan",
+    "title": "пармезан",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Перец": {
+    "canonical_id": "black_pepper",
+    "title": "перец",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "перец": {
+    "canonical_id": "black_pepper",
+    "title": "перец",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "петрушка": {
+    "canonical_id": "parsley",
+    "title": "петрушка",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "пищевая сода": {
+    "canonical_id": "baking_soda",
+    "title": "пищевая сода",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Помидоры": {
+    "canonical_id": "tomato",
+    "title": "помидоры",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "помидоры": {
+    "canonical_id": "tomato",
+    "title": "помидоры",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Растительное масло": {
+    "canonical_id": "vegetable_oil",
+    "title": "растительное масло",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "растительное масло": {
+    "canonical_id": "vegetable_oil",
+    "title": "растительное масло",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "репчатый лук": {
+    "canonical_id": "onion",
+    "title": "репчатый лук",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "рибай": {
+    "canonical_id": "ribeye",
+    "title": "рибай",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "рис": {
+    "canonical_id": "rice",
+    "title": "рис",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "розмарин": {
+    "canonical_id": "rosemary",
+    "title": "розмарин",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Салатный микс": {
+    "canonical_id": "salad_mix",
+    "title": "салатный микс",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сахар": {
+    "canonical_id": "sugar",
+    "title": "сахар",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сахарная пудра": {
+    "canonical_id": "powdered_sugar",
+    "title": "сахарная пудра",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "свиная шея (ошеек)": {
+    "canonical_id": "pork_neck",
+    "title": "свиная шея",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сливочное и оливковое масло": {
+    "canonical_id": "butter_and_olive_oil",
+    "title": "сливочное и оливковое масло",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сливочное масло": {
+    "canonical_id": "butter",
+    "title": "сливочное масло",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "соевый соус": {
+    "canonical_id": "soy_sauce",
+    "title": "соевый соус",
+    "contains": [
+      "soy",
+      "gluten"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Соль": {
+    "canonical_id": "salt",
+    "title": "соль",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "соль": {
+    "canonical_id": "salt",
+    "title": "соль",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "соль крупная": {
+    "canonical_id": "coarse_salt",
+    "title": "соль крупная",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "соус или подлива": {
+    "canonical_id": "gravy",
+    "title": "соус или подлива",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "спагетти": {
+    "canonical_id": "spaghetti",
+    "title": "спагетти",
+    "contains": [
+      "gluten"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "спаржа": {
+    "canonical_id": "asparagus",
+    "title": "спаржа",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "стейк": {
+    "canonical_id": "steak",
+    "title": "стейк",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Судак": {
+    "canonical_id": "zander",
+    "title": "судак",
+    "contains": [
+      "fish"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сушёный розмарин": {
+    "canonical_id": "dried_rosemary",
+    "title": "сушёный розмарин",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сушёный тимьян": {
+    "canonical_id": "dried_thyme",
+    "title": "сушёный тимьян",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "сыр": {
+    "canonical_id": "cheese",
+    "title": "сыр",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Сыр твёрдый": {
+    "canonical_id": "hard_cheese",
+    "title": "сыр твёрдый",
+    "contains": [
+      "milk"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "тимьян": {
+    "canonical_id": "thyme",
+    "title": "тимьян",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "тимьян или розмарин": {
+    "canonical_id": "thyme_or_rosemary",
+    "title": "тимьян или розмарин",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "томатная паста": {
+    "canonical_id": "tomato_paste",
+    "title": "томатная паста",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Томатное пюре": {
+    "canonical_id": "tomato_puree",
+    "title": "томатное пюре",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "томатное пюре": {
+    "canonical_id": "tomato_puree",
+    "title": "томатное пюре",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "томаты": {
+    "canonical_id": "tomato",
+    "title": "томаты",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Укроп": {
+    "canonical_id": "dill",
+    "title": "укроп",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "укроп": {
+    "canonical_id": "dill",
+    "title": "укроп",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Уксус": {
+    "canonical_id": "vinegar",
+    "title": "уксус",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "уксус 9%": {
+    "canonical_id": "vinegar_9",
+    "title": "уксус 9%",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Фасоль консервированная": {
+    "canonical_id": "canned_beans",
+    "title": "фасоль консервированная",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "филе лосося": {
+    "canonical_id": "salmon_fillet",
+    "title": "филе лосося",
+    "contains": [
+      "fish"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "филе форели": {
+    "canonical_id": "trout_fillet",
+    "title": "филе форели",
+    "contains": [
+      "fish"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "хлеб": {
+    "canonical_id": "bread",
+    "title": "хлеб",
+    "contains": [
+      "gluten"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "хлопья перца": {
+    "canonical_id": "chili_flakes",
+    "title": "хлопья перца",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "хлопья чили": {
+    "canonical_id": "chili_flakes",
+    "title": "хлопья чили",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "черный перец": {
+    "canonical_id": "black_pepper",
+    "title": "чёрный перец",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "чеснок": {
+    "canonical_id": "garlic",
+    "title": "чеснок",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Чеснок": {
+    "canonical_id": "garlic",
+    "title": "чеснок",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "чесночная паста": {
+    "canonical_id": "garlic_paste",
+    "title": "чесночная паста",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "чили": {
+    "canonical_id": "chili",
+    "title": "чили",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "чёрный перец": {
+    "canonical_id": "black_pepper",
+    "title": "чёрный перец",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "Чёрный перец": {
+    "canonical_id": "black_pepper",
+    "title": "чёрный перец",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "чёрный перец свежемолотый": {
+    "canonical_id": "fresh_black_pepper",
+    "title": "чёрный перец свежемолотый",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "шампиньоны": {
+    "canonical_id": "champignons",
+    "title": "шампиньоны",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "шафран": {
+    "canonical_id": "saffron",
+    "title": "шафран",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "шоколад": {
+    "canonical_id": "dark_chocolate",
+    "title": "шоколад",
+    "contains": [],
+    "may_contain": [
+      "milk"
+    ],
+    "unknown": []
+  },
+  "яблоки": {
+    "canonical_id": "apple",
+    "title": "яблоки",
+    "contains": [],
+    "may_contain": [],
+    "unknown": []
+  },
+  "яичный белок": {
+    "canonical_id": "egg_white",
+    "title": "яичный белок",
+    "contains": [
+      "egg"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "яйца": {
+    "canonical_id": "eggs",
+    "title": "яйца",
+    "contains": [
+      "egg"
+    ],
+    "may_contain": [],
+    "unknown": []
+  },
+  "яйцо": {
+    "canonical_id": "egg",
+    "title": "яйцо",
+    "contains": [
+      "egg"
+    ],
+    "may_contain": [],
+    "unknown": []
+  }
+}

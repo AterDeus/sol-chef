@@ -1,0 +1,341 @@
+{
+  "id": "svinoj-shashlyk-v-duhovke-na-shpazhkah",
+  "title": "Свиной шашлык в духовке на шпажках",
+  "summary": "Шашлык из свиной шеи в маринаде из лука и газированной минеральной воды — без кефира и кислоты. Для духовки без решётки: мясо подвешивается на шпажках над противнем, чтобы жир и сок стекали вниз, а не тушили кусок. Ориентир — 2 кг на 5 персон.",
+  "protein_base": "pork",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "neck"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Личный опыт",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 405,
+    "active_minutes": 20
+  },
+  "effort_level": 3,
+  "washing_level": 3,
+  "use_cases": [
+    "budget"
+  ],
+  "adaptations": [],
+  "prep": [
+    {
+      "text": "Замариновать мясо с луком, солью, перцем и маслом, залить минеральной водой до половины объёма и убрать в холод на 6–12 часов (можно на ночь).",
+      "before_hours": 6,
+      "type": "fridge"
+    }
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "champagne",
+      "title": "белое шампанское",
+      "aliases": [
+        "шампанское",
+        "несладкое белое шампанское"
+      ],
+      "allergens_contains": [
+        "sulfite"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "smoked_paprika",
+      "title": "копчёная паприка",
+      "aliases": [],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "pork_neck",
+      "display_name": "свиная шея",
+      "amount": 2000,
+      "unit": "g",
+      "detail": "ошеек, нарезать кубиками 4×4 см",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "sparkling_mineral_water",
+      "display_name": "минеральная вода сильногазированная",
+      "amount": 400,
+      "unit": "ml",
+      "detail": "залить до половины объёма мяса, не утоплять полностью",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 1000,
+      "unit": "g",
+      "detail": "часть кольцами, часть раздавить руками с солью",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "в маринад",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "detail": "по вкусу; ещё добавить после маринования",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "fresh_black_pepper",
+      "display_name": "чёрный перец свежемолотый",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать свиную шею кубиками около 4×4 см — крупнее, чем кажется нужным, иначе середина не успеет прожариться, а края пересохнут."
+    },
+    {
+      "position": 2,
+      "text": "Нарезать лук кольцами; треть раздавить руками с щепоткой соли, чтобы пустил сок."
+    },
+    {
+      "position": 3,
+      "text": "Смешать мясо, лук, соль, перец и масло; оставить без жидкости, чтобы специи и масло схватились за поверхность.",
+      "timer_seconds": 900,
+      "timer_label": "Без жидкости",
+      "timer_note": "15 минут"
+    },
+    {
+      "position": 4,
+      "text": "Залить минеральной водой до половины объёма мяса — полностью утоплять не нужно. Убрать в холод на 6–12 часов; кислоты нет, ночь безопасна."
+    },
+    {
+      "position": 5,
+      "text": "Перед нанизыванием стряхнуть лишний маринад и кусочки лука; при необходимости досолить."
+    },
+    {
+      "position": 6,
+      "text": "Надеть мясо на деревянные или металлические шпажки плотно, без зазоров, куски одинакового размера."
+    },
+    {
+      "position": 7,
+      "text": "Положить шпажки поперёк глубокого противня или формы так, чтобы концы опирались на края, а мясо висело над дном. Для сильного верхнего нагрева предпочтительны металлические шпажки; деревянные замочить целиком в воде на 30 минут и следить, чтобы они не касались нагревателя.",
+      "timer_seconds": 1800,
+      "timer_label": "Замачивание шпажек",
+      "timer_note": "30 минут; только деревянные шпажки",
+      "equipment_note": "Если шпажки короче формы — две одинаковые формы рядом."
+    },
+    {
+      "position": 8,
+      "text": "Разогреть духовку до 220–230°C, конвекция и верхний нагрев (гриль), если есть."
+    },
+    {
+      "position": 9,
+      "text": "Готовить 15–20 минут, один раз перевернув шпажки для равномерного подрумянивания с двух сторон.",
+      "timer_seconds": 1080,
+      "timer_label": "Запекание",
+      "timer_note": "15–20 минут; ориентир — цвет и щуп, не таймер"
+    },
+    {
+      "position": 10,
+      "text": "В последние 5–7 минут включить гриль на максимум и поднять форму ближе к нагревателю — корочка как на углях.",
+      "timer_seconds": 360,
+      "timer_label": "Гриль",
+      "timer_note": "5–7 минут внутри общего времени, не дополнительно"
+    },
+    {
+      "position": 11,
+      "text": "Проверить готовность термощупом — не ниже 71°C в центре куска.",
+      "target_internal_temperature_c": 71
+    },
+    {
+      "position": 12,
+      "text": "Снять и дать отдохнуть 3–4 минуты под фольгой перед подачей.",
+      "timer_seconds": 210,
+      "timer_label": "Отдых под фольгой",
+      "timer_note": "3–4 минуты"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "champagne_mustard",
+      "title": "Маринад с шампанским и горчицей",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "sparkling_mineral_water"
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "champagne",
+            "display_name": "белое шампанское",
+            "amount": 300,
+            "amount_max": 400,
+            "unit": "ml",
+            "detail": "несладкое; залить до половины объёма мяса",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "mustard",
+            "display_name": "дижонская горчица",
+            "amount": 1.5,
+            "amount_max": 2,
+            "unit": "tbsp",
+            "detail": "сначала размешать с маслом",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Горчицу размешать с маслом до однородности, затем смешать с мясом, луком, солью и перцем; оставить без жидкости.",
+            "timer_seconds": 900,
+            "timer_label": "Без жидкости",
+            "timer_note": "15 минут"
+          },
+          {
+            "position": 4,
+            "text": "Залить шампанским до половины объёма мяса. Убрать в холод строго на 4–6 часов, не дольше: кислота рыхлит поверхность."
+          },
+          {
+            "position": 5,
+            "text": "Дать мясу стечь на дуршлаге 5–10 минут, обсушить и стряхнуть лук перед нанизыванием.",
+            "timer_seconds": 600,
+            "timer_label": "Стек",
+            "timer_note": "5–10 минут на дуршлаге"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [
+          "mustard",
+          "sulfite"
+        ],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_smoked_paprika",
+      "title": "С копчёной паприкой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "smoked_paprika",
+            "display_name": "копчёная паприка",
+            "amount": 0.5,
+            "unit": "tsp",
+            "detail": "в маринад",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 3,
+            "text": "Добавить к мясу и луку 0,5 ч. л. копчёной паприки и перемешать."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Только свиная шея (ошеек). Другие части в V1 не названы — лопатку и корейку не подставлять."
+    },
+    {
+      "title": "Маринад без кислоты",
+      "text": "Минералка и лук, без кефира и уксуса. 6–12 часов и ночь допустимы: кислотность не «варит» поверхность."
+    },
+    {
+      "title": "Подвешивание",
+      "text": "Шпажки поперёк формы — замена решётке: жир капает вниз, кусок не тушится в соке. Шарики фольги как подставки хуже полного провисания."
+    },
+    {
+      "title": "Лук",
+      "text": "Перед нанизыванием стряхнуть. Мокрый маринад даёт пар вместо корочки; подгоревший лук на шпажке горчит."
+    },
+    {
+      "title": "Термощуп",
+      "text": "В духовке цвет врёт сильнее, чем на углях. Цель — не ниже 71°C в центре, не 68–70 из старого текста."
+    },
+    {
+      "title": "Шампанское",
+      "text": "В чипе с горчицей мариновать 4–6 часов, не дольше. Кислота рыхлит край; перед шпажками обязательно стечь и обсушить."
+    },
+    {
+      "title": "Дым",
+      "text": "Копчёная паприка — мягкий акцент из V1. Щепа в бытовой духовке — пожарный риск, в оверлей не входит. Жидкий дым легко забивает мясо."
+    }
+  ]
+}

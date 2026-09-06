@@ -1,0 +1,336 @@
+{
+  "id": "kurinyy-sup-s-lapshoy",
+  "title": "Куриный суп с лапшой",
+  "summary": "Бульон из бедра или грудки с морковью и луком, в конце — яичная лапша и укроп. Одна кастрюля, без отдельного гарнира.",
+  "recipe_family": "chicken_soup",
+  "protein_base": "poultry",
+  "cook_method": "boil",
+  "dish_type": "soup",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": ["thigh", "breast"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 55,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["easy", "budget", "batch"],
+  "new_ingredients": [
+    {
+      "canonical_id": "egg_noodles",
+      "title": "яичная лапша",
+      "aliases": ["лапша яичная", "яичная лапша гнёздами"],
+      "allergens_contains": ["gluten", "egg"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "noodles",
+      "title": "вермишель",
+      "aliases": ["вермишель паутинка", "тонкая вермишель"],
+      "allergens_contains": ["gluten"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    {"type": "omission", "ingredient": "bay_leaf", "quality": 0.95},
+    {"type": "omission", "ingredient": "dill", "quality": 0.88}
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_thighs",
+      "display_name": "курица",
+      "amount": 600,
+      "unit": "g",
+      "detail": "бёдра или грудка, один отруб на кастрюлю; на кости бульон глубже",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 2000,
+      "unit": "ml",
+      "detail": "холодная; магазинный бульон не обязателен",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "репчатый лук",
+      "amount": 150,
+      "unit": "g",
+      "detail": "один средний, кубиком; остаётся в супе",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 150,
+      "unit": "g",
+      "detail": "кружками около 5 мм",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "egg_noodles",
+      "display_name": "яичная лапша",
+      "amount": 80,
+      "unit": "g",
+      "detail": "гнёзда или широкая яичная; не вермишель-паутинка",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "detail": "в конце или горошком с овощами",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "dill",
+      "display_name": "укроп",
+      "amount": 15,
+      "unit": "g",
+      "detail": "свежий, нарубить перед подачей",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Курицу залить холодной водой, поставить на средний огонь. Когда закипит — снять пену."
+    },
+    {
+      "position": 2,
+      "text": "Добавить лук, морковь, лавровый лист и соль. Держать слабое кипение, не бурлящий ключ."
+    },
+    {
+      "position": 3,
+      "text": "Варить до готовности: бедро — 82 °C в толще у кости; грудка — 72 °C в самой толстой части, не часами. Снять мясо, отделить от костей, вернуть куски в кастрюлю, кости выбросить, лавр вынуть.",
+      "timer_seconds": 1800,
+      "timer_label": "Бульон",
+      "timer_note": "Ориентир — температура в мясе, не таймер; грудка обычно 20–25 минут, бедро у кости ближе к 30",
+      "target_internal_temperature_c": 82
+    },
+    {
+      "position": 4,
+      "text": "Всыпать яичную лапшу и варить до мягкости, помешивая, чтобы гнёзда разошлись.",
+      "timer_seconds": 420,
+      "timer_label": "Лапша",
+      "timer_note": "6–8 минут; паутинку сюда не класть — разварится"
+    },
+    {
+      "position": 5,
+      "text": "Снять с огня, всыпать укроп и перец. Посолить ещё, если бульон пресный."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_potato",
+      "title": "С картофелем",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [{ "canonical_id": "egg_noodles" }],
+        "add": [
+          {
+            "canonical_id": "potato",
+            "display_name": "картофель",
+            "amount": 300,
+            "unit": "g",
+            "detail": "обычный, кубик 1.5–2 см; яичную лапшу не класть",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Добавить картофель кубиком. Яичную лапшу не класть: в этой версии суп с картофелем, не «и то и другое кашей».",
+            "timer_seconds": 900,
+            "timer_label": "Картофель",
+            "timer_note": "15 минут до мягкого кубика; вилка входит без хруста"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": ["gluten", "egg"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_rice",
+      "title": "С рисом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [{ "canonical_id": "egg_noodles" }],
+        "add": [
+          {
+            "canonical_id": "rice",
+            "display_name": "рис",
+            "amount": 80,
+            "unit": "g",
+            "detail": "круглозёрный или длинный, промыть; вместо лапши",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Всыпать промытый рис вместо лапши. Варить, пока зёрна не станут мягкими, бульон чуть гуще от крахмала.",
+            "timer_seconds": 1080,
+            "timer_label": "Рис",
+            "timer_note": "15–18 минут; не класть лапшу сверху — оба разварятся"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": ["gluten", "egg"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_vermicelli",
+      "title": "С вермишелью",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [{ "canonical_id": "egg_noodles" }],
+        "add": [
+          {
+            "canonical_id": "noodles",
+            "display_name": "вермишель",
+            "amount": 50,
+            "unit": "g",
+            "detail": "паутинка из пшеницы, не яичная лапша базы",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Всыпать вермишель-паутинку, сразу размешать. Яичную лапшу не класть: паутинка другая, варится в разы быстрее.",
+            "timer_seconds": 150,
+            "timer_label": "Вермишель",
+            "timer_note": "2–3 минуты; дольше — каша, не суп"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": ["egg"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Бедро или грудка по весу один к одному, не два рецепта и не целая тушка. Бедро даёт жирнее бульон; грудку не гонять 40 минут — станет сухой."
+    },
+    {
+      "title": "Готовность",
+      "text": "Бедро — 82 °C у кости. Грудка — 72 °C в толще. Щуп в мясо, не в кипяток кастрюли."
+    },
+    {
+      "title": "Вода",
+      "text": "Холодной воды достаточно. Магазинный бульон гуще, но часто с сельдереем — если берёте готовый, смотрите состав."
+    },
+    {
+      "title": "Лапша",
+      "text": "В базе яичная, с яйцом и пшеницей. Вермишель-паутинка — отдельный вариант: тоньше, без яйца, кладут на 2–3 минуты в самом конце."
+    },
+    {
+      "title": "Картофель и рис",
+      "text": "Это вместо лапши, не сверху. И крупа, и лапша в одной кастрюле разбухнут и съедят бульон."
+    },
+    {
+      "title": "Пена",
+      "text": "Снять после закипания, иначе бульон мутный. Потом только слабое кипение."
+    },
+    {
+      "title": "Остатки",
+      "text": "Лапша в холодильнике разбухает. На заготовку варить бульон с мясом и овощами, лапшу или паутинку всыпать при разогреве."
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "id": "aromatizirovannoe-maslo-chili-myod",
+  "title": "Ароматизированное масло с чили и мёдом",
+  "summary": "Составное масло: размягчённое сливочное масло смешивают с чесноком, кунжутом, корейским перцем, паприкой и мёдом до ровного цвета. Горячую кукурузу или запечённые овощи смазывают сразу; остаток формуют колбаской в пергаменте и хранят в холоде, отрезая медальоны.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "no_cook",
+  "dish_type": "sauce",
+  "equipment": "saucepan",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "video",
+  "source_url": "https://www.youtube.com/watch?v=6aWbZTmuj30",
+  "source_name": "Epicurious",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 70,
+    "active_minutes": 10
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "easy",
+    "pantry",
+    "budget",
+    "batch"
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "ingredient": "sesame",
+      "quality": 0.85
+    },
+    {
+      "type": "omission",
+      "ingredient": "paprika",
+      "quality": 0.9
+    }
+  ],
+  "prep": [
+    {
+      "text": "Достать масло — комнатная температура, чтобы легко смешивалось с добавками",
+      "before_min": 60
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 100,
+      "unit": "g",
+      "detail": "размягчённое",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 1,
+      "unit": "clove",
+      "detail": "измельчённый",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "sesame",
+      "display_name": "кунжут",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "семена",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "chili_flakes",
+      "display_name": "хлопья перца",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "корейский кочукару; если нет — обычные хлопья чили",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "honey",
+      "display_name": "мёд",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Смешать размягчённое масло с чесноком, кунжутом, хлопьями перца, паприкой и мёдом до ровного цвета — добавки должны распределиться по всей массе."
+    },
+    {
+      "position": 2,
+      "text": "Тёплым мягким маслом можно сразу смазать горячую кукурузу или запечённые овощи."
+    },
+    {
+      "position": 3,
+      "text": "Остаток выложить горкой на лист пергамента или пищевой плёнки, чуть ближе к ближнему краю."
+    },
+    {
+      "position": 4,
+      "text": "Накрыть верхним краем пергамента, придерживая нижний край, и поджать масло ребром противня или металлической линейкой — получится плотный цилиндр без пустот."
+    },
+    {
+      "position": 5,
+      "text": "Свернуть рулетом и закрутить концы в противоположные стороны."
+    },
+    {
+      "position": 6,
+      "text": "Убрать в холодильник или морозилку. Перед подачей отрезать нужные медальоны."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "in_molds",
+      "title": "Розочки в молдах",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "coarse_salt",
+            "display_name": "соль крупная",
+            "amount": null,
+            "unit": "to_taste",
+            "detail": "морская; посыпать перед подачей",
+            "scale_mode": "gentle",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Мягкое масло утрамбовать в силиконовые молды, например в форме розочек."
+          },
+          {
+            "position": 4,
+            "text": "Снять излишки ножом вровень с краем формы."
+          },
+          {
+            "position": 5,
+            "text": "Охладить или заморозить, затем извлечь из молдов."
+          },
+          {
+            "position": 6,
+            "text": "Перед подачей посыпать крупной морской солью."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_herbs",
+      "title": "Со свежей петрушкой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "parsley",
+            "display_name": "петрушка",
+            "amount": null,
+            "unit": "to_taste",
+            "detail": "свежая, рубленая",
+            "scale_mode": "gentle",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Смешать размягчённое масло с чесноком, кунжутом, хлопьями перца, паприкой, мёдом и рубленой петрушкой до ровного цвета."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Температура",
+      "text": "Масло должно быть мягким, не растопленным: из лужи добавки не распределятся. Час при комнатной температуре — рабочий ориентир."
+    },
+    {
+      "title": "Из холодильника",
+      "text": "Микроволновка короткими импульсами по 5–10 секунд на высокой мощности (всего около 20 секунд — не ставить сразу на 20–30, иначе центр станет лужей); горячий стакан — прогреть кипятком, вылить, стряхнуть капли и накрыть брусок на 10–15 минут; натереть на крупной тёрке; расплющить скалкой между двумя листами пергамента."
+    },
+    {
+      "title": "Формовка",
+      "text": "Ребром противня или линейкой поджимают пергамент, чтобы в цилиндре не осталось пустот. Иначе колбаска крошится при нарезке медальонов."
+    },
+    {
+      "title": "Хранение",
+      "text": "Осторожно: из-за сырого чеснока хранить масло только в холодильнике и использовать не позднее чем через 4 суток. Для более долгого хранения сразу заморозить порционно; отрезать медальоны по мере надобности, не размораживая весь рулет."
+    },
+    {
+      "title": "Кочукару",
+      "text": "Корейский перец и обычные хлопья чили — один канон chili_flakes, не две строки «или». Без кочукару берут те хлопья, что есть."
+    },
+    {
+      "title": "Добавки",
+      "text": "Кунжут, перец, паприка и мёд в исходном ролике без граммов: вмешивать до ровного цвета и вкуса. Чеснок — зубчик на 100 г масла."
+    },
+    {
+      "title": "Обёртка",
+      "text": "Внутреннюю сторону пачки масла не выбрасывать: ею удобно смазывать формы и противни."
+    },
+    {
+      "title": "Видео",
+      "text": "Таймкод Epicurious: составное масло 04:54–06:46, размягчение 09:47–11:41, подача 12:24–13:19."
+    }
+  ]
+}

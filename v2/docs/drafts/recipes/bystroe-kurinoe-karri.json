@@ -1,0 +1,394 @@
+{
+  "id": "bystroe-kurinoe-karri",
+  "title": "Быстрое куриное карри",
+  "summary": "Карри без долгого томления: сухие специи прогреваются в масле, курица коротко тушится с томатами, овощи добавляются в конце, чтобы остаться слегка хрустящими.",
+  "protein_base": "poultry",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "thigh",
+    "breast"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [
+    "poultry_temp"
+  ],
+  "caution_text": "Куриные куски (бёдра): внутренняя температура не ниже 82 °C.",
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 25
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [
+    "one_pan"
+  ],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_thighs",
+      "display_name": "куриные бёдра",
+      "amount": 500,
+      "unit": "g",
+      "detail": "нарезать кусками; филе допустимо — см. заметку",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "репчатый, нарезать",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "amount_max": 3,
+      "unit": "clove",
+      "detail": "тёртый",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "ginger",
+      "display_name": "имбирь",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "свежий, кусочек 3–4 см, тёртый",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "asparagus",
+      "display_name": "спаржа",
+      "amount": 1,
+      "unit": "bunch",
+      "detail": "нарезать",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "cinnamon",
+      "display_name": "корица",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "палочка",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "cardamom",
+      "display_name": "кардамон",
+      "amount": 4,
+      "amount_max": 5,
+      "unit": "pcs",
+      "detail": "зелёный, стручки",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "kashmiri_chili",
+      "display_name": "кашмирский чили",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "cumin",
+      "display_name": "кумин",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "garam_masala",
+      "display_name": "гарам масала",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 11,
+      "canonical_id": "tomato",
+      "display_name": "томаты",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "банка измельчённых в собственном соку",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 12,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "для прогрева специй",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 13,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 14,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 125,
+      "unit": "ml",
+      "detail": "полстакана V1",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 15,
+      "canonical_id": "cilantro",
+      "display_name": "кинза",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "свежая — для подачи",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 16,
+      "canonical_id": "yogurt",
+      "display_name": "йогурт",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "натуральный — для подачи",
+      "scale_mode": "linear",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 17,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "басмати — для подачи",
+      "scale_mode": "linear",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "В кастрюле разогреть масло, прогреть палочку корицы и кардамон, пока они не станут ароматными.",
+      "equipment_note": "Сотейник с высокими бортами — та же кастрюля; отдельная сковорода не нужна."
+    },
+    {
+      "position": 2,
+      "text": "Добавить нарезанный лук со щепоткой соли, обжаривать 4–5 минут до золотистого цвета.",
+      "timer_seconds": 300,
+      "timer_label": "Лук",
+      "timer_note": "4–5 минут; ориентир — цвет, не только таймер"
+    },
+    {
+      "position": 3,
+      "text": "Выложить курицу, добавить сухие специи (кашмирский чили, кумин, гарам масала), тёртые имбирь и чеснок."
+    },
+    {
+      "position": 4,
+      "text": "Влить 125 мл воды, деглазировать дно кастрюли, тушить 3–4 минуты.",
+      "timer_seconds": 240,
+      "timer_label": "Деглазирование",
+      "timer_note": "3–4 минуты"
+    },
+    {
+      "position": 5,
+      "text": "Добавить томаты в собственном соку, тушить ещё 5 минут. Проверить самую толстую часть куска: внутренняя температура не ниже 82 °C; если ниже, продолжать тушить и проверять снова.",
+      "timer_seconds": 300,
+      "timer_label": "Томаты",
+      "timer_note": "5 минут — ориентир; готовность по термометру, не по таймеру",
+      "target_internal_temperature_c": 82
+    },
+    {
+      "position": 6,
+      "text": "Добавить нарезанную спаржу, тушить ещё около 3 минут — она должна остаться слегка хрустящей.",
+      "timer_seconds": 180,
+      "timer_label": "Спаржа",
+      "timer_note": "около 3 минут; овощ не разваривать"
+    },
+    {
+      "position": 7,
+      "text": "Подавать с рисом басмати, свежей кинзой и ложкой йогурта — по желанию."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_broccoli",
+      "title": "С брокколи",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "canonical_id": "broccoli",
+            "display_name": "брокколи",
+            "amount": 1,
+            "unit": "bunch",
+            "detail": "вместо спаржи, нарезать",
+            "scale_mode": "whole",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 6,
+            "text": "Добавить нарезанную брокколи, тушить ещё около 3 минут — она должна остаться слегка хрустящей.",
+            "timer_seconds": 180,
+            "timer_label": "Брокколи",
+            "timer_note": "около 3 минут; овощ не разваривать"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_zucchini",
+      "title": "С цукини",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "canonical_id": "zucchini",
+            "display_name": "цукини",
+            "amount": 1,
+            "unit": "bunch",
+            "detail": "вместо спаржи, нарезать",
+            "scale_mode": "whole",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 6,
+            "text": "Добавить нарезанные цукини, тушить ещё около 3 минут — они должны остаться слегка хрустящими.",
+            "timer_seconds": 180,
+            "timer_label": "Цукини",
+            "timer_note": "около 3 минут; овощ не разваривать"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "База — бёдра: они прощают чуть более долгое тушение. Филе из V1 допустимо, но время тушения курицы сократить на пару минут, иначе пересушится. Порог 82 °C — для тёмного мяса."
+    },
+    {
+      "title": "Целые специи",
+      "text": "Палочку корицы и стручки кардамона прогреть в масле в самом начале: аромат растворяется в жире. Без этого шага часть запаха остаётся нераскрытой."
+    },
+    {
+      "title": "Овощи в конце",
+      "text": "Спаржу (или брокколи, цукини) класть последней, чтобы осталась слегка хрустящей, а не разварилась вместе с курицей."
+    },
+    {
+      "title": "Томаты",
+      "text": "Одна банка измельчённых в собственном соку, без выдуманных граммов. Через 5 минут проверить термометром самую толстую часть куска; если не достигнуты 82 °C, продолжать тушение до этой температуры."
+    },
+    {
+      "title": "Подача",
+      "text": "Рис басмати, кинза и йогурт — по желанию. Йогурт можно не класть: молоко на карточке блюда не висит."
+    },
+    {
+      "title": "Посуда",
+      "text": "V1 готовит в сотейнике: это кастрюля с высокими бортами, не вторая посуда и не сковорода."
+    }
+  ]
+}

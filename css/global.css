@@ -25,6 +25,7 @@
   --wal: #A6763E;
   --wal-soft: #A6763E33;
 
+
   /* Акцент вкладки (переключается JS) */
   --accent: var(--gold);
   --accent-soft: var(--gold-soft);

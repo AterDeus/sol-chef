@@ -1,0 +1,11 @@
+{
+  "slug": "grechka-na-garnir-s-lukom",
+  "verdict": "accept",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [],
+  "minor": [],
+  "comment": "Рецепт воспроизводим дома: 300 г ядрицы, 600 мл одной выбранной жидкости, пассеровка лука и варка под крышкой дают понятный рассыпчатый гарнир. Вода и овощной бульон объединены choice_group и не складываются; celery остаётся unknown только на каноне овощного бульона, а не на строке выбора жидкости. Единственный якорь — 300 г гречки; protein_base=vegetarian, внешнего URL sol-chef.ru нет.",
+  "recipe_json": null
+}

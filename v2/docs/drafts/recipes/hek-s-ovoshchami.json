@@ -1,0 +1,382 @@
+{
+  "id": "hek-s-ovoshchami",
+  "title": "Хек с овощами",
+  "summary": "Хек запекают в одной форме на уже начавших мягчеть луке, моркови и томате. Овощи идут первыми, рыба — сверху до 63 °C, чтобы морковь не хрустела, а хек не высох.",
+  "recipe_family": "white_fish",
+  "protein_base": "fish_white_sea",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "baking_dish",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 50,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["one_pan", "budget", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "hake",
+      "title": "хек",
+      "aliases": ["филе хека", "хек филе", "стейки хека"],
+      "allergens_contains": ["fish"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "oven", "to": "stew", "quality": 0.88 },
+    { "type": "method", "from": "oven", "to": "steam", "quality": 0.82 },
+    { "type": "method", "from": "oven", "to": "pan_fry", "quality": 0.84 },
+    { "type": "equipment", "from": "baking_dish", "to": "pot", "quality": 0.88 },
+    { "type": "equipment", "from": "baking_dish", "to": "skillet", "quality": 0.84 }
+  ],
+  "prep": [
+    {
+      "text": "Замороженный хек разморозить в холодильнике и обсушить. Если стейки на кости — оставить кость, она держит сок; крупные рёберные кости вынуть пальцами."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "hake",
+      "display_name": "хек",
+      "amount": 700,
+      "unit": "g",
+      "detail": "филе или стейки без головы; не минтай в кляре и не три разных хека",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 200,
+      "unit": "g",
+      "detail": "полукольцами",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 250,
+      "unit": "g",
+      "detail": "кружками 3–4 мм, не кубиком 2 см — иначе не успеет",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "tomato",
+      "display_name": "помидоры",
+      "amount": 250,
+      "unit": "g",
+      "detail": "спелые, дольками; дают сок овощам",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "смешать с овощами",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.25,
+      "unit": "tsp",
+      "detail": "часть на овощи, часть на рыбу",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 190 °C."
+    },
+    {
+      "position": 2,
+      "text": "Лук нарезать полукольцами, морковь — кружками 3–4 мм, помидоры — дольками. Хек обсушить, проверить на кости."
+    },
+    {
+      "position": 3,
+      "text": "Смешать овощи в форме с маслом, половиной соли и перца. Распределить ровным слоем, без горки.",
+      "equipment_note": "Форма, овощи в один слой. Горка оставит морковь сырой, пока рыба уже сухая."
+    },
+    {
+      "position": 4,
+      "text": "Запекать овощи без рыбы, пока лук не станет мягким и морковь не начнёт гнуться.",
+      "timer_seconds": 1080,
+      "timer_label": "Овощи",
+      "timer_note": "16–18 минут; морковь ещё плотная, но уже не сырая хрустящая"
+    },
+    {
+      "position": 5,
+      "text": "Выложить хек сверху в один слой, посолить оставшейся солью. Запекать до 63 °C в толще рыбы. Овощи снизу должны быть мягкими, томатный сок — на дне формы, не выкипевшим насухо.",
+      "timer_seconds": 900,
+      "timer_label": "С рыбой",
+      "timer_note": "14–16 минут; ориентир — 63 °C в рыбе и вилка в моркови. Не класть хек сырым вместе с овощами на 35 минут — пересохнет",
+      "target_internal_temperature_c": 63
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "pot",
+      "title": "Тушение",
+      "cook_method_override": "stew",
+      "equipment": "pot",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 150,
+            "unit": "ml",
+            "detail": "на слой овощей; кастрюля без жидкости пригорит",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть кастрюлю с маслом на среднем огне. Духовку не включать."
+          },
+          {
+            "position": 2,
+            "text": "Лук полукольцами, морковь кружками 3–4 мм, помидоры дольками. Хек обсушить."
+          },
+          {
+            "position": 3,
+            "text": "Пассеровать лук и морковь 5–6 минут, пока лук не станет прозрачным. Добавить помидоры, половину соли и перца — это слой овощей, не зажарка до корочки.",
+            "timer_seconds": 360,
+            "timer_label": "Слой овощей",
+            "timer_note": "5–6 минут; морковь ещё плотная"
+          },
+          {
+            "position": 4,
+            "text": "Влить 150 мл воды, накрыть крышкой и тушить на слабом огне, пока морковь не начнёт прокалываться вилкой.",
+            "timer_seconds": 720,
+            "timer_label": "Овощи под крышкой",
+            "timer_note": "12 минут; жидкости должно покрывать дно, не топить рыбу заранее"
+          },
+          {
+            "position": 5,
+            "text": "Выложить хек на овощи в один слой, посолить. Накрыть и томить до 63 °C в толще. Не кипятить бурно: филе развалится, соус станет мутным.",
+            "timer_seconds": 720,
+            "timer_label": "Рыба",
+            "timer_note": "10–12 минут; ориентир — 63 °C. Это тушение в кастрюле, не форма в духовке",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Кастрюля с крышкой, рыба сверху овощного слоя. Не перемешивать после закладки хека."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "steam",
+      "title": "На пару",
+      "cook_method_override": "steam",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "смазать корзину, не для овощной зажарки",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Набрать воду в пароварку и довести до кипения. Духовку не включать."
+          },
+          {
+            "position": 2,
+            "text": "Лук полукольцами, морковь кружками потоньше — 2–3 мм, помидоры дольками. Хек обсушить."
+          },
+          {
+            "position": 3,
+            "text": "Смазать нижнюю корзину маслом. Уложить овощи вниз, посолить половиной соли. Рыбу пока не класть: морковь на пару дольше хека.",
+            "equipment_note": "Овощи снизу или в отдельной корзине. Если всё сразу — хек готов, морковь сырая."
+          },
+          {
+            "position": 4,
+            "text": "Готовить овощи на пару под крышкой, пока морковь не станет гибкой.",
+            "timer_seconds": 720,
+            "timer_label": "Овощи на пару",
+            "timer_note": "12 минут; кружки толще 4 мм не успеют"
+          },
+          {
+            "position": 5,
+            "text": "Положить хек сверху овощей или во вторую корзину выше. Посолить. Готовить до 63 °C. Помидоры размягчатся и дадут сок вниз, корочки не будет.",
+            "timer_seconds": 600,
+            "timer_label": "Рыба на пару",
+            "timer_note": "10 минут; ориентир — 63 °C. Не 30 минут вместе: хек разлезется",
+            "target_internal_temperature_c": 63
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 3,
+            "unit": "tbsp",
+            "detail": "овощи, потом рыба; сковорода должна блестеть",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть широкую сковороду с маслом на среднем огне. Духовку не включать."
+          },
+          {
+            "position": 2,
+            "text": "Лук полукольцами, морковь кружками 3 мм, помидоры дольками. Хек обсушить."
+          },
+          {
+            "position": 3,
+            "text": "Сначала овощи: лук и морковь 6–7 минут, пока морковь не потемнеет по краям. Добавить помидоры и половину соли, прогреть ещё 2 минуты, пока томат не даст сок. Овощи сдвинуть к краю или снять в миску.",
+            "timer_seconds": 540,
+            "timer_label": "Овощи",
+            "timer_note": "8–9 минут суммарно; рыбу на сырые овощи не класть — низ размокнет, верх сырой",
+            "equipment_note": "Не перегружать сковороду овощами горкой. Если 700 г хека плюс овощи не влезают — овощи снять, рыбу жарить партиями."
+          },
+          {
+            "position": 4,
+            "text": "Выложить хек в один слой на свободное дно. Жарить, не трогая, пока низ не схватится.",
+            "timer_seconds": 210,
+            "timer_label": "Первая сторона",
+            "timer_note": "3–4 минуты; рано переворачивать — филе порвётся"
+          },
+          {
+            "position": 5,
+            "text": "Перевернуть один раз, посолить рыбу. Вернуть овощи вокруг. Довести до 63 °C в толще. Не мешать всё в кашу: овощи сбоку, рыба в центре.",
+            "timer_seconds": 180,
+            "timer_label": "Вторая сторона",
+            "timer_note": "2–3 минуты; ориентир — 63 °C",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Партии, если сковорода мала. Полная сковорода 700 г рыбы сразу — тушение без корочки."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Рыба",
+      "text": "Один хек на закладку, не минтай в кляре и не три slug хека. Стейк на кости сочнее филе: кость не вынимать до тарелки."
+    },
+    {
+      "title": "Овощи первыми",
+      "text": "Морковь 250 г кружками 3–4 мм и лук 200 г идут в жар без рыбы. Вместе с сырым хеком на 35 минут морковь хрустит, рыба сухая."
+    },
+    {
+      "title": "Томат",
+      "text": "250 г спелых дольками — сок на дне формы. Зимой водянистые розовые почти ничего не дадут: берите те, что пахнут, не бледные."
+    },
+    {
+      "title": "Готовность",
+      "text": "Хек 63 °C в толще. Дальше крошка. Сырая серединка недопустима."
+    },
+    {
+      "title": "Кастрюля",
+      "text": "Слой овощей, 150 мл воды, хек сверху под крышкой. Перемешать после закладки рыбы — развалите филе."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Сначала овощи, потом рыба партиями. Одна сковорода «всё сразу» даст пар, не корочку."
+    }
+  ]
+}

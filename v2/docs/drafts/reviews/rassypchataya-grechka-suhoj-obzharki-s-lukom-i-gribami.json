@@ -1,0 +1,21 @@
+{
+  "slug": "rassypchataya-grechka-suhoj-obzharki-s-lukom-i-gribami",
+  "verdict": "revise",
+  "cookable": true,
+  "real": true,
+  "critical": [
+    {
+      "location": "draft.source_url",
+      "message": "Указан только корневой https://sol-chef.ru, а не URL исходной статьи; происхождение текста нельзя проверить."
+    }
+  ],
+  "major": [
+    {
+      "location": "recipes.ingredients[5,6,7,8].scale_mode",
+      "message": "Значение gentle запрещено каноном для масштабирования; замените его допустимой моделью на уровне полного объекта."
+    }
+  ],
+  "minor": [],
+  "comment": "Карточка находится в recipes/ и представляет полный объект; шампиньоны заданы явно, а технологическая последовательность и пропорция 1:2 реалистичны.",
+  "recipe_json": null
+}

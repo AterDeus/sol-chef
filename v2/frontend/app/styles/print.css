@@ -1,0 +1,88 @@
+@layer print {
+  @media print {
+    @page {
+      margin: 12mm;
+    }
+
+    html,
+    body {
+      background: #fff;
+      color: #111;
+      color-scheme: light;
+    }
+
+    body.cook-mode-open {
+      overflow: visible;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-shadow: none !important;
+      text-shadow: none !important;
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .skip-link,
+    .tabbar,
+    .site-header,
+    .mobile-brand,
+    .site-footer,
+    .guide-strip,
+    .recipe-actions,
+    .btn-cook,
+    .cook-root,
+    .cook-mode__toast,
+    .search-row button {
+      display: none !important;
+    }
+
+    .wrap {
+      animation: none;
+      max-width: none;
+      margin-inline: 0;
+      padding: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    a[href]::after {
+      content: none;
+    }
+
+    .site-header,
+    .cook-steps__rail {
+      position: static;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+
+    details,
+    details[open] {
+      display: block;
+    }
+
+    details summary {
+      display: block;
+    }
+
+    details > *:not(summary) {
+      display: block !important;
+    }
+
+    .recipe-card,
+    .recipe-step,
+    .card,
+    .grain-card,
+    .caution,
+    .cook-step-card {
+      break-inside: avoid;
+    }
+  }
+}

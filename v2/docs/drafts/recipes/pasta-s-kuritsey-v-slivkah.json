@@ -1,0 +1,442 @@
+{
+  "id": "pasta-s-kuritsey-v-slivkah",
+  "title": "Паста с курицей в сливочном соусе",
+  "summary": "Полоски грудки обжаривают порциями и собирают со сливками и чесноком, затем смешивают с пастой al dente. Это не флотские, не болоньезе и не грудка в сливках без макарон: соус должен обволочь перья, а не лежать лужей.",
+  "recipe_family": "pasta",
+  "protein_base": "poultry",
+  "cook_method": "pan_fry",
+  "dish_type": "pasta_grains",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["breast"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 3,
+  "use_cases": ["fast", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "cream",
+      "title": "сливки",
+      "aliases": ["сливки 20%", "сливки 22%", "сливки питьевые"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "pasta",
+      "title": "макароны",
+      "aliases": ["перья", "пенне", "феттуччине", "паста"],
+      "allergens_contains": ["gluten"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "pan_fry", "to": "oven", "quality": 0.86 },
+    { "type": "equipment", "from": "skillet", "to": "baking_dish", "quality": 0.86 },
+    { "type": "omission", "ingredient": "parmesan", "quality": 0.9 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_breast",
+      "display_name": "куриная грудка",
+      "amount": 500,
+      "unit": "g",
+      "detail": "филе без кости, полоски 1 см поперёк волокон",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "pasta",
+      "display_name": "паста (перья или феттуччине)",
+      "amount": 350,
+      "unit": "g",
+      "detail": "сухая; не рожки «по-флотски»",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "cream",
+      "display_name": "сливки",
+      "amount": 250,
+      "unit": "ml",
+      "detail": "20–22%, не растительные",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "detail": "мелко нарезать",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для обжарки грудки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "к курице; воду для пасты — отдельно",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "для воды варки пасты",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "parmesan",
+      "display_name": "пармезан",
+      "amount": 40,
+      "unit": "g",
+      "detail": "натереть, к подаче; по желанию",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать грудку полосками около 1 см поперёк волокон. Посолить и поперчить."
+    },
+    {
+      "position": 2,
+      "text": "Вскипятить воду в кастрюле, посолить. Отварить пасту на минуту меньше времени на упаковке. Отложить 80 мл воды варки, слить пасту, не промывать.",
+      "timer_seconds": 540,
+      "timer_label": "Паста",
+      "timer_note": "8–10 минут; ориентир — упаковка минус 1 минута"
+    },
+    {
+      "position": 3,
+      "text": "Пока паста варится, разогреть сковороду с маслом на средне-сильном огне."
+    },
+    {
+      "position": 4,
+      "text": "Обжарить грудку партиями в один слой до румяной корочки снаружи; внутри ещё не доводить.",
+      "timer_seconds": 180,
+      "timer_label": "Партия",
+      "timer_note": "2–3 минуты на партию; внутри ещё розовато",
+      "equipment_note": "Не перегружать сковороду: полоски в один слой, порциями. Горка тушится в соку, соус потом водянистый."
+    },
+    {
+      "position": 5,
+      "text": "Убавить огонь до среднего. Вернуть всю курицу, прогреть чеснок 20–30 секунд, влить сливки и 80 мл воды от пасты. Прогреть, пока соус не загустеет у краёв.",
+      "timer_seconds": 180,
+      "timer_label": "Сливки",
+      "timer_note": "3 минуты слабого пузырения, не бурного кипения"
+    },
+    {
+      "position": 6,
+      "text": "Вмешать пасту. Томить на слабом огне, пока грудка не достигнет 72 °C в толще полоски и соус не обволокет перья.",
+      "timer_seconds": 180,
+      "timer_label": "Собрать",
+      "timer_note": "Ориентир — 72 °C в центре полоски, не сухая крошка",
+      "target_internal_temperature_c": 72
+    },
+    {
+      "position": 7,
+      "text": "Снять с огня. Посыпать пармезаном, если используете."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "Запеканка",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "baking_dish",
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "hard_cheese",
+            "display_name": "твёрдый сыр",
+            "amount": 80,
+            "unit": "g",
+            "detail": "натереть; на запеканку, не вместо пармезана к подаче",
+            "scale_mode": "linear",
+            "scalable": true,
+            "allergens_contains": ["milk"]
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Разогреть духовку до 180 °C. Вскипятить воду, посолить. Отварить пасту на 2 минуты меньше упаковки — в форме она дойдёт. Отложить 80 мл воды варки, слить, не промывать.",
+            "timer_seconds": 480,
+            "timer_label": "Паста",
+            "timer_note": "на 2 минуты короче базы: в духовке паста ещё печётся"
+          },
+          {
+            "position": 3,
+            "text": "Сковороду разогреть с маслом только для короткой корочки. Форму смазать остатком масла со сковороды."
+          },
+          {
+            "position": 4,
+            "text": "Обжарить грудку партиями по минуте с каждой стороны — только цвет. Сразу переложить в форму вместе с пастой.",
+            "timer_seconds": 120,
+            "timer_label": "Корочка",
+            "timer_note": "По минуте на сторону, не 2–3 минуты базы",
+            "equipment_note": "Партии на сковороде обязательны. В форму — в один слой, не стопкой."
+          },
+          {
+            "position": 5,
+            "text": "Чеснок смешать со сливками и 80 мл воды от пасты, залить форму. Посыпать тёртым сыром. Сливки на плите не кипятить."
+          },
+          {
+            "position": 6,
+            "text": "Запекать без крышки до 72 °C в толще полоски грудки. Сыр должен расплавиться, края соуса — едва пузыриться.",
+            "timer_seconds": 900,
+            "timer_label": "Духовка",
+            "timer_note": "15 минут при 180 °C; на сковороде сборка была 3 минуты — здесь дольше и спокойнее",
+            "target_internal_temperature_c": 72
+          },
+          {
+            "position": 7,
+            "text": "Вынуть и дать постоять 3 минуты, чтобы соус схватился. Пармезан к подаче — по желанию, поверх уже расплавленного сыра."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_mushrooms",
+      "title": "С грибами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны",
+            "amount": 200,
+            "unit": "g",
+            "detail": "свежие культивируемые, пластинами; не лесные",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 4,
+            "text": "На той же сковороде обжарить шампиньоны до сухой поверхности и лёгкого румянца, затем уже чеснок и сливки.",
+            "timer_seconds": 420,
+            "timer_label": "Грибы",
+            "timer_note": "7 минут; сырая вода грибов сделает сливки серыми"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "tomato",
+      "title": "С томатным соусом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "cream" }
+        ],
+        "add": [
+          {
+            "canonical_id": "tomato_puree",
+            "display_name": "томатное пюре",
+            "amount": 300,
+            "unit": "ml",
+            "detail": "пассата или протёртые томаты, не томатная паста ложкой",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "Убавить огонь. Вернуть курицу, прогреть чеснок 20 секунд, влить томатное пюре и 80 мл воды от пасты. Прогреть до густого соуса без сливок.",
+            "timer_seconds": 240,
+            "timer_label": "Томат",
+            "timer_note": "4 минуты слабого пузырения; это не болоньезе и не час томления"
+          },
+          {
+            "position": 6,
+            "text": "Вмешать пасту. Томить до 72 °C в толще полоски. Соус должен обволочь перья, не стекать водой.",
+            "timer_seconds": 180,
+            "timer_label": "Собрать",
+            "timer_note": "Ориентир — 72 °C в центре полоски",
+            "target_internal_temperature_c": 72
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "cream",
+            "amount": 80,
+            "unit": "ml",
+            "detail": "меньше сливок, тот же соус",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "смазать сковороду",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Слегка смазать сковороду чайной ложкой масла и разогреть на средне-сильном огне."
+          },
+          {
+            "position": 5,
+            "text": "Прогреть чеснок 20 секунд, влить 80 мл сливок и 80 мл воды от пасты. Соус жиже базы — не выпаривать до плёнки.",
+            "timer_seconds": 120,
+            "timer_label": "Сливки",
+            "timer_note": "2 минуты, не 3: жидкости меньше, пригорит быстрее"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Не флотские",
+      "text": "Рожки, жареный фарш и ложка пасты — другой slug. Здесь сливки, грудка полосками и перья или феттуччине."
+    },
+    {
+      "title": "Не грудка без пасты",
+      "text": "Куриная грудка в сливочном соусе — отдельная карточка, гарнир подают отдельно. Здесь паста обязательна и входит в соус."
+    },
+    {
+      "title": "Сливки",
+      "text": "20–22% из супермаркета. 10% плохо густеют и сворачиваются на огне. Растительные — другой вкус и другой аллерген."
+    },
+    {
+      "title": "Грудка",
+      "text": "Только филе, 72 °C в центре полоски. Бедро на этой карточке ломает таймер и температуру — это другой отруб."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Полоски в один слой. На 500 г обычно две партии: пока вторая жарится, первая ждёт на тарелке, сок потом в сливки."
+    },
+    {
+      "title": "Вода от пасты",
+      "text": "80 мл крахмалистой воды связывают соус с перьями. Сливать всё в раковину — соус скользит и не обволакивает."
+    },
+    {
+      "title": "Томатный чип",
+      "text": "Сливки убираются, остаётся курица и пассата. Это не мясной соус с фаршем и не час томления."
+    }
+  ]
+}

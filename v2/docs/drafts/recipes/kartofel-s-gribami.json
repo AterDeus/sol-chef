@@ -1,0 +1,384 @@
+{
+  "id": "kartofel-s-gribami",
+  "title": "Картофель с грибами",
+  "summary": "Картофель жарят на сковороде с луком, шампиньоны отдельно до золота, затем соединяют. Картошка основа блюда, грибы — вкус, не наоборот. Сметана в конце по желанию, без кипения.",
+  "recipe_family": "potato",
+  "protein_base": "vegetables",
+  "cook_method": "pan_fry",
+  "dish_type": "side",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 40,
+    "active_minutes": 30
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": ["easy", "one_pan", "budget"],
+  "new_ingredients": [
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": ["сметана 15%", "сметана 20%"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "pan_fry", "to": "oven", "quality": 0.88 },
+    { "type": "method", "from": "pan_fry", "to": "air_fryer", "quality": 0.84 },
+    { "type": "equipment", "from": "skillet", "to": "baking_dish", "quality": 0.88 },
+    { "type": "omission", "ingredient": "sour_cream", "quality": 0.92 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 800,
+      "unit": "g",
+      "detail": "столовый; кубик 1.5–2 см, кожуру снять",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "champignons",
+      "display_name": "шампиньоны",
+      "amount": 300,
+      "unit": "g",
+      "detail": "свежие культивируемые, пластины 4–5 мм; не лесные, не смеси «грибное ассорти»",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 150,
+      "unit": "g",
+      "detail": "репчатый, полукольцами",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 5,
+      "unit": "tbsp",
+      "detail": "около 75 мл: 1 ст. л. на грибы, по 2 ст. л. на каждую партию картофеля",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "detail": "измельчить, в конце",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "15–20%, снять с огня и заправить; по желанию",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Картофель очистить и нарезать кубиком 1.5–2 см. Шампиньоны — пластинами 4–5 мм, лук полукольцами."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть широкую сковороду с 1 ст. л. масла на среднем плюс огне. Обжарить шампиньоны, пока не уйдёт вода и края не станут золотистыми. Снять в миску.",
+      "timer_seconds": 420,
+      "timer_label": "Шампиньоны",
+      "timer_note": "6–8 минут; сырая вода грибов превратит картофель в варёный",
+      "equipment_note": "Партиями, если слой полный: гора шампиньонов сразу отдаст лужу и будет тушиться."
+    },
+    {
+      "position": 3,
+      "text": "Влить 2 ст. л. масла из нормы — не всё оставшееся: ещё 2 ст. л. оставить на вторую партию. Выложить первую партию картофеля — около 400 г — в один слой. Остальные 400 г пока в миске.",
+      "equipment_note": "Не перегружать сковороду. 800 г сразу даёт пар, без корочки, середина сырая."
+    },
+    {
+      "position": 4,
+      "text": "Не мешать первые минуты, пока низ не схватится. Затем накрыть крышкой на среднем огне, чтобы середина дошла. Снять первую партию на тарелку.",
+      "timer_seconds": 600,
+      "timer_label": "Первая партия",
+      "timer_note": "8–10 минут; пар варит середину, иначе корочка будет, а внутри сыро"
+    },
+    {
+      "position": 5,
+      "text": "Влить оставшиеся 2 ст. л. масла. Так же обжарить вторую партию 400 г под крышкой, затем вернуть первую партию в сковороду, добавить лук. Жарить, помешивая, до румяных граней и мягкого лука. Вернуть шампиньоны и чеснок, прогреть минуту.",
+      "timer_seconds": 900,
+      "timer_label": "Вторая партия и сборка",
+      "timer_note": "вторая партия 8–10 минут под крышкой, затем 5–7 вместе с луком; ориентир — цвет"
+    },
+    {
+      "position": 6,
+      "text": "Посолить и поперчить. Снять с огня. Сметану, если используете, вмешайте сейчас — на плите свернётся хлопьями. Нож входит в кубик, кусок держит форму."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "baking_dish",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 3,
+            "unit": "tbsp",
+            "detail": "в форме одна закладка, не две сковороды",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть духовку до 200 °C. Картофель очистить и нарезать кубиком 1.5–2 см. Шампиньоны пластинами, лук полукольцами. Чеснок измельчить и отложить: в форму с первой минуты сгорит."
+          },
+          {
+            "position": 2,
+            "text": "Смешать картофель, шампиньоны, лук, 3 ст. л. масла, соль и перец в форме. Чеснок пока не класть. Распределить в один слой.",
+            "equipment_note": "Форма или противень, один слой. Горка даст варёный картофель и серые грибы без жара сковороды."
+          },
+          {
+            "position": 3,
+            "text": "Запекать без крышки, пока края картофеля не начнут румяниться.",
+            "timer_seconds": 1500,
+            "timer_label": "Первый проход",
+            "timer_note": "25 минут; грибы уже осядут, картофель ещё плотный"
+          },
+          {
+            "position": 4,
+            "text": "Перемешать и запекать до мягкой середины кубика. За 2–3 минуты до конца рассыпать чеснок: с первой минуты при 200 °C он сгорит.",
+            "timer_seconds": 900,
+            "timer_label": "До готовности",
+            "timer_note": "ещё 12–15 минут; чеснок только в конце"
+          },
+          {
+            "position": 5,
+            "text": "Снять из духовки. Сметану, если используете, вмешайте в горячее — духовку больше не включать."
+          },
+          {
+            "position": 6,
+            "text": "Подать сразу: в форме картофель не хрустит так, как на сковороде, но грибы пропекаются ровнее."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "cook_method_override": "air_fryer",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "potato",
+            "display_name": "картофель",
+            "amount": 250,
+            "unit": "g",
+            "detail": "не больше 250 г за закладку; кубик 1.5 см",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны",
+            "amount": 80,
+            "unit": "g",
+            "detail": "свежие культивируемые, пластины; не лесные; тонкий слой в чаше",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "onion",
+            "display_name": "лук",
+            "amount": 80,
+            "unit": "g",
+            "detail": "полукольцами",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "плёнка на 250 г, не 2 ст. л.",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "salt",
+            "display_name": "соль",
+            "amount": 0.25,
+            "unit": "tsp",
+            "detail": "на закладку 250 г, не 1 ч. л. базы",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "black_pepper",
+            "display_name": "чёрный перец",
+            "amount": 0.25,
+            "unit": "tsp",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "garlic",
+            "display_name": "чеснок",
+            "amount": 1,
+            "unit": "clove",
+            "detail": "в последние 2–3 минуты",
+            "scale_mode": "whole",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть аэрогриль до 200 °C. Картофель очистить и нарезать кубиком 1.5 см. Шампиньоны пластинами, лук полукольцами."
+          },
+          {
+            "position": 2,
+            "text": "Смешать картофель, шампиньоны, лук, 1 ст. л. масла, 1/4 ч. л. соли и перец. Чеснок отложить: в чаше с первой минуты сгорит."
+          },
+          {
+            "position": 3,
+            "text": "Уложить в чашу в один слой всю закладку варианта: 250 г картофеля, 80 г шампиньонов и лук. Это самостоятельная порция, не остаток от 800 г базы. Больше в чашу не класть.",
+            "equipment_note": "Одна тонкая закладка по списку варианта. 400 г картофеля с грибами в чаше даст пар и бледный кубик."
+          },
+          {
+            "position": 4,
+            "text": "Готовить, пока края картофеля не подсохнут.",
+            "timer_seconds": 600,
+            "timer_label": "До встряхивания",
+            "timer_note": "10 минут"
+          },
+          {
+            "position": 5,
+            "text": "Сильно встряхнуть и готовить до мягкой середины кубика. За 2–3 минуты до конца рассыпать чеснок: с десятой минуты при 200 °C он сгорит.",
+            "timer_seconds": 600,
+            "timer_label": "После встряхивания",
+            "timer_note": "ещё 8–12 минут; ориентир — нож и цвет"
+          },
+          {
+            "position": 6,
+            "text": "Переложить в миску. Сметану, если используете, вмешайте сразу: в чаше она стечёт на дно."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Основа — картофель",
+      "text": "Это гарнир из картошки с грибами, не жульен. Белок блюда — овощи. Шампиньоны обязательны, но якорь «У меня» — граммы картофеля."
+    },
+    {
+      "title": "Только шампиньоны",
+      "text": "С полки магазина. Лесные, белые, опята, «смесь сушёных» — другой риск и другой аудит, в эту карточку не входят."
+    },
+    {
+      "title": "Вода грибов",
+      "text": "Сначала шампиньоны до золота, потом картофель. Вместе с сырыми грибами картошка тушится в соке и не румянится."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Партии и крышка, затем без. 5 ст. л. масла: 1 на грибы, 2 на первую партию, 2 на вторую. Полная сковорода 800 г сразу — серая каша. На широкой помещается около 400 г кубика за проход."
+    },
+    {
+      "title": "Сметана",
+      "text": "По желанию и только с огня. На плите свернётся. Без сметаны блюдо уже готово — молоко на карточке не висит."
+    },
+    {
+      "title": "Соль в конце",
+      "text": "Солить готовый картофель. Соль в начале тянет воду, кубик размокает и не даёт корочки."
+    }
+  ]
+}

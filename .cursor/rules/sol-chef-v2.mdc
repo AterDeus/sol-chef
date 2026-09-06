@@ -1,0 +1,12 @@
+---
+description: Две версии sol-chef — V1 в корне, 2.0 только в v2/
+alwaysApply: true
+---
+
+# sol-chef
+
+- **V1** (рабочий сайт): корень репозитория. Не менять `index.html`, `recipe.html`, `js/`, `data/`, `css/` без явной просьбы про текущий сайт. Токены `css/global.css` — источник для копии в V2, не перезаписывать.
+- **2.0**: только папка `v2/`. Сначала `v2/CURRENT_SPRINT.md` и `v2/AGENTS.md`. Канон экранов: `v2/docs/UX-PROPOSAL.md`. Модель/API/тесты: `v2/docs/DATA-MODEL.md`, `API.md`, `TESTING.md`. Не использовать `v2/preview/` как референс.
+- Пустая ячейка HUMAN ≠ «да». UI по-русски, код по-английски.
+- Не удалять V1 до cutover. Не класть Next/Django в корень. Не запускать волны рецептов без «стартуй волну 1».
+- Рецепты агентами: `v2/docs/RECIPE.md` (не в спринте 1). UX-анализ: `v2/docs/UX.md`; реализация — `UX-PROPOSAL.md`, не `v2/preview/`.

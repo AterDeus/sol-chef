@@ -1,0 +1,432 @@
+{
+  "id": "kurinye-bedra-s-kartofelem",
+  "title": "Куриные бёдра с картофелем",
+  "summary": "Бёдра и картофель запекают в одной форме с луком, паприкой и чесноком. Мясо румяное, картофель мягкий — в том же соку, без гарнира отдельно.",
+  "recipe_family": "one_pan_potato",
+  "protein_base": "poultry",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "baking_dish",
+  "energy_profile": "standard",
+  "allowed_cuts": ["thigh", "drumstick"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 70,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["one_pan", "budget", "easy", "batch"],
+  "adaptations": [
+    {"type": "method", "from": "oven", "to": "pan_fry", "quality": 0.82},
+    {"type": "method", "from": "oven", "to": "stew", "quality": 0.78},
+    {"type": "method", "from": "oven", "to": "air_fryer", "quality": 0.88},
+    {"type": "equipment", "from": "baking_dish", "to": "skillet", "quality": 0.82},
+    {"type": "equipment", "from": "baking_dish", "to": "kazan", "quality": 0.78},
+    {"type": "omission", "ingredient": "vegetable_oil", "quality": 0.62}
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_thighs",
+      "display_name": "куриные бёдра",
+      "amount": 800,
+      "unit": "g",
+      "detail": "бёдра, можно голени; на кости с кожей",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 800,
+      "unit": "g",
+      "detail": "обычный, не молодой; очистить",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "репчатый лук",
+      "amount": 200,
+      "unit": "g",
+      "detail": "около двух средних",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 4,
+      "unit": "clove",
+      "detail": "раздавить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 2,
+      "unit": "tsp",
+      "detail": "сладкая, не копчёная",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "dried_rosemary",
+      "display_name": "сушёный розмарин",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "из пакетика, не свежие веточки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "для смазки формы и обвалки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 200 °C."
+    },
+    {
+      "position": 2,
+      "text": "Нарезать картофель крупными кусками 3–4 см, лук — дольками, чеснок раздавить плоской стороной ножа."
+    },
+    {
+      "position": 3,
+      "text": "Смешать бёдра, картофель, лук и чеснок с маслом, паприкой, розмарином, солью и перцем прямо в форме."
+    },
+    {
+      "position": 4,
+      "text": "Распределить в один слой: картофель снизу и по краям, бёдра сверху кожицей вверх.",
+      "equipment_note": "Форма, в которой всё лежит в один слой. В два ряда картофель снизу будет варёный, без корочки."
+    },
+    {
+      "position": 5,
+      "text": "Запекать без крышки, пока края картофеля не схватятся.",
+      "timer_seconds": 1800,
+      "timer_label": "Первый проход",
+      "timer_note": "30 минут; картофель ещё плотный — так и должно быть"
+    },
+    {
+      "position": 6,
+      "text": "Перемешать картофель, вернуть бёдра кожицей вверх и запекать до мягкого картофеля и 82 °C в толще бедра у кости.",
+      "timer_seconds": 1500,
+      "timer_label": "До готовности",
+      "timer_note": "Ориентир — 82 °C у кости, не таймер; сок из прокола прозрачный",
+      "target_internal_temperature_c": 82
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 80,
+            "unit": "ml",
+            "detail": "для пара под крышкой",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть широкую сковороду на средне-сильном огне."
+          },
+          {
+            "position": 2,
+            "text": "Нарезать картофель мелким кубиком 1–1.5 см, лук — полукольцами, чеснок раздавить."
+          },
+          {
+            "position": 3,
+            "text": "Натереть бёдра маслом, паприкой, розмарином, солью и перцем. Картофель и лук смешать с оставшимся маслом и щепоткой соли."
+          },
+          {
+            "position": 4,
+            "text": "Обжарить бёдра партиями кожицей вниз до румяной корочки, затем перевернуть. Снять на тарелку.",
+            "timer_seconds": 360,
+            "timer_label": "Партия",
+            "timer_note": "5–6 минут кожицей вниз на партию; ориентир — цвет, не таймер",
+            "equipment_note": "Не перегружать сковороду: бёдра в один слой, порциями. Полная сковорода — тушение в соку, без корочки."
+          },
+          {
+            "position": 5,
+            "text": "В той же сковороде обжарить лук, раздавленный чеснок и мелкий картофель, вернуть бёдра, влить воду и накрыть крышкой.",
+            "timer_seconds": 300,
+            "timer_label": "Овощи",
+            "timer_note": "5 минут на обжарку кубика, пока края не станут матовыми"
+          },
+          {
+            "position": 6,
+            "text": "Готовить под крышкой на средне-слабом огне до мягкого картофеля и 82 °C в толще бедра у кости, иногда встряхивая сковороду.",
+            "timer_seconds": 1500,
+            "timer_label": "Под крышкой",
+            "timer_note": "Ориентир — 82 °C у кости; если сухо — ещё ложка воды, не открывать крышку каждые две минуты",
+            "target_internal_temperature_c": 82
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "cook_method_override": "stew",
+      "equipment": "kazan",
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "water_or_stock",
+            "display_name": "вода или бульон",
+            "amount": 250,
+            "unit": "ml",
+            "detail": "воды достаточно; бульон по желанию",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть казан на среднем огне и влить масло."
+          },
+          {
+            "position": 2,
+            "text": "Нарезать картофель средними кусками 2–3 см, лук — полукольцами, чеснок раздавить."
+          },
+          {
+            "position": 3,
+            "text": "Натереть бёдра паприкой, розмарином, солью и перцем."
+          },
+          {
+            "position": 4,
+            "text": "Обжарить бёдра в казане до лёгкой корочки со всех сторон, сдвинуть к стенке и пассеровать лук с раздавленным чесноком.",
+            "timer_seconds": 480,
+            "timer_label": "Обжарка",
+            "timer_note": "8 минут суммарно; корочка здесь только намёк, не сухая духовки"
+          },
+          {
+            "position": 5,
+            "text": "Добавить картофель, влить 250 мл воды или бульона и довести до слабого кипения.",
+            "timer_seconds": 180,
+            "timer_label": "До кипения"
+          },
+          {
+            "position": 6,
+            "text": "Накрыть крышкой и томить на слабом огне до мягкого картофеля и 82 °C в толще бедра у кости — соус влажный, без сухой корочки духовки.",
+            "timer_seconds": 2400,
+            "timer_label": "Томление",
+            "timer_note": "Ориентир — 82 °C у кости, около 40 минут; жидкость не выкипает насухо",
+            "target_internal_temperature_c": 82
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "cook_method_override": "air_fryer",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть аэрогриль до 190 °C."
+          },
+          {
+            "position": 2,
+            "text": "Нарезать картофель средними дольками около 2 см, лук — крупно, чеснок раздавить."
+          },
+          {
+            "position": 3,
+            "text": "Смешать бёдра, картофель, лук и чеснок с маслом, паприкой, розмарином, солью и перцем."
+          },
+          {
+            "position": 4,
+            "text": "Уложить в чашу в один слой: за закладку не больше 3–4 бёдер и горсти картофеля; остальное — следующей партией.",
+            "equipment_note": "Не перегружать чашу. Стенки и дно должны продуваться, иначе картофель будет варёный, а кожа бледная."
+          },
+          {
+            "position": 5,
+            "text": "Готовить, пока края картофеля не подсохнут.",
+            "timer_seconds": 720,
+            "timer_label": "Первая закладка",
+            "timer_note": "12 минут; короче духовки — воздух в чаше жарче"
+          },
+          {
+            "position": 6,
+            "text": "Перевернуть бёдра и встряхнуть картофель, готовить до 82 °C в толще бедра у кости и румяных долек.",
+            "timer_seconds": 900,
+            "timer_label": "До готовности",
+            "timer_note": "Ориентир — 82 °C у кости, ещё 12–15 минут; крупные голени могут просить минуту-две сверху",
+            "target_internal_temperature_c": 82
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "position": 7,
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "только чтобы покрыть",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Смешать бёдра, картофель, лук и чеснок с 1 ст. л. масла, паприкой, розмарином, солью и перцем. Если форма липнет — застелить пергаментом."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Бёдра или голени по весу один к одному, не целая тушка. Голень у кости чуть плотнее — щуп именно туда, не в тонкий край."
+    },
+    {
+      "title": "Картофель",
+      "text": "Обычный розовый или белый, не молодой: крупные куски в духовке держат форму. Молодой развалится раньше, чем дойдёт мясо."
+    },
+    {
+      "title": "Кожица",
+      "text": "В форме бёдра кладут кожицей вверх: жир стекает на картофель, кожа успевает подсохнуть. Кожей вниз получится варёная плёнка."
+    },
+    {
+      "title": "Готовность",
+      "text": "82 °C в толще у кости. Если картофель ещё плотный, а птица уже в цели — бёдра снять, картофель допечь 5–10 минут."
+    },
+    {
+      "title": "Розмарин",
+      "text": "Хватит чайной ложки сушёного из пакетика. Больше — хвоя и горечь. Свежая веточка из супермаркета заменяет эту ложку, если попалась."
+    },
+    {
+      "title": "Сковорода",
+      "text": "На 800 г бёдер широкая сковорода и партии обязательны. Узкая — две волны мяса, потом всё под крышку с мелким кубиком."
+    },
+    {
+      "title": "Остатки",
+      "text": "Закрытая форма в холодильнике до двух суток. Разогрев при 180 °C, не в микроволновке: кожица снова подсыхает, картофель не преет."
+    }
+  ]
+}

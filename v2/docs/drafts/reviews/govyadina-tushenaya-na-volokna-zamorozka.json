@@ -1,0 +1,13 @@
+{
+  "slug": "govyadina-tushenaya-na-volokna-zamorozka",
+  "verdict": "revise",
+  "cookable": true,
+  "real": false,
+  "critical": [
+    "В V1 packet указан source_url https://sol-chef.ru; источник sol-chef.ru требует Critical."
+  ],
+  "major": [],
+  "minor": [],
+  "comment": "Технология приготовления и заморозка порциями выполнимы, а batch-сценарий соответствует V1 packet. До приёмки нужно заменить или подтвердить источник, поскольку ссылка на sol-chef.ru является критическим замечанием.",
+  "recipe_json": null
+}

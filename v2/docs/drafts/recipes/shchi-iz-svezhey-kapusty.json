@@ -1,0 +1,385 @@
+{
+  "id": "shchi-iz-svezhey-kapusty",
+  "title": "Щи из свежей капусты",
+  "summary": "Щи на говяжьей голяшке со свежей белокочанной капустой, картофелем, морковью и томатом. Без свёклы и без квашеной как обязательной базы: это не борщ и не кислые щи.",
+  "recipe_family": "shchi",
+  "protein_base": "beef",
+  "cook_method": "boil",
+  "dish_type": "soup",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": ["shank", "brisket", "shoulder"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 150,
+    "active_minutes": 35
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["batch", "budget", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "cabbage",
+      "title": "капуста белокочанная",
+      "aliases": ["капуста", "белокочанная капуста"],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": [],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "omission", "ingredient": "beef_shank_bone_in", "quality": 0.78 },
+    { "type": "omission", "ingredient": "sour_cream", "quality": 0.95 },
+    { "type": "omission", "ingredient": "dill", "quality": 0.92 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_shank_bone_in",
+      "display_name": "говяжья голяшка на кости",
+      "amount": 800,
+      "unit": "g",
+      "detail": "голяшка, грудинка или лопатка; на кости бульон крепче",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "cabbage",
+      "display_name": "капуста белокочанная",
+      "amount": 600,
+      "unit": "g",
+      "detail": "свежая, нашинковать; не квашеная",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 400,
+      "unit": "g",
+      "detail": "кубик около 1.5 см",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 150,
+      "unit": "g",
+      "detail": "кружки или крупная тёрка",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "репчатый, мелкий кубик",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "tomato",
+      "display_name": "помидоры",
+      "amount": 300,
+      "unit": "g",
+      "detail": "свежие, кубик; очень водянистые — слить лишний сок",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для зажарки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 2500,
+      "unit": "ml",
+      "detail": "холодная, покрыть мясо с запасом",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 2,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 11,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "detail": "в конце, раздавить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 12,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "detail": "молотый",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 13,
+      "canonical_id": "dill",
+      "display_name": "укроп",
+      "amount": 10,
+      "unit": "g",
+      "detail": "свежий, в конце",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 14,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 150,
+      "unit": "g",
+      "detail": "к подаче, по желанию",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Говяжью голяшку залить холодной водой, довести до кипения на среднем огне и снять пену."
+    },
+    {
+      "position": 2,
+      "text": "Убавить огонь до слабого кипения. Варить под крышкой, пока мясо не станет мягким и не отойдёт от кости.",
+      "timer_seconds": 5400,
+      "timer_label": "Бульон",
+      "timer_note": "1.5–2 часа; ориентир — вилка входит без сопротивления, не таймер"
+    },
+    {
+      "position": 3,
+      "text": "Пока варится: капусту нашинковать, картофель нарезать кубиком 1.5 см, морковь — кружками или на тёрке, лук и помидоры — мелким кубиком."
+    },
+    {
+      "position": 4,
+      "text": "На сковороде разогреть масло. Пассеровать лук и морковь до мягкости, добавить помидоры. Жарить, пока томат не загустеет и не потемнеет.",
+      "timer_seconds": 600,
+      "timer_label": "Зажарка",
+      "timer_note": "8–10 минут; сырые помидоры в кастрюлю без зажарки дадут кислую воду, не щи"
+    },
+    {
+      "position": 5,
+      "text": "Говядину вынуть на доску. В бульон положить картофель.",
+      "timer_seconds": 600,
+      "timer_label": "Картофель",
+      "timer_note": "10 минут от закипания; капусту пока не класть — иначе раскиснет, а картофель будет твёрдым"
+    },
+    {
+      "position": 6,
+      "text": "Добавить капусту, затем зажарку. Говядину нарезать кусками, кость убрать, мясо вернуть. Положить лавровый лист, посолить, поперчить. Варить до мягкой, но не кашеобразной капусты.",
+      "timer_seconds": 900,
+      "timer_label": "Сборка",
+      "timer_note": "12–15 минут; щи из свежей капусты должны держать соломку"
+    },
+    {
+      "position": 7,
+      "text": "Снять с огня, раздавить чеснок в кастрюлю, вмешать укроп, если есть, накрыть. Подавать со сметаной по желанию.",
+      "timer_seconds": 600,
+      "timer_label": "Настоять",
+      "timer_note": "10 минут под крышкой; чеснок не кипятить"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "vegetarian",
+      "title": "Без мяса",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "beef_shank_bone_in" }
+        ],
+        "replace": [
+          {
+            "canonical_id": "cabbage",
+            "is_anchor": true
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны",
+            "amount": 200,
+            "unit": "g",
+            "detail": "свежие культивируемые, пластинами; по желанию, для вкуса вместо мяса",
+            "scale_mode": "linear",
+            "scalable": true,
+            "optional": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Капусту нашинковать, картофель нарезать кубиком 1.5 см, морковь — кружками, лук и помидоры — мелким кубиком. Если есть шампиньоны — пластинами."
+          },
+          {
+            "position": 2,
+            "text": "В кастрюле довести воду до кипения.",
+            "timer_seconds": 300,
+            "timer_label": "Кипение",
+            "timer_note": "5 минут до уверенного кипения; мяса в этом варианте нет"
+          },
+          {
+            "position": 3,
+            "text": "В кипящую воду положить картофель.",
+            "timer_seconds": 600,
+            "timer_label": "Картофель",
+            "timer_note": "10 минут; капусту пока не класть"
+          },
+          {
+            "position": 4,
+            "text": "На сковороде разогреть масло. Пассеровать лук и морковь, затем шампиньоны, если используете, до сухой поверхности. Добавить помидоры и жарить до густого томата.",
+            "timer_seconds": 720,
+            "timer_label": "Зажарка",
+            "timer_note": "10–12 минут; грибы только шампиньоны, не лесные"
+          },
+          {
+            "position": 5,
+            "text": "Добавить в кастрюлю капусту.",
+            "timer_seconds": 300,
+            "timer_label": "Капуста",
+            "timer_note": "5 минут, затем вводить зажарку"
+          },
+          {
+            "position": 6,
+            "text": "Ввести зажарку, лавровый лист, соль и перец. Варить до мягкой капусты, которая ещё держит соломку.",
+            "timer_seconds": 900,
+            "timer_label": "Овощи",
+            "timer_note": "12–15 минут; снять пробу на соль"
+          },
+          {
+            "position": 7,
+            "text": "Снять с огня, раздавить чеснок, вмешать укроп, если есть, накрыть. Подавать со сметаной по желанию.",
+            "timer_seconds": 600,
+            "timer_label": "Настоять",
+            "timer_note": "10 минут под крышкой; чеснок не кипятить"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Свежая, не квашеная",
+      "text": "В title — свежая капуста. Квашеная даёт кислые щи, другой вкус и другой расчёт соли. В эту кастрюлю её не класть «для кислинки»."
+    },
+    {
+      "title": "Не борщ",
+      "text": "Свёклы, уксуса для цвета и сахара к зажарке здесь нет. Борщ — другой slug. Щи должны пахнуть капустой и говядиной, не свёклой."
+    },
+    {
+      "title": "Отруб",
+      "text": "Голяшка на кости. Грудинка и лопатка из allowed_cuts тоже. Вырезку не брать — в супе она сухая и дорогая зря."
+    },
+    {
+      "title": "Вода, не бульон",
+      "text": "Только вода. Магазинный бульон часто с сельдереем — на карточку повесится unknown, хотя в кастрюле его нет."
+    },
+    {
+      "title": "Капуста после картофеля",
+      "text": "Иначе соломка разлезется, а картофель ещё хрустит. Свежая капуста в щах должна держать форму."
+    },
+    {
+      "title": "Сметана",
+      "text": "К подаче, по желанию. Без неё блюдо то же; молоко на карточке из-за сметаны не висит."
+    },
+    {
+      "title": "Без мяса",
+      "text": "Якорь переезжает на капусту. Шампиньоны по желанию дают плотность; лесные грибы не подставлять."
+    },
+    {
+      "title": "На следующий день",
+      "text": "После ночи в холодильнике вкус собирается. Разогревать до горячего, не кипятить подолгу — капуста и так уже мягкая."
+    }
+  ]
+}

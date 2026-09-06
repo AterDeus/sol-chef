@@ -1,0 +1,16 @@
+---
+description: Правила агентных рецептов sol-chef 2.0 (VOCAB, SAFETY, конвейер Grok→Terra)
+globs: v2/docs/**/*.json,v2/docs/RECIPE.md,v2/docs/VOCAB.md,v2/docs/SAFETY.md,v2/docs/drafts/**
+alwaysApply: false
+---
+
+# Рецепты агентами
+
+Читать `v2/docs/RECIPE.md`, коды только из `v2/docs/VOCAB.md`, температуры и аллергены — `v2/docs/SAFETY.md`.
+
+- Волну новых не начинать без фразы «стартуй волну 1». Оверлей 43 — по CURRENT_SPRINT / RECIPE.md.
+- Автор Grok → валидатор-скрипт → модератор Terra Medium. В промпт: чеклист готовки/вкуса + JSON рецепта. Явный запрет ходить по репо (нет Read/Grep). `editorial_tested` не ставить.
+- Коды метода: `oven` `pan_fry` `stew` `boil` `grill` `steam` `no_cook`, не `duhovka`.
+- `unknown` аллерген ≠ «нет». High-risk — блок «Осторожно» + человек.
+- Чужой текст только с источником и ссылкой. Стакан в расчёте запрещён.
+- Черновики в `v2/docs/drafts/recipes/`, не в корневой `data/`.

@@ -1,0 +1,210 @@
+{
+  "id": "tushenaya-kuritsa-s-grechkoj-na-dni",
+  "title": "Тушёная курица с гречкой на несколько дней",
+  "summary": "Бюджетная заготовка на 4–6 порций: куриные бёдра тушат с луком и морковью, затем в той же кастрюле доводят гречку. Удобно разогревать. Бедро до внутренней температуры не ниже 82 °C.",
+  "protein_base": "poultry",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "thigh"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [
+    "poultry_temp"
+  ],
+  "caution_text": "Куриные бёдра: внутренняя температура не ниже 82 °C.",
+  "time_profile": {
+    "total_minutes": 65,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "batch",
+    "budget",
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_thighs",
+      "display_name": "бёдра куриные",
+      "amount": 1000,
+      "unit": "g",
+      "detail": "бюджетный белок, с костью или без",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "buckwheat",
+      "display_name": "гречка",
+      "amount": 300,
+      "unit": "g",
+      "detail": "ядрица, промыть",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "кружками",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 900,
+      "unit": "ml",
+      "detail": "на тушение и крупу",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для обжарки в кастрюле",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Обсушить бёдра куриные, посолить, поперчить, посыпать паприкой."
+    },
+    {
+      "position": 2,
+      "text": "Обжарить бёдра в кастрюле на растительном масле 4–5 минут с каждой стороны, затем выложить на тарелку.",
+      "timer_seconds": 600,
+      "timer_label": "Обжарка",
+      "timer_note": "4–5 минут с каждой стороны; ориентир — корочка, не только таймер",
+      "equipment_note": "Обжаривать в той же кастрюле, где потом тушить и доводить гречку."
+    },
+    {
+      "position": 3,
+      "text": "Обжарить лук и морковь 5 минут в той же кастрюле.",
+      "timer_seconds": 300,
+      "timer_label": "Овощи"
+    },
+    {
+      "position": 4,
+      "text": "Вернуть бёдра, влить около 500 мл воды, довести до слабого кипения и тушить под крышкой 25 минут.",
+      "timer_seconds": 1500,
+      "timer_label": "Тушение мяса"
+    },
+    {
+      "position": 5,
+      "text": "Всыпать промытую гречку, влить оставшиеся около 400 мл воды, перемешать и тушить ещё 15–18 минут, пока крупа не станет мягкой.",
+      "timer_seconds": 960,
+      "timer_label": "Гречка",
+      "timer_note": "15–18 минут; ориентир — мягкая крупа"
+    },
+    {
+      "position": 6,
+      "text": "Проверить термометром самую толстую часть бедра: внутренняя температура не ниже 82 °C. Если ниже — тушить ещё несколько минут.",
+      "timer_note": "Внутренняя температура: 82 °C",
+      "target_internal_temperature_c": 82
+    },
+    {
+      "position": 7,
+      "text": "Снять с огня, дать немного остыть и разложить по контейнерам порциями."
+    }
+  ],
+  "variants": [],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Только бёдра, с костью или без. Грудка сюда не ставится: порог 82 °C относится к тёмному мясу."
+    },
+    {
+      "title": "Посуда",
+      "text": "Обжарка, тушение мяса и гречка — в одной кастрюле. Отдельная сковорода не нужна."
+    },
+    {
+      "title": "Термометр",
+      "text": "Самая толстая часть бедра, не ниже 82 °C. Не ориентироваться только на цвет сока."
+    },
+    {
+      "title": "Хранение",
+      "text": "Остудить при комнатной температуре не дольше двух часов, хранить в холодильнике в закрытых контейнерах до 3–4 дней — обычное кухонное правило, не медицинская рекомендация."
+    },
+    {
+      "title": "Разогрев",
+      "text": "Разогревать до горячего пара по всему объёму; кусок птицы снова довести термометром не ниже 74 °C. Не оставлять на столе на ночь и не замораживать повторно после полного размораживания, если уже разогревали."
+    },
+    {
+      "title": "Бюджет",
+      "text": "Гречка и куриные бёдра — продукты супермаркета. Премиум морепродукты не используются."
+    }
+  ]
+}

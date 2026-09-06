@@ -1,0 +1,395 @@
+{
+  "id": "salat-s-syrom-i-gretskimi-orehami",
+  "title": "Салат с сыром и грецкими орехами",
+  "summary": "Салатный микс с огурцом, твёрдым сыром и грецкими орехами. Орехи слегка подсушивают на сухой сковороде. Заправка из оливкового масла, лимонного сока и горчицы.",
+  "protein_base": "vegetarian",
+  "cook_method": "pan_fry",
+  "dish_type": "salad",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 15,
+    "active_minutes": 10
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [],
+  "adaptations": [],
+  "new_ingredients": [
+    {
+      "canonical_id": "pumpkin_seeds",
+      "title": "тыквенные семечки",
+      "aliases": [],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "salad_mix",
+      "display_name": "салатный микс",
+      "amount": 150,
+      "amount_max": 200,
+      "unit": "g",
+      "detail": "листья салата или готовый микс",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "cucumber",
+      "display_name": "огурец",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "средний, ломтиками",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "hard_cheese",
+      "display_name": "сыр твёрдый",
+      "amount": 40,
+      "amount_max": 60,
+      "unit": "g",
+      "detail": "натереть",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "walnuts",
+      "display_name": "грецкие орехи",
+      "amount": 30,
+      "unit": "g",
+      "detail": "грубо порубить",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "olive_oil",
+      "display_name": "оливковое масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "lemon",
+      "display_name": "лимон",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "сок для заправки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "mustard",
+      "display_name": "горчица",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "перец",
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Грецкие орехи слегка подсушить на сухой сковороде, помешивая, затем остудить и грубо порубить.",
+      "timer_seconds": 180,
+      "timer_label": "Подсушивание орехов",
+      "timer_note": "2–3 минуты до аромата, не до жжения"
+    },
+    {
+      "position": 2,
+      "text": "Салатный микс выложить в миску. Добавить огурец ломтиками. Натереть твёрдый сыр."
+    },
+    {
+      "position": 3,
+      "text": "Смешать заправку: оливковое масло, сок лимона, горчица, соль и перец."
+    },
+    {
+      "position": 4,
+      "text": "Соединить салатный микс, огурец, сыр и рубленые орехи. Заправить и сразу подать."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_tomato",
+      "title": "С помидорами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "cucumber" }
+        ],
+        "add": [
+          {
+            "canonical_id": "tomato",
+            "display_name": "помидоры",
+            "amount": 150,
+            "unit": "g",
+            "detail": "вместо огурца",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Салатный микс выложить в миску. Добавить помидоры. Натереть твёрдый сыр."
+          },
+          {
+            "position": 4,
+            "text": "Соединить салатный микс, помидоры, сыр и рубленые орехи. Заправить и сразу подать."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_almond",
+      "title": "С миндалём",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "walnuts" }
+        ],
+        "add": [
+          {
+            "canonical_id": "almond",
+            "display_name": "миндаль",
+            "amount": 30,
+            "unit": "g",
+            "detail": "грубо порубить, вместо грецких орехов",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Миндаль слегка подсушить на сухой сковороде, помешивая, затем остудить и грубо порубить.",
+            "timer_seconds": 180,
+            "timer_label": "Подсушивание миндаля",
+            "timer_note": "2–3 минуты до аромата, не до жжения"
+          },
+          {
+            "position": 4,
+            "text": "Соединить салатный микс, огурец, сыр и рубленый миндаль. Заправить и сразу подать."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_vinegar",
+      "title": "С уксусом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "lemon" }
+        ],
+        "add": [
+          {
+            "canonical_id": "vinegar",
+            "display_name": "уксус",
+            "amount": 15,
+            "unit": "ml",
+            "detail": "вместо лимонного сока",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Смешать заправку: оливковое масло, уксус, горчица, соль и перец."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_pumpkin_seeds",
+      "title": "Без орехов",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "walnuts" }
+        ],
+        "add": [
+          {
+            "canonical_id": "pumpkin_seeds",
+            "display_name": "тыквенные семечки",
+            "amount": 30,
+            "unit": "g",
+            "detail": "вместо грецких орехов, грубо порубить",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Тыквенные семечки слегка подсушить на сухой сковороде, помешивая, затем остудить и грубо порубить.",
+            "timer_seconds": 180,
+            "timer_label": "Подсушивание семечек",
+            "timer_note": "2–3 минуты до аромата, не до жжения"
+          },
+          {
+            "position": 4,
+            "text": "Соединить салатный микс, огурец, сыр и рубленые тыквенные семечки. Заправить и сразу подать."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": ["tree_nut"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "without_cheese",
+      "title": "Без сыра",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "hard_cheese" }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Салатный микс выложить в миску. Добавить огурец ломтиками; порцию овоща взять больше. Сыр не класть."
+          },
+          {
+            "position": 4,
+            "text": "Соединить салатный микс, огурец и рубленые орехи. Заправить и сразу подать."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": ["milk"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Подсушивание",
+      "text": "Орехи на сухой сковороде только до аромата, не до жжения: 2–3 минуты достаточно. То же время для миндаля и тыквенных семечек."
+    },
+    {
+      "title": "Сразу к столу",
+      "text": "Заправить и сразу подать. Салат не держать в заправке."
+    },
+    {
+      "title": "Орехи",
+      "text": "В базе грецкие орехи. Миндаль — та же роль, tree_nut остаётся. Тыквенные семечки убирают tree_nut; молоко и горчица на карточке остаются."
+    },
+    {
+      "title": "Сыр",
+      "text": "Твёрдый сыр натереть. Вариант без сыра: молоко уходит; tree_nut и горчица остаются. Порцию огурца или помидоров взять больше — граммовки прибавки в исходнике нет."
+    },
+    {
+      "title": "Овощ",
+      "text": "Огурец или помидоры — одно, не оба сразу."
+    },
+    {
+      "title": "Заправка",
+      "text": "Сок лимона или уксус — одно. Горчица в базе, соль и перец по вкусу."
+    }
+  ]
+}

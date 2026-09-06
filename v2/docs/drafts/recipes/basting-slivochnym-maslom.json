@@ -1,0 +1,203 @@
+{
+  "id": "basting-slivochnym-maslom",
+  "title": "Бастинг сливочным маслом",
+  "summary": "Ароматическое глазирование (butter basting): мясо сначала обжаривают на сильном огне до первичной корочки, затем огонь убавляют и непрерывно поливают пенящимся сливочным маслом с тимьяном или розмарином и раздавленным чесноком. Снаружи получается карамелизированная хрустящая корочка с орехово-сливочным вкусом, внутри мясо остаётся сочным.",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "sauce",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["thick_rib"],
+  "scale_mode": "linear",
+  "scalable": false,
+  "source_type": "video",
+  "source_url": "https://www.youtube.com/watch?v=6aWbZTmuj30",
+  "source_name": "Epicurious",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 10,
+    "active_minutes": 8
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [],
+  "adaptations": [
+    {
+      "type": "substitution",
+      "from": "thyme",
+      "to": "rosemary",
+      "quality": 1
+    },
+    {
+      "type": "omission",
+      "ingredient": "salt",
+      "quality": 1
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "steak",
+      "display_name": "стейк",
+      "unit": "pcs",
+      "detail": "рибай на кости или другой толстый кусок; тот же приём работает со свиными отбивными, курицей, рыбой и морепродуктами",
+      "scale_mode": "linear",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "unit": "tbsp",
+      "detail": "щедро — при поливании должно полностью покрывать поверхность",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "thyme",
+      "display_name": "тимьян",
+      "unit": "pcs",
+      "detail": "свежие веточки",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 1,
+      "unit": "clove",
+      "detail": "неочищенный, слегка раздавить; шелуху не снимать — нужен только аромат",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "unit": "to_taste",
+      "detail": "крупная морская, для подачи",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Обжарить мясо на сильном огне до появления первичной корочки.",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями, иначе мясо тушится в соку."
+    },
+    {
+      "position": 2,
+      "text": "Убавить огонь до среднего — иначе сливочное масло сгорит."
+    },
+    {
+      "position": 3,
+      "text": "Добавить щедрое количество сливочного масла: его должно хватать, чтобы при поливании полностью покрывать продукт."
+    },
+    {
+      "position": 4,
+      "text": "Добавить веточки тимьяна и слегка раздавленный неочищенный зубчик чеснока."
+    },
+    {
+      "position": 5,
+      "text": "Наклонить сковороду и столовой ложкой непрерывно поливать мясо пенящимся коричневеющим маслом.",
+      "timer_seconds": 80,
+      "timer_label": "Поливание",
+      "timer_note": "Таймкод видео 00:08–01:26; ориентир — плотная золотистая корочка, не таймер"
+    },
+    {
+      "position": 6,
+      "text": "Прекратить поливать, когда корочка станет плотной и золотистой."
+    },
+    {
+      "position": 7,
+      "text": "Дать мясу отдохнуть, затем нарезать. При подаче можно присыпать крупной морской солью и свежим тимьяном."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_rosemary",
+      "title": "С розмарином",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "thyme" }
+        ],
+        "add": [
+          {
+            "canonical_id": "rosemary",
+            "display_name": "розмарин",
+            "unit": "pcs",
+            "detail": "свежие веточки",
+            "scale_mode": "gentle",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Добавить веточки розмарина и слегка раздавленный неочищенный зубчик чеснока."
+          },
+          {
+            "position": 7,
+            "text": "Дать мясу отдохнуть, затем нарезать. При подаче можно присыпать крупной морской солью и свежим розмарином."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Чеснок",
+      "text": "Зубчик кладут в шелухе и не едят: он только ароматизирует масло."
+    },
+    {
+      "title": "Масло",
+      "text": "Тонкого слоя не хватит. Масла должно быть столько, чтобы при наклоне сковороды полностью покрывать поверхность мяса."
+    },
+    {
+      "title": "Огонь",
+      "text": "После первичной корочки огонь средний: на сильном сливочное масло сгорит, а не станет ореховым."
+    },
+    {
+      "title": "Видео",
+      "text": "Поливание в ролике Epicurious: 00:08–01:26. Смотреть на корочку, не на секунды."
+    },
+    {
+      "title": "Это приём, не весь стейк",
+      "text": "Частые перевороты и полный стейк на сковороде — отдельный рецепт «Стейк на сковороде (Pan-Searing)»."
+    },
+    {
+      "title": "Отруб",
+      "text": "В словаре — толстый край (рибай), в том числе на кости. Тот же жест подходит к другому толстому куску; граммов в источнике нет."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Один слой, порциями. Полная сковорода — тушение в соку, глазурь не карамелизуется."
+    }
+  ]
+}

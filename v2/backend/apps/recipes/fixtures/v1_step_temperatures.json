@@ -1,0 +1,105 @@
+{
+  "classic-roast-chicken": [
+    {
+      "match": "Запекать в духовке",
+      "target_internal_temperature_c": 82,
+      "note": "thigh"
+    },
+    {
+      "match": "Дать курице отдохнуть",
+      "target_internal_temperature_c": 72,
+      "note": "breast after rest"
+    }
+  ],
+  "kuritsa-maslo-limon-zapechennaya": [
+    {
+      "match": "Запекать на решётке",
+      "target_internal_temperature_c": 82,
+      "note": "thigh"
+    },
+    {
+      "match": "Дать курице отдохнуть",
+      "target_internal_temperature_c": 72,
+      "note": "breast"
+    }
+  ],
+  "kuritsa-s-yablokami-zapechennaya": [
+    {
+      "match": "Запекать до внутренней температуры",
+      "target_internal_temperature_c": 82,
+      "note": "thigh"
+    },
+    {
+      "match": "Дать курице отдохнуть",
+      "target_internal_temperature_c": 72,
+      "note": "breast"
+    }
+  ],
+  "kuritsa-tselikom-limonnoe-maslo-bazovyy": [
+    {
+      "match": "Запекать при 200",
+      "target_internal_temperature_c": 82,
+      "note": "thigh"
+    },
+    {
+      "match": "дать отдохнуть",
+      "target_internal_temperature_c": 72,
+      "note": "breast"
+    }
+  ],
+  "kurinaya-grudka-na-skovorode-s-paprikoy": [
+    {
+      "match": "внутренней температуры не ниже 72",
+      "target_internal_temperature_c": 72
+    }
+  ],
+  "kurinoe-birjani-po-hajderabadski": [
+    {
+      "match": "Томить на минимальном огне",
+      "target_internal_temperature_c": 82
+    }
+  ],
+  "bystroe-kurinoe-karri": [
+    {
+      "match": "Добавить томаты в собственном соку",
+      "target_internal_temperature_c": 82
+    }
+  ],
+  "tushenye-kurinye-bedra-s-tomatom": [
+    {
+      "match": "Проверить термометром самую толстую часть бедра",
+      "target_internal_temperature_c": 82
+    }
+  ],
+  "tushenaya-kuritsa-s-grechkoj-na-dni": [
+    {
+      "match": "Проверить самую толстую часть бедра",
+      "target_internal_temperature_c": 82
+    }
+  ],
+  "losos-v-duhovke-s-limonom-i-ukropom": [
+    {
+      "match": "Запекать около 15 минут",
+      "target_internal_temperature_c": 63
+    }
+  ],
+  "sudak-v-duhovke-s-limonom": [
+    {
+      "match": "Проверить термометром самую толстую часть судака",
+      "target_internal_temperature_c": 63
+    }
+  ],
+  "svinoj-shashlyk-v-duhovke-na-shpazhkah": [
+    {
+      "match": "Проверьте готовность термощупом",
+      "target_internal_temperature_c": 71
+    }
+  ],
+  "svinnaya-sheya-zapechennaya-s-paprikoj": [
+    {
+      "match": "Запекать около 70–90 минут",
+      "target_internal_temperature_c": 63,
+      "hold_seconds": 180
+    }
+  ]
+}

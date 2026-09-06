@@ -1,0 +1,16 @@
+{
+  "slug": "govyazhi-rebra-mangal-folga-soja-med",
+  "verdict": "revise",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [
+    {
+      "field": "ingredients[6].scale_mode",
+      "issue": "Значение gentle запрещено для V2; для несмасштабируемого перца установлен linear."
+    }
+  ],
+  "minor": [],
+  "comment": "Рецепт реалистичен и безопасно ведёт к мягким рёбрам: непрямой жар в фольге до 90–94°C, затем краткая глазировка под постоянным контролем.",
+  "recipe_json": null
+}

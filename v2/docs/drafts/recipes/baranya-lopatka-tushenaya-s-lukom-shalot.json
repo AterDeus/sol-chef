@@ -1,0 +1,250 @@
+{
+  "id": "baranya-lopatka-tushenaya-s-lukom-shalot",
+  "title": "Тушёная баранья лопатка с луком-шалот",
+  "summary": "Низкая духовка 80–100°C на 7 часов: куриный бульон не покрывает жировую корку, чтобы она карамелизовалась сверху, а не разварилась. Шалот и соус готовятся отдельно и собираются в конце.",
+  "protein_base": "lamb",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": ["shoulder"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 450,
+    "active_minutes": 40
+  },
+  "effort_level": 4,
+  "washing_level": 3,
+  "use_cases": [],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "lamb_shoulder",
+      "display_name": "баранья лопатка",
+      "amount": 1.5,
+      "amount_max": 2,
+      "unit": "kg",
+      "detail": "лопатка; в исходнике — или говядина",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "репчатый, четвертинками",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "крупно нарезать",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "thyme",
+      "display_name": "тимьян",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "свежий, несколько веточек",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "stock",
+      "display_name": "бульон",
+      "amount": 500,
+      "amount_max": 700,
+      "unit": "ml",
+      "detail": "куриный; не «бульон или вода»",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "balsamic_vinegar",
+      "display_name": "бальзамический уксус",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "к мясу, выпарить 30 секунд",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "balsamic_vinegar",
+      "display_name": "бальзамический уксус",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "для шалота",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "corn_starch",
+      "display_name": "кукурузный крахмал",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "разведённый в воде",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 11,
+      "canonical_id": "shallot",
+      "display_name": "лук-шалот",
+      "amount": 6,
+      "amount_max": 8,
+      "unit": "pcs",
+      "detail": "разрезать пополам",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 12,
+      "canonical_id": "butter_and_olive_oil",
+      "display_name": "сливочное и оливковое масло",
+      "amount": null,
+      "unit": "to_taste",
+      "detail": "для шалота",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Сделать насечки на жировой стороне лопатки."
+    },
+    {
+      "position": 2,
+      "text": "В жаровне обжарить мясо со всех сторон до румяной корки, затем извлечь.",
+      "equipment_note": "Жаровня (Dutch oven) на плите: обжарка и тушение в одной посуде. Затем та же жаровня идёт в духовку."
+    },
+    {
+      "position": 3,
+      "text": "В том же жире обжарить лук и морковь, затем слить лишний вытопившийся жир."
+    },
+    {
+      "position": 4,
+      "text": "Вернуть мясо и овощи в жаровню жиром вверх, добавить тимьян, соль и чёрный перец."
+    },
+    {
+      "position": 5,
+      "text": "Влить бальзамический уксус к мясу и выпарить 30 секунд, убирая резкую кислинку.",
+      "timer_seconds": 30,
+      "timer_label": "Выпаривание уксуса"
+    },
+    {
+      "position": 6,
+      "text": "Влить куриный бульон так, чтобы он не доходил до жировой корки мяса — корка должна остаться над жидкостью."
+    },
+    {
+      "position": 7,
+      "text": "Накрыть крышкой и готовить в духовке при 80–100°C до полной мягкости.",
+      "timer_seconds": 25200,
+      "timer_label": "Тушение",
+      "timer_note": "Для 1.5–2 кг при 80–100°C; мягкость важнее времени",
+      "equipment_note": "Та же жаровня под крышкой; духовка даёт низкий жар, сосуд не меняется."
+    },
+    {
+      "position": 8,
+      "text": "Отдельно обжарить половинки шалота срезом вниз в смеси сливочного и оливкового масла с тимьяном, добавить бальзамический уксус для шалота, накрыть картушем из пергамента и запекать при 180°C.",
+      "timer_seconds": 960,
+      "timer_label": "Шалот в духовке",
+      "timer_note": "Отдельный процесс; не связан с объёмом мяса"
+    },
+    {
+      "position": 9,
+      "text": "Процедить оставшийся от мяса бульон через сито, довести до кипения, загустить разведённым в воде крахмалом до нужной консистенции."
+    },
+    {
+      "position": 10,
+      "text": "Выложить мясо с шалотом на тарелку и полить соусом."
+    }
+  ],
+  "variants": [],
+  "notes": [
+    {
+      "title": "Жировая корка",
+      "text": "Корка сознательно над уровнем бульона. Если залить целиком, жир сварится и станет резиновым вместо медленной карамелизации за 7 часов."
+    },
+    {
+      "title": "Бальзамический уксус",
+      "text": "К мясу — 2 ст. л., выпарить 30 секунд до бульона: резкая кислота уходит с паром, сладковатая глубина остаётся. Для шалота — отдельная 1 ст. л., не в общую жаровню."
+    },
+    {
+      "title": "Температура",
+      "text": "80–100°C около 7 часов, не 150°C на 3 часа. Ориентир — полная мягкость лопатки, не таймер."
+    },
+    {
+      "title": "Бульон",
+      "text": "В рецепте куриный бульон, не «бульон или вода». Магазинный часто с сельдереем: на каноне stock стоит unknown, не «аллергенов нет»."
+    },
+    {
+      "title": "Шалот",
+      "text": "Готовится отдельно: обжарка срезом вниз, картуш, 180°C. Семь часов вместе с лопаткой его разварят."
+    },
+    {
+      "title": "Отруб",
+      "text": "Только лопатка. В исходнике была пометка «или говядина» — это не ось варианта и не адаптация калькулятора."
+    }
+  ]
+}

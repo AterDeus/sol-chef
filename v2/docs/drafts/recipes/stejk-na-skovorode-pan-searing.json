@@ -1,0 +1,438 @@
+{
+  "id": "stejk-na-skovorode-pan-searing",
+  "title": "Стейк на сковороде (Pan-Searing)",
+  "summary": "Стейк стандартной толщины жарят на раскалённой чугунной сковороде прямо из холодильника. Сначала вытапливают жировую кромку, затем часто переворачивают и поливают пенящимся сливочным маслом с розмарином и чесноком.",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["thick_rib", "tenderloin"],
+  "scale_mode": "linear",
+  "scalable": false,
+  "source_type": "video",
+  "source_url": "https://www.youtube.com/watch?v=rgXtLVFzFmo",
+  "source_name": "Andy Cooks",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 20,
+    "active_minutes": 15
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": ["fast", "one_pan"],
+  "adaptations": [],
+  "new_ingredients": [
+    {
+      "canonical_id": "cream",
+      "title": "жирные сливки",
+      "aliases": ["сливки", "сливки жирные"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "sesame_oil",
+      "title": "кунжутное масло",
+      "aliases": ["масло кунжутное"],
+      "allergens_contains": ["sesame"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "steak",
+      "display_name": "стейк",
+      "unit": "pcs",
+      "detail": "рибай, стриплойн или филе-миньон, стандартной толщины",
+      "scale_mode": "linear",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "unit": "tbsp",
+      "detail": "для сковороды",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "unit": "to_taste",
+      "detail": "обычная или морская мелкого помола",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "unit": "pcs",
+      "detail": "несколько кубиков",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "rosemary",
+      "display_name": "розмарин",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "свежие веточки",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "unit": "clove",
+      "detail": "неочищенный, раздавленные зубчики",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "unit": "to_taste",
+      "detail": "свежемолотый, по подаче",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть тяжёлую чугунную сковороду с растительным маслом."
+    },
+    {
+      "position": 2,
+      "text": "Щедро посолить стейк со всех сторон, не добавляя чёрный перец."
+    },
+    {
+      "position": 3,
+      "text": "Когда масло начнёт слегка дымиться, опустить стейк вертикально, прижимая жировой прослойкой вниз, чтобы вытопить жир."
+    },
+    {
+      "position": 4,
+      "text": "Положить стейк плашмя и переворачивать каждые 30 секунд для равномерной корочки.",
+      "equipment_note": "Не перегружать сковороду: стейки в один слой, порциями, иначе мясо тушится в соку."
+    },
+    {
+      "position": 5,
+      "text": "После образования золотисто-коричневой корочки добавить в сковороду сливочное масло, розмарин и раздавленный чеснок."
+    },
+    {
+      "position": 6,
+      "text": "Наклонить сковороду и постоянно поливать стейк пенящимся ароматным маслом."
+    },
+    {
+      "position": 7,
+      "text": "Контролировать внутреннюю температуру термометром и снять стейк при достижении целевой степени прожарки."
+    },
+    {
+      "position": 8,
+      "text": "Переложить мясо на решётку, полить оставшимся маслом из сковороды и дать отдохнуть перед нарезкой.",
+      "timer_seconds": 300,
+      "timer_label": "Отдых",
+      "timer_note": "Фиксированный отдых 5 минут; не зависит от толщины стейка"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_green_butter",
+      "title": "С зелёным маслом (Beurre Maître d'Hôtel)",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "rosemary" },
+          { "canonical_id": "garlic" }
+        ],
+        "add": [
+          {
+            "canonical_id": "parsley",
+            "display_name": "петрушка",
+            "unit": "bunch",
+            "detail": "мелко рубленая, в масло",
+            "scale_mode": "gentle",
+            "scalable": false
+          },
+          {
+            "canonical_id": "lemon",
+            "display_name": "лимон",
+            "unit": "to_taste",
+            "detail": "несколько капель сока",
+            "scale_mode": "gentle",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 0,
+            "text": "Смешать размягчённое сливочное масло с мелко рубленой петрушкой, щепоткой соли и несколькими каплями лимонного сока, сформовать шайбу и убрать в холод."
+          }
+        ],
+        "replace": [
+          {
+            "position": 5,
+            "text": "После золотисто-коричневой корочки сливочное масло, розмарин и чеснок в сковороду не класть — довести стейк до нужной прожарки на растительном масле."
+          },
+          {
+            "position": 6,
+            "text": "Поливать стейк маслом из сковороды не нужно."
+          },
+          {
+            "position": 8,
+            "text": "Переложить мясо на решётку, накрыть шайбой зелёного масла и дать отдохнуть перед нарезкой.",
+            "timer_seconds": 300,
+            "timer_label": "Отдых",
+            "timer_note": "Фиксированный отдых 5 минут; не зависит от толщины стейка"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "au_poivre",
+      "title": "Перечный стейк (Au Poivre)",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "black_pepper",
+            "display_name": "чёрный перец",
+            "unit": "tbsp",
+            "detail": "крупно дроблёный горошек, обвалять стейк",
+            "scale_mode": "gentle",
+            "scalable": false
+          },
+          {
+            "canonical_id": "stock",
+            "display_name": "бульон",
+            "amount": 50,
+            "unit": "ml",
+            "detail": "для деглазирования сковороды",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "cream",
+            "display_name": "жирные сливки",
+            "amount": 50,
+            "unit": "ml",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 2,
+            "text": "Обвалять посоленный стейк в крупно дроблёном чёрном перце горошком со всех сторон."
+          },
+          {
+            "after_position": 7,
+            "text": "После снятия мяса влить в сковороду 50 мл бульона, соскоблить со дна, влить 50 мл жирных сливок и уварить до густого сливочно-перечного соуса.",
+            "timer_seconds": 120,
+            "timer_label": "Соус",
+            "timer_note": "Ориентир 2 минуты; густота важнее таймера"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": ["celery"],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_thyme_shallot",
+      "title": "С тимьяном и шалотом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "rosemary" }
+        ],
+        "add": [
+          {
+            "canonical_id": "thyme",
+            "display_name": "тимьян",
+            "amount": 3,
+            "amount_max": 4,
+            "unit": "pcs",
+            "detail": "свежие веточки",
+            "scale_mode": "whole",
+            "scalable": false
+          },
+          {
+            "canonical_id": "shallot",
+            "display_name": "шалот",
+            "amount": 1,
+            "unit": "pcs",
+            "detail": "мелко нарезанный",
+            "scale_mode": "whole",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "После образования золотисто-коричневой корочки добавить в сковороду сливочное масло, 3–4 веточки тимьяна и мелко нарезанный шалот."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "asian_style",
+      "title": "В азиатском стиле",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          { "canonical_id": "butter" },
+          { "canonical_id": "rosemary" },
+          { "canonical_id": "garlic" }
+        ],
+        "add": [
+          {
+            "canonical_id": "soy_sauce",
+            "display_name": "соевый соус",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "обычный пшеничный",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "ginger",
+            "display_name": "имбирь",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "свежий, тёртый",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "sesame_oil",
+            "display_name": "кунжутное масло",
+            "amount": 1,
+            "unit": "tsp",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "Смешать 1 ст. л. соевого соуса, 1 ч. л. тёртого свежего имбиря и 1 ч. л. кунжутного масла."
+          },
+          {
+            "position": 6,
+            "text": "В последние 30 секунд обжарки сбрызнуть стейк смесью. Сливочное масло с розмарином не добавлять."
+          },
+          {
+            "position": 8,
+            "text": "Переложить мясо на решётку и дать отдохнуть перед нарезкой.",
+            "timer_seconds": 300,
+            "timer_label": "Отдых",
+            "timer_note": "Фиксированный отдых 5 минут; не зависит от толщины стейка"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": ["gluten", "soy", "sesame"],
+        "contains_remove": ["milk"],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Прожарка",
+      "text": "Ориентиры внутренней температуры снятия с огня: rare 40 °C, medium rare 46 °C, medium 52 °C, medium well 57 °C, well done 71 °C. Для цельного стейка rare допустим; фарш в этом рецепте не используется."
+    },
+    {
+      "title": "Из холодильника",
+      "text": "Стейки стандартной толщины можно жарить сразу из холодильника, без выдержки при комнатной температуре."
+    },
+    {
+      "title": "Отрубы",
+      "text": "В словаре — толстый край (рибай) и вырезка (филе-миньон). Стриплойн в V1 тоже подходит, отдельного кода cut нет — в фильтр не выдуман."
+    },
+    {
+      "title": "Перец",
+      "text": "В базу чёрный перец до корочки не кладут: на раскалённой сковороде горчит. Свежемолотый — по подаче. В варианте au poivre перец горошком — корка до жарки."
+    },
+    {
+      "title": "Масло горит",
+      "text": "Если сковорода перегревается и масло горит — выключить огонь."
+    },
+    {
+      "title": "Отдых",
+      "text": "5 минут на решётке, не зависит от толщины. Сок успевает разойтись; резать сразу — лужа на доске."
+    },
+    {
+      "title": "Бульон в au poivre",
+      "text": "В V1 деглазирование — 50 мл бульона или безалкогольного напитка. Напиток без канона не выдуман. Магазинный бульон часто с сельдереем — на варианте unknown, не «аллергенов нет». Сливки — заявка канона cream (молоко уже есть от масла базы)."
+    },
+    {
+      "title": "Источник",
+      "text": "Andy Cooks, таймкоды видео 01:32–04:33. Новые таймкоды не добавлялись."
+    }
+  ]
+}

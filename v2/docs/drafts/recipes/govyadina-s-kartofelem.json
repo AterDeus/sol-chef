@@ -1,0 +1,350 @@
+{
+  "id": "govyadina-s-kartofelem",
+  "title": "Говядина с картофелем",
+  "summary": "Лопатку или голяшку сначала томят в форме под крышкой, затем к почти мягкому мясу кладут картофель и лук — один сосуд, без стейка и без картошки фри. Говядина доходит до вилки, клубни — в том же соку.",
+  "recipe_family": "one_pan_potato",
+  "protein_base": "beef",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "baking_dish",
+  "energy_profile": "standard",
+  "allowed_cuts": ["shoulder", "shank"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 150,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": ["one_pan", "batch", "budget"],
+  "adaptations": [
+    { "type": "method", "from": "oven", "to": "stew", "quality": 0.86 },
+    { "type": "equipment", "from": "baking_dish", "to": "kazan", "quality": 0.86 },
+    { "type": "equipment", "from": "baking_dish", "to": "pot", "quality": 0.84 },
+    { "type": "omission", "ingredient": "carrot", "quality": 0.92 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef",
+      "display_name": "говядина",
+      "amount": 800,
+      "unit": "g",
+      "detail": "лопатка или голяшка, куски 3–4 см; не стейк и не вырезка",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 800,
+      "unit": "g",
+      "detail": "обычный, не молодой; очистить, куски 3 см; класть после мяса, не вместе с сырым",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 250,
+      "unit": "g",
+      "detail": "репчатый, дольками",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 150,
+      "unit": "g",
+      "detail": "кружки 1 см; класть вместе с картофелем",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 5,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 4,
+      "unit": "clove",
+      "detail": "раздавить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "смазать форму и мясо",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 250,
+      "unit": "ml",
+      "detail": "на дно формы; бульон допустим — см. заметку",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать говядину кусками 3–4 см, картофель — кусками 3 см и отложить. Лук — дольками, морковь, если есть, — кружками, чеснок раздавить."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть духовку до 160 °C. Форму смазать маслом, выложить мясо и лук, посолить, поперчить, влить 250 мл воды, добавить лавр и чеснок. Картофель пока не класть."
+    },
+    {
+      "position": 3,
+      "text": "Плотно накрыть крышкой или фольгой и запекать, пока кусок говядины не начнёт поддаваться вилке.",
+      "timer_seconds": 5400,
+      "timer_label": "Мясо",
+      "timer_note": "90 минут при 160 °C; голяшка может просить 105. Без укрытия верх высохнет, коллаген не разойдётся",
+      "equipment_note": "Форма с бортиками и укрытием. Противень без крышки здесь не работает."
+    },
+    {
+      "position": 4,
+      "text": "Достать форму, уложить картофель и морковь в сок, перемешать, чтобы куски были смочены. При необходимости влить ещё 50 мл воды — овощи не должны сидеть на сухом дне."
+    },
+    {
+      "position": 5,
+      "text": "Снова накрыть и вернуть в духовку, пока картофель не станет мягким, а мясо не берётся вилкой без сопротивления.",
+      "timer_seconds": 2700,
+      "timer_label": "Картофель",
+      "timer_note": "45 минут; если клубни крупные — ещё 10. Не класть картофель вместе с сырым мясом: к мягкости говядины он развалится"
+    },
+    {
+      "position": 6,
+      "text": "Снять крышку или фольгу на последние минуты, если нужна лёгкая корочка на картофеле. Подавать из той же формы.",
+      "timer_seconds": 600,
+      "timer_label": "Без крышки",
+      "timer_note": "10 минут; не дольше — сок выкипит, мясо снова станет сухим"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "cook_method_override": "stew",
+      "equipment": "kazan",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 450,
+            "unit": "ml",
+            "detail": "больше, чем в форме: на плите жидкость уходит быстрее, мясо должно быть почти покрыто",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Разогреть казан, влить масло, обжарить мясо у стенок партиями, затем лук. Влить 450 мл воды, лавр, чеснок, соль и перец. Картофель не класть.",
+            "timer_seconds": 600,
+            "timer_label": "Обжарка",
+            "timer_note": "8–10 минут суммарно у стенок; холодный казан даст пригар",
+            "equipment_note": "Жар от стенок. Не скучивать всё на дне сразу."
+          },
+          {
+            "position": 3,
+            "text": "Накрыть и томить на слабом огне, пока говядина не начнёт поддаваться вилке.",
+            "timer_seconds": 4800,
+            "timer_label": "Тушение мяса",
+            "timer_note": "80 минут; жидкости 450 мл, не 250 как в форме. Если выкипело ниже половины — долить 50 мл, не превращать в суп"
+          },
+          {
+            "position": 4,
+            "text": "Уложить картофель и морковь в сок, перемешать от стенок к центру, крышку вернуть."
+          },
+          {
+            "position": 5,
+            "text": "Тушить под крышкой, пока картофель не станет мягким, а мясо не берётся вилкой.",
+            "timer_seconds": 2100,
+            "timer_label": "Картофель",
+            "timer_note": "35 минут на плите; короче духовки — жидкость и пар казана доводят быстрее"
+          },
+          {
+            "position": 6,
+            "text": "Крышку снять на 5 минут, если соус жидкий. Подавать из казана, не вымешивать в пюре."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "pot",
+      "title": "Тушение",
+      "has_delta": true,
+      "cook_method_override": "stew",
+      "equipment": "pot",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 400,
+            "unit": "ml",
+            "detail": "мясо почти покрыто; без крышки выкипит за полчаса",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Разогреть кастрюлю с толстым дном, влить масло, обжарить мясо партиями, затем лук. Влить 400 мл воды, лавр, чеснок, соль и перец. Картофель не класть.",
+            "timer_seconds": 600,
+            "timer_label": "Обжарка",
+            "timer_note": "8–10 минут; партии в один слой",
+            "equipment_note": "Крышка обязательна на всём тушении. Тонкая эмалированная кастрюля даст пригар по центру."
+          },
+          {
+            "position": 3,
+            "text": "Накрыть плотной крышкой и тушить на слабом огне, пока говядина не начнёт поддаваться вилке. Крышку не держать на щели.",
+            "timer_seconds": 5400,
+            "timer_label": "Тушение мяса",
+            "timer_note": "90 минут под крышкой; без неё вода уйдёт, мясо останется жёстким"
+          },
+          {
+            "position": 4,
+            "text": "Уложить картофель и морковь в сок, перемешать, крышку вернуть. Если дно сухое — 50 мл воды, не больше."
+          },
+          {
+            "position": 5,
+            "text": "Тушить под крышкой до мягкости картофеля и мяса вилкой.",
+            "timer_seconds": 2400,
+            "timer_label": "Картофель",
+            "timer_note": "40 минут; крышка снова плотно, иначе клубни сверху сырые, снизу развар"
+          },
+          {
+            "position": 6,
+            "text": "Если соус жидкий — крышку снять на 5–8 минут. Не скрести пригорелый центр в картофель."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Лопатка или голяшка. Стейк с картошкой фри — другое блюдо: здесь нужен коллаген и время, а не корочка medium-rare."
+    },
+    {
+      "title": "Картофель не сразу",
+      "text": "800 г картофеля кладут после ~90 минут мяса. Вместе с сырой говядиной клубни развалятся, пока лопатка ещё жевательная."
+    },
+    {
+      "title": "Лук весом",
+      "text": "250 г на 800 г мяса. Мало лука — сухой жар без сока. Дольки, не кубик: так лук держит форму к подаче."
+    },
+    {
+      "title": "Форма",
+      "text": "Бортики и крышка или фольга. Противень без укрытия высушит верх за час, низ не дойдёт."
+    },
+    {
+      "title": "Казан",
+      "text": "Жидкости больше (450 мл, не 250): на плите вода уходит быстрее, чем в закрытой форме. Стенки горячие до масла."
+    },
+    {
+      "title": "Кастрюля",
+      "text": "Крышка плотно на всём тушении. Щель = жёсткое мясо и сырой верх картофеля. Толстое дно, тихий огонь."
+    },
+    {
+      "title": "Вода или бульон",
+      "text": "Воды достаточно. Магазинный бульон часто с сельдереем — тогда unknown, не «аллергенов нет»."
+    },
+    {
+      "title": "Морковь",
+      "text": "По желанию, кружки вместе с картофелем. Без неё блюдо собирается: мясо, лук и картофель держат вкус сами."
+    }
+  ]
+}

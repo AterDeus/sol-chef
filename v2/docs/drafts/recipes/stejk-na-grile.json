@@ -1,0 +1,143 @@
+{
+  "id": "stejk-na-grile",
+  "title": "Стейк на гриле",
+  "summary": "Сильно мраморный стейк смазывают маслом, солят обычной солью и жарят на максимально разогретом гриле. Корочку набирают частыми контактами с самой горячей зоной решётки, а не двумя ровными полосками.",
+  "protein_base": "beef",
+  "cook_method": "grill",
+  "dish_type": "main",
+  "equipment": "grill",
+  "energy_profile": "standard",
+  "scale_mode": "linear",
+  "scalable": false,
+  "source_type": "video",
+  "source_url": "https://www.youtube.com/watch?v=rgXtLVFzFmo",
+  "source_name": "Andy Cooks",
+  "high_risk_flags": [],
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "steak",
+      "display_name": "стейк",
+      "unit": "pcs",
+      "detail": "с высокой мраморностью (например, вагю рибай)",
+      "scale_mode": "linear",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "unit": "tbsp",
+      "detail": "смазать стейк, не решётку",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "unit": "to_taste",
+      "detail": "обычная мелкого или среднего помола, до гриля",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "coarse_salt",
+      "display_name": "соль крупная",
+      "unit": "to_taste",
+      "detail": "хлопьевидная, только для подачи",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 5,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "unit": "to_taste",
+      "detail": "свежемолотый, только для подачи",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Смазать стейк растительным маслом со всех сторон (не решётку гриля)."
+    },
+    {
+      "position": 2,
+      "text": "Щедро посолить обычной солью, не используя крупную хлопьевидную соль на этом этапе."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть гриль до максимальной температуры."
+    },
+    {
+      "position": 4,
+      "text": "Выложить стейк на самую горячую зону решётки."
+    },
+    {
+      "position": 5,
+      "text": "Не стремиться к ровным двум полоскам — чем больше контактов с грилем, тем ярче вкус корочки."
+    },
+    {
+      "position": 6,
+      "text": "При переворачивании перемещать стейк на другое горячее место решётки."
+    },
+    {
+      "position": 7,
+      "text": "Снять стейк при достижении внутренней температуры снятия и дать отдохнуть на решётке.",
+      "pull_internal_temperature_c": 46
+    },
+    {
+      "position": 8,
+      "text": "Подавать, посыпав хлопьевидной крупной солью и свежемолотым чёрным перцем."
+    }
+  ],
+  "variants": [],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Метод рассчитан на высокую мраморность; в packet приведён пример вагю рибай. Фарш не использовать: rare у цельного куска допустим, у фарша нет."
+    },
+    {
+      "title": "Соль",
+      "text": "До гриля — только обычная мелкого или среднего помола. Хлопьевидную крупную соль не класть на сырое мясо: она для подачи."
+    },
+    {
+      "title": "Прожарка",
+      "text": "Ориентир снятия для medium rare из источника — 45–46 °C. Другие степени packet не задаёт."
+    },
+    {
+      "title": "Корочка",
+      "text": "Ровные две полоски не цель. Чаще переворачивать и каждый раз ставить на другое горячее место решётки."
+    },
+    {
+      "title": "Масло",
+      "text": "Смазывать стейк, не решётку: иначе масло горит на прутьях, а мясо липнет неравномерно."
+    },
+    {
+      "title": "Граммы",
+      "text": "В packet нет веса стейка и порций — якорь «У меня» выключен, количества не масштабируются."
+    },
+    {
+      "title": "Источник",
+      "text": "Andy Cooks, таймкоды видео 05:05–07:19."
+    }
+  ]
+}

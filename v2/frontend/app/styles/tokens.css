@@ -1,0 +1,93 @@
+@layer tokens {
+  :root {
+    --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-mono: ui-monospace, 'Cascadia Code', 'IBM Plex Mono', monospace;
+
+    --bg: #1b1713;
+    --surface: #262019;
+    --surface-2: #322a20;
+    --line: #3d3226;
+    --text: #ede4d6;
+    --text-dim: #a89a85;
+
+    --ember: #c15a1f;
+    --ember-soft: #c15a1f33;
+    --gold: #c9a034;
+    --gold-soft: #c9a03433;
+    --pork: #c97c6b;
+    --pork-soft: #c97c6b33;
+    --bird: #d6a24a;
+    --bird-soft: #d6a24a33;
+    --sage: #7e9463;
+    --sage-soft: #7e946333;
+    --wal: #a6763e;
+    --wal-soft: #a6763e33;
+
+    --accent: var(--gold);
+    --accent-soft: var(--gold-soft);
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2.5rem;
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 12px;
+    --radius-pill: 999px;
+
+    --touch: 2.75rem;
+    --tabbar-h: 4.5rem;
+    --page-max: 73.75rem;
+    --page-pad-x: clamp(1rem, 0.65rem + 1.4vw, 1.5rem);
+    --page-pad-top: clamp(1.125rem, 0.85rem + 1vw, 1.5rem);
+    --page-pad-bottom: clamp(4.5rem, 3.5rem + 4vw, 5rem);
+
+    --fs-11: 0.6875rem;
+    --fs-12: 0.75rem;
+    --fs-13: 0.8125rem;
+    --fs-14: 0.875rem;
+    --fs-15: 0.9375rem;
+    --fs-17: 1.0625rem;
+    --fs-18: 1.125rem;
+    --fs-20: 1.25rem;
+    --fs-22: 1.375rem;
+    --fs-h1: clamp(1.875rem, 1.35rem + 2.2vw, 2.75rem);
+    --fs-h2: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+    --fs-timer: clamp(2rem, 1.4rem + 3.2vw, 2.25rem);
+
+    --ease: ease;
+    --duration: 0.35s;
+    --duration-fast: 0.15s;
+    --shift: 4px;
+
+    --z-header: 90;
+    --z-tabbar: 100;
+    --z-cook: 200;
+    --z-toast: 210;
+    --z-skip: 300;
+
+    --focus-ring: 2px solid var(--gold);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --duration: 0.01ms;
+      --duration-fast: 0.01ms;
+      --shift: 0px;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    :root {
+      --line: #6b5a48;
+      --text-dim: #c4b49a;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@layer state {
+  body.is-recipe-page {
+    .mobile-brand,
+    .site-footer {
+      display: none;
+    }
+
+    @media (width < 769px) {
+      .tabbar--main {
+        display: none;
+      }
+    }
+  }
+
+  body.cook-mode-open {
+    overflow: hidden;
+
+    .tabbar {
+      display: none;
+    }
+  }
+}

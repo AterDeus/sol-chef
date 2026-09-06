@@ -1,0 +1,322 @@
+{
+  "id": "svinina-s-lukom",
+  "title": "Свинина с луком на сковороде",
+  "summary": "Куски шеи или лопатки обжаривают партиями, затем тушат на сковороде с большим количеством лука до мягкой сладости и 71 °C в центре куска. Без панировки и без шашлыка.",
+  "recipe_family": "pork_onion",
+  "protein_base": "pork",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["shoulder", "neck"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 40,
+    "active_minutes": 30
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": ["fast", "easy", "one_pan"],
+  "new_ingredients": [
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": ["сметана 15%", "сметана 20%"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "pan_fry", "to": "stew", "quality": 0.86 },
+    { "type": "equipment", "from": "skillet", "to": "pot", "quality": 0.86 },
+    { "type": "equipment", "from": "skillet", "to": "kazan", "quality": 0.84 },
+    { "type": "omission", "ingredient": "paprika", "quality": 0.82 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "pork_neck",
+      "display_name": "свинина",
+      "amount": 600,
+      "unit": "g",
+      "detail": "шея или лопатка, куски 1.5–2 см, не шашлычные кубики на шпажке",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 400,
+      "unit": "g",
+      "detail": "репчатый, полукольцами; лука много — это вкус блюда, не гарнир",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для жарки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "сладкая",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "detail": "свежемолотый",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать свинину кусками 1.5–2 см. Посолить и поперчить."
+    },
+    {
+      "position": 2,
+      "text": "Лук нарезать полукольцами."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть сковороду с маслом на средне-сильном огне до лёгкой дымки."
+    },
+    {
+      "position": 4,
+      "text": "Обжарить мясо небольшими партиями в один слой до румяной корочки со всех сторон, готовые куски снимать в миску.",
+      "timer_seconds": 300,
+      "timer_label": "Партия мяса",
+      "timer_note": "4–5 минут на партию; ориентир — корочка, не серый пар",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями. Полная сковорода — тушение в соку, корочки не будет."
+    },
+    {
+      "position": 5,
+      "text": "Вернуть всё мясо на сковороду, добавить лук и паприку. Жарить, помешивая, пока лук не станет золотистым и мягким, а в центре куска свинины не будет 71 °C.",
+      "timer_seconds": 720,
+      "timer_label": "Лук с мясом",
+      "timer_note": "10–12 минут; лук должен осесть и подсластить сок, не остаться сырым хрустом",
+      "target_internal_temperature_c": 71
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "pot",
+      "title": "Тушение",
+      "has_delta": true,
+      "cook_method_override": "stew",
+      "equipment": "pot",
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 150,
+            "unit": "ml",
+            "detail": "на тушение под крышкой; не суп",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Разогреть кастрюлю с маслом на средне-сильном огне."
+          },
+          {
+            "position": 4,
+            "text": "Обжарить мясо партиями до лёгкой корочки, не заполняя кастрюлю целиком. Снять в миску.",
+            "timer_seconds": 360,
+            "timer_label": "Обжарка в кастрюле",
+            "timer_note": "5–6 минут на партию; корочка слабее, чем на сковороде — это нормально",
+            "equipment_note": "Партии: дно кастрюли уже сковороды, скучивать нельзя."
+          },
+          {
+            "position": 5,
+            "text": "Вернуть мясо, добавить лук и паприку, помешивать 3 минуты. Влить 150 мл воды, накрыть крышкой и тушить на слабом огне до мягкости и 71 °C в центре куска.",
+            "timer_seconds": 1500,
+            "timer_label": "Тушение",
+            "timer_note": "25 минут под крышкой; это не 10 минут сковороды. Если жёсткая лопатка — ещё 10 минут, не доливать воду «на всякий случай»",
+            "target_internal_temperature_c": 71
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "cook_method_override": "stew",
+      "equipment": "kazan",
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 50,
+            "unit": "ml",
+            "detail": "только смочить дно: казан греет стенками, лук даст сок",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Разогреть сухой казан на среднем огне, пока стенки не станут горячими снаружи, затем влить масло.",
+            "timer_seconds": 240,
+            "timer_label": "Стенки",
+            "timer_note": "3–4 минуты; холодный казан даст пригар на дне и сырую середину"
+          },
+          {
+            "position": 4,
+            "text": "Обжарить мясо у стенок казана, сдвигая к центру, партиями, не одной кучей на дне. Снять в миску.",
+            "timer_seconds": 360,
+            "timer_label": "Мясо у стенок",
+            "timer_note": "5–6 минут на партию; стенки должны участвовать",
+            "equipment_note": "Не скучивать на дне: иначе это та же кастрюля без томления."
+          },
+          {
+            "position": 5,
+            "text": "Вернуть мясо, добавить лук и паприку. Влить 50 мл воды, накрыть и томить на слабом жаре от стенок, пока лук не станет почти вареньем, а в центре куска 71 °C.",
+            "timer_seconds": 2100,
+            "timer_label": "Томление",
+            "timer_note": "35 минут; меньше жидкости, чем в кастрюле, дольше стены. Не превращать в бульон",
+            "target_internal_temperature_c": 71
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_sour_cream",
+      "title": "Со сметаной",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "sour_cream",
+            "display_name": "сметана",
+            "amount": 80,
+            "unit": "g",
+            "detail": "15–20%, в конце на слабом огне",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 5,
+            "text": "Убавить огонь. Вмешать сметану и прогреть, не давая соусу закипеть, 1–2 минуты.",
+            "timer_seconds": 90,
+            "timer_label": "Сметана",
+            "timer_note": "Кипение свернёт сметану крупинками"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": ["milk"],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Лук",
+      "text": "400 г на 600 г мяса — не опечатка. Мало лука даёт сухую жареную свинину, а не блюдо «с луком». Полукольца, не кубик: так лук карамелизуется, а не тушится кашей."
+    },
+    {
+      "title": "Отруб",
+      "text": "Шея сочнее. Лопатка дешевле и чуть жёстче: на сковороде выбирайте куски не толще 2 см; если мясо жилистое — лучше вариант тушения."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Две партии мяса лучше, чем одна полная. Сок на дне до лука — уже тушение, сладкой корочки не будет."
+    },
+    {
+      "title": "Температура",
+      "text": "Цельный кусок: в центре 71 °C. Сочнее путь 63 °C с отдыхом 3 минуты, но на мелких кусках со сковороды честнее довести до 71 °C. 50–55 °C нельзя."
+    },
+    {
+      "title": "Не отбивные",
+      "text": "Это не отбивные волны 1 и не шашлык: куски свободные, без молотка и без шпажек."
+    },
+    {
+      "title": "Казан и кастрюля",
+      "text": "В кастрюле 150 мл воды и 25 минут под крышкой. В казане 50 мл и 35 минут от стенок. Не копировать таймер сковороды 10 минут."
+    }
+  ]
+}

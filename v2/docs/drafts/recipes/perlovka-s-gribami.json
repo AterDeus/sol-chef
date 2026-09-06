@@ -1,0 +1,376 @@
+{
+  "id": "perlovka-s-gribami",
+  "title": "Перловка с грибами и луком",
+  "summary": "Замоченную перловку варят в кастрюле с шампиньонами, луком и морковью до мягкого зерна без резины. Вода 1:2.5 к сухой крупе после замачивания; грибы обжаривают до сухой поверхности, иначе каша серая.",
+  "recipe_family": "kasha",
+  "protein_base": "vegetables",
+  "cook_method": "boil",
+  "dish_type": "pasta_grains",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 80,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["budget", "batch", "pantry"],
+  "prep": [
+    {
+      "text": "Перловку промыть до прозрачной воды и замочить в холодной воде на 8 часов, минимум на 4. Без замачивания зерно варится полтора часа и остаётся резиновым.",
+      "before_hours": 8
+    }
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "pearl_barley",
+      "title": "перловка",
+      "aliases": ["перловая крупа", "ячмень перловый"],
+      "allergens_contains": ["gluten"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "boil", "to": "oven", "quality": 0.88 },
+    { "type": "method", "from": "boil", "to": "stew", "quality": 0.9 },
+    { "type": "equipment", "from": "pot", "to": "oven", "quality": 0.88 },
+    { "type": "equipment", "from": "pot", "to": "kazan", "quality": 0.92 },
+    { "type": "omission", "ingredient": "carrot", "quality": 0.9 },
+    { "type": "omission", "ingredient": "bay_leaf", "quality": 0.95 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "pearl_barley",
+      "display_name": "перловка",
+      "amount": 300,
+      "unit": "g",
+      "detail": "сухая, до замачивания; промыть",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "champignons",
+      "display_name": "шампиньоны",
+      "amount": 400,
+      "unit": "g",
+      "detail": "свежие культивируемые, пластинами; не лесные и не смеси",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "репчатый, мелкий кубик",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 150,
+      "unit": "g",
+      "detail": "крупная тёрка",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 750,
+      "unit": "ml",
+      "detail": "горячая; к сухой крупе после замачивания около 1:2.5",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "для обжарки грибов и лука",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "detail": "молотый",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 10,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 30,
+      "unit": "g",
+      "detail": "вмешать в конце, по желанию",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Слить замоченную перловку, ещё раз промыть."
+    },
+    {
+      "position": 2,
+      "text": "Нарезать лук мелким кубиком, морковь натереть, шампиньоны — пластинами."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть кастрюлю с маслом на среднем огне. Обжарить лук и морковь до мягкости.",
+      "timer_seconds": 360,
+      "timer_label": "Лук",
+      "timer_note": "5–6 минут; лук прозрачный, не горелый"
+    },
+    {
+      "position": 4,
+      "text": "Добавить шампиньоны. Жарить в широкой кастрюле или партиями, пока не уйдёт вода и пластины не подрумянятся.",
+      "timer_seconds": 600,
+      "timer_label": "Грибы",
+      "timer_note": "8–10 минут; сырая вода грибов сделает кашу серой",
+      "equipment_note": "400 г грибов не сваливать горкой: плотный слой тушится, не румянится. Партии или широкое дно."
+    },
+    {
+      "position": 5,
+      "text": "Всыпать перловку, перемешать с грибами 1 минуту. Влить 750 мл горячей воды, посолить, поперчить, положить лавровый лист. Довести до кипения."
+    },
+    {
+      "position": 6,
+      "text": "Убавить огонь до слабого. Варить под крышкой, иногда помешивая, пока зерно не станет мягким без твёрдой сердцевины.",
+      "timer_seconds": 2700,
+      "timer_label": "Варка",
+      "timer_note": "40–50 минут; ориентир — мягкое зерно, не таймер. Если дно сухое раньше — долить 50 мл воды"
+    },
+    {
+      "position": 7,
+      "text": "Снять лавровый лист. Вмешать сливочное масло, если используете. Накрыть и дать постоять.",
+      "timer_seconds": 600,
+      "timer_label": "Отдых",
+      "timer_note": "10 минут под крышкой; крупа добирает пар"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 700,
+            "unit": "ml",
+            "detail": "горячая; в духовке под крышкой испаряется меньше, чем на плите",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Разогреть духовку до 180 °C. Обжарить лук и морковь в жаропрочной кастрюле на плите до мягкости.",
+            "timer_seconds": 360,
+            "timer_label": "Лук",
+            "timer_note": "5–6 минут на плите; в духовку сырые овощи не ставить"
+          },
+          {
+            "position": 4,
+            "text": "Добавить шампиньоны. Жарить на плите в широкой кастрюле или партиями, пока не уйдёт вода и пластины не подрумянятся.",
+            "timer_seconds": 600,
+            "timer_label": "Грибы",
+            "timer_note": "8–10 минут; это всё ещё плита, не духовка"
+          },
+          {
+            "position": 5,
+            "text": "Всыпать перловку, перемешать. Влить 700 мл горячей воды, посолить, поперчить, положить лавровый лист. Довести до кипения на плите, затем плотно накрыть крышкой."
+          },
+          {
+            "position": 6,
+            "text": "Поставить кастрюлю в духовку. Запекать под крышкой, не перемешивая, пока зерно не станет мягким.",
+            "timer_seconds": 3300,
+            "timer_label": "Духовка",
+            "timer_note": "50–55 минут при 180 °C; дольше плиты — жар спокойнее, крышку не снимать до проверки"
+          },
+          {
+            "position": 7,
+            "text": "Вынуть, снять лавровый лист, вмешать масло по желанию. Подержать под крышкой на столе.",
+            "timer_seconds": 600,
+            "timer_label": "Отдых",
+            "timer_note": "10 минут; если сверху сухо, а низ влажный — перемешать снизу вверх"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "cook_method_override": "stew",
+      "equipment": "kazan",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 650,
+            "unit": "ml",
+            "detail": "меньше, чем в кастрюле: казан держит пар стенками",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Разогреть сухой казан на среднем огне, пока стенки не станут горячими снаружи, затем влить масло. Обжарить лук и морковь у стенок, сдвигая к центру.",
+            "timer_seconds": 420,
+            "timer_label": "Стенки и лук",
+            "timer_note": "2–3 минуты прогрев, затем 5–6 минут лук; холодный казан даст пригар"
+          },
+          {
+            "position": 4,
+            "text": "Добавить шампиньоны. Жарить у стенок или партиями, пока не уйдёт вода; сок сгонять к центру, не доливать воду «на всякий случай». Не сваливать 400 г горкой на дно.",
+            "timer_seconds": 600,
+            "timer_label": "Грибы",
+            "timer_note": "8–10 минут"
+          },
+          {
+            "position": 5,
+            "text": "Всыпать перловку, прогреть 1 минуту. Влить 650 мл горячей воды по стенке, посолить, поперчить, положить лавровый лист. Довести до кипения."
+          },
+          {
+            "position": 6,
+            "text": "Убавить огонь до тихого. Томить под крышкой, почти не мешая: казан готовит стенками, частое помешивание ломает зерно.",
+            "timer_seconds": 3000,
+            "timer_label": "Томление",
+            "timer_note": "45–55 минут; проверить зерно у дна палочкой, не шумовкой по кругу"
+          },
+          {
+            "position": 7,
+            "text": "Снять с огня, убрать лавровый лист, вмешать масло по желанию. Держать под крышкой.",
+            "timer_seconds": 600,
+            "timer_label": "Отдых",
+            "timer_note": "10 минут; перемешать снизу вверх только перед подачей"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Замачивание",
+      "text": "8 часов в холодной воде — норма. 4 часа минимум. Горячая вода «ускорить» не стоит: снаружи разлезется, внутри останется стекло."
+    },
+    {
+      "title": "Грибы",
+      "text": "Только шампиньоны. Лесные, опята и сушёные смеси — другой риск и другая карточка. Воду грибов выпарить досуха, иначе каша серая и кислая."
+    },
+    {
+      "title": "Пропорция",
+      "text": "300 г сухой крупы на 750 мл воды после замачивания. Больше жидкости — каша-размазня, не гарнир с грибами."
+    },
+    {
+      "title": "Не гречка",
+      "text": "Ядрица варится 15–20 минут без замачивания. Перловка так не умеет: другой slug, другие минуты."
+    },
+    {
+      "title": "Бульон",
+      "text": "В базе вода. Магазинный бульон часто с сельдереем — на всю карточку повесится unknown. Если менять — смотрите состав."
+    },
+    {
+      "title": "Масло в конце",
+      "text": "Ложка сливочного по желанию. Без него блюдо то же; молоко на карточке из-за масла не висит."
+    },
+    {
+      "title": "Казан",
+      "text": "Меньше воды и почти не мешать. Кастрюля на плите требует помешивания, иначе дно схватится пятном."
+    }
+  ]
+}

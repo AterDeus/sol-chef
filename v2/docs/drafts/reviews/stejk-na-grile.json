@@ -1,0 +1,16 @@
+{
+  "slug": "stejk-na-grile",
+  "verdict": "accept",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [
+    "В packet нет total_minutes=25 и active_minutes=12: удалить или вернуть с подтверждением источником.",
+    "В packet подтверждена только температура снятия 45–46 °C; target_internal_temperature_c=50 и carryover 2–5 °C добавлены не из packet и должны быть удалены."
+  ],
+  "minor": [
+    "allowed_cuts («thick_rib», «tenderloin») не подтверждены packet: он называет примером вагю рибай; фильтровые отрубы нужно подтвердить отдельно или убрать."
+  ],
+  "comment": "Источник Andy Cooks и URL сохранены, а базовый метод приготовления воспроизводим. Рецепт нужно вернуть на доработку из-за чисел и классификации, которых нет в packet.",
+  "recipe_json": null
+}

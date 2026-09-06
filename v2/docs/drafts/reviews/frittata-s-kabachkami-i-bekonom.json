@@ -1,0 +1,11 @@
+{
+  "slug": "frittata-s-kabachkami-i-bekonom",
+  "verdict": "accept",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [],
+  "minor": [],
+  "comment": "Рецепт соответствует черновику sol-chef.ru, технологически выполним: жир бекона достаточен для кабачков, а перенос в духовку и вариант без неё описаны корректно.",
+  "recipe_json": null
+}

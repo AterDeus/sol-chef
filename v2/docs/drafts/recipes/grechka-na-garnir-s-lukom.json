@@ -1,0 +1,162 @@
+{
+  "id": "grechka-na-garnir-s-lukom",
+  "title": "Гречка на гарнир с луком",
+  "summary": "Рассыпчатый гарнир: ядрица и жидкость 1:2 по весу (300 г крупы на 600 мл воды или овощного бульона). Лук пассеруют в кастрюле, крупу варят под крышкой, без мяса.",
+  "protein_base": "vegetarian",
+  "cook_method": "boil",
+  "dish_type": "side",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "servings": 4,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 10
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["easy", "pantry", "budget", "one_pan"],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "buckwheat",
+      "display_name": "гречка",
+      "amount": 300,
+      "unit": "g",
+      "detail": "ядрица, промыть",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 600,
+      "unit": "ml",
+      "detail": "соотношение крупа:жидкость 1:2; одна жидкость на выбор",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "liquid"
+    },
+    {
+      "position": 3,
+      "canonical_id": "vegetable_stock",
+      "display_name": "бульон овощной",
+      "amount": 600,
+      "unit": "ml",
+      "detail": "замена воде, не вместе; магазинный может содержать сельдерей",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "liquid"
+    },
+    {
+      "position": 4,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "мелко нарезать",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "для пассеровки лука в кастрюле",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Промыть гречку в холодной воде до прозрачности."
+    },
+    {
+      "position": 2,
+      "text": "Нарезать лук и обжарить его в кастрюле на растительном масле до мягкости.",
+      "timer_seconds": 240,
+      "timer_label": "Лук",
+      "timer_note": "3–4 минуты до мягкости"
+    },
+    {
+      "position": 3,
+      "text": "Всыпать гречку, перемешать, влить воду или овощной бульон (крупа:жидкость 1:2), посолить."
+    },
+    {
+      "position": 4,
+      "text": "Довести до кипения, уменьшить огонь, накрыть крышкой и варить, пока жидкость не впитается.",
+      "timer_seconds": 960,
+      "timer_label": "Варка",
+      "timer_note": "15–18 минут; не мешать и не открывать крышку часто"
+    },
+    {
+      "position": 5,
+      "text": "Снять кастрюлю с огня и дать гречке постоять под крышкой, затем разрыхлить вилкой.",
+      "timer_seconds": 300,
+      "timer_label": "Настаивание",
+      "timer_note": "5 минут под крышкой"
+    }
+  ],
+  "variants": [],
+  "notes": [
+    {
+      "title": "Вода или бульон",
+      "text": "Нужно 600 мл одной жидкости, не обеих сразу. Вода даёт нейтральный гарнир; овощной бульон — плотнее вкус."
+    },
+    {
+      "title": "Магазинный бульон",
+      "text": "В составе часто сельдерей: unknown уже на каноне овощного бульона, не на воде. Если берёте воду — сельдерея в блюде нет."
+    },
+    {
+      "title": "Не мешать",
+      "text": "После закипания крышку не открывать и крупу не мешать — иначе разварится. Один раз довёл до кипения и оставил на тихом огне."
+    },
+    {
+      "title": "Соотношение",
+      "text": "Крупа к жидкости 1:2 по весу: на 300 г ядрицы — 600 мл. При масштабе якоря держать ту же пару, не доливать «на глаз»."
+    },
+    {
+      "title": "Настаивание",
+      "text": "5 минут под крышкой вне огня добирают пар. Разрыхлять вилкой только после этого."
+    },
+    {
+      "title": "Гарнир без мяса",
+      "text": "В эту кастрюлю мясо не класть: это гарнир к отдельному горячему, не каша с подливой."
+    },
+    {
+      "title": "Рис вместо гречки",
+      "text": "Можно взять 300 г круглозёрного или длиннозёрного риса и те же 600 мл жидкости. После закипания варить 12–15 минут под крышкой, не открывая часто."
+    }
+  ]
+}

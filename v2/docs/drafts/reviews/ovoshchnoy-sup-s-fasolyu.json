@@ -1,0 +1,10 @@
+{
+  "slug": "ovoshchnoy-sup-s-fasolyu",
+  "verdict": "accept",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [],
+  "minor": [],
+  "comment": "Суп воспроизводим дома в одной кастрюле: картофель варится до мягкости, а консервированная фасоль добавляется только для прогрева. Базовая версия соответствует packet: canned_beans, вода как единственный якорь и protein_base=vegetarian. Вариант со сметаной корректно добавляет milk через allergen_delta; заявка new_ingredients для sour_cream содержит тот же аллерген. Внешний URL, включая sol-chef.ru, не заявлен."
+}

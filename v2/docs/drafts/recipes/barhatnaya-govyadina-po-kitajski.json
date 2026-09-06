@@ -1,0 +1,333 @@
+{
+  "id": "barhatnaya-govyadina-po-kitajski",
+  "title": "Бархатная говядина по-китайски",
+  "summary": "Недорогой отруб нарезают поперёк волокон, коротко обрабатывают содой и обжаривают порциями на сильном огне. Крахмал, яичный белок и масло в маринаде держат сок внутри.",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["shoulder", "rump"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 15
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": ["one_pan", "budget"],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef",
+      "display_name": "говядина",
+      "amount": 500,
+      "unit": "g",
+      "detail": "лопатка или огузок, тонкими пластинами 3 мм поперёк волокон",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "baking_soda",
+      "display_name": "пищевая сода",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "egg_white",
+      "display_name": "яичный белок",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "corn_starch",
+      "display_name": "кукурузный крахмал",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "около 10 г",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "около 30 мл, обычный пшеничный",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "в маринад",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "для жарки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать говядину тонкими пластинами около 3 мм строго поперёк волокон."
+    },
+    {
+      "position": 2,
+      "text": "Посыпать мясо содой, тщательно перемешать и оставить при комнатной температуре.",
+      "timer_seconds": 900,
+      "timer_label": "Сода",
+      "timer_note": "Не дольше 15–20 минут, иначе текстура развалится"
+    },
+    {
+      "position": 3,
+      "text": "Промыть говядину в холодной проточной воде до полного удаления соды и хорошо отжать."
+    },
+    {
+      "position": 4,
+      "text": "Замариновать: соевый соус, яичный белок и крахмал перемешать до гладкости, затем влить 1 ст. л. масла."
+    },
+    {
+      "position": 5,
+      "text": "Сильно разогреть сковороду с маслом для жарки на максимальном огне."
+    },
+    {
+      "position": 6,
+      "text": "Выложить говядину небольшими партиями в один слой и обжаривать, постоянно помешивая, до изменения цвета.",
+      "timer_seconds": 90,
+      "timer_label": "Обжарка партии",
+      "timer_note": "1.5–2 минуты на партию; ориентир — цвет, не таймер",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями, иначе мясо тушится в соку."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_pepper_onion",
+      "title": "С перцем и луком",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "onion",
+            "display_name": "лук",
+            "amount": 1,
+            "unit": "pcs",
+            "detail": "репчатый",
+            "scale_mode": "whole",
+            "scalable": true
+          },
+          {
+            "canonical_id": "bell_pepper",
+            "display_name": "болгарский перец",
+            "amount": 1,
+            "unit": "pcs",
+            "scale_mode": "whole",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 6,
+            "text": "Мясо снять. На сильном огне обжарить лук и болгарский перец 2 минуты, вернуть говядину и прогреть вместе 30 секунд.",
+            "timer_seconds": 120,
+            "timer_label": "Овощи"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_black_pepper_sauce",
+      "title": "В перечном соусе",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "black_pepper",
+            "display_name": "чёрный перец",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "крупно смолотый",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "garlic",
+            "display_name": "чеснок",
+            "amount": 2,
+            "unit": "clove",
+            "detail": "измельчить",
+            "scale_mode": "whole",
+            "scalable": true
+          },
+          {
+            "canonical_id": "soy_sauce",
+            "display_name": "соевый соус",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "дополнительно в соус",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 6,
+            "text": "В конце добавить к мясу перец, чеснок и ещё 1 ст. л. соевого соуса, быстро перемешать."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "with_broccoli_ginger",
+      "title": "С брокколи и имбирём",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "broccoli",
+            "display_name": "брокколи",
+            "amount": 200,
+            "unit": "g",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "ginger",
+            "display_name": "имбирь",
+            "amount": 0.5,
+            "unit": "tsp",
+            "detail": "свежий, натёртый",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "stock",
+            "display_name": "бульон",
+            "amount": 50,
+            "unit": "ml",
+            "detail": "говяжий или куриный; вода допустима — см. заметку",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "corn_starch",
+            "display_name": "кукурузный крахмал",
+            "amount": 0.5,
+            "unit": "tsp",
+            "detail": "развести в бульоне",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 6,
+            "text": "Брокколи отварить 1 минуту в кипятке. Добавить к обжаренной говядине с имбирём и 50 мл бульона, смешанного с 0.5 ч. л. крахмала.",
+            "timer_seconds": 60,
+            "timer_label": "Брокколи"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": ["celery"],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Нарезка",
+      "text": "Только поперёк волокон и не толще 3 мм. Вдоль волокон даже сода не спасёт жёсткость."
+    },
+    {
+      "title": "Сода",
+      "text": "Сода растёт вместе с мясом: на 500 г — 0.5 ч. л., на 3 кг — 3 ч. л. 15 минут достаточно. Дольше 20 — каша. После выдержки мясо промыть начисто."
+    },
+    {
+      "title": "Отруб",
+      "text": "Лопатка или огузок. Постное «бедро» из старого текста в словарь отрубов не входит — брать огузок, не вырезку."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Партии в один слой. Полная сковорода = тушение в соку, бархат пропадает."
+    },
+    {
+      "title": "Бульон в вариации",
+      "text": "Вода допустима. Магазинный бульон часто с сельдереем — на карточке варианта стоит unknown, не «аллергенов нет»."
+    },
+    {
+      "title": "Соевый соус",
+      "text": "Обычный содержит пшеницу. Безглютеновый соус — другая строка канона, не молчаливая замена."
+    }
+  ]
+}

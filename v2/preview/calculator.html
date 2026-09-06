@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор — Кухонная шпаргалка</title>
+  <meta name="theme-color" content="#1B1713">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body style="--accent: var(--sage); --accent-soft: var(--sage-soft);">
+  <div class="wrap">
+    <p class="proto">Отбраковано · не референс UX</p>
+    <header class="site-header">
+      <div>
+        <div class="eyebrow">Что приготовить</div>
+        <h1>Калькулятор</h1>
+      </div>
+      <nav class="nav-main">
+        <a href="index.html">Справочник</a>
+        <a href="recipes.html">Рецепты</a>
+        <a class="is-active" href="calculator.html">Калькулятор</a>
+      </nav>
+    </header>
+
+    <p class="intro">Простой режим: фильтры + список с объяснением. Кладовка и покупки — позже. Аллерген <b>unknown</b> не проходит «без молока».</p>
+
+    <div class="toolbar">
+      <p class="note" style="margin:0">У меня есть</p>
+      <div class="filters">
+        <button type="button" class="chip is-on">Курица</button>
+        <button type="button" class="chip is-on">Гречка</button>
+        <button type="button" class="chip">Сковорода</button>
+        <button type="button" class="chip">Без молока</button>
+      </div>
+    </div>
+
+    <section class="panel">
+      <article class="result">
+        <div>
+          <h3><a href="recipe.html">Куриная грудка на сковороде с паприкой</a></h3>
+          <p>Совпало: курица, сковорода. Докупить: паприка. Соль — по вкусу.</p>
+        </div>
+        <span class="why">+12</span>
+      </article>
+      <article class="result">
+        <div>
+          <h3><a href="recipe.html">Гречка на гарнир с луком</a></h3>
+          <p>Совпало: гречка. Докупить: лук. Хорошая пара к грудке.</p>
+        </div>
+        <span class="why">гарнир +1</span>
+      </article>
+      <article class="result">
+        <div>
+          <h3>Сливочный соус к птице</h3>
+          <p>Скрыт фильтром «без молока»: в составе сливки (contains), не unknown.</p>
+        </div>
+        <span class="why">отсев</span>
+      </article>
+    </section>
+  </div>
+  <nav class="bottom-nav">
+    <a href="index.html">Справочник</a>
+    <a href="recipes.html">Рецепты</a>
+    <a class="is-active" href="calculator.html">Калькулятор</a>
+  </nav>
+  <script src="preview.js"></script>
+</body>
+</html>

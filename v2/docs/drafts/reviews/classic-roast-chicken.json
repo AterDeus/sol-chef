@@ -1,0 +1,205 @@
+{
+  "slug": "classic-roast-chicken",
+  "verdict": "accept",
+  "cookable": true,
+  "real": true,
+  "critical": [],
+  "major": [
+    "use_cases: one_pan и budget не подтверждены packet: рецепт требует миску, противень с решёткой и кухонную нить, а экономичность не заявлена."
+  ],
+  "minor": [],
+  "comment": "Источник Andy Cooks существует и соответствует packet; техника реальна, а после замены целевых температур на 72 °C для грудки и 82 °C для бедра рецепт безопасен и воспроизводим. Исправлены неподтверждённые сценарии use_cases: оставлен пустой список, поскольку packet не доказывает ни «одну посуду», ни бюджетность.",
+  "recipe_json": {
+    "id": "classic-roast-chicken",
+    "title": "Классическая запечённая курица",
+    "summary": "Классический запечённый цыплёнок с чесночно-тимьяновым маслом, которое втирают под кожу для сочной грудки и золотистой хрустящей кожицы. В рецепте показаны подготовка тушки, извлечение дужки, обвязка ножек шпагатом и запекание при 200°C до готовности бедра. После духовки птице дают отдохнуть 15 минут для равномерного распределения соков.",
+    "protein_base": "poultry",
+    "cook_method": "oven",
+    "dish_type": "main",
+    "equipment": "oven",
+    "energy_profile": "standard",
+    "allowed_cuts": ["whole_bird"],
+    "scale_mode": "linear",
+    "scalable": true,
+    "servings": 4,
+    "source_type": "article",
+    "source_name": "Andy Cooks",
+    "source_url": "https://www.andy-cooks.com/blogs/recipes/classic-roast-chicken",
+    "high_risk_flags": ["poultry_temp"],
+    "caution_text": "Целая птица: проверьте термометром грудку (не ниже 72 °C) и бедро (не ниже 82 °C). Не ориентируйтесь только на цвет сока. Не для детских подборок без дополнительной проверки.",
+    "time_profile": {
+      "total_minutes": 85,
+      "active_minutes": 20
+    },
+    "effort_level": 3,
+    "washing_level": 2,
+    "use_cases": [],
+    "adaptations": [],
+    "prep": [
+      {
+        "text": "Достать сливочное масло из холодильника — должно быть мягким",
+        "before_min": 60
+      },
+      {
+        "text": "Достать курицу из холодильника, обсушить кожу полотенцем",
+        "before_min": 30
+      }
+    ],
+    "ingredients": [
+      {
+        "position": 1,
+        "canonical_id": "whole_chicken",
+        "display_name": "курица",
+        "amount": 1,
+        "unit": "pcs",
+        "detail": "целая",
+        "scale_mode": "whole",
+        "scalable": true,
+        "is_anchor": false,
+        "optional": false
+      },
+      {
+        "position": 2,
+        "canonical_id": "butter",
+        "display_name": "сливочное масло",
+        "amount": 150,
+        "unit": "g",
+        "detail": "несолёное, комнатной температуры",
+        "scale_mode": "linear",
+        "scalable": true,
+        "is_anchor": false,
+        "optional": false
+      },
+      {
+        "position": 3,
+        "canonical_id": "lemon",
+        "display_name": "лимон",
+        "amount": 1,
+        "unit": "pcs",
+        "scale_mode": "whole",
+        "scalable": true,
+        "is_anchor": false,
+        "optional": false
+      },
+      {
+        "position": 4,
+        "canonical_id": "garlic",
+        "display_name": "чеснок",
+        "amount": 3,
+        "unit": "clove",
+        "scale_mode": "whole",
+        "scalable": true,
+        "is_anchor": false,
+        "optional": false
+      },
+      {
+        "position": 5,
+        "canonical_id": "salt",
+        "display_name": "соль",
+        "amount": null,
+        "unit": "to_taste",
+        "scale_mode": "gentle",
+        "scalable": false,
+        "is_anchor": false,
+        "optional": false
+      },
+      {
+        "position": 6,
+        "canonical_id": "black_pepper",
+        "display_name": "перец",
+        "amount": null,
+        "unit": "to_taste",
+        "detail": "свежемолотый белый или чёрный",
+        "scale_mode": "gentle",
+        "scalable": false,
+        "is_anchor": false,
+        "optional": false
+      },
+      {
+        "position": 7,
+        "canonical_id": "thyme",
+        "display_name": "тимьян",
+        "amount": 1,
+        "unit": "bunch",
+        "detail": "небольшой пучок, листья ощипаны и порублены",
+        "scale_mode": "whole",
+        "scalable": true,
+        "is_anchor": false,
+        "optional": false
+      }
+    ],
+    "steps": [
+      {
+        "position": 1,
+        "text": "Разогреть духовку до 200°C с конвекцией или 210°C без неё."
+      },
+      {
+        "position": 2,
+        "text": "Смешать мягкое масло с цедрой лимона, тёртым чесноком, солью, перцем и тимьяном."
+      },
+      {
+        "position": 3,
+        "text": "По желанию удалить дужку (вилочковую кость) из грудки."
+      },
+      {
+        "position": 4,
+        "text": "Разрезать лимон пополам, положить половинки и остатки тимьяна внутрь тушки, посолить полость; смазать низ курицы солью и небольшим количеством масла."
+      },
+      {
+        "position": 5,
+        "text": "Аккуратно отделить кожу от грудки пальцами и распределить масляную смесь под кожей."
+      },
+      {
+        "position": 6,
+        "text": "Обвязать курицу шпагатом (труссировка), обмазать оставшимся маслом снаружи и посолить."
+      },
+      {
+        "position": 7,
+        "text": "Запекать в духовке; проверять температуру после 40 минут — небольшая птица 45–50 мин, крупная 1 ч–1 ч 10 мин, до 82 °C в самой толстой части бедра.",
+        "timer_seconds": 3000,
+        "timer_label": "Запекание",
+        "timer_note": "Мелкая птица 45–50 мин, крупная до 1 ч 10 мин — снимайте по 82 °C в бедре, не по таймеру",
+        "target_internal_temperature_c": 82
+      },
+      {
+        "position": 8,
+        "text": "Дать курице отдохнуть 15 минут перед нарезкой. Проверить грудку: не ниже 72 °C.",
+        "timer_seconds": 900,
+        "timer_label": "Отдых",
+        "timer_note": "Фиксированный отдых; не зависит от размера тушки",
+        "target_internal_temperature_c": 72
+      }
+    ],
+    "variants": [],
+    "notes": [
+      {
+        "title": "Масло",
+        "text": "Должно быть мягким: холодным куском под кожей не распределится."
+      },
+      {
+        "title": "Кожа",
+        "text": "Перед запеканием обсушить полотенцем — иначе корочка не будет хрустящей."
+      },
+      {
+        "title": "Термометр",
+        "text": "Щуп в самую толстую часть бедра, не касаясь кости. Грудку проверить отдельно: цвет сока — не критерий."
+      },
+      {
+        "title": "Отдых",
+        "text": "15 минут фиксированно, от размера тушки не зависит: соки успевают разойтись."
+      },
+      {
+        "title": "Овощи",
+        "text": "Картофель, морковь и лук можно запекать в том же противне: добавить спустя 20 минут после начала готовки курицы. Количеств в источнике нет."
+      },
+      {
+        "title": "Соус",
+        "text": "Из соков после отдыха и с противня: эшалот, бульон, масло, немного хересного уксуса, тимьян или розмарин. Количеств нет — не вариант. Магазинный бульон часто с сельдереем."
+      },
+      {
+        "title": "Видео",
+        "text": "К рецепту Andy Cooks есть ролик: https://youtu.be/A7XNesFBEaA"
+      }
+    ]
+  }
+}

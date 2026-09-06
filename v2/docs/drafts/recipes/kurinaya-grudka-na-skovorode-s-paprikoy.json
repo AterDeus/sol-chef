@@ -1,0 +1,154 @@
+{
+  "id": "kurinaya-grudka-na-skovorode-s-paprikoy",
+  "title": "Куриная грудка на сковороде с паприкой",
+  "summary": "Куриная грудка с чесноком и паприкой, приготовленная на сильном огне и обязательно проверенная термометром до безопасной внутренней температуры.",
+  "protein_base": "poultry",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["breast"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Pilot source notes A06 + meat-poultry.json",
+  "high_risk_flags": ["poultry_temp"],
+  "caution_text": "Куриная грудка: внутренняя температура не ниже 72 °C. Не определяйте готовность только по цвету сока.",
+  "time_profile": {
+    "total_minutes": 20,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["fast", "easy", "one_pan"],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_breast",
+      "display_name": "куриная грудка",
+      "amount": 500,
+      "unit": "g",
+      "detail": "без кости",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "для сковороды",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "detail": "измельчить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разрезать куриную грудку вдоль на пласты равномерной толщины, посолить, поперчить и посыпать паприкой; чеснок измельчить."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть сковороду с растительным маслом на сильном огне. Выложить куриную грудку порциями в один слой и обжарить до румяной корочки.",
+      "timer_seconds": 240,
+      "timer_label": "обжаривание первой стороны",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями, иначе мясо тушится в соку."
+    },
+    {
+      "position": 3,
+      "text": "Перевернуть куриную грудку, добавить чеснок и продолжить готовить на среднем огне.",
+      "timer_seconds": 360,
+      "timer_label": "обжаривание второй стороны"
+    },
+    {
+      "position": 4,
+      "text": "Проверить, что куриная грудка достигла внутренней температуры не ниже 72 °C: ввести щуп термометра в самую толстую часть и при необходимости продолжать готовить; не определять готовность только по цвету сока.",
+      "timer_note": "Внутренняя температура: 72 °C",
+      "target_internal_temperature_c": 72
+    },
+    {
+      "position": 5,
+      "text": "Снять куриную грудку со сковороды и оставить отдыхать перед нарезкой.",
+      "timer_seconds": 300,
+      "timer_label": "отдых"
+    }
+  ],
+  "variants": [],
+  "notes": [
+    {
+      "title": "Толщина",
+      "text": "Пласты вдоль грудки должны быть одной толщины: иначе тонкий край пересохнет, пока толстый дойдёт до 72 °C."
+    },
+    {
+      "title": "Термометр",
+      "text": "Щуп в самую толстую часть пласта, не у края. Цвет сока и корочка — не критерий готовности."
+    },
+    {
+      "title": "Чеснок",
+      "text": "В сковороду после переворота, уже на среднем огне: на сильном с первой стороны быстро подгорит."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Партии в один слой. Полная сковорода = тушение в соку, корочки не будет."
+    },
+    {
+      "title": "Отдых",
+      "text": "Пять минут до нарезки: иначе сок вытечет на доску."
+    },
+    {
+      "title": "Отруб",
+      "text": "Только грудка. Бедро — другой отруб и другая температура (не ниже 82 °C), в этот рецепт не входит."
+    }
+  ]
+}

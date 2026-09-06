@@ -1,0 +1,366 @@
+{
+  "id": "svinye-otbivnye",
+  "title": "Свиные отбивные",
+  "summary": "Стейки шеи или корейки отбивают до ровной толщины, солят умеренно и жарят порциями на сковороде до 63 °C с отдыхом. Без панировки — корочка от мяса и масла, не от муки.",
+  "recipe_family": "otbivnye",
+  "protein_base": "pork",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["loin", "neck"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 22
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["fast", "easy"],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "pan_fry",
+      "to": "oven",
+      "quality": 0.82
+    },
+    {
+      "type": "method",
+      "from": "pan_fry",
+      "to": "grill",
+      "quality": 0.88
+    },
+    {
+      "type": "method",
+      "from": "pan_fry",
+      "to": "air_fryer",
+      "quality": 0.8
+    },
+    {
+      "type": "equipment",
+      "from": "skillet",
+      "to": "oven",
+      "quality": 0.82
+    },
+    {
+      "type": "equipment",
+      "from": "skillet",
+      "to": "grill",
+      "quality": 0.88
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "pork_neck",
+      "display_name": "свинина",
+      "amount": 700,
+      "unit": "g",
+      "detail": "шея или корейка стейками 1.5–2 см, на 3–4 отбивных",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "detail": "свежемолотый",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "detail": "раздавить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для жарки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать свинину на 3–4 стейка толщиной 1.5–2 см, если кусок ещё целый."
+    },
+    {
+      "position": 2,
+      "text": "Отбить каждый кусок через плёнку кулинарным молотком до толщины около 1–1.2 см и ровной поверхности, не разрывая мясо."
+    },
+    {
+      "position": 3,
+      "text": "Посолить и поперчить с обеих сторон, прижать раздавленный чеснок."
+    },
+    {
+      "position": 4,
+      "text": "Разогреть сковороду с маслом на средне-сильном огне до появления лёгкой дымки."
+    },
+    {
+      "position": 5,
+      "text": "Выложить отбивные порциями в один слой и жарить первую сторону, не перегружая сковороду.",
+      "timer_seconds": 210,
+      "timer_label": "Первая сторона",
+      "timer_note": "3.5 минуты; если сковорода полная — мясо тушится в соку, корочки не будет"
+    },
+    {
+      "position": 6,
+      "text": "Перевернуть и жарить вторую сторону до 60 °C в толще.",
+      "timer_seconds": 180,
+      "timer_label": "Вторая сторона",
+      "timer_note": "Ориентир — термометр, не таймер; после отдыха цель 63 °C",
+      "pull_internal_temperature_c": 60,
+      "target_internal_temperature_c": 63
+    },
+    {
+      "position": 7,
+      "text": "Снять на тарелку и дать отдохнуть.",
+      "timer_seconds": 180,
+      "timer_label": "Отдых",
+      "hold_seconds": 180,
+      "target_internal_temperature_c": 63
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Нарезать свинину на 3–4 стейка толщиной 2–2.5 см: в духовке тоньше 2 см быстро пересыхает."
+          },
+          {
+            "position": 2,
+            "text": "Слегка отбить через плёнку, только выровнять толщину, не делая куски тоньше 2 см."
+          },
+          {
+            "position": 4,
+            "text": "Разогреть духовку до 200 °C. Противень с решёткой смазать маслом. Корочку на сковороде не делать — сразу в духовку."
+          },
+          {
+            "position": 5,
+            "text": "Уложить отбивные в один слой на решётку и запекать первую сторону.",
+            "timer_seconds": 720,
+            "timer_label": "Духовка, первая сторона",
+            "timer_note": "12 минут при 200 °C; не тот же таймер сковороды"
+          },
+          {
+            "position": 6,
+            "text": "Перевернуть и запекать до 60 °C в толще.",
+            "timer_seconds": 600,
+            "timer_label": "Духовка, вторая сторона",
+            "timer_note": "Ещё около 10 минут; ориентир — термометр",
+            "pull_internal_temperature_c": 60,
+            "target_internal_temperature_c": 63
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "На гриле",
+      "has_delta": true,
+      "cook_method_override": "grill",
+      "equipment": "grill",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Разогреть гриль до средне-сильного жара. Решётку смазать маслом, чтобы мясо не прилипло."
+          },
+          {
+            "position": 5,
+            "text": "Выложить отбивные на решётку в один слой и жарить первую сторону над жаром, не над тлеющими углями в стороне.",
+            "timer_seconds": 150,
+            "timer_label": "Гриль, первая сторона",
+            "timer_note": "2.5 минуты; не копировать таймер сковороды 3.5 минуты"
+          },
+          {
+            "position": 6,
+            "text": "Перевернуть на решётке и жарить вторую сторону до 60 °C в толще.",
+            "timer_seconds": 120,
+            "timer_label": "Гриль, вторая сторона",
+            "timer_note": "Около 2 минут; ориентир — термометр и соки, не корочка сковороды",
+            "pull_internal_temperature_c": 60,
+            "target_internal_temperature_c": 63
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "cook_method_override": "air_fryer",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Разогреть аэрогриль до 180 °C. Отбивные слегка смазать маслом."
+          },
+          {
+            "position": 5,
+            "text": "Уложить в корзину одной партией в один слой, без наложений. На типичный аэрогриль входят 1–2 штуки — остальные держать в стороне и готовить следующим заходом, не складывать стопкой.",
+            "timer_seconds": 480,
+            "timer_label": "Аэрогриль до переворота",
+            "timer_note": "8 минут при 180 °C; одна партия в корзине"
+          },
+          {
+            "position": 6,
+            "text": "Перевернуть в корзине и готовить до 60 °C в толще.",
+            "timer_seconds": 360,
+            "timer_label": "Аэрогриль после переворота",
+            "timer_note": "Ещё около 6 минут; ориентир — термометр",
+            "pull_internal_temperature_c": 60,
+            "target_internal_temperature_c": 63
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "смазать сковороду, не наливать лужу"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Слегка смазать сковороду чайной ложкой масла и разогреть на средне-сильном огне."
+          },
+          {
+            "position": 5,
+            "text": "Выложить отбивные порциями в один слой и жарить первую сторону, не перегружая сковороду и не доливая масло между партиями.",
+            "timer_seconds": 210,
+            "timer_label": "Первая сторона",
+            "timer_note": "3.5 минуты; антипригарная сковорода держит корочку при 1 ч. л. масла"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "Шея или корейка стейками. Не вырезка, не фарш и не шашлычные кубики — отбивная держит форму цельного куска."
+    },
+    {
+      "title": "Отбить",
+      "text": "Плёнка с двух сторон, удары от центра к краю. Дырки в мясе выпускают сок; неровный край подгорает, толстая середина не доходит до 63 °C."
+    },
+    {
+      "title": "Соль",
+      "text": "Соль растёт слабее мяса: на 700 г — 1 ч. л., на 1.4 кг не два раза больше. Пересол на тонкой отбивной не спрятать."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Две партии лучше, чем одна полная. Сок на дне — это уже тушение, корочки не будет."
+    },
+    {
+      "title": "Температура",
+      "text": "Цельный кусок: 63 °C и 3 минуты отдыха. Сочнее, чем гнать до 71 °C. 50–55 °C для свинины нельзя."
+    },
+    {
+      "title": "Духовка",
+      "text": "Куски толще, чем на сковороде, и сразу в камеру, без корочки на плите. Тонкая отбивная в духовке высыхает, пока дойдёт середина."
+    },
+    {
+      "title": "Гриль",
+      "text": "Жар идёт с решётки, не со дна сковороды: другой контакт и другой таймер. Переворот обязателен, иначе одна сторона с полосками, вторая сырая."
+    },
+    {
+      "title": "Аэрогриль",
+      "text": "Одна партия в один слой. Стопка в корзине даёт пар, не корочку. На 3–4 отбивных часто два захода по 1–2 штуки."
+    }
+  ]
+}

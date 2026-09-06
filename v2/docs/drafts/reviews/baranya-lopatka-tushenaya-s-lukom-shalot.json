@@ -1,0 +1,13 @@
+{
+  "slug": "baranya-lopatka-tushenaya-s-lukom-shalot",
+  "verdict": "reject",
+  "cookable": true,
+  "real": false,
+  "critical": [
+    "source_url указывает только на sol-chef.ru, а не на конкретный первоисточник; для этого домена это Critical и пакет нельзя принять."
+  ],
+  "major": [],
+  "minor": [],
+  "comment": "Технология и количества согласованы с packet и рецепт можно приготовить. Но без проверяемой ссылки на конкретную публикацию sol-chef.ru происхождение рецепта не подтверждено.",
+  "recipe_json": null
+}

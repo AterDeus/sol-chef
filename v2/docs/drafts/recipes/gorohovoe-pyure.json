@@ -1,0 +1,235 @@
+{
+  "id": "gorohovoe-pyure",
+  "title": "Гороховое пюре",
+  "summary": "Колотый горох разваривают в кастрюле до полной мягкости и толкут с луком и сливочным маслом. Соль — только когда горох уже мягкий, иначе останется жёстким.",
+  "recipe_family": "legumes",
+  "protein_base": "legumes",
+  "cook_method": "boil",
+  "dish_type": "side",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 70,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["budget", "pantry", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "peas",
+      "title": "горох колотый",
+      "aliases": ["горох сухой", "колотый горох", "горох"],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "substitution", "from": "bacon", "to": "ham", "quality": 0.86 }
+  ],
+  "prep": [
+    {
+      "text": "Колотый горох перебрать, промыть и замочить в холодной воде на 2–4 часа. Воду замачивания слить и больше не использовать.",
+      "before_hours": 2
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "peas",
+      "display_name": "горох колотый",
+      "amount": 400,
+      "unit": "g",
+      "detail": "сухой колотый, не зелёный горошек; после замачивания слить",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 1400,
+      "unit": "ml",
+      "detail": "свежая, после слива замачивания; соотношение сухого гороха к воде около 1:3.5",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "репчатый, мелко",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "для пассеровки лука",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 40,
+      "unit": "g",
+      "detail": "в готовое пюре, не для жарки",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "только когда горох уже мягкий",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Слить воду замачивания, промыть горох. Лук нарезать мелко."
+    },
+    {
+      "position": 2,
+      "text": "В кастрюле на среднем огне пассеровать лук на растительном масле до мягкости и лёгкого золота.",
+      "timer_seconds": 300,
+      "timer_label": "Лук",
+      "timer_note": "4–6 минут, не жечь"
+    },
+    {
+      "position": 3,
+      "text": "Всыпать горох, влить 1400 мл свежей воды, положить лавровый лист. Довести до кипения и снять пену."
+    },
+    {
+      "position": 4,
+      "text": "Убавить огонь, крышку приоткрыть и варить, пока горох полностью не развалится. Помешивать со дна, чтобы не пригорел.",
+      "timer_seconds": 3000,
+      "timer_label": "Варка",
+      "timer_note": "45–55 минут после замачивания; ориентир — разваливается в кашу, не таймер"
+    },
+    {
+      "position": 5,
+      "text": "Вынуть лавр. Посолить. Толочь толкушкой с маслом до гладкого пюре. Если густо — вернуть 2–3 ст. л. горячей жидкости из кастрюли."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_smoked",
+      "title": "С копчёностями",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "bacon",
+            "display_name": "бекон",
+            "amount": 150,
+            "unit": "g",
+            "detail": "или ветчина того же веса — одна позиция, не оба; бекон вытопить",
+            "scale_mode": "linear",
+            "scalable": true,
+            "choice_group": "smoked"
+          },
+          {
+            "canonical_id": "ham",
+            "display_name": "ветчина",
+            "amount": 150,
+            "unit": "g",
+            "detail": "вместо бекона, не вместе; кубик 1 см, без вытопки",
+            "scale_mode": "linear",
+            "scalable": true,
+            "choice_group": "smoked"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Бекон нарезать кубиком и вытопить в кастрюле до шкварок, на этом жире пассеровать лук. Ветчину не вытапливать и не класть с горохом на весь час: лук пассеровать на масле, ветчину добавить кубиком в самом конце, вместе с маслом при толчении.",
+            "timer_seconds": 360,
+            "timer_label": "Копчёности и лук",
+            "timer_note": "бекон 5–6 минут до шкварок, затем лук"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Соль в конце",
+      "text": "Соль в начале держит кожицу гороха жёсткой. Солить, когда он уже разваливается."
+    },
+    {
+      "title": "Замачивание",
+      "text": "Колотый горох без замачивания варится дольше и чаще пригорает. Воду замачивания вылить — в пюре идёт только свежая."
+    },
+    {
+      "title": "Не блендер",
+      "text": "Толкушка или пресс. Погружной блендер делает клей: крахмал из разваренных зёрен взбивается в клейстер."
+    },
+    {
+      "title": "Густота",
+      "text": "Готовое пюре должно сползать с ложки, не литься. Лишнюю жидкость не сливать сразу: сначала потолочь, потом решить."
+    },
+    {
+      "title": "Копчёности",
+      "text": "Бекон даёт жир и дым — его вытапливают в начале. Ветчина уже варёная: её кладут кубиком в самом конце, вместе с маслом при толчении, не на час варки с горохом."
+    },
+    {
+      "title": "Мультиварка",
+      "text": "Не этот рецепт: здесь кастрюля, снятие пены и контроль дна. Программа «каша» даёт другое блюдо."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+.env
+.env.local
+# Named volumes live in Docker. Ignore bind-mounted data dirs if used locally.
+postgres-data/
+redis-data/

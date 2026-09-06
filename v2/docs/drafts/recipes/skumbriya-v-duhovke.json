@@ -1,0 +1,260 @@
+{
+  "id": "skumbriya-v-duhovke",
+  "title": "Скумбрия в духовке",
+  "summary": "Потрошёную магазинную скумбрию начиняют луком и лимоном и запекают до 63 °C у кости. Жирная рыба остаётся сочной, шкурка слегка схватывается — не лосось и не сырая у хребта.",
+  "recipe_family": "mackerel",
+  "protein_base": "fish_red_sea",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 12
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["budget", "easy", "one_pan"],
+  "new_ingredients": [
+    {
+      "canonical_id": "mackerel",
+      "title": "скумбрия",
+      "aliases": ["скумбрия потрошёная", "скумбрия тушка"],
+      "allergens_contains": ["fish"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "oven", "to": "grill", "quality": 0.86 },
+    { "type": "equipment", "from": "oven", "to": "grill", "quality": 0.86 }
+  ],
+  "prep": [
+    {
+      "text": "Если тушки заморожены — разморозить в холодильнике. Потрошёную магазинную скумбрию промыть внутри, обсушить бумагой внутри и снаружи. Чёрную плёнку вдоль живота счистить: она горчит."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "mackerel",
+      "display_name": "скумбрия",
+      "amount": 700,
+      "unit": "g",
+      "detail": "потрошёная магазинная, 2 тушки около 350 г; не филе лосося",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 150,
+      "unit": "g",
+      "detail": "полукольцами, в брюшко и под рыбу",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "lemon",
+      "display_name": "лимон",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "кружками в брюшко и сверху",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "смазать кожу",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "горошек; часть раздавить",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "detail": "внутри и снаружи",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 200 °C. Противень застелить бумагой."
+    },
+    {
+      "position": 2,
+      "text": "Надрезать кожу скумбрии косыми надрезами до мяса, не до кости. Посолить и поперчить внутри и снаружи, втереть масло в кожу."
+    },
+    {
+      "position": 3,
+      "text": "Лук полукольцами, лимон кружками. Начинить брюшко луком, кружками лимона и частью горошка. Остаток лука — под тушки на противень."
+    },
+    {
+      "position": 4,
+      "text": "Уложить тушки в один слой. Запекать до 63 °C в самой толстой части у кости: мякоть у хребта непрозрачная, сок белый, не розово-стекловидный.",
+      "timer_seconds": 1320,
+      "timer_label": "Запекание",
+      "timer_note": "20–24 минуты при 200 °C для тушек ~350 г; ориентир — 63 °C у кости, не таймер",
+      "target_internal_temperature_c": 63,
+      "equipment_note": "Противень в камере духовки, один слой. Две тушки внахлёст оставят сырое у кости."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "foil",
+      "title": "В фольге",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть духовку до 200 °C. Подготовить два листа фольги — по тушке."
+          },
+          {
+            "position": 3,
+            "text": "Начинить брюшко луком, лимоном и горошком. Каждую тушку завернуть в фольгу швом вверх, вместе с оставшимся луком. Плотно, но не сжимать рыбу."
+          },
+          {
+            "position": 4,
+            "text": "Запекать в фольге, затем развернуть края и запекать открытой, пока кожа не схватится и в толще у кости не будет 63 °C. Можно оставить закрытой до конца — тогда кожица мягкая, без корочки.",
+            "timer_seconds": 1500,
+            "timer_label": "Фольга",
+            "timer_note": "18–20 минут закрытой, 4–6 открытой; ориентир — 63 °C у кости. Закрытой дольше открытого противня: пар внутри пакета",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Каждая тушка в своём конверте. Один общий пакет на две рыбы даст сырое у кости."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "На гриле",
+      "cook_method_override": "grill",
+      "equipment": "grill",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 2,
+            "unit": "tbsp",
+            "detail": "кожа и решётка, иначе прилипнет",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть гриль до средне-сильного жара. Решётку смазать маслом. Духовку не включать."
+          },
+          {
+            "position": 2,
+            "text": "Надрезать кожу, посолить и поперчить внутри и снаружи, щедро смазать маслом — жир скумбрии будет капать, сухая кожа прикипит."
+          },
+          {
+            "position": 3,
+            "text": "Начинить брюшко луком и лимоном, чтобы начинка не провалилась между прутьями. Горошек внутрь, не на решётку."
+          },
+          {
+            "position": 4,
+            "text": "Класть на решётку в один слой. Жарить, не двигая, пока кожа не отпустит. Перевернуть один раз широкой лопаткой. Довести до 63 °C у кости. Жир капает — сдвинуть с прямого пламени, если вспыхивает, не поливать водой.",
+            "timer_seconds": 960,
+            "timer_label": "Гриль",
+            "timer_note": "7–8 минут первой стороны, 6–7 второй; ориентир — 63 °C у кости, не чёрная кожа",
+            "target_internal_temperature_c": 63,
+            "equipment_note": "Решётка, один слой, один переворот. Противень духовки сюда не ставить: жир должен капать вниз, иначе это не гриль."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Какая рыба",
+      "text": "Потрошёная магазинная скумбрия, якорь в граммах. Лосось V1 — другой slug. Филе без кожи здесь не то блюдо: жир и кожа держат сок."
+    },
+    {
+      "title": "Плёнка",
+      "text": "Чёрную плёнку в брюхе счистить ножом. Оставить — горечь на луке и лимоне, её не перебьёт соль."
+    },
+    {
+      "title": "Готовность",
+      "text": "63 °C у кости, не у хвоста. Сырое у хребта нельзя. Передерж открытого противня сушит брюшко быстрее спинки — лучше термометр, чем «ещё пять минут»."
+    },
+    {
+      "title": "Лук и лимон",
+      "text": "В брюшко, не горкой сверху: сверху кружки подсохнут до горечи, внутри отдадут сок мясу."
+    },
+    {
+      "title": "Фольга",
+      "text": "Каждая тушка в своём конверте, в конце развернуть. Закрытой дольше открытого противня. Один пакет на двоих оставит сырое у кости."
+    },
+    {
+      "title": "Гриль",
+      "text": "Решётка, один переворот, жир капает вниз. Вспышку сдвинуть, не заливать. Это не противень в духовке."
+    }
+  ]
+}

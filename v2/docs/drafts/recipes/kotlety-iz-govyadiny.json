@@ -1,0 +1,520 @@
+{
+  "id": "kotlety-iz-govyadiny",
+  "title": "Котлеты из говядины",
+  "summary": "Говяжий фарш смешивают с отжатым хлебом, луком и яйцом, формуют плоские котлеты и жарят партиями на сковороде до 71 °C в центре. Фарш прожаривать насквозь: rare недопустим.",
+  "recipe_family": "kotlety",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": ["mince"],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": ["ground_meat"],
+  "caution_text": "Говяжий фарш прожаривать до 71 °C в центре каждой котлеты: бактерии распределены по всему объёму, сырая серединка и rare недопустимы. Не ориентироваться только на цвет. Не давать детям недожаренными.",
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["fast", "budget", "batch", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "beef_mince",
+      "title": "говяжий фарш",
+      "aliases": ["фарш говяжий"],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": ["сметана 15%", "сметана 20%"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "pan_fry", "to": "oven", "quality": 0.88 },
+    { "type": "method", "from": "pan_fry", "to": "grill", "quality": 0.84 },
+    { "type": "method", "from": "pan_fry", "to": "air_fryer", "quality": 0.82 },
+    { "type": "method", "from": "pan_fry", "to": "stew", "quality": 0.8 },
+    { "type": "equipment", "from": "skillet", "to": "oven", "quality": 0.88 },
+    { "type": "equipment", "from": "skillet", "to": "grill", "quality": 0.84 },
+    { "type": "equipment", "from": "skillet", "to": "pot", "quality": 0.8 },
+    { "type": "omission", "ingredient": "garlic", "quality": 0.9 }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_mince",
+      "display_name": "говяжий фарш",
+      "amount": 500,
+      "unit": "g",
+      "detail": "размороженный; можно 10–20% свиного фарша в этой же массе для сочности, основа блюда всё равно говядина",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 200,
+      "unit": "ml",
+      "detail": "для замачивания хлеба; после отжима слить",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "bread",
+      "display_name": "хлеб",
+      "amount": 80,
+      "unit": "g",
+      "detail": "белый пшеничный без плотных корок; замочить и хорошо отжать",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "некрупная луковица, очень мелко",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "egg",
+      "display_name": "яйцо",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 1,
+      "unit": "clove",
+      "detail": "измельчить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "wheat_flour",
+      "display_name": "пшеничная мука",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для панировки, около 20 г",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "для жарки партиями",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Замочить хлеб в 200 мл холодной воды до мягкости.",
+      "timer_seconds": 600,
+      "timer_label": "Хлеб",
+      "timer_note": "8–10 минут; хлеб должен размокнуть, не раскиснуть в кашу"
+    },
+    {
+      "position": 2,
+      "text": "Отжать хлеб насухо. Лук нарезать очень мелко, чеснок измельчить."
+    },
+    {
+      "position": 3,
+      "text": "Смешать фарш, отжатый хлеб, лук, яйцо, чеснок, соль и перец до однородности, не превращая массу в пасту."
+    },
+    {
+      "position": 4,
+      "text": "Отбить фарш: несколько раз собрать массу и с силой бросить в миску.",
+      "timer_seconds": 60,
+      "timer_label": "Отбивание",
+      "timer_note": "1–2 минуты; масса должна стать липкой и держать форму"
+    },
+    {
+      "position": 5,
+      "text": "Смочить руки и сформовать овальные котлеты толщиной около 1.5 см, обвалять в муке."
+    },
+    {
+      "position": 6,
+      "text": "Разогреть сковороду с маслом на средне-сильном огне."
+    },
+    {
+      "position": 7,
+      "text": "Выложить котлеты небольшими партиями в один слой и жарить до румяной корочки с обеих сторон и внутренней температуры 71 °C, один раз перевернуть.",
+      "timer_seconds": 480,
+      "timer_label": "Партия",
+      "timer_note": "4 минуты с первой стороны, 3.5–4 со второй; ориентир — 71 °C в центре. Говядина постнее свиной: не держать «ещё минуту для корочки»",
+      "target_internal_temperature_c": 71,
+      "equipment_note": "Не перегружать сковороду: жарить партиями в один слой, иначе котлеты тушатся в соку и не доходят внутри."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать противень и верх котлет",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 6,
+            "text": "Разогреть духовку до 200 °C. Застелить противень бумагой и смазать маслом."
+          },
+          {
+            "position": 7,
+            "text": "Выложить котлеты на противень в один слой, слегка смазать верх маслом. Запекать до внутренней температуры 71 °C, один раз перевернуть.",
+            "timer_seconds": 1200,
+            "timer_label": "Запекание",
+            "timer_note": "18–20 минут; перевернуть на 10-й минуте; ориентир — 71 °C в центре. Не таймер сковороды 8 минут",
+            "target_internal_temperature_c": 71,
+            "equipment_note": "Противень, один слой, без глубокой жарки."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "На гриле",
+      "cook_method_override": "grill",
+      "equipment": "grill",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать решётку и котлеты",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "Смочить руки и сформовать котлеты толще сковородных, около 2 см, обвалять в муке. Тоньше 1.5 см на гриле высохнут, пока дойдёт центр."
+          },
+          {
+            "position": 6,
+            "text": "Разогреть гриль до средне-сильного жара. Решётку смазать маслом."
+          },
+          {
+            "position": 7,
+            "text": "Выложить котлеты на решётку в один слой и жарить первую сторону, затем обязательно перевернуть и довести до 71 °C в центре.",
+            "timer_seconds": 420,
+            "timer_label": "Гриль",
+            "timer_note": "3.5 минуты первая сторона, 3–3.5 вторая; не копировать таймер сковороды. Без переворота низ сырой, верх с полосками",
+            "target_internal_temperature_c": 71,
+            "equipment_note": "Решётка, не сковорода: жар снизу точечный. Партии, если не влезают без наложений."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "cook_method_override": "air_fryer",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "смазать корзину и котлеты",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "Смочить руки и сформовать котлеты меньше обычных, около 6 см в диаметре и не толще 1.5 см, обвалять в муке."
+          },
+          {
+            "position": 6,
+            "text": "Разогреть аэрогриль до 180 °C. Смазать корзину и котлеты тонким слоем масла."
+          },
+          {
+            "position": 7,
+            "text": "Выложить котлеты в один слой, не касаясь друг друга. Готовить до внутренней температуры 71 °C, обязательно перевернуть на середине.",
+            "timer_seconds": 720,
+            "timer_label": "Аэрогриль",
+            "timer_note": "11–12 минут; перевернуть на 6-й минуте. На типичную корзину — 3–4 штуки, остальные следующим заходом",
+            "target_internal_temperature_c": 71,
+            "equipment_note": "Партии: не заполнять корзину внахлёст, иначе пар вместо корочки и сырая середина."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "equipment",
+      "code": "pot",
+      "title": "В соусе",
+      "cook_method_override": "stew",
+      "equipment": "pot",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 2,
+            "unit": "tbsp",
+            "detail": "обжарить котлеты и пассеровать пасту",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "tomato_paste",
+            "display_name": "томатная паста",
+            "amount": 2,
+            "unit": "tbsp",
+            "detail": "около 30 г",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 250,
+            "unit": "ml",
+            "detail": "для соуса; котлеты почти покрыты",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "sour_cream",
+            "display_name": "сметана",
+            "amount": 150,
+            "unit": "g",
+            "detail": "15–20%, в конце, комнатной температуры",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "Смочить руки и сформовать те же плоские овальные котлеты толщиной около 1.5 см, обвалять в муке. Не скатывать шарики — это не тефтели."
+          },
+          {
+            "position": 6,
+            "text": "Разогреть кастрюлю с маслом. Обжарить котлеты партиями по 2 минуты с каждой стороны до лёгкой корочки и снять. В той же кастрюле пассеровать томатную пасту 1 минуту, влить 250 мл воды."
+          },
+          {
+            "position": 7,
+            "text": "Вернуть котлеты в соус в один слой, накрыть и томить на слабом огне. Вмешать сметану и прогревать без кипения до 71 °C в центре.",
+            "timer_seconds": 900,
+            "timer_label": "Томление",
+            "timer_note": "12 минут под крышкой, затем 3 минуты со сметаной; сметану не кипятить. Ориентир — 71 °C",
+            "target_internal_temperature_c": 71,
+            "equipment_note": "Кастрюля с крышкой; соус почти покрывает плоские котлеты, не сковорода и не шарики тефтелей."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": ["milk"],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "energy_profile": "light",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "для жарки на антипригарной сковороде",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 6,
+            "text": "Смазать антипригарную сковороду 1 ст. л. масла и разогреть на средне-сильном огне."
+          },
+          {
+            "position": 7,
+            "text": "Выложить котлеты небольшими партиями в один слой и жарить до 71 °C в центре, один раз перевернуть, не доливая масло между партиями.",
+            "timer_seconds": 480,
+            "timer_label": "Партия",
+            "timer_note": "4 и 3.5–4 минуты; антипригарная сковорода держит корочку при 1 ст. л.",
+            "target_internal_temperature_c": 71,
+            "equipment_note": "Не перегружать сковороду: партии в один слой, иначе тушение в соку."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Хлеб",
+      "text": "На 500 г фарша — 80 г мякиша. Плохо отжать — каша; мало хлеба — сухие котлеты разваливаются. Сухари горкой не подставлять в ту же граммовку."
+    },
+    {
+      "title": "Фарш",
+      "text": "Говяжий. 10–20% свинины в той же миске делает массу сочнее — это деталь, не второй protein_base. Куриные котлеты и тефтели — другие id."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Партии в один слой. Полная сковорода — тушение: корочки нет, центр долго сырой."
+    },
+    {
+      "title": "Готовность",
+      "text": "Фарш говядины — 71 °C в центре каждой штуки. Розовый сок и rare недопустимы: бактерии по всему объёму."
+    },
+    {
+      "title": "Гриль",
+      "text": "Котлеты толще (~2 см), иначе высохнут. Переворот обязателен: жар с решётки, не со дна сковороды."
+    },
+    {
+      "title": "Аэрогриль",
+      "text": "Мельче и в один слой. Стопка в корзине даёт пар. На 500 г фарша часто два захода."
+    },
+    {
+      "title": "Соус",
+      "text": "Плоские котлеты в томате со сметаной, не шарики с рисом. Сметану в конце, без бурления."
+    }
+  ]
+}

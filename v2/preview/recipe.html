@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Куриная грудка на сковороде — Кухонная шпаргалка</title>
+  <meta name="theme-color" content="#1B1713">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body style="--accent: var(--bird); --accent-soft: var(--bird-soft);">
+  <div class="wrap">
+    <p class="proto">Отбраковано · не референс UX</p>
+    <header class="site-header">
+      <div>
+        <a class="back" href="recipes.html">← К списку</a>
+        <div class="eyebrow">Птица · на сковороде · основное</div>
+        <h1>Куриная грудка на сковороде с паприкой</h1>
+      </div>
+      <nav class="nav-main">
+        <a href="index.html">Справочник</a>
+        <a class="is-active" href="recipes.html">Рецепты</a>
+        <a href="calculator.html">Калькулятор</a>
+      </nav>
+    </header>
+
+    <p class="intro">Куриная грудка с чесноком и паприкой на сильном огне. Готовность — термометром, не по цвету сока.</p>
+
+    <div class="actions">
+      <button type="button" class="btn btn-accent" id="open-cook">Режим готовки</button>
+      <button type="button" class="btn">Печать</button>
+    </div>
+
+    <div class="recipe-layout">
+      <section class="panel">
+        <h2>У меня</h2>
+        <p class="note">Масштаб от якоря — граммы грудки. Соль и паприка считаются мягче, не ×5.</p>
+        <div class="scale">
+          <button type="button" class="btn" data-delta="-50">−50</button>
+          <input id="anchor" type="number" value="500" min="50" step="50" aria-label="Граммы грудки">
+          <span class="note">г грудки</span>
+          <button type="button" class="btn" data-delta="50">+50</button>
+          <button type="button" class="btn" data-delta="250">+250</button>
+        </div>
+        <ul class="ing">
+          <li><span>Куриная грудка, без кости</span><span class="amt" data-base="500" data-mode="linear">500 г</span></li>
+          <li><span>Растительное масло</span><span class="amt" data-base="15" data-mode="gentle" data-unit="мл">15 мл</span></li>
+          <li><span>Чеснок</span><span class="amt" data-base="2" data-mode="gentle" data-unit="зубчик">2 зубчик</span></li>
+          <li><span>Паприка</span><span class="amt" data-base="5" data-mode="gentle" data-unit="г">5 г</span></li>
+          <li><span>Соль, перец</span><span class="amt">по вкусу</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Шаги</h2>
+        <ol class="steps">
+          <li>Разрезать грудку на пласты, посолить, поперчить, паприка; чеснок измельчить.</li>
+          <li>Разогреть сковороду с маслом на сильном огне. Обжарить до корочки. <span class="timer">4 мин</span><br><span class="note">Не набивать сковороду: иначе будет тушение в соку.</span></li>
+          <li>Перевернуть, добавить чеснок, средний огонь. <span class="timer">6 мин</span></li>
+          <li>Щуп в толстую часть: <b>target 72 °C</b>. Не по цвету сока.</li>
+          <li>Снять, отдых перед нарезкой. <span class="timer">5 мин</span></li>
+        </ol>
+      </section>
+    </div>
+
+    <aside class="caution">
+      <h2>Осторожно</h2>
+      <p>Птица. Безопасный конец — 72 °C в самой толстой части грудки (бедро было бы 82 °C). Детям и всем, кому важна пастеризация, не снижать температуру «чтобы сочнее».</p>
+    </aside>
+
+    <p class="source">Источник: шпаргалка по птице на этом сайте. Если рецепт нужно убрать — напишите на почту (в макете адрес ещё не ставили).</p>
+  </div>
+
+  <div class="cook" id="cook" hidden>
+    <div class="cook-head">
+      <div>
+        <div class="eyebrow">Режим готовки · экран не гаснет</div>
+        <h1 style="font-size: 28px;">Грудка с паприкой</h1>
+      </div>
+      <button type="button" class="btn" id="close-cook">Закрыть</button>
+    </div>
+    <div class="step-card is-now">
+      <div class="eyebrow">Шаг 2 из 5 · таймер 4:00</div>
+      <h2>Обжарить до корочки</h2>
+      <p>Сильный огонь. Не перегружать сковороду.</p>
+    </div>
+    <div class="step-card">
+      <div class="eyebrow">Дальше</div>
+      <p>Перевернуть, чеснок, 6 мин → термометр 72 °C → отдых 5 мин.</p>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html">Справочник</a>
+    <a class="is-active" href="recipes.html">Рецепты</a>
+    <a href="calculator.html">Калькулятор</a>
+  </nav>
+  <script src="preview.js"></script>
+</body>
+</html>

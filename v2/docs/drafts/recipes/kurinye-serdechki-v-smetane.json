@@ -1,0 +1,319 @@
+{
+  "id": "kurinye-serdechki-v-smetane",
+  "title": "Куриные сердечки в сметанном соусе",
+  "summary": "Куриные сердечки промывают, разрезают и тушат с луком в сметане до мягкости и 74 °C: без розового сока и без кипения соуса. Это субпродукты, не курица целиком и не печень строганов.",
+  "recipe_family": "offal_cream",
+  "protein_base": "offal",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 50,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": ["budget", "easy"],
+  "new_ingredients": [
+    {
+      "canonical_id": "chicken_hearts",
+      "title": "куриные сердечки",
+      "aliases": ["сердечки куриные", "сердца куриные"],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": ["сметана 15%", "сметана 20%"],
+      "allergens_contains": ["milk"],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "method", "from": "stew", "to": "pan_fry", "quality": 0.9 },
+    { "type": "equipment", "from": "pot", "to": "skillet", "quality": 0.9 },
+    { "type": "omission", "ingredient": "bay_leaf", "quality": 0.95 },
+    { "type": "substitution", "from": "sour_cream", "to": "yogurt", "quality": 0.8 }
+  ],
+  "prep": [
+    {
+      "text": "Замороженные сердечки разморозить в холодильнике. Перед нарезкой держать в холодной воде: так проще вымыть сгустки."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_hearts",
+      "display_name": "куриные сердечки",
+      "amount": 600,
+      "unit": "g",
+      "detail": "промыть, срезать сосуды и жир, разрезать вдоль, вымыть сгустки",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 200,
+      "unit": "g",
+      "detail": "репчатый, полукольцами",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 250,
+      "unit": "ml",
+      "detail": "15–20%, комнатной температуры",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "wheat_flour",
+      "display_name": "пшеничная мука",
+      "amount": 10,
+      "unit": "g",
+      "detail": "около 1 ст. л., обвалять сердечки перед закладкой",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "для обжарки лука и сердечек",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 120,
+      "unit": "ml",
+      "detail": "под крышку, чтобы сметана не прихватилась",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "detail": "раздавить",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "по желанию, вынуть перед подачей",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    },
+    {
+      "position": 9,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Промыть сердечки в холодной воде. Срезать сосуды, плёнки и лишний жир, разрезать каждое вдоль пополам и вымыть тёмные сгустки из камер. Ещё раз промыть и обсушить."
+    },
+    {
+      "position": 2,
+      "text": "Лук нарезать полукольцами. Сердечки посолить, поперчить и обвалять в муке, стряхнуть лишнее."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть кастрюлю с маслом на средне-сильном огне. Пассеровать лук до мягкости, в конце добавить раздавленный чеснок на 30 секунд.",
+      "timer_seconds": 360,
+      "timer_label": "Лук",
+      "timer_note": "5–6 минут до прозрачности, не до чёрных краёв"
+    },
+    {
+      "position": 4,
+      "text": "Выложить сердечки, перемешать и обжаривать, пока они не потеряют сырой блеск.",
+      "timer_seconds": 300,
+      "timer_label": "Схватить",
+      "timer_note": "4–5 минут; слой не выше 4 см, иначе будут варёные"
+    },
+    {
+      "position": 5,
+      "text": "Влить воду, положить лавровый лист, накрыть крышкой и тушить на слабом огне, пока сердечки не начнут прокалываться вилкой.",
+      "timer_seconds": 900,
+      "timer_label": "Под крышкой",
+      "timer_note": "15 минут; соус ещё без сметаны. Если сухо — ещё ложка воды"
+    },
+    {
+      "position": 6,
+      "text": "Убавить огонь до самого слабого. Вмешать сметану и томить без кипения до 74 °C в толще сердечка и исчезновения розового сока. На разрезе нет крови, кусок мягкий, не резиновый.",
+      "timer_seconds": 600,
+      "timer_label": "Сметана",
+      "timer_note": "8–10 минут; ориентир — 74 °C и мягкость, не бурление. Сметана свернётся, если кипит",
+      "target_internal_temperature_c": 74
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 60,
+            "unit": "ml",
+            "detail": "меньше, чем в кастрюле: сковорода ниже, жидкость быстрее выкипает",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло",
+            "amount": 3,
+            "unit": "tbsp",
+            "detail": "для обжарки партий",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Промыть сердечки, срезать сосуды и жир, разрезать вдоль, вымыть сгустки, обсушить."
+          },
+          {
+            "position": 2,
+            "text": "Лук полукольцами. Сердечки посолить, поперчить, обвалять в муке."
+          },
+          {
+            "position": 3,
+            "text": "Разогреть широкую сковороду с маслом на средне-сильном огне. Кастрюлю не использовать."
+          },
+          {
+            "position": 4,
+            "text": "Обжарить сердечки небольшими партиями в один слой до румяной корочки, снять на тарелку. Затем пассеровать лук до мягкости, в конце чеснок 30 секунд.",
+            "timer_seconds": 240,
+            "timer_label": "Партия",
+            "timer_note": "3–4 минуты на партию; ориентир — корочка, не таймер",
+            "equipment_note": "Не перегружать сковороду: партии в один слой. Полная сковорода — тушение в соку, корочки не будет. Это не кастрюля под крышкой."
+          },
+          {
+            "position": 5,
+            "text": "Вернуть все партии к луку, влить 60 мл воды, положить лавровый лист, накрыть крышкой. Тушить на среднем огне до мягкости сердечка: 74 °C ещё не значит, что субпродукт перестал быть резиновым.",
+            "timer_seconds": 900,
+            "timer_label": "Под крышкой",
+            "timer_note": "12–15 минут; это не 2 минуты «собрать». Если сухо — ещё ложка воды"
+          },
+          {
+            "position": 6,
+            "text": "Убавить огонь до слабого. Вмешать сметану в конце и прогревать без кипения до 74 °C и мягкости, без розового сока.",
+            "timer_seconds": 180,
+            "timer_label": "Сметана",
+            "timer_note": "2–3 минуты; сердечки уже мягкие с шага 5, сметана только прогреть. Ориентир — 74 °C",
+            "target_internal_temperature_c": 74
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Промывка",
+      "text": "Сгустки и сосуды дают горечь и серый соус. Разрезать вдоль и промыть камеры — обязательный шаг, не «по желанию»."
+    },
+    {
+      "title": "Не курица",
+      "text": "Основа — субпродукты, protein_base offal. Не бёдра в сметане и не печень строганов: другое время и другая текстура."
+    },
+    {
+      "title": "Готовность",
+      "text": "74 °C в толще и нет розового сока. Сырые сердечки резиновые; переваренные без жидкости — сухие шарики. Мягкость вилкой важнее цвета."
+    },
+    {
+      "title": "Сметана",
+      "text": "Комнатной температуры, огонь слабый, после того как сердечки уже почти мягкие. Кипение — крупинки. В сковороде сметану кладут в самом конце."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Сначала партии в один слой, потом лук, затем 12–15 минут под крышкой с 60 мл воды, сметана в самом конце. Не копировать 15 минут кастрюли в открытую сковороду без крышки: соус выкипит, сердечки останутся жёсткими."
+    },
+    {
+      "title": "Лавр",
+      "text": "Один лист на эту закладку, вынуть перед подачей. Без лавра блюдо то же, чуть проще."
+    }
+  ]
+}

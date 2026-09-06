@@ -1,0 +1,195 @@
+{
+  "id": "ribaj-na-skovorode-s-timyanom",
+  "title": "Рибай на сковороде с тимьяном",
+  "summary": "Стейк толстого края 400–500 г на двоих жарится на сковороде до выбранной прожарки. Ориентир для средней — 57°C в центре; более полную прожарку можно довести дальше по термометру, well-done не единственный вариант. Чеснок и тимьян или розмарин из кладовой.",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "thick_rib"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 15
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "one_pan"
+  ],
+  "adaptations": [],
+  "prep": [
+    {
+      "text": "Достать стейк из холодильника, чтобы мясо слегка согрелось перед жаркой.",
+      "before_min": 20,
+      "type": "room_temp"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "ribeye",
+      "display_name": "толстый край",
+      "amount": 400,
+      "amount_max": 500,
+      "unit": "g",
+      "detail": "толстый край, стейк толщиной около 2–2,5 см, не фарш",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "detail": "для жарки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "detail": "слегка раздавить",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "thyme",
+      "display_name": "тимьян",
+      "amount": 2,
+      "unit": "pcs",
+      "detail": "свежие веточки",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "herb"
+    },
+    {
+      "position": 5,
+      "canonical_id": "dried_thyme",
+      "display_name": "сушёный тимьян",
+      "unit": "pinch",
+      "detail": "замена свежим веточкам",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "herb"
+    },
+    {
+      "position": 6,
+      "canonical_id": "rosemary",
+      "display_name": "розмарин",
+      "amount": 1,
+      "unit": "pcs",
+      "detail": "веточка, замена тимьяну",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "herb"
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Обсушить стейк бумажным полотенцем, посолить и поперчить с обеих сторон."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть растительное масло на сковороде на сильном огне до лёгкого дымка."
+    },
+    {
+      "position": 3,
+      "text": "Выложить стейк и обжарить 2–3 минуты с первой стороны, не двигая, затем перевернуть.",
+      "timer_seconds": 180,
+      "timer_label": "Первая сторона",
+      "timer_note": "2–3 минуты; ориентир — корочка, не таймер",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями, иначе мясо тушится в соку."
+    },
+    {
+      "position": 4,
+      "text": "Жарить вторую сторону 2–3 минуты. Добавить раздавленный чеснок и тимьян или розмарин, снизить огонь до среднего и полить мясо горячим маслом со сковороды ещё 1–2 минуты.",
+      "timer_seconds": 240,
+      "timer_label": "Вторая сторона и ароматизация",
+      "timer_note": "2–3 минуты плюс 1–2 минуты с травами"
+    },
+    {
+      "position": 5,
+      "text": "Проверить термометром в центре самой толстой части: для средней прожарки ориентир 57°C. Если нужна более полная прожарка — продолжить на среднем огне и сверяться с термометром; well-done не единственный допустимый вариант."
+    },
+    {
+      "position": 6,
+      "text": "Снять стейк со сковороды и дать отдохнуть 5 минут, затем нарезать поперёк волокон.",
+      "timer_seconds": 300,
+      "timer_label": "Отдых"
+    }
+  ],
+  "variants": [],
+  "notes": [
+    {
+      "title": "Отруб",
+      "text": "В словаре — толстый край из обычной витрины, не мраморный премиум. Свинину и фарш не использовать: rare допустим только для цельного куска."
+    },
+    {
+      "title": "Сухая поверхность",
+      "text": "Влажный стейк будет тушиться, а не жариться. Перед солью обязательно обсушить."
+    },
+    {
+      "title": "Прожарка",
+      "text": "Для средней прожарки ориентир 57°C в центре самой толстой части. Более полную можно довести дальше по термометру; well-done не единственный допустимый вариант. Для цельного куска rare допустим, для фарша — нет."
+    },
+    {
+      "title": "Травы",
+      "text": "Свежий тимьян (2 веточки), щепотка сушёного или одна веточка розмарина — на выбор, не вместе."
+    },
+    {
+      "title": "Перед жаркой",
+      "text": "Достать стейк из холодильника примерно за 20 минут, чтобы слегка согрелся."
+    },
+    {
+      "title": "Сковорода",
+      "text": "При масштабе — порциями в один слой. Полная сковорода = тушение в соку, корочки не будет."
+    }
+  ]
+}
