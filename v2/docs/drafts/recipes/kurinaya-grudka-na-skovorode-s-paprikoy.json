@@ -7,12 +7,16 @@
   "dish_type": "main",
   "equipment": "skillet",
   "energy_profile": "standard",
-  "allowed_cuts": ["breast"],
+  "allowed_cuts": [
+    "breast"
+  ],
   "scale_mode": "linear",
   "scalable": true,
   "source_type": "article",
   "source_name": "Pilot source notes A06 + meat-poultry.json",
-  "high_risk_flags": ["poultry_temp"],
+  "high_risk_flags": [
+    "poultry_temp"
+  ],
   "caution_text": "Куриная грудка: внутренняя температура не ниже 72 °C. Не определяйте готовность только по цвету сока.",
   "time_profile": {
     "total_minutes": 20,
@@ -20,8 +24,31 @@
   },
   "effort_level": 2,
   "washing_level": 2,
-  "use_cases": ["fast", "easy", "one_pan"],
-  "adaptations": [],
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "pan_fry",
+      "to": "oven",
+      "quality": 0.86
+    },
+    {
+      "type": "method",
+      "from": "pan_fry",
+      "to": "air_fryer",
+      "quality": 0.84
+    },
+    {
+      "type": "equipment",
+      "from": "skillet",
+      "to": "oven",
+      "quality": 0.86
+    }
+  ],
   "ingredients": [
     {
       "position": 1,
@@ -107,7 +134,7 @@
     },
     {
       "position": 3,
-      "text": "Перевернуть куриную грудку, добавить чеснок и продолжить готовить на среднем огне.",
+      "text": "Перевернуть куриную грудку и готовить на среднем огне. Чеснок добавить только в последнюю минуту второй стороны, сразу снять с огня, если он начинает темнеть.",
       "timer_seconds": 360,
       "timer_label": "обжаривание второй стороны"
     },
@@ -124,7 +151,115 @@
       "timer_label": "отдых"
     }
   ],
-  "variants": [],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть духовку до 200 °C. Грудку разрезать вдоль на пласты одной толщины — не целую тушку и не толстый кусок целиком. Форму или решётку слегка смазать маслом."
+          },
+          {
+            "position": 2,
+            "text": "Смешать растительное масло с паприкой, солью, перцем и измельчённым чесноком. Обмазать пласты со всех сторон и уложить в один слой на форму или решётку."
+          },
+          {
+            "position": 3,
+            "text": "Запекать первую сторону, пока поверхность не схватится. В камере корочка появляется позже, чем на сковороде: не копировать 4 минуты плиты.",
+            "timer_seconds": 720,
+            "timer_label": "Первая сторона в камере",
+            "timer_note": "12 минут при 200 °C; это не обжарка на сильном огне",
+            "equipment_note": "Форма или решётка в камере, пласты в один слой. Горкой тонкий край пересохнет, пока толстый дойдёт до 72 °C."
+          },
+          {
+            "position": 4,
+            "text": "Перевернуть пласты и довести до внутренней температуры не ниже 72 °C в самой толстой части. При необходимости ещё несколько минут; не определять готовность только по цвету сока.",
+            "timer_seconds": 600,
+            "timer_label": "До 72 °C",
+                    "timer_note": "Ориентир — 72 °C, ещё около 8–10 минут; короче аэрогриля не будет — камера медленнее чаши",
+                    "target_internal_temperature_c": 72
+                  },
+                  {
+                    "position": 5,
+                    "text": "Вынуть пласты из формы или с решётки и оставить отдыхать перед нарезкой.",
+                    "timer_seconds": 300,
+                    "timer_label": "отдых"
+                  }
+                ]
+              },
+              "allergen_delta": {
+                "contains_add": [],
+                "contains_remove": [],
+                "may_contain_add": [],
+                "may_contain_remove": [],
+                "unknown_add": [],
+                "unknown_remove": []
+              },
+              "high_risk_delta": {
+                "add": [],
+                "remove": []
+              }
+            },
+            {
+              "axis": "equipment",
+              "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "cook_method_override": "air_fryer",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть аэрогриль до 180 °C. Пласты той же толщины, что на сковороде. За закладку — столько, сколько ложится в один слой в чаше; остальное следующей партией."
+          },
+          {
+            "position": 2,
+            "text": "Слегка смазать пласты маслом с паприкой, солью, перцем и измельчённым чесноком."
+          },
+          {
+            "position": 3,
+            "text": "Уложить в чашу в один слой. Не перегружать корзину: иначе мясо тушится в соку, корочки не будет.",
+            "timer_seconds": 360,
+            "timer_label": "Первая сторона в чаше",
+            "timer_note": "6 минут при 180 °C; партия по размеру чаши",
+            "equipment_note": "Одна партия в один слой. Полная чаша 500 г сразу — варёная грудка без корочки."
+          },
+          {
+            "position": 4,
+            "text": "Перевернуть и довести до 72 °C в самой толстой части пласта. Это короче духовки: не копировать 12+10 минут камеры.",
+            "timer_seconds": 360,
+            "timer_label": "До 72 °C",
+                    "timer_note": "Ориентир — 72 °C, ещё 5–7 минут; не таймер духовки",
+                    "target_internal_temperature_c": 72
+                  },
+                  {
+                    "position": 5,
+                    "text": "Вынуть пласты из чаши и оставить отдыхать перед нарезкой.",
+                    "timer_seconds": 300,
+                    "timer_label": "отдых"
+                  }
+                ]
+              },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
   "notes": [
     {
       "title": "Толщина",

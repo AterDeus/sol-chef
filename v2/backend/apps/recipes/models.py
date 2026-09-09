@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from decimal import Decimal
+
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex, OpClass
 from django.contrib.postgres.search import SearchVectorField
@@ -17,12 +19,15 @@ from apps.recipes.constants import (
     ENERGY_PROFILE,
     EQUIPMENT,
     HIGH_RISK,
+    NUTRITION_BASIS,
+    NUTRITION_SOURCE,
     PROTEIN_BASE,
     RECIPE_STATUS,
     SCALE_MODE,
     UNIT,
     USE_CASE,
     VARIANT_AXIS,
+    YIELD_KIND,
 )
 
 
@@ -57,6 +62,12 @@ class Recipe(models.Model):
     )
     scalable = models.BooleanField(default=True)
     servings = models.PositiveIntegerField(null=True, blank=True)
+    yield_weight_g = models.DecimalField(
+        max_digits=8, decimal_places=1, null=True, blank=True
+    )
+    yield_kind = models.CharField(
+        max_length=16, choices=_choice(YIELD_KIND), null=True, blank=True
+    )
     summary = models.TextField(null=True, blank=True)
     source_name = models.TextField(null=True, blank=True)
     source_url = models.URLField(max_length=500, null=True, blank=True)
@@ -151,6 +162,12 @@ class Recipe(models.Model):
         active = self.time_active_minutes
         if total is not None and active is not None and active > total:
             raise ValidationError("active_minutes не больше total_minutes.")
+        if self.yield_weight_g is not None and self.yield_weight_g <= 0:
+            raise ValidationError("yield_weight_g должен быть > 0.")
+        if self.yield_kind and self.yield_kind not in YIELD_KIND:
+            raise ValidationError(f"Неизвестный yield_kind: {self.yield_kind}")
+        if self.yield_kind and self.yield_weight_g is None:
+            raise ValidationError("yield_kind без yield_weight_g.")
 
     def anchor_row(self) -> RecipeIngredient | None:
         return self.ingredients.filter(is_anchor=True).select_related("ingredient").first()
@@ -207,6 +224,31 @@ class Ingredient(models.Model):
     density_g_per_ml = models.DecimalField(
         max_digits=8, decimal_places=3, null=True, blank=True
     )
+    kcal_per_100g = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True
+    )
+    protein_g_per_100g = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True
+    )
+    fat_g_per_100g = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True
+    )
+    carbs_g_per_100g = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True
+    )
+    nutrition_basis = models.CharField(
+        max_length=16, choices=_choice(NUTRITION_BASIS), null=True, blank=True
+    )
+    nutrition_source = models.CharField(
+        max_length=32, choices=_choice(NUTRITION_SOURCE), null=True, blank=True
+    )
+    nutrition_source_id = models.TextField(null=True, blank=True)
+    g_per_tsp = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
+    g_per_tbsp = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
+    g_per_pcs = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
+    g_per_clove = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
+    g_per_bunch = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
+    g_per_slice = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
     allergens_contains = ArrayField(models.CharField(max_length=32), default=list, blank=True)
     allergens_may_contain = ArrayField(
         models.CharField(max_length=32), default=list, blank=True
@@ -235,6 +277,10 @@ class RecipeIngredient(models.Model):
     scalable = models.BooleanField(default=True)
     is_anchor = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
+    nutrition_exclude = models.BooleanField(default=False)
+    nutrition_factor = models.DecimalField(
+        max_digits=4, decimal_places=2, null=True, blank=True
+    )
     choice_group = models.TextField(null=True, blank=True)
     display_name = models.TextField(null=True, blank=True)
 
@@ -254,6 +300,12 @@ class RecipeIngredient(models.Model):
                 raise ValidationError("Для «по вкусу»/щепотки amount должен быть пустым.")
             if self.scalable:
                 raise ValidationError("to_taste/pinch не масштабируются.")
+        if self.nutrition_exclude and self.nutrition_factor is not None:
+            raise ValidationError("nutrition_factor не вместе с nutrition_exclude.")
+        if self.nutrition_factor is not None and not (
+            Decimal("0.01") <= self.nutrition_factor <= Decimal("1")
+        ):
+            raise ValidationError("nutrition_factor должен быть 0.01–1.")
 
 
 class SubstitutionRule(models.Model):

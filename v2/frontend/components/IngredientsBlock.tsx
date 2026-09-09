@@ -1,6 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { NutritionBlock } from '@/components/NutritionBlock';
+import { SpriteIcon } from '@/components/SpriteIcon';
+import { computeNutrition } from '@/lib/nutrition';
 import { scaleIngredients } from '@/lib/scale';
 import type { RecipeIngredient, Scaling } from '@/lib/types';
 
@@ -42,10 +45,31 @@ function stepForBase(base: number): number {
   return base >= 500 ? 250 : 50;
 }
 
+const KBJU_SKIP_TIP = 'КБЖУ для этой строки не считается.';
+
+function NutritionSkipHint() {
+  const [open, setOpen] = useState(false);
+  return (
+    <button
+      type="button"
+      className="recipe-list__kbju-hint"
+      aria-label={KBJU_SKIP_TIP}
+      aria-expanded={open}
+      data-tip={KBJU_SKIP_TIP}
+      onClick={() => setOpen((value) => !value)}
+      onBlur={() => setOpen(false)}
+    >
+      <SpriteIcon name="info" size={16} />
+    </button>
+  );
+}
+
 type Props = {
   scaling: Scaling;
   ingredients: RecipeIngredient[];
   servingsBase?: number | null;
+  yieldWeightG?: number | null;
+  yieldKind?: 'estimated' | 'exact' | null;
   hasTimers?: boolean;
 };
 
@@ -53,6 +77,8 @@ export function IngredientsBlock({
   scaling,
   ingredients,
   servingsBase = null,
+  yieldWeightG = null,
+  yieldKind = null,
   hasTimers = false,
 }: Props) {
   const enabled = scaling.enabled === true;
@@ -74,6 +100,15 @@ export function IngredientsBlock({
       ? anchorWeight / defaultWeight
       : 1;
   const items = useMemo(() => scaleIngredients(ingredients, ratio), [ingredients, ratio]);
+  const nutrition = useMemo(
+    () =>
+      computeNutrition(ingredients, {
+        ratio,
+        servings: showServings ? servings : servingsBase,
+        yieldWeightG,
+      }),
+    [ingredients, ratio, showServings, servings, servingsBase, yieldWeightG],
+  );
 
   const factorLabel = showAnchor ? formatFactor(ratio) : '';
   const showReset = showAnchor && Math.abs(ratio - 1) >= 0.01;
@@ -82,142 +117,146 @@ export function IngredientsBlock({
   const displayStep = pair && useLarge ? step / pair.factor : step;
 
   return (
-    <section className="recipe-section recipe-ingredients">
-      <h2>Ингредиенты</h2>
-      {showAnchor && baseAnchor && (
-        <div className="recipe-scale">
-          <div className="recipe-scale__head">
-            <span className="recipe-scale__label">У меня</span>
-            {factorLabel ? <span className="recipe-scale__factor">{factorLabel}</span> : null}
-          </div>
-          <div className="recipe-scale__row">
-            <button
-              type="button"
-              className="btn-secondary recipe-scale__step"
-              aria-label="Меньше"
-              onClick={() => setAnchorWeight((n) => Math.max(step, n - step))}
-            >
-              −
-            </button>
-            <input
-              className="recipe-scale__input"
-              type="number"
-              inputMode="decimal"
-              min={pair && useLarge ? step / pair.factor : step}
-              step={displayStep}
-              value={formatInput(displayValue)}
-              aria-label={`Количество: ${baseAnchor.name}`}
-              onChange={(e) => {
-                const next = baseFromInput(e.target.value, pair, useLarge);
-                if (next != null) setAnchorWeight(next);
-              }}
-            />
-            {pair && (
-              <label className={`recipe-scale__unit-switch${useLarge ? ' is-large' : ''}`}>
-                <span className="recipe-scale__unit-opt" data-unit-side="small">
-                  {pair.small}
-                </span>
-                <span className="recipe-scale__unit-track">
-                  <input
-                    type="checkbox"
-                    className="recipe-scale__unit-check"
-                    checked={useLarge}
-                    aria-label={`Переключить ${pair.small} и ${pair.large}`}
-                    onChange={(e) => setUseLarge(e.target.checked)}
-                  />
-                  <span className="recipe-scale__unit-thumb" aria-hidden />
-                </span>
-                <span className="recipe-scale__unit-opt" data-unit-side="large">
-                  {pair.large}
-                </span>
-              </label>
-            )}
-            <button
-              type="button"
-              className="btn-secondary recipe-scale__step"
-              aria-label="Больше"
-              onClick={() => setAnchorWeight((n) => n + step)}
-            >
-              +
-            </button>
-          </div>
-          <p className="recipe-scale__meta">
-            <span>
-              {baseAnchor.name}
-              {baseAnchor.unit ? ` · в рецепте ${baseAnchor.amount} ${baseAnchor.unit}` : null}
-            </span>
-            {showReset && (
+    <>
+      <section className="recipe-section recipe-ingredients">
+        <h2>Ингредиенты</h2>
+        {showAnchor && baseAnchor && (
+          <div className="recipe-scale">
+            <div className="recipe-scale__head">
+              <span className="recipe-scale__label">У меня</span>
+              {factorLabel ? <span className="recipe-scale__factor">{factorLabel}</span> : null}
+            </div>
+            <div className="recipe-scale__row">
               <button
                 type="button"
-                className="recipe-scale__reset"
-                onClick={() => {
-                  setAnchorWeight(defaultWeight);
-                  setUseLarge(false);
-                }}
+                className="btn-secondary recipe-scale__step"
+                aria-label="Меньше"
+                onClick={() => setAnchorWeight((n) => Math.max(step, n - step))}
               >
-                Сброс
+                −
               </button>
-            )}
-          </p>
-          {showReset && hasTimers && (
-            <p className="recipe-scale__timer-hint">
-              Время готовки не пересчитывается — ориентируйтесь на шаги и подстройте таймеры в
-              режиме готовки.
+              <input
+                className="recipe-scale__input"
+                type="number"
+                inputMode="decimal"
+                min={pair && useLarge ? step / pair.factor : step}
+                step={displayStep}
+                value={formatInput(displayValue)}
+                aria-label={`Количество: ${baseAnchor.name}`}
+                onChange={(e) => {
+                  const next = baseFromInput(e.target.value, pair, useLarge);
+                  if (next != null) setAnchorWeight(next);
+                }}
+              />
+              {pair && (
+                <label className={`recipe-scale__unit-switch${useLarge ? ' is-large' : ''}`}>
+                  <span className="recipe-scale__unit-opt" data-unit-side="small">
+                    {pair.small}
+                  </span>
+                  <span className="recipe-scale__unit-track">
+                    <input
+                      type="checkbox"
+                      className="recipe-scale__unit-check"
+                      checked={useLarge}
+                      aria-label={`Переключить ${pair.small} и ${pair.large}`}
+                      onChange={(e) => setUseLarge(e.target.checked)}
+                    />
+                    <span className="recipe-scale__unit-thumb" aria-hidden />
+                  </span>
+                  <span className="recipe-scale__unit-opt" data-unit-side="large">
+                    {pair.large}
+                  </span>
+                </label>
+              )}
+              <button
+                type="button"
+                className="btn-secondary recipe-scale__step"
+                aria-label="Больше"
+                onClick={() => setAnchorWeight((n) => n + step)}
+              >
+                +
+              </button>
+            </div>
+            <p className="recipe-scale__meta">
+              <span>
+                {baseAnchor.name}
+                {baseAnchor.unit ? ` · в рецепте ${baseAnchor.amount} ${baseAnchor.unit}` : null}
+              </span>
+              {showReset && (
+                <button
+                  type="button"
+                  className="recipe-scale__reset"
+                  onClick={() => {
+                    setAnchorWeight(defaultWeight);
+                    setUseLarge(false);
+                  }}
+                >
+                  Сброс
+                </button>
+              )}
             </p>
-          )}
-        </div>
-      )}
-      {showServings && (
-        <div className="recipe-scale">
-          <div className="recipe-scale__head">
-            <span>Порции</span>
+            {showReset && hasTimers && (
+              <p className="recipe-scale__timer-hint">
+                Время готовки не пересчитывается — ориентируйтесь на шаги и подстройте таймеры в
+                режиме готовки.
+              </p>
+            )}
           </div>
-          <div className="recipe-scale__row">
-            <button
-              type="button"
-              className="btn-secondary"
-              aria-label="Меньше порций"
-              onClick={() => setServings((n) => Math.max(1, n - 1))}
-            >
-              −
-            </button>
-            <input
-              className="recipe-scale__input"
-              type="number"
-              min={1}
-              step={1}
-              value={servings}
-              aria-label="Число порций"
-              onChange={(e) => {
-                const next = Number(e.target.value);
-                if (Number.isFinite(next) && next > 0) setServings(next);
-              }}
-            />
-            <button
-              type="button"
-              className="btn-secondary"
-              aria-label="Больше порций"
-              onClick={() => setServings((n) => n + 1)}
-            >
-              +
-            </button>
+        )}
+        {showServings && (
+          <div className="recipe-scale">
+            <div className="recipe-scale__head">
+              <span>Порции</span>
+            </div>
+            <div className="recipe-scale__row">
+              <button
+                type="button"
+                className="btn-secondary"
+                aria-label="Меньше порций"
+                onClick={() => setServings((n) => Math.max(1, n - 1))}
+              >
+                −
+              </button>
+              <input
+                className="recipe-scale__input"
+                type="number"
+                min={1}
+                step={1}
+                value={servings}
+                aria-label="Число порций"
+                onChange={(e) => {
+                  const next = Number(e.target.value);
+                  if (Number.isFinite(next) && next > 0) setServings(next);
+                }}
+              />
+              <button
+                type="button"
+                className="btn-secondary"
+                aria-label="Больше порций"
+                onClick={() => setServings((n) => n + 1)}
+              >
+                +
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-      <ul className="recipe-list">
-        {items.map((item, index) => (
-          <li key={`${item.name}-${index}`}>
-            <span className="amount">{item.display_amount}</span>
-            <span>
-              {item.name}
-              {item.detail ? <span className="detail">{item.detail}</span> : null}
-              {item.scale_mode === 'manual' ? (
-                <span className="manual-hint">проверьте по исходному рецепту</span>
-              ) : null}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
+        )}
+        <ul className="recipe-list">
+          {items.map((item, index) => (
+            <li key={`${item.name}-${index}`}>
+              <span className="amount">{item.display_amount}</span>
+              <span>
+                {item.name}
+                {item.detail ? <span className="detail">{item.detail}</span> : null}
+                {item.scale_mode === 'manual' ? (
+                  <span className="manual-hint">проверьте по исходному рецепту</span>
+                ) : null}
+              </span>
+              {item.nutrition_skip_hint ? <NutritionSkipHint /> : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+      <NutritionBlock nutrition={nutrition} yieldKind={yieldKind} />
+    </>
   );
 }

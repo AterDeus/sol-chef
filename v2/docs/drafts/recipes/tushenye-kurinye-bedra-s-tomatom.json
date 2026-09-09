@@ -29,7 +29,32 @@
     "one_pan",
     "budget"
   ],
-  "adaptations": [],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "stew",
+      "to": "pan_fry",
+      "quality": 0.86
+    },
+    {
+      "type": "method",
+      "from": "stew",
+      "to": "oven",
+      "quality": 0.86
+    },
+    {
+      "type": "equipment",
+      "from": "pot",
+      "to": "skillet",
+      "quality": 0.86
+    },
+    {
+      "type": "equipment",
+      "from": "pot",
+      "to": "oven",
+      "quality": 0.86
+    }
+  ],
   "ingredients": [
     {
       "position": 1,
@@ -172,7 +197,125 @@
       "target_internal_temperature_c": 82
     }
   ],
-  "variants": [],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "water",
+            "display_name": "вода",
+            "amount": 200,
+            "unit": "ml",
+            "detail": "меньше 400 мл кастрюли: глубокая сковорода, соус не суп",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Разогреть масло на глубокой сковороде и обжарить бёдра 4–5 минут с каждой стороны до румяной корочки, порциями, затем снять на тарелку.",
+            "timer_seconds": 600,
+            "timer_label": "Обжарка бёдер",
+            "timer_note": "4–5 минут с каждой стороны; ориентир — корочка",
+            "equipment_note": "Партии в один слой. Полная сковорода = тушение в соку без корочки."
+          },
+          {
+            "position": 3,
+            "text": "На той же сковороде обжарить лук и морковь 5–6 минут до мягкости.",
+            "timer_seconds": 360,
+            "timer_label": "Овощи"
+          },
+          {
+            "position": 4,
+            "text": "Вернуть бёдра, добавить томатное пюре, 200 мл воды и лавровый лист, довести до слабого кипения."
+          },
+          {
+            "position": 5,
+            "text": "Накрыть крышкой сковороды и тушить на слабом огне, пока мясо не станет мягким. Пшеничную муку и соевый соус не добавлять.",
+            "timer_seconds": 1500,
+            "timer_label": "Под крышкой сковороды",
+            "timer_note": "25 минут; короче 40 минут кастрюли — слой жидкости ниже, жар ближе"
+          },
+          {
+            "position": 6,
+            "text": "Проверить самую толстую часть бедра у кости: не ниже 82 °C. Если ниже — ещё 5 минут под крышкой.",
+            "timer_note": "Внутренняя температура: 82 °C",
+            "target_internal_temperature_c": 82
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Обжарить бёдра в кастрюле или сразу в жаропрочной форме на плите 4–5 минут с каждой стороны, снять на тарелку. Разогреть духовку до 180 °C.",
+            "timer_seconds": 600,
+            "timer_label": "Обжарка бёдер",
+            "timer_note": "4–5 минут с каждой стороны; ориентир — корочка"
+          },
+          {
+            "position": 4,
+            "text": "Вернуть бёдра в форму, добавить томатное пюре, воду и лавровый лист. Довести на плите до пара.",
+            "equipment_note": "Форма или утятница с крышкой внутри камеры, не открытый противень."
+          },
+          {
+            "position": 5,
+            "text": "Накрыть и поставить в духовку. Тушить в камере, пока мясо не станет мягким. Пшеничную муку и соевый соус не добавлять.",
+            "timer_seconds": 2700,
+            "timer_label": "Духовка",
+            "timer_note": "45 минут при 180 °C под крышкой; это не 40 минут слабого огня на плите"
+          },
+          {
+            "position": 6,
+            "text": "Проверить самую толстую часть бедра у кости: не ниже 82 °C. Если ниже — ещё 5–10 минут в камере.",
+            "timer_note": "Внутренняя температура: 82 °C (бедро, не 72 °C грудки)",
+            "target_internal_temperature_c": 82
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
   "notes": [
     {
       "title": "Отруб",
@@ -184,7 +327,7 @@
     },
     {
       "title": "Томатное пюре",
-      "text": "Густой томатный концентрат из банки без злаков. Слово «пюре» в списке — чтобы не взять пшеничную пасту; на этикетке не должно быть муки."
+      "text": "Используйте протёртую мякоть томатов (пассату). Обязательно проверяйте состав на упаковке: в нём не должно быть загустителей и пшеничной муки, так как блюдо задумано строго безглютеновым."
     },
     {
       "title": "Без загустителя",

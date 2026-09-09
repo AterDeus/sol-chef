@@ -4,6 +4,8 @@
 
 Публичный REST в Next `app/api` запрещён. Браузер ходит на `/api/` того же origin (Caddy → Django).
 
+Мутации (V2.1): cookie-сессия + CSRF (`X-CSRFToken`). Неавторизованный **POST/PUT/DELETE** личного → **`403`** `{ "detail": "…" }`, не `401` и не JWT. `GET /api/recipes/<slug>/me/` для гостя → **`200`** `{ "authenticated": false }`.
+
 ## Общее
 
 - Без JWT, без CORS.
@@ -39,7 +41,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 - `cuts=`: код ∈ `Recipe.allowed_cuts` (поле базы, не дельта).
 - `without=`: аллерген; на **карточке каталога** — объединение базы и всех addon-дельт с `has_delta` (`contains` и `unknown`). Строки `optional` (гарнир / «для подачи») в это объединение не входят. Страница рецепта — аллергены **текущего** display.
 - Пустая выдача — `200` и `results: []`, не `404`.
-- В спринте 3–4 нет `energy=` (калораж). Нет `variant=` на каталоге (одна строка на slug). Каталог не принимает `have=` / `have_group=` / `intent=`.
+- В спринте 3–4 нет `energy=` (калораж). Нет `variant=` на каталоге (одна строка на slug). Каталог не принимает `have=` / `have_group=` / `intent=`. Нет query `kcal_max` — ни на каталоге, ни на карточке, ни на рекомендациях.
 
 Пример: `?protein_base=poultry&protein_base=beef&cook_method=oven` → (птица **или** говядина) **и** духовка.
 
@@ -103,9 +105,11 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 `allergens` на карточке каталога — худший случай: база ∪ addon-дельт с `has_delta`. `unknown` не опускать. `has_delta_variants` — есть ли хотя бы один addon с `has_delta=true` (для бейджа, не для переключателя в сетке).
 
+Каталог **не** отдаёт `nutrition` и `nutrition_line`.
+
 ### `GET /api/recipes/<slug>/`
 
-Полный рецепт. 404 если нет / не `published`.
+Полный рецепт. 404 если нет / не `published`. С V2.1-C в теле есть `community_confirmed`. Счётчики «приготовили N» и среднее оценок — не здесь, а `GET …/engagement/` (не ISR).
 
 ```json
 {
@@ -137,6 +141,9 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
     "base_anchor": { "amount": 500, "unit": "g", "name": "говядина" },
     "applied": { "anchor_weight": 600 }
   },
+  "servings": null,
+  "yield_weight_g": null,
+  "yield_kind": null,
   "ingredients": [
     {
       "name": "говядина",
@@ -148,7 +155,17 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
       "scale_mode": "linear",
       "is_anchor": true,
       "optional": false,
-      "display_amount": "600 г"
+      "nutrition_exclude": false,
+      "nutrition_skip_hint": false,
+      "display_amount": "600 г",
+      "nutrition_line": {
+        "kcal_per_100g": 250,
+        "protein_g_per_100g": 26.0,
+        "fat_g_per_100g": 15.0,
+        "carbs_g_per_100g": 0,
+        "grams_per_unit": 1,
+        "nutrition_factor": 1
+      }
     }
   ],
   "steps": [
@@ -168,13 +185,40 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
   "effort_level": 3,
   "washing_level": 2,
   "use_cases": ["one_pan", "budget"],
-  "adaptations": []
+  "adaptations": [],
+  "nutrition": {
+    "basis": "raw_input",
+    "incomplete": false,
+    "total": { "kcal": 1840, "protein_g": 112.0, "fat_g": 126.0, "carbs_g": 48.0 },
+    "per_100g_input": { "kcal": 214, "protein_g": 13.0, "fat_g": 14.7, "carbs_g": 5.6 },
+    "per_100g_cooked": null,
+    "per_serving": null
+  }
 }
 ```
 
 `display_amount` — уже округлённая строка для UI (правила DEFAULTS). Клиент её показывает, не пересчитывает.
 
-`applied_axes` — какие оси собраны в этом ответе. `ingredients` / `steps` / `allergens` / `cook_method` / `high_risk_flags` — уже display.
+`nutrition` — ориентировочное КБЖУ после сборки и масштаба (DEC-022, DEC-023). Не колонка рецепта. Не называть поле `per_100g` или `per_100g_raw`. `basis` остаётся `"raw_input"`: kcal всё ещё с сырых канонов; готовое — только знаменатель `per_100g_cooked`.
+
+| Поле | Смысл |
+|------|--------|
+| `basis` | всегда `"raw_input"` |
+| `total` | сумма по учтённым строкам текущего display |
+| `per_100g_input` | `total` на 100 г **входной** учтённой массы, не 100 г тарелки |
+| `per_100g_cooked` | `total` на 100 г `(yield_weight_g * ratio)`; `null` если выхода нет. Не алиас input |
+| `per_serving` | только если есть `servings`; иначе JSON `null` |
+| `incomplete` | хотя бы одна обязательная строка не вошла из-за дыры справочника или единиц |
+
+`yield_weight_g` / `yield_kind` — на карточке, не в каталоге. Нет выхода — оба `null`. `yield_kind`: `estimated` \| `exact`.
+
+`nutrition_line` — проекция **этой** строки карточки, чтобы клиент после `scaleLine` воспроизвёл ту же формулу. Не справочник `Ingredient` наружу. Каталог и калькулятор объект не читают. Нет отдельного `/api/nutrition`.
+
+- `nutrition_exclude` на строке обязателен (bool): клиент не ставит `incomplete` на исключённое масло жарки. `nutrition_line: null` — строка не участвует (`exclude` / `optional` / `pinch` / `to_taste` / нет данных). Клиент не считает. `nutrition_skip_hint` — иконка «КБЖУ не считается» у `to_taste`/`pinch`, только если канон жирный/сладкий (≥300 ккал или ≥20 г жира на 100 г). Соль, перец, паприка — `false` (DEC-024).
+- `nutrition_factor` в проекции: нет ключа на строке = `1`. Клиент умножает граммы вклада на него.
+- `grams_per_unit` — граммы **одной** текущей единицы этой строки (`tbsp`→14, `g`→1, `ml`→density). Не пачка `g_per_tsp`+`g_per_tbsp`+density.
+
+`applied_axes` — какие оси собраны в этом ответе. `ingredients` / `steps` / `allergens` / `cook_method` / `high_risk_flags` / `nutrition` — уже display.
 
 `available_variants` — ось addon. Переключатель состава только если `has_delta=true`. Иначе клиент показывает свёртку `variations` (`title` + `legacy_text`) и не меняет список.
 
@@ -186,7 +230,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 `scale_mode: manual` у строки: amount как после сборки, плюс клиент показывает «проверьте по исходному рецепту».
 
-`optional: true` — гарнир / подача / «по желанию». Строка в списке есть, в `allergens` блюда не входит.
+`optional: true` — гарнир / подача / «по желанию». Строка в списке есть, в `allergens` блюда и в КБЖУ не входит.
 
 ### `GET /api/guides/grains/` · `GET /api/guides/tips/`
 
@@ -260,7 +304,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 ### `GET /api/recommendations/`
 
-Калькулятор. Фильтры каталога плюс `have=`, `have_group=`, `intent=`. Без `q`. Как считает — [CALCULATOR.md](CALCULATOR.md).
+Калькулятор. Фильтры каталога плюс `have=`, `have_group=`, `intent=`. Без `q`. Без `kcal_max`. КБЖУ не отдаёт. Как считает — [CALCULATOR.md](CALCULATOR.md).
 
 Неизвестный `have` / `have_group` / `intent` → **400**. `intent=` **не** отсекает рецепт (вес). `have=` не отсекает блюда, которые **используют** продукт из кладовки (нехватка — корзины). Блюда, которые «Есть» не берут, на `featured` / `alternatives` не попадают; если таких нет — `featured: null`. Жёсткий отсев — оси и «без чего».
 
@@ -315,6 +359,67 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 Пустые ниши после ETL V1 — штатный `featured: null`, `results: []`.
 
-## Не в спринте 4
+## Не в гостевом срезе (спринт 4)
 
-`POST` что угодно, аккаунты, CSRF-мутации, `/api/pantry/` как склад, граммы кладовки, загрузка фото, JWT, webhooks, query `energy=`, чипы «15 мин / 30 мин» без поля времени в рецепте.
+Query `energy=`, `kcal_max`, чипы «15 мин / 30 мин» без поля времени в рецепте. JWT, webhooks, публичный Next `/api/`.
+
+Аккаунты, CSRF-мутации, `/api/pantry/` как **факт наличия** — [ниже, V2.1](#v21-аккаунты). Граммы кладовки и загрузка фото — V2.2.
+
+## V2.1 аккаунты
+
+План: [ACCOUNTS.md](ACCOUNTS.md). Модели: [DATA-MODEL.md](DATA-MODEL.md). Не включать в OpenAPI среза, пока CURRENT_SPRINT не про A.
+
+Все мутации ниже — CSRF. Письма и сессия — Django, не Next.
+
+### CSRF и «кто я»
+
+| Метод | URL | Кто | Смысл |
+|-------|-----|-----|--------|
+| `GET` | `/api/auth/csrf/` | все | выставить cookie CSRF, `{ "ok": true }` |
+| `GET` | `/api/auth/me/` | все | `{ "authenticated": false }` или `{ "authenticated": true, "email": "…", "is_trusted": false }` |
+
+### Вход / выход
+
+| Метод | URL | Тело | Смысл |
+|-------|-----|------|--------|
+| `POST` | `/api/auth/request-code/` | `{ "email": "user@mail.ru" }` | валидация домена; письмо OTP+ссылка; всегда нейтральный успех (не светить, есть ли аккаунт), кроме **400** на зарубежный домен |
+| `POST` | `/api/auth/verify-code/` | `{ "email", "code" }` | OTP; сессия; `next` не здесь — редирект делает страница |
+| `POST` | `/api/auth/magic-login/` | `{ "token" }` | POST со страницы confirm, не GET |
+| `POST` | `/api/auth/logout/` | — | сжечь сессию |
+| `POST` | `/api/auth/delete-account/` | `{ "confirm": true }` | обезличивание; без confirm — 400 |
+
+GET `/login/confirm?token=` **не** этот API и **не** логинит.
+
+Зарубежный email → `400` `{ "detail": "Для входа используются только почтовые адреса в российских доменах" }`.
+
+### Карточка: гидрация и память
+
+| Метод | URL | Смысл |
+|-------|-----|--------|
+| `GET` | `/api/recipes/<slug>/me/` | гость: `{ "authenticated": false }`. Вошедший: `authenticated`, `favorite`, `my_rating` (1–5 \| null), `last_cooked_at` (ISO \| null) |
+| `GET` | `/api/recipes/<slug>/engagement/` | публично, без PII: `{ "cooked_count", "rating_avg" (null если <3), "rating_count", "community_confirmed" }` |
+| `PUT` | `/api/recipes/<slug>/favorite/` | `{ "favorite": true\|false }` |
+| `POST` | `/api/recipes/<slug>/cooked/` | `{ "variant": code\|null, "equipment": code\|null, "scale_ratio": number\|null, "private_note": string }` → новая строка |
+| `PUT` | `/api/recipes/<slug>/rate/` | `{ "score": 1..5 }` |
+
+`cooked_count` — число `CookReport` со `status=approved`. Не класть engagement в ISR HTML.
+
+### Комментарии и жалобы
+
+| Метод | URL | Смысл |
+|-------|-----|--------|
+| `GET` | `/api/recipes/<slug>/comments/` | только `approved`; `{ "results": [ { "id", "body", "created_at" } ] }` — **без email и user id** |
+| `POST` | `/api/recipes/<slug>/comments/` | `{ "body" }` → `pending` или `approved` по правилам |
+| `POST` | `/api/recipes/<slug>/comments/<id>/delete/` | свой комментарий → `deleted` |
+| `POST` | `/api/complaints/` | `{ "target": "comment"\|"recipe", "comment_id"?, "recipe_slug"?, "reason" }` |
+
+### Кабинет
+
+| Метод | URL | Смысл |
+|-------|-----|--------|
+| `GET` | `/api/me/favorites/` | список семейств, новые сверху; карточка как каталог (slug, title, оси) |
+| `GET` | `/api/me/cooked/` | лента своих отчётов |
+| `GET` | `/api/pantry/` | `{ "items": [ { "kind": "canonical"\|"have_group", "code": "…" } ] }` |
+| `PUT` | `/api/pantry/` | полная замена набора (кнопка «Сохранить в кладовку»); граммов нет |
+
+Неизвестный `kind` / `code` кладовки → `400`, как `have=`.

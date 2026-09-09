@@ -5,6 +5,7 @@
 @import './styles/base.css';
 @import './styles/chrome.css';
 @import './styles/components/controls.css';
+@import './styles/components/art.css';
 @import './styles/components/recipe.css';
 @import './styles/components/guides.css';
 @import './styles/components/cook.css';

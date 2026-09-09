@@ -49,7 +49,7 @@
       "display_name": "картофель",
       "amount": 800,
       "unit": "g",
-      "detail": "обычный, не молодой; очистить",
+      "detail": "обычный, не молодой; очистить, куски 3–4 см",
       "scale_mode": "linear",
       "scalable": true,
       "is_anchor": false,
@@ -61,7 +61,7 @@
       "display_name": "репчатый лук",
       "amount": 200,
       "unit": "g",
-      "detail": "около двух средних",
+      "detail": "около двух средних, дольками",
       "scale_mode": "linear",
       "scalable": true,
       "is_anchor": false,
@@ -191,6 +191,16 @@
             "scale_mode": "linear",
             "scalable": true
           }
+        ],
+        "replace": [
+          {
+            "canonical_id": "potato",
+            "detail": "обычный, не молодой; очистить, кубик 1–1.5 см"
+          },
+          {
+            "canonical_id": "onion",
+            "detail": "полукольцами"
+          }
         ]
       },
       "step_delta": {
@@ -260,6 +270,16 @@
             "scale_mode": "linear",
             "scalable": true
           }
+        ],
+        "replace": [
+          {
+            "canonical_id": "potato",
+            "detail": "обычный, не молодой; очистить, куски 2–3 см"
+          },
+          {
+            "canonical_id": "onion",
+            "detail": "полукольцами"
+          }
         ]
       },
       "step_delta": {
@@ -315,6 +335,18 @@
       "title": "В аэрогриле",
       "has_delta": true,
       "cook_method_override": "air_fryer",
+      "ingredient_delta": {
+        "replace": [
+          {
+            "canonical_id": "potato",
+            "detail": "обычный, не молодой; очистить, дольки около 2 см"
+          },
+          {
+            "canonical_id": "onion",
+            "detail": "крупно"
+          }
+        ]
+      },
       "step_delta": {
         "replace": [
           {

@@ -17,7 +17,7 @@ docker compose -f v2/infra/docker-compose.yml up --build
 
 `.env` не коммитить. `DJANGO_SECRET_KEY` в примере — локальная заглушка, не прод-секрет.
 
-Сайт за Caddy: http://localhost:8080 — **когда** появятся приложения в `v2/backend` и `v2/frontend`. Пока там только README, контейнеры backend/frontend не станут healthy (нет `pyproject.toml` / `package.json`), Caddy не поднимется. Это ожидаемо.
+Сайт за Caddy: http://localhost:8080. Backend (`pyproject.toml`) и frontend (`package.json`) уже в срезе.
 
 Остановка с данными БД: `docker compose -f v2/infra/docker-compose.yml down`. Сброс томов (расширения Postgres живут в томе): `down -v`.
 

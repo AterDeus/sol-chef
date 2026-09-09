@@ -9,6 +9,7 @@ from typing import Any
 
 from apps.recipes.constants import EQUIPMENT
 from apps.recipes.services.allergens import merge_allergen_lists
+from apps.recipes.services.nutrition import CANON_NUTRITION_FIELDS, enrich_lines_from_db
 
 
 class VariantError(Exception):
@@ -32,28 +33,34 @@ def _copy_line(line: dict) -> dict:
     return out
 
 
+def _nutrition_from_ingredient(ing) -> dict:
+    return {field: getattr(ing, field) for field in CANON_NUTRITION_FIELDS}
+
+
 def lines_from_recipe(recipe) -> list[dict]:
     rows = []
     for line in recipe.ingredients.all():
         ing = line.ingredient
-        rows.append(
-            {
-                "canonical_id": ing.canonical_id,
-                "name": line.display_name or ing.title,
-                "amount": line.amount,
-                "amount_max": line.amount_max,
-                "unit": line.unit,
-                "detail": line.detail,
-                "scalable": line.scalable,
-                "scale_mode": line.scale_mode,
-                "is_anchor": line.is_anchor,
-                "optional": bool(line.optional),
-                "position": line.position,
-                "allergens_contains": list(ing.allergens_contains or []),
-                "allergens_may_contain": list(ing.allergens_may_contain or []),
-                "allergens_unknown": list(ing.allergens_unknown or []),
-            }
-        )
+        row = {
+            "canonical_id": ing.canonical_id,
+            "name": line.display_name or ing.title,
+            "amount": line.amount,
+            "amount_max": line.amount_max,
+            "unit": line.unit,
+            "detail": line.detail,
+            "scalable": line.scalable,
+            "scale_mode": line.scale_mode,
+            "is_anchor": line.is_anchor,
+            "optional": bool(line.optional),
+            "nutrition_exclude": bool(line.nutrition_exclude),
+            "nutrition_factor": line.nutrition_factor,
+            "position": line.position,
+            "allergens_contains": list(ing.allergens_contains or []),
+            "allergens_may_contain": list(ing.allergens_may_contain or []),
+            "allergens_unknown": list(ing.allergens_unknown or []),
+        }
+        row.update(_nutrition_from_ingredient(ing))
+        rows.append(row)
     return rows
 
 
@@ -107,6 +114,7 @@ def apply_ingredient_delta(lines: list[dict], delta: dict | None) -> list[dict]:
             continue
         current = out[idx]
         merged = _copy_line(current)
+        old_cid = current.get("canonical_id")
         for key in (
             "canonical_id",
             "name",
@@ -135,6 +143,21 @@ def apply_ingredient_delta(lines: list[dict], delta: dict | None) -> list[dict]:
             merged["optional"] = bool(spec["optional"])
         else:
             merged["optional"] = bool(current.get("optional"))
+        if "nutrition_exclude" in spec:
+            merged["nutrition_exclude"] = bool(spec["nutrition_exclude"])
+        else:
+            merged["nutrition_exclude"] = bool(current.get("nutrition_exclude"))
+        if "nutrition_factor" in spec:
+            merged["nutrition_factor"] = _d(spec.get("nutrition_factor"))
+        elif "nutrition_factor" not in merged:
+            merged["nutrition_factor"] = current.get("nutrition_factor")
+        if merged.get("canonical_id") != old_cid:
+            for field in CANON_NUTRITION_FIELDS:
+                merged[field] = spec.get(field)
+        else:
+            for field in CANON_NUTRITION_FIELDS:
+                if field in spec:
+                    merged[field] = spec[field]
         out[idx] = merged
     next_pos = max((line.get("position") or 0) for line in out) + 1 if out else 0
     for spec in delta.get("add") or []:
@@ -149,13 +172,19 @@ def apply_ingredient_delta(lines: list[dict], delta: dict | None) -> list[dict]:
             "scale_mode": spec.get("scale_mode") or "linear",
             "is_anchor": False,
             "optional": bool(spec.get("optional", False)),
+            "nutrition_exclude": bool(spec.get("nutrition_exclude", False)),
+            "nutrition_factor": _d(spec.get("nutrition_factor")),
             "position": spec.get("position", next_pos),
-            "allergens_contains": list(spec.get("allergens_contains") or spec.get("contains") or []),
+            "allergens_contains": list(
+                spec.get("allergens_contains") or spec.get("contains") or []
+            ),
             "allergens_may_contain": list(
                 spec.get("allergens_may_contain") or spec.get("may_contain") or []
             ),
             "allergens_unknown": list(spec.get("allergens_unknown") or spec.get("unknown") or []),
         }
+        for field in CANON_NUTRITION_FIELDS:
+            added[field] = spec.get(field)
         next_pos = max(next_pos, int(added["position"]) + 1)
         out.append(added)
     return out
@@ -413,6 +442,7 @@ def assemble_recipe(
         addon=addon,
         equipment=equipment,
     )
+    lines = enrich_lines_from_db(lines)
     addons = [item for item in variants if item.axis == "addon"]
     notes = recipe.notes if isinstance(recipe.notes, list) else []
     prep = recipe.prep if isinstance(recipe.prep, list) else []

@@ -1,0 +1,336 @@
+{
+  "id": "yabloki-zapechennye-s-myodom",
+  "title": "Запечённые яблоки с мёдом и орехами",
+  "summary": "Кисло-сладкие яблоки запекают целиком с грецким орехом, корицей и маслом в полости. Мёд поливают сразу после духовки: если положить его до выпечки, он подгорит.",
+  "recipe_family": "baked_fruit",
+  "protein_base": "vegetables",
+  "cook_method": "oven",
+  "dish_type": "dessert",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "servings": 4,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 45,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": [
+    "easy",
+    "one_pan",
+    "light"
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "cottage_cheese",
+      "title": "творог",
+      "aliases": [
+        "творог 9%",
+        "творог 18%",
+        "зернёный творог"
+      ],
+      "allergens_contains": [
+        "milk"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "star_anise",
+      "title": "бадьян",
+      "aliases": [
+        "звёздчатый анис",
+        "звездчатый анис",
+        "анис звёздчатый"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "maple_syrup",
+      "title": "кленовый сироп",
+      "aliases": [
+        "сироп кленовый",
+        "maple"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "ingredient": "walnuts",
+      "quality": 0.82
+    },
+    {
+      "type": "omission",
+      "ingredient": "cinnamon",
+      "quality": 0.95
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "apple",
+      "display_name": "яблоки",
+      "amount": 720,
+      "unit": "g",
+      "detail": "4 средних кисло-сладких ~180 г: Антоновка, Симеренко или Гренни Смит; сладкие рыхлые развалятся",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "walnuts",
+      "display_name": "грецкие орехи",
+      "amount": 30,
+      "unit": "g",
+      "detail": "крупно порубить, в полость",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "honey",
+      "display_name": "мёд",
+      "amount": 40,
+      "unit": "g",
+      "detail": "полить сразу после выпечки, на горячие; в духовку не класть",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "cinnamon",
+      "display_name": "корица",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "молотая, в начинку",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 10,
+      "unit": "g",
+      "detail": "кусочками в полость, не глазурь с начала выпечки",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 180 °C."
+    },
+    {
+      "position": 2,
+      "text": "Яблоки вымыть. Срезать крышечку с плодоножкой. Вынуть сердцевину ножом или выемкой, не протыкая дно."
+    },
+    {
+      "position": 3,
+      "text": "Грецкие орехи крупно порубить, смешать с корицей. Заполнить полости смесью и кусочком масла."
+    },
+    {
+      "position": 4,
+      "text": "Поставить яблоки в форму вертикально, крышечками накрыть. На дно влить 2–3 ст. л. воды.",
+      "equipment_note": "Форма с бортиком, не плоский противень: яблоки покатятся, сок убежит."
+    },
+    {
+      "position": 5,
+      "text": "Запекать, пока нож входит в мякоть без сопротивления, а бока ещё держат форму.",
+      "timer_seconds": 1800,
+      "timer_label": "Запекание",
+      "timer_note": "Около 30 минут на яблоко ~180 г; крупнее — до 40. Ориентир — нож, не таймер"
+    },
+    {
+      "position": 6,
+      "text": "Достать форму. Сразу полить мёдом по полостям и бокам. Мёд в духовку не возвращать — подгорит. Подать тёплыми."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_tvorog",
+      "title": "С творогом внутри",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "cottage_cheese",
+            "display_name": "творог",
+            "amount": 150,
+            "unit": "g",
+            "detail": "9–18%, в начинку; влажный отжать, иначе вытечет",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "egg",
+            "display_name": "яйцо",
+            "amount": 1,
+            "unit": "pcs",
+            "detail": "в начинку, связывает творог",
+            "scale_mode": "whole",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Творог размять с яйцом, рублеными орехами и корицей до густой начинки, не жидкой. Заполнить полости, не утрамбовывая до краёв: яйцо чуть поднимется. Сверху кусочек масла."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [
+          "egg"
+        ],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "asian",
+      "title": "Анисово-имбирная",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "cinnamon"
+          },
+          {
+            "canonical_id": "honey"
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "star_anise",
+            "display_name": "бадьян",
+            "amount": 2,
+            "unit": "pcs",
+            "detail": "звёздочки, растолочь; не гвоздика (cloves)",
+            "scale_mode": "whole",
+            "scalable": true
+          },
+          {
+            "canonical_id": "ginger",
+            "display_name": "имбирь",
+            "amount": 8,
+            "unit": "g",
+            "detail": "свежий, мелко натереть; вместо корицы",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "maple_syrup",
+            "display_name": "кленовый сироп",
+            "amount": 40,
+            "unit": "g",
+            "detail": "вместо мёда, полить после выпечки",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "soy_sauce",
+            "display_name": "соевый соус",
+            "amount": 0.5,
+            "unit": "tsp",
+            "detail": "капля в кленовый сироп, не больше; обычный пшеничный",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Бадьян растолочь в ступке (звёздочки, не гвоздику). Имбирь натереть. Смешать с рублеными орехами. Корицу не класть. Заполнить полости, сверху кусочек масла."
+          },
+          {
+            "position": 6,
+            "text": "Достать форму. Смешать кленовый сироп с каплей соевого соуса и сразу полить горячие яблоки. Мёд не класть. В духовку не возвращать. Подать тёплыми."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [
+          "soy",
+          "gluten"
+        ],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Мёд после, не до",
+      "text": "Мёд в духовке на 180 °C за полчаса обуглится раньше, чем яблоко станет мягким. Полить сразу с противня: горячая мякоть его втянет. Возвращать в духовку «на карамель» не нужно."
+    },
+    {
+      "title": "Сорт",
+      "text": "Нужны кисло-сладкие плотные: Антоновка, Симеренко, Гренни Смит. Сладкие рыхлые (голден, гала) развалятся в кашу и не удержат начинку."
+    },
+    {
+      "title": "Дно полости",
+      "text": "Сердцевину вынимать, не протыкая низ. Дырка на дне — масло, мёд и творог вытекут, яблоко осядет."
+    },
+    {
+      "title": "Вода в форме",
+      "text": "2–3 ст. л. на дно — пар, чтобы низ не пригорел. Больше жидкости даст варку, не запекание."
+    },
+    {
+      "title": "Готовность",
+      "text": "Нож входит без хруста, бока ещё стоят. Передержать — каша, недодержать — твёрдая середина у семечек."
+    },
+    {
+      "title": "Творог",
+      "text": "В варианте с начинкой творог 9–18%, не обезжиренный и не мокрый зернёный без отжима. Яйцо держит массу; без яйца творог вытечет."
+    },
+    {
+      "title": "Пряности",
+      "text": "Звёздочка бадьяна даёт мягкий сладковатый анисовый аромат. Целую гвоздику в тех же количествах не подставляйте: вкус резкий и перебьёт яблоко. Если всё же берёте гвоздику, хватит 1–2 бутонов на всю форму."
+    }
+  ]
+}

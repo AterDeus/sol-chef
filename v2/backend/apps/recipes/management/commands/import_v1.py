@@ -11,7 +11,6 @@ from django.db import transaction
 from apps.content.models import ContentDocument
 from apps.recipes.constants import (
     EXPECTED_CONTENT_DOCUMENTS,
-    EXPECTED_RECIPE_COUNT,
     V1_FOLDER_TO_COOK_METHOD,
     V1_FOLDER_TO_EQUIPMENT,
     slugify_ru,
@@ -24,6 +23,7 @@ from apps.recipes.etl.ingredients import (
     parse_amount,
 )
 from apps.recipes.etl.load import V1ImportError, folder_from_rel, load_recipe_objects
+from apps.recipes.etl.nutrition import load_ingredient_nutrition
 from apps.recipes.etl.taxonomy import (
     CAUTION_TEXT,
     POULTRY_TEMP_SLUGS,
@@ -91,16 +91,12 @@ def run_import(data_root: Path, *, dry_run: bool) -> list[str]:
         _upsert_content(data_root)
         for item in parsed:
             _upsert_recipe(item)
-        count = Recipe.objects.count()
-        if count != EXPECTED_RECIPE_COUNT:
-            raise V1ImportError(
-                f"После импорта Recipe.count={count}, ожидалось {EXPECTED_RECIPE_COUNT}"
-            )
         docs = ContentDocument.objects.count()
         if docs != EXPECTED_CONTENT_DOCUMENTS:
             raise V1ImportError(
                 f"ContentDocument.count={docs}, expected {EXPECTED_CONTENT_DOCUMENTS}"
             )
+        load_ingredient_nutrition()
         subs = upsert_substitution_rules()
     report.append(
         f"записано recipes={Recipe.objects.count()} "

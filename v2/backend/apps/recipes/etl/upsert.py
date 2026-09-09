@@ -23,6 +23,8 @@ def upsert_recipe(item: dict) -> Recipe:
             "scale_mode": item.get("scale_mode") or "linear",
             "scalable": item.get("scalable", True),
             "servings": item.get("servings"),
+            "yield_weight_g": item.get("yield_weight_g"),
+            "yield_kind": item.get("yield_kind"),
             "summary": item.get("summary"),
             "source_name": item.get("source_name"),
             "source_url": item.get("source_url"),
@@ -48,6 +50,7 @@ def upsert_recipe(item: dict) -> Recipe:
     recipe.full_clean(exclude=["search_vector"])
     recipe.save()
 
+    # Title/allergens only — nutrition columns are filled by load_ingredient_nutrition.
     for canon in item.get("new_canons") or []:
         Ingredient.objects.update_or_create(
             canonical_id=canon["canonical_id"],
@@ -87,6 +90,8 @@ def upsert_recipe(item: dict) -> Recipe:
             scalable=bool(line.get("scalable", True)),
             is_anchor=bool(line.get("is_anchor")),
             optional=bool(line.get("optional", False)),
+            nutrition_exclude=bool(line.get("nutrition_exclude")),
+            nutrition_factor=line.get("nutrition_factor"),
             choice_group=line.get("choice_group"),
             display_name=line.get("display_name"),
         )

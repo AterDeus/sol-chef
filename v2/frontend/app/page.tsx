@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { fetchGuide, fetchRecommendations } from '@/lib/api';
 import { hasAnyQuery, queryString } from '@/lib/filters';
-import { pickRandomRecipes, pickRandomTips } from '@/lib/home';
+import { pickRandomRecipes, pickRandomTips, tipSectionIcon } from '@/lib/home';
 import type { SearchParamsRecord, TipsPayload } from '@/lib/types';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
+import { PageIntro } from '@/components/PageArt';
 import { RecipeGrid } from '@/components/RecipeCard';
+import { SpriteIcon } from '@/components/SpriteIcon';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
@@ -28,20 +30,27 @@ export default async function HomePage({
 
   return (
     <>
-      <p className="eyebrow">Личная кулинарная шпаргалка</p>
-      <h1>Кухонная шпаргалка</h1>
-      <p className="lede">
-        Рецепты, справочник круп и мяса, советы Энди. Калькулятор соберёт ужин из того, что есть,
-        и того, что сейчас важнее.
-      </p>
-      <p className="home-actions">
-        <Link className="btn-primary" href="/calculator">
-          Подобрать блюдо
-        </Link>
-        <Link className="btn-secondary" href="/recipes">
-          Все рецепты
-        </Link>
-      </p>
+      <PageIntro
+        scene="home"
+        eyebrow="Личная кулинарная шпаргалка"
+        title="Кухонная шпаргалка"
+        lede={
+          <p className="lede">
+            Рецепты, справочник круп и мяса, советы Энди. Калькулятор соберёт ужин из того, что есть,
+            и того, что сейчас важнее.
+          </p>
+        }
+        actions={
+          <p className="home-actions">
+            <Link className="btn-primary" href="/calculator">
+              Подобрать блюдо
+            </Link>
+            <Link className="btn-secondary" href="/recipes">
+              Все рецепты
+            </Link>
+          </p>
+        }
+      />
 
       <div className="section-head">
         <h2>Рецепты</h2>
@@ -66,6 +75,7 @@ export default async function HomePage({
         <div className="home-tip-grid">
           {featuredTips.map((tip) => (
             <article key={`${tip.sectionId}:${tip.hint}`} className="home-tip">
+              <SpriteIcon name={tipSectionIcon(tip.sectionId)} className="ui-icon home-tip__icon" size={22} />
               <p className="home-tip__section">{tip.sectionTitle}</p>
               <h3>
                 <Link href={`/tips#tip-${tip.sectionId}`}>{tip.hint}</Link>

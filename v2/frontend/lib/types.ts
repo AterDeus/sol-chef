@@ -90,6 +90,31 @@ export type RecommendationsResponse = {
   };
 };
 
+export type NutritionMacros = {
+  kcal: number;
+  protein_g: number;
+  fat_g: number;
+  carbs_g: number;
+};
+
+export type NutritionLine = {
+  kcal_per_100g: number;
+  protein_g_per_100g: number;
+  fat_g_per_100g: number;
+  carbs_g_per_100g: number;
+  grams_per_unit: number;
+  nutrition_factor?: number;
+};
+
+export type RecipeNutrition = {
+  basis: 'raw_input';
+  incomplete: boolean;
+  total: NutritionMacros | null;
+  per_100g_input: NutritionMacros | null;
+  per_100g_cooked: NutritionMacros | null;
+  per_serving: NutritionMacros | null;
+};
+
 export type RecipeIngredient = {
   name: string;
   amount: number | null;
@@ -100,6 +125,9 @@ export type RecipeIngredient = {
   scale_mode: 'linear' | 'gentle' | 'whole' | 'manual';
   is_anchor: boolean;
   optional?: boolean;
+  nutrition_exclude?: boolean;
+  nutrition_skip_hint?: boolean;
+  nutrition_line?: NutritionLine | null;
   display_amount: string;
 };
 
@@ -165,6 +193,9 @@ export type RecipeDetail = {
   allergens: Allergens;
   scaling: Scaling;
   servings?: number | null;
+  yield_weight_g?: number | null;
+  yield_kind?: 'estimated' | 'exact' | null;
+  nutrition?: RecipeNutrition | null;
   ingredients: RecipeIngredient[];
   steps: RecipeStep[];
   variations: RecipeVariation[];

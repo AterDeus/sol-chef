@@ -39,6 +39,7 @@ export function Header() {
           href="/"
           aria-current={pathname === '/' ? 'page' : undefined}
         >
+          <SpriteIcon name="chef-hat" size={22} />
           Кухонная шпаргалка
         </Link>
         <nav className="site-nav" aria-label="Основное меню">

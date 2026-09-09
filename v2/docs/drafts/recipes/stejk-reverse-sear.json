@@ -15,12 +15,15 @@
   "source_name": "Andy Cooks",
   "high_risk_flags": [],
   "time_profile": {
-    "total_minutes": 55
+    "total_minutes": 55,
+    "active_minutes": 15
   },
   "effort_level": 3,
   "washing_level": 3,
   "use_cases": [],
-  "adaptations": [],
+  "adaptations": [
+    { "type": "equipment", "from": "oven", "to": "grill" }
+  ],
   "prep": [
     {
       "text": "Посолить стейк и убрать на решётку в холодильник (сухой посол)",
@@ -256,12 +259,51 @@
         "add": [],
         "remove": []
       }
+    },
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "Финиш на гриле",
+      "has_delta": true,
+      "cook_method_override": "grill",
+      "equipment": "grill",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "Разогреть гриль до сильного жара, чтобы решётка была очень горячей. Низкая температура уже набрана в духовке при 110°C — на гриле только корочка, не сырой цикл. Решётку или поверхность стейка слегка смазать растительным маслом."
+          },
+          {
+            "position": 6,
+            "text": "Выложить отдохнувший стейк на решётку гриля. Сковороду и пресс не использовать."
+          },
+          {
+            "position": 7,
+            "text": "Обжарить с каждой стороны 60–90 секунд до корочки — короче, чем 2–2.5 минуты на сковороде: открытый жар сильнее и быстрее даёт цвет.",
+            "timer_seconds": 60,
+            "timer_label": "Сторона 1",
+            "timer_note": "60–90 секунд на сторону; повторите для второй — короче сковороды (2–2.5 мин)"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
     }
   ],
   "notes": [
     {
       "title": "Прожарка",
-      "text": "Ориентиры внутренней температуры при снятии с огня: rare 40°C, medium rare 46°C, medium 52°C, medium well 57°C, well done 71°C."
+      "text": "Ориентиры внутренней температуры при снятии с огня: с кровью 40°C, средне-слабая 46°C, средняя 52°C, почти полная 57°C, полная 71°C."
     },
     {
       "title": "После духовки",

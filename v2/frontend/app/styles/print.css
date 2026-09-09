@@ -38,6 +38,15 @@
       display: none !important;
     }
 
+    .page-art,
+    .page-intro .page-art {
+      display: none !important;
+    }
+
+    .recipe-list__kbju-hint {
+      display: none !important;
+    }
+
     .wrap {
       animation: none;
       max-width: none;
@@ -81,6 +90,7 @@
     .card,
     .grain-card,
     .caution,
+    .recipe-nutrition,
     .cook-step-card {
       break-inside: avoid;
     }

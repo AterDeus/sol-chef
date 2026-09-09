@@ -1,0 +1,671 @@
+{
+  "_readme": "Typical raw_100g values for sol-chef 2.0. Editorial unless source_id is a stable FDC id. No runtime USDA/FDC HTTP. FDC itself is CC0.",
+  "beef": {
+    "kcal": 187,
+    "protein_g": 21.0,
+    "fat_g": 11.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "beef_chuck": {
+    "kcal": 187,
+    "protein_g": 21.0,
+    "fat_g": 11.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "beef_rump": {
+    "kcal": 187,
+    "protein_g": 21.0,
+    "fat_g": 11.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "beef_ribs": {
+    "kcal": 224,
+    "protein_g": 19.0,
+    "fat_g": 16.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "beef_shank_bone_in": {
+    "kcal": 170,
+    "protein_g": 22.0,
+    "fat_g": 8.5,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "steak": {
+    "kcal": 187,
+    "protein_g": 21.0,
+    "fat_g": 11.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "ribeye": {
+    "kcal": 250,
+    "protein_g": 19.0,
+    "fat_g": 20.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "pork_neck": {
+    "kcal": 263,
+    "protein_g": 16.0,
+    "fat_g": 21.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "lamb_shoulder": {
+    "kcal": 244,
+    "protein_g": 17.0,
+    "fat_g": 19.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "chicken_breast": {
+    "kcal": 120,
+    "protein_g": 22.5,
+    "fat_g": 2.6,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "chicken_thighs": {
+    "kcal": 177,
+    "protein_g": 19.7,
+    "fat_g": 9.8,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "whole_chicken": {
+    "kcal": 215,
+    "protein_g": 18.6,
+    "fat_g": 15.1,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "bacon": {
+    "kcal": 541,
+    "protein_g": 37.0,
+    "fat_g": 42.0,
+    "carbs_g": 1.4,
+    "source": "editorial"
+  },
+  "ham": {
+    "kcal": 145,
+    "protein_g": 21.0,
+    "fat_g": 6.0,
+    "carbs_g": 1.5,
+    "source": "editorial"
+  },
+  "onion": {
+    "kcal": 40,
+    "protein_g": 1.1,
+    "fat_g": 0.1,
+    "carbs_g": 9.3,
+    "source": "editorial",
+    "g_per_pcs": 100
+  },
+  "shallot": {
+    "kcal": 72,
+    "protein_g": 2.5,
+    "fat_g": 0.1,
+    "carbs_g": 16.8,
+    "source": "editorial",
+    "g_per_pcs": 30
+  },
+  "green_onion": {
+    "kcal": 32,
+    "protein_g": 1.8,
+    "fat_g": 0.2,
+    "carbs_g": 7.3,
+    "source": "editorial",
+    "g_per_bunch": 80
+  },
+  "carrot": {
+    "kcal": 41,
+    "protein_g": 0.9,
+    "fat_g": 0.2,
+    "carbs_g": 10,
+    "source": "editorial",
+    "g_per_pcs": 80
+  },
+  "potato": {
+    "kcal": 77,
+    "protein_g": 2.0,
+    "fat_g": 0.1,
+    "carbs_g": 17,
+    "source": "editorial",
+    "g_per_pcs": 150
+  },
+  "cabbage": {
+    "kcal": 25,
+    "protein_g": 1.3,
+    "fat_g": 0.1,
+    "carbs_g": 6.0,
+    "source": "editorial"
+  },
+  "tomato": {
+    "kcal": 18,
+    "protein_g": 0.9,
+    "fat_g": 0.2,
+    "carbs_g": 3.9,
+    "source": "editorial",
+    "g_per_pcs": 100
+  },
+  "tomato_paste": {
+    "kcal": 82,
+    "protein_g": 4.3,
+    "fat_g": 0.5,
+    "carbs_g": 19,
+    "source": "editorial",
+    "g_per_tbsp": 16,
+    "density_g_per_ml": 1.11
+  },
+  "tomato_puree": {
+    "kcal": 38,
+    "protein_g": 1.7,
+    "fat_g": 0.2,
+    "carbs_g": 9.0,
+    "source": "editorial",
+    "density_g_per_ml": 1.04
+  },
+  "garlic": {
+    "kcal": 149,
+    "protein_g": 6.4,
+    "fat_g": 0.5,
+    "carbs_g": 33,
+    "source": "editorial",
+    "g_per_clove": 5,
+    "g_per_pcs": 30
+  },
+  "bell_pepper": {
+    "kcal": 31,
+    "protein_g": 1.0,
+    "fat_g": 0.3,
+    "carbs_g": 6.0,
+    "source": "editorial",
+    "g_per_pcs": 150
+  },
+  "zucchini": {
+    "kcal": 17,
+    "protein_g": 1.2,
+    "fat_g": 0.3,
+    "carbs_g": 3.1,
+    "source": "editorial"
+  },
+  "broccoli": {
+    "kcal": 34,
+    "protein_g": 2.8,
+    "fat_g": 0.4,
+    "carbs_g": 7.0,
+    "source": "editorial"
+  },
+  "cucumber": {
+    "kcal": 15,
+    "protein_g": 0.7,
+    "fat_g": 0.1,
+    "carbs_g": 3.6,
+    "source": "editorial"
+  },
+  "green_peas": {
+    "kcal": 81,
+    "protein_g": 5.4,
+    "fat_g": 0.4,
+    "carbs_g": 14,
+    "source": "editorial"
+  },
+  "champignons": {
+    "kcal": 22,
+    "protein_g": 3.1,
+    "fat_g": 0.3,
+    "carbs_g": 3.3,
+    "source": "editorial"
+  },
+  "apple": {
+    "kcal": 52,
+    "protein_g": 0.3,
+    "fat_g": 0.2,
+    "carbs_g": 14,
+    "source": "editorial",
+    "g_per_pcs": 150
+  },
+  "lemon": {
+    "kcal": 29,
+    "protein_g": 1.1,
+    "fat_g": 0.3,
+    "carbs_g": 9.0,
+    "source": "editorial",
+    "g_per_pcs": 80
+  },
+  "water": {
+    "kcal": 0,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 0,
+    "source": "editorial",
+    "density_g_per_ml": 1
+  },
+  "stock": {
+    "kcal": 10,
+    "protein_g": 1.0,
+    "fat_g": 0.3,
+    "carbs_g": 1.0,
+    "source": "editorial",
+    "density_g_per_ml": 1.01
+  },
+  "vegetable_stock": {
+    "kcal": 8,
+    "protein_g": 0.4,
+    "fat_g": 0.1,
+    "carbs_g": 1.5,
+    "source": "editorial",
+    "density_g_per_ml": 1.01
+  },
+  "stock_or_water": {
+    "kcal": 5,
+    "protein_g": 0.5,
+    "fat_g": 0.1,
+    "carbs_g": 0.5,
+    "source": "editorial",
+    "density_g_per_ml": 1.01
+  },
+  "water_or_stock": {
+    "kcal": 5,
+    "protein_g": 0.5,
+    "fat_g": 0.1,
+    "carbs_g": 0.5,
+    "source": "editorial",
+    "density_g_per_ml": 1.01
+  },
+  "vegetable_oil": {
+    "kcal": 884,
+    "protein_g": 0,
+    "fat_g": 100,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tsp": 4.5,
+    "g_per_tbsp": 13.6,
+    "density_g_per_ml": 0.92
+  },
+  "olive_oil": {
+    "kcal": 884,
+    "protein_g": 0,
+    "fat_g": 100,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tsp": 4.5,
+    "g_per_tbsp": 13.6,
+    "density_g_per_ml": 0.91
+  },
+  "sunflower_oil": {
+    "kcal": 884,
+    "protein_g": 0,
+    "fat_g": 100,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tsp": 4.5,
+    "g_per_tbsp": 13.6,
+    "density_g_per_ml": 0.92
+  },
+  "butter": {
+    "kcal": 717,
+    "protein_g": 0.9,
+    "fat_g": 81,
+    "carbs_g": 0.1,
+    "source": "editorial",
+    "g_per_tbsp": 14,
+    "g_per_tsp": 4.7
+  },
+  "wheat_flour": {
+    "kcal": 364,
+    "protein_g": 10.0,
+    "fat_g": 1.0,
+    "carbs_g": 76,
+    "source": "editorial",
+    "g_per_tbsp": 8
+  },
+  "corn_starch": {
+    "kcal": 381,
+    "protein_g": 0.3,
+    "fat_g": 0.1,
+    "carbs_g": 91,
+    "source": "editorial",
+    "g_per_tbsp": 8,
+    "g_per_tsp": 2.7
+  },
+  "rice": {
+    "kcal": 365,
+    "protein_g": 7.0,
+    "fat_g": 0.6,
+    "carbs_g": 80,
+    "source": "editorial"
+  },
+  "buckwheat": {
+    "kcal": 343,
+    "protein_g": 13.0,
+    "fat_g": 3.4,
+    "carbs_g": 72,
+    "source": "editorial"
+  },
+  "spaghetti": {
+    "kcal": 371,
+    "protein_g": 13.0,
+    "fat_g": 1.5,
+    "carbs_g": 75,
+    "source": "editorial"
+  },
+  "bread": {
+    "kcal": 265,
+    "protein_g": 9.0,
+    "fat_g": 3.2,
+    "carbs_g": 49,
+    "source": "editorial",
+    "g_per_slice": 30
+  },
+  "egg": {
+    "kcal": 143,
+    "protein_g": 13.0,
+    "fat_g": 10.0,
+    "carbs_g": 1.0,
+    "source": "editorial",
+    "g_per_pcs": 50
+  },
+  "eggs": {
+    "kcal": 143,
+    "protein_g": 13.0,
+    "fat_g": 10.0,
+    "carbs_g": 1.0,
+    "source": "editorial",
+    "g_per_pcs": 50
+  },
+  "egg_white": {
+    "kcal": 52,
+    "protein_g": 10.9,
+    "fat_g": 0.2,
+    "carbs_g": 0.7,
+    "source": "editorial",
+    "g_per_pcs": 33
+  },
+  "sour_cream": {
+    "kcal": 206,
+    "protein_g": 2.8,
+    "fat_g": 20.0,
+    "carbs_g": 3.2,
+    "source": "editorial",
+    "g_per_tbsp": 15,
+    "density_g_per_ml": 0.99
+  },
+  "milk": {
+    "kcal": 60,
+    "protein_g": 3.2,
+    "fat_g": 3.2,
+    "carbs_g": 4.8,
+    "source": "editorial",
+    "density_g_per_ml": 1.03
+  },
+  "yogurt": {
+    "kcal": 61,
+    "protein_g": 3.5,
+    "fat_g": 3.3,
+    "carbs_g": 4.7,
+    "source": "editorial",
+    "density_g_per_ml": 1.03
+  },
+  "hard_cheese": {
+    "kcal": 357,
+    "protein_g": 27.0,
+    "fat_g": 28.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "cheese": {
+    "kcal": 350,
+    "protein_g": 25.0,
+    "fat_g": 27.0,
+    "carbs_g": 1.3,
+    "source": "editorial"
+  },
+  "parmesan": {
+    "kcal": 392,
+    "protein_g": 36.0,
+    "fat_g": 26.0,
+    "carbs_g": 3.2,
+    "source": "editorial"
+  },
+  "soy_sauce": {
+    "kcal": 53,
+    "protein_g": 8.1,
+    "fat_g": 0.1,
+    "carbs_g": 4.9,
+    "source": "editorial",
+    "g_per_tbsp": 16,
+    "g_per_tsp": 5,
+    "density_g_per_ml": 1.12
+  },
+  "baking_soda": {
+    "kcal": 0,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tsp": 4.6
+  },
+  "salt": {
+    "kcal": 0,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tsp": 6,
+    "g_per_tbsp": 18
+  },
+  "coarse_salt": {
+    "kcal": 0,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tsp": 5
+  },
+  "sugar": {
+    "kcal": 387,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 100,
+    "source": "editorial",
+    "g_per_tsp": 4,
+    "g_per_tbsp": 12.5
+  },
+  "powdered_sugar": {
+    "kcal": 389,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 100,
+    "source": "editorial",
+    "g_per_tbsp": 8
+  },
+  "honey": {
+    "kcal": 304,
+    "protein_g": 0.3,
+    "fat_g": 0,
+    "carbs_g": 82,
+    "source": "editorial",
+    "g_per_tbsp": 21,
+    "g_per_tsp": 7,
+    "density_g_per_ml": 1.42
+  },
+  "walnuts": {
+    "kcal": 654,
+    "protein_g": 15.0,
+    "fat_g": 65.0,
+    "carbs_g": 14,
+    "source": "editorial"
+  },
+  "almond": {
+    "kcal": 579,
+    "protein_g": 21.0,
+    "fat_g": 50.0,
+    "carbs_g": 22,
+    "source": "editorial"
+  },
+  "sesame": {
+    "kcal": 573,
+    "protein_g": 18.0,
+    "fat_g": 50.0,
+    "carbs_g": 23,
+    "source": "editorial",
+    "g_per_tsp": 3
+  },
+  "mustard": {
+    "kcal": 66,
+    "protein_g": 4.4,
+    "fat_g": 3.3,
+    "carbs_g": 5.8,
+    "source": "editorial",
+    "g_per_tsp": 5,
+    "g_per_tbsp": 15
+  },
+  "black_pepper": {
+    "kcal": 251,
+    "protein_g": 10.0,
+    "fat_g": 3.3,
+    "carbs_g": 64,
+    "source": "editorial",
+    "g_per_tsp": 2.3
+  },
+  "fresh_black_pepper": {
+    "kcal": 251,
+    "protein_g": 10.0,
+    "fat_g": 3.3,
+    "carbs_g": 64,
+    "source": "editorial",
+    "g_per_tsp": 2.3
+  },
+  "paprika": {
+    "kcal": 282,
+    "protein_g": 14.0,
+    "fat_g": 13.0,
+    "carbs_g": 54,
+    "source": "editorial",
+    "g_per_tsp": 2.3
+  },
+  "vinegar": {
+    "kcal": 18,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 0.4,
+    "source": "editorial",
+    "g_per_tbsp": 15,
+    "density_g_per_ml": 1.01
+  },
+  "vinegar_9": {
+    "kcal": 18,
+    "protein_g": 0,
+    "fat_g": 0,
+    "carbs_g": 0.4,
+    "source": "editorial",
+    "g_per_tbsp": 15,
+    "density_g_per_ml": 1.01
+  },
+  "balsamic_vinegar": {
+    "kcal": 88,
+    "protein_g": 0.5,
+    "fat_g": 0,
+    "carbs_g": 17,
+    "source": "editorial",
+    "g_per_tbsp": 16,
+    "density_g_per_ml": 1.2
+  },
+  "white_wine": {
+    "kcal": 82,
+    "protein_g": 0.1,
+    "fat_g": 0,
+    "carbs_g": 2.6,
+    "source": "editorial",
+    "density_g_per_ml": 0.99
+  },
+  "canned_beans": {
+    "kcal": 94,
+    "protein_g": 6.0,
+    "fat_g": 0.4,
+    "carbs_g": 17,
+    "source": "editorial"
+  },
+  "salmon_fillet": {
+    "kcal": 208,
+    "protein_g": 20.0,
+    "fat_g": 13.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "trout_fillet": {
+    "kcal": 148,
+    "protein_g": 21.0,
+    "fat_g": 7.0,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "zander": {
+    "kcal": 93,
+    "protein_g": 19.0,
+    "fat_g": 1.2,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "mayonnaise": {
+    "kcal": 680,
+    "protein_g": 1.0,
+    "fat_g": 75.0,
+    "carbs_g": 1.5,
+    "source": "editorial",
+    "g_per_tbsp": 15
+  },
+  "cream": {
+    "kcal": 196,
+    "protein_g": 2.7,
+    "fat_g": 20.0,
+    "carbs_g": 3.0,
+    "source": "editorial",
+    "density_g_per_ml": 1.0
+  },
+  "heavy_cream": {
+    "kcal": 340,
+    "protein_g": 2.1,
+    "fat_g": 36.0,
+    "carbs_g": 2.8,
+    "source": "editorial",
+    "density_g_per_ml": 1.0
+  },
+  "ghee": {
+    "kcal": 876,
+    "protein_g": 0.3,
+    "fat_g": 99.5,
+    "carbs_g": 0,
+    "source": "editorial",
+    "g_per_tbsp": 13
+  },
+  "lard": {
+    "kcal": 902,
+    "protein_g": 0,
+    "fat_g": 100,
+    "carbs_g": 0,
+    "source": "editorial"
+  },
+  "condensed_milk": {
+    "kcal": 321,
+    "protein_g": 7.9,
+    "fat_g": 8.7,
+    "carbs_g": 54,
+    "source": "editorial",
+    "g_per_tbsp": 19,
+    "density_g_per_ml": 1.3
+  },
+  "peanuts": {
+    "kcal": 567,
+    "protein_g": 26.0,
+    "fat_g": 49.0,
+    "carbs_g": 16,
+    "source": "editorial"
+  }
+}

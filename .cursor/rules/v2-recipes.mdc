@@ -8,7 +8,7 @@ alwaysApply: false
 
 Читать `v2/docs/RECIPE.md`, коды только из `v2/docs/VOCAB.md`, температуры и аллергены — `v2/docs/SAFETY.md`.
 
-- Волну новых не начинать без фразы «стартуй волну 1». Оверлей 43 — по CURRENT_SPRINT / RECIPE.md.
+- Волну новых и оверлей осей не начинать без явного старта в чате / CURRENT_SPRINT («стартуй волну N» / «стартуй оверлей осей N»). Оверлей 43 — по CURRENT_SPRINT / RECIPE.md.
 - Автор Grok → валидатор-скрипт → модератор Terra Medium. В промпт: чеклист готовки/вкуса + JSON рецепта. Явный запрет ходить по репо (нет Read/Grep). `editorial_tested` не ставить.
 - Коды метода: `oven` `pan_fry` `stew` `boil` `grill` `steam` `no_cook`, не `duhovka`.
 - `unknown` аллерген ≠ «нет». High-risk — блок «Осторожно» + человек.

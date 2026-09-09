@@ -1,0 +1,412 @@
+{
+  "id": "mapo-tofu",
+  "title": "Мапо тофу",
+  "summary": "Мягкий тофу тушат в остром соусе из доубаньцзяна и сычуаньского перца со свиным фаршем. Пасту и сычуань сначала прогревают в масле — иначе не будет красного масла и онемения. Тофу ложкой не мешать: только покачивать сковороду.",
+  "recipe_family": "mapo",
+  "protein_base": "pork",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "mince"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [
+    "ground_meat"
+  ],
+  "caution_text": "Свиной фарш доводить до 71 °C в центре массы: бактерии распределены по всему объёму, сырая серединка недопустима. Rare запрещён. Не давать детям непрожаренным.",
+  "time_profile": {
+    "total_minutes": 25,
+    "active_minutes": 20
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "one_pan"
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "tofu",
+      "title": "тофу",
+      "aliases": [
+        "тофу мягкий",
+        "шелковый тофу",
+        "тофу шелковый"
+      ],
+      "allergens_contains": [
+        "soy"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "pork_mince",
+      "title": "свиной фарш",
+      "aliases": [
+        "фарш свиной"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "doubanjiang",
+      "title": "доубаньцзян",
+      "aliases": [
+        "паста доубаньцзян",
+        "чили-бобовая паста"
+      ],
+      "allergens_contains": [
+        "soy",
+        "gluten"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "sichuan_pepper",
+      "title": "сычуаньский перец",
+      "aliases": [
+        "перец сычуаньский",
+        "хуацзяо"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "shiitake",
+      "title": "шиитаке",
+      "aliases": [
+        "грибы шиитаке",
+        "шиитаке сушёные"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "ingredient": "sichuan_pepper",
+      "quality": 0.85
+    },
+    {
+      "type": "substitution",
+      "from": "pork_mince",
+      "to": "shiitake",
+      "quality": 0.8
+    }
+  ],
+  "prep": [
+    {
+      "text": "Разморозить фарш заранее, не класть на сковороду ледяным комом."
+    },
+    {
+      "text": "Тофу слить. Не давить прессом: мягкий развалится."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "tofu",
+      "display_name": "тофу",
+      "amount": 300,
+      "unit": "g",
+      "detail": "мягкий или шелковый, не плотный для жарки; кубики ~2 см",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "pork_mince",
+      "display_name": "свиной фарш",
+      "amount": 150,
+      "unit": "g",
+      "detail": "размороженный",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "doubanjiang",
+      "display_name": "доубаньцзян",
+      "amount": 30,
+      "unit": "g",
+      "detail": "чили-бобовая паста, не томатная аджика",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "sichuan_pepper",
+      "display_name": "сычуаньский перец",
+      "amount": 2,
+      "unit": "g",
+      "detail": "горошек; слегка раздавить",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "detail": "мелко",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "ginger",
+      "display_name": "имбирь",
+      "amount": 10,
+      "unit": "g",
+      "detail": "свежий, мелко",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "corn_starch",
+      "display_name": "кукурузный крахмал",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "развести в 2 ст. л. холодного бульона",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "stock",
+      "display_name": "бульон",
+      "amount": 150,
+      "unit": "ml",
+      "detail": "куриный или овощной; вода допустима — см. заметку",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "detail": "для прогрева пасты; остаётся в соусе",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Слить тофу и нарезать кубиками около 2 см. Фарш размять."
+    },
+    {
+      "position": 2,
+      "text": "Крахмал размешать в 2 ст. л. холодного бульона до гладкости. Остальной бульон оставить."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть масло на сковороде на среднем огне. Сначала всыпать сычуаньский перец, затем доубаньцзян. Жарить, помешивая, пока масло не покраснеет и не запахнет.",
+      "timer_seconds": 60,
+      "timer_label": "Паста в масле",
+      "timer_note": "45–60 с; ориентир — красное масло, не горелая паста"
+    },
+    {
+      "position": 4,
+      "text": "Добавить чеснок и имбирь, помешать до запаха.",
+      "timer_seconds": 20,
+      "timer_label": "Чеснок"
+    },
+    {
+      "position": 5,
+      "text": "Выложить фарш, разбить комки. Жарить, пока масса не перестанет быть сырой и не наберёт 71 °C в центре.",
+      "timer_seconds": 180,
+      "timer_label": "Фарш",
+      "timer_note": "3–4 минуты; ориентир — 71 °C, не цвет",
+      "target_internal_temperature_c": 71,
+      "equipment_note": "Не перегружать сковороду: фарш тонким слоем, иначе тушится в соку и не дойдёт внутри. При увеличении порции — партиями."
+    },
+    {
+      "position": 6,
+      "text": "Влить остальной бульон и довести до слабого кипения."
+    },
+    {
+      "position": 7,
+      "text": "Аккуратно выложить тофу. Ложкой не мешать: покачивать сковороду, чтобы кубики покрылись соусом.",
+      "timer_seconds": 120,
+      "timer_label": "Тофу",
+      "timer_note": "1–2 минуты на слабом кипении"
+    },
+    {
+      "position": 8,
+      "text": "Влить крахмальный раствор и покачать сковороду, пока соус слегка не загустеет. С огня."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "vegetarian_mushrooms",
+      "title": "Вегетарианская",
+      "has_delta": true,
+      "caution_text_override": "Фарша нет: только культивируемые шиитаке из магазина, не лесные грибы. 71 °C проверять не нужно.",
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "pork_mince"
+          }
+        ],
+        "replace": [
+          {
+            "canonical_id": "stock",
+            "display_name": "вода замачивания шиитаке",
+            "amount": 150,
+            "unit": "ml",
+            "detail": "слить с грибов, долить водой до 150 мл если мало",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "shiitake",
+            "display_name": "шиитаке",
+            "amount": 30,
+            "unit": "g",
+            "detail": "сушёные культивируемые, не лесные; замочить, отжать, крупно порубить",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 0,
+            "text": "Замочить сушёные шиитаке в кипятке. Когда размягчатся, отжать и крупно порубить. 150 мл жидкости замачивания — вместо бульона.",
+            "timer_seconds": 1200,
+            "timer_label": "Замачивание",
+            "timer_note": "15–20 минут, пока грибы не станут мягкими"
+          }
+        ],
+        "replace": [
+          {
+            "position": 1,
+            "text": "Слить тофу и нарезать кубиками около 2 см. Фарша нет — шиитаке уже порублены."
+          },
+          {
+            "position": 5,
+            "text": "Выложить рубленые шиитаке в масло с пастой и обжарить до запаха. 71 °C не проверять.",
+            "timer_seconds": 120,
+            "timer_label": "Шиитаке",
+            "timer_note": "1–2 минуты",
+            "target_internal_temperature_c": null
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": [
+          "ground_meat"
+        ]
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "no_mala",
+      "title": "Без мала",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "sichuan_pepper"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Разогреть масло на сковороде на среднем огне. Вложить доубаньцзян без сычуаньского перца. Жарить, помешивая, пока масло не покраснеет.",
+            "timer_seconds": 60,
+            "timer_label": "Паста в масле",
+            "timer_note": "45–60 с; ориентир — красное масло, не горелая паста"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Тофу",
+      "text": "Нужен мягкий или шелковый, не плотный для жарки. Ложкой не мешать — кубики развалятся. Только покачивать сковороду."
+    },
+    {
+      "title": "Порядок масла",
+      "text": "Сычуань и доубаньцзян в масле первыми, до фарша и тофу. Иначе не выйдет красное масло и онемение мала."
+    },
+    {
+      "title": "Фарш",
+      "text": "Свиной фарш нельзя оставлять розовым внутри: бактерии по всему объёму. Довести до 71 °C. Толстый слой на сковороде тушится в соку и не доходит."
+    },
+    {
+      "title": "Доубаньцзян",
+      "text": "Это чили-бобовая паста, не томатная аджика и не чили-масло. Соль в конце почти не нужна: паста уже солёная. Без неё блюдо не мапо."
+    },
+    {
+      "title": "Бульон или вода",
+      "text": "Вода допустима. Магазинный бульон часто с сельдереем — смотрите состав."
+    },
+    {
+      "title": "Шиитаке",
+      "text": "В вегетарианском варианте только культивируемые шиитаке из магазина, не лесные и не смеси «лесных». Воду замачивания процедить в соус."
+    }
+  ]
+}

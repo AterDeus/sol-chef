@@ -4,22 +4,23 @@
 
 ## Сейчас
 
-- Фокус: **оверлей 43** — [CURRENT_SPRINT.md](../CURRENT_SPRINT.md).
-- КБЖУ: только черновик на разбор, канон не менялся.
+- Фокус: заготовки — параллель вс считает агент анализа один раз, не приложение. Код не трогали.
 
 ## Сделано в этой сессии
 
-- Черновик КБЖУ ужесточён по второму разбору: [drafts/NUTRITION.md](drafts/NUTRITION.md) — `per_100g_input`, базис только `raw_100g`, exclude целиком, проекция строки не второй API. Канон не менялся.
+- Уточнение: «солвер параллели» нужен для **готовых наборов**, как разовый прогон агента → `weekend_timeline`. Калькулятор и runtime Django — нет.
+- Карта, ТЗ §6.1, бэклог WEEKLY-PREP.
 
 ## Ждёт
 
-- Оверлей 43. `import_draft --accepted`, когда человек скажет.
-- Разбор NUTRITION.md; без «да» в HUMAN БЖУ остаётся вне скоупа DEFAULTS.
+- Явная фраза **«стартуй анализ заготовок»**.
+- Спринт кода `/prep` и пятого таба — отдельно.
+- Cutover по-прежнему без аккаунтов.
 
 ## Как смотреть
 
-Черновик: `v2/docs/drafts/NUTRITION.md`. Эталон и Compose — по CURRENT_SPRINT, не по этому файлу.
+[drafts/WEEKLY-PREP.md](drafts/WEEKLY-PREP.md) → [WEEKLY-PREP-MAP.md](drafts/WEEKLY-PREP-MAP.md) → [WEEKLY-PREP-TZ.md](drafts/WEEKLY-PREP-TZ.md). Сайт: http://localhost:8080/.
 
 ## Не делать
 
-- Кодить КБЖУ / писать `kcal` в JSON рецептов. Runtime USDA. Переносить таблицы черновика в DATA-MODEL. Писать волну в корневой `data/recipes/`. Runtime LLM. Ломать V1. Ставить `editorial_tested`.
+- Анализ без фразы старта. Код наборов и пятый таб в срезе 2.0. Корень V1.

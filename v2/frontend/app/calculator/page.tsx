@@ -4,6 +4,7 @@ import { hasAnyQuery } from '@/lib/filters';
 import type { SearchParamsRecord } from '@/lib/types';
 import { CalculatorAsk } from '@/components/CalculatorAsk';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
+import { PageIntro } from '@/components/PageArt';
 import { SolutionBoard } from '@/components/RecipeCard';
 
 export const dynamic = 'force-dynamic';
@@ -24,12 +25,18 @@ export default async function CalculatorPage({
 
   return (
     <>
-      <p className="eyebrow">Подбор</p>
-      <h1>Калькулятор</h1>
-      <p className="lede">
-        Напишите, что есть дома, или выберите, что сейчас важнее. Система сама соберёт блюдо и
-        подскажет, почему.
-      </p>
+      <PageIntro
+        scene="calculator"
+        showArt={!asked}
+        eyebrow="Подбор"
+        title="Калькулятор"
+        lede={
+          <p className="lede">
+            Напишите, что есть дома, или выберите, что сейчас важнее. Система сама соберёт блюдо и
+            подскажет, почему.
+          </p>
+        }
+      />
       <CalculatorAsk sp={sp} groups={pantry.ok ? pantry.data.groups : []} />
       {asked && (
         <p style={{ marginBottom: 16 }}>

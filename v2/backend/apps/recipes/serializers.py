@@ -4,6 +4,11 @@ from decimal import Decimal
 
 from apps.recipes.models import Recipe
 from apps.recipes.services.assemble import AssembledRecipe, catalog_allergens, pick_anchor
+from apps.recipes.services.nutrition import (
+    compute_recipe_nutrition,
+    nutrition_line_projection,
+    nutrition_skip_hint,
+)
 from apps.recipes.services.scale import (
     ScaleResult,
     format_display_amount,
@@ -75,7 +80,10 @@ def serialize_display_line(line: dict, scale: ScaleResult) -> dict:
         "scale_mode": line.get("scale_mode") or "linear",
         "is_anchor": bool(line.get("is_anchor")),
         "optional": bool(line.get("optional")),
+        "nutrition_exclude": bool(line.get("nutrition_exclude")),
+        "nutrition_skip_hint": nutrition_skip_hint(line),
         "display_amount": format_display_amount(amount, line["unit"], amount_max),
+        "nutrition_line": nutrition_line_projection(line),
     }
 
 
@@ -122,6 +130,13 @@ def serialize_recipe_detail(
             "base_anchor": base_anchor,
             "applied": scale.applied,
         }
+    nutrition = compute_recipe_nutrition(
+        assembled.ingredients,
+        servings=recipe.servings,
+        ratio=scale.ratio,
+        scaling_enabled=scale.enabled,
+        yield_weight_g=recipe.yield_weight_g,
+    )
     return {
         "slug": recipe.slug,
         "title": recipe.title,
@@ -140,8 +155,11 @@ def serialize_recipe_detail(
         "high_risk_flags": assembled.high_risk_flags,
         "caution_text": assembled.caution_text,
         "allergens": assembled.allergens,
+        "nutrition": nutrition,
         "scaling": scaling,
         "servings": recipe.servings,
+        "yield_weight_g": _num(recipe.yield_weight_g),
+        "yield_kind": recipe.yield_kind,
         "ingredients": ingredients,
         "steps": steps,
         "variations": assembled.variations,

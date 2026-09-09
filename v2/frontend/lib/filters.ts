@@ -1,4 +1,5 @@
 import type { PantryGroup, SearchParamsRecord } from './types';
+import { bookChapterById, chapterIdForBase, type BookChapter } from './vocab';
 
 export const FILTER_KEYS = [
   'protein_base',
@@ -85,10 +86,31 @@ export function toggleHref(
 }
 
 const DROP_WHEN: Record<string, string[]> = {
+  chapter: ['protein_base', 'cook_method', 'equipment', 'cuts', 'page'],
   protein_base: ['cook_method', 'equipment', 'cuts', 'page'],
   cook_method: ['equipment', 'page'],
   equipment: ['page'],
 };
+
+export function resolveBookChapter(sp: SearchParamsRecord): {
+  chapter: BookChapter | null;
+  selectedBases: string[];
+} {
+  const chapterId = valuesOf(sp, 'chapter')[0];
+  const selected = valuesOf(sp, 'protein_base');
+  let chapter = bookChapterById(chapterId) ?? null;
+  if (!chapter && selected.length) {
+    chapter = bookChapterById(chapterIdForBase(selected[0])) ?? null;
+  }
+  const selectedBases = chapter
+    ? selected.filter((code) =>
+        chapter.bases.length
+          ? (chapter.bases as readonly string[]).includes(code)
+          : true,
+      )
+    : selected;
+  return { chapter, selectedBases };
+}
 
 export function setHref(
   pathname: string,

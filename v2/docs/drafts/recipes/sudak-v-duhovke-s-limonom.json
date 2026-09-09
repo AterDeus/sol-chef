@@ -19,14 +19,35 @@
   },
   "effort_level": 2,
   "washing_level": 2,
-  "use_cases": ["easy", "one_pan", "budget"],
-  "adaptations": [],
+  "use_cases": [
+    "easy",
+    "one_pan",
+    "budget"
+  ],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "oven",
+      "to": "pan_fry",
+      "quality": 0.82
+    },
+    {
+      "type": "equipment",
+      "from": "oven",
+      "to": "skillet",
+      "quality": 0.82
+    }
+  ],
   "new_ingredients": [
     {
       "canonical_id": "river_trout",
       "title": "речная форель",
-      "aliases": ["форель речная"],
-      "allergens_contains": ["fish"],
+      "aliases": [
+        "форель речная"
+      ],
+      "allergens_contains": [
+        "fish"
+      ],
       "allergens_may_contain": [],
       "allergens_unknown": []
     }
@@ -158,6 +179,56 @@
   ],
   "variants": [
     {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разделать судака на крупные куски филе: целая тушка 900 г на сковороду в один слой не ляжет. Обсушить, посолить и поперчить."
+          },
+          {
+            "position": 2,
+            "text": "Лук и половину лимона нарезать: лук тонко к сковороде, лимон и укроп — часть к рыбе, часть к подаче. Брюшко целой тушки здесь не набивают."
+          },
+          {
+            "position": 3,
+            "text": "Разогреть масло на сковороде. Выложить лук, сверху филе кожей вниз партиями в один слой.",
+            "equipment_note": "Партии: не перегружать сковороду, иначе филе сломается при перевороте и будет тушиться в соку."
+          },
+          {
+            "position": 4,
+            "text": "Жарить до золотистой кожи, перевернуть один раз широкой лопаткой, не ломая филе. Это короче 25 минут духовки.",
+            "timer_seconds": 660,
+            "timer_label": "Сковорода",
+            "timer_note": "5–6 минут первой стороны и 4–5 после переворота на партию; не таймер противня"
+          },
+          {
+            "position": 5,
+            "text": "Проверить самую толстую часть: не ниже 63 °C или мясо разделяется на влажные хлопья. Если ниже — ещё минуту-две, не разламывая кусок.",
+            "timer_note": "Внутренняя температура: 63 °C",
+            "target_internal_temperature_c": 63
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
       "axis": "addon",
       "code": "river_trout",
       "title": "Речная форель",
@@ -219,7 +290,10 @@
         "unknown_add": [],
         "unknown_remove": []
       },
-      "high_risk_delta": { "add": [], "remove": [] }
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
     }
   ],
   "notes": [
@@ -236,8 +310,8 @@
       "text": "Брать целого очищенного и потрошёного судака около 900 г. Филе без брюшка в эту схему не подставлять: некуда класть лук, лимон и укроп."
     },
     {
-      "title": "Лавровый лист",
-      "text": "Два листа на противень по желанию: на вкус почти не влияют, без них блюдо то же."
+      "title": "Травы для рыбы",
+      "text": "Судак деликатный: два лавровых листа на противне почти не слышны, без них блюдо то же. Сильнее работают лимон, укроп и петрушка в брюшке — их уже кладут в рецепте."
     },
     {
       "title": "Форель",

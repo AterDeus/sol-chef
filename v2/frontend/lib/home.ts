@@ -2,6 +2,23 @@ import type { RecipeCardData, TipItem, TipsPayload } from './types';
 
 export const HOME_SAMPLE_SIZE = 6;
 
+const TIP_SECTION_ICON: Record<string, string> = {
+  '01': 'clipboard-list',
+  '02': 'utensils',
+  '03': 'flame',
+  '04': 'droplets',
+  '05': 'snowflake',
+  '06': 'scale',
+  '07': 'sun',
+  '08': 'chef-hat',
+  '09': 'beef',
+  '10': 'circle-check',
+};
+
+export function tipSectionIcon(sectionId: string): string {
+  return TIP_SECTION_ICON[sectionId] ?? 'chef-hat';
+}
+
 export type FeaturedTip = {
   sectionId: string;
   sectionTitle: string;

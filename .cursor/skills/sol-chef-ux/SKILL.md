@@ -10,6 +10,6 @@ description: Analyzes and proposes sol-chef 2.0 information architecture and scr
 Переигровка: вход `v2/docs/UX.md`, правка proposal.
 
 - Живой V1: корень репо, `python -m http.server 3456`.
-- `v2/preview/` не смотреть и не продолжать.
-- Не писать Next/Django. Не менять корневой сайт. Токены только из `css/global.css`.
+- `v2/preview/` не смотреть, не продолжать и не восстанавливать.
+- Этот скилл не пишет код приложения. Next/Django — только в `v2/` по CURRENT_SPRINT. Не менять корневой сайт. Токены только из `css/global.css`.
 - Принятое в `v2/docs/HUMAN.md` §3 (включая D+) не отменять без причины.

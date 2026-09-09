@@ -21,6 +21,7 @@ from apps.recipes.constants import (
     UNIT,
     USE_CASE,
     VARIANT_AXIS,
+    YIELD_KIND,
 )
 from apps.recipes.etl.taxonomy import TEMP_REQUIRED_SLUGS
 
@@ -39,6 +40,18 @@ ALLERGEN_DELTA_KEYS = (
     "unknown_remove",
 )
 EMPTY_ALLERGEN_DELTA = {key: [] for key in ALLERGEN_DELTA_KEYS}
+FORBIDDEN_RECIPE_NUTRITION_KEYS = frozenset(
+    {
+        "kcal",
+        "nutrition",
+        "protein_g",
+        "fat_g",
+        "carbs_g",
+        "per_serving",
+        "per_100g_cooked",
+        "per_100g_input",
+    }
+)
 
 MIN_NOTES_OVERLAY = 3
 MAX_NOTES = 10
@@ -87,6 +100,9 @@ def validate_draft(
         err("агент не ставит editorial_tested")
     if raw.get("tags") or raw.get("category"):
         err("tags/category — поля V1, не писать")
+    for key in FORBIDDEN_RECIPE_NUTRITION_KEYS:
+        if key in raw:
+            err(f"ключ {key} на рецепте запрещён")
 
     _enum("protein_base", raw.get("protein_base"), PROTEIN_BASE, err)
     _enum("cook_method", raw.get("cook_method"), COOK_METHOD, err)
@@ -104,6 +120,7 @@ def validate_draft(
         _enum("scale_mode", raw.get("scale_mode"), SCALE_MODE, err)
     if raw.get("scale_mode") == "fixed":
         err("scale_mode=fixed нет; это scalable=false")
+    _check_yield(raw, err)
 
     if overlay:
         _check_overlay_profile(raw, err)
@@ -219,6 +236,7 @@ def validate_draft(
         for key in LINE_ALLERGEN_KEYS:
             if key in line:
                 err(f"{cid}: аллергены только в реестре Ingredient, не в строке рецепта")
+        _check_line_nutrition(line, cid, err)
 
     if anchors > 1:
         err("больше одного is_anchor")
@@ -280,9 +298,12 @@ def validate_draft(
         if "whole_bird" in cuts:
             if not ({72, 82} <= targets):
                 err("целая птица: нужны target 72 и 82")
-        elif "thigh" in cuts or "drumstick" in cuts:
+        elif "drumstick" in cuts:
             if not targets or max(targets) < 82:
-                err("тёмное мясо птицы: target не ниже 82")
+                err("голень птицы на кости: target не ниже 82")
+        elif "thigh" in cuts:
+            if not targets or max(targets) < 74:
+                err("бедро птицы: target не ниже 74 (без кости); на кости — 82")
         elif "breast" in cuts:
             if not targets or max(targets) < 72:
                 err("грудка птицы: target не ниже 72")
@@ -338,6 +359,7 @@ def validate_draft(
                 err(f"{code}: has_delta без ingredient_delta/step_delta")
             if ing is not None:
                 _check_allergen_delta(item.get("allergen_delta"), err, code)
+                _check_delta_nutrition(ing, err, code)
         if item.get("cook_method_override"):
             _enum("cook_method_override", item.get("cook_method_override"), COOK_METHOD, err)
         if item.get("equipment"):
@@ -473,6 +495,49 @@ def _draft_canonicals(raw: dict) -> set[str]:
     return found
 
 
+def _check_yield(raw: dict, err) -> None:
+    kind = raw.get("yield_kind")
+    if kind is not None and kind != "":
+        _enum("yield_kind", kind, YIELD_KIND, err)
+    weight = raw.get("yield_weight_g")
+    if weight is None or weight == "":
+        if kind:
+            err("yield_kind без yield_weight_g")
+        return
+    try:
+        value = Decimal(str(weight))
+    except (InvalidOperation, TypeError, ValueError):
+        err("yield_weight_g не число")
+        return
+    if value <= 0:
+        err("yield_weight_g должен быть > 0")
+
+
+def _check_line_nutrition(line: dict, cid: str, err) -> None:
+    if "nutrition_exclude" in line and not isinstance(line.get("nutrition_exclude"), bool):
+        err(f"{cid}: nutrition_exclude должен быть bool")
+    if line.get("nutrition_exclude") and line.get("nutrition_factor") is not None:
+        err(f"{cid}: nutrition_factor не вместе с nutrition_exclude")
+    if "nutrition_factor" in line and line.get("nutrition_factor") is not None:
+        try:
+            factor = Decimal(str(line.get("nutrition_factor")))
+        except (InvalidOperation, TypeError, ValueError):
+            err(f"{cid}: nutrition_factor не число")
+            return
+        if not (Decimal("0.01") <= factor <= Decimal("1")):
+            err(f"{cid}: nutrition_factor должен быть 0.01–1")
+
+
+def _check_delta_nutrition(delta, err, code: str) -> None:
+    if not isinstance(delta, dict):
+        return
+    for spec in [*(delta.get("add") or []), *(delta.get("replace") or [])]:
+        if not isinstance(spec, dict):
+            continue
+        cid = (spec.get("canonical_id") or "").strip() or f"{code}:delta"
+        _check_line_nutrition(spec, cid, err)
+
+
 def _check_allergen_delta(delta, err, code: str) -> None:
     if not isinstance(delta, dict):
         err(f"{code}: ingredient_delta требует allergen_delta")
@@ -547,6 +612,8 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
                 "scalable": scalable,
                 "is_anchor": bool(line.get("is_anchor")),
                 "optional": bool(line.get("optional", False)),
+                "nutrition_exclude": bool(line.get("nutrition_exclude", False)),
+                "nutrition_factor": _dec(line.get("nutrition_factor")),
                 "choice_group": line.get("choice_group"),
                 "display_name": display,
             }
@@ -604,6 +671,9 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
         "scale_mode": raw.get("scale_mode") or "linear",
         "scalable": raw.get("scalable", True),
         "servings": raw.get("servings"),
+        "yield_weight_g": _dec(raw.get("yield_weight_g")),
+        "yield_kind": (raw.get("yield_kind") or None)
+        or ("estimated" if raw.get("yield_weight_g") not in (None, "") else None),
         "summary": raw.get("summary"),
         "source_name": raw.get("source_name"),
         "source_url": url,

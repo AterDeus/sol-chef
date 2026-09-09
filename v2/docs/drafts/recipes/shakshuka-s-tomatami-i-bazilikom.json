@@ -19,14 +19,37 @@
   },
   "effort_level": 2,
   "washing_level": 2,
-  "use_cases": ["fast", "easy", "one_pan", "budget"],
-  "adaptations": [],
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan",
+    "budget"
+  ],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "pan_fry",
+      "to": "oven",
+      "quality": 0.88
+    },
+    {
+      "type": "equipment",
+      "from": "skillet",
+      "to": "oven",
+      "quality": 0.88
+    }
+  ],
   "new_ingredients": [
     {
       "canonical_id": "feta",
       "title": "фета",
-      "aliases": ["брынза", "сыр фета"],
-      "allergens_contains": ["milk"],
+      "aliases": [
+        "брынза",
+        "сыр фета"
+      ],
+      "allergens_contains": [
+        "milk"
+      ],
       "allergens_may_contain": [],
       "allergens_unknown": []
     }
@@ -170,6 +193,48 @@
   ],
   "variants": [
     {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "Яйца в духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Сделать ложкой углубления в соусе по числу яиц и аккуратно выпустить в них яйца.",
+            "equipment_note": "Жаропрочная сковорода или форма: дальше яйца идут в камеру, не под крышкой на плите. Яйца в один слой."
+          },
+          {
+            "position": 5,
+            "text": "Переставить сковороду или форму в духовку. Белок должен побелеть, желток остаться жидким — это не 4–6 минут под крышкой.",
+            "timer_seconds": 480,
+            "timer_label": "Яйца в камере",
+            "timer_note": "7–9 минут при 180 °C; снять, пока желток ещё подвижен. Дольше, чем под крышкой на слабом огне"
+          }
+        ],
+        "insert": [
+          {
+            "after_position": 0,
+            "text": "Разогреть духовку до 180 °C: соус варится на плите, яйца дойдут в камере."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
       "axis": "addon",
       "code": "with_bacon",
       "title": "С беконом",
@@ -205,7 +270,10 @@
         "unknown_add": [],
         "unknown_remove": []
       },
-      "high_risk_delta": { "add": [], "remove": [] }
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
     },
     {
       "axis": "addon",
@@ -241,7 +309,10 @@
         "unknown_add": [],
         "unknown_remove": []
       },
-      "high_risk_delta": { "add": [], "remove": [] }
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
     },
     {
       "axis": "addon",
@@ -265,20 +336,25 @@
       "step_delta": {
         "insert": [
           {
-            "after_position": 5,
-            "text": "За 2 минуты до готовности покрошить поверх томатного соуса 40–50 г феты или брынзы."
+            "after_position": 4,
+            "text": "За 2 минуты до готовности яиц покрошить поверх соуса 40–50 г феты или брынзы (пока белок ещё доходит под крышкой или в камере)."
           }
         ]
       },
       "allergen_delta": {
-        "contains_add": ["milk"],
+        "contains_add": [
+          "milk"
+        ],
         "contains_remove": [],
         "may_contain_add": [],
         "may_contain_remove": [],
         "unknown_add": [],
         "unknown_remove": []
       },
-      "high_risk_delta": { "add": [], "remove": [] }
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
     }
   ],
   "notes": [
@@ -299,12 +375,12 @@
       "text": "Свежий — в конце, на снятую с огня сковороду. Тушить вместе с томатами не стоит: аромат уйдёт."
     },
     {
-      "title": "Хлеб к подаче",
-      "text": "Свежий хлеб в составе нет: это подача. Глютен на карточке не висит, пока хлеб не кладут в расчёт."
+      "title": "Подача",
+      "text": "К шакшуке подают тёплую питу, халу или подсушенный багет: ими удобно вымакивать томатный соус и желток прямо со сковороды. Блюдо принято ставить на стол в той же сковороде, посыпав зеленью."
     },
     {
-      "title": "Якорь",
-      "text": "Масштаб от 300 г помидоров. Яйца округляются до целых: одно яйцо — одно углубление."
+      "title": "Пропорции яиц и соуса",
+      "text": "На 300 г помидоров оптимально брать 2–3 яйца: в уваренном соусе делают ровно столько углублений, сколько яиц планируется выпустить."
     },
     {
       "title": "Бекон",

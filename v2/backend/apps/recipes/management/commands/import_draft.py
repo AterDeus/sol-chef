@@ -18,6 +18,7 @@ from apps.recipes.etl.draft import (
     review_allows_import,
     validate_draft,
 )
+from apps.recipes.etl.nutrition import load_ingredient_nutrition
 from apps.recipes.etl.upsert import upsert_recipe
 
 
@@ -33,7 +34,10 @@ def v1_map_path() -> Path:
 
 
 class Command(BaseCommand):
-    help = "Validate and upsert V2 draft recipes. --accepted loads only Luna-approved overlays."
+    help = (
+        "Validate and upsert V2 draft recipes. "
+        "--accepted loads accept+cookable; битый файл в пачке пропускает, не валит всю команду."
+    )
 
     def add_arguments(self, parser):
         parser.add_argument("--path", type=str, help="Один файл черновика")
@@ -71,19 +75,30 @@ class Command(BaseCommand):
             return
 
         imported = 0
+        skipped = 0
+        fail_fast = bool(options.get("path"))
         for path in paths:
             if path.name.startswith("_"):
                 continue
             try:
                 raw = load_json(path)
             except DraftError as exc:
-                raise CommandError(str(exc)) from exc
+                if fail_fast:
+                    raise CommandError(str(exc)) from exc
+                skipped += 1
+                self.stdout.write(f"пропуск {path.name}: {exc}")
+                continue
             errors = validate_draft(raw, overlay=True, known_ingredients=known)
             slug = (raw.get("id") or raw.get("slug") or path.stem).strip()
             if errors:
                 for item in errors:
                     self.stderr.write(item)
-                raise CommandError(f"{path.name}: валидатор {len(errors)} ошибок")
+                msg = f"{path.name}: валидатор {len(errors)} ошибок"
+                if fail_fast:
+                    raise CommandError(msg)
+                skipped += 1
+                self.stdout.write(f"пропуск {slug}: {msg}")
+                continue
             if options.get("check") and not options.get("accepted"):
                 self.stdout.write(f"OK {slug}")
                 continue
@@ -92,14 +107,16 @@ class Command(BaseCommand):
                 try:
                     review = load_review(review_path)
                 except DraftError as exc:
-                    if options.get("path") and not options.get("accepted"):
+                    if fail_fast:
                         raise CommandError(
                             f"{slug}: нет вердикта Luna ({review_path}). "
                             "Сначала независимая проверка."
                         ) from exc
+                    skipped += 1
                     self.stdout.write(f"пропуск {slug}: нет accept-вердикта")
                     continue
                 if not review_allows_import(review):
+                    skipped += 1
                     self.stdout.write(
                         f"пропуск {slug}: verdict={review.get('verdict')} "
                         f"cookable={review.get('cookable')}"
@@ -108,9 +125,14 @@ class Command(BaseCommand):
             try:
                 item = parse_draft(raw, known_ingredients=known)
             except DraftError as exc:
-                raise CommandError(str(exc)) from exc
+                if fail_fast:
+                    raise CommandError(str(exc)) from exc
+                skipped += 1
+                self.stdout.write(f"пропуск {slug}: {exc}")
+                continue
             with transaction.atomic():
                 upsert_recipe(item)
+                load_ingredient_nutrition()
             imported += 1
             self.stdout.write(f"записан {slug}")
-        self.stdout.write(f"готово imported={imported}")
+        self.stdout.write(f"готово imported={imported} skipped={skipped}")

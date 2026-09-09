@@ -2,11 +2,17 @@ import type { GrainsPayload, MeatPayload, TipsPayload } from '@/lib/types';
 import { EmptyState } from '@/components/Feedback';
 import { HashDetailsOpener } from '@/components/HashDetailsOpener';
 
-export function GrainsView({ payload }: { payload: GrainsPayload }) {
+export function GrainsView({
+  payload,
+  omitLead = false,
+}: {
+  payload: GrainsPayload;
+  omitLead?: boolean;
+}) {
   const rows = payload.rows ?? [];
   return (
     <>
-      {(payload.intro_lead || payload.intro) && (
+      {!omitLead && (payload.intro_lead || payload.intro) && (
         <p className="lede">
           {payload.intro_lead ? <strong>{payload.intro_lead} </strong> : null}
           {payload.intro}
@@ -57,11 +63,17 @@ export function GrainsView({ payload }: { payload: GrainsPayload }) {
   );
 }
 
-export function MeatView({ payload }: { payload: MeatPayload }) {
+export function MeatView({
+  payload,
+  omitLead = false,
+}: {
+  payload: MeatPayload;
+  omitLead?: boolean;
+}) {
   const methods = payload.methods ?? [];
   return (
     <>
-      {(payload.intro_lead || payload.intro) && (
+      {!omitLead && (payload.intro_lead || payload.intro) && (
         <p className="lede">
           {payload.intro_lead ? <strong>{payload.intro_lead} </strong> : null}
           {payload.intro}
@@ -98,12 +110,18 @@ export function MeatView({ payload }: { payload: MeatPayload }) {
   );
 }
 
-export function TipsView({ payload }: { payload: TipsPayload }) {
+export function TipsView({
+  payload,
+  omitLead = false,
+}: {
+  payload: TipsPayload;
+  omitLead?: boolean;
+}) {
   const sections = payload.sections ?? [];
   return (
     <>
       <HashDetailsOpener />
-      {payload.intro && <p className="lede">{payload.intro}</p>}
+      {!omitLead && payload.intro && <p className="lede">{payload.intro}</p>}
       {sections.length === 0 ? (
         <EmptyState>Пока нет советов.</EmptyState>
       ) : (

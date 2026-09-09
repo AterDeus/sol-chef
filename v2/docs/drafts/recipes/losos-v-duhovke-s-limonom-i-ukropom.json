@@ -19,8 +19,37 @@
   },
   "effort_level": 2,
   "washing_level": 2,
-  "use_cases": ["fast", "easy", "one_pan"],
-  "adaptations": [],
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "oven",
+      "to": "pan_fry",
+      "quality": 0.86
+    },
+    {
+      "type": "method",
+      "from": "oven",
+      "to": "grill",
+      "quality": 0.84
+    },
+    {
+      "type": "equipment",
+      "from": "oven",
+      "to": "skillet",
+      "quality": 0.86
+    },
+    {
+      "type": "equipment",
+      "from": "oven",
+      "to": "grill",
+      "quality": 0.84
+    }
+  ],
   "ingredients": [
     {
       "position": 1,
@@ -174,6 +203,100 @@
   ],
   "variants": [
     {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть сковороду с маслом на средне-сильном огне. Противень и духовка не нужны."
+          },
+          {
+            "position": 3,
+            "text": "Обсушить филе, смазать смесью. Выложить кожей вниз. Не двигать, пока кожа не схватится — иначе кусок развалится.",
+            "equipment_note": "Один слой. Толстый стейк целиком; тонкий край не наваливать вторым ярусом."
+          },
+          {
+            "position": 4,
+            "text": "Жарить кожей вниз, затем аккуратно перевернуть широкой лопаткой, не разваливая. В самой толстой части не ниже 63 °C или мясо легко разделяется на влажные хлопья.",
+            "timer_seconds": 480,
+            "timer_label": "Сковорода",
+            "timer_note": "Около 5–6 минут кожей вниз и 2–3 после переворота; короче 12–18 минут духовки",
+            "target_internal_temperature_c": 63
+          },
+          {
+            "position": 5,
+            "text": "Снять рыбу со сковороды и дать отдохнуть 2–3 минуты, затем подавать.",
+            "timer_seconds": 180,
+            "timer_label": "Отдых"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "На гриле",
+      "has_delta": true,
+      "cook_method_override": "grill",
+      "equipment": "grill",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть гриль до среднего жара. Решётку смазать маслом. Если стейк тонкий — корзинка или лист фольги, чтобы рыба не провалилась и не развалилась."
+          },
+          {
+            "position": 3,
+            "text": "Обсушить филе, смазать смесью. Выложить кожей вниз на решётку или в корзинку.",
+            "equipment_note": "Смазанная решётка. Тонкий кусок — только корзинка или фольга, не голые прутья."
+          },
+          {
+            "position": 4,
+            "text": "Жарить, перевернуть один раз широкой лопаткой. В самой толстой части не ниже 63 °C или мясо легко разделяется на влажные хлопья. Не доводить до сухих волокон.",
+            "timer_seconds": 600,
+            "timer_label": "Гриль",
+            "timer_note": "Около 4–5 минут с каждой стороны; не копировать 15 минут духовки",
+            "target_internal_temperature_c": 63
+          },
+          {
+            "position": 5,
+            "text": "Снять рыбу с решётки или из корзинки и дать отдохнуть 2–3 минуты, затем подавать.",
+            "timer_seconds": 180,
+            "timer_label": "Отдых"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
       "axis": "addon",
       "code": "in_parchment",
       "title": "В пергаментном конверте",
@@ -194,7 +317,10 @@
         "unknown_add": [],
         "unknown_remove": []
       },
-      "high_risk_delta": { "add": [], "remove": [] }
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
     }
   ],
   "notes": [

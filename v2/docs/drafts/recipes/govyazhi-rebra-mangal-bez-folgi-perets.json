@@ -19,8 +19,21 @@
   },
   "effort_level": 4,
   "washing_level": 2,
-  "use_cases": [],
-  "adaptations": [],
+  "use_cases": ["batch"],
+  "new_ingredients": [
+    {
+      "canonical_id": "apple_cider_vinegar",
+      "title": "яблочный уксус",
+      "aliases": ["уксус яблочный"],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    { "type": "equipment", "from": "grill", "to": "oven", "quality": 0.88 },
+    { "type": "method", "from": "grill", "to": "oven", "quality": 0.88 }
+  ],
   "prep": [
     {
       "text": "Обсушить рёбра бумажным полотенцем и снять плёнку с обратной стороны",
@@ -70,10 +83,11 @@
       "position": 4,
       "canonical_id": "water_and_apple_vinegar",
       "display_name": "вода и яблочный уксус",
+      "amount": 200,
       "unit": "ml",
-      "detail": "для сбрызгивания, примерно поровну",
+      "detail": "для сбрызгивания, примерно поровну: 100 мл воды и 100 мл уксуса в пульверизатор",
       "scale_mode": "linear",
-      "scalable": false,
+      "scalable": true,
       "is_anchor": false,
       "optional": false
     },
@@ -81,10 +95,11 @@
       "position": 5,
       "canonical_id": "vegetable_oil",
       "display_name": "растительное масло",
+      "amount": 1,
       "unit": "tbsp",
-      "detail": "тонкий слой, чтобы специи держались",
+      "detail": "тонкий слой на 1.5–2 кг, чтобы специи держались",
       "scale_mode": "gentle",
-      "scalable": false,
+      "scalable": true,
       "is_anchor": false,
       "optional": false
     }
@@ -129,7 +144,213 @@
       "timer_note": "10–15 минут, фольга негерметично"
     }
   ],
-  "variants": [],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "cook_method_override": "oven",
+      "equipment": "oven",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Разогреть духовку до 150 °C. Поставить решётку в середину, под неё — противень с водой на 1–2 см: пар смягчит сухой жар и удержит перечную корку."
+          },
+          {
+            "position": 4,
+            "text": "Уложить рёбра на решётку костями вниз, не заворачивая в фольгу на всём цикле. Запекать до 90–94 °C внутри и мягкости: кость шатается, щуп входит без сопротивления.",
+            "timer_seconds": 14400,
+            "timer_label": "Духовка",
+            "timer_note": "Для 1.5–2 кг при 150 °C — около 3.5–4.5 ч; ориентир — мягкость и 90–94 °C, не таймер",
+            "target_internal_temperature_c": 90
+          },
+          {
+            "position": 5,
+            "text": "Каждые 30–40 минут слегка сбрызгивать поверхность смесью воды с яблочным уксусом из пульверизатора — в сухой камере корка пересыхает быстрее, чем на мангале, поливать чаще.",
+            "timer_seconds": 1800,
+            "timer_label": "Между сбрызгиваниями",
+            "timer_note": "Интервал 30–40 минут, чаще чем на мангале; не общее время готовки"
+          },
+          {
+            "position": 6,
+            "text": "Не включать режим гриля и не поднимать температуру выше 160 °C на финале — перечная корка горчит в сухой камере быстрее, чем на непрямом угле."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "mustard_sauce",
+      "title": "Горчичный соус",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "mustard",
+            "display_name": "горчица",
+            "amount": 2,
+            "unit": "tbsp",
+            "detail": "в соус к подаче, не в натир",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "apple_cider_vinegar",
+            "display_name": "яблочный уксус",
+            "amount": 1,
+            "unit": "tbsp",
+            "detail": "в соус к подаче",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "honey",
+            "display_name": "мёд",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "в соус к подаче",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 7,
+            "text": "Пока рёбра отдыхают, взбить горчицу с яблочным уксусом и мёдом до однородности. Подавать соус отдельно к нарезанным рёбрам — не смазывать мясо до готовки."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": ["mustard"],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "herb_oil",
+      "title": "Зелёное масло",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "butter",
+            "display_name": "сливочное масло",
+            "amount": 50,
+            "unit": "g",
+            "detail": "растопить для зелёного масла",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "parsley",
+            "display_name": "петрушка",
+            "amount": 2,
+            "unit": "tbsp",
+            "detail": "мелко рубленая",
+            "scale_mode": "gentle",
+            "scalable": true
+          },
+          {
+            "canonical_id": "garlic",
+            "display_name": "чеснок",
+            "amount": 1,
+            "unit": "clove",
+            "detail": "в зелёное масло",
+            "scale_mode": "whole",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 7,
+            "text": "Растопить сливочное масло, смешать с мелко рубленой петрушкой и зубчиком чеснока, раздавленным или натёртым. Полить нарезанные рёбра на тарелке."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": ["milk"],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    },
+    {
+      "axis": "addon",
+      "code": "pickle_relish",
+      "title": "Огуречный релиш",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "cucumber",
+            "display_name": "солёные огурцы",
+            "amount": 100,
+            "unit": "g",
+            "detail": "мелко нарезанные, плюс 1 ст. л. рассола",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "mustard",
+            "display_name": "горчица",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "в релиш",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "dill",
+            "display_name": "укроп",
+            "unit": "pinch",
+            "detail": "в релиш",
+            "scale_mode": "gentle",
+            "scalable": false
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 7,
+            "text": "Мелко нарезать солёные огурцы, смешать с 1 ст. л. рассола, горчицей и щепоткой укропа. Подавать холодным релишем к горячим рёбрам."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": ["mustard"],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": { "add": [], "remove": [] }
+    }
+  ],
   "notes": [
     {
       "title": "Помол перца",
@@ -141,11 +362,11 @@
     },
     {
       "title": "Только непрямой жар",
-      "text": "Угли сбоку, не под мясом. Прямой огонь на любом этапе сожжёт перечную корку. Томление в фольге на мангале — другое блюдо, не этот цикл."
+      "text": "Угли сбоку, не под мясом. Прямой огонь на любом этапе сожжёт перечную корку. В фольгу не заворачивать."
     },
     {
       "title": "Сбрызгивание",
-      "text": "Раз в час вода и яблочный уксус примерно поровну. Без этого корка пересыхает и начинает горчить раньше, чем мясо станет мягким."
+      "text": "Раз в час сбрызгивать из пульверизатора: на цикл 1.5–2 кг хватает 200 мл смеси поровну воды и яблочного уксуса. Без этого корка пересыхает и начинает горчить раньше, чем мясо станет мягким."
     },
     {
       "title": "Готовность",
@@ -160,8 +381,12 @@
       "text": "В последние 10 минут можно точечно прогреть над непрямой, но более горячей зоной углей. Не над открытым пламенем."
     },
     {
+      "title": "Духовка",
+      "text": "150 °C, решётка над противнем с водой — тот же перечный цикл без фольги. Сбрызгивать чаще, чем на мангале. Не гриль-режим на финале: корка горчит в сухой камере быстрее, чем на непрямом угле."
+    },
+    {
       "title": "Отруб",
-      "text": "Только говяжьи рёбра. Другой отруб в этот открытый перечный цикл не подставлять."
+      "text": "Используйте только говяжьи рёбра. Другие отрубы без фольги за четыре часа на решётке пересохнут задолго до того, как станут мягкими."
     }
   ]
 }

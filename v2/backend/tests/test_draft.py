@@ -4,6 +4,7 @@ from pathlib import Path
 
 from apps.recipes.etl.draft import known_from_v1_map, load_json, validate_draft
 
+
 def _gold_path() -> Path:
     name = "barhatnaya-govyadina-po-kitajski.json"
     here = Path(__file__).resolve()
@@ -136,3 +137,81 @@ def test_allergens_on_recipe_line_fail():
     payload["ingredients"][0]["allergens_contains"] = ["soy"]
     errors = validate_draft(payload, overlay=True)
     assert any("реестре" in item for item in errors)
+
+
+def test_u31_kcal_on_recipe_root_fails():
+    payload = _overlay_min()
+    payload["kcal"] = 500
+    errors = validate_draft(payload, overlay=True)
+    assert any("kcal" in item for item in errors)
+
+
+def test_u31_nested_nutrition_object_fails():
+    payload = _overlay_min()
+    payload["nutrition"] = {"total": {"kcal": 1}}
+    errors = validate_draft(payload, overlay=True)
+    assert any("nutrition" in item for item in errors)
+
+
+def test_u32_oil_to_taste_allowed_on_new_wave():
+    payload = _overlay_min()
+    payload["ingredients"].append(
+        {
+            "canonical_id": "vegetable_oil",
+            "unit": "to_taste",
+            "amount": None,
+            "scalable": False,
+        }
+    )
+    errors = validate_draft(payload, overlay=False)
+    assert errors == []
+
+
+def test_overlay_honey_to_taste_does_not_block_import():
+    payload = _overlay_min()
+    payload["ingredients"].append(
+        {
+            "canonical_id": "honey",
+            "unit": "to_taste",
+            "amount": None,
+            "scalable": False,
+        }
+    )
+    errors = validate_draft(payload, overlay=True)
+    assert errors == []
+
+
+def test_nutrition_exclude_must_be_bool():
+    payload = _overlay_min()
+    payload["ingredients"][0]["nutrition_exclude"] = 1
+    errors = validate_draft(payload, overlay=True)
+    assert any("nutrition_exclude" in item for item in errors)
+
+
+def test_nutrition_factor_zero_fails():
+    payload = _overlay_min()
+    payload["ingredients"][0]["nutrition_factor"] = 0
+    errors = validate_draft(payload, overlay=True)
+    assert any("nutrition_factor" in item for item in errors)
+
+
+def test_nutrition_factor_not_with_exclude():
+    payload = _overlay_min()
+    payload["ingredients"][0]["nutrition_exclude"] = True
+    payload["ingredients"][0]["nutrition_factor"] = 0.5
+    errors = validate_draft(payload, overlay=True)
+    assert any("nutrition_factor" in item for item in errors)
+
+
+def test_author_per_100g_cooked_fails():
+    payload = _overlay_min()
+    payload["per_100g_cooked"] = {"kcal": 1}
+    errors = validate_draft(payload, overlay=True)
+    assert any("per_100g_cooked" in item for item in errors)
+
+
+def test_yield_kind_without_weight_fails():
+    payload = _overlay_min()
+    payload["yield_kind"] = "estimated"
+    errors = validate_draft(payload, overlay=True)
+    assert any("yield_kind" in item for item in errors)

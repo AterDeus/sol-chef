@@ -11,7 +11,7 @@ description: Writes and moderates sol-chef 2.0 recipe JSON (VOCAB codes, SAFETY 
 2. `v2/docs/VOCAB.md` — коды
 3. `v2/docs/SAFETY.md` — температуры, аллергены, high-risk
 
-Без packet не выдумывать бриф. Без «стартуй волну 1» — не массовая генерация.
+Без packet не выдумывать бриф. Без явного старта в чате / CURRENT_SPRINT («стартуй волну N» / «стартуй оверлей осей N») — не массовая генерация.
 
 ## Автор
 
@@ -25,7 +25,7 @@ description: Writes and moderates sol-chef 2.0 recipe JSON (VOCAB codes, SAFETY 
 
 ## Модератор (Terra Medium)
 
-Оркестратор вставляет в промпт чеклист + JSON рецепта (`v2/docs/drafts/reviews/PROMPT.md`). Task: `model=gpt-5.6-terra-medium`, без вложений. Явный запрет: не вызывать инструменты, не открывать репозиторий. Terra проверяет готовится / ничего не упущено / вкусно / real. `recipe_json` всегда null.
+Оркестратор вставляет в промпт чеклист + JSON рецепта (`v2/docs/drafts/reviews/PROMPT.md`). Task: `model=gpt-5.6-terra-medium`, без вложений. Явный запрет: не вызывать инструменты, не открывать репозиторий. Terra проверяет готовится / ничего не упущено / вкусно / real / цепочка варианта / физика замены / русский без внутреннего жаргона. `recipe_json` всегда null.
 
 ## Куда писать
 

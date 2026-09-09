@@ -18,9 +18,11 @@
 
 ### Срез vs позже
 
-В **спринте 1** в compose: caddy, frontend, backend, postgres, redis.
+В **гостевом срезе** в compose: caddy, frontend, backend, postgres, redis.
 
-Не в срезе: Celery worker, MinIO, Mailpit, ClamAV. Письма и фото — V2.1. Сборка образов на VPS запрещена (CI `pull`).
+**V2.1-A:** + Mailpit (SMTP для Django, UI писем на loopback). Письмо в запросе, без Celery.
+
+Не в V2.1: Celery worker, MinIO, ClamAV. Фото — V2.2. Сборка образов на VPS запрещена (CI `pull`). Postbox — прод, не локальный compose.
 
 ## Caddy (BFF, один origin)
 
@@ -35,7 +37,7 @@
 
 - Без JWT и CORS. Браузер вызывает `/api/` того же хоста.
 - Next SSR: `INTERNAL_API_URL=http://backend:8000`, клиент: `NEXT_PUBLIC_API_URL` пустой. Пробрасывать `Cookie` (и CSRF, когда появятся мутации). Не `fetch` на `localhost:8080` из контейнера.
-- ISR — только публичное тело. Персональные блоки (когда появятся) — клиентский `/api/` после гидрации.
+- ISR — только публичное тело. Персональные блоки и счётчики «приготовили N» / комментарии — клиентский `/api/` после гидрации ([ACCOUNTS.md](ACCOUNTS.md)). `community_confirmed` на `Recipe` можно в SSR.
 - Статика Django (админка): WhiteNoise у backend, чтобы `/static/` через Caddy работал и с gunicorn. В срезе достаточно runserver + WhiteNoise в deps.
 - `/admin/` на VPS закрывать авторизацией **до** cutover (не срез, не забыть в деплое).
 

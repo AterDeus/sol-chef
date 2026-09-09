@@ -112,6 +112,14 @@ HIGH_RISK = frozenset(
 
 ENERGY_PROFILE = frozenset({"standard", "light", "rich"})
 
+NUTRITION_BASIS = frozenset({"raw_100g"})
+
+YIELD_KIND = frozenset({"estimated", "exact"})
+
+NUTRITION_SOURCE = frozenset(
+    {"fooddata_central", "ru_table", "packaging_typical", "editorial"}
+)
+
 EQUIPMENT = frozenset(
     {
         "pot",

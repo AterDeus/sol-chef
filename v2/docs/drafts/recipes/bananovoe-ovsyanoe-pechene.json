@@ -1,0 +1,363 @@
+{
+  "id": "bananovoe-ovsyanoe-pechene",
+  "title": "Банановое овсяное печенье",
+  "summary": "Спелые бананы с точками разминают в пюре и смешивают с овсяными хлопьями, корицей и щепоткой соли — без сахара, пшеничной муки и яиц. Лепёшки на противне при 180 °C, пока края не подсохнут; в аэрогриле — по 6 штук.",
+  "recipe_family": "cookies",
+  "protein_base": "vegetables",
+  "cook_method": "oven",
+  "dish_type": "dessert",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 15
+  },
+  "effort_level": 1,
+  "washing_level": 2,
+  "use_cases": [
+    "easy",
+    "pantry",
+    "budget"
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "banana",
+      "title": "банан",
+      "aliases": [
+        "бананы",
+        "спелый банан",
+        "банан с точками"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "oatmeal",
+      "title": "овсяные хлопья",
+      "aliases": [
+        "геркулес",
+        "овсянка",
+        "хлопья овсяные",
+        "овсяные хлопья быстрого приготовления"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": [
+        "gluten"
+      ]
+    },
+    {
+      "canonical_id": "dried_cranberry",
+      "title": "сушёная клюква",
+      "aliases": [
+        "клюква сушёная",
+        "вяленая клюква"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "coconut_flakes",
+      "title": "кокосовая стружка",
+      "aliases": [
+        "стружка кокоса",
+        "кокос стружка",
+        "сушёный кокос"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    {
+      "type": "method",
+      "from": "oven",
+      "to": "air_fryer",
+      "quality": 0.88
+    }
+  ],
+  "prep": [
+    {
+      "text": "Бананы — мягкие, с коричневыми точками на кожуре. Зелёные не размять в пюре и не дадут сладости: в базе нет сахара."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "banana",
+      "display_name": "бананы",
+      "amount": 240,
+      "unit": "g",
+      "detail": "спелые, с коричневыми точками, очищенные; 2–3 шт; якорь массы теста",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "oatmeal",
+      "display_name": "овсяные хлопья",
+      "amount": 180,
+      "unit": "g",
+      "detail": "геркулес или среднего помола, не мука и не резаный овёс",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "cinnamon",
+      "display_name": "корица",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "молотая",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "pinch",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 180 °C. Противень застелить пергаментом."
+    },
+    {
+      "position": 2,
+      "text": "Размять спелые бананы вилкой в пюре: мелкие комочки допустимы, крупные куски нет. Зелёные бананы не свяжут тесто."
+    },
+    {
+      "position": 3,
+      "text": "Вмешать овсяные хлопья, корицу и щепотку соли. Оставить, чтобы хлопья впитали влагу: сухие края лепёшки развалятся на противне.",
+      "timer_seconds": 480,
+      "timer_label": "Отдых теста",
+      "timer_note": "8 минут; хлопья набухнут, масса станет лепиться"
+    },
+    {
+      "position": 4,
+      "text": "Ложкой выложить около 12 лепёшек, слегка приплющить. Между ними зазор: печенье почти не расползается, но края не должны слипнуться."
+    },
+    {
+      "position": 5,
+      "text": "Выпекать, пока края не подсохнут и не подрумянятся, а низ схватится. Сразу не снимать — горячие ещё мягкие.",
+      "timer_seconds": 780,
+      "timer_label": "Выпечка",
+      "timer_note": "12–15 минут; ориентир — сухой край, не таймер"
+    },
+    {
+      "position": 6,
+      "text": "Остудить на противне, затем переложить. Тёплые ломаются, через несколько минут держат форму.",
+      "timer_seconds": 300,
+      "timer_label": "Остывание",
+      "timer_note": "5 минут на противне"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "cook_method_override": "air_fryer",
+      "step_delta": {
+        "replace": [
+          {
+            "position": 1,
+            "text": "Разогреть аэрогриль до 160 °C. Пергамент — только с отверстиями, иначе не будет обдува."
+          },
+          {
+            "position": 4,
+            "text": "Выложить в корзину 6 лепёшек в один слой с зазором. Это одна закладка, не все 12. Остаток теста — вторая партия.",
+            "equipment_note": "Не больше 6 шт в один слой. Двенадцать сразу сомкнутся и пропекутся паром, не корочкой."
+          },
+          {
+            "position": 5,
+            "text": "Готовить, пока края не подсохнут. Воздух в чаше жарче духовки — 15 минут базы здесь пересушат банан.",
+            "timer_seconds": 540,
+            "timer_label": "Закладка",
+            "timer_note": "8–10 минут; ориентир — край, не таймер"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_chocolate_nuts",
+      "title": "С шоколадом и орехами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "dark_chocolate",
+            "display_name": "тёмный шоколад",
+            "amount": 50,
+            "unit": "g",
+            "detail": "крупно порубить, не растапливать и не вмешивать какао-порошок",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "walnuts",
+            "display_name": "грецкие орехи",
+            "amount": 40,
+            "unit": "g",
+            "detail": "крупно порубить",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Вмешать овсяные хлопья, корицу, щепотку соли, рубленый тёмный шоколад и грецкие орехи. Шоколад не растапливать: куски должны остаться кусками. Оставить, чтобы хлопья впитали влагу.",
+            "timer_seconds": 480,
+            "timer_label": "Отдых теста",
+            "timer_note": "8 минут; хлопья набухнут, масса станет лепиться"
+          },
+          {
+            "position": 4,
+            "text": "Ложкой выложить около 12 лепёшек, слегка приплющить. Куски шоколада и ореха вдавить в тесто, чтобы не выпали на противне. Между лепёшками зазор."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [
+          "tree_nut"
+        ],
+        "contains_remove": [],
+        "may_contain_add": [
+          "milk"
+        ],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_cranberry_coconut",
+      "title": "С клюквой и кокосом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "dried_cranberry",
+            "display_name": "сушёная клюква",
+            "amount": 40,
+            "unit": "g",
+            "detail": "сушёная, не свежая ягода; крупные ягоды разрезать",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "coconut_flakes",
+            "display_name": "кокосовая стружка",
+            "amount": 30,
+            "unit": "g",
+            "detail": "не кокосовое молоко и не масло",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 3,
+            "text": "Вмешать овсяные хлопья, корицу, щепотку соли, сушёную клюкву и кокосовую стружку. Оставить, чтобы хлопья впитали влагу.",
+            "timer_seconds": 480,
+            "timer_label": "Отдых теста",
+            "timer_note": "8 минут; хлопья набухнут, масса станет лепиться"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Сладость без сахара",
+      "text": "В базе нет сахара, муки и яиц. Сладость и связка — только спелый банан. Зелёный даст травяной вкус и крошки вместо лепёшки."
+    },
+    {
+      "title": "Какие хлопья",
+      "text": "Геркулес или среднего помола. Экстра-мелкие «3 минуты» дают кашу, резаный овёс не набухнет за 8 минут, овсяная мука — другое тесто."
+    },
+    {
+      "title": "Отдых",
+      "text": "Без паузы после замеса хлопья остаются сухими: лепёшка рассыпается при переносе. Если масса жидкая — ещё ложка хлопьев, не мука."
+    },
+    {
+      "title": "Текстура",
+      "text": "Без муки, яиц и сливочного масла печенье получается мягким, ближе к запечённым овсяным батончикам. Чтобы края были суше, формуйте заготовки не толще 7–8 мм: тесто само в духовке не растекается."
+    },
+    {
+      "title": "Овёс и глютен",
+      "text": "Обычные хлопья с полки часто идут с пшеницей на той же линии. Без маркировки «без глютена» статус глютена неизвестен, не «нет»."
+    },
+    {
+      "title": "Выпечка в аэрогриле",
+      "text": "Выкладывайте строго в один слой с зазором 1,5–2 см, чтобы воздух циркулировал. Лучше две партии по 5–6 штук, чем двенадцать сразу: слипнется во влажную лепёшку."
+    },
+    {
+      "title": "Шоколад и орехи",
+      "text": "Тёмный шоколад рубить, не топить: расплавленный уйдёт в тесто и подгорит. На тёмном часто следы молока — смотрите состав. Грецкий — орех."
+    },
+    {
+      "title": "Клюква",
+      "text": "Только сушёная. Свежая клюква пустит сок и размочит лепёшку. Кокос — стружка, не сливки из банки."
+    }
+  ]
+}

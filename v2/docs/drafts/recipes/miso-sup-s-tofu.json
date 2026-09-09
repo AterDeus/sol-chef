@@ -1,0 +1,361 @@
+{
+  "id": "miso-sup-s-tofu",
+  "title": "Мисо-суп с тофу и вакаме",
+  "summary": "Короткий суп в кастрюле: тофу и вакаме в воде или даси. Мисо разводят тёплой жидкостью и вмешивают уже с огня, чтобы сохранить аромат.",
+  "recipe_family": "miso_soup",
+  "protein_base": "legumes",
+  "cook_method": "boil",
+  "dish_type": "soup",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 15,
+    "active_minutes": 10
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": [
+    "fast",
+    "easy",
+    "pantry"
+  ],
+  "adaptations": [],
+  "new_ingredients": [
+    {
+      "canonical_id": "miso",
+      "title": "мисо",
+      "aliases": [
+        "мисо-паста",
+        "соевая паста мисо"
+      ],
+      "allergens_contains": [
+        "soy"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": [
+        "gluten"
+      ]
+    },
+    {
+      "canonical_id": "dashi",
+      "title": "даси",
+      "aliases": [
+        "хондаши",
+        "бульон даси",
+        "даши"
+      ],
+      "allergens_contains": [
+        "fish"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "tofu",
+      "title": "тофу",
+      "aliases": [
+        "соевый творог",
+        "тофу мягкий"
+      ],
+      "allergens_contains": [
+        "soy"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "wakame",
+      "title": "вакаме",
+      "aliases": [
+        "водоросли вакаме",
+        "морская капуста вакаме"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "chili_oil",
+      "title": "чили-масло",
+      "aliases": [
+        "масло чили",
+        "chili oil",
+        "ла-ю",
+        "la yu"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": [
+        "soy",
+        "sesame",
+        "peanut"
+      ]
+    },
+    {
+      "canonical_id": "shiitake",
+      "title": "шиитаке",
+      "aliases": [
+        "грибы шиитаке",
+        "шиитаке свежие"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 500,
+      "unit": "ml",
+      "detail": "или даси — выбрать одно",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "choice_group": "broth"
+    },
+    {
+      "position": 2,
+      "canonical_id": "dashi",
+      "display_name": "даси",
+      "amount": 500,
+      "unit": "ml",
+      "detail": "рыбный (хондаши / кацуобуси), вместо воды; комбу без рыбы — см. заметку",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "broth"
+    },
+    {
+      "position": 3,
+      "canonical_id": "miso",
+      "display_name": "мисо",
+      "amount": 40,
+      "unit": "g",
+      "detail": "светлая или смешанная паста; не класть комом в кипяток",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "tofu",
+      "display_name": "тофу",
+      "amount": 100,
+      "unit": "g",
+      "detail": "мягкий или шелковый, кубики ~1.5 см",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "wakame",
+      "display_name": "вакаме",
+      "amount": 5,
+      "unit": "g",
+      "detail": "сушёная; после замачивания сильно увеличивается",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "green_onion",
+      "display_name": "зелёный лук",
+      "amount": 15,
+      "unit": "g",
+      "detail": "перо, наискосок",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Замочить вакаме в холодной воде, пока готовите остальное.",
+      "timer_seconds": 300,
+      "timer_label": "Вакаме",
+      "timer_note": "5–10 минут; солёную промыть, сухую — просто замочить"
+    },
+    {
+      "position": 2,
+      "text": "Нарезать тофу кубиками около 1.5 см, зелёный лук — наискосок."
+    },
+    {
+      "position": 3,
+      "text": "В кастрюле довести воду или даси до слабого пара у края, не до бурного кипения.",
+      "timer_seconds": 180,
+      "timer_label": "Нагрев",
+      "timer_note": "2–4 минуты; ориентир — пар и редкие пузыри, не бурление",
+      "equipment_note": "Кастрюля. Кастрюля: тонкий суп, мисо вмешивают уже с огня."
+    },
+    {
+      "position": 4,
+      "text": "Заложить тофу и прогреть на малом огне, почти не помешивая.",
+      "timer_seconds": 120,
+      "timer_label": "Тофу",
+      "timer_note": "1–2 минуты, пока кубики прогреются"
+    },
+    {
+      "position": 5,
+      "text": "Снять кастрюлю с огня. В половнике развести мисо тёплой жидкостью из кастрюли до гладкости и влить обратно, размешать."
+    },
+    {
+      "position": 6,
+      "text": "Откинуть вакаме, добавить в суп вместе с зелёным луком. Подать сразу, больше не нагревать."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_chicken_mushrooms",
+      "title": "С курицей и грибами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "chicken_breast",
+            "display_name": "куриная грудка",
+            "amount": 120,
+            "unit": "g",
+            "detail": "без кости, кубики ~1.5 см",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "shiitake",
+            "display_name": "шиитаке",
+            "amount": 50,
+            "unit": "g",
+            "detail": "свежие, пластины; жёсткие ножки срезать",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 2,
+            "text": "Нарезать грудку кубиками около 1.5 см, шиитаке — пластинами, жёсткие ножки срезать."
+          }
+        ],
+        "replace": [
+          {
+            "position": 3,
+            "text": "В кастрюле довести воду или даси до слабого кипения. Заложить курицу и шиитаке, варить на малом огне, пока в центре куска грудки не будет 72 °C.",
+            "target_internal_temperature_c": 72,
+            "timer_seconds": 420,
+            "timer_label": "Курица",
+            "timer_note": "6–8 минут; ориентир — 72 °C в центре куска, не таймер"
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [
+          "poultry_temp"
+        ],
+        "remove": []
+      },
+      "caution_text_override": "Куриная грудка: внутренняя температура в центре куска не ниже 72 °C. Не определяйте готовность только по цвету. Не давать детям непроваренной."
+    },
+    {
+      "axis": "addon",
+      "code": "la_yu",
+      "title": "Острый, ла-ю",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "chili_oil",
+            "display_name": "чили-масло",
+            "amount": 1,
+            "unit": "tsp",
+            "detail": "ла-ю в тарелку в конце, не кипятить в кастрюле",
+            "scale_mode": "gentle",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "after_position": 6,
+            "text": "В тарелку капнуть чайную ложку чили-масла. В кастрюлю с мисо не вмешивать и не кипятить."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [
+          "soy",
+          "sesame",
+          "peanut"
+        ],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Как вмешивать мисо",
+      "text": "Пасту разводят тёплой жидкостью в половнике и вмешивают уже с огня. Так лучше сохраняется аромат. Если суп остыл — подогреть до тёплого, не до бурного кипения."
+    },
+    {
+      "title": "Вода или даси",
+      "text": "Выбрать одно, 500 мл. Вода допустима. Рыбный даси содержит рыбу; комбу — без рыбы."
+    },
+    {
+      "title": "Соль",
+      "text": "Мисо уже солёная. Не солить кастрюлю заранее: после вмешивания пасты попробуйте. Досаливать почти никогда не нужно."
+    },
+    {
+      "title": "Вакаме",
+      "text": "5 г сухой на 500 мл — норма. Горсть «на глаз» даст водорослевую кашу: сухая вакаме разбухает в несколько раз."
+    },
+    {
+      "title": "Тофу",
+      "text": "Мягкий или шелковый. Плотный тоже сработает, но текстура будет другой. Мешать ложкой в кастрюле почти не нужно — кубики развалятся."
+    },
+    {
+      "title": "Курица",
+      "text": "В базе мяса нет. Вариант с грудкой: кубики и шиитаке варят до 72 °C в центре куска, и только потом тофу и мисо с огня. Бедро сюда не подставлять молча — другая температура."
+    },
+    {
+      "title": "Подача",
+      "text": "Готовьте мисо-суп на одну трапезу: при повторном разогреве аромат пасты улетучивается, а вакаме теряет упругость. После добавления мисо суп не кипятить — бурление портит аромат."
+    }
+  ]
+}

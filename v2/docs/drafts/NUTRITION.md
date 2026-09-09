@@ -1,10 +1,10 @@
 # Черновик: ориентировочное КБЖУ
 
-Статус: **предложение, не канон.** Не править DATA-MODEL / API / VOCAB / DEFAULTS / UX-PROPOSAL / RECIPE по этому файлу, пока человек не принял (HUMAN или явная фраза в чате) и решение не перенесено в канон. Задача текущей сессии — [../../CURRENT_SPRINT.md](../../CURRENT_SPRINT.md) (оверлей 43); этот документ её **не** сменяет.
+Статус: **перенесён в канон 2026-09-06.** Не править этот файл — править [DATA-MODEL.md](../DATA-MODEL.md), [API.md](../API.md), [DEFAULTS.md](../DEFAULTS.md), [VOCAB.md](../VOCAB.md), [UX-PROPOSAL.md](../UX-PROPOSAL.md), [RECIPE.md](../RECIPE.md), [TESTING.md](../TESTING.md), [PLAN.md](../PLAN.md), [DECISIONS.md](../DECISIONS.md) DEC-022 / DEC-023. Задача сессии: [../../CURRENT_SPRINT.md](../../CURRENT_SPRINT.md).
 
-Назначение файла: отдать аналитику / другому агенту на разбор. После приёмки содержимое разъезжается по хозяевам (DATA-MODEL, API, DEFAULTS, TESTING, UX-PROPOSAL, RECIPE, DECISIONS). Этот черновик тогда помечается «перенесён», как [COOKING-SOLUTION.md](COOKING-SOLUTION.md).
+Тело ниже — архив спеки на момент переноса этапа 2. Хозяева канона — файлы из строки статуса. Первый срез этапа 3 (`yield_weight_g`, `nutrition_factor`) перенесён 2026-09-06 (DEC-023); `kcal_max` в архиве остаётся «позже».
 
-Пустая ячейка HUMAN ≠ «да». БЖУ сейчас в DEFAULTS — **вне скоупа V2**.
+Тело ниже — архив спеки на момент переноса. Хозяева канона — файлы из строки статуса.
 
 Правки после второго разбора (чат 2026-09-06): имя `per_100g_input`; `nutrition_basis` только `raw_100g`; `g_per_*` — редакционная оценка; `nutrition_exclude` только целиком; `to_taste` не для калорийных строк; клиентский payload — проекция, не второй источник истины; `incomplete` без порога «есть белок».
 
@@ -65,7 +65,7 @@ Recipe → assemble (variant → equipment → energy) → scale → nutrition �
 - Трогать корневой V1 (`data/`, `index.html`, `js/`).
 - Класть Next/Django в корень. `v2/preview/` не референс.
 - Менять `energy_profile` (`standard` / `light` / `rich`): это редакционная дельта состава, не «минус 20% ккал».
-- Ждать `ingredient_role` из RECIPE-V2-UPGRADE §4A. Роли — про замены калькулятора; в Postgres их ещё нет. КБЖУ от них не зависит.
+- Ждать `ingredient_role` из [RECIPE-V2-UPGRADE.md](RECIPE-V2-UPGRADE.md) §4A. Роли — про замены калькулятора; в Postgres их ещё нет. КБЖУ от них не зависит.
 - Округлять количества правилом UI (`roundScaled`: шаги 10 г и т.д.) **до** расчёта нутриентов. Считать с Decimal после `apply_mode`, округлять только отображение КБЖУ.
 - Глобальная таблица «ст. л. = 15 г» / «шт = 100 г», если у канона нет своего `g_per_*`.
 - Свободный текст в `nutrition_basis` и значения `cooked_100g` / `prepared_100g` в MVP.

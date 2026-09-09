@@ -1,0 +1,86 @@
+@layer components {
+  .page-intro {
+    display: grid;
+    gap: var(--space-5);
+    margin-block-end: var(--space-8);
+    align-items: center;
+    position: relative;
+  }
+
+  .page-intro--no-art {
+    margin-block-end: var(--space-6);
+  }
+
+  .page-intro__copy {
+    min-width: 0;
+  }
+
+  .page-intro--home h1 {
+    font-size: clamp(2.15rem, 1.35rem + 3vw, 3.4rem);
+    letter-spacing: -0.02em;
+    max-width: 12ch;
+  }
+
+  .page-intro__copy .lede {
+    margin-block-end: var(--space-6);
+  }
+
+  .page-intro__copy .home-actions {
+    margin-block-end: 0;
+  }
+
+  .page-art {
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+    justify-self: center;
+    width: min(100%, 36rem);
+  }
+
+  .page-art__paint {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (width >= 769px) {
+    .page-intro:not(.page-intro--no-art) {
+      grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 1.05fr);
+      gap: var(--space-6);
+    }
+
+    .page-art {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  @media (width < 769px) {
+    .page-intro:not(.page-intro--no-art) {
+      display: block;
+      margin-block-end: var(--space-6);
+      min-height: 11rem;
+    }
+
+    .page-intro:not(.page-intro--no-art) .page-intro__copy {
+      position: relative;
+      z-index: 1;
+      padding-inline-end: min(44%, 11.5rem);
+    }
+
+    .page-intro:not(.page-intro--no-art) .page-art {
+      position: absolute;
+      top: -0.4rem;
+      right: -0.75rem;
+      width: min(58%, 14.5rem);
+      max-width: 14.5rem;
+    }
+
+    .page-intro:not(.page-intro--no-art) .page-art__paint {
+      object-fit: cover;
+      object-position: 72% 46%;
+      aspect-ratio: 1 / 1;
+    }
+  }
+}

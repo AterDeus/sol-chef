@@ -28,6 +28,38 @@ Status: accepted · чат 2026-09-06
 
 API `?anchor_weight=` остаётся для шаринга и тестов. Ранжирование калькулятора — только Django. Формула V1 `1+(ratio-1)*0.5` запрещена.
 
+## DEC-022 — Nutrition is derived from assembled/scaled ingredients
+
+Status: accepted · чат 2026-09-06
+
+Ориентировочное КБЖУ — производное display после сборки варианта и масштаба, не контент рецепта.
+
+1. JSON рецепта автора не содержит `nutrition` / `kcal` / БЖУ.
+2. Источник чисел на 100 г — `Ingredient` (сид), не строка рецепта.
+3. Источник истины формулы — Django `services/nutrition.py`, Decimal, после assemble + `apply_mode`, без `roundScaled`.
+4. Frontend после `scaleLine` воспроизводит ту же формулу по проекции `nutrition_line`. Это не второй источник истины и не API каталога.
+
+Дополнительно: `kcal` суммируется с канонов, не считается Atwater 4/9/4; базис MVP — вход до готовки (`raw_input` / `nutrition_basis=raw_100g`); поле API — `per_100g_input` (не `per_100g`, не `per_100g_raw`); `nutrition_exclude` целиком из числителя и массы; для диапазона `amount`…`amount_max` nutrition берёт `amount` (низ).
+
+HUMAN 2.15. Спека на момент приёмки — [drafts/NUTRITION.md](drafts/NUTRITION.md) (архив).
+
+## DEC-023 — Yield and nutrition_factor are editorial
+
+Status: accepted · чат 2026-09-06 · HUMAN 2.16
+
+Первый срез этапа 3 КБЖУ: готовое и частичный жир — только если редакция написала числа.
+
+1. `yield_weight_g` — граммы готового на базе. Нет ключа → `per_100g_cooked: null`. Не алиас `per_100g_input`. Не выдумывать на каталоге.
+2. Знаменатель cooked — `yield * ratio`, всегда linear, не `gentle`.
+3. `nutrition_factor` 0.01–1 на строке, editorial. Нет ключа = 1. Ноль запрещён (`nutrition_exclude`). Не вместе с exclude. Авто-0.5 на масло жарки нет.
+4. Фильтр `kcal_max`, автовыбор `light`, обязательные `servings`, `ingredient_role` — не этот срез.
+
+## DEC-024 — Calorie-dense to_taste is allowed
+
+Status: accepted · чат 2026-09-06 · HUMAN 2.17
+
+`to_taste` / `pinch` на масле, мёде и прочих жирных канонах разрешены. Строка не входит в сумму КБЖУ и не ставит `incomplete`. На карточке иконка справа только если пропуск скрывает заметные ккал (канон ≥300 ккал/100 г или ≥20 г жира/100 г). Соль, перец, паприка — без иконки. Тултип: «КБЖУ для этой строки не считается.» Валидатор это не бьёт ни на оверлее 43, ни на новых волнах. Граммы у ядра блюда по-прежнему обязательны.
+
 ## DEC-002 — Один origin, без JWT и CORS
 
 Status: accepted · 2026-09-05
@@ -165,4 +197,19 @@ JSON `barhatnaya-govyadina-po-kitajski` — эталон карточки 2.0 д
 5. `use_cases` — фиксированный VOCAB, не теги V1.
 
 Полные роли `required`/`substitutable` на каждой строке — ещё не в Postgres. Ranking `intent=` по минутам не переключали: у ETL V1 `time_*` null. Чипы 15/30 (DEC-018) по-прежнему не врать по всему каталогу.
+
+## DEC-025 — Аккаунт поверх гостя
+
+Status: accepted · чат 2026-09-07 (ТЗ по черновику ACCOUNTS)
+
+1. Гость умеет книгу, калькулятор, «У меня», cook mode без входа. Аккаунт — сохранить и написать.
+2. Passwordless: российские TLD, OTP+ссылка, GET не логинит, в БД только хеш, сессия Django в Postgres. Не JWT, не 401 на гидратации гостя (`200` `{authenticated:false}`; мутации `403`).
+3. Четыре сущности: избранное, cook report, оценка, комментарий. Кладовка V2.1 — факт `canonical`/`have_group`, кнопка сохранить, не «У меня» и не кнопка на карточке рецепта.
+4. ISR без PII и без летучих счётчиков. `community_confirmed` — поле `Recipe`, считает сервис (≥3 разных user).
+5. Реализация тремя срезами A → B → C, затем V2.2 граммы и фото. Кастомный `User`, FK на `Recipe`, не slug как ключ.
+6. D+: «Войти» в служебном хроме, не пятый таб.
+
+Следствие: HUMAN 3.9 («аккаунт V2.2») читается как глубокая кладовка/корзина, не запрет войти в V2.1. HUMAN 12 — ответы в §10 HUMAN.
+
+Хозяин плана: [ACCOUNTS.md](ACCOUNTS.md).
 

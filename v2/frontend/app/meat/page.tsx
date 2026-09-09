@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { fetchMeatGuide } from '@/lib/api';
 import { MEAT_CUTS, MEAT_CUT_LABEL } from '@/lib/vocab';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
+import { PageIntro } from '@/components/PageArt';
 
 export const revalidate = 60;
 
@@ -17,9 +18,14 @@ export default async function MeatHubPage() {
 
   return (
     <>
-      <p className="eyebrow">Справочник</p>
-      <h1>Мясо</h1>
-      <p className="lede">Выберите белок — внутри температуры и типичные ошибки по отрубам.</p>
+      <PageIntro
+        scene="meat"
+        eyebrow="Справочник"
+        title="Мясо"
+        lede={
+          <p className="lede">Выберите белок — внутри температуры и типичные ошибки по отрубам.</p>
+        }
+      />
       {down && <ErrorBanner message="Не удалось связаться с сервером. Попробуйте позже." />}
       {!down && anyError && <ErrorBanner message="Часть справочников не загрузилась." />}
       {!down && tiles.length === 0 && (

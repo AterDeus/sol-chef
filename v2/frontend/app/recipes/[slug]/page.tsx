@@ -14,6 +14,7 @@ import {
 } from '@/lib/vocab';
 import { IngredientsBlock } from '@/components/IngredientsBlock';
 import { RecipeActions } from '@/components/RecipeActions';
+import { RecipeAxisLink, RecipeAxisSwitch } from '@/components/RecipeAxisSwitch';
 import { ErrorBanner } from '@/components/Feedback';
 import type { RecipeDetail, RecipeNote, SearchParamsRecord } from '@/lib/types';
 
@@ -114,7 +115,9 @@ export default async function RecipePage({ params, searchParams }: Props) {
         <span className="tag">{labelOf(PROTEIN_BASE, recipe.protein_base)}</span>
         <span className="tag">{labelOf(COOK_METHOD, recipe.cook_method)}</span>
         <span className="tag">{labelOf(DISH_TYPE, recipe.dish_type)}</span>
-        {recipe.equipment && <span className="tag">{labelOf(EQUIPMENT, recipe.equipment)}</span>}
+        {recipe.equipment && recipe.equipment !== recipe.cook_method && (
+          <span className="tag">{labelOf(EQUIPMENT, recipe.equipment)}</span>
+        )}
         {flags.map((flag) => (
           <span key={flag} className="tag">
             {labelOf(HIGH_RISK, flag)}
@@ -184,54 +187,58 @@ export default async function RecipePage({ params, searchParams }: Props) {
         </section>
       )}
 
-      {deltaVariants.length > 0 && (
-        <section className="recipe-section" aria-label="Вариации состава">
-          <fieldset className="filter-block">
-            <legend className="filter-legend">Вариация</legend>
-            <div className="chip-row">
-            <Link
-              href={recipeHref(recipe.slug, { equipment: appliedEquipment })}
-              className={!appliedVariant ? 'chip is-active' : 'chip'}
-              aria-current={!appliedVariant ? 'true' : undefined}
-            >
-              Как в рецепте
-            </Link>
-            {deltaVariants.map((item) => (
-              <Link
-                key={item.code}
-                href={recipeHref(recipe.slug, {
-                  variant: item.code,
-                  equipment: appliedEquipment,
-                })}
-                className={appliedVariant === item.code ? 'chip is-active' : 'chip'}
-                aria-current={appliedVariant === item.code ? 'true' : undefined}
-              >
-                {item.title}
-              </Link>
-            ))}
-            </div>
-          </fieldset>
-        </section>
-      )}
+      {(deltaVariants.length > 0 || equipmentCodes.length > 1) && (
+        <RecipeAxisSwitch applied={`${appliedVariant ?? ''}:${appliedEquipment ?? ''}`}>
+          {deltaVariants.length > 0 && (
+            <section className="recipe-section" aria-label="Вариации состава">
+              <fieldset className="filter-block">
+                <legend className="filter-legend">Вариация</legend>
+                <div className="chip-row">
+                  <RecipeAxisLink
+                    href={recipeHref(recipe.slug, { equipment: appliedEquipment })}
+                    className={!appliedVariant ? 'chip is-active' : 'chip'}
+                    current={!appliedVariant}
+                  >
+                    Как в рецепте
+                  </RecipeAxisLink>
+                  {deltaVariants.map((item) => (
+                    <RecipeAxisLink
+                      key={item.code}
+                      href={recipeHref(recipe.slug, {
+                        variant: item.code,
+                        equipment: appliedEquipment,
+                      })}
+                      className={appliedVariant === item.code ? 'chip is-active' : 'chip'}
+                      current={appliedVariant === item.code}
+                    >
+                      {item.title}
+                    </RecipeAxisLink>
+                  ))}
+                </div>
+              </fieldset>
+            </section>
+          )}
 
-      {equipmentCodes.length > 1 && (
-        <section className="recipe-section" aria-label="Посуда">
-          <fieldset className="filter-block">
-            <legend className="filter-legend">Посуда</legend>
-            <div className="chip-row">
-            {equipmentCodes.map((code) => (
-              <Link
-                key={code}
-                href={recipeHref(recipe.slug, { variant: appliedVariant, equipment: code })}
-                className={appliedEquipment === code ? 'chip is-active' : 'chip'}
-                aria-current={appliedEquipment === code ? 'true' : undefined}
-              >
-                {labelOf(EQUIPMENT, code)}
-              </Link>
-            ))}
-            </div>
-          </fieldset>
-        </section>
+          {equipmentCodes.length > 1 && (
+            <section className="recipe-section" aria-label="Посуда">
+              <fieldset className="filter-block">
+                <legend className="filter-legend">Посуда</legend>
+                <div className="chip-row">
+                  {equipmentCodes.map((code) => (
+                    <RecipeAxisLink
+                      key={code}
+                      href={recipeHref(recipe.slug, { variant: appliedVariant, equipment: code })}
+                      className={appliedEquipment === code ? 'chip is-active' : 'chip'}
+                      current={appliedEquipment === code}
+                    >
+                      {labelOf(EQUIPMENT, code)}
+                    </RecipeAxisLink>
+                  ))}
+                </div>
+              </fieldset>
+            </section>
+          )}
+        </RecipeAxisSwitch>
       )}
 
       {(recipe.ingredients ?? []).length > 0 && (
@@ -239,6 +246,8 @@ export default async function RecipePage({ params, searchParams }: Props) {
           scaling={recipe.scaling ?? { enabled: false }}
           ingredients={recipe.ingredients}
           servingsBase={recipe.servings}
+          yieldWeightG={recipe.yield_weight_g}
+          yieldKind={recipe.yield_kind}
           hasTimers={hasTimers}
         />
       )}
@@ -265,16 +274,20 @@ export default async function RecipePage({ params, searchParams }: Props) {
         </section>
       )}
 
-      {(recipe.variations ?? []).length > 0 && (
-        <details className="recipe-variations">
-          <summary>Вариации ({recipe.variations.length})</summary>
-          {recipe.variations.map((item) => (
-            <article key={item.title} style={{ marginBottom: 12 }}>
-              <h3 style={{ fontSize: 17, marginBottom: 6 }}>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </details>
+      {(recipe.variations ?? []).some((item) => item.text?.trim()) && (
+        <section className="recipe-section" aria-label="Текстовые вариации">
+          <h2>Вариации</h2>
+          <ul className="recipe-notes">
+            {recipe.variations
+              .filter((item) => item.text?.trim())
+              .map((item) => (
+                <li key={item.title || item.text}>
+                  {item.title ? <strong>{item.title}. </strong> : null}
+                  {item.text}
+                </li>
+              ))}
+          </ul>
+        </section>
       )}
 
       {notes.length > 0 && (

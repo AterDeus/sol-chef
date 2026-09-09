@@ -1,0 +1,405 @@
+{
+  "id": "pirozhnoe-kartoshka",
+  "title": "Пирожное «Картошка»",
+  "summary": "Песочное печенье дробят в крошку с мелкими кусочками — не в пыль. Смешивают с мягким маслом, сгущёнкой и какао, лепят овалы и охлаждают в холодильнике. Плиты и духовки нет.",
+  "recipe_family": "no_bake_dessert",
+  "protein_base": "eggs_dairy",
+  "cook_method": "no_cook",
+  "dish_type": "dessert",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": [
+    "fast",
+    "easy",
+    "pantry"
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "shortbread_cookies",
+      "title": "песочное печенье",
+      "aliases": [
+        "сахарное печенье",
+        "печенье к чаю"
+      ],
+      "allergens_contains": [
+        "gluten",
+        "milk"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": [
+        "egg"
+      ]
+    },
+    {
+      "canonical_id": "condensed_milk",
+      "title": "сгущённое молоко",
+      "aliases": [
+        "сгущёнка"
+      ],
+      "allergens_contains": [
+        "milk"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "cocoa_powder",
+      "title": "какао-порошок",
+      "aliases": [
+        "какао"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "coconut_flakes",
+      "title": "кокосовая стружка",
+      "aliases": [
+        "стружка кокоса"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "ricotta",
+      "title": "рикотта",
+      "aliases": [
+        "сыр рикотта"
+      ],
+      "allergens_contains": [
+        "milk"
+      ],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "vanilla_sugar",
+      "title": "ванильный сахар",
+      "aliases": [
+        "ванилин",
+        "ваниль"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    },
+    {
+      "canonical_id": "banana",
+      "title": "банан",
+      "aliases": [
+        "бананы"
+      ],
+      "allergens_contains": [],
+      "allergens_may_contain": [],
+      "allergens_unknown": []
+    }
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "ingredient": "cocoa_powder",
+      "quality": 0.78
+    }
+  ],
+  "prep": [
+    {
+      "text": "Достать масло заранее: мягкое, не растопленное — из лужи масса не слепится",
+      "before_min": 40
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "shortbread_cookies",
+      "display_name": "песочное печенье",
+      "amount": 300,
+      "unit": "g",
+      "detail": "обычное пшеничное; состав на пачке смотреть отдельно",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 100,
+      "unit": "g",
+      "detail": "мягкое, не растопленное",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "condensed_milk",
+      "display_name": "сгущённое молоко",
+      "amount": 100,
+      "unit": "g",
+      "detail": "обычная сгущёнка, не варёная",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "cocoa_powder",
+      "display_name": "какао-порошок",
+      "amount": 30,
+      "unit": "g",
+      "detail": "без сахара, просеять если комками",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "vanilla_sugar",
+      "display_name": "ванильный сахар",
+      "amount": 10,
+      "unit": "g",
+      "detail": "пакетик или щепотка ванилина",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Печенье сложить в пакет и размять скалкой в крошку с мелкими кусочками: не в пыль и не блендером до пудры. Крупные осколки тоже не оставлять — пирожное развалится."
+    },
+    {
+      "position": 2,
+      "text": "Мягкое масло растереть со сгущёнкой, какао и ванильным сахаром до однородной пасты без комочков масла."
+    },
+    {
+      "position": 3,
+      "text": "Вмешать крошку. Готовая масса лепится и не блестит жиром: если крошится — ещё ложка сгущёнки, если липнет к рукам — чуть крошки."
+    },
+    {
+      "position": 4,
+      "text": "Сформировать овалы «картошки» примерно с грецкий орех или чуть крупнее. Выложить на тарелку."
+    },
+    {
+      "position": 5,
+      "text": "Убрать в холодильник минимум на 15 минут, пока не схватятся.",
+      "timer_seconds": 900,
+      "timer_label": "Холодильник",
+      "timer_note": "15 минут минимум; дольше — плотнее"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_walnut_center",
+      "title": "С орехом внутри",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "walnuts",
+            "display_name": "грецкие орехи",
+            "amount": 30,
+            "unit": "g",
+            "detail": "половинки, по одной в центр каждой «картошки»",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 4,
+            "text": "Сформировать овалы. В центр каждого вдавить половинку грецкого ореха и залепить, чтобы орех не торчал. Выложить на тарелку."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [
+          "tree_nut"
+        ],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "white_coconut",
+      "title": "Белая в кокосе",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "cocoa_powder"
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "coconut_flakes",
+            "display_name": "кокосовая стружка",
+            "amount": 40,
+            "unit": "g",
+            "detail": "мелкая, для обвалки",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Мягкое масло растереть со сгущёнкой и ванильным сахаром до однородной пасты. Какао в этом варианте нет: масса остаётся светлой."
+          },
+          {
+            "position": 4,
+            "text": "Сформировать овалы и обвалять в кокосовой стружке со всех сторон. Выложить на тарелку."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "С рикоттой и бананом",
+      "energy_profile": "light",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "condensed_milk"
+          }
+        ],
+        "replace": [
+          {
+            "canonical_id": "butter",
+            "display_name": "сливочное масло",
+            "amount": 40,
+            "unit": "g",
+            "detail": "мягкое; меньше базы, связку даёт рикотта",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ],
+        "add": [
+          {
+            "canonical_id": "ricotta",
+            "display_name": "рикотта",
+            "amount": 120,
+            "unit": "g",
+            "detail": "мягкая, лишнюю сыворотку слить",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "banana",
+            "display_name": "банан",
+            "amount": 80,
+            "unit": "g",
+            "detail": "спелый, без кожуры; размять вилкой",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 2,
+            "text": "Спелый банан размять вилкой в пюре без крупных кусков. Растереть с мягким маслом, рикоттой, какао и ванильным сахаром. Сгущёнки в этом варианте нет."
+          },
+          {
+            "position": 3,
+            "text": "Вмешать крошку. Масса влажнее базы и менее сладкая: если не лепится — чуть крошки; если расползается — 10–15 минут в холодильнике, потом лепить."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Крошка",
+      "text": "Нужны крупинки и мелкие кусочки, не мука. Блендер до пудры даёт вязкую пасту без «картофельной» фактуры. Скалка в пакете или толкушка."
+    },
+    {
+      "title": "Масло",
+      "text": "Мягкое, как для намазывания. Растопленное вытечет при лепке, холодильник это не спасёт: жир застынет пятнами, крошка не свяжется."
+    },
+    {
+      "title": "Сгущёнка",
+      "text": "Обычная, не варёная. Варёнка гуще и темнее: масса станет как конфеты, не как «картошка»."
+    },
+    {
+      "title": "Холодильник",
+      "text": "15 минут — минимум, чтобы овалы не оплыли. На ночь можно: плотнее, вкус тот же. В морозилку на час не надо — внутри льдинки."
+    },
+    {
+      "title": "Коньяк",
+      "text": "По желанию столовая ложка в пасту к маслу. В базу не входит: без алкоголя рецепт полный. Детям такой вариант не давать."
+    },
+    {
+      "title": "С рикоттой и бананом",
+      "text": "Это уже другой десерт: рикотта и банан вместо сгущёнки. Влажнее и слаще бананом, не классическая «картошка»."
+    },
+    {
+      "title": "Печенье",
+      "text": "Пшеничное песочное. Яйцо в составе часто не подписано однозначно — на карточке яйцо как неизвестное. Овсяное и крекеры не подходят: крошка другая."
+    },
+    {
+      "title": "Белая",
+      "text": "Какао убрать полностью, обвалять в стружке. Какао в массу «для цвета» не возвращать: иначе это база с кокосом, не белая картошка."
+    }
+  ]
+}

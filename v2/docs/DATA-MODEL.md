@@ -10,8 +10,9 @@
 |-----|--------|
 | `recipes` | `Recipe`, `RecipeVariant`, `RecipeRevision`, `Ingredient`, `RecipeIngredient`, `RecipeStep`, `SubstitutionRule` |
 | `content` | `ContentDocument` |
+| `accounts` | V2.1: `User`, `AuthToken`, `Favorite`, `CookReport`, `PantryItem`, `RecipeRating`, `RecipeComment`, `Complaint` |
 
-Сессии Django — в Postgres (не Redis). Аккаунты, кладовка, комментарии — не в срезе.
+Сессии Django — в Postgres (не Redis). `AUTH_USER_MODEL = "accounts.User"`. Гостевой срез без этих таблиц живёт; миграции аккаунтов — спринт V2.1-A ([ACCOUNTS.md](ACCOUNTS.md)). Кладовка с граммами и фото — V2.2, не колонки «про запас».
 
 ## `Recipe` — живая карточка
 
@@ -30,11 +31,14 @@
 | `scale_mode` | enum | нет | дефолт рецепта; строка ингредиента может переопределить |
 | `scalable` | bool | нет | `false` = количества не меняются |
 | `servings` | positive int | да | база порций; в V1 у всех `NULL` |
+| `yield_weight_g` | decimal | да | граммы готового на **базе** рецепта; нет / null = нет `per_100g_cooked` |
+| `yield_kind` | enum | да | `estimated` (дефолт, если есть выход) \| `exact`; без выхода — null |
 | `summary` | text | да | лид |
 | `source_name` | text | да | |
 | `source_url` | URL | да | |
 | `source_type` | text | да | `video` / `article` / … |
 | `editorial_tested` | bool | нет | только человек; ETL: `false` |
+| `community_confirmed` | bool | нет | сервис аккаунтов: ≥3 разных user с approved `CookReport`; ETL: `false`; агент не ставит |
 | `high_risk_flags` | array of VOCAB | нет | пустой = нет флага |
 | `caution_text` | text | да | обязателен, если есть high-risk |
 | `energy_profile` | VOCAB | нет | дефолт оси energy; спринт 2 UI калоража нет; ETL: `standard` |
@@ -52,7 +56,7 @@
 | `search_vector` | generated tsvector | — | см. «Поиск» |
 | `updated_at` | timestamptz | нет | |
 
-Нет поля `scalable_rule`. Нет колонки `variations` на `Recipe` (это `RecipeVariant`). Нет `scale_mode=fixed`.
+Нет поля `scalable_rule`. Нет колонки `variations` на `Recipe` (это `RecipeVariant`). Нет `scale_mode=fixed`. Нет колонки `Recipe.nutrition` — КБЖУ не канон рецепта, а производное display после сборки и масштаба (DEC-022, DEC-023). `yield_weight_g` — редакционная масса готового, не сумма входных граммов. Не выдумывать выход на каталоге. Не подписывать `per_100g_input` как «на 100 г готового».
 
 Карточка 2.0 — три уровня, не квота вариантов:
 
@@ -72,6 +76,7 @@
 - `servings IS NULL` и нет строки `is_anchor=true` **после сборки варианта** → масштабирование выключено. ETL **не** подставляет 4 порции.
 - High-risk без `caution_text` → нельзя `published`. Вариант с флагом и `published` → `caution_text` базы или `caution_text_override`.
 - `editorial_tested` агент не ставит.
+- `community_confirmed` агент и ETL не ставят; только сервис по cook report.
 - После сборки **не больше одной** строки `is_anchor=true`.
 - Одно блюдо = один `slug`. Нет `family_id`.
 
@@ -111,6 +116,8 @@
 
 Таймеры и температуры не умножаются. `gentle` = `ratio^0.7`.
 
+КБЖУ display — после assemble и `apply_mode`, без `roundScaled` количеств (DEC-022). Не колонка `Recipe`. Выход в знаменателе `per_100g_cooked` — `yield_weight_g * ratio`, всегда linear, не `gentle`.
+
 ## `RecipeRevision`
 
 Неизменяемый снимок на момент смены статуса (`draft → in_review → approved → published`).
@@ -126,7 +133,7 @@
 
 ## `Ingredient` — канон
 
-Источник правды аллергена — эта таблица, не подстрока в рецепте и не копия `allergens_*` в каждом JSON. Оверлей ссылается `canonical_id`. `new_ingredients` — заявка: канона нет → зарегистрировать здесь → убрать блок из утверждённого файла.
+Источник правды аллергена и нутриентов на 100 г — эта таблица, не подстрока в рецепте и не копия `allergens_*` в каждом JSON. Оверлей ссылается `canonical_id`. `new_ingredients` — заявка: канона нет → зарегистрировать здесь → убрать блок из утверждённого файла.
 
 | Поле | Тип | Null | Смысл |
 |------|-----|------|--------|
@@ -138,6 +145,25 @@
 | `allergens_contains` | VOCAB[] | нет | 14 кодов; пустой = не содержит известных |
 | `allergens_may_contain` | VOCAB[] | нет | следы, только если явно |
 | `allergens_unknown` | VOCAB[] | нет | нельзя трактовать как «нет» |
+| `kcal_per_100g` | decimal | да | энергия **источника**, не Atwater 4/9/4 |
+| `protein_g_per_100g` | decimal | да | |
+| `fat_g_per_100g` | decimal | да | |
+| `carbs_g_per_100g` | decimal | да | как в источнике; сахар отдельно не в MVP |
+| `nutrition_basis` | enum | да, если макросы null | в MVP только `raw_100g`; обязателен, если нутриенты заполнены |
+| `nutrition_source` | enum | да | `fooddata_central` \| `ru_table` \| `packaging_typical` \| `editorial` |
+| `nutrition_source_id` | text | да | устойчивый id источника (FDC); у `editorial` обычно `null` |
+| `g_per_tsp` | decimal | да | типовая масса 1 ч. л. **этого** канона |
+| `g_per_tbsp` | decimal | да | то же, ст. л. |
+| `g_per_pcs` | decimal | да | то же, шт |
+| `g_per_clove` | decimal | да | то же, зубчик |
+| `g_per_bunch` | decimal | да | то же, пучок |
+| `g_per_slice` | decimal | да | то же, ломтик |
+
+Четыре макроса + `kcal`: все заполнены или все null. Валидатор сида.
+
+`g_per_*` — редакционная оценка типовой массы единицы **этого** канона (яйцо ≈ 50 г, зубчик чеснока ≈ 5 г), не глобальная таблица «ст. л. = 15 г». Нет своего `g_per_*` у нужного unit — строка вне суммы КБЖУ, `incomplete`.
+
+`nutrition_basis` в MVP — только `raw_100g` (типовой сырой продукт в том виде, как в рецепте). Значений `cooked_100g` / `prepared_100g` нет. `nutrition_source_id` не обязателен: заполнять, когда id стабилен; не выдумывать ключ для editorial.
 
 V1-имена (`"сливки"`, `"муки"`) **не** пишутся в `title` как попало: ETL резолвит строку V1 → `canonical_id` через сид-словарь (см. ETL).
 
@@ -171,10 +197,24 @@ Unique: пара from/to глобально (`recipe IS NULL`); пара from/to
 | `scalable` | bool | нет | `false` → amount не меняется; `scale_mode` игнорируется |
 | `is_anchor` | bool | нет | якорь «У меня»; **≤ 1** на рецепт |
 | `optional` | bool | нет | `true` = не обязателен для блюда («для подачи», «по желанию»); в аллергенах карточки не участвует |
+| `nutrition_exclude` | bool | нет | дефолт `false`; строка не входит **ни** в числитель КБЖУ, **ни** в массу `per_100g_input` |
+| `nutrition_factor` | decimal 0.01–1 | да | доля вклада строки (жир, который остался в сковороде). Нет ключа / null = 1. Ноль запрещён — это `nutrition_exclude`. Не вместе с exclude |
 | `choice_group` | text | да | «A или B» |
 | `display_name` | text | да | как в V1, если отличается от канона |
 
-`unit` ∈ `to_taste` \| `pinch` → `amount` должен быть `NULL`, `scalable=false`.
+`unit` ∈ `to_taste` \| `pinch` → `amount` должен быть `NULL`, `scalable=false`. `nutrition_factor` не вместе с `nutrition_exclude`.
+
+### КБЖУ (производное display)
+
+Не колонка `Recipe`. Считать после сборки варианта и `apply_mode`, до округления UI количеств (DEC-022).
+
+Nutrition использует **то же resolved `amount`**, что display после `apply_mode`. Для диапазона `amount` … `amount_max` берёт `amount` (низ). `amount_max` в расчёт не входит.
+
+Не входит ни в числитель, ни в массу `per_100g_input`: `optional: true`; `unit` ∈ `to_taste` \| `pinch`; `nutrition_exclude: true`. `nutrition_exclude` — целиком или никак. Частичный вклад — `nutrition_factor` (множитель граммов вклада и массы входа, дефолт 1). `to_taste` / `pinch` можно на жирных канонах (масло, мёд): валидатор не бьёт (DEC-024); UI-иконка только у жирного/сладкого, не у соли.
+
+Граммы строки: `g` — `amount`; `kg` — ×1000; `ml`/`l` — через `density_g_per_ml` (нет плотности → `incomplete`, не «как вода»); `tsp`/`tbsp`/`pcs`/`clove`/`bunch`/`slice` — `amount * g_per_<unit>` этого канона (нет → `incomplete`, глобальную ложку не подставлять). Затем × `nutrition_factor`. `pinch`/`to_taste` не переводятся и **не** делают `incomplete`. Вода/бульон, которые остаются в блюде: макросы 0, в знаменателе `per_100g_input` — да.
+
+`per_100g_cooked` — только если задан `yield_weight_g` > 0: `total` на 100 г `(yield_weight_g * ratio)`. `ratio` всегда linear, даже если якорь масла `gentle`. Нет выхода → JSON `null`, ячейки в UI нет. Это **новое поле**, не переименование `per_100g_input`.
 
 ### Якорь
 
@@ -233,6 +273,120 @@ Unique: `(type, slug)`.
 
 Пустых гидов (`seafood`, `vegetables`, …) не создавать.
 
+## Аккаунты (V2.1)
+
+План и инварианты — [ACCOUNTS.md](ACCOUNTS.md). Не в гостевом срезе. Фото и граммы кладовки — *позже* (V2.2), колонок не заводить.
+
+### `User`
+
+`AbstractBaseUser` + `PermissionsMixin`. Логин — почта. Пароль в UI нет (`set_unusable_password`).
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `email` | email, unique | нет | пока `deleted_at` пуст; после удаления — необратимый хеш-плейсхолдер, не рабочий адрес |
+| `is_active` | bool | нет | |
+| `is_staff` | bool | нет | админка |
+| `is_trusted` | bool | нет | только staff; вес cook report 2×, не `editorial_tested` |
+| `approved_comments_count` | int ≥0 | нет | сколько **опубликованных** своих комментариев; порог премодерации DEFAULTS |
+| `created_at` | timestamptz | нет | |
+| `deleted_at` | timestamptz | да | soft-delete; сессии сжечь |
+
+Удаление: `deleted_at=now()`, email заменить на неколлизящий хеш, `is_active=false`. Избранное и кладовка — физически DELETE. Оценка / комментарий / cook report: `user` SET_NULL; комментарии → `status=deleted`.
+
+### `AuthToken`
+
+Один ряд = одна попытка входа (письмо). Сырой link-token и OTP **в БД не хранить** — только SHA-256 (hex 64).
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | нет | CASCADE |
+| `link_token_hash` | char 64 | нет | хеш токена из URL |
+| `otp_hash` | char 64 | нет | хеш 6-значного кода |
+| `attempts_left` | 0–5 | нет | старт 5; 0 = нельзя verify |
+| `created_at` | timestamptz | нет | |
+| `expires_at` | timestamptz | нет | created + 15 мин |
+| `used_at` | timestamptz | да | успех; повторно нельзя |
+
+GET `/login/confirm?token=` **не** пишет `used_at`. POST успеха — `used_at`, сессия.
+
+### `Favorite`
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | нет | CASCADE |
+| `recipe` | FK Recipe | нет | CASCADE, если рецепт сняли |
+| `created_at` | timestamptz | нет | сортировка кабинета |
+
+Unique `(user, recipe)`.
+
+### `CookReport`
+
+Каждая готовка — новая строка.
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | да | SET_NULL при удалении аккаунта |
+| `recipe` | FK Recipe | нет | |
+| `variant_code` | text | да | `RecipeVariant.code` оси addon; null = база |
+| `equipment_code` | VOCAB | да | посуда display; null = база рецепта |
+| `scale_ratio` | decimal | да | факт «У меня» / порций, если человек сохранил; не кладовка |
+| `private_note` | text | да | только автору; не комментарий |
+| `cooked_at` | timestamptz | нет | |
+| `status` | enum | нет | `pending` \| `approved` \| `rejected`. V2.1 без фото: сразу `approved` |
+
+Фото — *позже*. `community_confirmed` на рецепте: count distinct `user_id` где `status=approved` и `user_id IS NOT NULL` ≥ 3.
+
+### `PantryItem`
+
+Факт наличия, не граммы.
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | нет | CASCADE |
+| `kind` | enum | нет | `canonical` \| `have_group` |
+| `code` | text | нет | `canonical_id` или код группы калькулятора |
+
+Unique `(user, kind, code)`. Неизвестные коды — 400 как у `have=` / `have_group=`.
+
+### `RecipeRating`
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | да | SET_NULL |
+| `recipe` | FK Recipe | нет | |
+| `score` | 1–5 | нет | |
+| `updated_at` | timestamptz | нет | |
+
+Unique `(user, recipe)` пока user не null. После удаления аккаунта оценка остаётся в среднем без PII.
+
+### `RecipeComment`
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | да | SET_NULL |
+| `recipe` | FK Recipe | нет | |
+| `body` | text | нет | plaintext, max DEFAULTS; без HTML/markdown |
+| `status` | enum | нет | `pending` \| `approved` \| `rejected` \| `deleted` |
+| `created_at` | timestamptz | нет | |
+
+Первые 5 `approved` пользователя когда-либо — следующие без стоп-слов сразу `approved`. Стоп-слова — файл в репо (`apps/accounts/stopwords.txt`), правит человек, не LLM.
+
+Публичная подпись **не** хранится: UI всегда «Участник · дата». Email и ник не отдавать.
+
+### `Complaint`
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `user` | FK User | да | SET_NULL |
+| `target` | enum | нет | `comment` \| `recipe` |
+| `comment` | FK Comment | да | если target=comment |
+| `recipe` | FK Recipe | да | если target=recipe (ошибка карточки, не «не вкусно») |
+| `reason` | text | нет | max DEFAULTS |
+| `status` | enum | нет | `open` \| `resolved` \| `rejected` |
+| `created_at` | timestamptz | нет | |
+
+Ровно один из `comment` / `recipe` по `target`. Жалоба на рецепт ≠ комментарий.
+
 ## Поиск
 
 С первой миграции. Не `__icontains`.
@@ -288,5 +442,6 @@ $$ LANGUAGE sql IMMUTABLE PARALLEL SAFE;
 - Сид замен `substitution_rules.json` → `SubstitutionRule` (upsert). Нет `canonical_id` в БД — пропустить строку, не падать.
 - Нет `servings` / якоря — UI масштаба выключен. Не выдумывать 4 порции и `light`.
 - Картинок нет — media не строить.
+- `community_confirmed` и `editorial_tested` при upsert **не затирать** живые значения (ETL пишет `false` только на INSERT).
 
 Сид-файлы появятся вместе с кодом импорта (не в этом документе). Пока кода нет — не заполнять «на глаз» в markdown.

@@ -44,7 +44,8 @@ U1–U9 и разбор V1 (43 рецепта) не требуют Postgres. FTS
 
 ## Отклонения от DATA-MODEL
 
-- На `Recipe` добавлены `variations` (JSONField) и `notes` (TextField) — они есть в ответе API.md.
+- `notes` на `Recipe` — JSONField (список объектов), не строка.
+- Вариации — таблица `RecipeVariant` (дельты), не JSONField на `Recipe`. В ответе API поле `variations` собирается из вариантов.
 - `ingredient_titles` — денормализация для generated `search_vector` (title + имена + summary).
 - Единица V1 «стакана» нормализуется в `ml` (×250 мл), в enum нет `cup`.
 - Счётные единицы вне VOCAB (`банка`, `стебля`, `стручков`, `порции`, `листиков`, `полоски`) → `pcs`.

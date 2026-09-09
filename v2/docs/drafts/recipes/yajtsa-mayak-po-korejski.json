@@ -1,0 +1,257 @@
+{
+  "id": "yajtsa-mayak-po-korejski",
+  "title": "Яйца «Маяк» по-корейски",
+  "summary": "Яйца варят всмятку 6 минут, сразу в лёд и очищают. Соевый маринад с водой, сахаром или мёдом, луком и чесноком только смешивают — без варки — и заливают в контейнере на 4–6 часов в холодильнике.",
+  "recipe_family": "asian_eggs",
+  "protein_base": "eggs_dairy",
+  "cook_method": "boil",
+  "dish_type": "appetizer",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "servings": 3,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "time_profile": {
+    "total_minutes": 270,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "batch",
+    "pantry",
+    "easy"
+  ],
+  "adaptations": [],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "eggs",
+      "display_name": "яйца",
+      "amount": 6,
+      "unit": "pcs",
+      "detail": "крупные С0, на 3 порции по 2 яйца; масштаб от порций",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 120,
+      "unit": "ml",
+      "detail": "обычный пшеничный; около 8 ст. л.",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 120,
+      "unit": "ml",
+      "detail": "в маринад, комнатной температуры",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 2,
+      "unit": "tbsp",
+      "detail": "песок, растворить в маринаде; не вместе с мёдом",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "sweetener"
+    },
+    {
+      "position": 5,
+      "canonical_id": "honey",
+      "display_name": "мёд",
+      "amount": 1.5,
+      "unit": "tbsp",
+      "detail": "вместо сахара, не вместе",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "sweetener"
+    },
+    {
+      "position": 6,
+      "canonical_id": "green_onion",
+      "display_name": "зелёный лук",
+      "amount": 3,
+      "unit": "pcs",
+      "detail": "стебля, наискось; в маринад",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 4,
+      "unit": "clove",
+      "detail": "раздавить или тонко нарезать",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "sesame",
+      "display_name": "кунжут",
+      "amount": 1,
+      "unit": "tsp",
+      "detail": "семена; можно уже поджаренные, на плите не жарить",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Налить в кастрюлю воду с запасом 2–3 см над яйцами и довести до кипения. Яйца из холодильника — 10 минут на столе, иначе скорлупа чаще трескается."
+    },
+    {
+      "position": 2,
+      "text": "Аккуратно опустить яйца в кипяток и варить на умеренном кипении. База — всмятку: желток ещё жидкий, белок схватился. Не держать 8–10 минут — это уже вкрутую.",
+      "timer_seconds": 360,
+      "timer_label": "Варка всмятку",
+      "timer_note": "6 минут от кипения для крупного С0; ориентир — время, не цвет скорлупы"
+    },
+    {
+      "position": 3,
+      "text": "Шумовкой переложить яйца в миску с водой и льдом. Остудить, пока скорлупа не станет холодной — так останавливается варка.",
+      "timer_seconds": 300,
+      "timer_label": "Лёд",
+      "timer_note": "около 5 минут"
+    },
+    {
+      "position": 4,
+      "text": "Очистить яйца. Если скорлупа плохо отходит — ещё минуту во льду и катнуть по доске, не рвать белок."
+    },
+    {
+      "position": 5,
+      "text": "В контейнере смешать соевый соус, воду, сахар или мёд — одно из двух, не оба — нарезанный зелёный лук, чеснок, кунжут и перец. Сахар или мёд растворить. Соус не кипятить и не прогревать на плите."
+    },
+    {
+      "position": 6,
+      "text": "Уложить очищенные яйца плотно. Залить маринадом, чтобы покрыл. Закрыть и поставить в холодильник. Не оставлять при комнатной температуре и не стерилизовать как банку.",
+      "timer_seconds": 14400,
+      "timer_label": "Маринад",
+      "timer_note": "4–6 часов в холодильнике; можно до суток. Не комнатная температура"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_ginger",
+      "title": "С имбирём и кинзой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "canonical_id": "ginger",
+            "display_name": "имбирь",
+            "amount": 20,
+            "unit": "g",
+            "detail": "свежий, тонкой соломкой; в маринад",
+            "scale_mode": "linear",
+            "scalable": true
+          },
+          {
+            "canonical_id": "cilantro",
+            "display_name": "кинза",
+            "amount": 10,
+            "unit": "g",
+            "detail": "листья; часть в маринад, часть к подаче",
+            "scale_mode": "linear",
+            "scalable": true
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "position": 5,
+            "text": "В контейнере смешать соевый соус, воду, сахар или мёд — одно из двух — лук, чеснок, кунжут, перец, соломку имбиря и часть кинзы. Сахар или мёд растворить. Соус не кипятить. Остальную кинзу оставить к подаче."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "contains_add": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": [],
+        "unknown_add": [],
+        "unknown_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "notes": [
+    {
+      "title": "Время варки",
+      "text": "Для крупного яйца категории С0 — ровно 6 минут в кипящей воде. Желток должен остаться текучим: в соевом маринаде он станет кремовым. Если сварить вкрутую 8–10 минут, маринад останется на белке, а желток выйдет сухим."
+    },
+    {
+      "title": "Лёд",
+      "text": "Ледяная вода сразу после варки останавливает нагрев и облегчает чистку. Без льда яйцо доходит в скорлупе до более плотного желтка."
+    },
+    {
+      "title": "Соус не варить",
+      "text": "Сахар или мёд растворяют в холодной смеси соевого и воды. Кипячение даёт другой вкус."
+    },
+    {
+      "title": "Контейнер, не банка",
+      "text": "Плотный контейнер в холодильнике на 4–6 часов, дальше до 2–3 дней. Комнатная температура и стерилизация банки здесь не подходят."
+    },
+    {
+      "title": "Чтобы покрыло",
+      "text": "Яйца кладут плотно, иначе 240 мл маринада не закроют верх. Если торчат — переложить в более узкую ёмкость, воду в маринад не доливать «на глаз»."
+    },
+    {
+      "title": "Сахар или мёд",
+      "text": "Одно сладкое, не оба. Мёд чуть ароматнее и слаще — его меньше. Соль в маринад не нужна: соевый уже солёный."
+    },
+    {
+      "title": "К рису",
+      "text": "К варёному рису как закуска — по желанию, не обязательно. Само блюдо — холодные яйца с маринадом, не горячий завтрак."
+    }
+  ]
+}

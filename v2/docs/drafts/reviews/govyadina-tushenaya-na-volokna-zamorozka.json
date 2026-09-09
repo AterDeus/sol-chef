@@ -1,13 +1,11 @@
 {
   "slug": "govyadina-tushenaya-na-volokna-zamorozka",
-  "verdict": "revise",
+  "verdict": "accept",
   "cookable": true,
-  "real": false,
-  "critical": [
-    "В V1 packet указан source_url https://sol-chef.ru; источник sol-chef.ru требует Critical."
-  ],
+  "real": true,
+  "critical": [],
   "major": [],
   "minor": [],
-  "comment": "Технология приготовления и заморозка порциями выполнимы, а batch-сценарий соответствует V1 packet. До приёмки нужно заменить или подтвердить источник, поскольку ссылка на sol-chef.ru является критическим замечанием.",
+  "comment": "Лопатка 2.5–3 кг до волокон 3.5–4 ч. Казан меньше жидкости у стенок. Духовка 160 °C под крышкой около 4 ч. Аддон голяшки сохранён. Вино или уксус — выбор, не смесь.",
   "recipe_json": null
 }

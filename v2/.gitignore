@@ -11,3 +11,7 @@ media/
 postgres-data/
 redis-data/
 minio-data/
+# agent / conversion scratch (not content pipeline)
+**/_tmp/
+**/_terra/
+tmp_*.py
