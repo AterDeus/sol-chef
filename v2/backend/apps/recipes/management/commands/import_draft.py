@@ -1,4 +1,4 @@
-"""Import accepted V2 recipe drafts into Postgres (overlay after import_v1)."""
+"""Import V2 recipe drafts into Postgres (overlay after import_v1)."""
 
 from __future__ import annotations
 
@@ -13,9 +13,7 @@ from apps.recipes.etl.draft import (
     DraftError,
     known_from_v1_map,
     load_json,
-    load_review,
     parse_draft,
-    review_allows_import,
     validate_draft,
 )
 from apps.recipes.etl.nutrition import load_ingredient_nutrition
@@ -36,7 +34,8 @@ def v1_map_path() -> Path:
 class Command(BaseCommand):
     help = (
         "Validate and upsert V2 draft recipes. "
-        "--accepted loads accept+cookable; битый файл в пачке пропускает, не валит всю команду."
+        "--path один файл; --accepted все *.json в drafts/recipes/; "
+        "пустая папка — успех, не ошибка. Вердикт Terra для импорта не нужен."
     )
 
     def add_arguments(self, parser):
@@ -44,18 +43,17 @@ class Command(BaseCommand):
         parser.add_argument(
             "--accepted",
             action="store_true",
-            help="Все slug с reviews/<slug>.json verdict=accept и cookable=true",
+            help="Все JSON в drafts/recipes/ (без reviews)",
         )
         parser.add_argument(
             "--check",
             action="store_true",
-            help="Только валидатор, без записи и без вердикта Luna",
+            help="Только валидатор, без записи",
         )
 
     def handle(self, *args, **options):
         root = drafts_root()
         recipes_dir = root / "recipes"
-        reviews_dir = root / "reviews"
         try:
             known = known_from_v1_map(json.loads(v1_map_path().read_text(encoding="utf-8")))
         except OSError as exc:
@@ -102,26 +100,6 @@ class Command(BaseCommand):
             if options.get("check") and not options.get("accepted"):
                 self.stdout.write(f"OK {slug}")
                 continue
-            if options.get("accepted") or not options.get("check"):
-                review_path = reviews_dir / f"{slug}.json"
-                try:
-                    review = load_review(review_path)
-                except DraftError as exc:
-                    if fail_fast:
-                        raise CommandError(
-                            f"{slug}: нет вердикта Luna ({review_path}). "
-                            "Сначала независимая проверка."
-                        ) from exc
-                    skipped += 1
-                    self.stdout.write(f"пропуск {slug}: нет accept-вердикта")
-                    continue
-                if not review_allows_import(review):
-                    skipped += 1
-                    self.stdout.write(
-                        f"пропуск {slug}: verdict={review.get('verdict')} "
-                        f"cookable={review.get('cookable')}"
-                    )
-                    continue
             try:
                 item = parse_draft(raw, known_ingredients=known)
             except DraftError as exc:

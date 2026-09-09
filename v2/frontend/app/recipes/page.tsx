@@ -5,9 +5,9 @@ import type { RecipeCardData, SearchParamsRecord } from '@/lib/types';
 import {
   BOOK_CHAPTERS,
   COOK_METHOD,
-  EQUIPMENT,
   PROTEIN_BASE,
   chapterIdForRecipe,
+  equipmentLabel,
   labelOf,
 } from '@/lib/vocab';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
@@ -127,7 +127,7 @@ export default async function RecipesPage({
     chapter ? chapter.label : null,
     proteinFilter.length === 1 ? labelOf(PROTEIN_BASE, proteinFilter[0]) : null,
     method ? labelOf(COOK_METHOD, method) : null,
-    equipment ? labelOf(EQUIPMENT, equipment) : null,
+    equipment ? equipmentLabel(equipment) : null,
   ].filter(Boolean);
 
   return (
@@ -239,7 +239,7 @@ export default async function RecipesPage({
               <div className="chip-row">
                 {[...equipmentCounts.entries()]
                   .filter(([code]) => Boolean(code))
-                  .sort((a, b) => labelOf(EQUIPMENT, a[0]).localeCompare(labelOf(EQUIPMENT, b[0]), 'ru'))
+                  .sort((a, b) => equipmentLabel(a[0]).localeCompare(equipmentLabel(b[0]), 'ru'))
                   .map(([code, n]) => (
                   <Link
                     key={code}
@@ -247,7 +247,7 @@ export default async function RecipesPage({
                     className={equipment === code ? 'chip is-active' : 'chip'}
                     aria-current={equipment === code ? 'true' : undefined}
                   >
-                    {labelOf(EQUIPMENT, code)} · {n}
+                    {equipmentLabel(code)} · {n}
                   </Link>
                 ))}
               </div>

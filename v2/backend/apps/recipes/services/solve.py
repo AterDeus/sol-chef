@@ -10,7 +10,7 @@ from apps.recipes.constants import (
     BEST_BUCKET_LIMIT,
     COMPONENT_DISH_TYPES,
     COOK_METHOD_LABEL_RU,
-    EQUIPMENT_LABEL_RU,
+    label_equipment_axis,
 )
 from apps.recipes.pantry_vocab import (
     FISH_CANNED,
@@ -277,8 +277,7 @@ def axes_why(recipe, assembled, methods: list[str], equipments: list[str]) -> li
         and assembled.equipment
         and assembled.equipment != recipe.equipment
     ):
-        label = EQUIPMENT_LABEL_RU.get(assembled.equipment, assembled.equipment)
-        extra.append(f"посуда — {label} (вариант)")
+        extra.append(f"посуда — {label_equipment_axis(assembled.equipment)} (вариант)")
     return extra
 
 

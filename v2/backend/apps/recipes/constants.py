@@ -11,6 +11,7 @@ PROTEIN_BASE = frozenset(
         "fish_white_sea",
         "fish_red_sea",
         "fish_river",
+        "fish_canned",
         "seafood",
         "offal",
         "eggs_dairy",
@@ -191,6 +192,7 @@ PROTEIN_BASE_LABEL_RU = {
     "fish_white_sea": "белая морская рыба",
     "fish_red_sea": "красная рыба",
     "fish_river": "речная рыба",
+    "fish_canned": "консервированная рыба",
     "seafood": "морепродукты",
     "offal": "субпродукты",
     "eggs_dairy": "яйца и молочные",
@@ -221,6 +223,11 @@ EQUIPMENT_LABEL_RU = {
     "baking_dish": "форма",
     "grill": "гриль",
 }
+
+
+def label_equipment_axis(code: str) -> str:
+    """Vessel label, or cook_method for method-only family codes (air_fryer, steam)."""
+    return EQUIPMENT_LABEL_RU.get(code) or COOK_METHOD_LABEL_RU.get(code, code)
 
 CUT_LABEL_RU = {
     "shank": "голяшка",

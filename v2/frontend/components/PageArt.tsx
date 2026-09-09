@@ -8,7 +8,8 @@ export type ArtScene =
   | 'beef'
   | 'pork'
   | 'poultry'
-  | 'tips';
+  | 'tips'
+  | 'prep';
 
 const ART_SRC: Record<ArtScene, string> = {
   home: '/art/main-bg.png',
@@ -19,6 +20,7 @@ const ART_SRC: Record<ArtScene, string> = {
   pork: '/art/pork.png',
   poultry: '/art/poultry.png',
   tips: '/art/tools.png',
+  prep: '/art/prep.png',
 };
 
 export function PageArt({ scene }: { scene: ArtScene }) {
@@ -26,7 +28,7 @@ export function PageArt({ scene }: { scene: ArtScene }) {
     <div className="page-art" aria-hidden>
       <img
         className="page-art__paint"
-        src={`${ART_SRC[scene]}?v=8`}
+        src={`${ART_SRC[scene]}?v=9`}
         alt=""
         width={1024}
         height={518}

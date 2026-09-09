@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "apps.recipes.apps.RecipesConfig",
     "apps.content.apps.ContentConfig",
+    "apps.prep.apps.PrepConfig",
 ]
 
 MIDDLEWARE = [

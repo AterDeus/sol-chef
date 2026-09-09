@@ -61,12 +61,31 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 | `?equipment=` | код посуды из доступных семейства; нет ключа = `Recipe.equipment` базы; иначе **`400`** |
 | рецепт без якоря и без servings | параметры игнорируются, `scaling.enabled=false`, `200` |
 | `scalable=false` у рецепта | то же: `200`, количества базы, `enabled=false` |
+| `?prep=` | слот набора; см. ниже. **Нельзя** вместе с `anchor_weight` (**400**) |
+| `servings` с `prep` | `ratio = servings / PrepKit.servings_base`, не якорь карточки |
 
 Сборка дельт **до** масштаба — [DATA-MODEL.md](DATA-MODEL.md). На карточке «У меня» Next считает количества локально (DEC-021). Query `anchor_weight` / `servings` остаются для шаринга и тестов. Ранжирование калькулятора на клиенте нет.
 
 В спринте 2 нет `?energy=`.
 
-Шаринг карточки: `/recipes/<slug>?variant=&equipment=` (не сегмент path; HUMAN 3.3).
+Шаринг карточки: `/recipes/<slug>?variant=&equipment=` (не сегмент path; HUMAN 3.3). Из набора: `/recipes/<slug>?prep=<kit>&day=&meal=` (и `servings=`, если не база).
+
+### Карточка с `prep=` (слой «На неделю»)
+
+Слот ищется по набору, не «первый slug в kit». Шаги ответа — тело слота или выбранной alternative, не книга.
+
+| Query | Поведение |
+|-------|-----------|
+| нет `prep` | тело с нуля, как сейчас |
+| `prep` + **оба** `day` и `meal` | слот kit×day×meal. URL-slug = `slot.recipe` **или** `alternatives[].slug` этого слота; при `no_leftover=1` у `reheat` ещё `no_leftover.slug` → иначе **400** |
+| `prep` без day/meal | ровно **один** слот kit, у которого `recipe.slug` = URL (alternatives не считаются); два и больше → **400**; ноль → **400** |
+| только `day` или только `meal` | **400** |
+| `prep` неизвестный / не published | **400** |
+| `anchor_weight` вместе с `prep` | **400** |
+
+Шаги: основное блюдо → `PrepSlot.steps`; замена → `alternatives[].steps` той же записи; `no_leftover=1` у reheat → `no_leftover.steps`, у источника leftover → `no_leftover.steps` если есть. `prep_context`: `kit` `{slug, title}`, `day`, `meal`, `mode`, `source`, `containers[]` (уже с масштабом qty), `alternatives` (без чужих steps в списке чипов — `slug`, `label`, `mode`), `no_leftover` bool. Страница без `prep` — ISR как сейчас; с `prep` — не класть контекст в статический HTML.
+
+Не добавлять prep в `GET /api/recommendations/`.
 
 ## Эндпоинты среза
 
@@ -358,6 +377,82 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 Без `have=` `buckets` пустые, `featured` — лучшее из ranked `results`. Заготовки (`dish_type` `sauce` / `preserve`) не featured, пока есть обычное блюдо. Клик: `/recipes/<slug>?equipment=&variant=` из `applied_axes`.
 
 Пустые ниши после ETL V1 — штатный `featured: null`, `results: []`.
+
+### `GET /api/prep-kits/`
+
+Каталог наборов. Только `status=published`. Порядок: `position` по возрастанию, затем `slug`. **Без пагинации** в пилоте. Пустой список — **200** `{ "results": [] }`, не `404` и не «скоро».
+
+```json
+{
+  "results": [
+    {
+      "slug": "nedelya-ptica",
+      "title": "Птица на неделю",
+      "summary": "…",
+      "rhythm": "freezer",
+      "position": 1,
+      "metrics": {
+        "slots_assemble": 8,
+        "slots_finish": 4,
+        "slots_reheat": 2,
+        "unique_slugs": 10,
+        "shopping_skus": 18,
+        "components_count": 5,
+        "t_sunday_active_min": 105,
+        "t_sunday_wall_min": 180,
+        "t_weekdays_active_min": 210,
+        "t_scratch_active_min": 480
+      }
+    }
+  ]
+}
+```
+
+### `GET /api/prep-kits/<slug>/`
+
+Полный набор. 404 если нет / не `published`. `?servings=` — линейный масштаб qty закупки, компонентов и контейнеров; число боксов и их `code`/`label` не менять. UI шлёт 1, 2 или 4 (база 2). Нет `servings_base` → масштаб выключен. `metrics` и `weekend_timeline` без пересчёта.
+
+`?no_leftover=1` (также `true`/`yes`/`on`) — вариант без остатка: слот-источник на один приём, `reheat` заменяется `PrepSlot.no_leftover` (slug не из 14 основных ячеек набора), qty leftover-only боксов и уникальной закупки уменьшаются, `shopping_add` вливается. Без query — как в JSON. В корне ответа: `no_leftover` (bool), `has_leftovers` (в наборе есть `reheat`). Карточка рецепта: тот же query; slug слота = основное блюдо **или** `no_leftover.slug` этого слота при флаге.
+
+`graph` — вид из слотов (кто ест компонент: weekend-слоты по контейнерам + каскад reheat), не ranking.
+
+```json
+{
+  "slug": "nedelya-ptica",
+  "title": "Птица на неделю",
+  "summary": "…",
+  "servings_base": 2,
+  "scaling": { "enabled": true, "mode": "servings", "ratio": 1, "applied": { "servings": 2 } },
+  "caution_text": "…",
+  "rhythm": "freezer",
+  "metrics": {},
+  "allergens": { "contains": ["egg"], "unknown": [], "may_contain": [] },
+  "shopping": [
+    {
+      "canonical_id": "chicken_thigh",
+      "qty": 1400,
+      "unit": "g",
+      "title_ru": "Куриное бедро",
+      "display_amount": "1400 г"
+    }
+  ],
+  "components": [],
+  "containers": [],
+  "weekend_timeline": [],
+  "slots": [],
+  "graph": [
+    {
+      "code": "chicken_thigh_strips_parcook",
+      "title": "Куриное бедро, полоски",
+      "slots": [
+        { "day": 1, "meal": "dinner", "slug": "lavash-s-kuritsej", "title": "Лаваш с курицей", "mode": "assemble" }
+      ]
+    }
+  ]
+}
+```
+
+У слота в ответе: `day`, `meal`, `slug`, `title`, `plate_title`, `plate_composition`, `mode`, `flavor`, `source`, `container_ids`, `containers` (развёрнутые боксы), `alternatives` (`slug`, `label`, `mode`, `container_ids`), минуты, `servings_cooked`, `feeds_slots`. `metrics.kcal_avg_per_serving` считает приложение (ориентир по основным рецептам). Тела `steps` слота на каталоге набора можно отдать (cook открывается с карточки рецепта).
 
 ## Не в гостевом срезе (спринт 4)
 

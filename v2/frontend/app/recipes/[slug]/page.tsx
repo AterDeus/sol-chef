@@ -7,9 +7,9 @@ import {
   ALLERGEN,
   COOK_METHOD,
   DISH_TYPE,
-  EQUIPMENT,
   HIGH_RISK,
   PROTEIN_BASE,
+  equipmentLabel,
   labelOf,
 } from '@/lib/vocab';
 import { IngredientsBlock } from '@/components/IngredientsBlock';
@@ -17,6 +17,7 @@ import { RecipeActions } from '@/components/RecipeActions';
 import { RecipeAxisLink, RecipeAxisSwitch } from '@/components/RecipeAxisSwitch';
 import { ErrorBanner } from '@/components/Feedback';
 import type { RecipeDetail, RecipeNote, SearchParamsRecord } from '@/lib/types';
+import { PREP_DAY_RU, PREP_MEAL_RU, PREP_MODE_RU, PREP_PLACE_RU, kitHref } from '@/lib/prep';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -74,7 +75,23 @@ export default async function RecipePage({ params, searchParams }: Props) {
   const sp = await searchParams;
   const variant = valuesOf(sp, 'variant')[0] || null;
   const equipment = valuesOf(sp, 'equipment')[0] || null;
-  const result = await fetchRecipe(slug, { variant, equipment });
+  const prepKit = valuesOf(sp, 'prep')[0] || null;
+  const day = valuesOf(sp, 'day')[0] || null;
+  const meal = valuesOf(sp, 'meal')[0] || null;
+  const servingsRaw = valuesOf(sp, 'servings')[0];
+  const servings = servingsRaw ? Number(servingsRaw) : undefined;
+  const noLeftover = ['1', 'true', 'yes', 'on'].includes(
+    (valuesOf(sp, 'no_leftover')[0] || '').toLowerCase(),
+  );
+  const result = await fetchRecipe(slug, {
+    variant,
+    equipment,
+    prep: prepKit,
+    day,
+    meal,
+    servings: Number.isFinite(servings) ? servings : undefined,
+    noLeftover,
+  });
 
   if (!result.ok && result.status === 404) notFound();
   if (!result.ok) {
@@ -90,6 +107,13 @@ export default async function RecipePage({ params, searchParams }: Props) {
   }
 
   const recipe = result.data;
+  const prepContext = recipe.prep_context ?? null;
+  const kitBack = prepContext
+    ? kitHref(prepContext.kit.slug, {
+        servings: Number.isFinite(servings) ? servings : null,
+        noLeftover,
+      })
+    : '/recipes';
   const flags = recipe.high_risk_flags ?? [];
   const hasRisk = flags.length > 0;
   const allergens = recipe.allergens ?? { contains: [], may_contain: [], unknown: [] };
@@ -103,9 +127,9 @@ export default async function RecipePage({ params, searchParams }: Props) {
 
   return (
     <article className="recipe-page">
-      <RecipeJsonLd recipe={recipe} />
-      <Link className="back-link" href="/recipes">
-        ← К списку рецептов
+      {!prepContext && <RecipeJsonLd recipe={recipe} />}
+      <Link className="back-link" href={prepContext ? kitBack : '/recipes'}>
+        {prepContext ? `← ${prepContext.kit.title}` : '← К списку рецептов'}
       </Link>
       <h1>
         {recipe.title}
@@ -116,7 +140,7 @@ export default async function RecipePage({ params, searchParams }: Props) {
         <span className="tag">{labelOf(COOK_METHOD, recipe.cook_method)}</span>
         <span className="tag">{labelOf(DISH_TYPE, recipe.dish_type)}</span>
         {recipe.equipment && recipe.equipment !== recipe.cook_method && (
-          <span className="tag">{labelOf(EQUIPMENT, recipe.equipment)}</span>
+          <span className="tag">{equipmentLabel(recipe.equipment)}</span>
         )}
         {flags.map((flag) => (
           <span key={flag} className="tag">
@@ -124,6 +148,44 @@ export default async function RecipePage({ params, searchParams }: Props) {
           </span>
         ))}
       </div>
+
+      {prepContext && (
+        <div className="prep-recipe-banner">
+          <span className="prep-mode">{PREP_MODE_RU[prepContext.mode]}</span>
+          <span>
+            {PREP_DAY_RU[prepContext.day]} · {PREP_MEAL_RU[prepContext.meal]} · {prepContext.kit.title}
+          </span>
+        </div>
+      )}
+      {prepContext && prepContext.containers.length > 0 && (
+        <ul className="prep-boxes">
+          {prepContext.containers.map((box) => (
+            <li key={box.code} className="prep-box">
+              <strong>{box.label}</strong> {box.component_title} · {box.display_amount}
+              {box.place === 'freezer' ? ` · ${PREP_PLACE_RU[box.place]}` : ''}
+            </li>
+          ))}
+        </ul>
+      )}
+      {prepContext && prepContext.alternatives.length > 0 && (
+        <div className="chip-row" aria-label="Замены">
+          {prepContext.alternatives.map((item) => (
+            <Link
+              key={item.slug}
+              href={recipeHref(item.slug, {
+                prep: prepContext.kit.slug,
+                day: prepContext.day,
+                meal: prepContext.meal,
+                servings: servings,
+                noLeftover,
+              })}
+              className={item.slug === slug ? 'chip is-active' : 'chip'}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
 
       {hasRisk && (
         <div className="caution" role="status">
@@ -176,7 +238,9 @@ export default async function RecipePage({ params, searchParams }: Props) {
       {prep.length > 0 && (
         <section className="recipe-section recipe-prep">
           <h2>Заранее</h2>
-          <p className="recipe-prep-hint">Запланируйте в режиме готовки</p>
+          <p className="recipe-prep-hint">
+            {prepContext ? 'Разморозка из набора' : 'Запланируйте в режиме готовки'}
+          </p>
           <ul className="recipe-prep-list">
             {prep.map((item, i) => (
               <li key={`${item.type}-${i}`}>
@@ -187,7 +251,7 @@ export default async function RecipePage({ params, searchParams }: Props) {
         </section>
       )}
 
-      {(deltaVariants.length > 0 || equipmentCodes.length > 1) && (
+      {!prepContext && (deltaVariants.length > 0 || equipmentCodes.length > 1) && (
         <RecipeAxisSwitch applied={`${appliedVariant ?? ''}:${appliedEquipment ?? ''}`}>
           {deltaVariants.length > 0 && (
             <section className="recipe-section" aria-label="Вариации состава">
@@ -231,7 +295,7 @@ export default async function RecipePage({ params, searchParams }: Props) {
                       className={appliedEquipment === code ? 'chip is-active' : 'chip'}
                       current={appliedEquipment === code}
                     >
-                      {labelOf(EQUIPMENT, code)}
+                      {equipmentLabel(code)}
                     </RecipeAxisLink>
                   ))}
                 </div>
@@ -241,7 +305,7 @@ export default async function RecipePage({ params, searchParams }: Props) {
         </RecipeAxisSwitch>
       )}
 
-      {(recipe.ingredients ?? []).length > 0 && (
+      {!prepContext && (recipe.ingredients ?? []).length > 0 && (
         <IngredientsBlock
           scaling={recipe.scaling ?? { enabled: false }}
           ingredients={recipe.ingredients}
@@ -304,7 +368,13 @@ export default async function RecipePage({ params, searchParams }: Props) {
         </section>
       )}
 
-      <RecipeActions title={recipe.title} steps={recipe.steps ?? []} prep={prep} />
+      <RecipeActions
+        title={recipe.title}
+        steps={recipe.steps ?? []}
+        prep={prep}
+        backHref={prepContext ? kitBack : '/recipes'}
+        backLabel={prepContext ? '← На неделю' : '← Рецепты'}
+      />
     </article>
   );
 }

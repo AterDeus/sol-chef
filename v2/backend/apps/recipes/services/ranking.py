@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from django.conf import settings
 
-from apps.recipes.constants import EQUIPMENT_LABEL_RU, PROTEIN_BASE_LABEL_RU
+from apps.recipes.constants import PROTEIN_BASE_LABEL_RU, label_equipment_axis
 
 
 def score_and_why(
@@ -34,7 +34,7 @@ def score_and_why(
         why.append("совпал тип блюда")
     if filter_equipment and equipment in filter_equipment:
         score += int(weights.get("equipment", weights["dish_type"]))
-        label = EQUIPMENT_LABEL_RU.get(equipment, equipment)
+        label = label_equipment_axis(equipment)
         why.append(f"совпала посуда — {label}")
     if editorial_tested:
         score += int(weights["editorial_tested"])

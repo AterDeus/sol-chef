@@ -22,17 +22,15 @@
 | Backend, модели, ETL | ARCHITECTURE → DATA-MODEL → API → SAFETY → VOCAB → TESTING |
 | UI / маршруты | UX-PROPOSAL (не `v2/preview/`, не UX.md) → `css/global.css` |
 | Визуал / полировка UI | бриф дизайнеру: [drafts/DESIGN-BRIEF.md](drafts/DESIGN-BRIEF.md); канон экранов не менять |
-| Аккаунты / избранное / «готовил» | план: [ACCOUNTS.md](ACCOUNTS.md); экраны UX-PROPOSAL §13; архив черновика [drafts/ACCOUNTS.md](drafts/ACCOUNTS.md) |
+| Аккаунты / избранное / «готовил» | план: [ACCOUNTS.md](ACCOUNTS.md); экраны UX-PROPOSAL §13 |
 | Калькулятор (как считает) | [CALCULATOR.md](CALCULATOR.md) — разбор экрана; контракт [API.md](API.md) |
-| Калькулятор как сборка (архив) | [drafts/COOKING-SOLUTION.md](drafts/COOKING-SOLUTION.md) — перенесён в CALCULATOR / DEC-017 |
-| Семейство / посуда (архив) | [drafts/FAMILY-AND-EQUIPMENT.md](drafts/FAMILY-AND-EQUIPMENT.md) — перенесён в VOCAB / DATA-MODEL / DEC-012…015 |
-| КБЖУ | канон: [DATA-MODEL.md](DATA-MODEL.md), [API.md](API.md), [DECISIONS.md](DECISIONS.md) DEC-022; архив спеки [drafts/NUTRITION.md](drafts/NUTRITION.md) |
-| Заготовки на неделю (идея, не канон) | продукт: [drafts/WEEKLY-PREP.md](drafts/WEEKLY-PREP.md); карта сущностей: [drafts/WEEKLY-PREP-MAP.md](drafts/WEEKLY-PREP-MAP.md); ТЗ анализа: [drafts/WEEKLY-PREP-TZ.md](drafts/WEEKLY-PREP-TZ.md) |
+| КБЖУ | канон: [DATA-MODEL.md](DATA-MODEL.md), [API.md](API.md), [DECISIONS.md](DECISIONS.md) DEC-022 |
+| Заготовки на неделю | канон: [DATA-MODEL.md](DATA-MODEL.md) `apps.prep`, [API.md](API.md) `/api/prep-kits/`, [UX-PROPOSAL.md](UX-PROPOSAL.md) §6.4–6.5; продукт: [drafts/WEEKLY-PREP.md](drafts/WEEKLY-PREP.md); тарелка: [weekly/MEAL-CONTRACT.md](weekly/MEAL-CONTRACT.md); сборка: [weekly/WEEKLY-PREP-DESIGN.md](weekly/WEEKLY-PREP-DESIGN.md) ← [weekly/NUTRITION-FRAMEWORK.md](weekly/NUTRITION-FRAMEWORK.md) + [weekly/SEASONALITY-RU.md](weekly/SEASONALITY-RU.md); контракт JSON: [drafts/WEEKLY-PREP-TZ.md](drafts/WEEKLY-PREP-TZ.md) |
 | Коды и маппинг V1 | VOCAB |
 | Почему так | [DECISIONS.md](DECISIONS.md) |
 | Что уже сделано | STATUS |
 | Выход на VPS / cutover | [CUTOVER.md](CUTOVER.md) — операционный чеклист; стек не меняет |
-| Контент-волна / оверлей 43 | [RECIPE.md](RECIPE.md) + [RECIPE-INVENTORY.md](RECIPE-INVENTORY.md); пакеты волн — [drafts/packets/](drafts/packets/README.md); оси посуды на существующих — [drafts/packets/OVERLAY-AXES.md](drafts/packets/OVERLAY-AXES.md); бриф JSON автора — [drafts/RECIPE-V2-UPGRADE.md](drafts/RECIPE-V2-UPGRADE.md); оверлей — CURRENT_SPRINT |
+| Контент-волна / оверлей 43 | [RECIPE.md](RECIPE.md) + [RECIPE-INVENTORY.md](RECIPE-INVENTORY.md); пакеты — [drafts/packets/](drafts/packets/README.md); оси посуды — [drafts/packets/OVERLAY-AXES.md](drafts/packets/OVERLAY-AXES.md); карточка из БД: `export_draft --slug` |
 | Переигровка IA | UX.md — только UX-аналитик |
 
 ## Хозяева
@@ -51,7 +49,7 @@
 | [CALCULATOR.md](CALCULATOR.md) | логика подбора `/calculator` (разбор, не контракт) |
 | [ACCOUNTS.md](ACCOUNTS.md) | план V2.1 A/B/C: вход, память, голос |
 | [VOCAB.md](VOCAB.md) | коды и маппинг V1 |
-| [SAFETY.md](SAFETY.md) | температуры, аллергены, high-risk |
+| [SAFETY.md](SAFETY.md) | температуры, аллергены, high-risk, охлаждение leftover / parcook |
 | [DECISIONS.md](DECISIONS.md) | ADR |
 | [PLAN.md](PLAN.md) | этапы V2.0–cutover |
 | [CUTOVER.md](CUTOVER.md) | чеклист деплоя и DNS; не канон стека |

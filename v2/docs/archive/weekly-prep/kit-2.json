@@ -1,0 +1,689 @@
+{
+  "id": "nedelya-kastryulya",
+  "title": "Кастрюля и морозилка",
+  "summary": "Неделя из больших кастрюль: говяжий гуляш, борщ и тушёная капуста с гарниром. Дальние порции в морозилке, будни в основном разогрев и одна кастрюля пасты.",
+  "servings_base": 2,
+  "position": 2,
+  "caution_text": "Говядина, свинина и говяжий фарш. Фарш в соусе — 71 °C в центре массы, rare недопустим. Тушёное мясо уже готово: разогревать до горячего, не «тёплого». Остывание вс — пластом на столе, затем холодильник или морозилка. Не держать мясо 7 дней в холодильнике без морозилки. Разморозка один раз, в холодильнике.",
+  "rhythm": "freezer",
+  "metrics": {
+    "slots_assemble": 7,
+    "slots_finish": 3,
+    "slots_reheat": 4,
+    "unique_slugs": 7,
+    "shopping_skus": 19,
+    "components_count": 6,
+    "t_sunday_active_min": 175,
+    "t_sunday_wall_min": 330,
+    "t_weekdays_active_min": 190,
+    "t_scratch_active_min": 375
+  },
+  "components": [
+    {
+      "id": "beef_goulash",
+      "title": "Говяжий гуляш, готов, с соусом",
+      "canonical_ids": ["beef", "onion", "paprika", "tomato_paste", "garlic"],
+      "qty": 2200,
+      "unit": "g",
+      "container_ids": ["c1", "c2", "c3"],
+      "weekend_steps": [
+        "Нарезать 1600 г говядины (лопатка или голяшка без кости) кусками около 3 см, 1000 г лука мелким кубиком, 6 зубчиков чеснока измельчить. Мясо посолить и поперчить.",
+        "Обжарить мясо партиями до лёгкой корочки, не скучивать. В той же кастрюле пассеровать лук до мягкости.",
+        "Снять с огня, вмешать 4 ст. л. сладкой паприки и 4 ст. л. томатной пасты, вернуть на слабый огонь на 30 секунд. Паприку не жарить на сухом сильном огне.",
+        "Вернуть мясо, влить 1000 мл воды, чеснок, 4 лавровых листа. Довести до слабого кипения.",
+        "Накрыть и томить в духовке при 160 °C около 2 часов, пока кусок не берётся вилкой без сопротивления. Соус должен обволакивать.",
+        "Вынуть, остудить пластом на столе, затем разложить по боксам вместе с соусом."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": 71
+      },
+      "storage": {
+        "fridge_days": 2,
+        "freezer_days": 7,
+        "notes": "остудить пластом; ближний бокс в холодильник, дальние в морозилку; оценка редакции, не ГОСТ"
+      }
+    },
+    {
+      "id": "borshch",
+      "title": "Борщ на голяшке, готов",
+      "canonical_ids": ["beef_shank_bone_in", "beetroot", "cabbage", "potato", "carrot", "onion", "tomato_paste"],
+      "qty": 3000,
+      "unit": "ml",
+      "container_ids": ["c4", "c5"],
+      "weekend_steps": [
+        "800 г голяшки залить 2,5 л холодной воды, довести до кипения, снять пену, варить слабым кипением 1,5–2 часа, пока мясо не отойдёт от кости.",
+        "Пока варится: натереть 400 г свёклы и 150 г моркови, нарезать 2 луковицы, нашинковать 400 г капусты, картофель 400 г кубиком 1,5 см.",
+        "На сковороде пассеровать лук и морковь, добавить свёклу, 2 ст. л. томатной пасты, 2 ст. л. уксуса и 1 ч. л. сахара. Жарить 8–10 минут.",
+        "Мясо вынуть. В бульон — картофель на 10 минут, затем капусту и зажарку. Мясо нарезать, кость убрать, вернуть. Лавр, соль, перец. Варить 12–15 минут.",
+        "С огня раздавить 4 зубчика чеснока в кастрюлю, настоять 10 минут. Остудить пластом, разложить по боксам. Сметану не класть в кастрюлю."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 2,
+        "freezer_days": 7,
+        "notes": "остудить пластом; ближний бокс в холодильник, дальний в морозилку; оценка редакции, не ГОСТ"
+      }
+    },
+    {
+      "id": "stewed_cabbage",
+      "title": "Тушёная капуста, готова",
+      "canonical_ids": ["cabbage", "onion", "carrot", "tomato_paste", "vinegar"],
+      "qty": 1400,
+      "unit": "g",
+      "container_ids": ["c6", "c7"],
+      "weekend_steps": [
+        "1500 г капусты соломкой 4–6 мм, 225 г моркови на тёрке, 3 луковицы полукольцами.",
+        "Пассеровать лук и морковь, добавить капусту и соль, тушить пока осядет.",
+        "Вмешать 3 ст. л. томатной пасты, 150 мл воды. Тушить около 30 минут на слабом огне.",
+        "Лавр, 1,5 ст. л. уксуса, 1,5 ст. л. сахара, перец. До мягкости без хруста кочерыжки.",
+        "Остудить пластом, разложить по боксам."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 3,
+        "freezer_days": 7,
+        "notes": "остудить пластом; ближний бокс в холодильник на ср–чт, дальний в морозилку; оценка редакции, не ГОСТ"
+      }
+    },
+    {
+      "id": "pork_goulash",
+      "title": "Свиной гуляш, готов, 71 °C",
+      "canonical_ids": ["pork_neck", "onion", "paprika", "tomato_paste", "garlic"],
+      "qty": 1100,
+      "unit": "g",
+      "container_ids": ["c8"],
+      "weekend_steps": [
+        "800 г шеи или лопатки кусками 2,5–3 см, 400 г лука мелким кубиком, 3 зубчика чеснока. Мясо посолить и поперчить.",
+        "Обжарить партиями, пассеровать лук. Снять с огня, вмешать 1 ст. л. паприки и 1 ст. л. томатной пасты.",
+        "Вернуть мясо, 400 мл воды, чеснок, 2 лавра. Томить в духовке при 160 °C около 90 минут до мягкости и 71 °C в центре куска.",
+        "Остудить пластом на столе, затем в морозилку одним боксом."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": 71,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": 71
+      },
+      "storage": {
+        "fridge_days": 2,
+        "freezer_days": 7,
+        "notes": "после вс только морозилка: день 4 слишком далеко для холодильника; остудить пластом; оценка редакции, не ГОСТ"
+      }
+    },
+    {
+      "id": "buckwheat_onion",
+      "title": "Гречка с луком, готова",
+      "canonical_ids": ["buckwheat", "onion"],
+      "qty": 900,
+      "unit": "g",
+      "container_ids": ["c9", "c10"],
+      "weekend_steps": [
+        "Промыть 300 г ядрицы до прозрачной воды.",
+        "Пассеровать 1 луковицу в кастрюле, всыпать гречку, влить 600 мл воды (не бульон), посолить.",
+        "Варить под крышкой 15–18 минут, не мешать. Настоять 5 минут, разрыхлить вилкой.",
+        "Остудить, разложить: половина в холодильник, половина в морозилку."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 2,
+        "freezer_days": 7,
+        "notes": "вода, не магазинный бульон; остудить, не оставлять в кастрюле на ночь толстым слоем; оценка редакции, не ГОСТ"
+      }
+    },
+    {
+      "id": "meat_sauce",
+      "title": "Мясной томатный соус, 71 °C, без пасты",
+      "canonical_ids": ["beef_mince", "tomato_puree", "onion", "carrot", "garlic"],
+      "qty": 800,
+      "unit": "g",
+      "container_ids": ["c11", "c12"],
+      "weekend_steps": [
+        "2 луковицы мелким кубиком, 100 г моркови на тёрке, 3 зубчика чеснока.",
+        "Пассеровать лук и морковь. Выложить 400 г говяжьего фарша слоем не толще 2 см, разбить комки, жарить до серого снаружи.",
+        "Чеснок 30 секунд. 400 мл томатного пюре, 100 мл воды, 1 ч. л. сахара, соль, перец, лавр.",
+        "Тушить 30 минут до густого соуса и 71 °C в центре массы. Лавр вынуть.",
+        "Пасту не варить. Остудить пластом, оба бокса в морозилку."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": 71,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": 71
+      },
+      "storage": {
+        "fridge_days": 2,
+        "freezer_days": 7,
+        "notes": "фарш после вс в морозилку, не три дня в холодильнике; остудить пластом; оценка редакции, не ГОСТ"
+      }
+    }
+  ],
+  "containers": [
+    {
+      "id": "c1",
+      "label": "№1",
+      "component_id": "beef_goulash",
+      "qty": 1100,
+      "unit": "g",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c2",
+      "label": "№2",
+      "component_id": "beef_goulash",
+      "qty": 550,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 6
+    },
+    {
+      "id": "c3",
+      "label": "№3",
+      "component_id": "beef_goulash",
+      "qty": 550,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 7
+    },
+    {
+      "id": "c4",
+      "label": "№4",
+      "component_id": "borshch",
+      "qty": 2000,
+      "unit": "ml",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c5",
+      "label": "№5",
+      "component_id": "borshch",
+      "qty": 1000,
+      "unit": "ml",
+      "place": "freezer",
+      "thaw_before_day": 5
+    },
+    {
+      "id": "c6",
+      "label": "№6",
+      "component_id": "stewed_cabbage",
+      "qty": 930,
+      "unit": "g",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c7",
+      "label": "№7",
+      "component_id": "stewed_cabbage",
+      "qty": 470,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 7
+    },
+    {
+      "id": "c8",
+      "label": "№8",
+      "component_id": "pork_goulash",
+      "qty": 1100,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 4
+    },
+    {
+      "id": "c9",
+      "label": "№9",
+      "component_id": "buckwheat_onion",
+      "qty": 450,
+      "unit": "g",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c10",
+      "label": "№10",
+      "component_id": "buckwheat_onion",
+      "qty": 450,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 6
+    },
+    {
+      "id": "c11",
+      "label": "№11",
+      "component_id": "meat_sauce",
+      "qty": 400,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 3
+    },
+    {
+      "id": "c12",
+      "label": "№12",
+      "component_id": "meat_sauce",
+      "qty": 400,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 6
+    }
+  ],
+  "weekend_timeline": [
+    {
+      "t_min": 0,
+      "hands": "Нарезать 1600 г говядины и 800 г свинины кусками, лук для обоих гуляшей. Духовка на 160 °C.",
+      "heat": "духовка: разогрев 160 °C"
+    },
+    {
+      "t_min": 20,
+      "hands": "Обжарить говядину партиями на конфорке 2, готовое снимать.",
+      "heat": "конфорка 2: говядина; духовка 160 °C"
+    },
+    {
+      "t_min": 35,
+      "hands": "Лук к говядине, паприка со снятой кастрюли, вода, накрыть, в духовку.",
+      "heat": "духовка: говяжий гуляш 160 °C ~120 мин; конфорка 2 свободна"
+    },
+    {
+      "t_min": 43,
+      "hands": "Голяшку в холодную воду на конфорку 1. До кипения, снять пену, слабое кипение.",
+      "heat": "конфорка 1: борщ (бульон); духовка: гуляш"
+    },
+    {
+      "t_min": 50,
+      "hands": "Натереть свёклу и морковь, нашинковать капусту на борщ и тушение, картофель кубиком, лук.",
+      "heat": "конфорка 1: борщ томится; духовка: гуляш"
+    },
+    {
+      "t_min": 70,
+      "hands": "Зажарка борща на конфорке 2 (лук, морковь, свёкла, томат, уксус). Снять в миску.",
+      "heat": "конфорка 2: зажарка; конфорка 1: борщ; духовка: гуляш"
+    },
+    {
+      "t_min": 80,
+      "hands": "На конфорке 2 пассеровать лук и морковь для капусты, заложить капусту, тушить.",
+      "heat": "конфорка 2: капуста; конфорка 1: борщ; духовка: гуляш"
+    },
+    {
+      "t_min": 90,
+      "hands": "Руки свободны: вымыть доски, подписать боксы. Капуста, борщ и гуляш идут сами.",
+      "heat": "конфорка 1: борщ; конфорка 2: капуста; духовка: гуляш"
+    },
+    {
+      "t_min": 133,
+      "hands": "Говядину из борща на доску. В бульон — картофель.",
+      "heat": "конфорка 1: борщ (картофель); конфорка 2: капуста; духовка: гуляш"
+    },
+    {
+      "t_min": 143,
+      "hands": "В борщ капусту, зажарку, нарезанное мясо, лавр. Варить 12–15 мин.",
+      "heat": "конфорка 1: борщ (сборка); конфорка 2: капуста; духовка: гуляш"
+    },
+    {
+      "t_min": 150,
+      "hands": "Капусту снять: уксус, сахар, лавр, до мягкости если ещё хрустит. Затем пластом на стол остывать.",
+      "heat": "конфорка 1: борщ; конфорка 2 свободна; духовка: гуляш; стол: капуста остывает"
+    },
+    {
+      "t_min": 158,
+      "hands": "Борщ с огня, чеснок в кастрюлю, настоять. Затем пластом на стол. На конфорке 2 поставить гречку (лук, крупа, вода).",
+      "heat": "конфорка 2: гречка; стол: борщ и капуста остывают; духовка: гуляш"
+    },
+    {
+      "t_min": 163,
+      "hands": "Говяжий гуляш из духовки. Пластом на стол остывать — не сразу в холодильник.",
+      "heat": "стол: мясо остывает; духовка свободна; конфорка 2: гречка"
+    },
+    {
+      "t_min": 180,
+      "hands": "Гречку снять, настоять под крышкой, разрыхлить. Обжарить свинину партиями, лук, паприка, в духовку на 160 °C.",
+      "heat": "духовка: свиной гуляш 160 °C ~90 мин; стол: говядина остывает"
+    },
+    {
+      "t_min": 195,
+      "hands": "Соус: лук, морковь, фарш слоем не толще 2 см, томат. Тушить на конфорке 1 до 71 °C.",
+      "heat": "конфорка 1: мясной соус; духовка: свинина; стол: остывание"
+    },
+    {
+      "t_min": 235,
+      "hands": "Соус готов. Разложить остывшие борщ, капусту, говяжий гуляш, гречку по боксам. Фарш — оба бокса в морозилку.",
+      "heat": "духовка: свинина; стол: фасовка"
+    },
+    {
+      "t_min": 270,
+      "hands": "Свиной гуляш из духовки. Пластом на стол остывать.",
+      "heat": "стол: свинина остывает"
+    },
+    {
+      "t_min": 330,
+      "hands": "Свинину в бокс №8, в морозилку. Проверить, что дальние боксы подписаны с днём разморозки.",
+      "heat": "нет"
+    }
+  ],
+  "slots": [
+    {
+      "day": 1,
+      "meal": "lunch",
+      "slug": "borshch",
+      "mode": "assemble",
+      "flavor": "свекольный, с мясом",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c4"],
+      "steps": [
+        { "text": "Достать бокс №4 из холодильника. Переложить в кастрюлю." },
+        { "text": "Разогреть на среднем огне до горячего: суп должен парить, не кипеть подолгу — капуста уже мягкая." },
+        { "text": "Подать со сметаной по желанию. Чеснок в вс уже в кастрюле, повторно не кипятить." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 4,
+      "feeds_slots": 2,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 40
+    },
+    {
+      "day": 1,
+      "meal": "dinner",
+      "slug": "gulyash-iz-govyadiny",
+      "mode": "assemble",
+      "flavor": "паприка, с гречкой",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c1", "c9"],
+      "steps": [
+        { "text": "Гуляш из бокса №1 в кастрюлю или сотейник. Гречку из №9 в другую посуду." },
+        { "text": "Разогреть гуляш на слабом огне под крышкой до горячего: соус пузырится, в центре куска не ниже 71 °C. Не бурлить. Если соус камнем — 1–2 ст. л. воды." },
+        { "text": "Гречку разогреть с 1–2 ст. л. воды, разрыхлить вилкой. Подать рядом, не вмешивать мясо в кастрюлю гречки." }
+      ],
+      "alternatives": [
+        {
+          "slug": "grechka-na-garnir-s-lukom",
+          "label": "Гречка, гуляш рядом",
+          "mode": "assemble",
+          "container_ids": ["c1", "c9"],
+          "steps": [
+            { "text": "Разогреть гречку №9 с ложкой воды, разрыхлить." },
+            { "text": "Гуляш №1 разогреть до горячего, 71 °C в куске. Подать рядом, не мешать в одну кашу." }
+          ]
+        }
+      ],
+      "servings_cooked": 4,
+      "feeds_slots": 2,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 30
+    },
+    {
+      "day": 2,
+      "meal": "lunch",
+      "slug": "borshch",
+      "mode": "reheat",
+      "flavor": "на второй день гуще",
+      "source": { "kind": "slot", "day": 1, "meal": "lunch" },
+      "container_ids": [],
+      "steps": [
+        { "text": "Вчерашний борщ из холодильника в кастрюлю. Это остаток пн обеда, не новый бокс вс." },
+        { "text": "Разогреть до горячего, не кипятить подолгу. Подать со сметаной по желанию." }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 40
+    },
+    {
+      "day": 2,
+      "meal": "dinner",
+      "slug": "gulyash-iz-govyadiny",
+      "mode": "reheat",
+      "flavor": "гуще после ночи",
+      "source": { "kind": "slot", "day": 1, "meal": "dinner" },
+      "container_ids": [],
+      "steps": [
+        { "text": "Остаток гуляша пн ужина из холодильника. Гречку, если осталась, разогреть отдельно с ложкой воды." },
+        { "text": "Слабый огонь, крышка, до горячего и 71 °C в центре куска. Без новой воды, если соус не расслоился в камень." }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 30
+    },
+    {
+      "day": 3,
+      "meal": "lunch",
+      "slug": "tushenaya-kapusta",
+      "mode": "assemble",
+      "flavor": "кисло-сладкая",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c6"],
+      "steps": [
+        { "text": "Бокс №6 из холодильника в сотейник." },
+        { "text": "Разогреть на слабом огне без новой воды, пока капуста не станет горячей и блестящей." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 4,
+      "feeds_slots": 2,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 25
+    },
+    {
+      "day": 3,
+      "meal": "dinner",
+      "slug": "makarony-s-myasnym-sousom",
+      "mode": "finish",
+      "flavor": "томат, фарш 71 °C",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c11"],
+      "steps": [
+        { "text": "Соус №11 разморозить в холодильнике с ночи. Вскипятить воду, посолить, отварить 200 г пасты al dente по упаковке. Слить, не промывать." },
+        { "text": "Соус разогреть до горячего: в центре массы фарша 71 °C. Смешать с пастой на минуту. Если сухо — ложка воды от варки." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 2,
+      "feeds_slots": 1,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 25
+    },
+    {
+      "day": 4,
+      "meal": "lunch",
+      "slug": "tushenaya-kapusta",
+      "mode": "reheat",
+      "flavor": "слаще вчерашней",
+      "source": { "kind": "slot", "day": 3, "meal": "lunch" },
+      "container_ids": [],
+      "steps": [
+        { "text": "Вчерашняя капуста из холодильника." },
+        { "text": "Слабый огонь, без новой воды, до горячего." }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 10,
+      "time_active_scratch_min": 25
+    },
+    {
+      "day": 4,
+      "meal": "dinner",
+      "slug": "svinoy-gulyash",
+      "mode": "assemble",
+      "flavor": "паприка, свинина 71 °C",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c8"],
+      "steps": [
+        { "text": "Бокс №8 разморожен в холодильнике с дня 3. Переложить в сотейник." },
+        { "text": "Разогреть на слабом огне до горячего: в центре куска 71 °C. Не бурлить. Без новой воды, если соус не камнем." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 4,
+      "feeds_slots": 2,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 25
+    },
+    {
+      "day": 5,
+      "meal": "lunch",
+      "slug": "borshch",
+      "mode": "assemble",
+      "flavor": "из морозилки",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c5"],
+      "steps": [
+        { "text": "Бокс №5 разморожен в холодильнике. Это второй бокс вс, не остаток пн." },
+        { "text": "Разогреть до горячего, не кипятить подолгу. Сметана по желанию." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 2,
+      "feeds_slots": 1,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 40
+    },
+    {
+      "day": 5,
+      "meal": "dinner",
+      "slug": "svinoy-gulyash",
+      "mode": "reheat",
+      "flavor": "гуще после ночи",
+      "source": { "kind": "slot", "day": 4, "meal": "dinner" },
+      "container_ids": [],
+      "steps": [
+        { "text": "Остаток свиного гуляша чт ужина из холодильника." },
+        { "text": "Слабый огонь до горячего, 71 °C в центре куска." }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 25
+    },
+    {
+      "day": 6,
+      "meal": "lunch",
+      "slug": "grechka-na-garnir-s-lukom",
+      "mode": "assemble",
+      "flavor": "крупа, гуляш рядом",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c2", "c10"],
+      "steps": [
+        { "text": "Боксы №2 и №10 разморожены. Гречку разогреть с ложкой воды, разрыхлить вилкой." },
+        { "text": "Гуляш разогреть до горячего, 71 °C в куске. Подать рядом: мясо не вмешивать в кастрюлю гречки." }
+      ],
+      "alternatives": [
+        {
+          "slug": "gulyash-iz-govyadiny",
+          "label": "Гуляш, гречка гарниром",
+          "mode": "assemble",
+          "container_ids": ["c2", "c10"],
+          "steps": [
+            { "text": "Разогреть гуляш №2 до горячего, 71 °C в куске." },
+            { "text": "Гречку №10 с ложкой воды. Подать как гарнир." }
+          ]
+        }
+      ],
+      "servings_cooked": 2,
+      "feeds_slots": 1,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 10
+    },
+    {
+      "day": 6,
+      "meal": "dinner",
+      "slug": "makarony-s-myasnym-sousom",
+      "mode": "finish",
+      "flavor": "свежая паста, соус вс",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c12"],
+      "steps": [
+        { "text": "Соус №12 разморожен. Отварить 200 г пасты al dente, слить, не промывать." },
+        { "text": "Соус до 71 °C в центре массы. Смешать с пастой. Не оставлять смешанную пасту на завтра — клейковина разбухнет." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 2,
+      "feeds_slots": 1,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 25
+    },
+    {
+      "day": 7,
+      "meal": "lunch",
+      "slug": "ris-na-garnir",
+      "mode": "finish",
+      "flavor": "свежий рис, гуляш из морозилки",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c3"],
+      "steps": [
+        { "text": "Промыть 150 г длиннозёрного риса до почти прозрачной воды. В кастрюлю с 240 мл воды, щепоткой соли и ½ ст. л. масла. До кипения, затем минимальный огонь под крышкой 12–15 минут. Настоять 10 минут, разрыхлить вилкой." },
+        { "text": "Гуляш из бокса №3 (разморожен) разогреть до горячего, 71 °C в куске. Подать рис рядом." }
+      ],
+      "alternatives": [
+        {
+          "slug": "gulyash-iz-govyadiny",
+          "label": "Гуляш со свежим рисом",
+          "mode": "finish",
+          "container_ids": ["c3"],
+          "steps": [
+            { "text": "Сварить 150 г риса как в основном слоте." },
+            { "text": "Разогреть гуляш №3 до горячего, 71 °C. Рис гарниром." }
+          ]
+        }
+      ],
+      "servings_cooked": 2,
+      "feeds_slots": 1,
+      "time_active_from_prep_min": 18,
+      "time_active_scratch_min": 10
+    },
+    {
+      "day": 7,
+      "meal": "dinner",
+      "slug": "tushenaya-kapusta",
+      "mode": "assemble",
+      "flavor": "из морозилки",
+      "source": { "kind": "weekend" },
+      "container_ids": ["c7"],
+      "steps": [
+        { "text": "Бокс №7 разморожен. Это второй бокс вс, не остаток ср." },
+        { "text": "Слабый огонь без новой воды до горячего." }
+      ],
+      "alternatives": [],
+      "servings_cooked": 2,
+      "feeds_slots": 1,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 25
+    }
+  ],
+  "shopping": [
+    { "canonical_id": "beef", "qty": 1600, "unit": "g", "title_ru": "Говядина (лопатка или голяшка без кости)" },
+    { "canonical_id": "beef_shank_bone_in", "qty": 800, "unit": "g", "title_ru": "Говяжья голяшка на кости" },
+    { "canonical_id": "pork_neck", "qty": 800, "unit": "g", "title_ru": "Свиная шея или лопатка" },
+    { "canonical_id": "beef_mince", "qty": 400, "unit": "g", "title_ru": "Говяжий фарш" },
+    { "canonical_id": "onion", "qty": 2600, "unit": "g", "title_ru": "Лук репчатый" },
+    { "canonical_id": "carrot", "qty": 475, "unit": "g", "title_ru": "Морковь" },
+    { "canonical_id": "cabbage", "qty": 1900, "unit": "g", "title_ru": "Капуста белокочанная" },
+    { "canonical_id": "potato", "qty": 400, "unit": "g", "title_ru": "Картофель" },
+    { "canonical_id": "beetroot", "qty": 400, "unit": "g", "title_ru": "Свёкла" },
+    { "canonical_id": "tomato_paste", "qty": 150, "unit": "g", "title_ru": "Томатная паста" },
+    { "canonical_id": "tomato_puree", "qty": 400, "unit": "ml", "title_ru": "Томатное пюре / пассата" },
+    { "canonical_id": "paprika", "qty": 40, "unit": "g", "title_ru": "Паприка сладкая молотая" },
+    { "canonical_id": "garlic", "qty": 16, "unit": "clove", "title_ru": "Чеснок" },
+    { "canonical_id": "bay_leaf", "qty": 12, "unit": "pcs", "title_ru": "Лавровый лист" },
+    { "canonical_id": "vinegar", "qty": 50, "unit": "ml", "title_ru": "Уксус столовый" },
+    { "canonical_id": "buckwheat", "qty": 300, "unit": "g", "title_ru": "Гречка ядрица" },
+    { "canonical_id": "pasta", "qty": 400, "unit": "g", "title_ru": "Паста (перья или спагетти)" },
+    { "canonical_id": "rice", "qty": 150, "unit": "g", "title_ru": "Рис длиннозёрный" },
+    { "canonical_id": "sour_cream", "qty": 150, "unit": "g", "title_ru": "Сметана к борщу, по желанию" }
+  ],
+  "allergens": {
+    "contains": ["gluten", "milk"],
+    "unknown": [],
+    "may_contain": []
+  }
+}

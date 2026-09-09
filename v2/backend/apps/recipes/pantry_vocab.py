@@ -286,7 +286,7 @@ FISH_FRESH = frozenset(
     }
 )
 FISH_CANNED = frozenset({"canned_tuna", "canned_sardine", "canned_fish"})
-FISH_PROTEIN = frozenset({"fish_white_sea", "fish_red_sea", "fish_river", "seafood"})
+FISH_PROTEIN = frozenset({"fish_white_sea", "fish_red_sea", "fish_river", "fish_canned", "seafood"})
 
 _CHICKEN = (
     "chicken_breast",

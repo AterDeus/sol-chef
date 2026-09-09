@@ -41,7 +41,7 @@ Status: accepted · чат 2026-09-06
 
 Дополнительно: `kcal` суммируется с канонов, не считается Atwater 4/9/4; базис MVP — вход до готовки (`raw_input` / `nutrition_basis=raw_100g`); поле API — `per_100g_input` (не `per_100g`, не `per_100g_raw`); `nutrition_exclude` целиком из числителя и массы; для диапазона `amount`…`amount_max` nutrition берёт `amount` (низ).
 
-HUMAN 2.15. Спека на момент приёмки — [drafts/NUTRITION.md](drafts/NUTRITION.md) (архив).
+HUMAN 2.15. Канон — DATA-MODEL / API / DEC-022.
 
 ## DEC-023 — Yield and nutrition_factor are editorial
 
@@ -212,4 +212,15 @@ Status: accepted · чат 2026-09-07 (ТЗ по черновику ACCOUNTS)
 Следствие: HUMAN 3.9 («аккаунт V2.2») читается как глубокая кладовка/корзина, не запрет войти в V2.1. HUMAN 12 — ответы в §10 HUMAN.
 
 Хозяин плана: [ACCOUNTS.md](ACCOUNTS.md).
+
+## DEC-026 — Слой «На неделю»
+
+Status: accepted · чат 2026-09-09 (HUMAN §11 + старт кода)
+
+1. Пятый таб шапки/таббара — **«На неделю»**, URL `/prep`. «Войти» не таб.
+2. `Recipe` хранит только тело «с нуля». Будничные шаги — на `PrepSlot` (и `alternatives[].steps`), не `PrepRecipeBody`.
+3. Гостю без входа. Пилот: готовые наборы, editorial замены. Солвер вс и сбор калькулятором — не в рантайме.
+4. Пустой каталог — 200 и «Наборы пока не загружены». Демо-наборов в коде нет.
+
+Канон: [DATA-MODEL.md](DATA-MODEL.md), [API.md](API.md), [UX-PROPOSAL.md](UX-PROPOSAL.md) §6.4–6.5. Черновики продукта: [drafts/WEEKLY-PREP.md](drafts/WEEKLY-PREP.md).
 

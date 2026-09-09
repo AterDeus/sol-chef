@@ -6,6 +6,7 @@ export const PROTEIN_BASE: Record<string, string> = {
   fish_white_sea: 'Белая морская рыба',
   fish_red_sea: 'Красная рыба',
   fish_river: 'Речная рыба',
+  fish_canned: 'Консервированная рыба',
   seafood: 'Морепродукты',
   offal: 'Субпродукты',
   eggs_dairy: 'Яйца и молочные',
@@ -31,7 +32,7 @@ export const BOOK_CHAPTERS = [
   {
     id: 'fish',
     label: 'Рыба и морепродукты',
-    bases: ['fish_white_sea', 'fish_red_sea', 'fish_river', 'seafood'],
+    bases: ['fish_white_sea', 'fish_red_sea', 'fish_river', 'fish_canned', 'seafood'],
     dishTypes: [],
   },
   { id: 'sides', label: 'Гарниры', bases: [], dishTypes: ['side'] },
@@ -194,4 +195,9 @@ export const HAVE_GROUP: Record<string, string> = {
 
 export function labelOf(map: Record<string, string>, code: string): string {
   return map[code] ?? code;
+}
+
+/** Vessel, or method-only family code (`air_fryer`, `steam`) on the equipment axis. */
+export function equipmentLabel(code: string): string {
+  return EQUIPMENT[code] ?? COOK_METHOD[code] ?? code;
 }

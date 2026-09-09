@@ -13,7 +13,7 @@ export function SpriteIcon({ name, className = 'ui-icon', size = 22 }: Props) {
       aria-hidden
       focusable="false"
     >
-      <use href={`/icons.svg#icon-${name}`} />
+      <use href={`/icons.svg?v=11#icon-${name}`} />
     </svg>
   );
 }

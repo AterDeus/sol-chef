@@ -8,17 +8,6 @@ alwaysApply: false
 
 Код только под `v2/`. Корневой V1 не трогать. `v2/preview/` не смотреть и не восстанавливать.
 
-1. Задача — `v2/CURRENT_SPRINT.md`
-2. Запреты — `v2/AGENTS.md`
-3. Стек / Caddy — `v2/docs/ARCHITECTURE.md`
-4. Поля БД — `v2/docs/DATA-MODEL.md`
-5. HTTP — `v2/docs/API.md`
-6. Экраны — `v2/docs/UX-PROPOSAL.md` (D+ с правками §9, «Калькулятор», `/calculator`)
-7. Коды — `v2/docs/VOCAB.md`
-8. Safety — `v2/docs/SAFETY.md`
-9. Числа — `v2/docs/DEFAULTS.md`
-10. Перед «готово» — `v2/docs/TESTING.md`
-
-Порядок при конфликте — `v2/docs/README.md`. ADR — `v2/docs/DECISIONS.md`.
+Задача — `v2/CURRENT_SPRINT.md`. Запреты — `v2/AGENTS.md`. Куда какой документ — `v2/docs/README.md` (не открывать весь канон сразу).
 
 Не объявлять срез готовым без Compose и чек-листа TESTING.

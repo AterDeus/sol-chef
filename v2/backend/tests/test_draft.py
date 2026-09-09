@@ -2,20 +2,16 @@ import json
 from copy import deepcopy
 from pathlib import Path
 
+from io import StringIO
+from unittest.mock import patch
+
+from django.core.management import call_command
+
 from apps.recipes.etl.draft import known_from_v1_map, load_json, validate_draft
 
 
 def _gold_path() -> Path:
-    name = "barhatnaya-govyadina-po-kitajski.json"
-    here = Path(__file__).resolve()
-    candidates = [
-        here.parents[2] / "docs" / "drafts" / "recipes" / name,
-        Path("/v1-src/v2/docs/drafts/recipes") / name,
-    ]
-    for path in candidates:
-        if path.is_file():
-            return path
-    return candidates[0]
+    return Path(__file__).resolve().parent / "fixtures" / "gold_overlay.json"
 
 
 GOLD = _gold_path()
@@ -215,3 +211,34 @@ def test_yield_kind_without_weight_fails():
     payload["yield_kind"] = "estimated"
     errors = validate_draft(payload, overlay=True)
     assert any("yield_kind" in item for item in errors)
+
+
+def test_canned_fish_no_cook_does_not_require_target():
+    payload = _overlay_min()
+    payload["protein_base"] = "fish_canned"
+    payload["cook_method"] = "no_cook"
+    payload["steps"] = [
+        {"text": "Слить жидкость из банки, размять рыбу вилкой. Не греть."}
+    ]
+    errors = validate_draft(payload, overlay=True)
+    assert errors == []
+
+
+def test_cooked_fish_still_requires_target_63():
+    payload = _overlay_min()
+    payload["protein_base"] = "fish_white_sea"
+    payload["cook_method"] = "oven"
+    payload["equipment"] = "oven"
+    payload["steps"] = [{"text": "Запекать филе, пока оно не расслаивается вилкой."}]
+    errors = validate_draft(payload, overlay=True)
+    assert any("63" in item for item in errors)
+
+
+def test_import_draft_accepted_empty_is_ok(tmp_path):
+    out = StringIO()
+    with patch(
+        "apps.recipes.management.commands.import_draft.drafts_root",
+        return_value=tmp_path,
+    ):
+        call_command("import_draft", "--accepted", stdout=out)
+    assert "Черновиков нет" in out.getvalue()

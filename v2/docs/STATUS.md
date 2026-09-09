@@ -4,23 +4,30 @@
 
 ## Сейчас
 
-- Фокус: заготовки — параллель вс считает агент анализа один раз, не приложение. Код не трогали.
+- На «На неделю» два набора: **Для занятых** и **Бюджетная**.
+- Сайт: http://localhost:8080/prep
+- Каталог рецептов — **Postgres**. JSON в `drafts/recipes/` и `drafts/reviews/` больше не в дереве. Выгрузка: `export_draft --slug`. Compose: `import_v1` не затирает overlay (`time_profile`).
 
 ## Сделано в этой сессии
 
-- Уточнение: «солвер параллели» нужен для **готовых наборов**, как разовый прогон агента → `weekend_timeline`. Калькулятор и runtime Django — нет.
-- Карта, ТЗ §6.1, бэклог WEEKLY-PREP.
+- «Без вчерашнего» — в шапке набора (`?no_leftover=1`): источник на один приём, `reheat` → **дополнительное** блюдо каталога, которого нет в 14 ячейках, не дубль уже стоящего слота.
+- Для занятых: вт обед → `chechevitsa-s-ovoshchami`. Бюджетная: ср обед → `kartofel-s-gribami`; вс обед → чечевица. Закупка через `shopping_add` (чечевица / картофель+грибы).
+- Импорт JSON: когда Docker Desktop жив — `import_prep_kit` обоих наборов и `pytest tests/test_prep.py`.
 
 ## Ждёт
 
-- Явная фраза **«стартуй анализ заготовок»**.
-- Спринт кода `/prep` и пятого таба — отдельно.
-- Cutover по-прежнему без аккаунтов.
+- Живые названия наборов, если не заходят.
+- Редакционный просмотр сеток.
+- Поднять Compose (Docker Desktop не отвечает) и прогнать импорт + pytest.
+- Не генерировать следующие 10 рецептов.
 
 ## Как смотреть
 
-[drafts/WEEKLY-PREP.md](drafts/WEEKLY-PREP.md) → [WEEKLY-PREP-MAP.md](drafts/WEEKLY-PREP-MAP.md) → [WEEKLY-PREP-TZ.md](drafts/WEEKLY-PREP-TZ.md). Сайт: http://localhost:8080/.
+- Каталог: http://localhost:8080/prep
+- Бриф состава: `v2/docs/drafts/weekly-prep/BRIEFS-SEPTEMBER.md`
+
+После пересоздания тома Postgres: `migrate` и `import_prep_kit`. Overlay/волны живут в томе, не в git JSON.
 
 ## Не делать
 
-- Анализ без фразы старта. Код наборов и пятый таб в срезе 2.0. Корень V1.
+- Импорт kit-1/kit-2. Корень V1. Новая волна slug.

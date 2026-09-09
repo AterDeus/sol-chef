@@ -9,6 +9,7 @@
 @import './styles/components/recipe.css';
 @import './styles/components/guides.css';
 @import './styles/components/cook.css';
+@import './styles/components/prep.css';
 @import './styles/a11y.css';
 @import './styles/state.css';
 @import './styles/print.css';

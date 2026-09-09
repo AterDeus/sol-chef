@@ -1,0 +1,1087 @@
+{
+  "id": "nedelya-kapusta-i-volokna",
+  "title": "Бюджетная",
+  "summary": "Неделя на лопатке, капусте, фасоли и рыбе из банки — без курицы. Воскресенье длиннее: мясо томится само, пока вы делаете остальное.",
+  "servings_base": 2,
+  "position": 2,
+  "rhythm": "freezer",
+  "caution_text": "Говядину доведите до мягких волокон. Рыбные котлеты жарьте до румяной корочки, внутри мясо матовое. Готовый суп в воскресенье не варите. Рис варите свежим, когда садитесь есть.",
+  "metrics": {
+    "slots_assemble": 0,
+    "slots_finish": 12,
+    "slots_reheat": 2,
+    "unique_slugs": 11,
+    "shopping_skus": 21,
+    "components_count": 9,
+    "t_sunday_active_min": 88,
+    "t_sunday_wall_min": 170,
+    "t_weekdays_active_min": 200,
+    "t_scratch_active_min": 430
+  },
+  "components": [
+    {
+      "id": "pollock_fillet_raw",
+      "title": "Филе минтая, холодильник",
+      "canonical_ids": [
+        "pollock"
+      ],
+      "qty": 450,
+      "unit": "g",
+      "container_ids": [
+        "c1"
+      ],
+      "weekend_steps": [
+        "Обсушите филе, посолите и уберите в холодильник плоским боксом. Не замораживайте.",
+        "Сегодня не запекайте."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": false,
+        "weekday_target_internal_temperature_c": 63
+      },
+      "storage": {
+        "fridge_days": 1,
+        "freezer_days": null,
+        "notes": "24–36 ч в холодильнике. Считать сырым. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "roasted_veg_near",
+      "title": "Запечённые овощи, холодильник",
+      "canonical_ids": [
+        "carrot",
+        "bell_pepper",
+        "onion",
+        "champignons"
+      ],
+      "qty": 700,
+      "unit": "g",
+      "container_ids": [
+        "c2"
+      ],
+      "weekend_steps": [
+        "Нарежьте перец, лук, морковь и грибы. Выложите на противень, полейте маслом, посолите и запеките при 220 °C.",
+        "Остудите и уберите в холодильник."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 3,
+        "freezer_days": null,
+        "notes": "Не морозилка. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "roasted_veg_pumpkin",
+      "title": "Тыква и овощи, морозилка",
+      "canonical_ids": [
+        "pumpkin",
+        "onion",
+        "carrot"
+      ],
+      "qty": 1400,
+      "unit": "g",
+      "container_ids": [
+        "c3"
+      ],
+      "weekend_steps": [
+        "Нарежьте тыкву кубиком и оставшиеся овощи, полейте двумя ложками масла и запеките до мягкости.",
+        "Остудите и уберите плоским боксом в морозилку."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 3,
+        "freezer_days": 7,
+        "notes": "После оттайки держать в холодильнике. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "tomato_sauce",
+      "title": "Томатный соус",
+      "canonical_ids": [
+        "tomato",
+        "onion",
+        "garlic"
+      ],
+      "qty": 1300,
+      "unit": "ml",
+      "container_ids": [
+        "c4"
+      ],
+      "weekend_steps": [
+        "Обжарьте лук и чеснок на масле, добавьте помидоры и томатную пасту, посолите.",
+        "Уварите, пока ложка не будет оставлять след на дне. Снимите с огня, остудите и уберите в холодильник."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 6,
+        "freezer_days": 7,
+        "notes": "Яйца в соус не кладите — их вбивают уже в сковороду. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "bean_soup_base",
+      "title": "Заготовка овощного супа",
+      "canonical_ids": [
+        "carrot",
+        "onion"
+      ],
+      "qty": 1200,
+      "unit": "ml",
+      "container_ids": [
+        "c5"
+      ],
+      "weekend_steps": [
+        "Обжарьте лук и морковь, залейте водой и поварите 20–25 минут. Картофель и фасоль не кладите.",
+        "Остудите и уберите в холодильник. Картофель и банку фасоли добавите в день еды."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 3,
+        "freezer_days": null,
+        "notes": "Доварка в день еды, назавтра — разогрев уже готового супа. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "fish_patties_raw",
+      "title": "Рыбные котлеты, сырые",
+      "canonical_ids": [
+        "pollock"
+      ],
+      "qty": 450,
+      "unit": "g",
+      "container_ids": [
+        "c6"
+      ],
+      "weekend_steps": [
+        "Слепите котлеты по карточке и уберите плоским пакетом в морозилку. Сегодня не жарьте.",
+        "Доску после рыбы вымойте отдельно от говядины."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": false,
+        "weekday_target_internal_temperature_c": 63
+      },
+      "storage": {
+        "fridge_days": 1,
+        "freezer_days": 7,
+        "notes": "Жарить из мороза или после короткой оттайки пока не начнёт слоиться вилкой. Не готовые в мороз. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "pulled_beef",
+      "title": "Говядина на волокна",
+      "canonical_ids": [
+        "beef_chuck"
+      ],
+      "qty": 700,
+      "unit": "g",
+      "container_ids": [
+        "c7",
+        "c8"
+      ],
+      "weekend_steps": [
+        "Обжарьте лопатку, залейте водой так, чтобы мясо было прикрыто, и тушите под крышкой, пока не разойдётся на волокна — около двух с половиной часов.",
+        "Разберите, разложите с желе в два плоских пакета и уберите в морозилку."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": 92,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": 74
+      },
+      "storage": {
+        "fridge_days": 2,
+        "freezer_days": 7,
+        "notes": "Оттайка с запасом суток. Прогреть с желе 5–10 мин. Без гарнира это не ужин. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "braised_cabbage",
+      "title": "Тушёная капуста",
+      "canonical_ids": [
+        "cabbage"
+      ],
+      "qty": 600,
+      "unit": "g",
+      "container_ids": [
+        "c9"
+      ],
+      "weekend_steps": [
+        "Капусту тушите почти без жидкости, до мягкости без лужи. Остудите и уберите в холодильник.",
+        "Мокрой не замораживайте. При прогреве с говядиной выпарите лишнюю влагу на сковороде."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 4,
+        "freezer_days": null,
+        "notes": "Не пять суток в морозилке. Оценка редакции, не ГОСТ."
+      }
+    },
+    {
+      "id": "canned_fish",
+      "title": "Банки рыбы",
+      "canonical_ids": [
+        "canned_tuna"
+      ],
+      "qty": 2,
+      "unit": "pcs",
+      "container_ids": [
+        "c10"
+      ],
+      "weekend_steps": [
+        "Поставьте банки тунца или горбуши в холодильник. Не открывайте."
+      ],
+      "parcook": {
+        "pull_internal_temperature_c": null,
+        "eat_now": true,
+        "weekday_target_internal_temperature_c": null
+      },
+      "storage": {
+        "fridge_days": 7,
+        "freezer_days": null,
+        "notes": "Открыть, когда варите рис. Оценка редакции, не ГОСТ."
+      }
+    }
+  ],
+  "containers": [
+    {
+      "id": "c1",
+      "label": "№1 минтай",
+      "component_id": "pollock_fillet_raw",
+      "qty": 450,
+      "unit": "g",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c2",
+      "label": "№2 овощи, холодильник",
+      "component_id": "roasted_veg_near",
+      "qty": 700,
+      "unit": "g",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c3",
+      "label": "№3 тыква и овощи",
+      "component_id": "roasted_veg_pumpkin",
+      "qty": 1400,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 4
+    },
+    {
+      "id": "c4",
+      "label": "№4 томатный соус",
+      "component_id": "tomato_sauce",
+      "qty": 1300,
+      "unit": "ml",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c5",
+      "label": "№5 заготовка супа",
+      "component_id": "bean_soup_base",
+      "qty": 1200,
+      "unit": "ml",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c6",
+      "label": "№6 рыбные котлеты",
+      "component_id": "fish_patties_raw",
+      "qty": 450,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 3
+    },
+    {
+      "id": "c7",
+      "label": "№7 говядина",
+      "component_id": "pulled_beef",
+      "qty": 350,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 4
+    },
+    {
+      "id": "c8",
+      "label": "№8 говядина",
+      "component_id": "pulled_beef",
+      "qty": 350,
+      "unit": "g",
+      "place": "freezer",
+      "thaw_before_day": 5
+    },
+    {
+      "id": "c9",
+      "label": "№9 капуста",
+      "component_id": "braised_cabbage",
+      "qty": 600,
+      "unit": "g",
+      "place": "fridge",
+      "thaw_before_day": null
+    },
+    {
+      "id": "c10",
+      "label": "№10 банки рыбы",
+      "component_id": "canned_fish",
+      "qty": 2,
+      "unit": "pcs",
+      "place": "fridge",
+      "thaw_before_day": null
+    }
+  ],
+  "weekend_timeline": [
+    {
+      "kind": "intro",
+      "hands": "Лопатка томится сама около двух с половиной часов. Готовый суп не варите — только бульон и зажарку. Рис сегодня не нужен."
+    },
+    {
+      "t_min": 0,
+      "hands": "Обжарьте лопатку со всех сторон, залейте водой так, чтобы мясо было прикрыто, накройте и оставьте на слабом огне. Разогрейте духовку до 220 °C."
+    },
+    {
+      "t_min": 15,
+      "hands": "Нарежьте перец, лук, морковь и грибы. Выложите на противень, полейте маслом, посолите и поставьте в духовку. Капусту нашинкуйте отдельно, её будете тушить на сковороде."
+    },
+    {
+      "t_min": 28,
+      "hands": "Капусту тушите почти без воды, до мягкости без лужи. Остудите: позже только прогреете её с говядиной."
+    },
+    {
+      "t_min": 40,
+      "hands": "Во второй кастрюле обжарьте лук и морковь, залейте водой и поварите 20–25 минут. Это заготовка супа, без фасоли и картофеля. На сковороде сварите томатный соус: лук, чеснок, помидоры. Когда ложка будет оставлять след на дне, снимите с огня и оставьте остывать."
+    },
+    {
+      "t_min": 55,
+      "hands": "Слепите рыбные котлеты и уберите плоским пакетом в морозилку. Минтай обсушите, посолите и поставьте в холодильник. Банки рыбы тоже поставьте в холодильник закрытыми."
+    },
+    {
+      "t_min": 70,
+      "hands": "Овощи с противня выньте остывать. На другой противень выложите тыкву кубиком и оставшиеся овощи: полейте маслом, посолите и поставьте в духовку."
+    },
+    {
+      "t_min": 95,
+      "hands": "Заготовку супа, овощи с первого противня, капусту и соус уберите в холодильник. Тыкву — в морозилку."
+    },
+    {
+      "t_min": 150,
+      "hands": "Лопатка готова, когда мясо само расходится на волокна. Разберите, два плоских пакета с желе уберите в морозилку. Вымойте стол."
+    }
+  ],
+  "slots": [
+    {
+      "day": 1,
+      "meal": "lunch",
+      "slug": "mintay-v-duhovke",
+      "mode": "finish",
+      "flavor": "Минтай на запечённых овощах с хлебом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c1",
+        "c2"
+      ],
+      "steps": [
+        {
+          "text": "Филе лежит в холодильнике, не в морозилке."
+        },
+        {
+          "text": "Овощи выложите на противень, сверху рыбу. Минуты двенадцать. Готово, когда мясо матовое и слоится вилкой. Зелень и хлеб."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 16,
+      "time_active_scratch_min": 35,
+      "plate": {
+        "title": "Минтай на запечённых овощах с хлебом",
+        "composition": "Минтай из холодильника, овощи с противня, зелень, хлеб"
+      }
+    },
+    {
+      "day": 1,
+      "meal": "dinner",
+      "slug": "shakshuka-s-tomatami-i-bazilikom",
+      "mode": "finish",
+      "flavor": "Шакшука с фетой и хлебом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c4"
+      ],
+      "steps": [
+        {
+          "text": "Отлейте часть соуса в сковороду и доведите до пузырей. Ложкой сделайте лунки и вбейте яйца."
+        },
+        {
+          "text": "Сверху фета, к соусу — хлеб. Остаток соуса закройте и уберите в холодильник."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 30,
+      "plate": {
+        "title": "Шакшука с фетой и хлебом",
+        "composition": "Яйца в томатном соусе, фета, хлеб"
+      }
+    },
+    {
+      "day": 2,
+      "meal": "lunch",
+      "slug": "ovoshchnoy-sup-s-fasolyu",
+      "mode": "finish",
+      "flavor": "Овощной суп с фасолью, сметаной и хлебом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c5"
+      ],
+      "steps": [
+        {
+          "text": "Заготовку вылейте в кастрюлю. Картофель нарежьте сейчас, добавьте банку фасоли."
+        },
+        {
+          "text": "Варите 15–20 минут, пока картофель не станет мягким. Сметана, хлеб."
+        },
+        {
+          "text": "Половину съешьте. Остаток уберите в холодильник на завтра: это уже сваренный сегодня суп."
+        }
+      ],
+      "no_leftover": {
+        "steps": [
+          {
+            "text": "Заготовку вылейте в кастрюлю. Картофель нарежьте сейчас, добавьте банку фасоли."
+          },
+          {
+            "text": "Варите 15–20 минут, пока картофель не станет мягким. Сметана, хлеб."
+          },
+          {
+            "text": "Съешьте всё за этот обед — завтра картофель с грибами, не разогрев супа."
+          }
+        ]
+      },
+      "alternatives": [],
+      "servings_cooked": 4,
+      "feeds_slots": 2,
+      "time_active_from_prep_min": 20,
+      "time_active_scratch_min": 35,
+      "plate": {
+        "title": "Овощной суп с фасолью, сметаной и хлебом",
+        "composition": "Суп с фасолью, сметана, хлеб"
+      }
+    },
+    {
+      "day": 2,
+      "meal": "dinner",
+      "slug": "zapechennye-ovoshchi",
+      "mode": "finish",
+      "flavor": "Запечённые овощи с адыгейским сыром",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c2"
+      ],
+      "steps": [
+        {
+          "text": "Овощи прогрейте на сковороде три минуты. Рядом положите адыгейский сыр или брынзу — тоже на три минуты."
+        },
+        {
+          "text": "Хлеб и зелень. Яйца сегодня не кладите."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 25,
+      "plate": {
+        "title": "Запечённые овощи с адыгейским сыром",
+        "composition": "Овощи с противня, адыгейский сыр или брынза, хлеб, зелень"
+      }
+    },
+    {
+      "day": 3,
+      "meal": "lunch",
+      "slug": "ovoshchnoy-sup-s-fasolyu",
+      "mode": "reheat",
+      "flavor": "Овощной суп с фасолью и хлебом",
+      "source": {
+        "kind": "slot",
+        "day": 2,
+        "meal": "lunch"
+      },
+      "container_ids": [],
+      "steps": [
+        {
+          "text": "Разогрейте вчерашний суп до горячего пара. Сметана, хлеб."
+        }
+      ],
+      "no_leftover": {
+        "slug": "kartofel-s-gribami",
+        "mode": "finish",
+        "container_ids": [],
+        "steps": [
+          {
+            "text": "Картофель нарежьте ломтями, грибы — пластинами, лук — полукольцами. Это не противень воскресенья."
+          },
+          {
+            "text": "Обжарьте лук и грибы, затем картофель. Держите на сковороде, пока картофель не станет мягким внутри и румяным с краёв — около 20 минут."
+          },
+          {
+            "text": "Зелень сверху. Салат из капусты с огурцом сделайте сейчас, если тарелка кажется сухой."
+          }
+        ],
+        "plate": {
+          "title": "Картофель с грибами и салатом",
+          "composition": "Жареный картофель, шампиньоны, лук, салат из капусты с огурцом"
+        },
+        "time_active_from_prep_min": 20,
+        "time_active_scratch_min": 30,
+        "shopping_add": [
+          {
+            "canonical_id": "potato",
+            "qty": 600,
+            "unit": "g",
+            "title_ru": "Картофель"
+          },
+          {
+            "canonical_id": "champignons",
+            "qty": 300,
+            "unit": "g",
+            "title_ru": "Шампиньоны"
+          },
+          {
+            "canonical_id": "onion",
+            "qty": 150,
+            "unit": "g",
+            "title_ru": "Лук"
+          }
+        ]
+      },
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 8,
+      "time_active_scratch_min": 35,
+      "plate": {
+        "title": "Овощной суп с фасолью и хлебом",
+        "composition": "Вчерашний суп, сметана, хлеб"
+      }
+    },
+    {
+      "day": 3,
+      "meal": "dinner",
+      "slug": "rybnye-kotlety",
+      "mode": "finish",
+      "flavor": "Рыбные котлеты с гречкой и салатом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c6"
+      ],
+      "steps": [
+        {
+          "text": "Котлеты кладите на сковороду из морозилки или слегка оттаявшими. Не размораживайте в микроволновке."
+        },
+        {
+          "text": "Жарьте до румяной корочки: внутри мясо матовое, не сырое."
+        },
+        {
+          "text": "Гречку сварите сейчас. Салат: капуста с огурцом, масло, соль."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 20,
+      "time_active_scratch_min": 35,
+      "plate": {
+        "title": "Рыбные котлеты с гречкой и салатом",
+        "composition": "Рыбные котлеты, гречка, салат из капусты с огурцом"
+      }
+    },
+    {
+      "day": 4,
+      "meal": "lunch",
+      "slug": "teplyy-boul-s-tykvoy-i-fettoy",
+      "mode": "finish",
+      "flavor": "Тёплый боул с тыквой, нутом и брынзой",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c3"
+      ],
+      "steps": [
+        {
+          "text": "Тыкву и овощи прогрейте. Нут из банки три минуты со специями."
+        },
+        {
+          "text": "Раскрошите брынзу на горячее, гренки подсушите сейчас. Орехи или ложка масла — одно из двух."
+        },
+        {
+          "text": "Овощи в контейнере оставьте: они ещё понадобятся."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 40,
+      "plate": {
+        "title": "Тёплый боул с тыквой, нутом и брынзой",
+        "composition": "Тыква, нут, брынза, гренки"
+      }
+    },
+    {
+      "day": 4,
+      "meal": "dinner",
+      "slug": "govyadina-na-volokna-s-garnirom",
+      "mode": "finish",
+      "flavor": "Говядина на волокна с тушёной капустой",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c7",
+        "c9"
+      ],
+      "steps": [
+        {
+          "text": "Пакет с желе выложите на сковороду на 5–10 минут, пока мясо не станет горячим."
+        },
+        {
+          "text": "Капусту прогрейте рядом и выпарьте лишнюю влагу, смешайте с мясом. Без капусты это не ужин."
+        },
+        {
+          "text": "Зелень сверху. Крупу сегодня не кладите."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 15,
+      "time_active_scratch_min": 40,
+      "plate": {
+        "title": "Говядина на волокна с тушёной капустой",
+        "composition": "Рваная говядина, тушёная капуста, зелень"
+      }
+    },
+    {
+      "day": 5,
+      "meal": "lunch",
+      "slug": "boul-s-gorbushoy-ili-tuntsem",
+      "mode": "finish",
+      "flavor": "Боул с рисом и рыбой из банки",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c10"
+      ],
+      "steps": [
+        {
+          "text": "Сварите рис: 15–18 минут."
+        },
+        {
+          "text": "Банку откройте сейчас. Огурец, зелень, заправка — к горячему рису."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 20,
+      "time_active_scratch_min": 20,
+      "plate": {
+        "title": "Боул с рисом и рыбой из банки",
+        "composition": "Рис, тунец или горбуша, свежие овощи, заправка"
+      }
+    },
+    {
+      "day": 5,
+      "meal": "dinner",
+      "slug": "govyadina-na-volokna-s-garnirom",
+      "mode": "finish",
+      "flavor": "Говядина на волокна с рисом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c8"
+      ],
+      "steps": [
+        {
+          "text": "Поставьте рис на пятнадцать минут, свежий к этому ужину. Параллельно прогрейте пакет говядины с желе 5–10 минут."
+        },
+        {
+          "text": "Рис к мясу. Зелень, лимон по вкусу."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 18,
+      "time_active_scratch_min": 40,
+      "plate": {
+        "title": "Говядина на волокна с рисом",
+        "composition": "Рваная говядина, рис, зелень"
+      }
+    },
+    {
+      "day": 6,
+      "meal": "lunch",
+      "slug": "boul-s-nutom-i-zapechennymi-ovoshchami",
+      "mode": "finish",
+      "flavor": "Нут с запечёнными овощами и хлебом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c3"
+      ],
+      "steps": [
+        {
+          "text": "Овощи прогрейте. Нут из банки со специями три минуты."
+        },
+        {
+          "text": "Лимон, зелень, ложка масла. Хлеб, если тарелка кажется лёгкой."
+        },
+        {
+          "text": "Немного овощей оставьте к яйцам. Это же блюдо можно разогреть завтра."
+        }
+      ],
+      "no_leftover": {
+        "steps": [
+          {
+            "text": "Овощи прогрейте. Нут из банки со специями три минуты."
+          },
+          {
+            "text": "Лимон, зелень, ложка масла. Хлеб, если тарелка кажется лёгкой."
+          },
+          {
+            "text": "Немного овощей оставьте к яйцам вечером. Съешьте боул за этот обед — завтра чечевица."
+          }
+        ]
+      },
+      "alternatives": [],
+      "servings_cooked": 4,
+      "feeds_slots": 2,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 25,
+      "plate": {
+        "title": "Нут с запечёнными овощами и хлебом",
+        "composition": "Нут, овощи с противня, лимон, зелень, хлеб"
+      }
+    },
+    {
+      "day": 6,
+      "meal": "dinner",
+      "slug": "makarony-s-myasnym-sousom",
+      "mode": "finish",
+      "flavor": "Макароны с мясным соусом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c4"
+      ],
+      "steps": [
+        {
+          "text": "Сварите перья около восьми минут. Остаток соуса разогрейте и смешайте."
+        }
+      ],
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 30,
+      "plate": {
+        "title": "Макароны с мясным соусом",
+        "composition": "Перья, мясной томатный соус"
+      }
+    },
+    {
+      "day": 7,
+      "meal": "lunch",
+      "slug": "boul-s-nutom-i-zapechennymi-ovoshchami",
+      "mode": "reheat",
+      "flavor": "Нут с запечёнными овощами",
+      "source": {
+        "kind": "slot",
+        "day": 6,
+        "meal": "lunch"
+      },
+      "container_ids": [],
+      "steps": [
+        {
+          "text": "Разогрейте вчерашний боул. Лимон и зелень добавьте сейчас, если выдохлись."
+        }
+      ],
+      "no_leftover": {
+        "slug": "chechevitsa-s-ovoshchami",
+        "mode": "finish",
+        "container_ids": [],
+        "steps": [
+          {
+            "text": "Чечевицу промойте. Лук и морковь нарежьте сейчас."
+          },
+          {
+            "text": "Обжарьте овощи, залейте водой, добавьте чечевицу. Варите около 20 минут, пока зёрна не станут мягкими."
+          },
+          {
+            "text": "Хлеб к тарелке. Готовое на вечер не оставляйте — к яйцам овощи из контейнера."
+          }
+        ],
+        "plate": {
+          "title": "Чечевица с овощами и хлебом",
+          "composition": "Чечевица, лук и морковь, хлеб"
+        },
+        "time_active_from_prep_min": 20,
+        "time_active_scratch_min": 25,
+        "shopping_add": [
+          {
+            "canonical_id": "lentils",
+            "qty": 200,
+            "unit": "g",
+            "title_ru": "Чечевица"
+          },
+          {
+            "canonical_id": "carrot",
+            "qty": 150,
+            "unit": "g",
+            "title_ru": "Морковь"
+          },
+          {
+            "canonical_id": "onion",
+            "qty": 150,
+            "unit": "g",
+            "title_ru": "Лук"
+          }
+        ]
+      },
+      "alternatives": [],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 8,
+      "time_active_scratch_min": 25,
+      "plate": {
+        "title": "Нут с запечёнными овощами",
+        "composition": "Вчерашний нут с овощами, лимон, зелень"
+      }
+    },
+    {
+      "day": 7,
+      "meal": "dinner",
+      "slug": "omlet",
+      "mode": "finish",
+      "flavor": "Омлет с овощами и хлебом",
+      "source": {
+        "kind": "weekend"
+      },
+      "container_ids": [
+        "c3"
+      ],
+      "steps": [
+        {
+          "text": "Остаток овощей прогрейте три минуты на сковороде, затем влейте яйца."
+        },
+        {
+          "text": "Хлеб к тарелке."
+        }
+      ],
+      "alternatives": [
+        {
+          "slug": "yaichnitsa-s-pomidorami",
+          "label": "Яичница с помидором и овощами",
+          "mode": "finish",
+          "container_ids": [
+            "c3"
+          ],
+          "steps": [
+            {
+              "text": "Овощи три минуты, помидор, яйца глазуньей, хлеб."
+            }
+          ]
+        }
+      ],
+      "servings_cooked": null,
+      "feeds_slots": null,
+      "time_active_from_prep_min": 12,
+      "time_active_scratch_min": 15,
+      "plate": {
+        "title": "Омлет с овощами и хлебом",
+        "composition": "Яйца, овощи с противня, хлеб"
+      }
+    }
+  ],
+  "shopping": [
+    {
+      "canonical_id": "beef_chuck",
+      "qty": 900,
+      "unit": "g",
+      "title_ru": "Говяжья лопатка"
+    },
+    {
+      "canonical_id": "pollock",
+      "qty": 900,
+      "unit": "g",
+      "title_ru": "Минтай"
+    },
+    {
+      "canonical_id": "canned_tuna",
+      "qty": 2,
+      "unit": "pcs",
+      "title_ru": "Тунец или горбуша в собственном соку"
+    },
+    {
+      "canonical_id": "canned_beans",
+      "qty": 2,
+      "unit": "pcs",
+      "title_ru": "Фасоль консервированная"
+    },
+    {
+      "canonical_id": "canned_chickpeas",
+      "qty": 2,
+      "unit": "pcs",
+      "title_ru": "Нут консервированный"
+    },
+    {
+      "canonical_id": "cabbage",
+      "qty": 1000,
+      "unit": "g",
+      "title_ru": "Капуста белокочанная"
+    },
+    {
+      "canonical_id": "pumpkin",
+      "qty": 900,
+      "unit": "g",
+      "title_ru": "Тыква"
+    },
+    {
+      "canonical_id": "carrot",
+      "qty": 500,
+      "unit": "g",
+      "title_ru": "Морковь"
+    },
+    {
+      "canonical_id": "onion",
+      "qty": 500,
+      "unit": "g",
+      "title_ru": "Лук"
+    },
+    {
+      "canonical_id": "bell_pepper",
+      "qty": 250,
+      "unit": "g",
+      "title_ru": "Перец"
+    },
+    {
+      "canonical_id": "champignons",
+      "qty": 200,
+      "unit": "g",
+      "title_ru": "Шампиньоны"
+    },
+    {
+      "canonical_id": "tomato",
+      "qty": 800,
+      "unit": "g",
+      "title_ru": "Помидоры"
+    },
+    {
+      "canonical_id": "cucumber",
+      "qty": 400,
+      "unit": "g",
+      "title_ru": "Огурцы"
+    },
+    {
+      "canonical_id": "rice",
+      "qty": 250,
+      "unit": "g",
+      "title_ru": "Рис"
+    },
+    {
+      "canonical_id": "buckwheat",
+      "qty": 150,
+      "unit": "g",
+      "title_ru": "Гречка"
+    },
+    {
+      "canonical_id": "pasta",
+      "qty": 200,
+      "unit": "g",
+      "title_ru": "Макароны-перья"
+    },
+    {
+      "canonical_id": "eggs",
+      "qty": 10,
+      "unit": "pcs",
+      "title_ru": "Яйца"
+    },
+    {
+      "canonical_id": "cheese",
+      "qty": 300,
+      "unit": "g",
+      "title_ru": "Брынза, фета или адыгейский"
+    },
+    {
+      "canonical_id": "sour_cream",
+      "qty": 200,
+      "unit": "g",
+      "title_ru": "Сметана"
+    },
+    {
+      "canonical_id": "rye_bread",
+      "qty": 1,
+      "unit": "pcs",
+      "title_ru": "Хлеб"
+    },
+    {
+      "canonical_id": "garlic",
+      "qty": 6,
+      "unit": "clove",
+      "title_ru": "Чеснок"
+    }
+  ],
+  "allergens": {
+    "contains": [
+      "milk",
+      "gluten",
+      "egg",
+      "fish"
+    ],
+    "unknown": [],
+    "may_contain": []
+  }
+}

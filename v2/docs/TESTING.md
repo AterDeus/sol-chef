@@ -48,6 +48,17 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | U36 | `nutrition_factor=0.5` на масле уменьшает вклад вдвое; не авто-0.5 |
 | U37 | `yield_weight_g=500`, `ratio=2`, `scaling_enabled=True` → знаменатель cooked 1000 г; `per_100g_cooked` ≠ `per_100g_input` |
 | U38 | нет `yield_weight_g` → `per_100g_cooked is None` |
+| U51 | `GET /api/prep-kits/` без наборов → 200 `{ "results": [] }` |
+| U52 | список только `published`, порядок `position` затем `slug` |
+| U53 | импорт: 14 слотов → kit `published` |
+| U54 | импорт: чужой `container_ids` / unpublished / reheat вперёд / reheat не со вчера → отказ |
+| U55 | рецепт без `prep` — книжные шаги |
+| U56 | `prep` без day/meal при двух слотах одного slug → 400 |
+| U57 | `prep`+day+meal → шаги этого слота, `mode` в `prep_context` |
+| U58 | `servings` набора меняет qty контейнера №2, не число контейнеров; `servings=1` при базе 2 даёт половину |
+| U59 | alternative.slug с тем же day/meal → `alternatives[].steps`, не 400 из‑за FK слота |
+| U60 | `anchor_weight` + `prep` → 400 |
+| U61 | `?no_leftover=1`: `reheat` → `no_leftover` блюдо (slug не из 14 слотов); без флага слот остаётся `reheat`; `prep`+day+meal на slug замены без флага → 400, с флагом — `no_leftover.steps`; импорт без `no_leftover` у reheat или с дублем сетки → отказ |
 
 ## Integration
 
@@ -66,8 +77,8 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | I11 | каталог не использует `__icontains` (grep по коду поиска) |
 | I12 | `GET /api/recipes/?equipment=` AND с `protein_base`; неизвестный код → 400 |
 | I13 | рецепт с только legacy-вариациями: `available_variants[].has_delta=false`, ингредиенты базы |
-| I14 | `import_draft --check` зелёный на эталонном черновике |
-| I15 | `import_draft --accepted`: файл с ошибкой валидатора **пропускает**, не останавливает пачку; `--path` по-прежнему падает |
+| I14 | `import_draft --check --path` зелёный на эталоне `tests/fixtures/gold_overlay.json` |
+| I15 | `import_draft --accepted` без JSON — «Черновиков нет», код 0; битый файл в пачке пропускает; `--path` падает |
 
 ## E2E (Playwright, через Caddy `:8080`)
 
@@ -97,6 +108,9 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | E22 | `/recipes/barhatnaya-govyadina-po-kitajski` | блок КБЖУ; слайдер «У меня» и чип (если есть) двигают числа; не фильтр калькулятора `kcal_max` |
 | E23 | `/recipes/<slug>` с legacy-вариациями | секция «Вариации» списком как заметки, не `<details>` / не `<summary>` |
 | E24 | `/recipes/<slug>` чип вариации или посуды | страница не прыгает наверх; URL помнит оси |
+| E25 | `/prep` | empty-state «Наборы пока не загружены», не «скоро»; пятый пункт шапки/таббара «На неделю» активен |
+| E26 | `/prep/<slug>` неизвестный | 404 |
+| E27 | рецепт с `?prep=` | контейнеры и глагол mode; cook mode по шагам слота, не книги |
 
 В бандле frontend нет `Math.pow` / `ratio ** 0.7` вокруг количеств (grep).
 
@@ -135,7 +149,8 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | A19 | калькулятор открывает выбранную ось, не всегда базу | |
 | A20 | калькулятор не вываливает VOCAB; книга — смысловые разделы, не алфавит | |
 | A21 | `have=` даёт «докупить» названиями, не процентом; featured не сетка | |
-| A22 | неизвестный `have` → 400 | |
+| A22 | неизвестный `have` → 400 |
+| A23 | `/prep` открывается; пустой список не «скоро»; шапка из пяти пунктов | |
 
 Нет Compose — срез не готов, даже если документы полные.
 

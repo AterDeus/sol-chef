@@ -40,7 +40,7 @@
 - [ ] Пустые ниши основы не показывают заглушку «скоро» (глава просто отсутствует).
 - [ ] Формула «У меня» на карточке = Django (`ratio^0.7`), не V1 `0.5`.
 - [ ] Калькулятор считает Django, не клиент.
-- [ ] Принятые оверлеи в БД: после `import_v1` всегда `import_draft --accepted`. Повторный ETL не откатывает overlay.
+- [ ] Принятые оверлеи в БД: `import_v1` не затирает slug с `time_profile`. Том Postgres — источник правды. Выгрузка: `export_draft --slug`.
 - [ ] Регрессия V1: из корня `python -m http.server 3456` ещё открывает старый сайт, пока DNS на Pages.
 
 Acceptance среза — [TESTING.md](TESTING.md) A1–A22. Прод не стартовать, пока локальный Compose не зелёный.
@@ -115,7 +115,7 @@ Postgres не ограничивает число `Recipe`. Узкие мест�
 ## 4. Данные и импорт на сервере
 
 - [ ] Прод-старт контейнера: `migrate` + `collectstatic`. **Не** `import_v1` на каждый reboot.
-- [ ] Импорт — отдельная команда/job в CI или ручной one-shot: `import_v1` затем `import_draft --accepted`.
+- [ ] Импорт — отдельная команда/job: `import_v1` (не затирает overlay). Новые slug — `import_draft --path`.
 - [ ] Бэкап Postgres до импорта и после. Том не единственная копия.
 - [ ] Повторный импорт идемпотентный (upsert по slug). Overlay не затирается.
 - [ ] В проде нет `_terra/`, `_repass*.py`, pytest cache, `.venv` в образе (dockerignore).

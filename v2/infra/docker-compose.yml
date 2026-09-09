@@ -76,7 +76,7 @@ services:
       [
         "sh",
         "-c",
-        "set -eu; if [ -f pyproject.toml ]; then uv sync && uv run python manage.py migrate --noinput && uv run python manage.py collectstatic --noinput && uv run python manage.py import_v1 && uv run python manage.py import_draft --accepted && exec uv run python manage.py runserver 0.0.0.0:8000; else echo 'v2/backend: no pyproject.toml yet — Django app is not in this tree.' >&2; exit 1; fi",
+        "set -eu; if [ -f pyproject.toml ]; then uv sync && uv run python manage.py migrate --noinput && uv run python manage.py collectstatic --noinput && uv run python manage.py import_v1 && exec uv run python manage.py runserver 0.0.0.0:8000; else echo 'v2/backend: no pyproject.toml yet — Django app is not in this tree.' >&2; exit 1; fi",
       ]
     depends_on:
       postgres:

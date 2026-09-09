@@ -309,8 +309,16 @@ def validate_draft(
                 err("грудка птицы: target не ниже 72")
         elif not targets:
             err("птица: нет target_internal_temperature_c")
+    elif protein == "fish_canned":
+        # Промышленные консервы: не требовать target 63.
+        pass
     elif protein in {"fish_white_sea", "fish_red_sea", "fish_river"}:
-        if "raw_fish" not in flags and (not targets or min(targets) < 63):
+        if "raw_fish" in flags:
+            pass
+        elif cook == "no_cook":
+            # Сборка готовых консервов / холодный боул: не требовать повторный target 63.
+            pass
+        elif not targets or min(targets) < 63:
             err("готовая рыба: target не ниже 63")
     elif protein == "pork" and "mince" not in cuts:
         if not targets:

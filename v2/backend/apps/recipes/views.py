@@ -123,11 +123,14 @@ class RecipeDetailView(APIView):
         recipe = _published().filter(slug=slug).first()
         if recipe is None:
             raise NotFound("Рецепт не найден.")
+        from apps.prep.services.context import resolve_prep_for_recipe
+
+        prep_pack = resolve_prep_for_recipe(recipe, request)
         variant = (request.query_params.get("variant") or "").strip() or None
         equipment = (request.query_params.get("equipment") or "").strip() or None
         assembled = assemble_recipe(recipe, variant_code=variant, equipment_code=equipment)
-        servings = parse_optional_decimal(request, "servings")
-        anchor_weight = parse_optional_decimal(request, "anchor_weight")
+        servings = None if prep_pack else parse_optional_decimal(request, "servings")
+        anchor_weight = None if prep_pack else parse_optional_decimal(request, "anchor_weight")
         anchor = pick_anchor(assembled.ingredients)
         scale = resolve_scale(
             recipe_scalable=recipe.scalable,
@@ -138,7 +141,13 @@ class RecipeDetailView(APIView):
             anchor_weight=anchor_weight,
             anchor_name=(anchor.get("name") if anchor else None),
         )
-        return Response(serialize_recipe_detail(recipe, assembled, scale))
+        data = serialize_recipe_detail(recipe, assembled, scale)
+        if prep_pack:
+            data["steps"] = prep_pack["steps"]
+            data["prep"] = prep_pack["prep"]
+            data["prep_context"] = prep_pack["prep_context"]
+            data["scaling"] = prep_pack["scaling"]
+        return Response(data)
 
 
 class IngredientListView(APIView):

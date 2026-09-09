@@ -10,6 +10,7 @@
 |-----|--------|
 | `recipes` | `Recipe`, `RecipeVariant`, `RecipeRevision`, `Ingredient`, `RecipeIngredient`, `RecipeStep`, `SubstitutionRule` |
 | `content` | `ContentDocument` |
+| `prep` | `PrepKit`, `PrepComponent`, `PrepContainer`, `PrepSlot` — слой «На неделю»; не раздувать `recipes` |
 | `accounts` | V2.1: `User`, `AuthToken`, `Favorite`, `CookReport`, `PantryItem`, `RecipeRating`, `RecipeComment`, `Complaint` |
 
 Сессии Django — в Postgres (не Redis). `AUTH_USER_MODEL = "accounts.User"`. Гостевой срез без этих таблиц живёт; миграции аккаунтов — спринт V2.1-A ([ACCOUNTS.md](ACCOUNTS.md)). Кладовка с граммами и фото — V2.2, не колонки «про запас».
@@ -68,7 +69,7 @@
 
 Вариант ≠ адаптация. Variant — редакционная версия блюда (чип, дельта состава). Adaptation — заранее разрешённая операция движка; runtime не фантазирует «наверное можно в духовке».
 
-`new_ingredients` в JSON автора — **заявка** на канон, не второй реестр. После регистрации в `Ingredient` блок из утверждённого рецепта исчезает. Аллергены строки рецепта не источник истины — только таблица `Ingredient`.
+`new_ingredients` в JSON автора — **заявка** на канон, не второй реестр и не корзина. После регистрации в `Ingredient` блок из утверждённого рецепта исчезает. Аллергены строки рецепта не источник истины — только таблица `Ingredient`. Строки с одним `choice_group` — взаимоисключающий выбор; заявка канона на обе ветки не значит, что обе покупают.
 
 ### Инварианты рецепта
 
@@ -199,7 +200,7 @@ Unique: пара from/to глобально (`recipe IS NULL`); пара from/to
 | `optional` | bool | нет | `true` = не обязателен для блюда («для подачи», «по желанию»); в аллергенах карточки не участвует |
 | `nutrition_exclude` | bool | нет | дефолт `false`; строка не входит **ни** в числитель КБЖУ, **ни** в массу `per_100g_input` |
 | `nutrition_factor` | decimal 0.01–1 | да | доля вклада строки (жир, который остался в сковороде). Нет ключа / null = 1. Ноль запрещён — это `nutrition_exclude`. Не вместе с exclude |
-| `choice_group` | text | да | «A или B» |
+| `choice_group` | text | да | «A или B»: одна ветка в закупке и в display, не сумма веток |
 | `display_name` | text | да | как в V1, если отличается от канона |
 
 `unit` ∈ `to_taste` \| `pinch` → `amount` должен быть `NULL`, `scalable=false`. `nutrition_factor` не вместе с `nutrition_exclude`.
@@ -445,3 +446,163 @@ $$ LANGUAGE sql IMMUTABLE PARALLEL SAFE;
 - `community_confirmed` и `editorial_tested` при upsert **не затирать** живые значения (ETL пишет `false` только на INSERT).
 
 Сид-файлы появятся вместе с кодом импорта (не в этом документе). Пока кода нет — не заполнять «на глаз» в markdown.
+
+## `apps.prep` — набор на неделю
+
+Не колонки на `Recipe`. Книжное тело шагов — только «с нуля». Будничное тело живёт на **слоте** этого набора (`PrepSlot.steps`), не на паре kit×recipe и не в `PrepRecipeBody`.
+
+Два слота одного slug (борщ finish в пн / reheat во вт) — два разных `steps`.
+
+Импорт: `manage.py import_prep_kit` (dry-run / import). Upsert по `PrepKit.slug`. JSON набора: `id` или `slug` → `slug`; `component.id` / `container.id` → `code`. Next JSON не читает. Не в корневой `data/`. Нет демо-наборов в фикстурах.
+
+`mode` у published слота меняется только **полным re-import** набора. Нет PATCH слота.
+
+### `PrepKit`
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `slug` | slug, unique | нет | URL `/prep/<slug>` |
+| `title` | text | нет | |
+| `summary` | text | да | |
+| `servings_base` | positive int | да | база масштаба; нет → масштаб выключен |
+| `caution_text` | text | да | обязателен при мясе/птице/рыбе в наборе (редакция) |
+| `rhythm` | text | да | подпись ритма (`freezer`, `fridge_only`, …), не фильтр витрины |
+| `status` | enum | нет | `draft` \| `published`. Список API — только `published` |
+| `position` | int | нет | editorial порядок списка (возрастание, затем `slug`) |
+| `metrics` | JSON | нет | целые минуты и счётчики; клиент **не** пересчитывает |
+| `weekend_timeline` | JSON | нет | шкала вс; приложение не солвит заново |
+| `shopping` | JSON | нет | `[{ canonical_id, qty, unit, title_ru }]` |
+| `allergens` | JSON | нет | `{ contains, unknown, may_contain }` — худший случай набора |
+
+Нет полей `weekend_protocol`, `qty_g`, `eaten_by`, `feeds_days`, `weekend_active_hours_estimated`.
+
+### `PrepComponent`
+
+Unique `(kit, code)`. Полуфабрикат после вс.
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `kit` | FK | нет | |
+| `code` | slug | нет | из JSON `id` |
+| `title` | text | нет | |
+| `canonical_ids` | JSON list | нет | каноны VOCAB |
+| `qty` | decimal | нет | выход на `servings_base` |
+| `unit` | VOCAB unit | нет | |
+| `weekend_steps` | JSON list | нет | **как** делать, не расписание |
+| `parcook` | JSON | нет | |
+| `storage` | JSON | нет | срок — редакционная оценка, не ГОСТ |
+
+Какие боксы у компонента — строки `PrepContainer`, не копия `eaten_by`.
+
+### `PrepContainer`
+
+Unique `(kit, code)`. Физический бокс. Не 1:1 с компонентом.
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `kit` | FK | нет | |
+| `code` | slug | нет | `c2` |
+| `label` | text | нет | `№2` |
+| `component` | FK | нет | |
+| `qty` | decimal | нет | |
+| `unit` | VOCAB unit | нет | тот же, что у компонента, для суммы |
+| `place` | enum | нет | `fridge` \| `freezer` |
+| `thaw_before_day` | 1–7 | да | достать к этому дню слота; null — не из морозилки |
+
+### `PrepSlot`
+
+Unique `(kit, day, meal)`. `day` ∈ 1…7 (1 = первый день после вс). `meal` ∈ `lunch` \| `dinner`.
+
+| Поле | Тип | Null | Смысл |
+|------|-----|------|--------|
+| `kit` | FK | нет | |
+| `day` | 1–7 | нет | |
+| `meal` | enum | нет | |
+| `recipe` | FK `Recipe` | нет | **основное** блюдо слота. Тарелка целиком — в `steps`. Второго FK (`side_recipe`) нет |
+| `mode` | enum | нет | `assemble` \| `finish` \| `reheat` |
+| `flavor` | text | да | короткий вкус; для UI тарелки дублирует `plate.title`, если оно есть |
+| `plate` | JSON | да | `{title, composition}` — имя и состав **тарелки**, не slug книги |
+| `source` | JSON | нет | ровно две формы, см. ниже |
+| `container_ids` | JSON list | нет | коды боксов **этого** kit; у reheat `[]` |
+| `alternatives` | JSON list | нет | 0–3 объекта, не массив slug |
+| `no_leftover` | JSON | да | у `reheat` — замена слота; у источника leftover — шаги «на один раз». Пусто `{}` |
+| `servings_cooked` | int | да | большая порция на слоте-источнике |
+| `feeds_slots` | int | да | сколько слотов кормит, включая источник |
+| `time_active_from_prep_min` | int | да | |
+| `time_active_scratch_min` | int | да | |
+| `steps` | JSON list | нет | редакционное тело **этого** применения; пустой запрещён у published |
+
+`from_prep` как mode не писать.
+
+#### `source` (ровно две формы)
+
+```json
+{ "kind": "weekend" }
+```
+
+```json
+{ "kind": "slot", "day": 1, "meal": "lunch" }
+```
+
+Других ключей нет. `container_ids` **не** внутри `source`.
+
+| `mode` | `source` | `container_ids` |
+|--------|----------|-----------------|
+| assemble / finish | только `weekend` | непустой список кодов **этого** kit |
+| reheat | только `slot` | пусто. Источник — тот же kit, **вчера** (`source.day + 1 ===` этот `day`). Приём может отличаться. Не вперёд, не сам на себя, не «через два дня» |
+
+#### `alternatives[]`
+
+0–3 объекта:
+
+```json
+{
+  "slug": "…",
+  "label": "Лаваш с курицей",
+  "mode": "assemble",
+  "container_ids": ["c2", "c5"],
+  "steps": [{ "text": "…" }]
+}
+```
+
+`steps` обязательны (иначе cook mode замены нет). `slug` — published `Recipe`. `container_ids` — боксы этого kit. Не требуют новой закупки и вс. `reheat` у замены: `container_ids` пустой.
+
+Фронт ничего не валидирует. Импорт — да.
+
+#### `no_leftover`
+
+У **`reheat`** — обязательный объект: чем становится слот при `?no_leftover=1`. Не alternative-чип: это **блюдо слота**. Published slug, которого **нет** среди основных slug 14 слотов этого kit (`assemble`/`finish`/`reheat`). `assemble`/`finish`; непустые `steps`. Боксы этого kit **или** пустые `container_ids` плюс непустой `shopping_add` (блюдо будня с закупки, не дубль ячейки). `shopping_add` — дельта закупки к базе набора (те же ключи, что у `shopping`).
+
+```json
+{
+  "slug": "chechevitsa-s-ovoshchami",
+  "mode": "finish",
+  "container_ids": [],
+  "steps": [{ "text": "…" }],
+  "plate": { "title": "…", "composition": "…" },
+  "shopping_add": [{ "canonical_id": "lentils", "qty": 200, "unit": "g", "title_ru": "Чечевица" }]
+}
+```
+
+У **слота-источника** leftover (на него ссылается `reheat`) — необязательно `{ "steps": [{ "text": "…" }] }`: тело «съесть за этот приём», без «остаток на завтра».
+
+При `?no_leftover=1` приложение: источник `feeds_slots=1`, `servings_cooked` = база набора; `reheat` подменяется объектом; боксы/компоненты, которые ест **только** этот leftover, и закупка с их уникальными `canonical_id` — × `1/feeds_slots`; `shopping_add` сливается в список.
+
+### Инварианты импорта (иначе kit не `published`, транзакция откатывается)
+
+- ровно 14 слотов: все пары day×meal;
+- recipe слота, каждый `alternatives[].slug` и `no_leftover.slug` у reheat — `published`;
+- `no_leftover.slug` у reheat не совпадает ни с одним основным slug 14 слотов этого kit;
+- `container_ids` слота, замены и `no_leftover` принадлежат этому kit (у `no_leftover` список может быть пустым, если есть `shopping_add`);
+- сумма `qty` контейнеров компонента = `qty` компонента (тот же `unit`);
+- `source` сходится с `mode`;
+- reheat: источник есть, тот же kit, `source.day + 1 === slot.day`, не этот слот;
+- `steps` слота, каждой alternative и `no_leftover` у reheat непустые;
+- у каждого `reheat` есть `no_leftover` с slug/mode/steps (боксы или `shopping_add`);
+- нет запрещённых ключей (`weekend_protocol`, `qty_g`, `eaten_by`, `eaten_by_slots`, `feeds_days`, `weekend_active_hours_estimated`, `container_ids` внутри `source`).
+
+Кто ест компонент — не поле: слоты `weekend` по контейнерам + каскад `reheat`.
+
+### Масштаб набора
+
+`ratio = servings / servings_base`. Линейно **qty** закупки, компонентов, контейнеров. Число и коды боксов не менять (№2 остаётся №2). Timeline, `steps`, `mode`, граф — без изменений. UI набора предлагает **1, 2 и 4** порции при `servings_base=2`. Нет `servings_base` → масштаб выключен. Минуты в `metrics` не пересчитывать.

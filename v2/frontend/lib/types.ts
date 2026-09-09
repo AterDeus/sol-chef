@@ -206,6 +206,7 @@ export type RecipeDetail = {
   washing_level?: number | null;
   use_cases?: string[];
   adaptations?: RecipeAdaptation[];
+  prep_context?: PrepContext | null;
 };
 
 export type GuideDocument = {
@@ -266,3 +267,131 @@ export type TipsPayload = {
 };
 
 export type SearchParamsRecord = Record<string, string | string[] | undefined>;
+
+export type PrepMetrics = {
+  slots_assemble?: number;
+  slots_finish?: number;
+  slots_reheat?: number;
+  unique_slugs?: number;
+  shopping_skus?: number;
+  components_count?: number;
+  t_sunday_active_min?: number | null;
+  t_sunday_wall_min?: number | null;
+  t_weekdays_active_min?: number | null;
+  t_scratch_active_min?: number | null;
+  kcal_avg_per_serving?: number | null;
+};
+
+export type PrepQty = {
+  qty: number;
+  unit: string;
+  display_amount: string;
+};
+
+export type PrepContainer = PrepQty & {
+  code: string;
+  label: string;
+  component_code?: string;
+  component_title?: string;
+  place: 'fridge' | 'freezer';
+  thaw_before_day: number | null;
+};
+
+export type PrepAlternative = {
+  slug: string;
+  label: string;
+  mode: 'assemble' | 'finish' | 'reheat';
+  container_ids?: string[];
+};
+
+export type PrepSource = { kind: 'weekend' } | { kind: 'slot'; day: number; meal: 'lunch' | 'dinner' };
+
+export type PrepSlot = {
+  day: number;
+  meal: 'lunch' | 'dinner';
+  slug: string;
+  title: string;
+  plate_title?: string | null;
+  plate_composition?: string | null;
+  mode: 'assemble' | 'finish' | 'reheat';
+  flavor?: string | null;
+  source: PrepSource;
+  container_ids: string[];
+  containers: PrepContainer[];
+  alternatives: PrepAlternative[];
+  servings_cooked?: number | null;
+  feeds_slots?: number | null;
+  time_active_from_prep_min?: number | null;
+  time_active_scratch_min?: number | null;
+};
+
+export type PrepComponent = PrepQty & {
+  code: string;
+  title: string;
+  canonical_ids: string[];
+  weekend_steps: string[];
+  parcook: Record<string, unknown>;
+  storage: Record<string, unknown>;
+};
+
+export type PrepShopping = PrepQty & {
+  canonical_id: string;
+  title_ru?: string | null;
+};
+
+export type PrepGraphNode = {
+  code: string;
+  title: string;
+  slots: Array<{
+    day: number;
+    meal: 'lunch' | 'dinner';
+    slug: string;
+    title: string;
+    mode: string;
+  }>;
+};
+
+export type PrepKitCard = {
+  slug: string;
+  title: string;
+  summary?: string | null;
+  rhythm?: string | null;
+  position: number;
+  metrics: PrepMetrics;
+};
+
+export type PrepKitListResponse = {
+  results: PrepKitCard[];
+};
+
+export type PrepKitDetail = {
+  slug: string;
+  title: string;
+  summary?: string | null;
+  servings_base: number | null;
+  no_leftover?: boolean;
+  has_leftovers?: boolean;
+  scaling: Scaling;
+  caution_text?: string | null;
+  rhythm?: string | null;
+  metrics: PrepMetrics;
+  allergens: Allergens;
+  shopping: PrepShopping[];
+  components: PrepComponent[];
+  containers: PrepContainer[];
+  weekend_timeline: Array<Record<string, unknown>>;
+  slots: PrepSlot[];
+  graph: PrepGraphNode[];
+};
+
+export type PrepContext = {
+  kit: { slug: string; title: string };
+  day: number;
+  meal: 'lunch' | 'dinner';
+  mode: 'assemble' | 'finish' | 'reheat';
+  source: PrepSource;
+  containers: PrepContainer[];
+  alternatives: PrepAlternative[];
+  no_leftover?: boolean;
+};
+

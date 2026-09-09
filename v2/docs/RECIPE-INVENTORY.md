@@ -229,7 +229,7 @@ ETL V1: только `standard`. Переключатель **не в сприн
 
 Ориентир **~100**, чтобы калькулятор и справочник не врали. Приоритет: супермаркет РФ, якорь «У меня», температуры из SAFETY, без брендов и выдуманных URL.
 
-Packet’ы всех волн: [drafts/packets/](drafts/packets/README.md) — WAVE-1 … WAVE-9 (55 + 30 = 85). Волны 1–9 уже написаны.
+Packet’ы: [drafts/packets/](drafts/packets/README.md), сводка [CLOSED-WAVES.md](drafts/packets/CLOSED-WAVES.md). Волны 1–9 уже в БД.
 
 ### Первая волна (10)
 
@@ -311,4 +311,4 @@ Packet’ы всех волн: [drafts/packets/](drafts/packets/README.md) — W
 3. В HUMAN **§5**: квоты — только ваши цифры.
 4. Новую волну не стартовать без явного старта в чате. Packet’ы 1–9 лежат в [drafts/packets/](drafts/packets/README.md).
 
-Агент после старта пачки пишет черновики в `v2/docs/drafts/recipes/`, не в корневой `data/`.
+Агент после старта пачки пишет черновики в `v2/docs/drafts/recipes/` (WIP), не в корневой `data/`. Каталог — Postgres.

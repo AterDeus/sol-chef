@@ -8,6 +8,7 @@ from apps.recipes.services.assemble import (
     VariantError,
     apply_ingredient_delta,
     assemble_display,
+    available_equipment_codes,
     count_anchors,
     pick_anchor,
     resolve_axes,
@@ -105,6 +106,37 @@ def test_u11_unknown_variant_equipment_cuts():
         parse_codes(DummyRequest(), "cuts")
         raise AssertionError("expected BadQuery")
     except BadQuery:
+        pass
+
+
+def test_air_fryer_method_variant_on_equipment_axis():
+    variant = SimpleNamespace(
+        axis="equipment",
+        has_delta=True,
+        code="air_fryer",
+        equipment=None,
+        cook_method_override="air_fryer",
+    )
+    recipe = SimpleNamespace(equipment="oven")
+    assert available_equipment_codes(recipe, [variant]) == ["oven", "air_fryer"]
+    addon, equipment_variant, applied = resolve_axes(
+        recipe=recipe,
+        variants=[variant],
+        variant_code=None,
+        equipment_code="air_fryer",
+    )
+    assert addon is None
+    assert equipment_variant is variant
+    assert applied == "air_fryer"
+    try:
+        resolve_axes(
+            recipe=recipe,
+            variants=[variant],
+            variant_code=None,
+            equipment_code="deep_fry",
+        )
+        raise AssertionError("expected VariantError")
+    except VariantError:
         pass
 
 

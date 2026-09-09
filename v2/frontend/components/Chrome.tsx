@@ -7,13 +7,15 @@ import { SpriteIcon } from '@/components/SpriteIcon';
 const NAV = [
   { href: '/calculator', label: 'Калькулятор', match: 'calc', icon: 'list-filter' },
   { href: '/recipes', label: 'Рецепты', match: 'recipes', icon: 'book-open-text' },
+  { href: '/prep', label: 'На неделю', match: 'prep', icon: 'refrigerator' },
   { href: '/grains', label: 'Справочник', match: 'guide', icon: 'wheat' },
   { href: '/tips', label: 'Советы', match: 'tips', icon: 'chef-hat' },
 ] as const;
 
-export function navMatch(pathname: string): 'calc' | 'recipes' | 'guide' | 'tips' | null {
+export function navMatch(pathname: string): 'calc' | 'recipes' | 'prep' | 'guide' | 'tips' | null {
   if (pathname.startsWith('/calculator')) return 'calc';
   if (pathname.startsWith('/recipes')) return 'recipes';
+  if (pathname.startsWith('/prep')) return 'prep';
   if (pathname.startsWith('/grains') || pathname.startsWith('/meat')) return 'guide';
   if (pathname.startsWith('/tips')) return 'tips';
   return null;
@@ -50,7 +52,7 @@ export function Header() {
               className={active === item.match ? 'is-active' : undefined}
               aria-current={active === item.match ? 'page' : undefined}
             >
-              <SpriteIcon name={item.icon} size={18} />
+              <SpriteIcon name={item.icon} size={20} />
               {item.label}
             </Link>
           ))}
@@ -103,6 +105,7 @@ export function Footer() {
       <Link href="/meat/pork">Свинина</Link>
       <Link href="/meat/poultry">Птица</Link>
       <Link href="/tips">Советы Энди</Link>
+      <Link href="/prep">На неделю</Link>
       <Link href="/recipes">Все рецепты</Link>
     </footer>
   );
@@ -113,10 +116,11 @@ const TABS: Array<{
   label: string;
   aria?: string;
   icon: string;
-  match: 'calc' | 'recipes' | 'guide' | 'tips';
+  match: 'calc' | 'recipes' | 'prep' | 'guide' | 'tips';
 }> = [
   { href: '/calculator', label: 'Калькулятор', icon: 'list-filter', match: 'calc' },
   { href: '/recipes', label: 'Рецепты', icon: 'book-open-text', match: 'recipes' },
+  { href: '/prep', label: 'На неделю', icon: 'refrigerator', match: 'prep' },
   { href: '/grains', label: 'Справка', aria: 'Справочник', icon: 'wheat', match: 'guide' },
   { href: '/tips', label: 'Советы', aria: 'Советы Энди', icon: 'chef-hat', match: 'tips' },
 ];
@@ -144,11 +148,19 @@ export function TabBar() {
   );
 }
 
-export function RecipeTabBar({ onCook }: { onCook: () => void }) {
+export function RecipeTabBar({
+  onCook,
+  backHref = '/recipes',
+  backLabel = '← Рецепты',
+}: {
+  onCook: () => void;
+  backHref?: string;
+  backLabel?: string;
+}) {
   return (
     <nav className="tabbar tabbar--recipe" aria-label="Меню рецепта">
-      <Link href="/recipes" aria-label="Назад к рецептам">
-        ← Рецепты
+      <Link href={backHref} aria-label={backLabel}>
+        {backLabel}
       </Link>
       <Link href="/grains" aria-label="Справочник">
         Справка

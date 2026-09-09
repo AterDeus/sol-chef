@@ -7,7 +7,6 @@ from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import Any
 
-from apps.recipes.constants import EQUIPMENT
 from apps.recipes.services.allergens import merge_allergen_lists
 from apps.recipes.services.nutrition import CANON_NUTRITION_FIELDS, enrich_lines_from_db
 
@@ -356,8 +355,8 @@ def resolve_axes(
     applied_equipment = recipe.equipment
     equipment_variant = None
     if equipment_code:
-        if equipment_code not in EQUIPMENT:
-            raise VariantError(f"Неизвестный код equipment: {equipment_code}")
+        # Family axis, not VOCAB equipment-only: air_fryer / steam live here
+        # as cook_method codes with no vessel field (VOCAB, overlay axes).
         if equipment_code not in available:
             raise VariantError(f"Неизвестный код equipment: {equipment_code}")
         applied_equipment = equipment_code

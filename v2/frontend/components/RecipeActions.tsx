@@ -31,10 +31,14 @@ export function RecipeActions({
   title,
   steps,
   prep,
+  backHref,
+  backLabel,
 }: {
   title: string;
   steps: RecipeStep[];
   prep?: RecipePrep[];
+  backHref?: string;
+  backLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
   const hasSteps = steps.length > 0;
@@ -49,7 +53,9 @@ export function RecipeActions({
         )}
         <CopyLinkButton />
       </div>
-      {hasSteps && <RecipeTabBar onCook={() => setOpen(true)} />}
+      {hasSteps && (
+        <RecipeTabBar onCook={() => setOpen(true)} backHref={backHref} backLabel={backLabel} />
+      )}
       {hasSteps && (
         <CookMode
           title={title}

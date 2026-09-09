@@ -3,6 +3,8 @@ import type {
   CatalogResponse,
   GuideDocument,
   PantryOptionsResponse,
+  PrepKitDetail,
+  PrepKitListResponse,
   RecipeDetail,
   RecommendationsResponse,
   SearchParamsRecord,
@@ -128,6 +130,10 @@ export async function fetchRecipe(
     servings?: number;
     variant?: string | null;
     equipment?: string | null;
+    prep?: string | null;
+    day?: number | string | null;
+    meal?: string | null;
+    noLeftover?: boolean;
   },
 ): Promise<ApiResult<RecipeDetail>> {
   const qs = new URLSearchParams();
@@ -135,10 +141,32 @@ export async function fetchRecipe(
   if (opts?.servings != null) qs.set('servings', String(opts.servings));
   if (opts?.variant) qs.set('variant', opts.variant);
   if (opts?.equipment) qs.set('equipment', opts.equipment);
+  if (opts?.prep) qs.set('prep', opts.prep);
+  if (opts?.day != null && opts.day !== '') qs.set('day', String(opts.day));
+  if (opts?.meal) qs.set('meal', opts.meal);
+  if (opts?.noLeftover) qs.set('no_leftover', '1');
   const suffix = qs.toString() ? `?${qs.toString()}` : '';
   return getJson<RecipeDetail>(
     `/api/recipes/${encodeURIComponent(slug)}/${suffix}`,
     'Рецепт не найден.',
+  );
+}
+
+export async function fetchPrepKits(): Promise<ApiResult<PrepKitListResponse>> {
+  return getJson('/api/prep-kits/', 'Не удалось загрузить наборы.');
+}
+
+export async function fetchPrepKit(
+  slug: string,
+  opts?: { servings?: number; noLeftover?: boolean },
+): Promise<ApiResult<PrepKitDetail>> {
+  const qs = new URLSearchParams();
+  if (opts?.servings != null) qs.set('servings', String(opts.servings));
+  if (opts?.noLeftover) qs.set('no_leftover', '1');
+  const suffix = qs.toString() ? `?${qs.toString()}` : '';
+  return getJson(
+    `/api/prep-kits/${encodeURIComponent(slug)}/${suffix}`,
+    'Набор не найден.',
   );
 }
 

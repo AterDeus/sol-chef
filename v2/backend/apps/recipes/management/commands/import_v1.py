@@ -87,9 +87,13 @@ def run_import(data_root: Path, *, dry_run: bool) -> list[str]:
         report.append("Запись в БД пропущена.")
         return report
 
+    skipped_overlay = 0
     with transaction.atomic():
         _upsert_content(data_root)
         for item in parsed:
+            if _is_v2_overlay(item["slug"]):
+                skipped_overlay += 1
+                continue
             _upsert_recipe(item)
         docs = ContentDocument.objects.count()
         if docs != EXPECTED_CONTENT_DOCUMENTS:
@@ -100,6 +104,7 @@ def run_import(data_root: Path, *, dry_run: bool) -> list[str]:
         subs = upsert_substitution_rules()
     report.append(
         f"записано recipes={Recipe.objects.count()} "
+        f"skipped_overlay={skipped_overlay} "
         f"content={ContentDocument.objects.count()} substitutions={subs}"
     )
     return report
@@ -335,6 +340,11 @@ def _upsert_content(data_root: Path) -> None:
             slug=slug,
             defaults={"title": title, "payload_json": payload},
         )
+
+
+def _is_v2_overlay(slug: str) -> bool:
+    """Overlay/wave rows have time_profile; do not roll them back to V1 JSON."""
+    return Recipe.objects.filter(slug=slug, time_total_minutes__isnull=False).exists()
 
 
 def _upsert_recipe(item: dict) -> None:

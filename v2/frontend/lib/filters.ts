@@ -138,11 +138,24 @@ export function withPage(pathname: string, sp: SearchParamsRecord, page: number)
 
 export function recipeHref(
   slug: string,
-  opts: { variant?: string | null; equipment?: string | null } = {},
+  opts: {
+    variant?: string | null;
+    equipment?: string | null;
+    prep?: string | null;
+    day?: number | string | null;
+    meal?: string | null;
+    servings?: number | string | null;
+    noLeftover?: boolean;
+  } = {},
 ): string {
   const qs = new URLSearchParams();
   if (opts.variant) qs.set('variant', opts.variant);
   if (opts.equipment) qs.set('equipment', opts.equipment);
+  if (opts.prep) qs.set('prep', opts.prep);
+  if (opts.day != null && opts.day !== '') qs.set('day', String(opts.day));
+  if (opts.meal) qs.set('meal', opts.meal);
+  if (opts.servings != null && opts.servings !== '') qs.set('servings', String(opts.servings));
+  if (opts.noLeftover) qs.set('no_leftover', '1');
   const suffix = qs.toString() ? `?${qs.toString()}` : '';
   return `/recipes/${slug}${suffix}`;
 }

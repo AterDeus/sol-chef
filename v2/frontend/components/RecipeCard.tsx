@@ -5,8 +5,8 @@ import {
   ALLERGEN,
   COOK_METHOD,
   DISH_TYPE,
-  EQUIPMENT,
   PROTEIN_BASE,
+  equipmentLabel,
   labelOf,
 } from '@/lib/vocab';
 
@@ -101,7 +101,10 @@ export function SolutionBoard({
   const shopping = featured.shopping_delta ?? [];
   const substitutions = featured.substitutions ?? [];
   const method = labelOf(COOK_METHOD, featured.cook_method);
-  const gear = featured.equipment ? labelOf(EQUIPMENT, featured.equipment) : null;
+  const gear =
+    featured.equipment && featured.equipment !== featured.cook_method
+      ? equipmentLabel(featured.equipment)
+      : null;
 
   return (
     <div className="solution-board">

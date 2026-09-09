@@ -22,7 +22,7 @@
 
 Один slug = один автор (Grok 4.6 High) → `import_draft --check --path` → Terra Medium → при `accept` импорт.
 
-Источник правды: **текущий** `v2/docs/drafts/recipes/<slug>.json`, не корневой V1. Автор возвращает **полный** JSON того же `id`: база (ингредиенты, шаги, заметки) почти как была + новые `variants` + согласованные `adaptations`. Не второй slug. Не «переписать блюдо ради JSON».
+Источник правды: **Postgres**. Сначала `export_draft --slug`, не корневой V1. Автор возвращает **полный** JSON того же `id`: база почти как была + новые `variants` + согласованные `adaptations`. Не второй slug. Не «переписать блюдо ради JSON».
 
 ## Правила осей (нарушение = Major)
 
@@ -86,13 +86,13 @@
 
 На один slug из **текущей** пачки:
 
-1. Прочитать packet в файле пачки + файл `drafts/recipes/<slug>.json` + при необходимости `drafts/reviews/<slug>.json`.
-2. Task автор: `model` как в RECIPE (Grok). В промпт вставить: этот OVERLAY-AXES (правила) + JSON packet slug + **полный текущий рецепт**. Явно: вернуть только JSON рецепта; сохранить `id`; не ходить по репо, если оркестратор уже вставил файлы; `editorial_tested` не ставить.
+1. `export_draft --slug` + packet пачки.
+2. Task автор: `model` как в RECIPE (Grok). В промпт: этот OVERLAY-AXES (правила) + JSON packet slug + **полный текущий рецепт**. Вернуть только JSON; сохранить `id`; `editorial_tested` не ставить.
 3. Записать ответ в `drafts/recipes/<slug>.json`.
 4. `python manage.py import_draft --check --path <файл>`. Ошибки схемы — Composer Fast, без смены состава.
-5. Terra Medium: [reviews/PROMPT.md](../reviews/PROMPT.md) + JSON. Без инструментов. Вердикт → `drafts/reviews/<slug>.json`.
+5. Terra Medium: [reviews/PROMPT.md](../reviews/PROMPT.md) + JSON. Без инструментов. Вердикт в чат.
 6. `revise` → тот же автор, точечно. `reject` / Critical — стоп пачки, к человеку.
-7. Импорт в Postgres **только** `accept` + `cookable`. `--path` для одного; пачка целиком — `--accepted` после всех вердиктов.
+7. Импорт: `import_draft --path` после accept в чате. `--accepted` больше не нужен для запуска.
 
 Стоп пачки: ≥1 Critical; revise > 40% пачки; автор выкинул обязательный способ без `error`.
 
