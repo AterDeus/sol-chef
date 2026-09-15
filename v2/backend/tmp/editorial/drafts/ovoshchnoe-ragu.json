@@ -1,0 +1,561 @@
+{
+  "id": "ovoshchnoe-ragu",
+  "title": "Овощное рагу",
+  "summary": "Кабачок, перец, лук и помидоры тушат в кастрюле до мягкости без каши: овощи держат кусок, соус густой от собственного сока. Картофель, баклажан и шампиньоны — взаимоисключающие добавки, не все сразу.",
+  "protein_base": "vegetables",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 50,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "budget",
+    "batch",
+    "one_pan",
+    "easy"
+  ],
+  "adaptations": [
+    {
+      "to": "kazan",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.92
+    },
+    {
+      "to": "baking_dish",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.84
+    },
+    {
+      "to": "skillet",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.86
+    },
+    {
+      "to": "oven",
+      "from": "stew",
+      "type": "method",
+      "quality": 0.84
+    },
+    {
+      "to": "pan_fry",
+      "from": "stew",
+      "type": "method",
+      "quality": 0.86
+    },
+    {
+      "type": "omission",
+      "quality": 0.95,
+      "ingredient": "fresh_basil"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Молодые плоды с тонкой кожурой. У старого кабачка удалите крупные семена и, при необходимости, грубую кожицу.",
+      "title": "Кабачок в базе"
+    },
+    {
+      "text": "Картофель, баклажаны или шампиньоны добавляйте по отдельности, а не все вместе: у них разное время приготовления и разное количество влаги. Кабачок уже в составе, второй раз его не кладите.",
+      "title": "Дополнительные ингредиенты"
+    },
+    {
+      "text": "80 мл в кастрюле — смочить дно. В казане 30 мл: греют стенки. Если налили «как суп» — выпарить в конце, вкус уже размазан.",
+      "title": "Жидкость"
+    },
+    {
+      "text": "Посолить и отжать. Иначе губка заберёт масло, рагу станет жирным и водянистым одновременно. Промывать после соли не надо.",
+      "title": "Баклажан"
+    },
+    {
+      "text": "Вводить сразу после лука, не в конце. Разваристый сорт развалится раньше кабачка — брать тот, что держит кубик в супе.",
+      "title": "Картофель"
+    },
+    {
+      "text": "Только в конце, с огня. В тушении 25 минут он чернеет и горчит. Без него блюдо живое.",
+      "title": "Базилик"
+    },
+    {
+      "text": "Остывает в кастрюле, ночует в холодильнике. На второй день гуще и слаще. Разогрев на слабом огне, без новой воды.",
+      "title": "На следующий день"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "zucchini",
+      "display_name": "кабачок",
+      "amount": 600,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "молодые, кубик 2 см; крупные — вычистить семена и грубую кожуру"
+    },
+    {
+      "position": 2,
+      "canonical_id": "bell_pepper",
+      "display_name": "болгарский перец",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "1–2 шт, квадрат 2 см"
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "один крупный, полукольцами"
+    },
+    {
+      "position": 4,
+      "canonical_id": "tomato",
+      "display_name": "помидоры",
+      "amount": 350,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "кубик; очень водянистые — слить лишний сок после нарезки"
+    },
+    {
+      "position": 5,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 100,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "кружки 5 мм"
+    },
+    {
+      "position": 6,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "тонко нарезать, не продавливать в кашу"
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для пассеровки"
+    },
+    {
+      "position": 8,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 80,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "смочить дно; овощи сами дадут сок"
+    },
+    {
+      "position": 9,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежемолотый"
+    },
+    {
+      "position": 11,
+      "canonical_id": "fresh_basil",
+      "display_name": "базилик свежий",
+      "amount": 1,
+      "unit": "bunch",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "несколько листьев в конце"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать лук полукольцами, морковь кружками, перец и кабачок кубиком 2 см, помидоры кубиком. Чеснок тонко нарезать."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть кастрюлю с маслом на среднем огне. Пассеровать лук и морковь до мягкости и лёгкого золота.",
+      "timer_seconds": 360,
+      "timer_label": "Лук и морковь",
+      "timer_note": "5–6 минут; не жечь лук"
+    },
+    {
+      "position": 3,
+      "text": "Добавить перец, помешать 2 минуты. Затем кабачок, помидоры, чеснок, соль и 80 мл воды. Перемешать.",
+      "timer_seconds": 120,
+      "timer_label": "Перец",
+      "timer_note": "2 минуты перца до кабачка, чтобы не остался сырым хрустом"
+    },
+    {
+      "position": 4,
+      "text": "Накрыть крышкой и тушить на слабом огне, иногда помешивая. Жидкость едва покрывает дно, овощи не плавают как в супе.",
+      "timer_seconds": 1500,
+      "timer_label": "Тушение",
+      "timer_note": "25 минут; кабачок матовый и мягкий, кубик держит форму, не разваливается в кашу"
+    },
+    {
+      "position": 5,
+      "text": "Снять крышку, поперчить. Если сока много — выпарить 3–4 минуты без крышки до густого соуса. Вмешать базилик, если есть, и сразу снять с огня.",
+      "timer_seconds": 240,
+      "timer_label": "Густота",
+      "timer_note": "Только если на дне лужа; иначе шаг короткий — базилик и стол"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_eggplant",
+      "title": "С баклажаном",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 350,
+            "detail": "кубик 2 см; молодые без грубых семян",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "eggplant",
+            "display_name": "баклажан"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Нарезанный баклажан посолить 0,5 ч. л. соли сверх нормы рагу, отложить на 10 минут, затем отжать влагу руками. Горький сок и лишняя вода уйдут, иначе рагу станет водянистым и баклажан впитает всё масло.",
+            "timer_note": "10 минут, затем отжать; не промывать под краном — снова намокнет",
+            "timer_label": "Соль баклажана",
+            "timer_seconds": 600,
+            "after_position": 1
+          },
+          {
+            "text": "Добавить отжатый баклажан вместе с перцем, до кабачка. Он должен обжалиться с краёв до тушения, иначе останется губкой.",
+            "timer_note": "3 минуты с кабачком до крышки",
+            "timer_label": "Баклажан",
+            "timer_seconds": 180,
+            "after_position": 2
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_mushrooms",
+      "title": "С грибами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 250,
+            "detail": "свежие культивируемые, пластины; не лесные, не смеси «грибное ассорти»",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Добавить шампиньоны к луку. Обжарить, пока пластины не перестанут блестеть водой и края не станут золотистыми — только потом перец и кабачок.",
+            "timer_note": "5–6 минут; сырая вода грибов превратит рагу в варёные овощи",
+            "timer_label": "Шампиньоны",
+            "timer_seconds": 360,
+            "after_position": 2,
+            "equipment_note": "Партиями, если сковорода: полный слой шампиньонов сразу отдаст лужу."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_potato",
+      "title": "С картофелем",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 400,
+            "detail": "кубик 2 см, не разваристый сорт",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "potato",
+            "display_name": "картофель"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Добавить картофель к луку и моркови, перемешать 2 минуты, затем продолжать с перцем. Картофелю нужно время раньше кабачка, иначе останется хрустящим.",
+            "timer_note": "2 минуты в масле до перца; в духовке картофель класть в форму вместе с луком, не сверху в конце",
+            "timer_label": "Картофель",
+            "timer_seconds": 120,
+            "after_position": 2
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "ml",
+            "amount": 30,
+            "detail": "только смочить дно: казан греет стенками, овощи дадут сок",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "water",
+            "display_name": "вода"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть сухой казан на среднем огне, пока стенки не станут горячими снаружи, затем влить масло. Пассеровать лук и морковь у стенок, сдвигая к центру.",
+            "position": 2,
+            "timer_note": "2–3 минуты прогрев стенок, затем 5–6 минут лук; холодный казан даст пригар",
+            "timer_label": "Стенки и овощи",
+            "timer_seconds": 420
+          },
+          {
+            "text": "Добавить перец, помешать 2 минуты. Затем кабачок, помидоры, чеснок и соль. Воду на этом шаге не вливать — в казане она одна, 30 мл, на следующем шаге.",
+            "position": 3
+          },
+          {
+            "text": "Влить 30 мл воды только смочить дно. Тушить под крышкой: овощи уже в казане с шага 3, повторно не закладывать. Сок овощей и жар стенок, без булькающего слоя.",
+            "position": 4,
+            "timer_note": "28 минут; помешивать от стенок к центру, не доливать воду «на всякий случай»",
+            "timer_label": "Томление",
+            "timer_seconds": 1680
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "stew",
+      "equipment": "kazan"
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Смазать форму маслом из рецепта.",
+            "position": 2
+          },
+          {
+            "text": "Смешать в форме лук, морковь, перец, кабачок, помидоры, чеснок, соль, оставшееся масло и воду.",
+            "position": 3
+          },
+          {
+            "text": "Накрыть крышкой формы или фольгой в два слоя, края прижать. Запекать без перемешивания.",
+            "position": 4,
+            "timer_note": "40 минут при 180 °C; без крышки верх высохнет, низ останется сырым",
+            "timer_label": "Под фольгой",
+            "timer_seconds": 2400
+          },
+          {
+            "text": "Снять фольгу, поперчить, перемешать. Запекать открытым до лёгкой корочки на верхних кусках. Базилик — после духовки.",
+            "position": 5,
+            "timer_note": "12 минут; дольше плиты — духовка греет спокойнее, кабачок не жарят открытым с первой минуты",
+            "timer_label": "Без фольги",
+            "timer_seconds": 720
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "baking_dish"
+    },
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "ml",
+            "amount": 50,
+            "detail": "после обжарки партий, под крышку",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "water",
+            "display_name": "вода"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть глубокую сковороду с маслом на средне-сильном огне. Обжарить лук и морковь.",
+            "position": 2,
+            "timer_note": "4–5 минут",
+            "timer_label": "Лук",
+            "timer_seconds": 300
+          },
+          {
+            "text": "Добавить перец и кабачок партиями в один слой: горка даст пар, не корочку. Обжарить до лёгкого золота, сдвигая готовое к краю.",
+            "position": 3,
+            "timer_note": "6–8 минут суммарно; не вываливать все 600 г кабачка сразу",
+            "timer_label": "Партии овощей",
+            "timer_seconds": 480,
+            "equipment_note": "Не перегружать сковороду: партии в один слой, иначе овощи тушатся в соке с первой минуты."
+          },
+          {
+            "text": "Вернуть все овощи, добавить помидоры, чеснок, соль и 50 мл воды. Накрыть крышкой и тушить на слабом огне.",
+            "position": 4,
+            "timer_note": "15 минут; короче кастрюли — кабачок уже получил корочку",
+            "timer_label": "Под крышкой",
+            "timer_seconds": 900
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet"
+    }
+  ]
+}

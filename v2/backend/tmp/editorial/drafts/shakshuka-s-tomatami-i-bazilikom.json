@@ -1,0 +1,377 @@
+{
+  "id": "shakshuka-s-tomatami-i-bazilikom",
+  "title": "Шакшука с томатами и базиликом",
+  "summary": "Яйца готовят в густом томатном соусе с чесноком и зирой, а свежий базилик добавляют в конце. Соус сначала уваривают до густоты, затем в углубления выпускают яйца и доводят под крышкой: белок схватывается, желток остаётся жидким.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "pan_fry",
+  "dish_type": "breakfast",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 20,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan",
+    "budget"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.88
+    },
+    {
+      "to": "oven",
+      "from": "skillet",
+      "type": "equipment",
+      "quality": 0.88
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Яйца класть только когда томатная масса загустела. В слишком жидком соусе белок растечётся, поэтому сначала соус нужно уварить до густоты.",
+      "title": "Густота соуса"
+    },
+    {
+      "text": "Под крышкой белок схватывается быстро. Снять с плиты, пока желток ещё подвижен: дольше — сухой желток.",
+      "title": "Яйца"
+    },
+    {
+      "text": "Нужна глубокая сковорода с крышкой. Без крышки верх белка не успеет побелеть, пока желток не пересушится.",
+      "title": "Сковорода"
+    },
+    {
+      "text": "Свежий — в конце, на снятую с огня сковороду. Тушить вместе с томатами не стоит: аромат уйдёт.",
+      "title": "Базилик"
+    },
+    {
+      "text": "К шакшуке подают тёплую питу, халу или подсушенный багет: ими удобно вымакивать томатный соус и желток прямо со сковороды. Блюдо принято ставить на стол в той же сковороде, посыпав зеленью.",
+      "title": "Подача"
+    },
+    {
+      "text": "На 300 г помидоров оптимально брать 2–3 яйца: в уваренном соусе делают ровно столько углублений, сколько яиц планируется выпустить.",
+      "title": "Пропорции яиц и соуса"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "eggs",
+      "display_name": "яйца",
+      "amount": 3,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "tomato",
+      "display_name": "помидоры",
+      "amount": 300,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "нарезать кубиком"
+    },
+    {
+      "position": 3,
+      "canonical_id": "tomato_paste",
+      "display_name": "томатная паста",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "измельчить"
+    },
+    {
+      "position": 5,
+      "canonical_id": "fresh_basil",
+      "display_name": "базилик свежий",
+      "amount": 1,
+      "unit": "bunch",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "несколько веточек"
+    },
+    {
+      "position": 6,
+      "canonical_id": "olive_oil",
+      "display_name": "оливковое масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "cumin",
+      "display_name": "зира",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 9,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть оливковое масло в глубокой сковороде на среднем огне и обжарить измельчённый чеснок с зирой до появления аромата.",
+      "timer_seconds": 60,
+      "timer_label": "Чеснок и зира",
+      "timer_note": "Около 1 минуты, ориентир — аромат, не горелый чеснок"
+    },
+    {
+      "position": 2,
+      "text": "Добавить нарезанные помидоры и томатную пасту, посолить и поперчить."
+    },
+    {
+      "position": 3,
+      "text": "Тушить соус на среднем огне, периодически помешивая, пока томаты не размягчатся и масса не загустеет.",
+      "timer_seconds": 480,
+      "timer_label": "Соус",
+      "timer_note": "8–10 минут; яйца класть только в густой соус"
+    },
+    {
+      "position": 4,
+      "text": "Сделать ложкой углубления в соусе по числу яиц и аккуратно выпустить в них яйца.",
+      "equipment_note": "Глубокая сковорода с крышкой. Яйца в один слой в соусе: не перегружать, иначе белок растечётся и не схватится."
+    },
+    {
+      "position": 5,
+      "text": "Накрыть сковороду крышкой, уменьшить огонь до слабого и готовить, пока белок полностью не побелеет, а желток останется жидким.",
+      "timer_seconds": 240,
+      "timer_label": "Яйца под крышкой",
+      "timer_note": "4–6 минут; снять, пока желток ещё подвижен"
+    },
+    {
+      "position": 6,
+      "text": "Снять с огня, посыпать мелко нарезанным свежим базиликом и подавать со свежим хлебом."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_bacon",
+      "title": "С беконом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 50,
+            "detail": "нарезать",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "bacon",
+            "display_name": "бекон"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Нарезать 50 г бекона и обжарить на сковороде до лёгкой хрустящей корочки. Вытопленный жир оставить в сковороде.",
+            "timer_label": "Бекон",
+            "timer_seconds": 180,
+            "after_position": 0
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_feta",
+      "title": "С сыром фета или брынзой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 40,
+            "detail": "покрошить",
+            "scalable": true,
+            "amount_max": 50,
+            "scale_mode": "linear",
+            "canonical_id": "feta",
+            "display_name": "фета или брынза"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "За 2 минуты до готовности яиц покрошить поверх соуса 40–50 г феты или брынзы (пока белок ещё доходит под крышкой или в камере).",
+            "after_position": 4
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "milk"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_zucchini",
+      "title": "С кабачками",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 100,
+            "detail": "мелкими кубиками",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "zucchini",
+            "display_name": "кабачки"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Вместе с помидорами добавить 100 г кабачков, нарезанных мелкими кубиками.",
+            "after_position": 2
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "Яйца в духовке",
+      "has_delta": true,
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Разогреть духовку до 180 °C: соус варится на плите, яйца дойдут в камере.",
+            "after_position": 0
+          }
+        ],
+        "replace": [
+          {
+            "text": "Сделать ложкой углубления в соусе по числу яиц и аккуратно выпустить в них яйца.",
+            "position": 4,
+            "equipment_note": "Жаропрочная сковорода или форма: дальше яйца идут в камеру, не под крышкой на плите. Яйца в один слой."
+          },
+          {
+            "text": "Переставить сковороду или форму в духовку. Белок должен побелеть, желток остаться жидким — это не 4–6 минут под крышкой.",
+            "position": 5,
+            "timer_note": "7–9 минут при 180 °C; снять, пока желток ещё подвижен. Дольше, чем под крышкой на слабом огне",
+            "timer_label": "Яйца в камере",
+            "timer_seconds": 480
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "oven"
+    }
+  ]
+}

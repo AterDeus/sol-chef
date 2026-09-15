@@ -1,0 +1,142 @@
+# sol-chef 2.0 — VPS. Host: :80 and :443 (Caddy).
+# Local slice stays in docker-compose.yml (next dev / runserver / :8080).
+name: sol-chef
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      TZ: Europe/Moscow
+      PGTZ: Europe/Moscow
+      POSTGRES_USER: ${POSTGRES_USER:-solchef}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-solchef}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - sol-chef
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    command: ["redis-server", "--appendonly", "yes"]
+    environment:
+      TZ: Europe/Moscow
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - sol-chef
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.prod
+    environment:
+      TZ: Europe/Moscow
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUNBUFFERED: "1"
+      UV_PROJECT_ENVIRONMENT: /opt/venv
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?set DJANGO_SECRET_KEY in .env}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-sol-chef.ru,www.sol-chef.ru,backend,localhost,127.0.0.1}
+      DJANGO_CSRF_TRUSTED_ORIGINS: ${DJANGO_CSRF_TRUSTED_ORIGINS:-https://sol-chef.ru,https://www.sol-chef.ru}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-solchef}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-solchef}
+      REDIS_URL: redis://redis:6379/0
+      V1_DATA_ROOT: /v1-src
+    volumes:
+      - ../../:/v1-src:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/healthz"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    networks:
+      - sol-chef
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile.prod
+    environment:
+      TZ: Europe/Moscow
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      INTERNAL_API_URL: ${INTERNAL_API_URL:-http://backend:8000}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-}
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://127.0.0.1:3000', (r) => { r.resume(); process.exit(r.statusCode ? 0 : 1); }).on('error', () => process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    networks:
+      - sol-chef
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    environment:
+      TZ: Europe/Moscow
+      DOMAIN: ${DOMAIN:-sol-chef.ru}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+      ADMIN_BASIC_USER: ${ADMIN_BASIC_USER:?set ADMIN_BASIC_USER in .env}
+      ADMIN_BASIC_HASH: ${ADMIN_BASIC_HASH:?set ADMIN_BASIC_HASH in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ${CADDYFILE:-./Caddyfile.http}:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
+    networks:
+      - sol-chef
+    restart: unless-stopped
+
+networks:
+  sol-chef:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  caddy_data:
+  caddy_config:

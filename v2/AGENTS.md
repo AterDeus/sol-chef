@@ -4,12 +4,12 @@
 
 ## Законы
 
-- Код и документы 2.0 — только папка `v2/`. Корень репозитория — рабочий V1: не менять `index.html`, `recipe.html`, `js/`, `data/`, `css/` (токены `css/global.css` копировать). Не удалять V1 до cutover.
-- Корневой `PLAN.md` — архив V1, не запрет React/БД.
+- Код и документы 2.0 — только папка `v2/`. Корень репозитория — монорепо, не статическая главная. V1 — [`archive/v1/`](../archive/v1/), не возвращать в корень как прод. Токены `archive/v1/css/global.css` копировать в V2, не перезаписывать.
+- Корневой архивный PLAN — история V1, не запрет React/БД.
 - `v2/preview/` не референс и не восстанавливать. Экраны: [docs/UX-PROPOSAL.md](docs/UX-PROPOSAL.md) (**D+**, правки HUMAN §9). В UI **«Калькулятор»**, URL **`/calculator`**.
-- JSON корня — ETL в Postgres, не рантайм Next.
+- JSON архива V1 — ETL в Postgres, не рантайм Next.
 - Пустая ячейка [docs/HUMAN.md](docs/HUMAN.md) ≠ «да». Ответ в HUMAN действует после правки канона (VOCAB / UX-PROPOSAL / SAFETY…), не вместо неё. UI по-русски, код по-английски.
-- Стек: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Схема: [docs/DATA-MODEL.md](docs/DATA-MODEL.md). HTTP: [docs/API.md](docs/API.md). Числа: [docs/DEFAULTS.md](docs/DEFAULTS.md). Коды: [docs/VOCAB.md](docs/VOCAB.md). Safety: [docs/SAFETY.md](docs/SAFETY.md). Сдача: [docs/TESTING.md](docs/TESTING.md).
+- Стек: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Схема: [docs/DATA-MODEL.md](docs/DATA-MODEL.md). HTTP: [docs/API.md](docs/API.md). Числа: [docs/DEFAULTS.md](docs/DEFAULTS.md). Коды: [docs/VOCAB.md](docs/VOCAB.md). Safety: [docs/SAFETY.md](docs/SAFETY.md). Сдача: [docs/TESTING.md](docs/TESTING.md). Выход на ВМ: [docs/CUTOVER.md](docs/CUTOVER.md).
 
 ## Не всегда открывать
 
@@ -19,19 +19,20 @@
 
 ## Запреты
 
-- Код 2.0 вне `v2/`. Ломать текущий сайт.
-- Runtime LLM, JWT, CORS, сборка образов на VPS, публичный Next `app/api`.
+- Код 2.0 вне `v2/`. Возвращать V1 в корень как прод.
+- Runtime LLM, JWT, CORS, публичный Next `app/api`.
 - GET magic link логинит. `unknown` аллерген = «нет».
 - `gentle` как в V1 JS (`1+(ratio-1)*0.5`). Ранжирование калькулятора на клиенте Next.
 - Сессии в Redis. ClamAV на VPS 8 ГБ. Gmail / Госуслуги.
 - Волны и оверлеи без явного старта в чате / CURRENT_SPRINT. `editorial_tested` от агента. High-risk без «Осторожно».
-- Коммит `.env`, ключей, дампов. Пуш в `main` как прод. Деплой production.
+- Коммит `.env`, ключей, дампов. Пуш в `main` как прод, пока домен не на V2 (см. CUTOVER). Сборка образов на VPS после появления реестра — только `pull`.
 - Regex как основной ETL-аллергенов. `__icontains` для поиска каталога. `scale_mode=fixed` / поле `scalable_rule`.
+- `import_v1` на проде вместо дампа — затирает оверлеи и теряет ~135 карточек.
 
 ## Git
 
-Пути только под `v2/`. Сообщения по-русски, зачем. Секреты не в git.
+Пути только под `v2/` (архив V1 — только по явной просьбе). Сообщения по-русски, зачем. Секреты не в git.
 
 ## Проверка
 
-Команды — в TESTING и CURRENT_SPRINT. Нет Compose — срез не готов. V1 после правок 2.0 должен открываться из корня (`python -m http.server 3456`).
+Команды — в TESTING и CURRENT_SPRINT. Нет Compose — срез не готов. Архив V1: `python -m http.server 3456` из `archive/v1/`.

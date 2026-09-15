@@ -1,6 +1,6 @@
 ---
 description: Иконки UI — Lucide, stroke 1px, спрайт assets/images/icons.svg
-globs: assets/images/**,css/icons.css,index.html,js/tabs.js
+globs: archive/v1/assets/images/**,archive/v1/css/icons.css,archive/v1/index.html,archive/v1/js/tabs.js
 alwaysApply: false
 ---
 

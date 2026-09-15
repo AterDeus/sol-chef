@@ -1,0 +1,443 @@
+{
+  "id": "govyadina-tushenaya-na-volokna-zamorozka",
+  "title": "Тушёная говядина на волокна (заготовка на заморозку)",
+  "summary": "Крупный кусок лопатки томится 3,5–4 часа до распада коллагена, разбирается на волокна и замораживается порциями с соусом — база на 3–4 недели. Из 2,5–3 кг мяса выходит примерно 1,8–2 кг готового рваного мяса.",
+  "protein_base": "beef",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "shoulder"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 280,
+    "active_minutes": 60
+  },
+  "effort_level": 3,
+  "washing_level": 3,
+  "use_cases": [
+    "batch",
+    "budget"
+  ],
+  "adaptations": [
+    {
+      "to": "kazan",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.9
+    },
+    {
+      "to": "oven",
+      "from": "stew",
+      "type": "method",
+      "quality": 0.88
+    },
+    {
+      "to": "oven",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.88
+    }
+  ],
+  "prep": [
+    {
+      "text": "Посолить лопатку и убрать в холодильник без крышки (сухой посол).",
+      "before_hours": 24
+    },
+    {
+      "text": "Достать мясо из холодильника и обсушить перед обжаркой.",
+      "before_min": 30
+    }
+  ],
+  "notes": [
+    {
+      "text": "Лопатка — оптимум для заготовки: жира и коллагена хватает, чтобы рваное мясо не пересохло после заморозки. Кострец и огузок не брать — постным отрубам не хватает жира.",
+      "title": "Отруб"
+    },
+    {
+      "text": "Натрите мясо солью за сутки до приготовления и оставьте на решётке в холодильнике без крышки. Перед обжаркой промокните поверхность салфеткой: влажное мясо не даст румяной корочки.",
+      "title": "Сухой посол"
+    },
+    {
+      "text": "Не мельче 6–8 см. Мелкая нарезка отдаёт сок раньше, чем коллаген распадётся.",
+      "title": "Размер кусков"
+    },
+    {
+      "text": "Порциями до плотной корки. Не двигать кусок, пока корка не схватится; полная кастрюля — тушение в соку.",
+      "title": "Обжарка"
+    },
+    {
+      "text": "До половины высоты кусков, не покрывать целиком. Иначе мясо варится, а не томится.",
+      "title": "Жидкость"
+    },
+    {
+      "text": "Вода допустима. Магазинный бульон часто с сельдереем — смотрите состав.",
+      "title": "Бульон или вода"
+    },
+    {
+      "text": "Обычный содержит пшеницу и сою. Соль в конце — с учётом соуса, не вдобавок «как обычно».",
+      "title": "Соевый соус"
+    },
+    {
+      "text": "Раскладывайте разобранное мясо в плоские пакеты по 300–400 г, обязательно добавляя часть мясного сока. Без соуса волокна высохнут уже после первой разморозки.",
+      "title": "Заморозка"
+    },
+    {
+      "text": "Греть на слабом огне с ложкой бульона или воды: в морозилке волокна теряют влагу.",
+      "title": "Разморозка"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_chuck",
+      "display_name": "говяжья лопатка",
+      "amount": 2.5,
+      "unit": "kg",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "amount_max": 3,
+      "detail": "куском (или 2 крупных куска по 1,2–1,5 кг)"
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для обжарки"
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 300,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "репчатый, крупно нарезать"
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "крупно нарезать"
+    },
+    {
+      "position": 5,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 6,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 8,
+      "detail": "раздавить"
+    },
+    {
+      "position": 6,
+      "canonical_id": "tomato_paste",
+      "display_name": "томатная паста",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 3
+    },
+    {
+      "position": 7,
+      "canonical_id": "red_wine_or_balsamic",
+      "display_name": "красное вино или бальзамический уксус",
+      "amount": 100,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сухое вино или бальзамический уксус, для деглазирования"
+    },
+    {
+      "position": 8,
+      "canonical_id": "stock_or_water",
+      "display_name": "бульон или вода",
+      "amount": 1000,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 1200,
+      "detail": "говяжий бульон или вода"
+    },
+    {
+      "position": 9,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 2,
+      "detail": "обычный пшеничный"
+    },
+    {
+      "position": 10,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 3
+    },
+    {
+      "position": 11,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "горошком"
+    },
+    {
+      "position": 12,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "по вкусу, с учётом соевого соуса"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Обсушить мясо бумажным полотенцем, разрезать на 2–3 крупных куска (не мельче 6–8 см) — мелкая нарезка перед долгим тушением теряет сок раньше, чем коллаген успевает распасться."
+    },
+    {
+      "position": 2,
+      "text": "Обжарить куски в толстостенной кастрюле на сильном огне со всех сторон до плотной корки, порциями. Не двигать кусок, пока корка не схватится сама. Выложить мясо.",
+      "equipment_note": "Не перегружать кастрюлю: обжаривать порциями. Казан подходит тем же методом — жидкость до половины кусков, крышка, то же время."
+    },
+    {
+      "position": 3,
+      "text": "В этом же жире обжарить лук, морковь и чеснок 5–7 минут, добавить томатную пасту и пассеровать ещё 2 минуты — уходит сырой металлический привкус концентрата.",
+      "timer_seconds": 420,
+      "timer_label": "Овощи",
+      "timer_note": "5–7 минут овощи, затем паста ещё 2 минуты"
+    },
+    {
+      "position": 4,
+      "text": "Влить вино или уксус, деглазировать, соскребая прижарки со дна — это концентрированный вкус, не мусор."
+    },
+    {
+      "position": 5,
+      "text": "Вернуть мясо в кастрюлю, долить бульон или воду примерно до половины высоты кусков (не покрывая целиком), добавить соевый соус, лавровый лист и перец."
+    },
+    {
+      "position": 6,
+      "text": "Довести до едва заметного кипения, накрыть крышкой и тушить на минимальном огне 3,5–4 часа. Ориентир готовности — щуп входит как в масло: у крупного куска на 2,5–3 кг время может отличаться на полчаса в любую сторону.",
+      "timer_seconds": 12600,
+      "timer_label": "Тушение",
+      "timer_note": "Ориентир для 2,5–3 кг; щуп важнее таймера, ±30 мин нормально"
+    },
+    {
+      "position": 7,
+      "text": "Вынуть мясо, разобрать на волокна двумя вилками или миксером на низкой скорости, пока оно ещё тёплое — так расслаивается легче. Убрать крупные куски жира и хрящи."
+    },
+    {
+      "position": 8,
+      "text": "Соус процедить, при желании уварить в широком сотейнике до нужной густоты, вернуть часть соуса к волокнам — без соуса волокна высохнут уже после первой разморозки."
+    },
+    {
+      "position": 9,
+      "text": "Разложить по порционным пакетам (300–400 г) с небольшим количеством соуса, разровнять плоско и заморозить — плоские пакеты размораживаются быстрее толстых брикетов."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_shank",
+      "title": "С голяшкой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "kg",
+            "amount": 0.5,
+            "detail": "20–30% смеси, для желатина",
+            "scalable": true,
+            "amount_max": 0.8,
+            "scale_mode": "linear",
+            "canonical_id": "beef_shank_bone_in",
+            "display_name": "говяжья голяшка на кости"
+          }
+        ],
+        "replace": [
+          {
+            "unit": "kg",
+            "amount": 2,
+            "detail": "лопатка куском; 70–80% смеси",
+            "scalable": true,
+            "amount_max": 2.2,
+            "scale_mode": "linear",
+            "canonical_id": "beef_chuck"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Довести до едва заметного кипения, накрыть крышкой и тушить на минимальном огне 3,5–4,5 часа. Голяшка чуть удлиняет томление; ориентир — щуп входит как в масло.",
+            "position": 6,
+            "timer_note": "Голяшка чуть дольше; щуп важнее таймера, ±30 мин нормально",
+            "timer_label": "Тушение",
+            "timer_seconds": 14400
+          },
+          {
+            "text": "Вынуть мясо, разобрать на волокна двумя вилками или миксером на низкой скорости, пока оно ещё тёплое. Убрать кость голяшки, крупные куски жира и хрящи.",
+            "position": 7
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "ml",
+            "amount": 700,
+            "detail": "меньше, чем 1–1,2 л кастрюли: стенки казана парят; по-прежнему до половины высоты кусков",
+            "scalable": true,
+            "amount_max": 800,
+            "scale_mode": "linear",
+            "canonical_id": "stock_or_water",
+            "display_name": "бульон или вода"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть казан, влить масло. Обжарить куски порциями у стенок до плотной корки, не двигать, пока корка не схватится. Выложить мясо.",
+            "position": 2,
+            "equipment_note": "Не скучивать на дне: иначе это кастрюля без томления от стенок. Партии обязательны."
+          },
+          {
+            "text": "Вернуть мясо в казан, долить 700–800 мл бульона или воды до половины высоты кусков, добавить соевый соус, лавровый лист и перец.",
+            "position": 5
+          },
+          {
+            "text": "Довести до едва заметного кипения у стенок, накрыть и томить на минимальном огне, иногда сдвигая куски от стенок к центру. Щуп входит как в масло.",
+            "position": 6,
+            "timer_note": "Около 4 часов; стенки держат жар, жидкости меньше. Щуп важнее таймера, ±30 мин нормально",
+            "timer_label": "Томление в казане",
+            "timer_seconds": 14400
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "stew",
+      "equipment": "kazan"
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Вернуть мясо в кастрюлю или утятницу с крышкой, долить бульон до половины высоты кусков, добавить соевый соус, лавр и перец. Разогреть духовку до 160 °C.",
+            "position": 5
+          },
+          {
+            "text": "Довести на плите только до слабого пара, плотно накрыть крышкой и поставить в камеру. Томить без бурления на конфорке — удобно для большой порции на заморозку.",
+            "position": 6,
+            "timer_note": "Около 4 часов при 160 °C под крышкой; это не слабое кипение на плите 3,5–4 часа, которое нужно сторожить",
+            "timer_label": "Духовка",
+            "timer_seconds": 14400,
+            "equipment_note": "Крышка обязательна. Открытая форма высушит верх 2,5–3 кг и не разберёт коллаген."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "oven"
+    }
+  ]
+}

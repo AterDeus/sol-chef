@@ -1,0 +1,401 @@
+{
+  "id": "kurinaya-grudka-v-slivochnom-souse",
+  "title": "Куриная грудка в сливочном соусе",
+  "summary": "Медальоны грудки быстро обжаривают порциями и доводят в сливках с чесноком и щепоткой горчицы. Без пасты: это горячее с соусом, не карбонара и не сковорода с макаронами.",
+  "protein_base": "poultry",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "breast"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 25,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.84
+    },
+    {
+      "to": "baking_dish",
+      "from": "skillet",
+      "type": "equipment",
+      "quality": 0.84
+    },
+    {
+      "to": "milk",
+      "from": "cream",
+      "type": "substitution",
+      "quality": 0.52
+    },
+    {
+      "type": "omission",
+      "quality": 0.9,
+      "ingredient": "mustard"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Макароны в эту сковороду не класть. Гарнир отдельно: рис, картофель, гречка.",
+      "title": "Гарнир"
+    },
+    {
+      "text": "20–22% из супермаркета. 10% плохо густеют и легко сворачиваются. Растительные сливки — другой вкус и другой аллерген, молча не подменять.",
+      "title": "Сливки"
+    },
+    {
+      "text": "Медальоны в один слой. На 600 г обычно две партии: пока вторая жарится, первая отдыхает на тарелке, сок потом в сливки.",
+      "title": "Сковорода"
+    },
+    {
+      "text": "72 °C в центре медальона. Дольше — сухая грудка, соус не вернёт сок. Розовый сок из толстого куска — рано.",
+      "title": "Температура"
+    },
+    {
+      "text": "Половина чайной ложки столовой горчицы придаёт соусу пикантность, не превращая его в ядрёный горчичный. Если вам не нравится горчичный оттенок, исключите её — соус получится классическим нежно-сливочным.",
+      "title": "Горчица"
+    },
+    {
+      "text": "Молоко даст жидкий соус и легко свернётся. Если менять: огонь едва тёплый, ложка муки в соке сковороды, качество ниже сливок.",
+      "title": "Молоко вместо сливок"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_breast",
+      "display_name": "куриная грудка",
+      "amount": 600,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "филе без кости, 2 крупные или 3 средние"
+    },
+    {
+      "position": 2,
+      "canonical_id": "cream",
+      "display_name": "сливки",
+      "amount": 200,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "20–22%, не растительные"
+    },
+    {
+      "position": 3,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "мелко нарезать"
+    },
+    {
+      "position": 4,
+      "canonical_id": "mustard",
+      "display_name": "горчица",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "столовая, не зерновая"
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для обжарки"
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежемолотый"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать грудку поперёк волокон на медальоны толщиной около 1,5 см."
+    },
+    {
+      "position": 2,
+      "text": "Посолить и поперчить с обеих сторон."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть сковороду с маслом на средне-сильном огне, но не доводить масло до дыма."
+    },
+    {
+      "position": 4,
+      "text": "Выложить медальоны партиями в один слой и обжарить до золотистой корочки с двух сторон, не доводя до готовности внутри. Снять на тарелку.",
+      "timer_seconds": 180,
+      "timer_label": "Партия",
+      "timer_note": "По 1,5–2 минуты на сторону; внутри ещё розовато — так и нужно",
+      "equipment_note": "Не перегружать сковороду: медальоны в один слой, порциями. Полная сковорода тушит грудку в соку, соус потом водянистый."
+    },
+    {
+      "position": 5,
+      "text": "Убавить огонь до среднего, прогреть чеснок 20–30 секунд, влить сливки, вмешать горчицу и прогревать, пока соус не начнёт загустевать по краям.",
+      "timer_seconds": 180,
+      "timer_label": "Сливки",
+      "timer_note": "3 минуты слабого пузырения, не бурного кипения"
+    },
+    {
+      "position": 6,
+      "text": "Вернуть грудку в соус и томить на слабом огне до 72 °C в толще медальона.",
+      "timer_seconds": 300,
+      "timer_label": "В соусе",
+      "timer_note": "Ориентир — 72 °C в центре, не сухая белая крошка на разрезе",
+      "target_internal_temperature_c": 72
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_cheese",
+      "title": "С сыром",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 70,
+            "detail": "натереть; российский или гауда из супермаркета",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "hard_cheese",
+            "display_name": "твёрдый сыр"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Посыпать тёртым сыром, накрыть крышкой на минуту, пока сыр не поплывёт по соусу. Не запекать сыр до корки — это не гратен.",
+            "timer_label": "Сыр",
+            "timer_seconds": 60,
+            "after_position": 6
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_mushrooms",
+      "title": "С грибами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 200,
+            "detail": "свежие культивируемые, пластинами; не лесные и не вешенки из смеси",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "На той же сковороде обжарить шампиньоны до сухой поверхности и лёгкого румянца, затем уже чеснок и сливки.",
+            "timer_note": "7 минут; сырая вода грибов сделает сливки серыми",
+            "timer_label": "Грибы",
+            "timer_seconds": 420,
+            "after_position": 4
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "ml",
+            "amount": 50,
+            "detail": "чтобы 80 мл сливок покрыли медальоны",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "water",
+            "display_name": "вода"
+          }
+        ],
+        "replace": [
+          {
+            "unit": "ml",
+            "amount": 80,
+            "detail": "меньше сливок, тот же соус",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "cream"
+          },
+          {
+            "unit": "tsp",
+            "amount": 1,
+            "detail": "смазать сковороду",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Слегка смазать сковороду чайной ложкой масла и разогреть на средне-сильном огне.",
+            "position": 3
+          },
+          {
+            "text": "Прогреть чеснок 20 секунд, влить 80 мл сливок и 50 мл воды, вмешаться горчицу. Соус жиже базы — не выпаривать до плёнки.",
+            "position": 5,
+            "timer_note": "2 минуты, не 3: жидкости меньше, пригорит быстрее",
+            "timer_label": "Сливки",
+            "timer_seconds": 120
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Сковороду разогреть с маслом только для короткой корочки.",
+            "position": 3
+          },
+          {
+            "text": "Обжарить медальоны партиями по минуте с каждой стороны — только цвет, не готовность. Сразу переложить в форму в один слой.",
+            "position": 4,
+            "timer_note": "По минуте на сторону; это не 1,5–2 минуты базы и не доведение на плите",
+            "timer_label": "Корочка",
+            "timer_seconds": 120,
+            "equipment_note": "Партии на сковороде обязательны. В форму класть в один слой, не стопкой."
+          },
+          {
+            "text": "Чеснок и горчицу смешать со сливками в миске, залить форму. Сливки на плите не кипятить — в духовке их проще не сжечь.",
+            "position": 5
+          },
+          {
+            "text": "Запекать без крышки до 72 °C в толще медальона. Соус должен едва пузыриться по краям формы.",
+            "position": 6,
+            "timer_note": "12 минут при 180 °C; на сковороде доведение было 5 минут — здесь дольше и спокойнее",
+            "timer_label": "Духовка",
+            "timer_seconds": 720,
+            "target_internal_temperature_c": 72
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "baking_dish"
+    }
+  ]
+}

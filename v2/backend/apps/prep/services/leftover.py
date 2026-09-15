@@ -121,6 +121,17 @@ def recipes_for_replacements(kit: PrepKit) -> dict[str, Recipe]:
     return {row.slug: row for row in Recipe.objects.filter(slug__in=slugs, status="published")}
 
 
+def leftover_plan_cost(kit: PrepKit) -> dict[str, int]:
+    """Цена переключателя «Без вчерашнего»: N блюд и M уникальных позиций закупки."""
+    dishes = sum(1 for slot in kit.slots.all() if slot.mode == "reheat")
+    canonicals = {
+        str(row.get("canonical_id") or "").strip()
+        for row in shopping_additions(kit)
+    }
+    canonicals.discard("")
+    return {"dishes": dishes, "shopping_add": len(canonicals)}
+
+
 def shopping_additions(kit: PrepKit) -> list[dict]:
     rows: list[dict] = []
     for slot in kit.slots.all():

@@ -194,6 +194,13 @@
     "carbs_g": 3.1,
     "source": "editorial"
   },
+  "eggplant": {
+    "kcal": 25,
+    "protein_g": 1.0,
+    "fat_g": 0.2,
+    "carbs_g": 5.9,
+    "source": "editorial"
+  },
   "broccoli": {
     "kcal": 34,
     "protein_g": 2.8,

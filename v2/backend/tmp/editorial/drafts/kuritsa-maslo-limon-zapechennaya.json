@@ -1,0 +1,294 @@
+{
+  "id": "kuritsa-maslo-limon-zapechennaya",
+  "title": "Курица целиком с маслом под кожей и лимоном",
+  "summary": "Сливочное масло с цедрой лимона и чесноком закладывают под кожу грудки: в духовке оно тает и пропитывает мясо, поэтому постная грудка остаётся сочной без разрезания тушки бабочкой. Половинки лимона и травы внутри работают исключительно на аромат.",
+  "protein_base": "poultry",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "whole_bird"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [
+    "poultry_temp"
+  ],
+  "caution_text": "Целая птица: грудка не ниже 72 °C, бедро не ниже 82 °C. Проверяйте термометром, не по цвету сока.",
+  "time_profile": {
+    "total_minutes": 110,
+    "active_minutes": 25
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [],
+  "adaptations": [
+    {
+      "to": "grill",
+      "from": "oven",
+      "type": "method",
+      "quality": 0.86
+    },
+    {
+      "to": "grill",
+      "from": "oven",
+      "type": "equipment",
+      "quality": 0.86
+    }
+  ],
+  "prep": [
+    {
+      "text": "Посолить курицу снаружи и внутри, убрать в холодильник без крышки (сухой посол)",
+      "type": "fridge",
+      "before_hours": 12
+    },
+    {
+      "text": "Достать масло из холодильника, чтобы размягчилось",
+      "type": "room_temp",
+      "before_min": 60
+    },
+    {
+      "text": "Достать курицу из холодильника перед запеканием",
+      "type": "room_temp",
+      "before_min": 30
+    }
+  ],
+  "notes": [
+    {
+      "text": "Щуп в бедро и в грудку отдельно. У целой тушки бёдра отстают от грудки заметнее, чем если разрезать её бабочкой: один замер в грудке покажет ложную готовность раньше времени. Цвет сока — не критерий.",
+      "title": "Термометр"
+    },
+    {
+      "text": "Если грудка румянится быстрее бёдер, прикройте её фольгой на середине запекания.",
+      "title": "Грудка"
+    },
+    {
+      "text": "Только размягчённое. Холодный цельный кусок под кожей не распределится, и часть грудки останется без защиты.",
+      "title": "Масло"
+    },
+    {
+      "text": "Выдержка тушки с солью в холодильнике в течение 12 часов сохраняет сочность грудки гораздо надежнее, чем любые цитрусовые в полости.",
+      "title": "Сухой посол"
+    },
+    {
+      "text": "Половинки лимона и веточки трав ароматизируют полость. Стенка мышцы влагу внутрь не пропускает — на сочность тушки это не работает.",
+      "title": "Начинка"
+    },
+    {
+      "text": "Отделять от грудки от шеи, не рвать. Масло под кожей держит грудку сочной без разрезания тушки бабочкой.",
+      "title": "Кожа"
+    },
+    {
+      "text": "После 12 часов посола кожа суше и горит быстрее: только непрямой жар и поворот. Масло под бёдрами может капать — угли сбоку. Это не база без посола.",
+      "title": "Гриль"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "whole_chicken",
+      "display_name": "курица",
+      "amount": 1.5,
+      "unit": "kg",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "amount_max": 1.8,
+      "detail": "целиком"
+    },
+    {
+      "position": 2,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 80,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 100,
+      "detail": "размягчённое"
+    },
+    {
+      "position": 3,
+      "canonical_id": "lemon",
+      "display_name": "лимон",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "цедра + сам лимон половинками внутрь тушки"
+    },
+    {
+      "position": 4,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 4,
+      "detail": "мелко натёртый"
+    },
+    {
+      "position": 5,
+      "canonical_id": "thyme",
+      "display_name": "тимьян",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "несколько веточек; листья в масло, веточки внутрь тушки",
+      "choice_group": "herb"
+    },
+    {
+      "position": 6,
+      "canonical_id": "rosemary",
+      "display_name": "розмарин",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "несколько веточек; листья в масло, веточки внутрь тушки",
+      "choice_group": "herb"
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "крупная"
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 200°C."
+    },
+    {
+      "position": 2,
+      "text": "Смешать размягчённое масло с тёртым чесноком, цедрой лимона, рублеными листьями тимьяна или розмарина, солью и перцем."
+    },
+    {
+      "position": 3,
+      "text": "Аккуратно отделить кожу от грудки рукой, начиная от шеи, стараясь не порвать её."
+    },
+    {
+      "position": 4,
+      "text": "Равномерно распределить масляную смесь под кожей грудки и бёдер, массируя снаружи для равномерного слоя."
+    },
+    {
+      "position": 5,
+      "text": "Внутрь тушки положить половинки лимона и оставшиеся веточки трав, ножки связать шпагатом."
+    },
+    {
+      "position": 6,
+      "text": "Обмазать кожу снаружи тонким слоем оставшегося масла, посолить снаружи."
+    },
+    {
+      "position": 7,
+      "text": "Запекать на решётке в форме до 82 °C в самой толстой части бедра — ориентировочно 70–80 минут для тушки 1,5–1,8 кг.",
+      "timer_seconds": 4500,
+      "timer_label": "Духовка",
+      "timer_note": "Для тушки 1,5–1,8 кг; снимайте по 82 °C в бедре, не по таймеру",
+      "target_internal_temperature_c": 82
+    },
+    {
+      "position": 8,
+      "text": "Дать курице отдохнуть под фольгой перед нарезкой. Проверить грудку: не ниже 72 °C.",
+      "timer_seconds": 600,
+      "timer_label": "Отдых",
+      "timer_note": "Фиксированный отдых под фольгой",
+      "target_internal_temperature_c": 72
+    },
+    {
+      "position": 9,
+      "text": "Нарезать и подавать, полить стекшим с противня соком с чесноком и лимоном."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "На гриле",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разжечь гриль на две зоны: прямой жар с одной стороны, пустая зона с другой. Кожу после 12 часов сухого посола не мочить — она суше обычной и на прямом жаре сгорит раньше, чем дойдёт бедро.",
+            "position": 1
+          },
+          {
+            "text": "Оставшимся маслом тонко смазать кожу. Дополнительно не солить: посол уже 12 часов. Положить на непрямой жар, крышку закрыть.",
+            "position": 6
+          },
+          {
+            "text": "Готовить на непрямом жаре. Через 25 минут повернуть тушку, чтобы бедро уходило, а грудка с маслом под кожей не обуглилась. Масло из карманов бёдер может капать — поддон или угли сбоку, не над языками.",
+            "position": 7,
+            "timer_note": "25 минут до поворота; сухая кожа после посола румянится быстрее, чем в духовке 70–80 минут",
+            "timer_label": "Непрямой жар",
+            "timer_seconds": 1500,
+            "equipment_note": "Только непрямой жар. Это не база без посола и не курица с яблоками."
+          },
+          {
+            "text": "Держать до 82 °C в самой толстой части бедра. Снять, отдохнуть под фольгой 10 минут, проверить грудку: не ниже 72 °C.",
+            "position": 8,
+            "timer_note": "Ещё 40–50 минут после поворота для 1,5–1,8 кг; не копировать таймер духовки",
+            "timer_label": "До температур",
+            "timer_seconds": 2700,
+            "target_internal_temperature_c": 82
+          },
+          {
+            "text": "Нарезать. Сок с противня или поддона под решёткой — к нарезке. Грудку после отдыха ещё раз: не ниже 72 °C.",
+            "position": 9,
+            "target_internal_temperature_c": 72
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "grill",
+      "equipment": "grill"
+    }
+  ],
+  "servings": 4
+}

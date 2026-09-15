@@ -1,0 +1,378 @@
+{
+  "id": "bryusselskaya-kapusta-s-bekonom",
+  "title": "Брюссельская капуста с беконом и бальзамиком",
+  "summary": "Половинки брюссельской капусты запекают на противне срезом вниз с беконом, пока срез не станет тёмно-золотистым. Бальзамик и чеснок идут в последние минуты — с первой минуты уксус сгорит, а чеснок почернеет.",
+  "protein_base": "vegetables",
+  "cook_method": "oven",
+  "dish_type": "side",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": [
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "quality": 0.78,
+      "ingredient": "bacon"
+    },
+    {
+      "to": "air_fryer",
+      "from": "oven",
+      "type": "method",
+      "quality": 0.86
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Выкладывайте половинки срезом вниз на горячий металлический противень и не ворошите первые 12–15 минут. Плотный контакт с металлом даёт карамель и ореховый привкус; горка сварится в пару с запахом варёной капусты.",
+      "title": "Раскладка на противне"
+    },
+    {
+      "text": "100 г в базе — полоски 2 см. Крошка сгорит за 18 минут при 220 °C. Соли 0,5 ч. л.: бекон уже солёный. Без бекона (адаптация или постная версия) соли чуть больше.",
+      "title": "Бекон"
+    },
+    {
+      "text": "Только в последние 4–6 минут. С первой минуты сахар уксуса подгорает до горечи. В азиатской глазури бальзамик убрать полностью: соя и мёд его заменяют, два сладких уксуса не класть вместе.",
+      "title": "Бальзамик"
+    },
+    {
+      "text": "После промывки обсушить. Мокрый срез парит, корочки не будет. Замороженная брюссельская здесь не подходит: слишком много воды.",
+      "title": "Сухие половинки"
+    },
+    {
+      "text": "Раздавить, не крошить в кашу, и класть вместе с глазурью. С первой минуты при 220 °C чернеет.",
+      "title": "Чеснок"
+    },
+    {
+      "text": "400 г — одна закладка, срез вниз, без встряхивания до корочки. Сетка даёт меньше контакта, чем противень; если кочаны внахлёст — вторая партия, не горка.",
+      "title": "Аэрогриль"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "brussels_sprouts",
+      "display_name": "брюссельская капуста",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "свежая; половинки через кочерыжку, крупные кочаны — на четвертинки"
+    },
+    {
+      "position": 2,
+      "canonical_id": "bacon",
+      "display_name": "бекон",
+      "amount": 100,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "полоски около 2 см, не крошка"
+    },
+    {
+      "position": 3,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 20,
+      "unit": "ml",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "рафинированное, чтобы покрыть половинки плёнкой"
+    },
+    {
+      "position": 4,
+      "canonical_id": "balsamic_vinegar",
+      "display_name": "бальзамический уксус",
+      "amount": 15,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "в последние минуты, не с первой"
+    },
+    {
+      "position": 5,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "раздавить плоскостью ножа, не резать в кашу"
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "бекон уже солёный — не полную чайную"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 220 °C. Противень металлический, без фольги и без бумаги: срез должен лежать на горячем металле."
+    },
+    {
+      "position": 2,
+      "text": "Срезать сухой кончик кочерыжки, снять жёлтые листья. Разрезать каждый кочан пополам через кочерыжку, чтобы половинка не развалилась. Кочаны крупнее 3 см — на четвертинки. Обсушить полотенцем."
+    },
+    {
+      "position": 3,
+      "text": "Нарезать бекон полосками около 2 см: крошка сгорит, пока капуста румянится."
+    },
+    {
+      "position": 4,
+      "text": "Смешать половинки на противне с 20 мл масла и 0,5 ч. л. соли. Уложить в один слой срезом вниз, с зазорами. Бекон разложить рядом, не под срезом. Чеснок отложить: при 220 °C с первой минуты сгорит.",
+      "equipment_note": "Один слой срезом вниз. Горка или целые кочаны дадут пар и варёную серединку, не румяную корочку."
+    },
+    {
+      "position": 5,
+      "text": "Запекать без крышки и без переворачивания, пока срез хорошо не подрумянится и не покроется плотной румяной корочкой.",
+      "timer_seconds": 1080,
+      "timer_label": "Срез вниз",
+      "timer_note": "18 минут; не ворошить — срез должен успеть схватиться"
+    },
+    {
+      "position": 6,
+      "text": "Снять противень. Разложить раздавленный чеснок, полить 15 мл бальзамика, коротко встряхнуть, не переворачивая половинки на спинку. Вернуть в духовку, пока глазурь не забурлит и бекон не станет хрустящим.",
+      "timer_seconds": 300,
+      "timer_label": "Глазурь",
+      "timer_note": "4–6 минут; бальзамик с первой минуты даст горечь, не глянец"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "asian_glaze",
+      "title": "Азиатская глазурь",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "ml",
+            "amount": 15,
+            "detail": "обычный пшеничный; вместо бальзамика, не вместе",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "soy_sauce",
+            "display_name": "соевый соус"
+          },
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "в глазурь",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "honey",
+            "display_name": "мёд"
+          },
+          {
+            "unit": "tsp",
+            "amount": 1,
+            "detail": "тёмное; больше даст горечь",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "sesame_oil",
+            "display_name": "кунжутное масло"
+          },
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "семена, в последние минуты",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "sesame",
+            "display_name": "кунжут"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "balsamic_vinegar"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Смешать 15 мл соевого соуса, 1 ст. л. мёда и 1 ч. л. кунжутного масла. Снять противень, разложить чеснок, полить глазурью, посыпать кунжутом. Коротко встряхнуть, не переворачивая половинки. Вернуть в духовку, пока глазурь не забурлит. Бальзамик не класть: два сладких уксуса перебьют друг друга.",
+            "position": 6,
+            "timer_note": "2–4 минуты; глазурь должна заблестеть, не почернеть",
+            "timer_label": "Соевая глазурь",
+            "timer_seconds": 180
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "soy",
+          "gluten",
+          "sesame"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "lenten_nuts",
+      "title": "Постная, с орехами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 40,
+            "detail": "грубо порубить; в последние минуты, иначе сгорят",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "walnuts",
+            "display_name": "грецкие орехи"
+          },
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "с бальзамиком в конце; или кленовый сироп",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "honey",
+            "choice_group": "sweetener",
+            "display_name": "мёд"
+          },
+          {
+            "unit": "ml",
+            "amount": 15,
+            "detail": "вместо мёда, не вместе",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "maple_syrup",
+            "choice_group": "sweetener",
+            "display_name": "кленовый сироп"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "bacon"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Грубо порубить грецкие орехи. Бекон не класть.",
+            "position": 3
+          },
+          {
+            "text": "Смешать половинки на противне с 20 мл масла и 0,5 ч. л. соли; бекона нет — можно щепотку сверху. Уложить в один слой срезом вниз, с зазорами. Чеснок и орехи отложить.",
+            "position": 4,
+            "equipment_note": "Один слой срезом вниз. Без бекона жира меньше: плёнка масла обязательна, иначе срез серый."
+          },
+          {
+            "text": "Снять противень. Разложить чеснок и орехи, полить 15 мл бальзамика и 1 ст. л. мёда (или 15 мл кленового сиропа — одно, не оба). Коротко встряхнуть, не переворачивая половинки. Вернуть в духовку, пока орехи не подсохнут и глазурь не забурлит.",
+            "position": 6,
+            "timer_note": "2–4 минуты; глазурь должна заблестеть, не почернеть. Если сильно бурлит — вынуть раньше",
+            "timer_seconds": 180
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "tree_nut"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть аэрогриль до 200 °C.",
+            "position": 1
+          },
+          {
+            "text": "Смешать половинки с 20 мл масла и 0,5 ч. л. соли. Уложить в чашу в один слой срезом вниз: 400 г капусты и 100 г бекона — одна закладка. Чеснок отложить.",
+            "position": 4,
+            "equipment_note": "Один слой. Полная чаша без зазоров даст варёные бока; срез на сетке румянится слабее, чем на противне, — не трясти, пока он не схватится."
+          },
+          {
+            "text": "Готовить без встряхивания, пока срез не потемнеет.",
+            "position": 5,
+            "timer_note": "12 минут; встряхнуть раньше — срез не успеет схватиться",
+            "timer_label": "Срез вниз",
+            "timer_seconds": 720
+          },
+          {
+            "text": "Разложить чеснок, полить 15 мл бальзамика, один раз встряхнуть и готовить, пока глазурь не забурлит и бекон не станет хрустящим.",
+            "position": 6,
+            "timer_note": "3–5 минут; воздух в чаше жарче духовки",
+            "timer_label": "Глазурь",
+            "timer_seconds": 240
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "air_fryer"
+    }
+  ]
+}

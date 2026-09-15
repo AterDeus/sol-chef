@@ -61,6 +61,12 @@ function formatNumber(value: number): string {
   return text.replace('.', ',');
 }
 
+const SPOON_ML: Record<string, number> = { tsp: 5, tbsp: 15 };
+
+function spoonMl(amount: number, unit: string): string {
+  return formatNumber(roundHalfUp(amount * SPOON_ML[unit], 1));
+}
+
 export function formatDisplayAmount(
   amount: number | null,
   unit: string,
@@ -70,7 +76,13 @@ export function formatDisplayAmount(
   if (unit === 'to_taste' || unit === 'pinch' || amount == null) return label;
   let text = formatNumber(amount);
   if (amountMax != null) text = `${text}–${formatNumber(amountMax)}`;
-  return `${text} ${label}`;
+  let shown = `${text} ${label}`;
+  if (unit in SPOON_ML) {
+    let hint = spoonMl(amount, unit);
+    if (amountMax != null) hint = `${hint}–${spoonMl(amountMax, unit)}`;
+    shown = `${shown} (~${hint} мл)`;
+  }
+  return shown;
 }
 
 export function scaleLine(

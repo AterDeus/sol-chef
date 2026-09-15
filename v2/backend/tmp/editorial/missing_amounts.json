@@ -1,0 +1,98 @@
+[
+  {
+    "slug": "zharenaya-kartoshka-s-lukom",
+    "cid": "dill",
+    "name": "укроп",
+    "unit": "bunch",
+    "detail": "свежий, рубленый, в конце",
+    "optional": true
+  },
+  {
+    "slug": "ovoshchnoe-ragu",
+    "cid": "fresh_basil",
+    "name": "базилик свежий",
+    "unit": "bunch",
+    "detail": "несколько листьев в конце",
+    "optional": true
+  },
+  {
+    "slug": "stejk-reverse-sear",
+    "cid": "steak",
+    "name": "стейк",
+    "unit": "pcs",
+    "detail": "томагавк или другой толстый отруб",
+    "optional": false
+  },
+  {
+    "slug": "stejk-reverse-sear",
+    "cid": "vegetable_oil",
+    "name": "растительное масло",
+    "unit": "tbsp",
+    "detail": "для сковороды",
+    "optional": false
+  },
+  {
+    "slug": "stejk-na-grile",
+    "cid": "steak",
+    "name": "стейк",
+    "unit": "pcs",
+    "detail": "с высокой мраморностью (например, вагю рибай)",
+    "optional": false
+  },
+  {
+    "slug": "stejk-na-grile",
+    "cid": "vegetable_oil",
+    "name": "растительное масло",
+    "unit": "tbsp",
+    "detail": "смазать стейк, не решётку",
+    "optional": false
+  },
+  {
+    "slug": "stejk-na-skovorode-pan-searing",
+    "cid": "steak",
+    "name": "стейк",
+    "unit": "pcs",
+    "detail": "рибай, стриплойн или филе-миньон, стандартной толщины",
+    "optional": false
+  },
+  {
+    "slug": "stejk-na-skovorode-pan-searing",
+    "cid": "vegetable_oil",
+    "name": "растительное масло",
+    "unit": "tbsp",
+    "detail": "для сковороды",
+    "optional": false
+  },
+  {
+    "slug": "stejk-na-skovorode-pan-searing",
+    "cid": "butter",
+    "name": "сливочное масло",
+    "unit": "pcs",
+    "detail": "несколько кубиков",
+    "optional": false
+  },
+  {
+    "slug": "stejk-na-skovorode-pan-searing",
+    "cid": "garlic",
+    "name": "чеснок",
+    "unit": "clove",
+    "detail": "неочищенный, раздавленные зубчики",
+    "optional": false
+  },
+  {
+    "slug": "frittata-s-kabachkami-i-bekonom",
+    "cid": "fresh_basil",
+    "name": "базилик свежий",
+    "unit": "bunch",
+    "detail": "для подачи",
+    "optional": true
+  },
+  {
+    "slug": "shakshuka-s-tomatami-i-bazilikom",
+    "cid": "fresh_basil",
+    "name": "базилик свежий",
+    "unit": "bunch",
+    "detail": "несколько веточек",
+    "optional": false
+  }
+]

@@ -1,7 +1,7 @@
 @layer tokens {
   :root {
     --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-serif: var(--font-sans);
     --font-mono: ui-monospace, 'Cascadia Code', 'IBM Plex Mono', monospace;
 
     --bg: #1b1713;

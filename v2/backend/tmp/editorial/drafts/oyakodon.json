@@ -1,0 +1,343 @@
+{
+  "id": "oyakodon",
+  "title": "Оякодон",
+  "summary": "Полоски куриного бедра тушат с луком в смеси даси (или воды), соевого соуса и мирина, затем заливают яйцом. Края белка должны схватиться; полностью жидкое яйцо с обычных яиц лучше не оставлять. Выкладывают на тёплый рис.",
+  "protein_base": "poultry",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "thigh"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [
+    "poultry_temp"
+  ],
+  "caution_text": "Филе бедра без кости: в самом толстом месте не ниже 74 °C, проверить до яйца. Не ориентироваться только на цвет сока. Обычные яйца лучше довести до схватывания желтка или взять пастеризованные.",
+  "time_profile": {
+    "total_minutes": 25,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "to": "tofu",
+      "from": "chicken_thighs",
+      "type": "substitution",
+      "quality": 0.84
+    },
+    {
+      "to": "dashi",
+      "from": "water",
+      "type": "substitution",
+      "quality": 0.92
+    },
+    {
+      "type": "omission",
+      "quality": 0.9,
+      "ingredient": "green_onion"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Полоски филе бедра без кости остаются сочными в соусе. Грудка за те же минуты суше. Кость не нужна.",
+      "title": "Какое мясо"
+    },
+    {
+      "text": "Термометр в самую толстую полоску, не в соус. После яйца температуру мяса уже не проверить. Середина может оставаться мягкой по технологии блюда, но полностью жидкое яйцо с обычных непастеризованных яиц лучше не оставлять: доведите желток до схватывания или берите пастеризованные яйца.",
+      "title": "74 °C до яйца"
+    },
+    {
+      "text": "На 200 г мяса нужно около 110 мл воды или даси плюс соевый и мирин. Без этой жидкости получится глазурь, а не оякодон. Если выкипело — ложка воды, не ещё соевого.",
+      "title": "Жидкость в соусе"
+    },
+    {
+      "text": "200 г — одна партия в сковороде 24–26 см. Полная сковорода даёт пар: курица серая, яйцо варится лужей.",
+      "title": "Сковорода"
+    },
+    {
+      "text": "Мирин даёт блеск и мягкую сладость. Нет мирина — 15 г мёда растворить в 15 мл тёплой воды.",
+      "title": "Мирин или мёд"
+    },
+    {
+      "text": "На сковороде только лук, курица и яйцо. Рис варят отдельно или разогревают вчерашний. Холодный рис под горячим яйцом остудит блюдо.",
+      "title": "Рис заранее"
+    },
+    {
+      "text": "Обычный содержит сою и пшеницу. Соль сверху не нужна: соус уже солоноватый.",
+      "title": "Соевый соус"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_thighs",
+      "display_name": "куриное бедро",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "филе без кости, полосками 1,5–2 см"
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "репчатый лук",
+      "amount": 120,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около одной средней головки, перьями или полукольцами"
+    },
+    {
+      "position": 3,
+      "canonical_id": "egg",
+      "display_name": "яйца",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 3,
+      "detail": "слегка смешать белок с желтком, не взбивать в пену"
+    },
+    {
+      "position": 4,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 25,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "обычный пшеничный; около 1,5 ст. л."
+    },
+    {
+      "position": 5,
+      "canonical_id": "mirin",
+      "display_name": "мирин",
+      "amount": 25,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сладкое рисовое вино",
+      "choice_group": "mirin_sub"
+    },
+    {
+      "position": 6,
+      "canonical_id": "honey",
+      "display_name": "мёд",
+      "amount": 15,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "вместо мирина: растворить в 15 мл тёплой воды",
+      "choice_group": "mirin_sub"
+    },
+    {
+      "position": 7,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 110,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для соуса; или даси — одно",
+      "choice_group": "broth"
+    },
+    {
+      "position": 8,
+      "canonical_id": "dashi",
+      "display_name": "даси",
+      "amount": 110,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "вместо воды; порошок развести по пачке",
+      "choice_group": "broth"
+    },
+    {
+      "position": 9,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": 300,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "уже сваренный тёплый, на две миски; круглозёрный или жасмин"
+    },
+    {
+      "position": 10,
+      "canonical_id": "green_onion",
+      "display_name": "зелёный лук",
+      "amount": 15,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "тонко наискосок, на подачу"
+    },
+    {
+      "position": 11,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для сковороды"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать филе куриного бедра полосками 1,5–2 см. Лук — перьями или полукольцами. Яйца слегка смешать вилкой: белок и желток могут остаться полосками, в пену не взбивать."
+    },
+    {
+      "position": 2,
+      "text": "Тёплый рис разложить по мискам. Если рис холодный — разогреть заранее, к сборке он должен быть горячим."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть сковороду с маслом на среднем огне. Выложить лук и размягчить, помешивая, пока не станет полупрозрачным.",
+      "timer_seconds": 180,
+      "timer_label": "Лук",
+      "timer_note": "около 3 минут; не жарить до тёмной корочки"
+    },
+    {
+      "position": 4,
+      "text": "Добавить курицу. Влить воду или даси, соевый соус и мирин (или мёд, растворённый в 15 мл тёплой воды). Тушить на среднем огне, пока в самом толстом месте полоски не будет 74 °C. Яйцо не лить раньше.",
+      "timer_seconds": 360,
+      "timer_label": "Курица в соусе",
+      "timer_note": "5–7 минут; ориентир — 74 °C в толще полоски, не цвет сока",
+      "target_internal_temperature_c": 74,
+      "equipment_note": "Не перегружать сковороду: курица в один слой. 200 г — одна партия; больше мяса — порциями, иначе соус выкипит, а яйцо ляжет лужей."
+    },
+    {
+      "position": 5,
+      "text": "Если жидкости почти не осталось — влить 1–2 ст. л. воды, не новую порцию соевого. Соус должен покрывать дно тонким слоем.",
+      "timer_seconds": 30,
+      "timer_label": "Соус",
+      "timer_note": "полминуты; глазурь без жидкости — не оякодон"
+    },
+    {
+      "position": 6,
+      "text": "Равномерно вылить яйца по кругу. Накрыть. Края белка должны схватиться. Середина у оякодона часто оставляют мягкой, но полностью жидкое яйцо с обычных непастеризованных яиц лучше не оставлять: доведите желток до схватывания или берите пастеризованные яйца.",
+      "timer_seconds": 45,
+      "timer_label": "Яйцо",
+      "timer_note": "30–60 секунд — края схватились; для обычных яиц держать до схватывания желтка"
+    },
+    {
+      "position": 7,
+      "text": "Сдвинуть курицу с яйцом на рис вместе с соусом. Посыпать зелёным луком."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "vegetarian_tofu",
+      "title": "С тофу и шиитаке",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 100,
+            "detail": "свежие культивируемые, пластинами; не лесные",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "shiitake",
+            "display_name": "шиитаке"
+          }
+        ],
+        "replace": [
+          {
+            "name": "тофу",
+            "unit": "g",
+            "amount": 200,
+            "detail": "плотный, отжать, кубик 2 см; не мягкий для супа",
+            "position": 1,
+            "scalable": true,
+            "is_anchor": true,
+            "scale_mode": "linear",
+            "canonical_id": "tofu",
+            "display_name": "тофу"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Тофу отжать и нарезать кубиком 2 см. Шиитаке — пластинами, жёсткие ножки срезать. Лук — перьями. Яйца слегка смешать вилкой, в пену не взбивать.",
+            "position": 1
+          },
+          {
+            "text": "Добавить тофу и шиитаке в один слой. Влить воду или даси, соевый соус и мирин. Тушить, пока тофу не прогреется, а грибы не станут мягкими.",
+            "position": 4,
+            "timer_note": "4–6 минут; тофу не разваливать лопаткой",
+            "timer_label": "Тофу и шиитаке",
+            "timer_seconds": 300,
+            "target_internal_temperature_c": null
+          },
+          {
+            "text": "Если жидкости почти не осталось — влить 1–2 ст. л. воды. Соус должен покрывать дно тонким слоем.",
+            "position": 5,
+            "timer_note": "1–2 минуты",
+            "timer_label": "Соус",
+            "timer_seconds": 90
+          },
+          {
+            "text": "Сдвинуть тофу, шиитаке и яйцо на рис вместе с соусом. Посыпать зелёным луком.",
+            "position": 7
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": [
+          "poultry_temp"
+        ]
+      },
+      "caution_text_override": "Птицы в этом варианте нет: плотный тофу и магазинные шиитаке. Температуру мяса не проверять."
+    }
+  ]
+}

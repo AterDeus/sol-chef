@@ -3,15 +3,15 @@ from pathlib import Path
 from django.conf import settings
 
 from apps.recipes.constants import EXPECTED_RECIPE_COUNT, EXPECTED_RECIPE_FILES
-from apps.recipes.etl.load import load_recipe_objects, read_index
+from apps.recipes.etl.load import V1ImportError, load_recipe_objects, read_index, resolve_v1_root
 
 
 def _v1_root() -> Path:
     env = Path(settings.V1_DATA_ROOT)
-    if (env / "data" / "recipes" / "index.json").is_file():
-        return env
-    repo = Path(__file__).resolve().parents[3]
-    return repo
+    try:
+        return resolve_v1_root(env)
+    except V1ImportError:
+        return resolve_v1_root(Path(__file__).resolve().parents[3])
 
 
 def test_i1_v1_catalog_has_43_recipes():

@@ -71,6 +71,14 @@ def apply_mode(amount: Decimal, ratio: Decimal, scale_mode: str, scalable: bool)
     return amount * ratio
 
 
+SPOON_ML = {"tsp": Decimal("5"), "tbsp": Decimal("15")}
+
+
+def _spoon_ml(amount: Decimal, unit: str) -> str:
+    ml = (amount * SPOON_ML[unit]).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+    return _format_number(ml)
+
+
 def format_display_amount(
     amount: Decimal | None, unit: str, amount_max: Decimal | None = None
 ) -> str:
@@ -80,7 +88,13 @@ def format_display_amount(
     text = _format_number(amount)
     if amount_max is not None:
         text = f"{text}–{_format_number(amount_max)}"
-    return f"{text} {label}"
+    shown = f"{text} {label}"
+    if unit in SPOON_ML:
+        hint = _spoon_ml(amount, unit)
+        if amount_max is not None:
+            hint = f"{hint}–{_spoon_ml(amount_max, unit)}"
+        shown = f"{shown} (~{hint} мл)"
+    return shown
 
 
 def _format_number(value: Decimal) -> str:

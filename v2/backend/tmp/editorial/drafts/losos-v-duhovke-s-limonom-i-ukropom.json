@@ -1,0 +1,355 @@
+{
+  "id": "losos-v-duhovke-s-limonom-i-ukropom",
+  "title": "Лосось в духовке с лимоном и укропом",
+  "summary": "Стейк или филе лосося запекается на противне при 190°C без молока, сливок и сыра: только растительное масло, лимон, чеснок и зелень. Ориентир готовности — не ниже 63°C внутри, затем короткий отдых перед подачей.",
+  "protein_base": "fish_red_sea",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Pilot source notes A02",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 28,
+    "active_minutes": 8
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "to": "pan_fry",
+      "from": "oven",
+      "type": "method",
+      "quality": 0.86
+    },
+    {
+      "to": "grill",
+      "from": "oven",
+      "type": "method",
+      "quality": 0.84
+    },
+    {
+      "to": "skillet",
+      "from": "oven",
+      "type": "equipment",
+      "quality": 0.86
+    },
+    {
+      "to": "grill",
+      "from": "oven",
+      "type": "equipment",
+      "quality": 0.84
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "В составе нет сливочного масла, сливок, сыра, молока и сметаны — только масло, лимон, чеснок и зелень.",
+      "title": "Без молока"
+    },
+    {
+      "text": "Кусок 2,5–3 см. Время — ориентир 12–18 минут; готовность проверяйте термометром в самой толстой части, не по цвету поверхности.",
+      "title": "Толщина"
+    },
+    {
+      "text": "Лосось или форель из супермаркета: стейк или филе на выбор, не оба сразу.",
+      "title": "Рыба"
+    },
+    {
+      "text": "Для смеси достаточно одного растительного масла: оливкового или нейтрального рафинированного. Молочные жиры не подменять обратно.",
+      "title": "Масло"
+    },
+    {
+      "text": "Укроп можно заменить петрушкой того же веса; вкус станет мягче, состав по аллергенам тот же.",
+      "title": "Зелень"
+    },
+    {
+      "text": "Пергаментный конверт в вариации держит сок; режим и температура те же, состав не меняется.",
+      "title": "Конверт"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "salmon_fillet",
+      "display_name": "филе лосося",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "стейк или кусок филе одинаковой толщины 2,5–3 см",
+      "choice_group": "fish"
+    },
+    {
+      "position": 2,
+      "canonical_id": "trout_fillet",
+      "display_name": "филе форели",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "стейк или кусок филе той же толщины",
+      "choice_group": "fish"
+    },
+    {
+      "position": 3,
+      "canonical_id": "olive_oil",
+      "display_name": "оливковое масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "oil"
+    },
+    {
+      "position": 4,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "choice_group": "oil"
+    },
+    {
+      "position": 5,
+      "canonical_id": "lemon",
+      "display_name": "лимон",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "цедра и сок"
+    },
+    {
+      "position": 6,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "dill",
+      "display_name": "укроп",
+      "amount": 10,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежая зелень, мелко нарезать",
+      "choice_group": "herbs"
+    },
+    {
+      "position": 8,
+      "canonical_id": "parsley",
+      "display_name": "петрушка",
+      "amount": 10,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "замена укропу",
+      "choice_group": "herbs"
+    },
+    {
+      "position": 9,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "black_pepper",
+      "display_name": "перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 190°C. Застелить противень пергаментом или фольгой."
+    },
+    {
+      "position": 2,
+      "text": "Смешать масло с цедрой и соком лимона, измельчённым чесноком, нарезанной зеленью, солью и перцем. Молочные продукты не использовать."
+    },
+    {
+      "position": 3,
+      "text": "Обсушить филе, выложить на противень и смазать смесью со всех сторон."
+    },
+    {
+      "position": 4,
+      "text": "Запекать около 15 минут (для куска 2,5–3 см ориентир 12–18 минут), пока в самой толстой части не будет не ниже 63°C.",
+      "timer_seconds": 900,
+      "timer_label": "Запекание",
+      "timer_note": "Внутренняя температура: 63°C",
+      "target_internal_temperature_c": 63
+    },
+    {
+      "position": 5,
+      "text": "Вынуть противень и дать рыбе отдохнуть 2–3 минуты, затем подавать.",
+      "timer_seconds": 180,
+      "timer_label": "Отдых"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "in_parchment",
+      "title": "В пергаментном конверте",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Обсушить филе, выложить на противень, смазать смесью со всех сторон и завернуть в пергамент.",
+            "position": 3
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "grill",
+      "title": "На гриле",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть гриль до среднего жара. Решётку смазать маслом. Если стейк тонкий — корзинка или лист фольги, чтобы рыба не провалилась и не развалилась.",
+            "position": 1
+          },
+          {
+            "text": "Обсушить филе, смазать смесью. Выложить кожей вниз на решётку или в корзинку.",
+            "position": 3,
+            "equipment_note": "Смазанная решётка. Тонкий кусок — только корзинка или фольга, не голые прутья."
+          },
+          {
+            "text": "Жарить, перевернуть один раз широкой лопаткой. В самой толстой части не ниже 63 °C или мясо легко разделяется на влажные хлопья. Не доводить до сухих волокон.",
+            "position": 4,
+            "timer_note": "Около 4–5 минут с каждой стороны; не копировать 15 минут духовки",
+            "timer_label": "Гриль",
+            "timer_seconds": 600,
+            "target_internal_temperature_c": 63
+          },
+          {
+            "text": "Снять рыбу с решётки или из корзинки и дать отдохнуть 2–3 минуты, затем подавать.",
+            "position": 5,
+            "timer_label": "Отдых",
+            "timer_seconds": 180
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "grill",
+      "equipment": "grill"
+    },
+    {
+      "axis": "equipment",
+      "code": "skillet",
+      "title": "На сковороде",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть сковороду с маслом на средне-сильном огне. Противень и духовка не нужны.",
+            "position": 1
+          },
+          {
+            "text": "Обсушить филе, смазать смесью. Выложить кожей вниз. Не двигать, пока кожа не схватится — иначе кусок развалится.",
+            "position": 3,
+            "equipment_note": "Один слой. Толстый стейк целиком; тонкий край не наваливать вторым ярусом."
+          },
+          {
+            "text": "Жарить кожей вниз, затем аккуратно перевернуть широкой лопаткой, не разваливая. В самой толстой части не ниже 63 °C или мясо легко разделяется на влажные хлопья.",
+            "position": 4,
+            "timer_note": "Около 5–6 минут кожей вниз и 2–3 после переворота; короче 12–18 минут духовки",
+            "timer_label": "Сковорода",
+            "timer_seconds": 480,
+            "target_internal_temperature_c": 63
+          },
+          {
+            "text": "Снять рыбу со сковороды и дать отдохнуть 2–3 минуты, затем подавать.",
+            "position": 5,
+            "timer_label": "Отдых",
+            "timer_seconds": 180
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "pan_fry",
+      "equipment": "skillet"
+    }
+  ]
+}

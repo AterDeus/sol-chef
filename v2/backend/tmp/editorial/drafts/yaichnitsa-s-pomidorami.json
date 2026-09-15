@@ -1,0 +1,237 @@
+{
+  "id": "yaichnitsa-s-pomidorami",
+  "title": "Яичница с помидорами",
+  "summary": "Лук и помидоры обжаривают и тушат без крышки, пока сок не выпарится и не останется густая овощная основа, затем в углубления выпускают яйца и доводят под крышкой: белок плотный, желток часто полужидкий.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "pan_fry",
+  "dish_type": "breakfast",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 20,
+    "active_minutes": 15
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": [
+    "fast",
+    "easy",
+    "pantry"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.88
+    },
+    {
+      "to": "baking_dish",
+      "from": "skillet",
+      "type": "equipment",
+      "quality": 0.88
+    },
+    {
+      "type": "omission",
+      "quality": 0.92,
+      "ingredient": "bell_pepper"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Помидоры должны хорошо прогреться и отдать лишнюю влагу, но оставаться кусочками; превращать их в пюре не нужно. Овощи остаются кусочками, и только потом в них выпускают цельные яйца.",
+      "title": "Обжарка томатов"
+    },
+    {
+      "text": "Доводите под крышкой на минимальном огне: белок должен полностью побелеть и уплотниться между ломтиками томатов, а желток можно оставить полужидким или довести до плотности по вкусу.",
+      "title": "Готовность яиц"
+    },
+    {
+      "text": "Главная ошибка — яйца в лужу. Помидоры должны увариться, пока лопатка оставляет сухой след. Зимние бледные плоды водянистее: держать дольше, не прибавлять пасту «чтобы было как шакшука».",
+      "title": "Сок помидоров"
+    },
+    {
+      "text": "По желанию, для сладости. Без него блюдо то же. Острый перец и зиру не подставлять: вкус уедет в другую сторону.",
+      "title": "Перец"
+    },
+    {
+      "text": "Одна посуда. Крышка на этапе яиц: без неё верх белка не успеет побелеть, пока низ желтка уже затянется. Не перегружать: 400 г помидоров + 4 яйца — сковорода от 24 см.",
+      "title": "Сковорода"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "tomato",
+      "display_name": "помидоры",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "спелые, кубик 1,5 см; водянистые зимние — дольше уваривать"
+    },
+    {
+      "position": 2,
+      "canonical_id": "eggs",
+      "display_name": "яйца",
+      "amount": 4,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "крупные"
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 120,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "один средний, полукольцами"
+    },
+    {
+      "position": 4,
+      "canonical_id": "bell_pepper",
+      "display_name": "болгарский перец",
+      "amount": 100,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "соломка"
+    },
+    {
+      "position": 5,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для сковороды"
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "к овощам; яйца — щепоть сверху после выпуска"
+    },
+    {
+      "position": 7,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать лук полукольцами, помидоры кубиком 1,5 см. Если кладёте перец — соломкой."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть сковороду с маслом на среднем огне. Обжарить лук до мягкости и лёгкого золота, затем перец, если используете.",
+      "timer_seconds": 240,
+      "timer_label": "Лук",
+      "timer_note": "4 минуты; лук прозрачный с золотыми краями, не тёмная корочка"
+    },
+    {
+      "position": 3,
+      "text": "Добавить помидоры и соль. Тушить без крышки, помешивая, пока сок не выпарится и останется густая поджарка, а не суп.",
+      "timer_seconds": 480,
+      "timer_label": "Помидоры",
+      "timer_note": "7–9 минут; ориентир — лопатка оставляет след, который не заливается сразу",
+      "equipment_note": "Сковорода не меньше 24 см на 400 г помидоров: в тесной посуде овощи варятся в соке."
+    },
+    {
+      "position": 4,
+      "text": "Лопаткой сделать четыре углубления в овощах. Выпустить по яйцу в каждое. Поперчить, щепоть соли на белок."
+    },
+    {
+      "position": 5,
+      "text": "Накрыть крышкой и готовить на слабом огне, пока белок не побелеет и не уплотнится между овощами. Желток можно оставить полужидким или довести до плотности — как любите.",
+      "timer_seconds": 240,
+      "timer_label": "Яйца",
+      "timer_note": "3–5 минут под крышкой; белок матовый, желток ещё подвижен, если хотите полужидкий"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 200 °C. Смазать форму маслом, выложить лук и перец, если используете, полить маслом.",
+            "position": 2
+          },
+          {
+            "text": "Добавить помидоры и соль, перемешать. Запекать без крышки, пока сок не уварится и края овощей не подсохнут.",
+            "position": 3,
+            "timer_note": "15 минут при 200 °C; дольше сковороды — форма греет спокойнее, лужу всё равно выпарить",
+            "timer_label": "Овощи в форме",
+            "timer_seconds": 900
+          },
+          {
+            "text": "Достать форму. Сделать четыре углубления, выпустить яйца, поперчить.",
+            "position": 4
+          },
+          {
+            "text": "Вернуть в духовку и запекать, пока белок не побелеет. Желток можно оставить полужидким или додержать до плотности.",
+            "position": 5,
+            "timer_note": "6–8 минут; белок матовый, желток по вкусу — снять раньше, пока ещё подвижен",
+            "timer_label": "Яйца в духовке",
+            "timer_seconds": 420,
+            "equipment_note": "Форма около 20×20 см или сковорода без пластмассовой ручки: яйца должны лежать в углублениях, не растекаться тонкой плёнкой по всему дну."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "baking_dish"
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "id": "bitye-ogurtsy-po-aziatski",
+  "title": "«Битые» огурцы по-азиатски",
+  "summary": "Пупырчатые огурцы плющат ножом или скалкой, заправляют соевым, чесноком и уксусом и оставляют на 10 минут. Не варить и не мариновать часами: хруст уходит, в миске остаётся рассол.",
+  "protein_base": "vegetables",
+  "cook_method": "no_cook",
+  "dish_type": "salad",
+  "equipment": null,
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 20,
+    "active_minutes": 10
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": [
+    "fast",
+    "easy",
+    "pantry"
+  ],
+  "adaptations": [],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Нужны пупырчатые короткоплодные: у них плотная мякоть. Гладкие салатные после плющения дают воду и вялую текстуру.",
+      "title": "Огурцы"
+    },
+    {
+      "text": "Прижмите огурец широким лезвием ножа или скалкой, чтобы мякоть растрескалась вдоль. Рваные трещины впитывают заправку, гладкий кубик остаётся скользким снаружи. Затем нарежьте наискосок крупными кусками.",
+      "title": "Как отбивать"
+    },
+    {
+      "text": "Достаточно 10–15 минут при комнатной температуре, чтобы огурцы промариновались и остались хрустящими. Через час они пустят сок и потеряют тело; на ночь в холодильник не ставить.",
+      "title": "Подавать сразу"
+    },
+    {
+      "text": "Обычный пшеничный: соя и глютен. Соль в рецепте поверх соуса — если соус уже солоноватый, соли меньше.",
+      "title": "Соевый соус"
+    },
+    {
+      "text": "Рисовый мягче. Яблочный заменяет его один к одному. Столовый 9% и бальзамик не класть: первый жёсткий, второй сладкий и тёмный.",
+      "title": "Уксус"
+    },
+    {
+      "text": "Растительное нейтральное или тёмное кунжутное — одно, не оба. Кунжутное ароматнее; оба сразу дают жирную плёнку.",
+      "title": "Масло"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "cucumber",
+      "display_name": "огурцы",
+      "amount": 500,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "пупырчатые короткоплодные, не гладкие салатные"
+    },
+    {
+      "position": 2,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 20,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около 1 ст. л. с верхом, обычный пшеничный"
+    },
+    {
+      "position": 3,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "раздавить или натереть"
+    },
+    {
+      "position": 4,
+      "canonical_id": "rice_vinegar",
+      "display_name": "рисовый уксус",
+      "amount": 15,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "безострый 3–5%; не бальзамик",
+      "choice_group": "vinegar"
+    },
+    {
+      "position": 5,
+      "canonical_id": "apple_cider_vinegar",
+      "display_name": "яблочный уксус",
+      "amount": 15,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "вместо рисового",
+      "choice_group": "vinegar"
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "рафинированное; если нет кунжутного",
+      "choice_group": "oil"
+    },
+    {
+      "position": 7,
+      "canonical_id": "sesame_oil",
+      "display_name": "кунжутное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "тёмное; вместо растительного",
+      "choice_group": "oil"
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "pinch",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "по вкусу; соевый уже солоноватый — часто не нужна"
+    },
+    {
+      "position": 9,
+      "canonical_id": "chili_flakes",
+      "display_name": "хлопья чили",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Пупырчатые огурцы вымыть и обсушить. Срезать концы. Кожицу не снимать целиком — можно полосками, если горчит."
+    },
+    {
+      "position": 2,
+      "text": "Плющить огурцы боковой стороной ножа или скалкой, пока кожица не треснет и мякоть не пойдёт трещинами. Порвать или нарезать крупными кусками. Не варить и не бланшировать."
+    },
+    {
+      "position": 3,
+      "text": "Смешать маринад: соевый соус, рисовый или яблочный уксус, чеснок, растительное или кунжутное масло, соль и хлопья чили."
+    },
+    {
+      "position": 4,
+      "text": "Залить огурцы маринадом, перемешать. Оставить на 10–15 минут при комнатной температуре.",
+      "timer_seconds": 600,
+      "timer_label": "Маринад",
+      "timer_note": "около 10 минут; дольше часа огурцы отдадут сок и потеряют хруст"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_peanuts",
+      "title": "С арахисом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 40,
+            "detail": "уже жареный, без оболочки, крупно подробить",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "peanuts",
+            "display_name": "арахис"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Перед подачей посыпать дроблёным жареным арахисом. Арахис не жарить: брать готовый.",
+            "after_position": 4
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "peanut"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_sesame_cilantro",
+      "title": "С кунжутом и кинзой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "семена; можно уже поджаренные, на плите не жарить",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "sesame",
+            "display_name": "кунжут"
+          },
+          {
+            "unit": "g",
+            "amount": 15,
+            "detail": "свежая, крупно порвать",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "cilantro",
+            "display_name": "кинза"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Перед подачей посыпать кунжутом и кинзой, ещё раз перемешать. Кунжут не обжаривать: блюдо без плиты.",
+            "after_position": 4
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ]
+}

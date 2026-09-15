@@ -1,0 +1,509 @@
+{
+  "id": "rizotto-bazovyy-parmezan",
+  "title": "Ризотто (базовый рецепт, с пармезаном)",
+  "summary": "Техника, а не набор продуктов: рис не моют, горячий бульон подливают половниками, помешивание стачивает крахмал с зёрен. Вне огня холодное масло и пармезан дают кремовость без сливок.",
+  "protein_base": "vegetarian",
+  "cook_method": "boil",
+  "dish_type": "pasta_grains",
+  "equipment": "saucepan",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 30
+  },
+  "effort_level": 4,
+  "washing_level": 3,
+  "use_cases": [],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "boil",
+      "type": "method",
+      "quality": 0.84
+    },
+    {
+      "to": "oven",
+      "from": "saucepan",
+      "type": "equipment",
+      "quality": 0.84
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Не промывать: крахмал на поверхности зерна — источник кремовости. Арборио или карнароли; обычный круглозёрный даст кашу.",
+      "title": "Рис"
+    },
+    {
+      "text": "Только горячий и порционно. Воду использовать можно, но вкус получится менее насыщенным. Магазинный куриный или овощной часто с сельдереем — смотрите состав.",
+      "title": "Бульон"
+    },
+    {
+      "text": "Зёрна трутся друг о друга и отдают крахмал в жидкость. Непрерывность важнее силы. Две посуды: кастрюля с бульоном и широкий сотейник.",
+      "title": "Помешивание"
+    },
+    {
+      "text": "Холодное масло и пармезан вмешивайте строго со снятого с огня сотейника. От остаточного тепла сыр и масло свяжутся в кремовую эмульсию; на включённой плите жир быстро перегреется и отсечётся.",
+      "title": "Финальное взбивание (мантекатура)"
+    },
+    {
+      "text": "Готовое ризотто растекается волной (all'onda), не стоит горкой. Если густое — ещё половник горячего бульона.",
+      "title": "Консистенция"
+    },
+    {
+      "text": "Бульон и пармезан уже солёные. Солить в конце, после пробы на зубок.",
+      "title": "Соль"
+    },
+    {
+      "text": "Сухое белое. В вине часто сульфиты.",
+      "title": "Вино"
+    },
+    {
+      "text": "Почти весь бульон сразу, крышка, 18 минут в камере 180 °C, одно помешивание в конце. Не копируйте помешивание половником и не используйте рисоварку. Грибы и тыква — отдельные варианты к этой же базе.",
+      "title": "Духовка"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "для ризотто (арборио или карнароли), не промывать"
+    },
+    {
+      "position": 2,
+      "canonical_id": "stock",
+      "display_name": "бульон",
+      "amount": 700,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 800,
+      "detail": "куриный или овощной, горячий"
+    },
+    {
+      "position": 3,
+      "canonical_id": "white_wine",
+      "display_name": "белое вино",
+      "amount": 100,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сухое"
+    },
+    {
+      "position": 4,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 75,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "шалот или репчатый, мелко нарезать"
+    },
+    {
+      "position": 5,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 40,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "разделить пополам: на обжарку и холодным на mantecatura"
+    },
+    {
+      "position": 6,
+      "canonical_id": "olive_oil",
+      "display_name": "оливковое масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "с половиной масла на обжарку лука"
+    },
+    {
+      "position": 7,
+      "canonical_id": "parmesan",
+      "display_name": "пармезан",
+      "amount": 40,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "amount_max": 50,
+      "detail": "тёртый"
+    },
+    {
+      "position": 8,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "с учётом солёности бульона и сыра"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть бульон в отдельной кастрюле и держать на самом слабом огне рядом с сотейником на протяжении всей готовки.",
+      "equipment_note": "Холодный бульон, влитый в рис, останавливает готовку."
+    },
+    {
+      "position": 2,
+      "text": "В широком сотейнике разогреть оливковое масло с половиной сливочного, обжарить лук на среднем огне до мягкости и прозрачности, не давая подрумяниться."
+    },
+    {
+      "position": 3,
+      "text": "Всыпать рис, обжаривать, постоянно помешивая (тостатура): зёрна полупрозрачные по краям и блестящие, белые в центре.",
+      "timer_seconds": 150,
+      "timer_label": "Тостатура",
+      "timer_note": "2–3 минуты; ориентир — вид зерна, не таймер"
+    },
+    {
+      "position": 4,
+      "text": "Влить вино, помешивать, пока оно почти полностью не выпарится."
+    },
+    {
+      "position": 5,
+      "text": "Добавлять горячий бульон по половнику, постоянно помешивая и дожидаясь почти полного впитывания перед следующей порцией.",
+      "timer_seconds": 1080,
+      "timer_label": "Добавление бульона",
+      "timer_note": "Для 200 г риса; al dente важнее времени — пробовать за 2–3 минуты до конца"
+    },
+    {
+      "position": 6,
+      "text": "За 2–3 минуты до конца попробовать рис: al dente, лёгкое сопротивление в центре, не сырой и не разваренный. Подсолить по вкусу."
+    },
+    {
+      "position": 7,
+      "text": "Снять сотейник с огня, вмешать оставшееся холодное сливочное масло кусочками и тёртый пармезан энергичными круговыми движениями, слегка встряхивая сотейник (mantecatura)."
+    },
+    {
+      "position": 8,
+      "text": "Сразу после мантекатуры разложить ризотто по тарелкам и слегка разровнять: готовое должно растекаться волной, а не стоять горкой.",
+      "timer_seconds": 90,
+      "timer_label": "Отдых",
+      "timer_note": "1–2 минуты под крышкой"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "milanese_saffron",
+      "title": "Миланезе (с шафраном)",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "pinch",
+            "amount": null,
+            "detail": "нити, замочить в ложке горячего бульона",
+            "scalable": false,
+            "scale_mode": "gentle",
+            "canonical_id": "saffron",
+            "display_name": "шафран"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Щепотку нитей шафрана замочить в ложке горячего бульона.",
+            "timer_note": "10 минут; короткое замачивание сохраняет цвет лучше, чем варка нитей в общем бульоне",
+            "timer_label": "Шафран",
+            "timer_seconds": 600,
+            "after_position": 1
+          },
+          {
+            "text": "Влить настой шафрана в ризотто за 5 минут до готовности.",
+            "timer_label": "Настой",
+            "timer_seconds": 300,
+            "after_position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_champignons",
+      "title": "С шампиньонами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 200,
+            "detail": "свежие; обжарить отдельно",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Шампиньоны обжарить отдельно на сильном огне до золотистого цвета, не в сотейнике с рисом: иначе отдадут воду и притормозят тостатуру.",
+            "after_position": 2
+          },
+          {
+            "text": "Вмешать обжаренные шампиньоны в ризотто за последние 5 минут добавления бульона.",
+            "timer_label": "Грибы",
+            "timer_seconds": 300,
+            "after_position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_pumpkin_sage",
+      "title": "С тыквой и шалфеем",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 300,
+            "detail": "кубиком; половину размять в пюре",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "pumpkin",
+            "display_name": "тыква"
+          },
+          {
+            "unit": "pinch",
+            "amount": null,
+            "detail": "к тыкве",
+            "scalable": false,
+            "scale_mode": "gentle",
+            "canonical_id": "nutmeg",
+            "display_name": "мускатный орех"
+          },
+          {
+            "unit": "pcs",
+            "amount": 6,
+            "detail": "листья, обжарить до хруста",
+            "scalable": true,
+            "scale_mode": "whole",
+            "canonical_id": "sage",
+            "display_name": "шалфей"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Тыкву нарезать кубиком, обжарить или запечь отдельно до мягкости со щепоткой мускатного ореха. Половину размять в пюре, половину оставить кубиками.",
+            "after_position": 1
+          },
+          {
+            "text": "За 5 минут до готовности вмешать тыквенное пюре; кубики оставить для текстуры.",
+            "timer_label": "Тыква",
+            "timer_seconds": 300,
+            "after_position": 5
+          },
+          {
+            "text": "Листья шалфея обжарить в части сливочного масла до хруста и выложить сверху при подаче.",
+            "after_position": 8
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_seafood",
+      "title": "С морепродуктами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 300,
+            "detail": "креветки, мидии, кальмары",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "seafood_mix",
+            "display_name": "морепродукты"
+          },
+          {
+            "unit": "clove",
+            "amount": 2,
+            "detail": "измельчить, к луку",
+            "scalable": true,
+            "scale_mode": "whole",
+            "canonical_id": "garlic",
+            "display_name": "чеснок"
+          },
+          {
+            "unit": "bunch",
+            "detail": "мелко рубленая, при подаче",
+            "scalable": false,
+            "scale_mode": "gentle",
+            "canonical_id": "parsley",
+            "display_name": "петрушка"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "parmesan"
+          }
+        ],
+        "replace": [
+          {
+            "name": "бульон рыбный",
+            "detail": "горячий; процеженную воду от варки мидий можно добавить",
+            "position": 2,
+            "canonical_id": "fish_stock"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "За последние минуты добавления бульона выложить морепродукты в сотейник и прогреть до готовности.",
+            "after_position": 5
+          }
+        ],
+        "replace": [
+          {
+            "text": "В широком сотейнике разогреть оливковое масло с половиной сливочного, обжарить лук и чеснок на среднем огне до мягкости, не давая подрумяниться.",
+            "position": 2
+          },
+          {
+            "text": "Снять сотейник с огня, вмешать оставшееся холодное сливочное масло кусочками энергичными круговыми движениями, сыр не класть. Сверху — капля оливкового масла и рубленая петрушка.",
+            "position": 7
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "fish",
+          "crustacean",
+          "mollusc"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Бульон нагреть в отдельной кастрюле до горячего, не кипящего ключом.",
+            "position": 1
+          },
+          {
+            "text": "В широком сотейнике или форме, которая идёт в духовку, разогреть оливковое масло с половиной сливочного, обжарить лук до мягкости, не давая подрумяниться.",
+            "position": 2,
+            "equipment_note": "Сотейник должен выдерживать 180 °C. Рисоварку не использовать."
+          },
+          {
+            "text": "Влить почти весь горячий бульон сразу, оставив около 100 мл. Перемешать один раз, чтобы рис не лежал горкой. Половниками каждые минуту не подливать.",
+            "position": 5,
+            "timer_note": "Почти вся жидкость сразу; это не 18 подач половника"
+          },
+          {
+            "text": "Накрыть крышкой или фольгой в два слоя, края прижать. Поставить в камеру. Не мешать. За 3 минуты до конца открыть, попробовать: al dente, не сырой центр. Если сухо — влить оставшиеся 100 мл горячего бульона, не размешивая по кругу.",
+            "position": 6,
+            "timer_note": "18 минут при 180 °C под крышкой; активное помешивание плиты сюда не копировать",
+            "timer_label": "Камера",
+            "timer_seconds": 1080,
+            "equipment_note": "Камера духовки. Без крышки верх высохнет, низ останется сырым."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "oven"
+    }
+  ]
+}

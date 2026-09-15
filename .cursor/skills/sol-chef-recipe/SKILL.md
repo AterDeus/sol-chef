@@ -17,7 +17,7 @@ description: Writes and moderates sol-chef 2.0 recipe JSON (VOCAB codes, SAFETY 
 
 Один JSON. Факты из packet. `id` = транслит `title`. Не заполнять `editorial_tested`. Не использовать коды `duhovka` / `skovoroda`. Соль — `gentle` (`ratio^0.7`). Сода в бархате/маринаде — `linear`; в выпечке и дрожжи — `manual`. Неизвестные аллергены — `unknown` **на каноне**, не `allergens_*` в строке рецепта.
 
-Оверлей 43: эталон `v2/backend/tests/fixtures/gold_overlay.json`. Существующую карточку сначала `export_draft --slug`. Обязателен профиль (`time_profile`, effort/washing, `use_cases`). `variants` 0–10, не квота. `adaptations[]` отдельно. `new_ingredients` только если канона нет в сиде. `prep: []` не писать.
+Оверлей 43: эталон `v2/backend/tests/fixtures/gold_overlay.json`. Существующую карточку сначала `export_draft --slug`. Обязателен профиль (`time_profile`, effort/washing, `use_cases`). `variants` 0–10, не квота. `adaptations[]` отдельно. `new_ingredients` только если канона нет в сиде. `prep: []` не писать. Шкаф (соль, сахар, лимон, ложка муки) — [RECIPE.md](v2/docs/RECIPE.md) § «Шкаф»: можно добавить без смены базы; на карточке блок **Из шкафа**.
 
 Восемь вопросов: основа; посуда; обязательное; что убрать; что заменить; другой способ; редакционные варианты; `use_cases` (не `dinner`/`cozy`).
 
@@ -29,4 +29,4 @@ description: Writes and moderates sol-chef 2.0 recipe JSON (VOCAB codes, SAFETY 
 
 ## Куда писать
 
-`v2/docs/drafts/recipes/<slug>.json` → `import_draft --path`. Не корневой `data/recipes/`. Каталог в git не хранить: он в Postgres.
+`v2/docs/drafts/recipes/<slug>.json` → `import_draft --path`. Не `archive/v1/data/recipes/`. Каталог в git не хранить: он в Postgres.

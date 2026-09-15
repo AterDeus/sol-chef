@@ -1,0 +1,313 @@
+{
+  "id": "tsvetnaya-kapusta-v-duhovke",
+  "title": "Цветная капуста в духовке",
+  "summary": "Соцветия цветной капусты запекают в форме с маслом, чесноком и паприкой до румяных краёв и мягкой ножки.",
+  "protein_base": "vegetables",
+  "cook_method": "oven",
+  "dish_type": "side",
+  "equipment": "baking_dish",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 40,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 1,
+  "use_cases": [
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "to": "air_fryer",
+      "from": "oven",
+      "type": "method",
+      "quality": 0.9
+    },
+    {
+      "type": "omission",
+      "quality": 0.82,
+      "ingredient": "paprika"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Размер 3–4 см. Целую головку целиком здесь не печь: верх сгорит, кочерыжка останется сырой. Заранее отваривать не нужно — иначе в духовке будет каша.",
+      "title": "Соцветия"
+    },
+    {
+      "text": "После промывки обсушить. Оставшаяся на поверхности вода сначала будет испаряться, поэтому корочка образуется хуже.",
+      "title": "Сухие розочки"
+    },
+    {
+      "text": "Форма не горкой. Если 800 г не влезают в один ряд — второй противень или вторая партия, не два этажа.",
+      "title": "Один слой"
+    },
+    {
+      "text": "3 ст. л. на 800 г — плёнка, не лужа. Без масла края серые. Сметана в базе не нужна: иначе это уже запеканка.",
+      "title": "Масло"
+    },
+    {
+      "text": "Чаша маленькая: 400 г за закладку, соцветия мельче и обязательное встряхивание. Килограмм сразу — влажный пар.",
+      "title": "Аэрогриль"
+    },
+    {
+      "text": "Это два альтернативных варианта подачи, смешивать их не стоит. Тёртый сыр добавляют за 5–7 минут до готовности, чтобы он расплавился, но не подгорел. Сметаной готовые соцветия заправляют уже при подаче на стол.",
+      "title": "Сыр или сметана"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "cauliflower",
+      "display_name": "цветная капуста",
+      "amount": 800,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "свежая; разобрать на соцветия 3–4 см, ножку подрезать, не варить заранее"
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "чтобы покрыть соцветия плёнкой"
+    },
+    {
+      "position": 3,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "измельчить"
+    },
+    {
+      "position": 4,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сладкая, не копчёная"
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть духовку до 220 °C. Металлический противень быстрее отдаёт тепло и обычно помогает получить более румяную корочку; фольгой не застилать."
+    },
+    {
+      "position": 2,
+      "text": "Разобрать капусту на соцветия 3–4 см: слишком крупные останутся сырыми у ножки, слишком мелкие сгорят. Промыть и хорошо обсушить полотенцем — мокрые розочки будут париться."
+    },
+    {
+      "position": 3,
+      "text": "Смешать соцветия в форме с 3 ст. л. масла, измельчённым чесноком, паприкой, солью и перцем, чтобы каждая розочка блестела."
+    },
+    {
+      "position": 4,
+      "text": "Распределить в один слой срезом ножки вниз, с зазорами.",
+      "equipment_note": "Один слой. Горка в центре даёт пар, а не корочку — это уже варёная капуста."
+    },
+    {
+      "position": 5,
+      "text": "Запекать без крышки, пока края не начнут румяниться.",
+      "timer_seconds": 900,
+      "timer_label": "До переворота",
+      "timer_note": "15 минут; низ ещё плотный — так и должно быть"
+    },
+    {
+      "position": 6,
+      "text": "Перевернуть соцветия и запекать до тёмно-золотистых краёв: нож входит в ножку без хруста сырой сердцевины, куски держат форму.",
+      "timer_seconds": 900,
+      "timer_label": "До корочки",
+      "timer_note": "Ещё 12–15 минут; ориентир — цвет и ножка, не таймер"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_cheese",
+      "title": "С сыром",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 80,
+            "detail": "натёртый, российский или гауда",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "hard_cheese",
+            "display_name": "твёрдый сыр"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Посыпать соцветия натёртым сыром и вернуть в духовку, пока сыр не расплавится и не появятся румяные пятна. Сыр с первой минуты сгорит.",
+            "timer_note": "7–8 минут; не держать до чёрной корки",
+            "timer_label": "Сыр",
+            "timer_seconds": 480,
+            "after_position": 6
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "milk"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_sour_cream",
+      "title": "Со сметаной",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 150,
+            "detail": "15–20%, комнатной температуры",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "sour_cream",
+            "display_name": "сметана"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Соцветия уже румяные с шага 5. Убавить духовку до 180 °C. Смешать сметану с щепоткой соли, полить тонким слоем и запекать коротко, пока сметана не загустеет пятнами — не кипятить при 220 °C.",
+            "position": 6,
+            "timer_note": "5–6 минут при 180 °C; 12 минут при 220 °C дадут крупинки",
+            "timer_label": "Сметана",
+            "timer_seconds": 360
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "milk"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть аэрогриль до 200 °C.",
+            "position": 1
+          },
+          {
+            "text": "Разобрать капусту на соцветия 2–3 см — в чаше крупная розочка не пропечётся. Промыть и обсушить.",
+            "position": 2
+          },
+          {
+            "text": "Уложить в чашу в один слой: за закладку не больше 400 г. Остальные 400 г — следующей партией.",
+            "position": 4,
+            "equipment_note": "Не больше 400 г в чашу. Стенки должны продуваться; полная чаша — варёные бока без корочки."
+          },
+          {
+            "text": "Готовить, пока края не подсохнут.",
+            "position": 5,
+            "timer_note": "8 минут; воздух в чаше жарче духовки",
+            "timer_label": "До встряхивания",
+            "timer_seconds": 480
+          },
+          {
+            "text": "Сильно встряхнуть чашу и готовить до румяных краёв и мягкой ножки. Следующая партия — в ту же чашу.",
+            "position": 6,
+            "timer_note": "Ещё 6–8 минут на партию; ориентир — цвет, не таймер",
+            "timer_label": "После встряхивания",
+            "timer_seconds": 420
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "air_fryer"
+    }
+  ]
+}

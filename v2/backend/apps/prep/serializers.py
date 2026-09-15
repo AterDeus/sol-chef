@@ -6,12 +6,14 @@ from apps.prep.models import PrepComponent, PrepContainer, PrepKit, PrepSlot
 from apps.prep.services.graph import kit_graph
 from apps.prep.services.leftover import (
     effective_qty_ratio,
+    leftover_plan_cost,
     leftover_qty_factors,
     merge_shopping,
     no_leftover_payload,
     recipes_for_replacements,
     shopping_additions,
 )
+from apps.prep.services.thaw import thaw_lead_hours, thaw_prep_item_text, thaw_pull_for
 from apps.prep.services.scale import kit_ratio, qty_payload
 from apps.recipes.services.assemble import assemble_recipe
 from apps.recipes.services.nutrition import compute_recipe_nutrition
@@ -25,6 +27,9 @@ def serialize_container(
 ) -> dict:
     combined, on = effective_qty_ratio(ratio, enabled, extra or Decimal("1"))
     payload = qty_payload(box.qty, box.unit, combined, on)
+    thaw_pull = thaw_pull_for(
+        box.place, box.thaw_before_day, box.unit, box.component.code
+    )
     return {
         "code": box.code,
         "label": box.label,
@@ -32,6 +37,7 @@ def serialize_container(
         "component_title": box.component.title,
         "place": box.place,
         "thaw_before_day": box.thaw_before_day,
+        "thaw_pull": thaw_pull,
         **payload,
     }
 
@@ -42,11 +48,21 @@ def thaw_prep_items(containers: list[dict], day: int) -> list[dict]:
         thaw = box.get("thaw_before_day")
         if thaw is None or int(thaw) > day:
             continue
+        pull = box.get("thaw_pull") or thaw_pull_for(
+            box.get("place") or "",
+            int(thaw),
+            box.get("unit"),
+            box.get("component_code"),
+        )
         items.append(
             {
                 "type": "thaw",
-                "text": f"Достать {box.get('label')} ({box.get('component_title')}) из морозилки.",
-                "before_hours": 12,
+                "text": thaw_prep_item_text(
+                    morning=pull == "morning",
+                    label=box.get("label"),
+                    component_title=box.get("component_title"),
+                ),
+                "before_hours": thaw_lead_hours(pull, box.get("unit"), box.get("qty")),
             }
         )
     return items
@@ -261,6 +277,7 @@ def serialize_kit_detail(
         "servings_base": kit.servings_base,
         "no_leftover": bool(no_leftover),
         "has_leftovers": has_leftovers,
+        "leftover_cost": leftover_plan_cost(kit),
         "scaling": {
             "enabled": bool(kit.servings_base),
             "mode": "servings" if kit.servings_base else "off",

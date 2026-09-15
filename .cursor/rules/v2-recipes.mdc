@@ -11,4 +11,4 @@ alwaysApply: false
 - Волну и оверлей осей не начинать без «стартуй волну N» / «стартуй оверлей осей N» в чате / CURRENT_SPRINT.
 - Каталог в Postgres. Правка: `export_draft --slug` → JSON → `import_draft --path`. Эталон валидатора: `v2/backend/tests/fixtures/gold_overlay.json`.
 - Автор Grok → валидатор → Terra Medium. `editorial_tested` не ставить. `unknown` аллерген ≠ «нет».
-- Черновики только в `v2/docs/drafts/recipes/`, не в корневой `data/`.
+- Черновики только в `v2/docs/drafts/recipes/`, не в `archive/v1/data/`.

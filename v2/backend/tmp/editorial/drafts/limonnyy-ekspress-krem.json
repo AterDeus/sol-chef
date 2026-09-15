@@ -1,0 +1,359 @@
+{
+  "id": "limonnyy-ekspress-krem",
+  "title": "Лимонный экспресс-крем",
+  "summary": "Холодный крем без плиты: сгущёнку взбивают со сметаной или сливками 33%, вливая лимонный сок тонкой струйкой 3–5 минут, пока масса не загустеет без крупинок.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "no_cook",
+  "dish_type": "dessert",
+  "equipment": null,
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 15,
+    "active_minutes": 12
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": [
+    "fast",
+    "easy",
+    "pantry"
+  ],
+  "adaptations": [
+    {
+      "to": "lime",
+      "from": "lemon",
+      "type": "substitution",
+      "quality": 0.9
+    },
+    {
+      "type": "omission",
+      "quality": 0.96,
+      "ingredient": "butter"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Сгущёнку и сметану (или сливки для базового крема) достать заранее: ледяные хуже смешиваются и дольше схватываются."
+    }
+  ],
+  "notes": [
+    {
+      "text": "Только обычная с сахаром, не варёная. Варёная уже загустела карамелью и с лимонным соком не схватится так же: получится сладкая паста, не экспресс-крем.",
+      "title": "Сгущёнка"
+    },
+    {
+      "text": "Кислота свертывает казеин. Тонкая струйка при взбивании даёт ровный крем за 3–5 минут. Весь сок сразу — крупинки, которые миксером не исправить.",
+      "title": "Сок струйкой"
+    },
+    {
+      "text": "Одно из двух, не оба. Сметана 20–25% кислее и гуще; сливки 33% нейтральнее и шелковистее. 10–20% сливки почти не держат структуру.",
+      "title": "Сметана или сливки"
+    },
+    {
+      "text": "Густота от кислоты и молочного белка, не от нагрева и не от желатина. Варить или прогревать смесь нельзя: свернётся комками и отслоится.",
+      "title": "Без желатина и плиты"
+    },
+    {
+      "text": "Только жёлтый слой. Белая губка даёт горечь, которую сахар сгущёнки не маскирует.",
+      "title": "Цедра"
+    },
+    {
+      "text": "Это другой приём: холодные сливки 33% взбивают, затем вмешивают сок и мёд. Нет коагуляции сгущёнки, текстура — воздушный мусс, не плотный крем базы. Не ждать, что «схватится как обычно».",
+      "title": "Вариант «полегче»"
+    },
+    {
+      "text": "Базе достаточно 15 минут, чтобы уплотниться. Часами держать не обязательно.",
+      "title": "Холодильник"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "condensed_milk",
+      "display_name": "сгущённое молоко",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "не варёная; отмерить по граммовке банки, не варить"
+    },
+    {
+      "position": 2,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "20–25%; одно из двух с сливками, не оба",
+      "choice_group": "dairy"
+    },
+    {
+      "position": 3,
+      "canonical_id": "cream",
+      "display_name": "сливки 33%",
+      "amount": 200,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "33%, не 10–20%; замена сметане, не вместе",
+      "choice_group": "dairy"
+    },
+    {
+      "position": 4,
+      "canonical_id": "lemon",
+      "display_name": "лимон",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сок ~30 мл тонкой струйкой и цедра; если очень сочный — не выливать весь сок сразу"
+    },
+    {
+      "position": 5,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 30,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "растопить, остудить, вмешать в готовый крем"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Снять цедру с лимона мелкой тёркой, не задевая белую горькую часть. Выжать сок, процедить от косточек: около 30 мл."
+    },
+    {
+      "position": 2,
+      "text": "Выложить сгущёнку в миску. Добавить сметану или сливки 33% — одно из двух, не оба сразу."
+    },
+    {
+      "position": 3,
+      "text": "Взбивать венчиком или миксером на средней скорости, вливая лимонный сок тонкой струйкой. Добавление сока постепенно помогает избежать резкого свертывания: весь сок сразу даст крупинки, которые уже не разбить."
+    },
+    {
+      "position": 4,
+      "text": "Взбивать до густого крема без комков. Вмешать цедру. Если кладёте масло — растопить, остудить и вмешать в готовый крем, не в горячем виде.",
+      "timer_seconds": 240,
+      "timer_label": "Взбивание",
+      "timer_note": "3–5 минут; ориентир — густой крем без крупинок, не таймер"
+    },
+    {
+      "position": 5,
+      "text": "Разложить по креманкам. Подавать сразу или убрать в холодильник на 15 минут: станет плотнее. Плиту, желатин и варку не использовать."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "lime_twist",
+      "title": "Лаймовый",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "pcs",
+            "amount": 2,
+            "detail": "сок и цедра вместо лимона; два лайма ≈ один лимон по соку",
+            "scalable": true,
+            "scale_mode": "whole",
+            "canonical_id": "lime",
+            "display_name": "лайм"
+          },
+          {
+            "unit": "g",
+            "amount": 5,
+            "detail": "свежая, мелко в готовый крем",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "mint",
+            "display_name": "мята"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "lemon"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Снять цедру с лаймов мелкой тёркой, не задевая белую часть. Выжать сок, процедить. Мяту мелко нарезать.",
+            "position": 1
+          },
+          {
+            "text": "Взбивать на средней скорости, вливая сок лайма тонкой струйкой. Весь сок сразу даст крупинки казеина.",
+            "position": 3
+          },
+          {
+            "text": "Взбивать до густого крема без комков. Вмешать цедру лайма и мяту. Если кладёте масло — растопить, остудить и вмешать в готовый крем.",
+            "position": 4,
+            "timer_note": "3–5 минут; ориентир — густой крем без крупинок, не таймер",
+            "timer_label": "Взбивание",
+            "timer_seconds": 240
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_cookie_crust",
+      "title": "В стаканчиках с крошкой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 80,
+            "detail": "на дно креманок; крошка с кусочками, не пыль",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "cookies",
+            "display_name": "песочное печенье"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Раскрошить песочное печенье руками в крошку с кусочками, не в пыль. Разложить по креманкам на дно ровным слоем.",
+            "after_position": 0
+          }
+        ],
+        "replace": [
+          {
+            "text": "Выложить крем на крошку, не перемешивая слой. Подавать сразу или убрать в холодильник на 15 минут.",
+            "position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [
+          "egg"
+        ],
+        "contains_add": [
+          "gluten"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 30,
+            "detail": "вместо сахара сгущёнки; в уже взбитые сливки",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "honey",
+            "display_name": "мёд"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "condensed_milk"
+          },
+          {
+            "canonical_id": "sour_cream"
+          },
+          {
+            "canonical_id": "butter"
+          }
+        ],
+        "replace": [
+          {
+            "unit": "ml",
+            "amount": 250,
+            "detail": "холодные, для взбивания; без сгущёнки — другая текстура",
+            "optional": false,
+            "scalable": true,
+            "is_anchor": true,
+            "scale_mode": "linear",
+            "canonical_id": "cream",
+            "display_name": "сливки 33%"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Охлаждённые сливки 33% вылить в холодную миску. Сгущёнки в этом варианте нет: получится воздушный мусс, а не плотный крем базы.",
+            "position": 2
+          },
+          {
+            "text": "Взбить сливки до мягких пиков. Не вливать сок в жидкие сливки — смесь не взобьётся.",
+            "position": 3
+          },
+          {
+            "text": "Вмешать мёд и лимонный сок с цедрой лопаткой или на самой низкой скорости. После сока почти не взбивать: иначе сливки разойдутся в масло. Текстура воздушная, не плотный крем базы.",
+            "position": 4,
+            "timer_note": "2–4 минуты до мягких пиков; после сока почти не взбивать",
+            "timer_label": "Взбивание сливок",
+            "timer_seconds": 180
+          },
+          {
+            "text": "Разложить сразу. В холодильнике мусс осядет, но не станет плотным как база со сгущёнкой — это норма, не ошибка.",
+            "position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ]
+}

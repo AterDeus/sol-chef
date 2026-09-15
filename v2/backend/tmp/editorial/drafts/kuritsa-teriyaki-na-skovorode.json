@@ -1,0 +1,333 @@
+{
+  "id": "kuritsa-teriyaki-na-skovorode",
+  "title": "Курица терияки на сковороде",
+  "summary": "Бёдра с кожей жарят кожей вниз до хруста, соус терияки собирают отдельно и глазируют мясо только в последнюю минуту. Сахар не должен стоять на сковороде с начала — иначе пригорит, а мясо у кости не дойдёт.",
+  "protein_base": "poultry",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "thigh"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [
+    "poultry_temp"
+  ],
+  "caution_text": "Куриные бёдра: внутренняя температура у кости не ниже 82 °C. Не определяйте готовность по цвету сока или корочке. Не для детских подборок без дополнительной проверки.",
+  "time_profile": {
+    "total_minutes": 25,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy",
+    "one_pan"
+  ],
+  "adaptations": [],
+  "prep": [
+    {
+      "text": "Достать бёдра из холодильника за 15–20 минут и обсушить кожу насухо — мокрая кожа не хрустит и даст пар."
+    }
+  ],
+  "notes": [
+    {
+      "text": "Первая сторона — кожа. Её не двигают, пока не отойдёт сама. Переворот раньше времени рвёт кожу и выпускает жир в сковороду без корочки.",
+      "title": "Кожа вниз"
+    },
+    {
+      "text": "Глазируйте только когда бёдра дошли до 82 °C у кости. Сахар и мирин карамелизуются за секунды: если влить раньше, соус сгорит, а мясо у кости ещё сырое. На последних 1–2 минутах переворачивайте куски, чтобы глазурь легла ровным глянцем.",
+      "title": "Когда добавлять соус"
+    },
+    {
+      "text": "Один слой, с зазором. Две закладки лучше, чем полная сковорода: иначе пар, кожа серая, мясо тушится в соку.",
+      "title": "Сковорода"
+    },
+    {
+      "text": "Только бедро. Грудка суше, цель 72 °C, и эта глазурь её пересушит.",
+      "title": "Бедро"
+    },
+    {
+      "text": "Сладкое рисовое вино, не уксус и не «вода с мёдом» в базе. Нет мирина — берите медово-горчичный вариант, не подменяйте базу молча.",
+      "title": "Мирин"
+    },
+    {
+      "text": "Рис к терияки привычен, в состав не входит. Соль сверх соевого соуса обычно не нужна.",
+      "title": "К подаче"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "chicken_thighs",
+      "display_name": "куриные бёдра",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "с кожей и костью; не грудка и не филе"
+    },
+    {
+      "position": 2,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 60,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "обычный пшеничный; в глазурь, не на сковороду с первой минуты"
+    },
+    {
+      "position": 3,
+      "canonical_id": "mirin",
+      "display_name": "мирин",
+      "amount": 40,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сладкое рисовое вино; в глазурь"
+    },
+    {
+      "position": 4,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 10,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "в глазурь; не сыпать на сухую сковороду"
+    },
+    {
+      "position": 5,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 2,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "натереть или продавить в глазурь"
+    },
+    {
+      "position": 6,
+      "canonical_id": "ginger",
+      "display_name": "имбирь",
+      "amount": 10,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежий, натереть в глазурь"
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "плёнка на сковороде; кожа сама отдаст жир",
+      "nutrition_factor": 0.5
+    },
+    {
+      "position": 8,
+      "canonical_id": "sesame",
+      "display_name": "кунжут",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "семена, к подаче"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Смешать в миске соевый соус, мирин, сахар, тёртый чеснок и имбирь до растворения сахара. Отставить: это глазурь для глазирования, не маринад и не среда жарки."
+    },
+    {
+      "position": 2,
+      "text": "Ещё раз обсушить бёдра. Кожу не снимать, грудку не подменять."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть сковороду на средне-сильном огне, влить плёнку масла."
+    },
+    {
+      "position": 4,
+      "text": "Выложить бёдра кожей вниз в один слой и жарить, не двигая, пока кожа не станет золотистой и хрустящей.",
+      "timer_seconds": 540,
+      "timer_label": "Кожа вниз",
+      "timer_note": "8–10 минут; не переворачивать раньше корочки. Соус ещё не вливать",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями. Полная сковорода — пар и тушение в соку, кожа не хрустит."
+    },
+    {
+      "position": 5,
+      "text": "Перевернуть и жарить до 82 °C в толще у кости. Соус по-прежнему в миске.",
+      "timer_seconds": 360,
+      "timer_label": "Вторая сторона",
+      "timer_note": "5–7 минут; ориентир — 82 °C у кости, не таймер и не цвет сока",
+      "target_internal_temperature_c": 82
+    },
+    {
+      "position": 6,
+      "text": "В последнюю минуту влить заранее смешанный соус и быстро покрыть бёдра ложкой, пока глазурь не загустеет и не заблестит. Не кипятить дольше минуты — сахар пригорит.",
+      "timer_seconds": 60,
+      "timer_label": "Глазурь",
+      "timer_note": "Одна минута; соус с первой минуты жарки даст горечь, а не глянец"
+    },
+    {
+      "position": 7,
+      "text": "Снять со сковороды, посыпать кунжутом и сразу подавать."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "honey_mustard",
+      "title": "Медово-горчичная",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 40,
+            "detail": "дижон из сида mustard; вместо соевого профиля",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "mustard",
+            "display_name": "горчица дижонская"
+          },
+          {
+            "unit": "g",
+            "amount": 30,
+            "detail": "вместо мирина и сахара; в глазурь",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "honey",
+            "display_name": "мёд"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "soy_sauce"
+          },
+          {
+            "canonical_id": "mirin"
+          },
+          {
+            "canonical_id": "sugar"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Смешать в миске дижонскую горчицу, мёд, тёртый чеснок и имбирь. Отставить: та же глазурь для глазирования, без соевого соуса и мирина.",
+            "position": 1
+          },
+          {
+            "text": "В последнюю минуту влить медово-горчичную смесь и быстро покрыть бёдра соусом ложкой, пока глазурь не загустеет. Не кипятить дольше минуты — мёд пригорит так же, как сахар.",
+            "position": 6,
+            "timer_note": "Одна минута; техника та же, состав другой",
+            "timer_label": "Глазурь",
+            "timer_seconds": 60
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [
+          "mustard"
+        ],
+        "unknown_remove": [],
+        "contains_remove": [
+          "soy",
+          "gluten"
+        ],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "mala",
+      "title": "Мала-терияки",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "tsp",
+            "amount": 1,
+            "detail": "горошек: слегка поджарить и раздавить в глазурь",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "sichuan_pepper",
+            "display_name": "сычуаньский перец"
+          },
+          {
+            "unit": "pcs",
+            "amount": 1,
+            "detail": "свежий стручок, мелко в глазурь",
+            "scalable": true,
+            "scale_mode": "whole",
+            "canonical_id": "chili",
+            "display_name": "чили"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Слегка поджарить сычуаньский горошек на сухой сковороде до аромата, раздавить. Смешать в миске соевый соус, мирин, сахар, чеснок, имбирь, сычуань и мелко нарезанный чили. Отставить: глазурь, не маринад.",
+            "position": 1
+          },
+          {
+            "text": "В последнюю минуту влить глазурь с сычуанем и чили и быстро покрыть соусом. Не кипятить дольше минуты.",
+            "position": 6,
+            "timer_note": "Одна минута; чили и сахар с начала жарки горчат",
+            "timer_label": "Глазурь мала",
+            "timer_seconds": 60
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ]
+}

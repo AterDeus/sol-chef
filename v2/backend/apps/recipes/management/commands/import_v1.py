@@ -22,7 +22,12 @@ from apps.recipes.etl.ingredients import (
     map_unit_and_amount,
     parse_amount,
 )
-from apps.recipes.etl.load import V1ImportError, folder_from_rel, load_recipe_objects
+from apps.recipes.etl.load import (
+    V1ImportError,
+    folder_from_rel,
+    load_recipe_objects,
+    resolve_v1_root,
+)
 from apps.recipes.etl.nutrition import load_ingredient_nutrition
 from apps.recipes.etl.taxonomy import (
     CAUTION_TEXT,
@@ -57,7 +62,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        data_root = Path(settings.V1_DATA_ROOT)
+        data_root = resolve_v1_root(Path(settings.V1_DATA_ROOT))
         dry_run = options["dry_run"]
         try:
             report = run_import(data_root, dry_run=dry_run)

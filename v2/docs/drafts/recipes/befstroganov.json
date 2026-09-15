@@ -1,0 +1,332 @@
+{
+  "id": "befstroganov",
+  "title": "Бефстроганов",
+  "summary": "Огузок или вырезку режут соломкой поперёк волокон, обжаривают партиями до серого цвета и заправляют сметаной с луком на той же сковороде. Соус густой, мясо не тушится часами.",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "rump",
+    "tenderloin"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy"
+  ],
+  "adaptations": [
+    {
+      "to": "yogurt",
+      "from": "sour_cream",
+      "type": "substitution",
+      "quality": 0.82
+    },
+    {
+      "type": "omission",
+      "quality": 0.9,
+      "ingredient": "mustard"
+    }
+  ],
+  "notes": [
+    {
+      "text": "Только поперёк волокон и не толще 8 мм. Вдоль волокон соломка останется жёсткой, сколько ни жарь.",
+      "title": "Нарезка"
+    },
+    {
+      "text": "Огузок или вырезка. Нарезанные поперёк волокон полоски быстро становятся мягкими; лопатка или шея за время быстрой обжарки останутся жёсткими.",
+      "title": "Отруб"
+    },
+    {
+      "text": "Партии в один слой на сильном огне. Полная сковорода даёт серый варёный сок, не корочку.",
+      "title": "Сковорода"
+    },
+    {
+      "text": "Берите жирность 15–20%, не сливки. Вводить на слабом огне. Кипение даёт крупинки.",
+      "title": "Сметана"
+    },
+    {
+      "text": "Сметану можно заменить густым натуральным йогуртом и уменьшить количество масла. Основа остаётся неизменной: говядина соломкой, быстро обжаренная с луком.",
+      "title": "Облегчённая версия"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef",
+      "display_name": "говядина",
+      "amount": 500,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "огузок или вырезка, соломка 6–8 мм поперёк волокон"
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около двух средних, полукольцами"
+    },
+    {
+      "position": 3,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "15–20%, комнатной температуры"
+    },
+    {
+      "position": 4,
+      "canonical_id": "mustard",
+      "display_name": "горчица",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "столовая"
+    },
+    {
+      "position": 5,
+      "canonical_id": "stock_or_water",
+      "display_name": "вода или бульон",
+      "amount": 80,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "под деглазировку; вода допустима"
+    },
+    {
+      "position": 6,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для обжарки партий"
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежемолотый"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать говядину соломкой 6–8 мм и 4–5 см длиной строго поперёк волокон. Посолить и поперчить непосредственно перед жаркой."
+    },
+    {
+      "position": 2,
+      "text": "Нарезать лук полукольцами."
+    },
+    {
+      "position": 3,
+      "text": "Сильно разогреть широкую сковороду с маслом до лёгкой дымки."
+    },
+    {
+      "position": 4,
+      "text": "Обжарить говядину небольшими партиями в один слой, помешивая, до серого цвета без розовых кусков. Снять на тарелку.",
+      "timer_seconds": 90,
+      "timer_label": "Партия",
+      "timer_note": "1–1.5 минуты на партию; ориентир — цвет, не таймер. Это не тартар и не стейк с кровью",
+      "equipment_note": "Не перегружать сковороду: в один слой, порциями. Полная сковорода — тушение в соку, мясо серое и жёсткое."
+    },
+    {
+      "position": 5,
+      "text": "На той же сковороде пассеровать лук до мягкости и лёгкого золота.",
+      "timer_seconds": 300,
+      "timer_label": "Лук",
+      "timer_note": "5 минут; не до чёрных краёв"
+    },
+    {
+      "position": 6,
+      "text": "Вернуть говядину, добавить горчицу и 80 мл воды или бульона, соскоблить со дна, прогреть 30 секунд."
+    },
+    {
+      "position": 7,
+      "text": "Убавить огонь до слабого, вмешаться сметану и прогревать без кипения, пока соус не загустеет и покроет мясо.",
+      "timer_seconds": 120,
+      "timer_label": "Сметана",
+      "timer_note": "2 минуты; сметана не должна бурлить, иначе свернётся"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_mushrooms",
+      "title": "С грибами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 250,
+            "detail": "свежие культивируемые, пластинами; не лесные",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "champignons",
+            "display_name": "шампиньоны"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Добавить шампиньоны пластинами к луку и жарить, пока не выпарится жидкость и грибы не начнут румяниться. Затем вернуть мясо, как в следующем шаге.",
+            "timer_note": "6–7 минут; сырая вода грибов разбавит сметану",
+            "timer_label": "Грибы",
+            "timer_seconds": 420,
+            "after_position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 200,
+            "detail": "натуральный густой без сахара, комнатной температуры",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "yogurt",
+            "display_name": "йогурт"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "sour_cream"
+          }
+        ],
+        "replace": [
+          {
+            "unit": "tsp",
+            "amount": 1,
+            "detail": "смазать сковороду, не наливать лужу",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Слегка смазать широкую сковороду чайной ложкой масла и сильно разогреть до лёгкой дымки.",
+            "position": 3
+          },
+          {
+            "text": "Обжарить говядину небольшими партиями в один слой до серого цвета, не доливая масло между партиями. Снять на тарелку.",
+            "position": 4,
+            "timer_note": "1–1.5 минуты; антипригарная сковорода держит при 1 ч. л. масла",
+            "timer_label": "Партия",
+            "timer_seconds": 90,
+            "equipment_note": "Не перегружать сковороду: порциями в один слой."
+          },
+          {
+            "text": "Убавить огонь до слабого, вмешаться йогурт вместо сметаны и только прогреть, не доводя до кипения.",
+            "position": 7,
+            "timer_note": "1–1.5 минуты; йогурт сворачивается быстрее сметаны",
+            "timer_label": "Йогурт",
+            "timer_seconds": 90
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "new_ingredients": [
+    {
+      "canonical_id": "sour_cream",
+      "title": "сметана",
+      "aliases": [
+        "сметана 20%",
+        "сметана 15%"
+      ],
+      "contains": [
+        "milk"
+      ],
+      "may_contain": [],
+      "unknown": []
+    }
+  ]
+}

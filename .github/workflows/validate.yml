@@ -16,11 +16,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Validate data/recipes/
-        run: node scripts/validate-recipes.js
+      - name: Validate archive/v1/data/recipes/
+        run: node archive/v1/scripts/validate-recipes.js
 
-      - name: Validate data/tips.json
-        run: node scripts/validate-tips.js
+      - name: Validate archive/v1/data/tips.json
+        run: node archive/v1/scripts/validate-tips.js
 
       - name: Validate reference JSON
-        run: node scripts/validate-reference.js
+        run: node archive/v1/scripts/validate-reference.js

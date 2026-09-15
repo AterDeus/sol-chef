@@ -11,6 +11,7 @@ import {
   labelOf,
 } from '@/lib/vocab';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
+import { PageIntro } from '@/components/PageArt';
 import { RecipeGrid } from '@/components/RecipeCard';
 
 export const dynamic = 'force-dynamic';
@@ -132,12 +133,17 @@ export default async function RecipesPage({
 
   return (
     <>
-      <p className="eyebrow">Книга</p>
-      <h1>Рецепты</h1>
-      <p className="lede">
-        Сначала мясо, птица, овощи, рыба, гарниры, завтраки или десерты. В главе сразу все рецепты;
-        способ и посуда только сужают список. <Link href="/calculator">Калькулятор</Link>
-      </p>
+      <PageIntro
+        scene="recipes"
+        eyebrow="Книга"
+        title="Рецепты"
+        lede={
+          <p className="lede">
+            Сначала мясо, птица, овощи, рыба, гарниры, завтраки или десерты. В главе сразу все
+            рецепты; способ и посуда только сужают список. <Link href="/calculator">Калькулятор</Link>
+          </p>
+        }
+      />
       <form className="search-row" action="/recipes" method="get">
         {(['chapter', 'protein_base', 'cook_method', 'equipment', 'without'] as const).flatMap((key) =>
           valuesOf(chapterSp, key).map((value) => (

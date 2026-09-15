@@ -2,10 +2,61 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://sol-chef.ru/schemas/tip.schema.json",
   "title": "Tips",
-  "description": "Советы Энди Кукса в data/tips.json",
+  "description": "Советы шеф-поваров в data/tips.json. Уникальность item.id по всему файлу draft-07 не выражает (нет uniqueItems по вложенным массивам и нет uniqueKeys) — проверка в scripts/validate-tips.js.",
   "type": "object",
   "required": ["intro", "sections"],
   "additionalProperties": false,
+  "definitions": {
+    "tipItem": {
+      "type": "object",
+      "required": ["id", "hint", "kind", "tags"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^\\d{2}-\\d{2}$",
+          "description": "{section.id}-{itemIndex padded}, например 06-01"
+        },
+        "hint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["technique", "mistake", "timing", "accuracy", "heat", "storage"]
+        },
+        "tags": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "prep",
+              "knives",
+              "skillet",
+              "oven",
+              "dough",
+              "ingredients",
+              "spices",
+              "taste",
+              "meat",
+              "fish",
+              "veg",
+              "grains",
+              "sauce",
+              "storage",
+              "safety"
+            ]
+          }
+        }
+      }
+    }
+  },
   "properties": {
     "intro": {
       "type": "string",
@@ -30,7 +81,7 @@
           "items": {
             "type": "array",
             "minItems": 1,
-            "items": { "type": "string", "minLength": 1 }
+            "items": { "$ref": "#/definitions/tipItem" }
           }
         }
       }

@@ -203,8 +203,8 @@ def validate_kit_payload(payload: dict) -> list[str]:
         elif parent in component_by_id and component_by_id[parent].get("unit") != unit:
             errors.append(f"container {code}: unit ≠ unit компонента.")
         place = item.get("place")
-        if place not in {"fridge", "freezer"}:
-            errors.append(f"container {code}: place fridge|freezer.")
+        if place not in {"fridge", "freezer", "pantry"}:
+            errors.append(f"container {code}: place fridge|freezer|pantry.")
         thaw = item.get("thaw_before_day")
         if thaw is not None and thaw not in range(1, 8):
             errors.append(f"container {code}: thaw_before_day 1–7.")

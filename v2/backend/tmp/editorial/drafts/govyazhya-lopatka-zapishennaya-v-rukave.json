@@ -1,0 +1,177 @@
+{
+  "id": "govyazhya-lopatka-zapishennaya-v-rukave",
+  "title": "Говяжья лопатка, запечённая в рукаве",
+  "summary": "Медленное запекание говяжьей лопатки в рукаве при низкой температуре (150°C). В рукаве мясо готовится во влажной среде, поэтому поверхность меньше пересыхает, а соединительная ткань постепенно размягчается.",
+  "protein_base": "beef",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Личный повар",
+  "source_url": "https://sol-chef.ru",
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": null,
+    "active_minutes": null
+  },
+  "effort_level": null,
+  "washing_level": null,
+  "use_cases": [],
+  "adaptations": [],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Низкая температура 150°C и длительное время — ключевой фактор для растворения соединительной ткани лопатки без пересушивания.",
+      "title": null
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 0,
+      "canonical_id": "beef_chuck",
+      "display_name": "говяжья лопатка",
+      "amount": 1.2,
+      "unit": "kg",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false
+    },
+    {
+      "position": 1,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 5,
+      "unit": "clove",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "нарезать пластинками"
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 3,
+      "canonical_id": "mustard",
+      "display_name": "горчица",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "dried_rosemary",
+      "display_name": "сушёный розмарин",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "dried_thyme",
+      "display_name": "сушёный тимьян",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 0,
+      "text": "Сделать по всей поверхности куска говядины глубокие надрезы ножом и нашпиговать их пластинками чеснока."
+    },
+    {
+      "position": 1,
+      "text": "В небольшой миске смешать растительное масло, горчицу, соевый соус, розмарин, тимьян, соль и чёрный перец."
+    },
+    {
+      "position": 2,
+      "text": "Тщательно натереть говядину полученной маринадной смесью со всех сторон."
+    },
+    {
+      "position": 3,
+      "text": "Поместить мясо в рукав для запекания, завязать края и сделать 2–3 небольших прокола сверху для выхода лишнего пара."
+    },
+    {
+      "position": 4,
+      "text": "Разогреть духовку до 150°C и запекать говядину 2.5–3 часа (внутренняя температура мяса должна достигнуть 90°C для максимальной мягкости)."
+    },
+    {
+      "position": 5,
+      "text": "Извлечь рукав из духовки и дать мясу «отдохнуть» прямо в рукаве 15 минут перед нарезкой."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "s-kartofelem-i-morkovyu",
+      "title": "С картофелем и морковью",
+      "has_delta": false,
+      "legacy_text": "<p>Добавьте в рукав к мясу крупные куски картофеля и моркови. Овощи пропитаются мясным соком со специями и станут готовым гарниром.</p>"
+    },
+    {
+      "axis": "addon",
+      "code": "zapekanie-v-folge",
+      "title": "Запекание в фольге",
+      "has_delta": false,
+      "legacy_text": "<p>Если нет рукава, плотно заверните натёртое специями мясо в 3–4 слоя фольги. За 15 минут до конца готовки разверните фольгу сверху для легкой корочки.</p>"
+    }
+  ]
+}

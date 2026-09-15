@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { fetchGuide, fetchRecommendations } from '@/lib/api';
 import { hasAnyQuery, queryString } from '@/lib/filters';
 import { pickRandomRecipes, pickRandomTips, tipSectionIcon } from '@/lib/home';
+import { tipHashHref } from '@/lib/tips';
 import type { SearchParamsRecord, TipsPayload } from '@/lib/types';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
 import { PageIntro } from '@/components/PageArt';
@@ -36,7 +37,7 @@ export default async function HomePage({
         title="Кухонная шпаргалка"
         lede={
           <p className="lede">
-            Рецепты, справочник круп и мяса, советы Энди. Калькулятор соберёт ужин из того, что есть,
+            Рецепты, справочник круп и мяса, советы шеф-поваров. Калькулятор соберёт ужин из того, что есть,
             и того, что сейчас важнее.
           </p>
         }
@@ -74,11 +75,11 @@ export default async function HomePage({
       {featuredTips.length > 0 && (
         <div className="home-tip-grid">
           {featuredTips.map((tip) => (
-            <article key={`${tip.sectionId}:${tip.hint}`} className="home-tip">
+            <article key={tip.id} className="home-tip">
               <SpriteIcon name={tipSectionIcon(tip.sectionId)} className="ui-icon home-tip__icon" size={22} />
               <p className="home-tip__section">{tip.sectionTitle}</p>
               <h3>
-                <Link href={`/tips#tip-${tip.sectionId}`}>{tip.hint}</Link>
+                <Link href={tipHashHref(tip.id)}>{tip.hint}</Link>
               </h3>
               {tip.explanation ? <p className="home-tip__expl">{tip.explanation}</p> : null}
             </article>

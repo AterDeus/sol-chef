@@ -2,7 +2,7 @@
 
 App Router, TypeScript. Прод-сборка: `output: 'standalone'`. Срез в Compose: `next dev`. UI по-русски, код по-английски.
 
-Экраны: [../docs/UX-PROPOSAL.md](../docs/UX-PROPOSAL.md) (**D+**). Стек: [../docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md). Токены скопированы из корневого `css/global.css` (тот файл не перезаписывался).
+Экраны: [../docs/UX-PROPOSAL.md](../docs/UX-PROPOSAL.md) (**D+**). Стек: [../docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md). Токены скопированы из `archive/v1/css/global.css` (тот файл не перезаписывался).
 
 `v2/preview/` не референс.
 

@@ -193,6 +193,33 @@ export const HAVE_GROUP: Record<string, string> = {
   other: 'Другое',
 };
 
+export const TIP_KIND: Record<string, string> = {
+  technique: 'Приём',
+  mistake: 'Ошибка',
+  timing: 'Время',
+  accuracy: 'Точность',
+  heat: 'Температура',
+  storage: 'Хранение',
+};
+
+export const TIP_TAG: Record<string, string> = {
+  prep: 'Подготовка',
+  knives: 'Ножи',
+  skillet: 'Сковорода',
+  oven: 'Духовка',
+  dough: 'Тесто',
+  ingredients: 'Ингредиенты',
+  spices: 'Специи',
+  taste: 'Вкус',
+  meat: 'Мясо',
+  fish: 'Рыба',
+  veg: 'Овощи',
+  grains: 'Крупы',
+  sauce: 'Соусы',
+  storage: 'Хранение',
+  safety: 'Безопасность',
+};
+
 export function labelOf(map: Record<string, string>, code: string): string {
   return map[code] ?? code;
 }

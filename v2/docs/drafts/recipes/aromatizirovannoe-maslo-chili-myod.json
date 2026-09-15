@@ -1,0 +1,272 @@
+{
+  "id": "aromatizirovannoe-maslo-chili-myod",
+  "title": "Ароматизированное масло с чили и мёдом",
+  "summary": "Составное масло: размягчённое сливочное масло смешивают с чесноком, кунжутом, корейским перцем, паприкой и мёдом до ровного цвета. Горячую кукурузу или запечённые овощи смазывают сразу; остаток формуют колбаской в пергаменте и хранят в холоде, отрезая медальоны.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "no_cook",
+  "dish_type": "sauce",
+  "equipment": "saucepan",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "video",
+  "source_name": "Epicurious",
+  "source_url": "https://www.youtube.com/watch?v=6aWbZTmuj30",
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 70,
+    "active_minutes": 10
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "easy",
+    "pantry",
+    "budget",
+    "batch"
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "quality": 0.85,
+      "ingredient": "sesame"
+    },
+    {
+      "type": "omission",
+      "quality": 0.9,
+      "ingredient": "paprika"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Достать масло — комнатная температура, чтобы легко смешивалось с добавками",
+      "before_min": 60
+    }
+  ],
+  "notes": [
+    {
+      "text": "Масло должно быть мягким, не растопленным: из лужи добавки не распределятся. Час при комнатной температуре — рабочий ориентир.",
+      "title": "Температура"
+    },
+    {
+      "text": "Микроволновка короткими импульсами по 5–10 секунд на высокой мощности (всего около 20 секунд — не ставить сразу на 20–30, иначе центр станет лужей); горячий стакан — прогреть кипятком, вылить, стряхнуть капли и накрыть брусок на 10–15 минут; натереть на крупной тёрке; расплющить скалкой между двумя листами пергамента.",
+      "title": "Из холодильника"
+    },
+    {
+      "text": "Ребром противня или линейкой поджимают пергамент, чтобы в цилиндре не осталось пустот. Иначе колбаска крошится при нарезке медальонов.",
+      "title": "Формовка"
+    },
+    {
+      "text": "Осторожно: из-за сырого чеснока хранить масло только в холодильнике и использовать не позднее чем через 4 суток. Для более долгого хранения сразу заморозить порционно; отрезать медальоны по мере надобности, не размораживая весь рулет.",
+      "title": "Хранение"
+    },
+    {
+      "text": "Корейский кочукару можно заменить обычными хлопьями чили: замена рабочая, но смесь будет острее и менее ярко-красной. У кочукару мягкая сладковатая жгучесть и глубокий кирпичный цвет.",
+      "title": "Кочукару"
+    },
+    {
+      "text": "Пропорции кунжута, перца, паприки и мёда не требуют аптечной точности: вмешивайте их по вкусу до равномерного цвета. Чеснок берите из расчёта один зубчик на 100 г масла.",
+      "title": "Добавки"
+    },
+    {
+      "text": "Отрежьте медальон холодного масла и выложите на горячий стейк, запечённые корнеплоды или отварную кукурузу за минуту до подачи: масло начнёт плавиться и образует ароматную глазурь.",
+      "title": "Как подавать"
+    },
+    {
+      "text": "Чтобы кружки получались с ровным срезом и не крошились, режьте рулет хорошо охлаждённым. Лезвие согрейте под горячей водой и вытрите насухо.",
+      "title": "Нарезка медальонов"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 100,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "размягчённое"
+    },
+    {
+      "position": 2,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 1,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "измельчённый"
+    },
+    {
+      "position": 3,
+      "canonical_id": "sesame",
+      "display_name": "кунжут",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "семена"
+    },
+    {
+      "position": 4,
+      "canonical_id": "chili_flakes",
+      "display_name": "хлопья перца",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "корейский кочукару; если нет — обычные хлопья чили"
+    },
+    {
+      "position": 5,
+      "canonical_id": "paprika",
+      "display_name": "паприка",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "honey",
+      "display_name": "мёд",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Смешать размягчённое масло с чесноком, кунжутом, хлопьями перца, паприкой и мёдом до ровного цвета — добавки должны распределиться по всей массе."
+    },
+    {
+      "position": 2,
+      "text": "Тёплым мягким маслом можно сразу смазать горячую кукурузу или запечённые овощи."
+    },
+    {
+      "position": 3,
+      "text": "Остаток выложить горкой на лист пергамента или пищевой плёнки, чуть ближе к ближнему краю."
+    },
+    {
+      "position": 4,
+      "text": "Накрыть верхним краем пергамента, придерживая нижний край, и поджать масло ребром противня или металлической линейкой — получится плотный цилиндр без пустот."
+    },
+    {
+      "position": 5,
+      "text": "Свернуть рулетом и закрутить концы в противоположные стороны."
+    },
+    {
+      "position": 6,
+      "text": "Убрать в холодильник или морозилку. Перед подачей отрезать нужные медальоны."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "in_molds",
+      "title": "Розочки в молдах",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "to_taste",
+            "amount": null,
+            "detail": "морская; посыпать перед подачей",
+            "scalable": false,
+            "scale_mode": "gentle",
+            "canonical_id": "coarse_salt",
+            "display_name": "соль крупная"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Мягкое масло утрамбовать в силиконовые молды, например в форме розочек.",
+            "position": 3
+          },
+          {
+            "text": "Снять излишки ножом вровень с краем формы.",
+            "position": 4
+          },
+          {
+            "text": "Охладить или заморозить, затем извлечь из молдов.",
+            "position": 5
+          },
+          {
+            "text": "Перед подачей посыпать крупной морской солью.",
+            "position": 6
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_herbs",
+      "title": "Со свежей петрушкой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "to_taste",
+            "amount": null,
+            "detail": "свежая, рубленая",
+            "scalable": false,
+            "scale_mode": "gentle",
+            "canonical_id": "parsley",
+            "display_name": "петрушка"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Смешать размягчённое масло с чесноком, кунжутом, хлопьями перца, паприкой, мёдом и рубленой петрушкой до ровного цвета.",
+            "position": 1
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ]
+}

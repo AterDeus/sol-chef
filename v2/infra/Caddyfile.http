@@ -1,0 +1,33 @@
+# First boot on a VPS, before DNS points here. Browser: http://<VPS_IP>/
+# After DNS: switch CADDYFILE to ./Caddyfile.prod and recreate caddy.
+
+:80 {
+	encode gzip
+
+	handle /_internal* {
+		respond 404
+	}
+
+	handle /admin* {
+		basic_auth {
+			{$ADMIN_BASIC_USER} {$ADMIN_BASIC_HASH}
+		}
+		reverse_proxy backend:8000
+	}
+
+	handle /api* {
+		reverse_proxy backend:8000
+	}
+
+	handle /static* {
+		reverse_proxy backend:8000
+	}
+
+	handle /healthz* {
+		reverse_proxy backend:8000
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+}

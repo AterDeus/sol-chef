@@ -1,0 +1,233 @@
+{
+  "id": "zharenyy-ris-po-aziatski-vok",
+  "title": "Жареный рис по-азиатски (эгг фрайд райс)",
+  "summary": "Классика вока: холодный вчерашний рис, обжарка компонентов по отдельности на сильном огне и сборка в самом конце. Ключевая деталь — рис обязательно холодный и сухой, тёплый парит вместо жарки и превращается в кашу.",
+  "protein_base": "vegetarian",
+  "cook_method": "pan_fry",
+  "dish_type": "pasta_grains",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 25,
+    "active_minutes": 20
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "one_pan"
+  ],
+  "adaptations": [],
+  "notes": [
+    {
+      "title": "Холодный рис",
+      "text": "Нужен вчерашний рис из холодильника: крахмал на поверхности зёрен подсыхает, и они разделяются на сковороде. Свежий тёплый парит и слипается в кашу."
+    },
+    {
+      "title": "Соевый по краям",
+      "text": "Лейте соус на раскалённый металл по краю сковороды, не прямо на рис: секундный контакт даёт лёгкий дымный запах вместо просто солёного вкуса."
+    },
+    {
+      "title": "По отдельности",
+      "text": "Овощи, ветчину, яйцо и рис жарят по очереди и собирают в конце. Всё сразу в вок — пар и серая каша."
+    },
+    {
+      "title": "Масло",
+      "text": "3 ст. л. на весь цикл: по ложке на овощи, яйцо и рис. Если дно сухое — ещё ложка, не полстакана."
+    },
+    {
+      "title": "Сковорода",
+      "text": "Вок или широкая глубокая сковорода на сильном огне. Не перегружать: рис тонким слоем. Горка даст пар."
+    },
+    {
+      "title": "Глутамат",
+      "text": "Щепотка по желанию. Без неё блюдо то же: соевый и сахар уже дают вкус."
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "уже варёный жасмин, холодный, лучше со вчера; не сырая крупа"
+    },
+    {
+      "position": 2,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 80,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "мелкий кубик"
+    },
+    {
+      "position": 3,
+      "canonical_id": "corn",
+      "display_name": "кукуруза",
+      "amount": 80,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "консервированная (слить) или замороженная"
+    },
+    {
+      "position": 4,
+      "canonical_id": "green_peas",
+      "display_name": "горошек",
+      "amount": 80,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "зелёный замороженный, не размораживать заранее"
+    },
+    {
+      "position": 5,
+      "canonical_id": "ham",
+      "display_name": "ветчина",
+      "amount": 120,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "или колбаса, кубиком"
+    },
+    {
+      "position": 6,
+      "canonical_id": "green_onion",
+      "display_name": "зелёный лук",
+      "amount": 4,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "белую и зелёную части нарезать отдельно"
+    },
+    {
+      "position": 7,
+      "canonical_id": "egg",
+      "display_name": "яйцо",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 8,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "на весь цикл, рафинированное"
+    },
+    {
+      "position": 9,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "soy_sauce",
+      "display_name": "соевый соус",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "светлый пшеничный"
+    },
+    {
+      "position": 11,
+      "canonical_id": "msg",
+      "display_name": "глутамат натрия",
+      "amount": null,
+      "unit": "pinch",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разогреть вок или широкую глубокую сковороду на сильном огне, влить 1 ст. л. масла.",
+      "equipment_note": "Не перегружать сковороду: продукты тонким слоем. Горка даст пар вместо жарки."
+    },
+    {
+      "position": 2,
+      "text": "Обжарить морковь до лёгкого румянца, добавить кукурузу, через минуту — горошек. Переложить всё на тарелку.",
+      "timer_seconds": 180,
+      "timer_label": "Овощи",
+      "timer_note": "2–3 минуты; морковь чуть мягче сырой, горошек ярко-зелёный"
+    },
+    {
+      "position": 3,
+      "text": "Влить ещё ложку масла, подрумянить ветчину, добавить белую часть зелёного лука. Выложить к овощам.",
+      "timer_seconds": 90,
+      "timer_label": "Ветчина",
+      "timer_note": "1–2 минуты до румянца по краям"
+    },
+    {
+      "position": 4,
+      "text": "На раскалённом масле быстро размешать яйца до мягкого скрэмбла, переложить отдельно.",
+      "timer_seconds": 45,
+      "timer_label": "Яйцо",
+      "timer_note": "30–60 секунд; яйцо ещё чуть влажное, дойдёт с рисом"
+    },
+    {
+      "position": 5,
+      "text": "Влить оставшуюся ложку масла, высыпать холодный сухой рис, разбивая комки лопаткой, пока зёрна не станут горячими и отдельными.",
+      "timer_seconds": 120,
+      "timer_label": "Рис",
+      "timer_note": "1.5–2 минуты; комков нет, пар почти ушёл"
+    },
+    {
+      "position": 6,
+      "text": "Вернуть овощи, ветчину и яйцо, измельчая яйцо лопаткой."
+    },
+    {
+      "position": 7,
+      "text": "Всыпать сахар, влить 2 ст. л. соевого соуса по краям сковороды. Если используете глутамат — щепотка сейчас. Добавить зелёную часть лука, перемешать и сразу подавать.",
+      "timer_seconds": 30,
+      "timer_label": "Сборка",
+      "timer_note": "20–40 секунд; соус должен блестеть на зёрнах, не лужей"
+    }
+  ],
+  "variants": []
+}

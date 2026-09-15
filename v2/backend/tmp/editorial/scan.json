@@ -1,0 +1,387 @@
+{
+  "count": 135,
+  "flagged": 39,
+  "by_rule": {
+    "P12": 32,
+    "P16": 1,
+    "P05": 10,
+    "P01": 10,
+    "P10": 1,
+    "P07": 5
+  },
+  "recipes": {
+    "baklazhany-s-kartofelem-na-skovorode": [
+      {
+        "rule": "P12",
+        "where": "notes[4].text",
+        "text": "Одно на выбор. Пасту разведите в воде, иначе пригорит. Свежие помидоры дают сок сами; воды тогда 1–2 ст. л., чтобы не подсохло. К томатам — щепотка сахара: блюдо не станет сладк…"
+      },
+      {
+        "rule": "P12",
+        "where": "ingredients[8].detail",
+        "text": "к томатам, чтобы скруглить кислоту"
+      }
+    ],
+    "basting-slivochnym-maslom": [
+      {
+        "rule": "P16",
+        "where": "ing:butter",
+        "text": "to_taste сливочное масло"
+      }
+    ],
+    "ber-mane": [
+      {
+        "rule": "P05",
+        "where": "ing:gravy",
+        "text": "detail repeats amount: горячий соус или подлива, которую загущаете; 500 мл — типичный объём на эту пасту, добавляйте пасту понемногу"
+      },
+      {
+        "rule": "P12",
+        "where": "variants[0].step_delta.replace[2].text",
+        "text": "Не доводить до кипения после масла. Избыточную кислотность — например у томатов — масло сглаживает."
+      }
+    ],
+    "borshch": [
+      {
+        "rule": "P12",
+        "where": "notes[3].text",
+        "text": "Подойдёт обычный столовый: 1–2 ст. л. на кастрюлю. Особая концентрация не нужна — кислота лишь помогает сохранить яркий свекольный цвет. Не лейте больше двух ложек, иначе суп ст…"
+      },
+      {
+        "rule": "P12",
+        "where": "variants[1].step_delta.replace[5].timer_note",
+        "text": "12–15 минут; снять пробу на соль и кислоту"
+      }
+    ],
+    "boul-s-gorbushoy-ili-tuntsem": [
+      {
+        "rule": "P05",
+        "where": "ing:rice",
+        "text": "detail repeats amount: уже варёный, 400 г готового; если варить с нуля — 140 г сухого и 280 мл воды, остудить пластом и сразу в холодильник; длиннозёрный"
+      }
+    ],
+    "boul-s-nutom-i-zapechennymi-ovoshchami": [
+      {
+        "rule": "P05",
+        "where": "ing:canned_chickpeas",
+        "text": "detail repeats amount: 400 г после слива жидкости; примерно две банки по 400 г с жидкостью, или сваренный нут того же веса"
+      }
+    ],
+    "bryusselskaya-kapusta-s-bekonom": [
+      {
+        "rule": "P01",
+        "where": "notes[3].title",
+        "text": "food «Сухие половинки» not in base ingredients"
+      }
+    ],
+    "buzhenina": [
+      {
+        "rule": "P10",
+        "where": "notes[2].text",
+        "text": "Расход соли увеличивается медленнее веса: на 1 кг мяса нужно 2 ч. л. соли, а на кусок в 2 кг — около 3–3,5 ч. л., но никак не четыре. Не уменьшайте норму: холодная запечённая св…"
+      }
+    ],
+    "govyadina-na-volokna-s-garnirom": [
+      {
+        "rule": "P12",
+        "where": "notes[3].text",
+        "text": "После огня — чайная ложка лимонного сока или яблочного уксуса. Жир желе станет легче, блюдо не кислое. На плите не выпаривать: кислота выветрится."
+      },
+      {
+        "rule": "P12",
+        "where": "notes[3].title",
+        "text": "Кислота"
+      }
+    ],
+    "svinye-kotlety": [
+      {
+        "rule": "P07",
+        "where": "steps",
+        "text": "замачивание в шагах, prep пустой"
+      }
+    ],
+    "zapechennaya-tykva-s-travami": [
+      {
+        "rule": "P01",
+        "where": "notes[4].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "kartofel-po-derevenski": [
+      {
+        "rule": "P01",
+        "where": "notes[6].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "kotlety-iz-govyadiny": [
+      {
+        "rule": "P07",
+        "where": "steps",
+        "text": "замачивание в шагах, prep пустой"
+      }
+    ],
+    "kurinye-bedra-s-kartofelem": [
+      {
+        "rule": "P01",
+        "where": "notes[5].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "kurinye-kotlety": [
+      {
+        "rule": "P07",
+        "where": "steps",
+        "text": "замачивание в шагах, prep пустой"
+      }
+    ],
+    "kurinyy-plov": [
+      {
+        "rule": "P07",
+        "where": "steps",
+        "text": "замачивание в шагах, prep пустой"
+      },
+      {
+        "rule": "P05",
+        "where": "ing:water",
+        "text": "detail repeats amount: горячая; на 400 г риса — 600 мл, не доливать «на глаз»"
+      },
+      {
+        "rule": "P12",
+        "where": "notes[6].text",
+        "text": "Сушёный из того же отдела специй, без бренда. Нет в магазине — готовить без него, кислоту он даёт, но зирвак и зира держат вкус сами."
+      }
+    ],
+    "limonnyy-ekspress-krem": [
+      {
+        "rule": "P12",
+        "where": "notes[1].text",
+        "text": "Кислота свертывает казеин. Тонкая струйка при взбивании даёт ровный крем за 3–5 минут. Весь сок сразу — крупинки, которые миксером не исправить."
+      },
+      {
+        "rule": "P12",
+        "where": "notes[3].text",
+        "text": "Густота от кислоты и молочного белка, не от нагрева и не от желатина. Варить или прогревать смесь нельзя: свернётся комками и отслоится."
+      }
+    ],
+    "lobio-iz-krasnoy-fasoli-bystroe": [
+      {
+        "rule": "P05",
+        "where": "ing:canned_beans",
+        "text": "detail repeats amount: красная, слитая и промытая из банок; примерно две банки по 400 г с жидкостью"
+      },
+      {
+        "rule": "P12",
+        "where": "notes[6].text",
+        "text": "Столовый уксус или лимонный сок обязательны: без кислоты орехи и фасоль становятся плоскими. Бальзамик не брать. Если есть гранатовый соус, ложку можно вмешавать в конце вместо …"
+      },
+      {
+        "rule": "P12",
+        "where": "notes[6].title",
+        "text": "Кислота"
+      }
+    ],
+    "makarony-s-myasnym-sousom": [
+      {
+        "rule": "P12",
+        "where": "ingredients[8].detail",
+        "text": "снять кислоту томата, не делать соус сладким"
+      }
+    ],
+    "mintay-v-duhovke": [
+      {
+        "rule": "P01",
+        "where": "notes[4].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "miso-sup-s-tofu": [
+      {
+        "rule": "P07",
+        "where": "steps",
+        "text": "замачивание в шагах, prep пустой"
+      }
+    ],
+    "oyakodon": [
+      {
+        "rule": "P05",
+        "where": "ing:honey",
+        "text": "detail repeats amount: вместо мирина: растворить в 15 мл тёплой воды"
+      }
+    ],
+    "pesochnoe-pechene": [
+      {
+        "rule": "P01",
+        "where": "notes[0].title",
+        "text": "food «Клейковина» not in base ingredients"
+      }
+    ],
+    "salat-s-syrom-i-gretskimi-orehami": [
+      {
+        "rule": "P12",
+        "where": "notes[1].text",
+        "text": "Горчица держит масло и кислоту вместе. Без неё заправка расслаивается на дне миски. Лимон или яблочный уксус — одно."
+      }
+    ],
+    "svinina-s-kartofelem": [
+      {
+        "rule": "P01",
+        "where": "notes[5].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "svinoy-gulyash": [
+      {
+        "rule": "P01",
+        "where": "notes[3].title",
+        "text": "food «Только свинина» not in base ingredients"
+      }
+    ],
+    "stejk-na-grile": [
+      {
+        "rule": "P01",
+        "where": "notes[4].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "teplyy-boul-s-tykvoy-i-fettoy": [
+      {
+        "rule": "P05",
+        "where": "ing:canned_chickpeas",
+        "text": "detail repeats amount: банка; 400 г — вес после слива жидкости. Откинуть и промыть. Не вместе с фасолью"
+      },
+      {
+        "rule": "P05",
+        "where": "ing:canned_beans",
+        "text": "detail repeats amount: банка; 400 г — вес после слива жидкости. Откинуть и промыть. Вместо нута"
+      }
+    ],
+    "tom-yam-s-kuritsey": [
+      {
+        "rule": "P12",
+        "where": "notes[4].text",
+        "text": "Сок вливают в конце, чтобы сохранить свежий аромат и кислотность. Долго кипятить его не нужно."
+      },
+      {
+        "rule": "P12",
+        "where": "steps[6].text",
+        "text": "Снять кастрюлю с сильного кипения. Влить рыбный соус, сок лайма и чайную ложку сахара, перемешать. Сок лайма добавить в конце, чтобы сохранить свежий аромат и кислотность. Попро…"
+      }
+    ],
+    "baranya-lopatka-tushenaya-s-lukom-shalot": [
+      {
+        "rule": "P12",
+        "where": "notes[1].text",
+        "text": "К мясу — 2 ст. л., выпарить 30 секунд до бульона: резкая кислота уходит с паром, сладковатая глубина остаётся. Для шалота — отдельная 1 ст. л., не в общую жаровню."
+      }
+    ],
+    "tushenaya-kapusta": [
+      {
+        "rule": "P12",
+        "where": "notes[1].text",
+        "text": "Кислоту и сахар класть после основной мягкости. Рано — капуста дольше остаётся жёсткой. Столовый 9% и яблочный в этой ложке взаимозаменяемы."
+      }
+    ],
+    "tushenye-kabachki-s-risom": [
+      {
+        "rule": "P05",
+        "where": "ing:water",
+        "text": "detail repeats amount: сначала 100 мл горячей; долить, если рис ещё жёсткий, а жидкости нет"
+      },
+      {
+        "rule": "P12",
+        "where": "notes[2].text",
+        "text": "Свежие помидоры дают сок и сладость. Паста — кислее и гуще: тогда воды ближе к 150 мл, иначе крупа не набухнет. К томатам — щепотка сахара, чтобы скруглить кислоту."
+      },
+      {
+        "rule": "P12",
+        "where": "ingredients[9].detail",
+        "text": "к томатам, чтобы скруглить кислоту"
+      }
+    ],
+    "farshirovannye-pertsy": [
+      {
+        "rule": "P12",
+        "where": "notes[2].text",
+        "text": "50 г пасты на 500 мл воды в кастрюле. Гуще — рис в центре сырой. Сахар только гасит кислоту, не делает блюдо сладким."
+      },
+      {
+        "rule": "P12",
+        "where": "ingredients[10].detail",
+        "text": "сбалансировать кислоту томата"
+      }
+    ],
+    "fasol-tushenaya-s-ovoshchami": [
+      {
+        "rule": "P12",
+        "where": "notes[4].text",
+        "text": "Полчайной ложки гасит кислоту пасты, блюдо не становится сладким. Если помидоры уже спелые и сладкие — можно не класть."
+      },
+      {
+        "rule": "P12",
+        "where": "ingredients[10].detail",
+        "text": "сбалансировать кислоту томата"
+      }
+    ],
+    "hek-s-ovoshchami": [
+      {
+        "rule": "P01",
+        "where": "notes[5].title",
+        "text": "orphan «Сковорода» (in variant only)"
+      }
+    ],
+    "krevetki-v-chesnochnom-masle": [
+      {
+        "rule": "P12",
+        "where": "notes[4].text",
+        "text": "Сок и цедра — сняв с огня. На сильном жаре кислота сворачивает сок креветок и делает масло горьковатым."
+      }
+    ],
+    "chechevitsa-s-ovoshchami": [
+      {
+        "rule": "P05",
+        "where": "ing:tomato",
+        "text": "detail repeats amount: кубик; зимой — те же 250 г из банки без кожицы"
+      }
+    ],
+    "svinoj-shashlyk-v-duhovke-na-shpazhkah": [
+      {
+        "rule": "P12",
+        "where": "summary",
+        "text": "Шашлык из свиной шеи в маринаде из лука и газированной минеральной воды — без кефира и кислоты. На мангале или электрогриле: угли до седого жара, шампуры или решётка, средний ил…"
+      },
+      {
+        "rule": "P12",
+        "where": "notes[1].text",
+        "text": "Минералка и лук, без кефира и уксуса. 6–12 часов и ночь допустимы: кислотность не «варит» поверхность."
+      },
+      {
+        "rule": "P12",
+        "where": "notes[1].title",
+        "text": "Маринад без кислоты"
+      },
+      {
+        "rule": "P12",
+        "where": "notes[7].text",
+        "text": "В маринаде с горчицей выдерживайте мясо не дольше 4–6 часов: кислота делает поверхность рыхлой. Перед нанизыванием на шампуры дайте маринаду полностью стечь и промокните мясо."
+      },
+      {
+        "rule": "P12",
+        "where": "steps[3].text",
+        "text": "Залить минеральной водой до половины объёма мяса — полностью утоплять не нужно. Убрать в холод на 6–12 часов; кислоты нет, ночь безопасна."
+      },
+      {
+        "rule": "P12",
+        "where": "variants[0].step_delta.replace[1].text",
+        "text": "Залить шампанским до половины объёма мяса. Убрать в холод строго на 4–6 часов, не дольше: кислота рыхлит поверхность."
+      }
+    ],
+    "yablochnyy-krambl": [
+      {
+        "rule": "P12",
+        "where": "notes[2].text",
+        "text": "Кисло-сладкие: антоновка, семеренко, гранни смит. Сладкие без кислоты дают варенье под крошкой. Кубик 1,5 см держит форму; дольки оседают кашей."
+      }
+    ]
+  }
+}

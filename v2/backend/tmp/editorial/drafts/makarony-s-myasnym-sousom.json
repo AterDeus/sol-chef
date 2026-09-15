@@ -1,0 +1,474 @@
+{
+  "id": "makarony-s-myasnym-sousom",
+  "title": "Макароны с мясным соусом",
+  "summary": "Говяжий фарш тушат с луком, морковью и томатным пюре до густого соуса, затем смешивают с отваренной пастой. Фарш томят в томате полчаса, не жарят всухую с рожками.",
+  "protein_base": "beef",
+  "cook_method": "stew",
+  "dish_type": "pasta_grains",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "mince"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [
+    "ground_meat"
+  ],
+  "caution_text": "Говяжий фарш доводить до 71 °C в центре массы: бактерии распределены по всему объёму, сырая серединка и rare недопустимы. Не ориентироваться только на цвет. Не давать детям непротушенным.",
+  "time_profile": {
+    "total_minutes": 55,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 3,
+  "use_cases": [
+    "budget",
+    "easy",
+    "batch"
+  ],
+  "adaptations": [
+    {
+      "to": "pork_mince",
+      "from": "beef_mince",
+      "type": "substitution",
+      "quality": 0.92
+    },
+    {
+      "type": "omission",
+      "quality": 0.72,
+      "ingredient": "beef_mince"
+    },
+    {
+      "type": "omission",
+      "quality": 0.88,
+      "ingredient": "carrot"
+    }
+  ],
+  "notes": [
+    {
+      "text": "Говяжий фарш нельзя оставлять слабой прожарки: при измельчении мяса бактерии попадают внутрь массы. Обжаривайте и томите мясо до полной готовности (не менее 71 °C), пока не исчезнут все розовые комки. Толстый слой в кастрюле тушится в соку и не доходит.",
+      "title": "Фарш"
+    },
+    {
+      "text": "Пюре или пассата — 400 мл и полчаса томления, не столовая ложка пасты. Паста даст горечь и цвет, но не соус.",
+      "title": "Томат"
+    },
+    {
+      "text": "Стебель сельдерея обогащает зажарку, но он не входит в основу из-за возможной аллергии. Если используете готовый магазинный бульон, также проверяйте состав: в нём часто содержится экстракт сельдерея.",
+      "title": "Сельдерей"
+    },
+    {
+      "text": "В вегетарианском варианте вместо фарша используют чечевицу: она обеспечивает соусу правильную густоту и белковую плотность.",
+      "title": "Без мяса"
+    },
+    {
+      "text": "Перья держат соус. Спагетти тоже работают. Рожки не запрещены, но тогда блюдо визуально путают с флотскими — лучше перья.",
+      "title": "Паста"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_mince",
+      "display_name": "говяжий фарш",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "размороженный, не замороженным комом"
+    },
+    {
+      "position": 2,
+      "canonical_id": "pasta",
+      "display_name": "паста",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сухая; перья или спагетти"
+    },
+    {
+      "position": 3,
+      "canonical_id": "tomato_puree",
+      "display_name": "томатное пюре",
+      "amount": 400,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "пассата или протёртые томаты, не ложка пасты для цвета"
+    },
+    {
+      "position": 4,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 300,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "репчатый, мелкий кубик"
+    },
+    {
+      "position": 5,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 100,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "мелкая тёрка"
+    },
+    {
+      "position": 6,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "мелко нарезать"
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для пассеровки"
+    },
+    {
+      "position": 8,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 100,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "если соус слишком густой при томлении"
+    },
+    {
+      "position": 9,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "снять кислоту томата, не делать соус сладким"
+    },
+    {
+      "position": 10,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "к соусу"
+    },
+    {
+      "position": 11,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для воды варки пасты"
+    },
+    {
+      "position": 12,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 13,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Нарезать лук мелким кубиком, морковь натереть, чеснок измельчить."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть кастрюлю с маслом на среднем огне. Пассеровать лук и морковь до мягкости.",
+      "timer_seconds": 360,
+      "timer_label": "Овощи",
+      "timer_note": "5–6 минут; лук прозрачный"
+    },
+    {
+      "position": 3,
+      "text": "Выложить говяжий фарш, разбить комки. Жарить, пока не перестанет быть сырым снаружи. Не сваливать толстым слоем: иначе тушится в соку и не доходит внутри.",
+      "timer_seconds": 480,
+      "timer_label": "Фарш",
+      "timer_note": "7–8 минут до серого цвета снаружи; 71 °C проверяют после томления",
+      "equipment_note": "Не перегружать кастрюлю: фарш слоем не толще 2 см, иначе середина сырая. При необходимости разбить на две закладки."
+    },
+    {
+      "position": 4,
+      "text": "Добавить чеснок на 30 секунд. Влить томатное пюре, 100 мл воды, сахар, соль, перец, лавровый лист. Перемешать.",
+      "timer_seconds": 30,
+      "timer_label": "Чеснок"
+    },
+    {
+      "position": 5,
+      "text": "Убавить огонь до слабого. Тушить под крышкой, иногда помешивая, до густого соуса и 71 °C в центре массы фарша.",
+      "timer_seconds": 1800,
+      "timer_label": "Соус",
+      "timer_note": "30 минут; ориентир — 71 °C и ложка оставляет след на дне, не таймер",
+      "target_internal_temperature_c": 71
+    },
+    {
+      "position": 6,
+      "text": "Пока тушится: вскипятить воду в другой кастрюле, посолить. Отварить пасту al dente по упаковке. Слить, не промывать.",
+      "timer_seconds": 540,
+      "timer_label": "Паста",
+      "timer_note": "8–10 минут; ориентир — упаковка"
+    },
+    {
+      "position": 7,
+      "text": "Снять лавровый лист. Смешать пасту с соусом в кастрюле, прогреть минуту. Если сухо — ложка воды от варки пасты.",
+      "timer_seconds": 60,
+      "timer_label": "Смешать"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "mixed",
+      "title": "Смешанный фарш",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 200,
+            "detail": "размороженный, вместе с говядиной",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "pork_mince",
+            "display_name": "свиной фарш"
+          }
+        ],
+        "replace": [
+          {
+            "unit": "g",
+            "amount": 200,
+            "detail": "размороженный; вторая половина — свинина",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "beef_mince",
+            "display_name": "говяжий фарш"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Выложить говяжий и свиной фарш, разбить комки. Жарить вместе, пока не перестанет быть сырым снаружи.",
+            "position": 3,
+            "timer_note": "7–8 минут; 71 °C проверяют после томления",
+            "timer_label": "Фарш",
+            "timer_seconds": 480,
+            "equipment_note": "Не перегружать кастрюлю: слой не толще 2 см."
+          },
+          {
+            "text": "Тушить под крышкой до густого соуса и 71 °C в центре смешанного фарша.",
+            "position": 5,
+            "timer_note": "30 минут; ориентир — 71 °C, не таймер",
+            "timer_label": "Соус",
+            "timer_seconds": 1800,
+            "target_internal_temperature_c": 71
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "caution_text_override": "Смесь говяжьего и свиного фарша доводить до 71 °C в центре массы: бактерии распределены по всему объёму, сырая серединка недопустима. Не ориентироваться только на цвет. Не давать детям непротушенным."
+    },
+    {
+      "axis": "addon",
+      "code": "pork",
+      "title": "Со свининой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "name": "свиной фарш",
+            "unit": "g",
+            "amount": 400,
+            "detail": "размороженный, не замороженным комом",
+            "position": 1,
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "pork_mince",
+            "display_name": "свиной фарш"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Выложить свиной фарш, разбить комки. Жарить, пока не перестанет быть сырым снаружи. Не сваливать толстым слоем.",
+            "position": 3,
+            "timer_note": "7–8 минут; 71 °C проверяют после томления",
+            "timer_label": "Фарш",
+            "timer_seconds": 480,
+            "equipment_note": "Не перегружать кастрюлю: слой не толще 2 см."
+          },
+          {
+            "text": "Тушить под крышкой до густого соуса и 71 °C в центре массы свиного фарша.",
+            "position": 5,
+            "timer_note": "30 минут; ориентир — 71 °C, не таймер",
+            "timer_label": "Соус",
+            "timer_seconds": 1800,
+            "target_internal_temperature_c": 71
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "caution_text_override": "Свиной фарш доводить до 71 °C в центре массы: бактерии распределены по всему объёму, сырая серединка недопустима. Не ориентироваться только на цвет. Не давать детям непротушенным."
+    },
+    {
+      "axis": "addon",
+      "code": "vegetarian",
+      "title": "Без мяса",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 150,
+            "detail": "сухая красная; зелёная варится дольше на 10 минут",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "lentils",
+            "display_name": "чечевица"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "beef_mince"
+          }
+        ],
+        "replace": [
+          {
+            "is_anchor": true,
+            "canonical_id": "pasta"
+          },
+          {
+            "unit": "ml",
+            "amount": 400,
+            "detail": "для варки чечевицы в соусе",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "water",
+            "display_name": "вода"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Всыпать промытую чечевицу к луку и моркови, прогреть 1 минуту. Фарша в этом варианте нет.",
+            "position": 3,
+            "timer_label": "Чечевица",
+            "timer_seconds": 60
+          },
+          {
+            "text": "Добавить чеснок на 30 секунд. Влить томатное пюре, 400 мл воды, сахар, соль, перец, лавровый лист. Перемешать.",
+            "position": 4,
+            "timer_label": "Чеснок",
+            "timer_seconds": 30
+          },
+          {
+            "text": "Тушить под крышкой, пока чечевица не станет мягкой и соус не загустеет. 71 °C не проверять — мяса нет.",
+            "position": 5,
+            "timer_note": "25 минут для красной; зелёная — до 35, пока не разомнётся зубами",
+            "timer_label": "Соус",
+            "timer_seconds": 1500,
+            "target_internal_temperature_c": null
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": [
+          "ground_meat"
+        ]
+      },
+      "caution_text_override": "Фарша в этом варианте нет: соус из чечевицы, овощей и томата. Проверять 71 °C не нужно."
+    }
+  ]
+}

@@ -412,7 +412,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 Полный набор. 404 если нет / не `published`. `?servings=` — линейный масштаб qty закупки, компонентов и контейнеров; число боксов и их `code`/`label` не менять. UI шлёт 1, 2 или 4 (база 2). Нет `servings_base` → масштаб выключен. `metrics` и `weekend_timeline` без пересчёта.
 
-`?no_leftover=1` (также `true`/`yes`/`on`) — вариант без остатка: слот-источник на один приём, `reheat` заменяется `PrepSlot.no_leftover` (slug не из 14 основных ячеек набора), qty leftover-only боксов и уникальной закупки уменьшаются, `shopping_add` вливается. Без query — как в JSON. В корне ответа: `no_leftover` (bool), `has_leftovers` (в наборе есть `reheat`). Карточка рецепта: тот же query; slug слота = основное блюдо **или** `no_leftover.slug` этого слота при флаге.
+`?no_leftover=1` (также `true`/`yes`/`on`) — вариант без остатка: слот-источник на один приём, `reheat` заменяется `PrepSlot.no_leftover` (slug не из 14 основных ячеек набора), qty leftover-only боксов и уникальной закупки уменьшаются, `shopping_add` вливается. Без query — как в JSON. В корне ответа: `no_leftover` (bool), `has_leftovers` (в наборе есть `reheat`), `leftover_cost` `{dishes, shopping_add}` — цена плана для подписи переключателя. У контейнера морозилки ещё `thaw_pull`: `evening_before` \| `morning` (считает сервер из `unit` и кода компонента). Карточка рецепта: тот же query; slug слота = основное блюдо **или** `no_leftover.slug` этого слота при флаге.
 
 `graph` — вид из слотов (кто ест компонент: weekend-слоты по контейнерам + каскад reheat), не ranking.
 

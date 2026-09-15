@@ -168,32 +168,308 @@
     }
   }
 
-  .tips-acc {
+  .tips-search {
+    margin-block-end: var(--space-5);
+  }
+
+  .tips-search__label {
+    display: block;
+    margin: 0 0 var(--space-2);
+    font-size: var(--fs-14);
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .tips-search .search-row {
+    margin-block-end: 0;
+  }
+
+  .tips-chips.chip-row {
+    margin-block-end: 0;
+  }
+
+  .tips-chips .chip {
+    min-height: 2rem;
+    padding: 0.25rem 0.75rem;
+    font-size: var(--fs-13);
+    cursor: pointer;
+  }
+
+  .chip__n {
+    font-family: var(--font-mono);
+    font-size: var(--fs-11);
+    color: var(--text-dim);
+    margin-inline-start: 0.4em;
+  }
+
+  .tips-section {
+    margin-block-end: 1.5rem;
+    scroll-margin-top: 5rem;
+    position: relative;
+
+    &:has(.tip-card[open], .tip-card--raised) {
+      z-index: 3;
+    }
+
+    h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: var(--fs-15);
+      margin: 0 0 0.625rem;
+      padding-block-end: 0.4rem;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  .tips-section__n {
+    font-family: var(--font-mono);
+    font-size: var(--fs-11);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+  }
+
+  .tips-results:not(.is-ready) {
+    min-height: 12rem;
+  }
+
+  .tips-results:not(.is-ready) .tips-section {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .tips-loader {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 12rem;
+    color: var(--text-dim);
+    font-size: var(--fs-14);
+  }
+
+  .tips-results:not(.is-ready) .tips-loader {
+    display: flex;
+  }
+
+  .tips-loader__spin {
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 2px solid var(--line);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: tips-spin 0.7s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tips-loader__spin {
+      animation: none;
+    }
+  }
+
+  .tips-masonry {
+    --tips-gap: 0.65rem;
+    --tips-col-min: 16.5rem;
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+  }
+
+  .tips-masonry:not(.is-ready) > .tip-slot {
+    visibility: hidden;
+  }
+
+  .tip-slot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    height: var(--tip-slot-h);
+
+    &:has(.tip-card--raised) {
+      z-index: 5;
+    }
+
+    &:has(.tip-card[open]) {
+      z-index: 6;
+    }
+  }
+
+  .tip-slot--static {
+    height: auto;
+  }
+
+  .tip-card__face {
+    padding: 0.7rem 0.85rem 0.75rem;
+  }
+
+  .tip-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin: 0 0 0.45rem;
+  }
+
+  .tip-badge {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 0.12rem 0.45rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: var(--fs-11);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  .tip-badge--kind {
+    border-color: var(--gold);
+    background: var(--gold-soft);
+    color: var(--gold);
+  }
+
+  .tip-card__hint {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: var(--fs-15);
+    margin: 0;
+    color: var(--text);
+  }
+
+  .tip-card {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+    margin: 0;
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     background: var(--surface);
-    margin-block-end: 10px;
     scroll-margin-top: 5rem;
+    transition: border-color var(--duration) var(--ease);
 
     summary {
+      list-style: none;
       cursor: pointer;
-      padding: 0.875rem var(--space-4);
-      font-weight: 600;
+      padding: 0;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
     }
 
-    ul {
-      margin: 0;
-      padding: 0 var(--space-4) var(--space-4) var(--space-8);
+    &--raised {
+      z-index: 5;
+      border-color: var(--gold);
     }
 
-    li {
-      margin-block-end: var(--space-2);
+    &[open] {
+      z-index: 6;
+      border-color: var(--gold);
+    }
+  }
+
+  .tip-slot--static .tip-card {
+    position: relative;
+    inset: auto;
+  }
+
+  /* UA: details:not([open])::details-content { display: none; content-visibility: hidden }.
+     Same specificity so closed content stays in layout and can animate both ways. */
+  .tip-card:not([open])::details-content,
+  .tip-card[open]::details-content {
+    display: block;
+    content-visibility: visible;
+    overflow: hidden;
+  }
+
+  .tip-card__reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration) var(--ease);
+  }
+
+  .tip-card[open] .tip-card__reveal {
+    grid-template-rows: 1fr;
+  }
+
+  .tip-card__clip {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .tip-card__panel {
+    padding: 0 0.85rem 0.8rem;
+  }
+
+  .tip-card__body {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: var(--fs-14);
+  }
+
+  @supports (interpolate-size: allow-keywords) {
+    .tip-card {
+      interpolate-size: allow-keywords;
     }
 
-    .expl {
-      display: block;
-      color: var(--text-dim);
-      font-size: var(--fs-13);
+    .tip-card:not([open])::details-content,
+    .tip-card[open]::details-content {
+      height: 0;
+      transition:
+        height var(--duration) var(--ease),
+        content-visibility var(--duration) allow-discrete;
     }
+
+    .tip-card[open]::details-content {
+      height: auto;
+    }
+
+    @starting-style {
+      .tip-card[open]::details-content {
+        height: 0;
+      }
+    }
+
+    .tip-card__reveal,
+    .tip-card[open] .tip-card__reveal {
+      grid-template-rows: 1fr;
+      transition: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tip-card,
+    .tip-card__reveal,
+    .tip-card:not([open])::details-content,
+    .tip-card[open]::details-content {
+      transition: none;
+    }
+
+    .tip-card[open] .tip-card__reveal {
+      grid-template-rows: 1fr;
+    }
+
+    .tip-card[open]::details-content {
+      height: auto;
+    }
+  }
+}
+
+@keyframes tips-spin {
+  to {
+    transform: rotate(360deg);
   }
 }

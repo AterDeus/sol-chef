@@ -1,0 +1,299 @@
+[
+  {
+    "slug": "luchnyy-sous-s-gorchitsey-na-skovorode",
+    "dish": "sauce",
+    "method": "pan_fry",
+    "cid": "onion",
+    "name": "Лук",
+    "amount": "1.00",
+    "detail": null
+  },
+  {
+    "slug": "bystroe-kurinoe-karri",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "репчатый, нарезать"
+  },
+  {
+    "slug": "baranya-lopatka-tushenaya-s-lukom-shalot",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, четвертинками"
+  },
+  {
+    "slug": "kurinoe-birjani-po-hajderabadski",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "3.00",
+    "detail": "репчатый, крупные луковицы, нарезанные тонкими полосками"
+  },
+  {
+    "slug": "govyazhi-golyashki-tomlenye-v-duhovke",
+    "dish": "main",
+    "method": "oven",
+    "cid": "onion",
+    "name": "репчатый лук",
+    "amount": "2.00",
+    "detail": "нарезать кубиком"
+  },
+  {
+    "slug": "sudak-v-duhovke-s-limonom",
+    "dish": "main",
+    "method": "oven",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "часть в брюшко, часть на противень"
+  },
+  {
+    "slug": "tushenaya-kapusta",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, полукольцами"
+  },
+  {
+    "slug": "tushenye-kurinye-bedra-s-tomatom",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "средние, полукольцами"
+  },
+  {
+    "slug": "svinnaya-sheya-zapechennaya-s-paprikoj",
+    "dish": "main",
+    "method": "oven",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "крупный, дольками"
+  },
+  {
+    "slug": "tushenaya-kuritsa-s-grechkoj-na-dni",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": null
+  },
+  {
+    "slug": "tushenye-kurinye-bedra-s-tomatom",
+    "dish": "main",
+    "method": "stew",
+    "cid": "carrot",
+    "name": "морковь",
+    "amount": "2.00",
+    "detail": "кружками"
+  },
+  {
+    "slug": "makarony-po-flotski",
+    "dish": "pasta_grains",
+    "method": "pan_fry",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, мелким кубиком"
+  },
+  {
+    "slug": "gorohovoe-pyure",
+    "dish": "side",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "репчатый, мелко"
+  },
+  {
+    "slug": "kurinyy-plov",
+    "dish": "pasta_grains",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, крупные, полукольцами"
+  },
+  {
+    "slug": "kuritsa-s-yablokami-zapechennaya",
+    "dish": "main",
+    "method": "oven",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "репчатый, четвертинками; половину в полость, половину вокруг курицы"
+  },
+  {
+    "slug": "ovoshchnoy-sup-s-fasolyu",
+    "dish": "soup",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "репчатый"
+  },
+  {
+    "slug": "perlovka-s-gribami",
+    "dish": "pasta_grains",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, мелкий кубик"
+  },
+  {
+    "slug": "rassypchataya-grechka-suhoj-obzharki-s-lukom-i-gribami",
+    "dish": "pasta_grains",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "репчатый, средняя головка (100 г)"
+  },
+  {
+    "slug": "baranya-lopatka-tushenaya-s-lukom-shalot",
+    "dish": "main",
+    "method": "stew",
+    "cid": "carrot",
+    "name": "морковь",
+    "amount": "2.00",
+    "detail": "крупно нарезать"
+  },
+  {
+    "slug": "govyadina-tushenaya-na-volokna-zamorozka",
+    "dish": "main",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, крупно нарезать"
+  },
+  {
+    "slug": "govyazhi-golyashki-tomlenye-v-duhovke",
+    "dish": "main",
+    "method": "oven",
+    "cid": "carrot",
+    "name": "морковь",
+    "amount": "1.00",
+    "detail": "нарезать кружочками"
+  },
+  {
+    "slug": "tushenaya-kuritsa-s-grechkoj-na-dni",
+    "dish": "main",
+    "method": "stew",
+    "cid": "carrot",
+    "name": "морковь",
+    "amount": "2.00",
+    "detail": "кружками"
+  },
+  {
+    "slug": "govyadina-tushenaya-na-volokna-zamorozka",
+    "dish": "main",
+    "method": "stew",
+    "cid": "carrot",
+    "name": "морковь",
+    "amount": "2.00",
+    "detail": "крупно нарезать"
+  },
+  {
+    "slug": "rizotto-bazovyy-parmezan",
+    "dish": "pasta_grains",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "0.50",
+    "detail": "шалот или репчатый, мелко нарезать"
+  },
+  {
+    "slug": "makarony-s-myasnym-sousom",
+    "dish": "pasta_grains",
+    "method": "stew",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, мелкий кубик"
+  },
+  {
+    "slug": "ovoshchnoy-sup-s-fasolyu",
+    "dish": "soup",
+    "method": "boil",
+    "cid": "carrot",
+    "name": "морковь",
+    "amount": "1.00",
+    "detail": "средняя"
+  },
+  {
+    "slug": "svinye-kotlety",
+    "dish": "main",
+    "method": "pan_fry",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "некрупная луковица, очень мелко"
+  },
+  {
+    "slug": "grechka-na-garnir-s-lukom",
+    "dish": "side",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "мелко нарезать"
+  },
+  {
+    "slug": "kotlety-iz-govyadiny",
+    "dish": "main",
+    "method": "pan_fry",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "некрупная луковица, очень мелко"
+  },
+  {
+    "slug": "rybnye-kotlety",
+    "dish": "main",
+    "method": "pan_fry",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "некрупная луковица, очень мелко"
+  },
+  {
+    "slug": "kurinye-kotlety",
+    "dish": "main",
+    "method": "pan_fry",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "1.00",
+    "detail": "некрупная луковица, очень мелко"
+  },
+  {
+    "slug": "shchi-iz-svezhey-kapusty",
+    "dish": "soup",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, мелкий кубик"
+  },
+  {
+    "slug": "borshch",
+    "dish": "soup",
+    "method": "boil",
+    "cid": "onion",
+    "name": "лук",
+    "amount": "2.00",
+    "detail": "репчатый, мелкий кубик"
+  }
+]

@@ -1,0 +1,249 @@
+{
+  "id": "pechen-s-lukom",
+  "title": "Печень с луком",
+  "summary": "Говяжью печень снимают с плёнки и быстро жарят партиями на сковороде с большим количеством лука, без сметаны и без сливок. Лук — тело блюда, не гарнир.",
+  "protein_base": "offal",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "budget",
+    "easy"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.86
+    },
+    {
+      "to": "baking_dish",
+      "from": "skillet",
+      "type": "equipment",
+      "quality": 0.86
+    },
+    {
+      "type": "omission",
+      "quality": 0.9,
+      "ingredient": "butter"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Замороженную печень разморозить в холодильнике и обсушить. Мокрые ломти на сковороде тушатся в соке и остаются сырыми в центре."
+    }
+  ],
+  "notes": [
+    {
+      "text": "500 г лука на 500 г печени — норма, не ошибка. Мало лука получается жаркое из печени, не это блюдо.",
+      "title": "Лука много"
+    },
+    {
+      "text": "Сметану, сливки и мучную панировку не класть — в этой версии сочность дают лук и сливочное масло; сметана и сливки не нужны.",
+      "title": "Без сметаны"
+    },
+    {
+      "text": "На срезе не должно оставаться крови или сырого глянцевого блеска (температура внутри — 71 °C). При этом снимайте печень вовремя: без соуса пережаренные кусочки моментально станут сухими и жёсткими.",
+      "title": "Готовность"
+    },
+    {
+      "text": "Говяжья. Куриная тоньше и на тех же минутах пересыхает.",
+      "title": "Куриная печень"
+    },
+    {
+      "text": "Снимать до нарезки. Оставленная оболочка стянет ломти и оставит жёсткие края.",
+      "title": "Плёнка"
+    },
+    {
+      "text": "Растительное держит жар, сливочное — вкус в конце. Без сливочного блюдо останется собой; без жира на сковороде печень прилипнет.",
+      "title": "Масло"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_liver",
+      "display_name": "говяжья печень",
+      "amount": 500,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "плёнку снять; ломти 8–10 мм; база говяжья — куриная готовится быстрее и ломает таймер"
+    },
+    {
+      "position": 2,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 500,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "репчатый, полукольцами; лука много — это блюдо, не щепотка к мясу"
+    },
+    {
+      "position": 3,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для лука и партий печени"
+    },
+    {
+      "position": 4,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 20,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "в конце к луку"
+    },
+    {
+      "position": 5,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 6,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежемолотый"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Снять с печени тонкую плёнку: поддеть ножом с края и стянуть. Нарезать ломтями 8–10 мм. Лук нарезать полукольцами."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть широкую сковороду с растительным маслом на средне-сильном огне."
+    },
+    {
+      "position": 3,
+      "text": "Обжарить весь лук до мягкости и золотистых краёв, помешивая. Лука много: если сковорода тесная — двумя заходами, затем вернуть вместе.",
+      "timer_seconds": 600,
+      "timer_label": "Лук",
+      "timer_note": "8–12 минут до сладкой мягкости, не до угля",
+      "equipment_note": "Не забивать сковороду горкой лука: нижний слой сгорит, верхний останется сырым. Партиями, затем соединить."
+    },
+    {
+      "position": 4,
+      "text": "Сдвинуть лук к краю или снять в миску. Выложить печень партиями в один слой, посолить и поперчить. Обжаривать, переворачивая, пока не исчезнет сырая кровь и разрез не станет серо-коричневым, без розового сока.",
+      "timer_seconds": 180,
+      "timer_label": "Партия печени",
+      "timer_note": "2,5–4 минуты на партию; не стейк medium — кровь в центре недопустима",
+      "target_internal_temperature_c": 71,
+      "equipment_note": "Не перегружать сковороду: порциями в один слой. Полная сковорода даст сырую середину и серый варёный сок."
+    },
+    {
+      "position": 5,
+      "text": "Вернуть лук к печени, добавить сливочное масло, прогреть 30–60 секунд, пока масло не растает и лук не смешается с соком. Сметану и сливки не добавлять: здесь только лук и масло.",
+      "timer_seconds": 45,
+      "timer_label": "Собрать"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "для обжарки лука на сковороде перед формой",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Снять с печени плёнку, нарезать ломтями 8–10 мм. Лук нарезать полукольцами.",
+            "position": 1
+          },
+          {
+            "text": "На сковороде обжарить весь лук в 1 ст. л. масла до мягкости и золота. Печень сырой на сковороду не класть — её доводят в форме.",
+            "position": 2
+          },
+          {
+            "text": "Переложить лук в форму ровным слоем. Сверху — печень в один слой, посолить, поперчить, разложить кусочки сливочного масла.",
+            "position": 3,
+            "equipment_note": "Форма, один слой печени на луке. Горка даст сырой центр и сухие края."
+          },
+          {
+            "text": "Запекать до 71 °C в толще ломтя: разрез серо-коричневый, без сырой крови и розового сока. Не держать «на всякий случай» — печень пересыхает быстрее мяса.",
+            "position": 4,
+            "timer_note": "10–14 минут при 180 °C; ориентир — 71 °C, не таймер",
+            "timer_label": "Запекание",
+            "timer_seconds": 720,
+            "target_internal_temperature_c": 71
+          },
+          {
+            "text": "Перемешать печень с луком прямо в форме и сразу подавать. Сметану не добавлять.",
+            "position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "baking_dish"
+    }
+  ]
+}

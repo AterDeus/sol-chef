@@ -9,7 +9,8 @@ export type ArtScene =
   | 'pork'
   | 'poultry'
   | 'tips'
-  | 'prep';
+  | 'prep'
+  | 'recipes';
 
 const ART_SRC: Record<ArtScene, string> = {
   home: '/art/main-bg.png',
@@ -21,6 +22,7 @@ const ART_SRC: Record<ArtScene, string> = {
   poultry: '/art/poultry.png',
   tips: '/art/tools.png',
   prep: '/art/prep.png',
+  recipes: '/art/recipes.png',
 };
 
 export function PageArt({ scene }: { scene: ArtScene }) {

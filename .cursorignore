@@ -4,12 +4,11 @@ v2/docs/drafts/RECIPE-V2-UPGRADE.md
 v2/docs/PRODUCT.md
 v2/docs/UX.md
 v2/docs/ACCOUNTS.md
-v2/docs/CUTOVER.md
-PLAN.md
-docs/ADD_RECIPE.md
-docs/ADD_TIP.md
-docs/RECIPE_AI_SYSTEM.md
-docs/RECIPE_AI_PROMPT.txt
+archive/v1/PLAN.md
+archive/v1/docs/ADD_RECIPE.md
+archive/v1/docs/ADD_TIP.md
+archive/v1/docs/RECIPE_AI_SYSTEM.md
+archive/v1/docs/RECIPE_AI_PROMPT.txt
 
 # Test gold (one recipe); tests open by path
 v2/backend/tests/fixtures/gold_overlay.json

@@ -1,6 +1,5 @@
-import type { GrainsPayload, MeatPayload, TipsPayload } from '@/lib/types';
+import type { GrainsPayload, MeatPayload } from '@/lib/types';
 import { EmptyState } from '@/components/Feedback';
-import { HashDetailsOpener } from '@/components/HashDetailsOpener';
 
 export function GrainsView({
   payload,
@@ -104,44 +103,6 @@ export function MeatView({
               ))}
             </div>
           </section>
-        ))
-      )}
-    </>
-  );
-}
-
-export function TipsView({
-  payload,
-  omitLead = false,
-}: {
-  payload: TipsPayload;
-  omitLead?: boolean;
-}) {
-  const sections = payload.sections ?? [];
-  return (
-    <>
-      <HashDetailsOpener />
-      {!omitLead && payload.intro && <p className="lede">{payload.intro}</p>}
-      {sections.length === 0 ? (
-        <EmptyState>Пока нет советов.</EmptyState>
-      ) : (
-        sections.map((section) => (
-          <details key={section.id} id={`tip-${section.id}`} className="tips-acc">
-            <summary>{section.title}</summary>
-            <ul>
-              {section.items.map((item, index) => {
-                if (typeof item === 'string') {
-                  return <li key={index}>{item}</li>;
-                }
-                return (
-                  <li key={index}>
-                    {item.hint}
-                    {item.explanation ? <span className="expl">{item.explanation}</span> : null}
-                  </li>
-                );
-              })}
-            </ul>
-          </details>
         ))
       )}
     </>

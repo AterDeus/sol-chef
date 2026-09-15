@@ -1,0 +1,394 @@
+{
+  "id": "syrniki",
+  "title": "Сырники",
+  "summary": "Отжатый творог 9–18% смешивают с яйцом, мукой и небольшим сахаром, лепят невысокие кружки и жарят партиями до румяной корочки и схватившейся середины. Влажный творог и лишняя мука — две главные причины развала и резины.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "pan_fry",
+  "dish_type": "breakfast",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 35,
+    "active_minutes": 25
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy",
+    "budget"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.9
+    },
+    {
+      "to": "air_fryer",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.86
+    },
+    {
+      "to": "oven",
+      "from": "skillet",
+      "type": "equipment",
+      "quality": 0.9
+    },
+    {
+      "type": "omission",
+      "quality": 0.98,
+      "ingredient": "raisin"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Если творог влажный (ложечка оставляет лужицу), завернуть в плотную ткань или марлю и отжать 10 минут. Мокрый творог разваливает кружки, сколько ни сыпь муки."
+    }
+  ],
+  "notes": [
+    {
+      "text": "9–18%. Из слишком сухого обезжиренного творога сырники могут получиться плотными и сухими. Зернёный в сливках — откинуть на сито, иначе тесто поплывёт.",
+      "title": "Жирность творога"
+    },
+    {
+      "text": "Если после вилки на доске остаётся лужа — отжать. Добавлять муку «пока не перестанет липнуть» — путь к клёцкам. Мука в тесте фиксирована: 40 г на 500 г творога.",
+      "title": "Отжать влагу"
+    },
+    {
+      "text": "Не выше 2 см. Слишком толстые сырники будут дольше прогреваться внутри, поэтому поверхность может потемнеть раньше, чем середина пропечётся. Ленивые ложкой чуть ниже, пласт — ровные 1,5 см.",
+      "title": "Толщина"
+    },
+    {
+      "text": "Средне-слабый. Сильный огонь даёт тёмную корочку и сырую середину.",
+      "title": "Огонь"
+    },
+    {
+      "text": "По желанию, обсушенный. Мокрый изюм рвёт тесто при перевороте. Магазинный часто обрабатывают сульфитами — смотрите состав.",
+      "title": "Изюм"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "cottage_cheese",
+      "display_name": "творог",
+      "amount": 500,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "9–18% жирности, не обезжиренный; мягкий, но не влажный"
+    },
+    {
+      "position": 2,
+      "canonical_id": "eggs",
+      "display_name": "яйцо",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "крупное, комнатной температуры"
+    },
+    {
+      "position": 3,
+      "canonical_id": "wheat_flour",
+      "display_name": "пшеничная мука",
+      "amount": 40,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "в тесто, около 2,5 ст. л.; не больше — иначе резина"
+    },
+    {
+      "position": 4,
+      "canonical_id": "wheat_flour",
+      "display_name": "пшеничная мука",
+      "amount": 20,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для обвалки кружков, около 1,5 ст. л."
+    },
+    {
+      "position": 5,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 25,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около 1,5 ст. л.; больше — сырники потекут и подгорят"
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "pinch",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "на баланс сладости"
+    },
+    {
+      "position": 7,
+      "canonical_id": "raisin",
+      "display_name": "изюм",
+      "amount": 40,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "без косточек, обсушить"
+    },
+    {
+      "position": 8,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для жарки; слой около 2 мм, не фритюр"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Растереть творог вилкой до мелкой крупинки без крупных комков. Не взбивать блендером: пюре даст липкое тесто."
+    },
+    {
+      "position": 2,
+      "text": "Вмешать яйцо, сахар и щепотку соли до однородности. Если кладёте изюм — обсушить и вмешать сейчас."
+    },
+    {
+      "position": 3,
+      "text": "Добавить 40 г муки и быстро собрать тесто: оно должно лепиться, не липнуть к ладоням лужей. Если течёт — ещё 1 ч. л. муки, не горсть."
+    },
+    {
+      "position": 4,
+      "text": "Смочить руки, слепить невысокие кружки около 6–7 см в диаметре и 1,5–2 см толщиной. Обвалять в муке для обвалки, стряхнуть лишнее."
+    },
+    {
+      "position": 5,
+      "text": "Разогреть сковороду с маслом на средне-слабом огне: масло должно блестеть, но не дымить."
+    },
+    {
+      "position": 6,
+      "text": "Выложить сырники в один слой с зазором и жарить до плотной румяной корочки с обеих сторон: середина схватилась, при нажатии не течёт сырое тесто.",
+      "timer_seconds": 240,
+      "timer_label": "Первая сторона",
+      "timer_note": "3–4 минуты с первой стороны, 3 со второй; ориентир — корочка и схватившаяся середина, не таймер",
+      "equipment_note": "Не перегружать сковороду: партиями в один слой, иначе сырники тушатся в масле и разваливаются при перевороте."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "lazy",
+      "title": "Ленивые",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Не лепить кружки. Смочить столовую ложку и выкладывать тесто порциями на сковороду или размазать пластом толщиной около 1,5 см по дну. Края пригладить, чтобы пласт не был толще в середине.",
+            "position": 4
+          },
+          {
+            "text": "Жарить порции или пласт на средне-слабом огне до румяной корочки снизу, затем перевернуть лопаткой (пласт — одним движением или разрезать на сектора). Середина должна схватиться, без сырого теста.",
+            "position": 6,
+            "timer_note": "4–5 минут снизу: ленивые толще у краёв ложки, им чуть дольше, чем кружкам",
+            "timer_label": "Первая сторона",
+            "timer_seconds": 300,
+            "equipment_note": "Порции ложкой — с зазором, не слипаясь. Пласт — одна сковорода, не набивать второй слой сверху."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "g",
+            "amount": 10,
+            "detail": "около 2 ч. л.; вкус творога, не десерт",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "sugar",
+            "display_name": "сахар"
+          },
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "для антипригарной сковороды; тонкая плёнка",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Смазать антипригарную сковороду 1 ст. л. масла и разогреть на средне-слабом огне.",
+            "position": 5
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "air_fryer",
+      "title": "В аэрогриле",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "смазать корзину и сырники тонким слоем",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Слепить кружки меньше обычных: около 5 см в диаметре и не толще 1,5 см. Обвалять в муке для обвалки, стряхнуть лишнее.",
+            "position": 4
+          },
+          {
+            "text": "Разогреть аэрогриль до 180 °C. Смазать корзину и сырники тонким слоем масла.",
+            "position": 5
+          },
+          {
+            "text": "Уложить в корзину в один слой с зазором, не больше 6–8 штук за закладку. Готовить до румяной корочки, один раз перевернуть; середина схватилась.",
+            "position": 6,
+            "timer_note": "8–10 минут, перевернуть на 6-й; остальное — следующей партией",
+            "timer_label": "Аэрогриль",
+            "timer_seconds": 600,
+            "equipment_note": "Не заполнять чашу горкой: воздух должен огибать каждый кружок, иначе серединка сырая, низ влажный."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "air_fryer"
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "смазать противень и верх сырников; без глубокой жарки",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Застелить противень бумагой и смазать маслом.",
+            "position": 5
+          },
+          {
+            "text": "Выложить сырники на противень в один слой с зазором, слегка смазать верх маслом. Запекать до румяных боков и схватившейся середины; один раз перевернуть.",
+            "position": 6,
+            "timer_note": "18–20 минут; перевернуть на 12-й; ориентир — сухая серединка на изломе, не таймер",
+            "timer_label": "Запекание",
+            "timer_seconds": 1200,
+            "equipment_note": "Противень, один слой, без глубокой жарки и без слоя масла."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "oven"
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "id": "omlet",
+  "title": "Омлет",
+  "summary": "Яйца взбивают с молоком или водой и жарят на сковороде под крышкой, пока смесь полностью не свернётся. Яйца заранее смешаны, центр не оставляют сырым.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "pan_fry",
+  "dish_type": "breakfast",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 12,
+    "active_minutes": 10
+  },
+  "effort_level": 1,
+  "washing_level": 1,
+  "use_cases": [
+    "fast",
+    "easy",
+    "pantry"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.9
+    },
+    {
+      "to": "baking_dish",
+      "from": "skillet",
+      "type": "equipment",
+      "quality": 0.9
+    },
+    {
+      "type": "omission",
+      "quality": 0.95,
+      "ingredient": "dill"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Классический расчёт — по 2 яйца на порцию (4 штуки на двоих). Яйца проще отсчитывать поштучно, ориентируясь на аппетит и размер сковороды.",
+      "title": "Количество яиц"
+    },
+    {
+      "text": "Небольшое количество молока делает омлет мягче и нежнее. Воду можно использовать в том же количестве; омлет получится менее сливочным. Растительное «молоко» не подставлять: другой вкус и другая свертываемость.",
+      "title": "Молоко или вода"
+    },
+    {
+      "text": "Омлет готов, когда середина свернулась. Жидкий желток как у глазуньи сюда не относится: доводим до конца.",
+      "title": "Не сырой центр"
+    },
+    {
+      "text": "Не взбивайте яйца миксером до пены: достаточно слегка соединить белки с желтками и молоком вилкой. Лишний воздух сделает омлет пористым и сухим. Готовую смесь заливают целиком, а не выпускают сырыми яйцами в сковороду.",
+      "title": "Подготовка яичной массы"
+    },
+    {
+      "text": "Пышнее и без постоянного внимания. Форму не мешать. Первые минуты дверцу не открывать — опадёт.",
+      "title": "Духовка"
+    },
+    {
+      "text": "Перец и помидор сначала выпарить. Мокрые овощи дают лужу и сырое яйцо в центре.",
+      "title": "Овощи"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "eggs",
+      "display_name": "яйца",
+      "amount": 4,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "крупные С0, на 2 порции; масштаб от порций, не от граммов яиц"
+    },
+    {
+      "position": 2,
+      "canonical_id": "milk",
+      "display_name": "молоко",
+      "amount": 80,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "2,5–3,2%; одна жидкость на выбор",
+      "choice_group": "liquid"
+    },
+    {
+      "position": 3,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 80,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "вместо молока; омлет менее пышный",
+      "choice_group": "liquid"
+    },
+    {
+      "position": 4,
+      "canonical_id": "butter",
+      "display_name": "сливочное масло",
+      "amount": 15,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "смазать сковороду, не лужа"
+    },
+    {
+      "position": 5,
+      "canonical_id": "dill",
+      "display_name": "укроп",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "свежий, мелко; можно без него"
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 0.25,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "pinch",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Разбить яйца в миску, добавить молоко или воду, соль, перец и укроп. Взбить вилкой до однородности, без крупных комков белка."
+    },
+    {
+      "position": 2,
+      "text": "Разогреть сковороду 22–24 см на среднем огне, растопить масло и распределить по дну.",
+      "equipment_note": "На 2 порции — сковорода 22–24 см. Больше порций: вторая партия или вариант в духовке, не гора смеси в маленькой сковороде."
+    },
+    {
+      "position": 3,
+      "text": "Залить смесь. Края слегка поднимать лопаткой, чтобы жидкость стекала вниз. Не мешать как болтунью. Накрыть крышкой.",
+      "timer_seconds": 90,
+      "timer_label": "Края"
+    },
+    {
+      "position": 4,
+      "text": "Держать под крышкой, пока омлет полностью не свернётся: центр не жидкий, поверхность матовая, вилка не оставляет сырого следа. Сырой желток в середине не оставлять.",
+      "timer_seconds": 240,
+      "timer_label": "Под крышкой",
+      "timer_note": "3–5 минут на среднем огне; ориентир — свёрнутый центр, не румяная корка снизу"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_cheese",
+      "title": "С сыром",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 50,
+            "detail": "натёртый, российский или гауда",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "hard_cheese",
+            "display_name": "твёрдый сыр"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Когда края схватятся, равномерно посыпать натёртым сыром. Дальше держать под крышкой, пока сыр не расплавится и центр не свернётся.",
+            "after_position": 3
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_vegetables",
+      "title": "С овощами",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 80,
+            "detail": "мелкий кубик",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "bell_pepper",
+            "display_name": "болгарский перец"
+          },
+          {
+            "unit": "g",
+            "amount": 80,
+            "detail": "кубик, семена слегка отжать",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "tomato",
+            "display_name": "помидор"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Обжарить перец и помидор 3–4 минуты, пока не уйдёт лишняя жидкость. Затем залить яичную смесь сверху, как в следующем шаге.",
+            "timer_note": "Сырая вода помидора не даст омлету схватиться",
+            "timer_label": "Овощи",
+            "timer_seconds": 210,
+            "after_position": 2
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "g",
+            "amount": 15,
+            "detail": "смазать форму, не сковороду",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "butter",
+            "display_name": "сливочное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Форму смазать сливочным маслом. Сковороду не разогревать.",
+            "position": 1
+          },
+          {
+            "text": "Разбить яйца в миску, добавить молоко или воду, соль, перец и укроп. Взбить вилкой до однородности.",
+            "position": 2
+          },
+          {
+            "text": "Вылить смесь в форму ровным слоем. Не перемешивать в духовке.",
+            "position": 3,
+            "equipment_note": "Форма, слой смеси 1,5–2,5 см. Толще 3 см — сырой центр при подгоревших краях."
+          },
+          {
+            "text": "Запекать без помешивания, пока омлет не поднимется и полностью не свернётся: центр матовый, не жидкий, вилка выходит без сырого яйца.",
+            "position": 4,
+            "timer_note": "14–18 минут при 180 °C; не открывать дверцу первые 12 минут — опадёт",
+            "timer_label": "Запекание",
+            "timer_seconds": 960
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "baking_dish"
+    }
+  ],
+  "servings": 2
+}

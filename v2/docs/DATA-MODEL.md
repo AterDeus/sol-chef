@@ -274,6 +274,18 @@ Unique: `(type, slug)`.
 
 Пустых гидов (`seafood`, `vegetables`, …) не создавать.
 
+Источник советов по-прежнему `data/tips.json`. В `payload_json.sections[].items[]` каждый пункт — объект, не строка:
+
+| Поле | Тип | Смысл |
+|------|-----|--------|
+| `id` | text | уникален во всём файле; шаблон `{section.id}-{NN}` (`06-01`) |
+| `hint` | text | заголовок карточки |
+| `explanation` | text, необязательно | раскрытие; можно опустить или пустую строку |
+| `kind` | enum | VOCAB «Советы»: тип совета |
+| `tags` | 1–3 кодов | VOCAB «Советы»: темы; не копия `kind` |
+
+Поиск на `/tips` — клиент Next (`?q=` и чипы). Без Django FTS, без `__icontains`, без нового API.
+
 ## Аккаунты (V2.1)
 
 План и инварианты — [ACCOUNTS.md](ACCOUNTS.md). Не в гостевом срезе. Фото и граммы кладовки — *позже* (V2.2), колонок не заводить.
@@ -453,7 +465,7 @@ $$ LANGUAGE sql IMMUTABLE PARALLEL SAFE;
 
 Два слота одного slug (борщ finish в пн / reheat во вт) — два разных `steps`.
 
-Импорт: `manage.py import_prep_kit` (dry-run / import). Upsert по `PrepKit.slug`. JSON набора: `id` или `slug` → `slug`; `component.id` / `container.id` → `code`. Next JSON не читает. Не в корневой `data/`. Нет демо-наборов в фикстурах.
+Импорт: `manage.py import_prep_kit` (dry-run / import). Upsert по `PrepKit.slug`. JSON набора: `id` или `slug` → `slug`; `component.id` / `container.id` → `code`. Next JSON не читает. Не в `archive/v1/data/`. Нет демо-наборов в фикстурах.
 
 `mode` у published слота меняется только **полным re-import** набора. Нет PATCH слота.
 
@@ -490,7 +502,7 @@ Unique `(kit, code)`. Полуфабрикат после вс.
 | `unit` | VOCAB unit | нет | |
 | `weekend_steps` | JSON list | нет | **как** делать, не расписание |
 | `parcook` | JSON | нет | |
-| `storage` | JSON | нет | срок — редакционная оценка, не ГОСТ |
+| `storage` | JSON | нет | срок — редакционная оценка, не ГОСТ; `fridge_days` готового по умолчанию 3, не 6 ([WEEKLY-PREP-DESIGN.md](WEEKLY-PREP-DESIGN.md) §29) |
 
 Какие боксы у компонента — строки `PrepContainer`, не копия `eaten_by`.
 
@@ -506,8 +518,8 @@ Unique `(kit, code)`. Физический бокс. Не 1:1 с компоне�
 | `component` | FK | нет | |
 | `qty` | decimal | нет | |
 | `unit` | VOCAB unit | нет | тот же, что у компонента, для суммы |
-| `place` | enum | нет | `fridge` \| `freezer` |
-| `thaw_before_day` | 1–7 | да | достать к этому дню слота; null — не из морозилки |
+| `place` | enum | нет | `fridge` \| `freezer` \| `pantry` (закрытые банки — шкаф, не холодильник) |
+| `thaw_before_day` | 1–7 | да | день, к которому бокс должен оттаять; null — не из морозилки. Подпись «с вечера / утром» UI считает из `unit` и кода компонента ([WEEKLY-PREP-DESIGN.md](WEEKLY-PREP-DESIGN.md) §32), отдельного поля нет |
 
 ### `PrepSlot`
 

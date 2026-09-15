@@ -12,6 +12,17 @@ class V1ImportError(Exception):
     pass
 
 
+def resolve_v1_root(root: Path) -> Path:
+    """Accept the repo root or `archive/v1`. Prefer a tree that still has the catalog JSON."""
+    for candidate in (root, root / "archive" / "v1"):
+        if (candidate / "data" / "recipes" / "index.json").is_file():
+            return candidate
+    archived = root / "archive" / "v1"
+    raise V1ImportError(
+        f"Нет каталога V1 (data/recipes/index.json) в {root} или {archived}"
+    )
+
+
 def read_index(data_root: Path) -> list[str]:
     index_path = data_root / "data" / "recipes" / "index.json"
     if not index_path.is_file():

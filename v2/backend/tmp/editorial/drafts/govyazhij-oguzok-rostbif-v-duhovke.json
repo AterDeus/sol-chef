@@ -1,0 +1,149 @@
+{
+  "id": "govyazhij-oguzok-rostbif-v-duhovke",
+  "title": "Запечённый говяжий огузок (ростбиф)",
+  "summary": "Доступная альтернатива вырезке из постного тазобедренного отруба (огузок). Высокотемпературный старт при 220°C создаёт корочку, а последующее запекание при 120°C до 57°C внутри сохраняет мясо сочным и нежным.",
+  "protein_base": "beef",
+  "cook_method": "oven",
+  "dish_type": "main",
+  "equipment": "oven",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Личный повар",
+  "source_url": "https://sol-chef.ru",
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": null,
+    "active_minutes": null
+  },
+  "effort_level": null,
+  "washing_level": null,
+  "use_cases": [],
+  "adaptations": [],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Огузок — постный отруб, поэтому запекание строго до внутренней температуры 57°C жизненно важно. Чем выше конечная температура, тем менее сочным будет постный огузок; степень прожарки лучше контролировать термометром.",
+      "title": null
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 0,
+      "canonical_id": "beef_rump",
+      "display_name": "говяжий огузок",
+      "amount": 1,
+      "unit": "kg",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "цельный кусок"
+    },
+    {
+      "position": 1,
+      "canonical_id": "olive_oil",
+      "display_name": "оливковое масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 2,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "измельчить"
+    },
+    {
+      "position": 3,
+      "canonical_id": "coarse_salt",
+      "display_name": "соль крупная",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 4,
+      "canonical_id": "fresh_black_pepper",
+      "display_name": "чёрный перец свежемолотый",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 5,
+      "canonical_id": "dried_thyme",
+      "display_name": "сушёный тимьян",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 0,
+      "text": "За 1 час до приготовления достать огузок из холодильника, чтобы мясо прогрелось до комнатной температуры."
+    },
+    {
+      "position": 1,
+      "text": "Смешать оливковое масло, измельчённый чеснок, крупную соль, чёрный перец и тимьян."
+    },
+    {
+      "position": 2,
+      "text": "Равномерно натереть кусок говядины масляной смесью со всех сторон."
+    },
+    {
+      "position": 3,
+      "text": "Разогреть духовку до 220°C. Поместить мясо на решётку (подставив снизу противень) и запекать 15 минут для образования аппетитной корочки."
+    },
+    {
+      "position": 4,
+      "text": "Снизить температуру духовки до 120°C и продолжать запекать около 45–55 минут."
+    },
+    {
+      "position": 5,
+      "text": "Извлечь мясо из духовки строго при достижении внутренней температуры 57°C (контролировать кулинарным термометром)."
+    },
+    {
+      "position": 6,
+      "text": "Плотно завернуть ростбиф в фольгу и дать «отдохнуть» 20 минут перед нарезкой."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "kholodnaya-narezka-dlya-sendvichei",
+      "title": "Холодная нарезка для сэндвичей",
+      "has_delta": false,
+      "legacy_text": "<p>Остудите готовый ростбиф и выдержите в холодильнике 4–6 часов. Охлаждённый огузок легко нарезается слайсером или острым ножом на ультратонкие ломтики.</p>"
+    },
+    {
+      "axis": "addon",
+      "code": "s-zernistoi-gorchitsei",
+      "title": "С зернистой горчицей",
+      "has_delta": false,
+      "legacy_text": "<p>Обмажьте кусок 2 ст. л. зернистой дижонской горчицы вместе со специями перед запеканием.</p>"
+    }
+  ]
+}

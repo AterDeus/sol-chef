@@ -16,7 +16,7 @@ def _choice(codes: frozenset[str] | tuple[str, ...]) -> list[tuple[str, str]]:
 PREP_STATUS = frozenset({"draft", "published"})
 PREP_MODE = frozenset({"assemble", "finish", "reheat"})
 PREP_MEAL = frozenset({"lunch", "dinner"})
-PREP_PLACE = frozenset({"fridge", "freezer"})
+PREP_PLACE = frozenset({"fridge", "freezer", "pantry"})
 
 
 class PrepKit(models.Model):

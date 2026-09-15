@@ -1,4 +1,5 @@
-import type { RecipeCardData, TipItem, TipsPayload } from './types';
+import type { RecipeCardData, TipsPayload } from './types';
+import { flattenTips as flattenAllTips } from './tips';
 
 export const HOME_SAMPLE_SIZE = 6;
 
@@ -13,6 +14,12 @@ const TIP_SECTION_ICON: Record<string, string> = {
   '08': 'chef-hat',
   '09': 'beef',
   '10': 'circle-check',
+  '11': 'drumstick',
+  '12': 'wheat',
+  '13': 'shopping-basket',
+  '14': 'flask-conical',
+  '15': 'timer',
+  '16': 'book-open-text',
 };
 
 export function tipSectionIcon(sectionId: string): string {
@@ -20,21 +27,12 @@ export function tipSectionIcon(sectionId: string): string {
 }
 
 export type FeaturedTip = {
+  id: string;
   sectionId: string;
   sectionTitle: string;
   hint: string;
   explanation?: string;
 };
-
-function tipHint(item: TipItem): string {
-  return typeof item === 'string' ? item : item.hint;
-}
-
-function tipExplanation(item: TipItem): string | undefined {
-  if (typeof item === 'string') return undefined;
-  const text = item.explanation?.trim();
-  return text || undefined;
-}
 
 function randomInt(maxExclusive: number): number {
   const buf = new Uint32Array(1);
@@ -73,18 +71,13 @@ export function pickRandomRecipes(
 }
 
 export function flattenTips(payload: TipsPayload): FeaturedTip[] {
-  const all: FeaturedTip[] = [];
-  for (const section of payload.sections ?? []) {
-    for (const item of section.items) {
-      all.push({
-        sectionId: section.id,
-        sectionTitle: section.title,
-        hint: tipHint(item),
-        explanation: tipExplanation(item),
-      });
-    }
-  }
-  return all;
+  return flattenAllTips(payload).map((tip) => ({
+    id: tip.id,
+    sectionId: tip.sectionId,
+    sectionTitle: tip.sectionTitle,
+    hint: tip.hint,
+    explanation: tip.explanation,
+  }));
 }
 
 export function pickRandomTips(payload: TipsPayload, n = HOME_SAMPLE_SIZE): FeaturedTip[] {

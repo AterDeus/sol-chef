@@ -104,7 +104,7 @@ export function Footer() {
       <Link href="/meat/beef">Говядина</Link>
       <Link href="/meat/pork">Свинина</Link>
       <Link href="/meat/poultry">Птица</Link>
-      <Link href="/tips">Советы Энди</Link>
+      <Link href="/tips">Советы шеф-поваров</Link>
       <Link href="/prep">На неделю</Link>
       <Link href="/recipes">Все рецепты</Link>
     </footer>
@@ -122,7 +122,7 @@ const TABS: Array<{
   { href: '/recipes', label: 'Рецепты', icon: 'book-open-text', match: 'recipes' },
   { href: '/prep', label: 'На неделю', icon: 'refrigerator', match: 'prep' },
   { href: '/grains', label: 'Справка', aria: 'Справочник', icon: 'wheat', match: 'guide' },
-  { href: '/tips', label: 'Советы', aria: 'Советы Энди', icon: 'chef-hat', match: 'tips' },
+  { href: '/tips', label: 'Советы', aria: 'Советы шеф-поваров', icon: 'chef-hat', match: 'tips' },
 ];
 
 export function TabBar() {

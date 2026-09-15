@@ -1,0 +1,231 @@
+{
+  "id": "salat-s-syrom-i-gretskimi-orehami",
+  "title": "Салат с сыром и грецкими орехами",
+  "summary": "Салатный микс с огурцом или помидорами, твёрдым сыром и грецкими орехами или миндалём. Заправка — оливковое масло, лимонный сок и горчица. Орехи слегка подсушивают на сухой сковороде до аромата.",
+  "protein_base": "vegetarian",
+  "cook_method": "pan_fry",
+  "dish_type": "salad",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Pilot source notes A05",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": null,
+    "active_minutes": null
+  },
+  "effort_level": null,
+  "washing_level": null,
+  "use_cases": [],
+  "adaptations": [],
+  "prep": [],
+  "notes": [
+    {
+      "text": "На сухой сковороде только до аромата: 2–3 минуты. Дальше горчат. Грецкие или миндаль — одно, 30 г. Без орехов хруст теряется: тогда те же 30 г семечек тыквы прогревают так же.",
+      "title": "Орехи"
+    },
+    {
+      "text": "Горчица помогает стабилизировать заправку, поэтому масло и кислота смешиваются более равномерно. Лимон или яблочный уксус — одно.",
+      "title": "Заправка"
+    },
+    {
+      "text": "Твёрдый, натереть. Моцарелла сюда плывёт. Фета солонее: если кладёте её вместо твёрдого, соли в заправке меньше.",
+      "title": "Сыр"
+    },
+    {
+      "text": "Заправленный салат через 15 минут уже в луже. Орехи отсыреют, листья осядут.",
+      "title": "Сразу на стол"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 0,
+      "canonical_id": "salad_mix",
+      "display_name": "салатный микс",
+      "amount": 180,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "листья или готовый микс"
+    },
+    {
+      "position": 1,
+      "canonical_id": "cucumber",
+      "display_name": "огурцы",
+      "amount": 200,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежие, ломтиками; взять огурец или помидоры, не оба сразу",
+      "choice_group": "veg"
+    },
+    {
+      "position": 2,
+      "canonical_id": "tomato",
+      "display_name": "помидоры",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "плотные, дольки; та же порция / вместо огурца, не вместе",
+      "choice_group": "veg"
+    },
+    {
+      "position": 3,
+      "canonical_id": "hard_cheese",
+      "display_name": "сыр твёрдый",
+      "amount": 50,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "натереть"
+    },
+    {
+      "position": 4,
+      "canonical_id": "walnuts",
+      "display_name": "грецкие орехи",
+      "amount": 30,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "грубо порубить; взять грецкие или миндаль, не оба",
+      "choice_group": "nuts"
+    },
+    {
+      "position": 5,
+      "canonical_id": "almond",
+      "display_name": "миндаль",
+      "amount": 30,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "грубо порубить, та же порция / вместо, не вместе",
+      "choice_group": "nuts"
+    },
+    {
+      "position": 6,
+      "canonical_id": "olive_oil",
+      "display_name": "оливковое масло",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "lemon",
+      "display_name": "лимонный сок",
+      "amount": 1,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "из половины лимона; или уксус того же объёма",
+      "choice_group": "acid"
+    },
+    {
+      "position": 8,
+      "canonical_id": "vinegar",
+      "display_name": "яблочный уксус",
+      "amount": 15,
+      "unit": "ml",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "вместо лимонного сока",
+      "choice_group": "acid"
+    },
+    {
+      "position": 9,
+      "canonical_id": "mustard",
+      "display_name": "горчица",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "linear",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "столовая"
+    },
+    {
+      "position": 10,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 0.25,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 11,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": null,
+      "unit": "pinch",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Грецкие орехи или миндаль слегка подсушить на сухой сковороде, помешивая, затем остудить и грубо порубить.",
+      "timer_seconds": 180,
+      "timer_label": "Орехи",
+      "timer_note": "2–3 минуты до запаха, не до горечи"
+    },
+    {
+      "position": 2,
+      "text": "Салатный микс выложить в миску. Добавить огурец или помидоры — одно. Натереть твёрдый сыр."
+    },
+    {
+      "position": 3,
+      "text": "Смешать заправку: оливковое масло, лимонный сок или уксус, горчицу, соль и перец."
+    },
+    {
+      "position": 4,
+      "text": "Соединить листья, овощ, сыр и рубленые орехи. Заправить и сразу подать: от соли листья осядут."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "bez-orekhov",
+      "title": "Без орехов",
+      "has_delta": false,
+      "legacy_text": "Заменить грецкие орехи и миндаль тыквенными семечками (30 г), подсушенными на той же сухой сковороде. Аллерген tree_nut из базового состава уходит; молоко и горчица остаются."
+    },
+    {
+      "axis": "addon",
+      "code": "bez-syra",
+      "title": "Без сыра",
+      "has_delta": false,
+      "legacy_text": "Не добавлять сыр; увеличить порцию огурца или помидоров. Аллерген milk уходит; tree_nut и mustard остаются."
+    }
+  ]
+}

@@ -250,12 +250,41 @@ export type MeatPayload = {
   methods?: MeatMethod[];
 };
 
-export type TipItem =
-  | string
-  | {
-      hint: string;
-      explanation?: string;
-    };
+export type TipKind =
+  | 'technique'
+  | 'mistake'
+  | 'timing'
+  | 'accuracy'
+  | 'heat'
+  | 'storage';
+
+export type TipTag =
+  | 'prep'
+  | 'knives'
+  | 'skillet'
+  | 'oven'
+  | 'dough'
+  | 'ingredients'
+  | 'spices'
+  | 'taste'
+  | 'meat'
+  | 'fish'
+  | 'veg'
+  | 'grains'
+  | 'sauce'
+  | 'storage'
+  | 'safety';
+
+export type TipRecord = {
+  id?: string;
+  hint: string;
+  explanation?: string;
+  kind?: TipKind;
+  tags?: TipTag[];
+};
+
+/** Guide payload may omit id/kind/tags until JSON is tagged; strings are hint-only. */
+export type TipItem = string | TipRecord;
 
 export type TipsPayload = {
   intro?: string;
@@ -293,8 +322,9 @@ export type PrepContainer = PrepQty & {
   label: string;
   component_code?: string;
   component_title?: string;
-  place: 'fridge' | 'freezer';
+  place: 'fridge' | 'freezer' | 'pantry';
   thaw_before_day: number | null;
+  thaw_pull?: 'evening_before' | 'morning' | null;
 };
 
 export type PrepAlternative = {
@@ -371,6 +401,7 @@ export type PrepKitDetail = {
   servings_base: number | null;
   no_leftover?: boolean;
   has_leftovers?: boolean;
+  leftover_cost?: { dishes: number; shopping_add: number };
   scaling: Scaling;
   caution_text?: string | null;
   rhythm?: string | null;

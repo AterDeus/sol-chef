@@ -1,0 +1,47 @@
+# HTTPS for sol-chef.ru. ACME needs DNS A-records pointing at this VPS first.
+
+{
+	email {$ACME_EMAIL}
+}
+
+www.{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}
+
+{$DOMAIN} {
+	encode gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	handle /_internal* {
+		respond 404
+	}
+
+	handle /admin* {
+		basic_auth {
+			{$ADMIN_BASIC_USER} {$ADMIN_BASIC_HASH}
+		}
+		reverse_proxy backend:8000
+	}
+
+	handle /api* {
+		reverse_proxy backend:8000
+	}
+
+	handle /static* {
+		reverse_proxy backend:8000
+	}
+
+	handle /healthz* {
+		reverse_proxy backend:8000
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+}

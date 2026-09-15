@@ -20,7 +20,7 @@
 | Новая задача / срез | CURRENT_SPRINT → AGENTS |
 | Внешнему аналитику / одностраничник продукта | [PRODUCT.md](PRODUCT.md) — сценарии, экраны, полный пример рецепта; не канон при конфликте с UX-PROPOSAL |
 | Backend, модели, ETL | ARCHITECTURE → DATA-MODEL → API → SAFETY → VOCAB → TESTING |
-| UI / маршруты | UX-PROPOSAL (не `v2/preview/`, не UX.md) → `css/global.css` |
+| UI / маршруты | UX-PROPOSAL (не `v2/preview/`, не UX.md) → `archive/v1/css/global.css` |
 | Визуал / полировка UI | бриф дизайнеру: [drafts/DESIGN-BRIEF.md](drafts/DESIGN-BRIEF.md); канон экранов не менять |
 | Аккаунты / избранное / «готовил» | план: [ACCOUNTS.md](ACCOUNTS.md); экраны UX-PROPOSAL §13 |
 | Калькулятор (как считает) | [CALCULATOR.md](CALCULATOR.md) — разбор экрана; контракт [API.md](API.md) |
@@ -59,4 +59,4 @@
 | [RECIPE.md](RECIPE.md) | конвейер волн |
 | [RECIPE-INVENTORY.md](RECIPE-INVENTORY.md) | 43 утверждённых + черновик сотни |
 
-`v2/preview/` и корневой `PLAN.md` — не про 2.0.
+`v2/preview/` и архивный `archive/v1/PLAN.md` — не про 2.0 как канон стека.

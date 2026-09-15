@@ -82,9 +82,18 @@ Status: accepted · 2026-09-05
 
 ## DEC-005 — V2 только в `v2/`
 
-Status: accepted · 2026-09-05
+Status: superseded · DEC-027 · 2026-09-12
 
-Корень — живой V1 до cutover. JSON корня — сырьё ETL, не рантайм Next.
+Корень был живым V1 до cutover. JSON корня — сырьё ETL, не рантайм Next.
+
+## DEC-027 — Cutover: V1 в архив, прод на ВМ
+
+Status: accepted · чат 2026-09-12
+
+1. Статический V1 переезжает в `archive/v1/`. Корень — монорепо; Next/Django по-прежнему только в `v2/`.
+2. JSON архива — сырьё `import_v1`, не рантайм. Живой каталог (~135 карточек и наборы) — Postgres; на ВМ переносят дампом, не голым `import_v1`.
+3. Домен `sol-chef.ru` уходит с GitHub Pages на ВМ Timeweb (Caddy 80/443). Операции — [CUTOVER.md](CUTOVER.md).
+4. `main` с архивом не пушить, пока DNS не смотрит на V2: без корневых `index.html`/`CNAME` Pages отдаст не сайт.
 
 ## DEC-006 — Каркас D+
 

@@ -13,6 +13,7 @@ uv sync --group dev
 # Локально без Docker:
 #   set POSTGRES_HOST=localhost
 #   set V1_DATA_ROOT=K:\Work\sol-chef
+#   (ETL сам найдёт archive/v1)
 uv run python manage.py migrate
 uv run python manage.py import_v1 --dry-run
 uv run python manage.py import_v1
@@ -35,7 +36,7 @@ U1–U9 и разбор V1 (43 рецепта) не требуют Postgres. FTS
 
 ## `import_v1`
 
-Читает `{V1_DATA_ROOT}/data/recipes/index.json` (19 файлов, 43 объекта). Сиды:
+Читает `{V1_DATA_ROOT}/data/recipes/index.json` или `{V1_DATA_ROOT}/archive/v1/data/recipes/index.json` (19 файлов, 43 объекта V1). Сиды:
 
 - `apps/recipes/fixtures/v1_ingredient_map.json` — точная строка V1 `name` → `canonical_id` + аллергены
 - `apps/recipes/fixtures/v1_step_temperatures.json` — 13 рецептов птица/свинина/рыба

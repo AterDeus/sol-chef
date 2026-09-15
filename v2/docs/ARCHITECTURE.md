@@ -6,7 +6,7 @@
 
 | Сервис | Образ / стек | Сеть Compose | На хост |
 |--------|--------------|--------------|---------|
-| caddy | Caddy | 80 | **8080** → http://localhost:8080 |
+| caddy | Caddy | срез: 80→**8080**; прод: **80 и 443** | срез: http://localhost:8080; прод: https://sol-chef.ru |
 | frontend | Next.js 15, Node 22 | 3000 | не публиковать в проде |
 | backend | Django 5.2, Python 3.12, uv | 8000 | не публиковать в проде |
 | postgres | 16 | 5432 | только Docker-сеть |
@@ -14,7 +14,7 @@
 
 Сессии — в Postgres, не в Redis. Redis — брокер очередей (в срезе worker не обязателен).
 
-Локально в compose: Django **runserver**, Next **`next dev`**. Прод: gunicorn (2 воркера) + WhiteNoise; Next `output: 'standalone'`. Не путать.
+Локально в compose: Django **runserver**, Next **`next dev`**. Прод: gunicorn (2 воркера) + WhiteNoise; Next `output: 'standalone'`. Не путать. Чеклист ВМ и DNS: [CUTOVER.md](CUTOVER.md).
 
 ### Срез vs позже
 
@@ -27,7 +27,8 @@
 ## Caddy (BFF, один origin)
 
 ```
-Браузер → Caddy :8080
+Срез:  браузер → Caddy :8080
+Прод:  браузер → Caddy :443 (Let's Encrypt)
   /api /admin /static /healthz  → backend:8000
   /_internal/*                  → 404 снаружи
   всё остальное                 → frontend:3000
@@ -39,7 +40,7 @@
 - Next SSR: `INTERNAL_API_URL=http://backend:8000`, клиент: `NEXT_PUBLIC_API_URL` пустой. Пробрасывать `Cookie` (и CSRF, когда появятся мутации). Не `fetch` на `localhost:8080` из контейнера.
 - ISR — только публичное тело. Персональные блоки и счётчики «приготовили N» / комментарии — клиентский `/api/` после гидрации ([ACCOUNTS.md](ACCOUNTS.md)). `community_confirmed` на `Recipe` можно в SSR.
 - Статика Django (админка): WhiteNoise у backend, чтобы `/static/` через Caddy работал и с gunicorn. В срезе достаточно runserver + WhiteNoise в deps.
-- `/admin/` на VPS закрывать авторизацией **до** cutover (не срез, не забыть в деплое).
+- `/admin/` на VPS закрывать авторизацией **до** cutover: Caddy basic auth + Django login. См. [CUTOVER.md](CUTOVER.md).
 
 301 `recipe.html?id=` — страница Next, не `redirects()` по pathname. См. API/UX-PROPOSAL.
 
@@ -63,8 +64,8 @@ Query масштаба — [API.md](API.md). Нет ни servings, ни якор
 
 ## ETL
 
-Источник: корневой `data/`, не рантайм Next. Идемпотентный upsert, одна транзакция, сиды аллергенов и температур — DATA-MODEL. Команда: `import_v1`, флаг `--dry-run`. Число рецептов — DEFAULTS.
+Источник: `archive/v1/data/`, не рантайм Next. Идемпотентный upsert, одна транзакция, сиды аллергенов и температур — DATA-MODEL. Команда: `import_v1`, флаг `--dry-run`. На проде каталог переносят дампом Postgres, не повторным `import_v1` (оверлеи 43 и новые карточки иначе потеряются). Число рецептов V1 в JSON — DEFAULTS; живой каталог V2 — в БД.
 
 ## Запреты инфра
 
-Runtime LLM. JWT. CORS. `next build` на VPS. ClamAV на 8 ГБ. Сессии в Redis. Публичный Next `/api/`. Код 2.0 вне `v2/`.
+Runtime LLM. JWT. CORS. `next build` на хосте VPS (сборка только в образе). ClamAV на 8 ГБ. Сессии в Redis. Публичный Next `/api/`. Код 2.0 вне `v2/`.

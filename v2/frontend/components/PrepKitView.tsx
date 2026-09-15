@@ -14,6 +14,10 @@ import {
   PREP_SERVING_OPTIONS,
   formatServingsLabel,
   kitHref,
+  leftoverCostCaption,
+  thawRemindersForDay,
+  coldContainerCaption,
+  formatThawColumn,
 } from '@/lib/prep';
 
 const TABS = [
@@ -49,7 +53,9 @@ export function PrepKitView({
   const [tab, setTab] = useState<(typeof TABS)[number]['id']>('shop');
   const applied = servings ?? kit.servings_base ?? 2;
   const servingOptions = kit.servings_base ? PREP_SERVING_OPTIONS : [];
+  const leftoverCaption = leftoverCostCaption(kit.leftover_cost);
   const showLeftoverToggle = Boolean(kit.has_leftovers);
+  const boxCaption = coldContainerCaption(kit.containers);
   const intro = kit.weekend_timeline.filter((row) => row.kind === 'intro');
   const recipeSteps = kit.weekend_timeline.filter((row) => row.kind !== 'intro');
   const planHref = (nextServings: number | null, nextNoLeftover: boolean) =>
@@ -84,7 +90,11 @@ export function PrepKitView({
                 onChange={() => router.push(planHref(servings, !noLeftover))}
               />
               Без вчерашнего
-              <span>Блюдо на один приём; вместо разогрева — другое из набора. Меняет закупку и воскресенье.</span>
+              <span>
+                Блюдо на один приём; вместо разогрева — другое из набора. Меняет закупку и
+                воскресенье.
+                {leftoverCaption ? ` ${leftoverCaption}` : ''}
+              </span>
             </label>
           )}
         </div>
@@ -155,6 +165,7 @@ export function PrepKitView({
             </ol>
           )}
           <h3>Куда разложить</h3>
+          {boxCaption && <p className="lede">{boxCaption}</p>}
           <table className="prep-table">
             <thead>
               <tr>
@@ -172,11 +183,7 @@ export function PrepKitView({
                   </td>
                   <td>{box.component_title}</td>
                   <td>{PREP_PLACE_RU[box.place] || box.place}</td>
-                  <td>
-                    {box.thaw_before_day
-                      ? `${PREP_DAY_RU[box.thaw_before_day]} вечером накануне`
-                      : '—'}
-                  </td>
+                  <td>{formatThawColumn(box)}</td>
                 </tr>
               ))}
             </tbody>
@@ -208,9 +215,15 @@ export function PrepKitView({
             {[1, 2, 3, 4, 5, 6, 7].map((day) => {
               const lunch = kit.slots.find((slot) => slot.day === day && slot.meal === 'lunch');
               const dinner = kit.slots.find((slot) => slot.day === day && slot.meal === 'dinner');
+              const thawLines = thawRemindersForDay(day, kit.containers);
               return (
                 <div key={day} className="prep-day">
                   <p className="prep-day__title">{PREP_DAY_RU[day]}</p>
+                  {thawLines.map((line) => (
+                    <p key={line} className="prep-day__thaw">
+                      {line}
+                    </p>
+                  ))}
                   <div className="prep-slot-row">
                     {[lunch, dinner].map((slot) => {
                       if (!slot) return null;

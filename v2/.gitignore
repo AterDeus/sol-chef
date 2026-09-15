@@ -1,6 +1,8 @@
 .env
 .env.*
 !.env.example
+!infra/.env.example
+**/*.dump
 **/__pycache__/
 **/.venv/
 **/node_modules/

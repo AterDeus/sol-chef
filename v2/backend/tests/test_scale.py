@@ -5,6 +5,7 @@ from decimal import Decimal
 from apps.recipes.services.scale import (
     ScaleConflict,
     apply_mode,
+    format_display_amount,
     resolve_scale,
     round_scaled,
 )
@@ -52,6 +53,14 @@ def test_velvet_soda_scales_linear_with_meat():
         scaling_enabled=True,
     )
     assert amount == Decimal("3")
+
+
+def test_spoon_amount_shows_ml_in_parens():
+    assert format_display_amount(Decimal("1.5"), "tbsp") == "1,5 ст. л. (~23 мл)"
+    assert format_display_amount(Decimal("2"), "tbsp") == "2 ст. л. (~30 мл)"
+    assert format_display_amount(Decimal("1"), "tsp") == "1 ч. л. (~5 мл)"
+    assert format_display_amount(Decimal("3"), "tbsp", Decimal("4")) == "3–4 ст. л. (~45–60 мл)"
+    assert format_display_amount(Decimal("20"), "ml") == "20 мл"
 
 
 def test_u5_rounding_defaults():

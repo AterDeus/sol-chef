@@ -1,0 +1,466 @@
+{
+  "id": "borshch",
+  "title": "Борщ",
+  "summary": "Домашний борщ на говяжьей голяшке: свёкла и капуста, томатная зажарка, уксус для цвета, чеснок в конце. Сметана к подаче по желанию. Кастрюля на несколько дней.",
+  "protein_base": "beef",
+  "cook_method": "boil",
+  "dish_type": "soup",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "shank",
+    "brisket",
+    "shoulder"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 150,
+    "active_minutes": 40
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "batch",
+    "budget",
+    "easy"
+  ],
+  "adaptations": [
+    {
+      "to": "chicken_thighs",
+      "from": "beef_shank_bone_in",
+      "type": "substitution",
+      "quality": 0.84
+    },
+    {
+      "type": "omission",
+      "quality": 0.78,
+      "ingredient": "beef_shank_bone_in"
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Голяшка на кости даёт самый плотный бульон. Грудинка и лопатка тоже подходят; вырезку не брать — в борще она сухая и дорогая зря.",
+      "title": "Отруб"
+    },
+    {
+      "text": "Мясо на кости залейте холодной водой и варите при слабом кипении полтора–два часа, снимая пену. Готовые кубики и концентраты здесь не нужны: они заглушают вкус свёклы и мяса.",
+      "title": "Основа для борща"
+    },
+    {
+      "text": "Сырую натирают в зажарку, не варёную «для винегрета». Варёная даёт плоский сладкий вкус и серый цвет.",
+      "title": "Свёкла"
+    },
+    {
+      "text": "Подойдёт обычный столовый: 1–2 ст. л. на кастрюлю. Особая концентрация не нужна — кислота лишь помогает сохранить яркий свекольный цвет. Не лейте больше двух ложек, иначе суп станет излишне кислым.",
+      "title": "Уксус"
+    },
+    {
+      "text": "После картофеля, не вместе. Иначе капуста разлезется, а картофель ещё твёрдый.",
+      "title": "Капуста"
+    },
+    {
+      "text": "Только после снятия с огня. Кипячёный чеснок в борще — варёный запах, без остроты.",
+      "title": "Чеснок"
+    },
+    {
+      "text": "К подаче, по желанию. В состав борща сметана не входит.",
+      "title": "Сметана"
+    },
+    {
+      "text": "После ночи в холодильнике вкус становится насыщеннее. Разогревать до горячего, не кипятить подолгу — капуста и так уже мягкая.",
+      "title": "На следующий день"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef_shank_bone_in",
+      "display_name": "говяжья голяшка на кости",
+      "amount": 800,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "голяшка, грудинка или лопатка; на кости бульон крепче"
+    },
+    {
+      "position": 2,
+      "canonical_id": "beetroot",
+      "display_name": "свёкла",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сырая, на крупной тёрке"
+    },
+    {
+      "position": 3,
+      "canonical_id": "cabbage",
+      "display_name": "капуста белокочанная",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "нашинковать"
+    },
+    {
+      "position": 4,
+      "canonical_id": "potato",
+      "display_name": "картофель",
+      "amount": 400,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "кубик около 1,5 см"
+    },
+    {
+      "position": 5,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "на крупной тёрке"
+    },
+    {
+      "position": 6,
+      "canonical_id": "onion",
+      "display_name": "лук",
+      "amount": 300,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "репчатый, мелкий кубик"
+    },
+    {
+      "position": 7,
+      "canonical_id": "tomato_paste",
+      "display_name": "томатная паста",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "в зажарку"
+    },
+    {
+      "position": 8,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для зажарки"
+    },
+    {
+      "position": 9,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 2500,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "холодная, покрыть мясо с запасом"
+    },
+    {
+      "position": 10,
+      "canonical_id": "vinegar",
+      "display_name": "уксус",
+      "amount": 2,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "столовый, в зажарку к свёкле"
+    },
+    {
+      "position": 11,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "к зажарке"
+    },
+    {
+      "position": 12,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 2,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 13,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 14,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 4,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "в конце, раздавить"
+    },
+    {
+      "position": 15,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "молотый"
+    },
+    {
+      "position": 16,
+      "canonical_id": "sour_cream",
+      "display_name": "сметана",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": true,
+      "detail": "к подаче"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Говяжью голяшку залить холодной водой, довести до кипения на среднем огне и снять пену."
+    },
+    {
+      "position": 2,
+      "text": "Убавить огонь до слабого кипения. Варить под крышкой, пока мясо не станет мягким и не отойдёт от кости.",
+      "timer_seconds": 5400,
+      "timer_label": "Бульон",
+      "timer_note": "1,5–2 часа; ориентир — вилка входит без сопротивления, не таймер"
+    },
+    {
+      "position": 3,
+      "text": "Пока варится: свёклу и морковь натереть на крупной тёрке, лук нарезать мелким кубиком, капусту нашинковать, картофель — кубиком около 1,5 см."
+    },
+    {
+      "position": 4,
+      "text": "На широкой сковороде разогреть масло. Пассеровать лук и морковь до мягкости, добавить свёклу, томатную пасту, уксус и сахар. Жарить, помешивая, пока зажарка не потемнеет и не станет пахнуть томатом.",
+      "timer_seconds": 600,
+      "timer_label": "Зажарка",
+      "timer_note": "8–10 минут; уксус к свёкле сразу, иначе цвет уйдёт в бурый",
+      "equipment_note": "Не перегружать сковороду: овощи должны пассероваться, не тушиться в соку. Если слой выше пальца — две партии или шире сковорода."
+    },
+    {
+      "position": 5,
+      "text": "Говядину вынуть на доску. В бульон положить картофель.",
+      "timer_seconds": 600,
+      "timer_label": "Картофель",
+      "timer_note": "10 минут от закипания; капусту пока не класть — иначе раскиснет"
+    },
+    {
+      "position": 6,
+      "text": "Добавить капусту, затем зажарку. Говядину нарезать кусками, кость убрать, мясо вернуть в кастрюлю. Положить лавровый лист, посолить, поперчить. Варить до мягкости капусты.",
+      "timer_seconds": 900,
+      "timer_label": "Сборка",
+      "timer_note": "12–15 минут; снять пробу на соль"
+    },
+    {
+      "position": 7,
+      "text": "Снять с огня, раздавить чеснок прямо в кастрюлю, перемешать и накрыть. Подавать со сметаной по желанию.",
+      "timer_seconds": 600,
+      "timer_label": "Настоять",
+      "timer_note": "10 минут под крышкой; чеснок не кипятить"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "chicken",
+      "title": "С курицей",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "g",
+            "amount": 800,
+            "detail": "бёдра, можно на кости; кожу снимать не обязательно",
+            "position": 1,
+            "scalable": true,
+            "is_anchor": true,
+            "scale_mode": "linear",
+            "canonical_id": "chicken_thighs",
+            "display_name": "куриные бёдра"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Куриные бёдра залить холодной водой, довести до кипения на среднем огне и снять пену.",
+            "position": 1
+          },
+          {
+            "text": "Убавить огонь до слабого кипения. Варить под крышкой, пока мясо не побелеет на срезе, но ещё не развалится.",
+            "position": 2,
+            "timer_note": "20 минут до овощей; до 82 °C доводят на сборке, не на этом шаге",
+            "timer_label": "Курица",
+            "timer_seconds": 1200
+          },
+          {
+            "text": "Картофель положить в кастрюлю к курице, бёдра не вынимать.",
+            "position": 5,
+            "timer_note": "10 минут; капусту пока не класть",
+            "timer_label": "Картофель",
+            "timer_seconds": 600
+          },
+          {
+            "text": "Добавить капусту, затем зажарку, лавровый лист, соль и перец. Варить до мягкости капусты и 82 °C в толще бедра у кости.",
+            "position": 6,
+            "timer_note": "12–15 минут; ориентир — 82 °C у кости, сок из прокола прозрачный",
+            "timer_label": "Сборка",
+            "timer_seconds": 900,
+            "target_internal_temperature_c": 82
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "vegetarian",
+      "title": "Постный",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "beef_shank_bone_in"
+          }
+        ],
+        "replace": [
+          {
+            "is_anchor": true,
+            "canonical_id": "beetroot"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Свёклу и морковь натереть на крупной тёрке, лук нарезать мелким кубиком, капусту нашинковать, картофель — кубиком около 1,5 см.",
+            "position": 1
+          },
+          {
+            "text": "В кастрюле довести воду до кипения.",
+            "position": 2,
+            "timer_note": "5 минут до уверенного кипения; мяса в этом варианте нет",
+            "timer_label": "Кипение",
+            "timer_seconds": 300
+          },
+          {
+            "text": "В кипящую воду положить картофель.",
+            "position": 3,
+            "timer_note": "10 минут; капусту пока не класть",
+            "timer_label": "Картофель",
+            "timer_seconds": 600
+          },
+          {
+            "text": "На широкой сковороде разогреть масло. Пассеровать лук и морковь до мягкости, добавить свёклу, томатную пасту, уксус и сахар. Жарить, помешивая, пока зажарка не потемнеет и не станет пахнуть томатом.",
+            "position": 4,
+            "timer_note": "8–10 минут; уксус к свёкле сразу",
+            "timer_label": "Зажарка",
+            "timer_seconds": 600,
+            "equipment_note": "Не перегружать сковороду: овощи должны пассероваться, не тушиться в соку. Если слой выше пальца — две партии или шире сковорода."
+          },
+          {
+            "text": "Добавить в кастрюлю капусту.",
+            "position": 5,
+            "timer_note": "5 минут, затем вводить зажарку",
+            "timer_label": "Капуста",
+            "timer_seconds": 300
+          },
+          {
+            "text": "Ввести зажарку, лавровый лист, соль и перец. Варить до мягкости свёклы и капусты.",
+            "position": 6,
+            "timer_note": "12–15 минут; снять пробу на соль и кислоту",
+            "timer_label": "Овощи",
+            "timer_seconds": 900
+          },
+          {
+            "text": "Снять с огня, раздавить чеснок прямо в кастрюлю, перемешать и накрыть. Подавать со сметаной по желанию.",
+            "position": 7,
+            "timer_note": "10 минут под крышкой; чеснок не кипятить",
+            "timer_label": "Настоять",
+            "timer_seconds": 600
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ]
+}

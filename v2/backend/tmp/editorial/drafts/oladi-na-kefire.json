@@ -1,0 +1,315 @@
+{
+  "id": "oladi-na-kefire",
+  "title": "Пышные оладьи на кефире",
+  "summary": "Густое тесто на кефире комнатной температуры поднимают содой в последний момент и жарят сразу под крышкой, не размешивая после подхода. Тесто держит горку на ложке, тонким слоем не разливать.",
+  "protein_base": "eggs_dairy",
+  "cook_method": "pan_fry",
+  "dish_type": "breakfast",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 30,
+    "active_minutes": 20
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "easy",
+    "budget",
+    "pantry"
+  ],
+  "adaptations": [
+    {
+      "to": "oven",
+      "from": "pan_fry",
+      "type": "method",
+      "quality": 0.9
+    }
+  ],
+  "prep": [
+    {
+      "text": "Достать кефир заранее: к замесу он должен быть комнатной температуры, не из холодильника и не горячий.",
+      "before_min": 40
+    }
+  ],
+  "notes": [
+    {
+      "text": "Оладьи толстые: тесто как густая сметана, ложка держит горку. Если растекается тонкой лентой — мало муки или кефир слишком тёплый. Если растекается тонкой лентой, середины не будет.",
+      "title": "Толщина"
+    },
+    {
+      "text": "Кефир лучше использовать комнатной температуры. Холодный замедляет реакцию соды, а слишком горячий может свернуть яйцо и преждевременно погасить действие соды.",
+      "title": "Температура кефира"
+    },
+    {
+      "text": "Только в конце, 4–5 движений. После подхода тесто не трогать: вымесите пузыри — оладьи сядут. Жарить сразу, не оставлять миску на час.",
+      "title": "Сода"
+    },
+    {
+      "text": "Пар поднимает середину. Без крышки низ сгорит, центр останется сырым. Огонь средний: масло не дымит.",
+      "title": "Крышка"
+    },
+    {
+      "text": "Сковороду не забивать. Оладьи, которые касаются друг друга, слипаются и тушатся в масле. Лучше две партии с корочкой, чем одна мокрая.",
+      "title": "Партии"
+    },
+    {
+      "text": "Вариант «полегче» — противень с пергаментом, без масла сковороды. Корочка мягче жареной, тесто то же. Первые 10 минут дверцу не открывать — осядут.",
+      "title": "Духовка"
+    },
+    {
+      "text": "Кубик или тёрка, сок отжать. Мокрое яблоко превращает густое тесто в блинное: на сковороде растечётся и не поднимется.",
+      "title": "Яблоко"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "kefir",
+      "display_name": "кефир",
+      "amount": 300,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "2,5–3,2%, комнатной температуры"
+    },
+    {
+      "position": 2,
+      "canonical_id": "wheat_flour",
+      "display_name": "пшеничная мука",
+      "amount": 250,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "тесто густое: ложка держит горку, не блинное"
+    },
+    {
+      "position": 3,
+      "canonical_id": "eggs",
+      "display_name": "яйцо",
+      "amount": 1,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "крупное, комнатной температуры"
+    },
+    {
+      "position": 4,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 30,
+      "unit": "g",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около 1,5 ст. л.; в несладком варианте убирается"
+    },
+    {
+      "position": 5,
+      "canonical_id": "baking_soda",
+      "display_name": "пищевая сода",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "manual",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "в последний момент, не заранее"
+    },
+    {
+      "position": 6,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 0.25,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для жарки; слой тонкий, не фритюр"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Смешать кефир комнатной температуры с яйцом, сахаром и солью до однородности."
+    },
+    {
+      "position": 2,
+      "text": "Всыпать муку и быстро собрать густое тесто: ложка держит горку, тесто не стекает тонкой лентой. Не взбивать — мелкие комки допустимы."
+    },
+    {
+      "position": 3,
+      "text": "Всыпать соду в последний момент, сделать 4–5 движений лопаткой. Оставить, пока не появятся пузыри. После подхода тесто не мешать и жарить сразу, не оставлять на час.",
+      "timer_seconds": 360,
+      "timer_label": "Подход",
+      "timer_note": "5–8 минут до пузырей; как только поднялось — на сковороду, без повторного размешивания"
+    },
+    {
+      "position": 4,
+      "text": "Разогреть сковороду с маслом на среднем огне: масло блестит, не дымит."
+    },
+    {
+      "position": 5,
+      "text": "Выкладывать тесто ложкой порциями с зазором, накрыть крышкой. Жарить до пузырей и золотистого низа, перевернуть и снова накрыть, пока середина не схватится.",
+      "timer_seconds": 180,
+      "timer_label": "Первая сторона",
+      "timer_note": "2–3 минуты под крышкой, после переворота ещё 2 минуты; ориентир — румянец и сухая середина, не таймер",
+      "equipment_note": "Не перегружать сковороду: 4–5 оладий на сковороду 24 см с зазором. Полная сковорода слипается и тушится без корочки — остальное следующей партией."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_apple",
+      "title": "С яблочным припёком",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 150,
+            "detail": "кисло-сладкое, мелкий кубик или на тёрке; лишний сок слегка отжать",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "apple",
+            "display_name": "яблоко"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Всыпать муку и быстро собрать густое тесто. Вмешать яблоко мелким кубиком или на тёрке: если выступил сок — слегка отжать, иначе тесто поплывёт. Ложка должна держать горку.",
+            "position": 2
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_green_onion",
+      "title": "Несладкие с зелёным луком",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 40,
+            "detail": "перо, мелко",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "green_onion",
+            "display_name": "зелёный лук"
+          }
+        ],
+        "remove": [
+          {
+            "canonical_id": "sugar"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Смешать кефир комнатной температуры с яйцом, солью и мелко нарезанным зелёным луком. Сахар не класть.",
+            "position": 1
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "energy",
+      "code": "light",
+      "title": "Полегче",
+      "has_delta": true,
+      "ingredient_delta": {
+        "remove": [
+          {
+            "canonical_id": "vegetable_oil"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 190 °C. Противень застелить пергаментом. Масло сковороды не использовать, сковороду не разогревать.",
+            "position": 4
+          },
+          {
+            "text": "Выложить тесто ложкой на пергамент с зазором. Выпекать без переворота, пока оладьи не поднимутся и низ не станет золотистым, середина сухая.",
+            "position": 5,
+            "timer_note": "12–16 минут при 190 °C; ориентир — пышность и золотистый низ, не сырое тесто в центре",
+            "timer_label": "Выпекание",
+            "timer_seconds": 840,
+            "equipment_note": "Один слой с зазором. Горка в центре противня даёт сырую середину."
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven"
+    }
+  ]
+}

@@ -1,0 +1,599 @@
+{
+  "id": "farshirovannye-pertsy",
+  "title": "Фаршированные перцы",
+  "summary": "Крупные перцы наполняют рисом с луком и морковью и тушат в кастрюле в томатной жидкости. Фарш в начинке — отдельный вариант: его смешивают с тем же рисом.",
+  "protein_base": "vegetables",
+  "cook_method": "stew",
+  "dish_type": "main",
+  "equipment": "pot",
+  "energy_profile": "standard",
+  "allowed_cuts": [],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 80,
+    "active_minutes": 40
+  },
+  "effort_level": 3,
+  "washing_level": 2,
+  "use_cases": [
+    "batch",
+    "budget",
+    "one_pan"
+  ],
+  "adaptations": [
+    {
+      "to": "baking_dish",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.9
+    },
+    {
+      "to": "kazan",
+      "from": "pot",
+      "type": "equipment",
+      "quality": 0.92
+    },
+    {
+      "to": "oven",
+      "from": "stew",
+      "type": "method",
+      "quality": 0.9
+    }
+  ],
+  "prep": [],
+  "notes": [
+    {
+      "text": "Крупные, с толстой стенкой. Тонкие летние лопаются и вываливают рис. Дырка в донышке спустит соус внутрь — стенку не прокалывать.",
+      "title": "Перцы"
+    },
+    {
+      "text": "До полуготовности и в перец рыхло. Плотная набивка: рис не дойдёт, стенки треснут. Пропаренный рис потребует другого количества жидкости и времени, поэтому для этой начинки лучше использовать обычный рис.",
+      "title": "Рис"
+    },
+    {
+      "text": "50 г пасты на 500 мл воды в кастрюле. Гуще — рис в центре сырой. Сахар только гасит кислоту, не делает блюдо сладким.",
+      "title": "Томатная жидкость"
+    },
+    {
+      "text": "Перцы выкладывают в глубокую форму с томатной подливкой и запекают под фольгой при 180 °C около 50 минут. Если готовите перцы с мясом, мясной фарш перед смешиванием с рисом обязательно предварительно обжарьте на сковороде.",
+      "title": "Духовка"
+    },
+    {
+      "text": "Перцы укладывают строго в один слой под плотную крышку. Мясной фарш предварительно подрумянивают прямо на дне казана перед формированием начинки.",
+      "title": "Казан"
+    },
+    {
+      "text": "На следующий день в холодильнике только вкуснее. Разогрев под крышкой на слабом огне или в форме при 160 °C, с ложкой воды, если соус загустел.",
+      "title": "Остатки"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "bell_pepper",
+      "display_name": "болгарский перец",
+      "amount": 800,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "detail": "крупные, ~6 шт, с толстой стенкой"
+    },
+    {
+      "position": 2,
+      "canonical_id": "rice",
+      "display_name": "рис",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "круглый или обычный, не пропаренный"
+    },
+    {
+      "position": 3,
+      "canonical_id": "onion",
+      "display_name": "репчатый лук",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около 1–2 средних"
+    },
+    {
+      "position": 4,
+      "canonical_id": "carrot",
+      "display_name": "морковь",
+      "amount": 150,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "натереть на крупной тёрке"
+    },
+    {
+      "position": 5,
+      "canonical_id": "tomato_paste",
+      "display_name": "томатная паста",
+      "amount": 50,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "около 3 ст. л., без крахмальных смесей"
+    },
+    {
+      "position": 6,
+      "canonical_id": "water",
+      "display_name": "вода",
+      "amount": 500,
+      "unit": "ml",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для томатной жидкости"
+    },
+    {
+      "position": 7,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 3,
+      "unit": "tbsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "для пассеровки в той же кастрюле"
+    },
+    {
+      "position": 8,
+      "canonical_id": "garlic",
+      "display_name": "чеснок",
+      "amount": 3,
+      "unit": "clove",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "измельчить"
+    },
+    {
+      "position": 9,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": 1.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 10,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.5,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    },
+    {
+      "position": 11,
+      "canonical_id": "sugar",
+      "display_name": "сахар",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "сбалансировать кислоту томата"
+    },
+    {
+      "position": 12,
+      "canonical_id": "bay_leaf",
+      "display_name": "лавровый лист",
+      "amount": 2,
+      "unit": "pcs",
+      "scale_mode": "whole",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Срезать у перцев крышечки, вычистить семена и перегородки, не прокалывая стенки. Крышечки сохранить — ими накрыть начинку."
+    },
+    {
+      "position": 2,
+      "text": "Промыть рис, отварить в подсоленной воде до полуготовности и откинуть на сито.",
+      "timer_seconds": 480,
+      "timer_label": "Рис",
+      "timer_note": "8 минут: зёрна ещё плотные в центре, иначе в перце разварится в кашу"
+    },
+    {
+      "position": 3,
+      "text": "В кастрюле разогреть масло, пассеровать лук до прозрачности, добавить морковь и чеснок, готовить до мягкости.",
+      "timer_seconds": 480,
+      "timer_label": "Овощи",
+      "timer_note": "7–8 минут; морковь мягкая, без сырой сердцевины"
+    },
+    {
+      "position": 4,
+      "text": "Смешать полуготовый рис с овощами, солью и перцем. Начинка рыхлая, только рис и овощи."
+    },
+    {
+      "position": 5,
+      "text": "Развести томатную пасту в 500 мл воды, добавить сахар и лавровый лист."
+    },
+    {
+      "position": 6,
+      "text": "Наполнить перцы неплотно, накрыть крышечками и поставить стоя в ту же кастрюлю. Влить томатную жидкость на треть–половину высоты.",
+      "equipment_note": "Кастрюля с крышкой: перцы стоят плотно, жидкость не до краёв, иначе начинка вымоется."
+    },
+    {
+      "position": 7,
+      "text": "Довести до слабого кипения, накрыть крышкой и тушить до мягких стенок перца.",
+      "timer_seconds": 2100,
+      "timer_label": "Тушение",
+      "timer_note": "35 минут; вилкой стенка протыкается без хруста, рис внутри дошёл"
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "beef",
+      "title": "С говядиной",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 400,
+            "detail": "размороженный",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "beef_mince",
+            "display_name": "говяжий фарш"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "В кастрюле разогреть масло, пассеровать лук и морковь, добавить говяжий фарш партиями в широкий слой, разбить комки и обжарить до изменения цвета, в конце чеснок. 400 г горкой даст тушение в соке, не обжарку.",
+            "position": 3,
+            "timer_note": "10 минут: фарш серый, без сырых комков",
+            "timer_label": "Фарш",
+            "timer_seconds": 600
+          },
+          {
+            "text": "Смешать обжаренный фарш с полуготовым рисом, солью и перцем. Рис из базы не убирать.",
+            "position": 4
+          },
+          {
+            "text": "Довести до слабого кипения, накрыть крышкой и тушить до мягких стенок перца и 71 °C в центре начинки.",
+            "position": 7,
+            "timer_note": "Ориентир — 71 °C в центре начинки, не только мягкий перец",
+            "timer_label": "Тушение",
+            "timer_seconds": 2100,
+            "target_internal_temperature_c": 71
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [
+          "ground_meat"
+        ],
+        "remove": []
+      },
+      "caution_text_override": "Говяжий фарш в начинке довести до 71 °C в центре: бактерии распределены по всему объёму, сырая серединка недопустима. Не давать детям непроваренным."
+    },
+    {
+      "axis": "addon",
+      "code": "chicken",
+      "title": "С курицей",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 400,
+            "detail": "размороженный, не из одной сухой грудки",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "chicken_mince",
+            "display_name": "куриный фарш"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "В кастрюле разогреть масло, пассеровать лук и морковь, добавить куриный фарш партиями в широкий слой, разбить комки и обжарить до побеления, в конце чеснок. Если дальше духовка или казан — эту обжарку всё равно сделать на плите, затем начинить перцы.",
+            "position": 3,
+            "timer_note": "8–10 минут: фарш белый, без розовых комков",
+            "timer_label": "Фарш",
+            "timer_seconds": 600
+          },
+          {
+            "text": "Смешать обжаренный куриный фарш с полуготовым рисом, солью и перцем. Рис из базы не убирать.",
+            "position": 4
+          },
+          {
+            "text": "Довести до слабого кипения, накрыть крышкой и тушить до мягких стенок перца и 74 °C в центре начинки.",
+            "position": 7,
+            "timer_note": "Ориентир — 74 °C в центре начинки, не только мягкий перец",
+            "timer_label": "Тушение",
+            "timer_seconds": 2100,
+            "target_internal_temperature_c": 74
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [
+          "ground_meat"
+        ],
+        "remove": []
+      },
+      "caution_text_override": "Фарш птицы в начинке довести до 74 °C в центре: rare недопустим, бактерии по всему объёму. Не давать детям непроваренным."
+    },
+    {
+      "axis": "addon",
+      "code": "pork",
+      "title": "Со свининой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 400,
+            "detail": "размороженный",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "pork_mince",
+            "display_name": "свиной фарш"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "В кастрюле разогреть масло, пассеровать лук и морковь, добавить свиной фарш партиями в широкий слой, разбить комки и обжарить до изменения цвета, в конце чеснок. Если дальше духовка или казан — эту обжарку всё равно сделать на плите, затем начинить перцы.",
+            "position": 3,
+            "timer_note": "10 минут: фарш светлый, без сырых комков",
+            "timer_label": "Фарш",
+            "timer_seconds": 600
+          },
+          {
+            "text": "Смешать обжаренный свиной фарш с полуготовым рисом, солью и перцем. Рис из базы не убирать.",
+            "position": 4
+          },
+          {
+            "text": "Довести до слабого кипения, накрыть крышкой и тушить до мягких стенок перца и 71 °C в центре начинки.",
+            "position": 7,
+            "timer_note": "Ориентир — 71 °C в центре начинки, не только мягкий перец",
+            "timer_label": "Тушение",
+            "timer_seconds": 2100,
+            "target_internal_temperature_c": 71
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [
+          "ground_meat"
+        ],
+        "remove": []
+      },
+      "caution_text_override": "Свиной фарш в начинке довести до 71 °C в центре: бактерии распределены по всему объёму, сырая серединка недопустима. Не давать детям непроваренным."
+    },
+    {
+      "axis": "addon",
+      "code": "rice_vegetable",
+      "title": "С рисом, без мяса",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 200,
+            "detail": "молодой, мелким кубиком",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "zucchini",
+            "display_name": "кабачок"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Проверить начинку: только овощи и рис, мяса в смеси нет.",
+            "after_position": 4
+          }
+        ],
+        "replace": [
+          {
+            "text": "В кастрюле разогреть масло, пассеровать лук, морковь и кабачок до мягкости, в конце чеснок.",
+            "position": 3,
+            "timer_note": "9 минут; кабачок осел, морковь мягкая",
+            "timer_label": "Овощи",
+            "timer_seconds": 540
+          },
+          {
+            "text": "Смешать полуготовый рис с овощами, солью и перцем. Начинка только овощи и рис, без фарша.",
+            "position": 4
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "equipment",
+      "code": "kazan",
+      "title": "В казане",
+      "has_delta": true,
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть казан, влить масло. Если выбран мясной вариант: пассеровать лук и морковь, добавить фарш (говядина, свинина или курица — 400 г) партиями в широкий слой, разбить комки и обжарить до изменения цвета, в конце чеснок. Если начинка без мяса: пассеровать лук, морковь и чеснок до мягкости. Обжарку фарша не пропускать: в казане сырой фарш в перце не дойдёт равномерно.",
+            "position": 3,
+            "timer_note": "С фаршем 10 минут без сырых комков. Без мяса — стенки казана горячее кастрюли, лук не поджигать.",
+            "timer_label": "Начинка",
+            "timer_seconds": 600
+          },
+          {
+            "text": "Смешать полуготовый рис с пассерованными овощами и, если выбран мясной вариант, с обжаренным фаршем, солью и перцем. Рис из базы не убирать. Сырой фарш в перец не класть.",
+            "position": 4
+          },
+          {
+            "text": "Наполнить перцы неплотно и уложить в казан в один слой. Вторым рядом не ставить. Влить томатную жидкость на треть высоты.",
+            "position": 6,
+            "equipment_note": "Один слой и плотная крышка. Второй ряд оставит верхние перцы сырыми, нижние размякнут."
+          },
+          {
+            "text": "Довести до слабого кипения, плотно накрыть крышкой и томить на слабом огне до мягких стенок перца. Если начинка с говядиной или свининой — до 71 °C в центре; если с куриным фаршем — до 74 °C, не 71. Крышку не поднимать без нужды.",
+            "position": 7,
+            "timer_note": "40 минут под крышкой; с фаршем ориентир — 71 °C говядина/свинина, 74 °C птица. Куриный фарш не считать готовым по 71 °C.",
+            "timer_label": "Томление",
+            "timer_seconds": 2400
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "stew",
+      "equipment": "kazan"
+    },
+    {
+      "axis": "equipment",
+      "code": "oven",
+      "title": "В духовке",
+      "has_delta": true,
+      "ingredient_delta": {
+        "replace": [
+          {
+            "unit": "ml",
+            "amount": 300,
+            "detail": "на дно формы, не заливать перцы",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "water",
+            "display_name": "вода"
+          }
+        ]
+      },
+      "step_delta": {
+        "replace": [
+          {
+            "text": "Разогреть духовку до 180 °C. Срезать у перцев крышечки, вычистить семена, не прокалывая стенки.",
+            "position": 1
+          },
+          {
+            "text": "На сковороде или в сотейнике разогреть масло. Если выбран мясной вариант: пассеровать лук и морковь, добавить фарш (говядина, свинина или курица — 400 г) партиями в широкий слой, разбить комки и обжарить до изменения цвета, в конце чеснок; 400 г горкой даст тушение в соке. Если начинка без мяса: пассеровать лук, морковь и чеснок до мягкости. Эту обжарку сделать на плите даже если дальше духовка — не полагаться на «уже обжаренный» фарш.",
+            "position": 3,
+            "timer_note": "С фаршем 10 минут до серого/белого без сырых комков; без мяса 7–8 минут овощей",
+            "timer_label": "Начинка",
+            "timer_seconds": 600
+          },
+          {
+            "text": "Смешать полуготовый рис с пассерованными овощами и, если выбран мясной вариант, с обжаренным фаршем, солью и перцем. Рис из базы не убирать. Сырой фарш в перец не класть.",
+            "position": 4
+          },
+          {
+            "text": "Развести томатную пасту в 300 мл воды, добавить сахар и лавровый лист.",
+            "position": 5
+          },
+          {
+            "text": "Наполнить перцы неплотно, поставить в форму в один слой. Влить томатную жидкость на дно — слой 1–2 см, не до верха перцев.",
+            "position": 6,
+            "equipment_note": "Форма / жаровня: перцы стоят в один слой, жидкость только снизу. Высокий слой как в кастрюле даст варку, не запекание."
+          },
+          {
+            "text": "Накрыть форму фольгой или крышкой и запекать до мягких стенок перца. Если начинка с говядиной или свининой — до 71 °C в центре; если с куриным фаршем — до 74 °C, не 71. Последние 10 минут можно без фольги, чтобы верх подсох.",
+            "position": 7,
+            "timer_note": "50 минут при 180 °C; с фаршем ориентир — 71 °C говядина/свинина, 74 °C птица. Куриный фарш не считать готовым по 71 °C.",
+            "timer_label": "Запекание",
+            "timer_seconds": 3000
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      },
+      "cook_method_override": "oven",
+      "equipment": "baking_dish"
+    }
+  ]
+}

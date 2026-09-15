@@ -1,0 +1,316 @@
+{
+  "id": "govyadina-na-volokna-s-garnirom",
+  "title": "Говядина на волокна с гарниром",
+  "summary": "Уже томлёную говядину, разобранную на волокна, прогревают на сковороде вместе с желе 5–10 минут, чтобы мясо стало горячим и не высохло. В тарелку — свежая зелень и гарнир: тушёная капуста или готовая гречка с рисом.",
+  "protein_base": "beef",
+  "cook_method": "pan_fry",
+  "dish_type": "main",
+  "equipment": "skillet",
+  "energy_profile": "standard",
+  "allowed_cuts": [
+    "shoulder"
+  ],
+  "scale_mode": "linear",
+  "scalable": true,
+  "source_type": "article",
+  "source_name": "Редакция sol-chef",
+  "source_url": null,
+  "high_risk_flags": [],
+  "caution_text": null,
+  "time_profile": {
+    "total_minutes": 20,
+    "active_minutes": 15
+  },
+  "effort_level": 2,
+  "washing_level": 2,
+  "use_cases": [
+    "fast",
+    "batch"
+  ],
+  "adaptations": [
+    {
+      "type": "omission",
+      "quality": 0.88,
+      "ingredient": "parsley"
+    }
+  ],
+  "prep": [
+    {
+      "text": "Плоский пакет с волокнами и желе переложить из морозилки в холодильник — с запасом суток, не вечером перед плитой.",
+      "before_hours": 24
+    }
+  ],
+  "notes": [
+    {
+      "text": "Берите готовую тушёную говядину на волокна из заготовки: плоский пакет 300–400 г на двоих, обязательно с желе. Без сока волокна на сковороде станут сухими нитями.",
+      "title": "Откуда мясо"
+    },
+    {
+      "text": "Плоский пакет — в холодильник с запасом суток. Не размораживать в микроволновке: края сварятся, середина останется льдом, желе уйдёт.",
+      "title": "Разморозка"
+    },
+    {
+      "text": "Желе уже солёное. Сначала прогрейте и попробуйте, потом решайте. Перец — после мяса, не в холодное желе.",
+      "title": "Соль"
+    },
+    {
+      "text": "После огня — чайная ложка лимонного сока или яблочного уксуса. Жир желе станет легче, блюдо не кислое. На плите не выпаривать: кислота выветрится.",
+      "title": "Кислота"
+    },
+    {
+      "text": "Слабый или средний огонь, помешивать, сок оставить на сковороде. Бурное кипение выпаривает желе за пару минут — тогда только ложка воды, не новая порция масла.",
+      "title": "Не высушить"
+    },
+    {
+      "text": "Сами волокна — не полная тарелка. Выберите один гарнир: тушёную капусту или готовую гречку/рис. Не оба сразу.",
+      "title": "Гарнир"
+    },
+    {
+      "text": "Удобнее уже тушёная, почти без жидкости: на сковороде только выпарить лужу, затем мясо. Нет готовой — нашинковать 400 г соломкой и тушить под крышкой 12–15 минут с ложкой масла до мягкости, потом волокна. Это удлинит будни.",
+      "title": "Капуста"
+    },
+    {
+      "text": "Гречка или рис уже варёные, из холодильника. Прогреть до горячего вместе с соком. После варки крупу остужают пластом и убирают в холод максимум через час — не оставлять кастрюлю на плите на вечер.",
+      "title": "Крупа"
+    },
+    {
+      "text": "Петрушку класть в тарелку, не на сковороду: на жаре она сникнет и отдаст горечь. Укроп или зелёный лук вместо петрушки — тот же приём.",
+      "title": "Зелень"
+    }
+  ],
+  "ingredients": [
+    {
+      "position": 1,
+      "canonical_id": "beef",
+      "display_name": "говядина томлёная",
+      "amount": 350,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": true,
+      "optional": false,
+      "amount_max": 400,
+      "detail": "разобранная на волокна, вместе с желе"
+    },
+    {
+      "position": 2,
+      "canonical_id": "vegetable_oil",
+      "display_name": "растительное масло",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "слегка смазать сковороду, чтобы волокна не прилипли"
+    },
+    {
+      "position": 3,
+      "canonical_id": "black_pepper",
+      "display_name": "чёрный перец",
+      "amount": 0.25,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежемолотый, после прогрева"
+    },
+    {
+      "position": 4,
+      "canonical_id": "salt",
+      "display_name": "соль",
+      "amount": null,
+      "unit": "to_taste",
+      "scale_mode": "gentle",
+      "scalable": false,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "только после пробы: желе уже солёное"
+    },
+    {
+      "position": 5,
+      "canonical_id": "lemon",
+      "display_name": "лимонный сок",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "после огня, к желе; вместо уксуса, не вместе",
+      "choice_group": "acid"
+    },
+    {
+      "position": 6,
+      "canonical_id": "vinegar",
+      "display_name": "уксус",
+      "amount": 1,
+      "unit": "tsp",
+      "scale_mode": "gentle",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "яблочный или столовый 6–9%; вместо лимонного сока, не вместе",
+      "choice_group": "acid"
+    },
+    {
+      "position": 7,
+      "canonical_id": "parsley",
+      "display_name": "петрушка",
+      "amount": 10,
+      "unit": "g",
+      "scale_mode": "linear",
+      "scalable": true,
+      "is_anchor": false,
+      "optional": false,
+      "detail": "свежая, порубить для подачи; в тарелку, не на сковороду"
+    }
+  ],
+  "steps": [
+    {
+      "position": 1,
+      "text": "Смазать сковороду маслом. Выложить размороженные волокна вместе со всем желе ровным слоем. Если внутри ещё лёд — сначала слабый огонь под крышкой, пока желе не станет жидким."
+    },
+    {
+      "position": 2,
+      "text": "Прогреть на слабом или среднем огне, помешивая, пока желе не растает в соус и мясо не станет горячим насквозь. Сок не выпаривать всухую: если желе мало — ложка воды. Не кипятить бурно. Если среди волокон остались крупные куски, прогреть их до 74 °C в центре.",
+      "timer_seconds": 420,
+      "timer_label": "Прогрев",
+      "timer_note": "5–10 минут; ориентир — горячее насквозь, соус блестит, не кипение и не сухие нити",
+      "target_internal_temperature_c": 74,
+      "equipment_note": "Не перегружать сковороду: волокна ровным слоем. Горка — низ пригорит, середина останется холодной."
+    },
+    {
+      "position": 3,
+      "text": "Снять с огня. Вмешать чайную ложку лимонного сока или яблочного уксуса. Попробовать. Посолить только если желе не дотягивает. Поперчить."
+    },
+    {
+      "position": 4,
+      "text": "Разложить по тарелкам и сразу посыпать петрушкой."
+    }
+  ],
+  "variants": [
+    {
+      "axis": "addon",
+      "code": "with_cabbage",
+      "title": "С тушёной капустой",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 400,
+            "detail": "уже тушёная, без лишней жидкости",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "cabbage",
+            "display_name": "капуста белокочанная"
+          },
+          {
+            "unit": "tbsp",
+            "amount": 1,
+            "detail": "выпарить капусту",
+            "scalable": true,
+            "scale_mode": "gentle",
+            "canonical_id": "vegetable_oil",
+            "display_name": "растительное масло"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Разогреть широкую сковороду с ложкой масла. Выложить тушёную капусту и выпарить лишнюю влагу, помешивая, пока не останется мокрой лужи.",
+            "timer_note": "3–4 минуты; мокрая капуста разбавит желе и остудит мясо",
+            "timer_label": "Капуста",
+            "timer_seconds": 240,
+            "after_position": 0,
+            "equipment_note": "Не скучивать горкой: иначе выпарится только низ, сверху останется вода."
+          }
+        ],
+        "replace": [
+          {
+            "text": "К капусте выложить волокна вместе со всем желе, перемешать.",
+            "position": 1
+          },
+          {
+            "text": "Прогреть вместе на среднем огне, помешивая, пока мясо не станет горячим насквозь. Если среди волокон остались крупные куски, прогреть их до 74 °C в центре.",
+            "position": 2,
+            "timer_note": "5–7 минут; капуста уже тёплая, мясо не должно высохнуть",
+            "timer_label": "Вместе",
+            "timer_seconds": 360,
+            "equipment_note": "Не перегружать сковороду: капуста и волокна в один слой по возможности, иначе середина не прогреется.",
+            "target_internal_temperature_c": 74
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    },
+    {
+      "axis": "addon",
+      "code": "with_groats",
+      "title": "С гречкой или рисом",
+      "has_delta": true,
+      "ingredient_delta": {
+        "add": [
+          {
+            "unit": "g",
+            "amount": 300,
+            "detail": "уже варёная, рассыпчатая; одна крупа на выбор",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "buckwheat",
+            "choice_group": "groats",
+            "display_name": "гречка"
+          },
+          {
+            "unit": "g",
+            "amount": 300,
+            "detail": "уже варёный, рассыпчатый; не вместе с гречкой",
+            "scalable": true,
+            "scale_mode": "linear",
+            "canonical_id": "rice",
+            "choice_group": "groats",
+            "display_name": "рис"
+          }
+        ]
+      },
+      "step_delta": {
+        "insert": [
+          {
+            "text": "Добавить готовую гречку или рис, аккуратно перемешать с соком и прогреть, пока крупа не станет горячей насквозь — не кашей и не еле тёплой.",
+            "timer_note": "2–3 минуты; крупа берёт желе, сильный огонь высушит мясо",
+            "timer_label": "Крупа",
+            "timer_seconds": 150,
+            "after_position": 2
+          }
+        ]
+      },
+      "allergen_delta": {
+        "unknown_add": [],
+        "contains_add": [],
+        "unknown_remove": [],
+        "contains_remove": [],
+        "may_contain_add": [],
+        "may_contain_remove": []
+      },
+      "high_risk_delta": {
+        "add": [],
+        "remove": []
+      }
+    }
+  ],
+  "servings": 2
+}
