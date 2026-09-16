@@ -26,18 +26,47 @@ const TABS = [
   { id: 'meals', label: 'Блюда на неделю', icon: 'utensils' },
 ] as const;
 
-function formatClock(row: Record<string, unknown>): string | null {
-  const raw = row.t_min;
-  if (raw == null || raw === '') return null;
-  const minutes = typeof raw === 'number' ? raw : Number(raw);
-  if (!Number.isFinite(minutes)) return null;
-  const hh = String(Math.floor(minutes / 60)).padStart(2, '0');
-  const mm = String(minutes % 60).padStart(2, '0');
-  return `${hh}:${mm}`;
-}
-
 function slotTitle(slot: PrepSlot): string {
   return slot.plate_title || slot.flavor || slot.title;
+}
+
+function stringList(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is string => typeof item === 'string' && item.trim() !== '');
+}
+
+function SundayIntro({ row, index }: { row: Record<string, unknown>; index: number }) {
+  const gear = stringList(row.gear);
+  const plan = stringList(row.plan);
+  if (gear.length > 0 || plan.length > 0) {
+    return (
+      <div className="prep-sunday-intro">
+        {gear.length > 0 && (
+          <section className="prep-sunday-intro__col" aria-labelledby={`prep-gear-${index}`}>
+            <h3 id={`prep-gear-${index}`}>Посуда</h3>
+            <ul>
+              {gear.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {plan.length > 0 && (
+          <section className="prep-sunday-intro__col" aria-labelledby={`prep-plan-${index}`}>
+            <h3 id={`prep-plan-${index}`}>Сегодня</h3>
+            <ul>
+              {plan.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+    );
+  }
+  const hands = typeof row.hands === 'string' ? row.hands : '';
+  if (!hands) return null;
+  return <p className="lede">{hands}</p>;
 }
 
 export function PrepKitView({
@@ -146,18 +175,14 @@ export function PrepKitView({
         <section>
           <h2>Рецепт воскресенья</h2>
           {intro.map((row, index) => (
-            <p key={`intro-${index}`} className="lede">
-              {typeof row.hands === 'string' ? row.hands : ''}
-            </p>
+            <SundayIntro key={`intro-${index}`} row={row} index={index} />
           ))}
           {recipeSteps.length > 0 && (
             <ol className="prep-recipe">
               {recipeSteps.map((row, index) => {
-                const clock = formatClock(row);
                 const text = typeof row.hands === 'string' ? row.hands : '';
                 return (
                   <li key={index}>
-                    {clock && <span className="prep-recipe__t">{clock}</span>}
                     <span>{text}</span>
                   </li>
                 );

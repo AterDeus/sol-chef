@@ -19,6 +19,7 @@
     font-size: clamp(2.15rem, 1.35rem + 3vw, 3.4rem);
     letter-spacing: -0.02em;
     max-width: 12ch;
+    line-height: 1.1;
   }
 
   .page-intro__copy .lede {

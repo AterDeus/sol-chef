@@ -1,7 +1,7 @@
-# sol-chef 2.0 — local slice (Sprint 1).
+# sol-chef 2.0 — local slice.
 # Host entry: http://localhost:8080  (Caddy :80)
-# Apps in ../backend and ../frontend are filled by other agents; this file
-# is ready before they exist, but migrate/import/dev servers need those trees.
+# Daily: docker compose -f v2/infra/docker-compose.yml up
+# Rebuild images after Dockerfile / lockfile changes: add --build
 name: sol-chef
 
 services:
@@ -57,7 +57,6 @@ services:
       PYTHONDONTWRITEBYTECODE: "1"
       PYTHONUNBUFFERED: "1"
       UV_PROJECT_ENVIRONMENT: /opt/venv
-      UV_LINK_MODE: copy
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-local-dev-only-not-a-secret}
       DJANGO_DEBUG: ${DJANGO_DEBUG:-1}
       POSTGRES_HOST: postgres
@@ -66,18 +65,19 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-solchef-local}
       POSTGRES_DB: ${POSTGRES_DB:-solchef}
       REDIS_URL: redis://redis:6379/0
-      V1_DATA_ROOT: ${V1_DATA_ROOT:-/v1-src}
+      DOCS_ROOT: /v2-docs
     volumes:
       - ../backend:/app
-      - ../../:/v1-src:ro
-      - backend_uv_cache:/root/.cache/uv
+      - ../docs:/v2-docs:ro
     # Live code via bind-mount. uv venv stays in the image (/opt/venv), not on the host.
+    # Catalog lives in the Postgres volume — do not import_v1 on start.
     command:
-      [
-        "sh",
-        "-c",
-        "set -eu; if [ -f pyproject.toml ]; then uv sync && uv run python manage.py migrate --noinput && uv run python manage.py collectstatic --noinput && uv run python manage.py import_v1 && exec uv run python manage.py runserver 0.0.0.0:8000; else echo 'v2/backend: no pyproject.toml yet — Django app is not in this tree.' >&2; exit 1; fi",
-      ]
+      - sh
+      - -c
+      - |
+        set -eu
+        python manage.py migrate --noinput
+        exec python manage.py runserver 0.0.0.0:8000
     depends_on:
       postgres:
         condition: service_healthy
@@ -88,7 +88,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 12
-      start_period: 180s
+      start_period: 60s
     networks:
       - sol-chef
     restart: unless-stopped
@@ -111,26 +111,26 @@ services:
       - ../frontend:/app
       - frontend_node_modules:/app/node_modules
     command:
-      [
-        "sh",
-        "-c",
-        "set -eu; if [ -f package.json ]; then npm install && exec npm run dev -- -H 0.0.0.0 -p 3000; fi; echo 'v2/frontend: no package.json yet — Next app is not in this tree.' >&2; exit 1",
-      ]
-    depends_on:
-      backend:
-        condition: service_healthy
+      - sh
+      - -c
+      - |
+        set -eu
+        if [ ! -x node_modules/.bin/next ]; then
+          npm ci --no-audit --no-fund
+        fi
+        exec npm run dev -- -H 0.0.0.0 -p 3000
     healthcheck:
       test:
         [
           "CMD",
           "node",
           "-e",
-          "require('http').get('http://127.0.0.1:3000', (r) => { r.resume(); process.exit(r.statusCode ? 0 : 1); }).on('error', () => process.exit(1))",
+          "require('net').connect({port:3000,host:'127.0.0.1'},()=>process.exit(0)).on('error',()=>process.exit(1))",
         ]
       interval: 5s
       timeout: 5s
       retries: 12
-      start_period: 180s
+      start_period: 60s
     networks:
       - sol-chef
     restart: unless-stopped
@@ -159,5 +159,4 @@ networks:
 volumes:
   postgres_data:
   redis_data:
-  backend_uv_cache:
   frontend_node_modules:

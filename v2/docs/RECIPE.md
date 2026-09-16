@@ -167,4 +167,4 @@ Terra **не** получает пути и **не** открывает: `RECIPE
 - Новый slug: `v2/docs/drafts/recipes/<slug>.json`
 - В Postgres: `python manage.py import_draft --path …` (вердикт Terra не gate). Не в корневой `data/`.
 
-Compose: только `import_v1` (43 из V1). Карточки с `time_profile` **не** откатываются к V1. Том Postgres — источник правды оверлея и волн.
+Локальный Compose **не** гоняет `import_v1`: каталог — том Postgres. Карточки с `time_profile` **не** откатываются к V1. Том Postgres — источник правды оверлея и волн. ETL V1 — ручная команда / pytest, не старт среза.

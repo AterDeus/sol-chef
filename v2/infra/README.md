@@ -14,8 +14,12 @@
 
 ```bash
 cp v2/infra/.env.example v2/infra/.env
-docker compose -f v2/infra/docker-compose.yml up --build
+docker compose -f v2/infra/docker-compose.yml up
 ```
+
+`--build` нужен после смены Dockerfile, `uv.lock` или `package-lock.json`. Обычный день — без него.
+
+Если после смены lock фронт не подхватил пакеты: `docker compose -f v2/infra/docker-compose.yml down` и удалить том `sol-chef_frontend_node_modules`, затем `up --build`.
 
 `.env` не коммитить. `DJANGO_SECRET_KEY` в примере — локальная заглушка, не прод-секрет.
 
@@ -33,9 +37,9 @@ docker compose -f v2/infra/docker-compose.yml up --build
 | postgres | 5432 | нет |
 | redis | 6379 | нет |
 
-- Backend: `uv sync` → `migrate` → идемпотентный `import_v1` → `runserver 0.0.0.0:8000`. Код: bind-mount `v2/backend`. Каталог V1: корень репозитория **read-only** в `/v1-src`; ETL сам находит `archive/v1` (`V1_DATA_ROOT=/v1-src`).
-- Frontend: `npm install && npm run dev -- -H 0.0.0.0 -p 3000`. `INTERNAL_API_URL=http://backend:8000`, `NEXT_PUBLIC_API_URL` пустой.
+- Backend: `migrate` → `runserver 0.0.0.0:8000`. Зависимости — в образе (`/opt/venv`), код — bind-mount `v2/backend`. Каталог — том Postgres, не `import_v1`. Черновики для `import_draft` / `import_prep_kit`: `v2/docs` → `/v2-docs` (`--path /v2-docs/drafts/…`).
+- Frontend: `next dev` (пакеты из образа / тома `node_modules`). `INTERNAL_API_URL=http://backend:8000`, `NEXT_PUBLIC_API_URL` пустой. Стартует параллельно с backend.
 - Caddy: `/api` `/admin` `/static` `/healthz` → backend; `/_internal/*` снаружи 404; остальное (включая `/_next/webpack-hmr`) → frontend.
-- TZ: `Europe/Moscow`.
+- TZ: `Europe/Moscow`. `archive/v1` в контейнер не монтируется.
 
-Прод не вызывает `import_v1` при старте: каталог — дамп Postgres, см. CUTOVER.
+Прод тоже не вызывает `import_v1` при старте: каталог — дамп Postgres, см. CUTOVER.

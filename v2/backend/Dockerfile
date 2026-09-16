@@ -10,18 +10,22 @@ RUN apt-get update \
 
 WORKDIR /app
 
-ENV UV_COMPILE_BYTECODE=1 \
+ENV UV_COMPILE_BYTECODE=0 \
     UV_LINK_MODE=copy \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    TZ=Europe/Moscow
+    TZ=Europe/Moscow \
+    UV_PROJECT_ENVIRONMENT=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
 
 COPY . .
 
 EXPOSE 8000
 
-# Compose overrides CMD: migrate + import_v1 + runserver. curl is for healthcheck.
-CMD ["sh", "-c", "uv sync && exec uv run python manage.py runserver 0.0.0.0:8000"]
+# Compose overrides CMD: migrate + runserver. curl is for healthcheck.
+# Venv lives in /opt/venv so a bind-mount of /app does not hide it.
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

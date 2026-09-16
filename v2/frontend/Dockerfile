@@ -10,10 +10,13 @@ RUN apk add --no-cache libc6-compat tzdata \
 
 WORKDIR /app
 
-# Tree may only have README until the Next app exists. Runtime bind-mounts overlay /app.
+COPY package.json package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --no-audit --no-fund
+
+# Bind-mount at runtime overlays /app; empty node_modules volume is seeded from this layer.
 COPY . /app
 
 EXPOSE 3000
 
-# Compose overrides this for the local slice (npm install + next dev).
-CMD ["sh", "-c", "if [ -f package.json ]; then npm install && exec npm run dev -- -H 0.0.0.0 -p 3000; else node -e \"require('http').createServer((_,r)=>{r.writeHead(503);r.end('frontend app not present')}).listen(3000)\"; fi"]
+CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]

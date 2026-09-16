@@ -178,14 +178,6 @@ def thaw_reminders_for_day(day: int, containers: list[dict]) -> list[str]:
     return lines
 
 
-def format_clock(row: dict) -> str | None:
-    raw = row.get("t_min")
-    if raw is None or raw == "":
-        return None
-    minutes = raw if isinstance(raw, int) else int(raw)
-    return f"{minutes // 60:02d}:{minutes % 60:02d}"
-
-
 def format_timer(step: dict) -> str | None:
     seconds = step.get("timer_seconds")
     label = step.get("timer_label")
@@ -286,23 +278,36 @@ def render_shopping(rows: list[dict]) -> list[str]:
     return lines
 
 
+def render_sunday_intro(row: dict) -> list[str]:
+    gear = [item.strip() for item in row.get("gear") or [] if isinstance(item, str) and item.strip()]
+    plan = [item.strip() for item in row.get("plan") or [] if isinstance(item, str) and item.strip()]
+    lines: list[str] = []
+    if gear:
+        lines.append("**Посуда**")
+        lines.extend(f"- {item}" for item in gear)
+        lines.append("")
+    if plan:
+        lines.append("**Сегодня**")
+        lines.extend(f"- {item}" for item in plan)
+        lines.append("")
+    if lines:
+        return lines
+    hands = row.get("hands") if isinstance(row.get("hands"), str) else ""
+    if hands.strip():
+        return [hands.strip(), ""]
+    return []
+
+
 def render_sunday(kit: dict) -> list[str]:
     lines = ["### Рецепт воскресенья", ""]
     timeline = kit.get("weekend_timeline") or []
     intro = [row for row in timeline if row.get("kind") == "intro"]
     recipe_steps = [row for row in timeline if row.get("kind") != "intro"]
     for row in intro:
-        hands = row.get("hands") if isinstance(row.get("hands"), str) else ""
-        if hands.strip():
-            lines.append(hands.strip())
-            lines.append("")
+        lines.extend(render_sunday_intro(row))
     for i, row in enumerate(recipe_steps, start=1):
         hands = row.get("hands") if isinstance(row.get("hands"), str) else ""
-        clock = format_clock(row)
-        head = f"{i}. "
-        if clock:
-            head += f"**{clock}.** "
-        lines.append(head + hands.strip())
+        lines.append(f"{i}. {hands.strip()}")
     if recipe_steps:
         lines.append("")
     return lines

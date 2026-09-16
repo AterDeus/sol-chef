@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 from django.conf import settings
@@ -21,10 +22,16 @@ from apps.recipes.etl.upsert import upsert_recipe
 
 
 def drafts_root() -> Path:
-    mounted = Path(settings.V1_DATA_ROOT) / "v2" / "docs" / "drafts"
-    if (mounted / "recipes").is_dir():
-        return mounted
-    return Path(__file__).resolve().parents[5] / "docs" / "drafts"
+    candidates: list[Path] = []
+    docs_root = os.environ.get("DOCS_ROOT")
+    if docs_root:
+        candidates.append(Path(docs_root) / "drafts")
+    candidates.append(Path(settings.V1_DATA_ROOT) / "v2" / "docs" / "drafts")
+    candidates.append(Path(__file__).resolve().parents[5] / "docs" / "drafts")
+    for candidate in candidates:
+        if (candidate / "recipes").is_dir():
+            return candidate
+    return candidates[0]
 
 
 def v1_map_path() -> Path:

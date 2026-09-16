@@ -59,9 +59,6 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: ${POSTGRES_DB:-solchef}
       REDIS_URL: redis://redis:6379/0
-      V1_DATA_ROOT: /v1-src
-    volumes:
-      - ../../:/v1-src:ro
     depends_on:
       postgres:
         condition: service_healthy

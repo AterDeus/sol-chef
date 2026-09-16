@@ -171,6 +171,44 @@
     }
   }
 
+  .prep-sunday-intro {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-5);
+
+    @media (width >= 640px) {
+      grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr);
+      gap: var(--space-4);
+      align-items: start;
+    }
+  }
+
+  .prep-sunday-intro__col {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3) var(--space-4);
+
+    h3 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-12);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin: 0 0 var(--space-3);
+      padding: 0;
+      border: none;
+    }
+
+    ul {
+      margin: 0;
+      padding-inline-start: 1.15rem;
+      display: grid;
+      gap: var(--space-2);
+      font-size: var(--fs-15);
+    }
+  }
+
   .prep-recipe {
     margin: 0 0 var(--space-5);
     padding-inline-start: 1.3rem;
@@ -181,12 +219,6 @@
       display: grid;
       gap: 4px;
     }
-  }
-
-  .prep-recipe__t {
-    font-family: var(--font-mono);
-    font-size: var(--fs-12);
-    color: var(--gold);
   }
 
   .prep-details {
