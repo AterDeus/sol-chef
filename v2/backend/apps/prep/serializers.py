@@ -13,7 +13,13 @@ from apps.prep.services.leftover import (
     recipes_for_replacements,
     shopping_additions,
 )
-from apps.prep.services.thaw import thaw_lead_hours, thaw_prep_item_text, thaw_pull_for
+from apps.prep.services.thaw import (
+    container_number,
+    thaw_already_in_fridge_text,
+    thaw_lead_hours,
+    thaw_prep_item_text,
+    thaw_pull_for,
+)
 from apps.prep.services.scale import kit_ratio, qty_payload
 from apps.recipes.services.assemble import assemble_recipe
 from apps.recipes.services.nutrition import compute_recipe_nutrition
@@ -42,7 +48,13 @@ def serialize_container(
     }
 
 
-def thaw_prep_items(containers: list[dict], day: int) -> list[dict]:
+def thaw_prep_items(
+    containers: list[dict],
+    day: int,
+    *,
+    used_earlier: dict[str, bool] | None = None,
+) -> list[dict]:
+    already = used_earlier or {}
     items: list[dict] = []
     for box in containers:
         thaw = box.get("thaw_before_day")
@@ -54,14 +66,32 @@ def thaw_prep_items(containers: list[dict], day: int) -> list[dict]:
             box.get("unit"),
             box.get("component_code"),
         )
+        code = str(box.get("code") or "")
+        same_day_already = int(thaw) == day and bool(already.get(code))
+        if int(thaw) < day or already.get(code):
+            if same_day_already:
+                num = container_number(box.get("label"))
+                text = (
+                    f"Контейнер {num} уже в холодильнике — вы достали его утром к обеду."
+                    if num
+                    else "Заготовка уже в холодильнике — вы достали её утром к обеду."
+                )
+            else:
+                text = thaw_already_in_fridge_text(
+                    label=box.get("label"),
+                    pull=pull,
+                    thaw_before_day=int(thaw),
+                )
+        else:
+            text = thaw_prep_item_text(
+                morning=pull == "morning",
+                label=box.get("label"),
+                component_title=box.get("component_title"),
+            )
         items.append(
             {
                 "type": "thaw",
-                "text": thaw_prep_item_text(
-                    morning=pull == "morning",
-                    label=box.get("label"),
-                    component_title=box.get("component_title"),
-                ),
+                "text": text,
                 "before_hours": thaw_lead_hours(pull, box.get("unit"), box.get("qty")),
             }
         )

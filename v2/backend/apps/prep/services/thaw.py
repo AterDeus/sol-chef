@@ -21,6 +21,27 @@ DICED_COMPONENT_CODES = frozenset(
 THAW_EVENING = "evening_before"
 THAW_MORNING = "morning"
 
+DAY_GENITIVE = (
+    "",
+    "понедельника",
+    "вторника",
+    "среды",
+    "четверга",
+    "пятницы",
+    "субботы",
+    "воскресенья",
+)
+DAY_V = (
+    "",
+    "в понедельник",
+    "во вторник",
+    "в среду",
+    "в четверг",
+    "в пятницу",
+    "в субботу",
+    "в воскресенье",
+)
+
 
 def thaw_pull_for(
     place: str,
@@ -91,3 +112,29 @@ def thaw_prep_item_text(*, morning: bool, label: str | None, component_title: st
     else:
         what = (label or "заготовку").strip()
     return f"{when} достаньте {what} из морозилки и переложите в холодильник."
+
+
+def thaw_when_pulled(pull: str | None, thaw_before_day: int) -> str:
+    day = int(thaw_before_day)
+    if pull == THAW_MORNING:
+        name = DAY_V[day] if 1 <= day <= 7 else ""
+        return f"утром {name}".strip()
+    if day <= 1:
+        prev = "воскресенья"
+    else:
+        prev = DAY_GENITIVE[day - 1]
+    return f"с вечера {prev}"
+
+
+def thaw_already_in_fridge_text(
+    *,
+    label: str | None,
+    pull: str | None,
+    thaw_before_day: int,
+) -> str:
+    num = container_number(label)
+    when = thaw_when_pulled(pull, thaw_before_day)
+    if num:
+        return f"Контейнер {num} уже в холодильнике: вы доставали его {when}."
+    what = (label or "заготовка").strip()
+    return f"{what} уже в холодильнике: вы доставали её {when}."

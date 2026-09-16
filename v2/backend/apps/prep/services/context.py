@@ -113,6 +113,17 @@ def resolve_prep_for_recipe(recipe: Recipe, request: Request) -> dict | None:
         )
         source = slot.source
 
+    meal_rank = {"lunch": 0, "dinner": 1}
+    my_rank = meal_rank.get(meal or "", 1)
+    used_earlier: dict[str, bool] = {}
+    for code in ids:
+        used_earlier[code] = any(
+            row.day == day
+            and meal_rank.get(row.meal, 1) < my_rank
+            and code in [str(item) for item in (row.container_ids or [])]
+            for row in slots
+        )
+
     containers = []
     for code in ids:
         box = boxes.get(code)
@@ -142,7 +153,7 @@ def resolve_prep_for_recipe(recipe: Recipe, request: Request) -> dict | None:
     applied_servings = int(servings) if servings is not None else kit.servings_base
     return {
         "steps": steps,
-        "prep": thaw_prep_items(containers, day),
+        "prep": thaw_prep_items(containers, day, used_earlier=used_earlier),
         "prep_context": {
             "kit": {"slug": kit.slug, "title": kit.title},
             "day": day,
