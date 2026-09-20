@@ -24,6 +24,9 @@ const CSV_KEYS = new Set([
   'have',
   'have_group',
   'intent',
+  'use_case',
+  'quick',
+  'missed',
 ]);
 
 export function valuesOf(sp: SearchParamsRecord, key: string): string[] {
@@ -52,6 +55,10 @@ export function toURLSearchParams(sp: SearchParamsRecord): URLSearchParams {
 
 export function hasAnyQuery(sp: SearchParamsRecord): boolean {
   return toURLSearchParams(sp).toString().length > 0;
+}
+
+export function hasCalculatorQuery(sp: SearchParamsRecord): boolean {
+  return FILTER_KEYS.some((key) => valuesOf(sp, key).length > 0);
 }
 
 export function queryString(sp: SearchParamsRecord): string {
@@ -146,6 +153,7 @@ export function recipeHref(
     meal?: string | null;
     servings?: number | string | null;
     noLeftover?: boolean;
+    piece?: string | null;
   } = {},
 ): string {
   const qs = new URLSearchParams();
@@ -156,6 +164,7 @@ export function recipeHref(
   if (opts.meal) qs.set('meal', opts.meal);
   if (opts.servings != null && opts.servings !== '') qs.set('servings', String(opts.servings));
   if (opts.noLeftover) qs.set('no_leftover', '1');
+  if (opts.piece) qs.set('piece', opts.piece);
   const suffix = qs.toString() ? `?${qs.toString()}` : '';
   return `/recipes/${slug}${suffix}`;
 }

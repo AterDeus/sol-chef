@@ -1,55 +1,34 @@
 import Link from 'next/link';
 import type { AlternativeSolution, RecipeCardData } from '@/lib/types';
+import { minutesLabel } from '@/lib/catalog';
 import { recipeHref } from '@/lib/filters';
 import {
-  ALLERGEN,
   COOK_METHOD,
   DISH_TYPE,
   PROTEIN_BASE,
   equipmentLabel,
   labelOf,
+  pickGuestProteinVariant,
 } from '@/lib/vocab';
+import { AllergenNotice } from '@/components/AllergenNotice';
 
-function AllergenDots({ recipe }: { recipe: RecipeCardData }) {
-  const { contains, may_contain, unknown } = recipe.allergens ?? {
-    contains: [],
-    may_contain: [],
-    unknown: [],
-  };
-  if (!contains.length && !may_contain.length && !unknown.length) return null;
+export type BookCardContext = {
+  chapterId?: string;
+  proteinFilter?: string[];
+};
 
-  return (
-    <div className="allergen-dots" aria-label="Аллергены">
-      {contains.map((code) => (
-        <span key={`c-${code}`} className="allergen-dot allergen-dot--contains">
-          <i aria-hidden />
-          {labelOf(ALLERGEN, code)}
-        </span>
-      ))}
-      {may_contain.map((code) => (
-        <span key={`m-${code}`} className="allergen-dot allergen-dot--may">
-          <i aria-hidden />
-          следы: {labelOf(ALLERGEN, code)}
-        </span>
-      ))}
-      {unknown.map((code) => (
-        <span key={`u-${code}`} className="allergen-dot allergen-dot--unknown">
-          <i aria-hidden />
-          неизвестно: {labelOf(ALLERGEN, code)}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
-  const tags = [
-    labelOf(PROTEIN_BASE, recipe.protein_base),
-    labelOf(COOK_METHOD, recipe.cook_method),
-    labelOf(DISH_TYPE, recipe.dish_type),
-  ];
+export function RecipeCard({
+  recipe,
+  book,
+}: {
+  recipe: RecipeCardData;
+  book?: BookCardContext;
+}) {
+  const guest = book ? pickGuestProteinVariant(recipe, book) : null;
+  const proteinCode = guest?.protein_base ?? recipe.protein_base;
+  const time = minutesLabel(recipe.time_profile?.total_minutes);
   const href = recipeHref(recipe.slug, {
-    variant: recipe.applied_axes?.variant,
+    variant: guest?.code ?? recipe.applied_axes?.variant,
     equipment: recipe.applied_axes?.equipment,
   });
 
@@ -58,13 +37,32 @@ export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
       <h3>
         <Link href={href}>{recipe.title}</Link>
       </h3>
-      <div className="recipe-meta">
-        {tags.map((tag) => (
-          <span key={tag} className="tag">
-            {tag}
-          </span>
-        ))}
-      </div>
+      <dl className="recipe-card__facts">
+        <div>
+          <dt>Категория</dt>
+          <dd>{labelOf(PROTEIN_BASE, proteinCode)}</dd>
+        </div>
+        {guest?.title ? (
+          <div>
+            <dt>Вариант</dt>
+            <dd>{guest.title}</dd>
+          </div>
+        ) : null}
+        <div>
+          <dt>Способ</dt>
+          <dd>{labelOf(COOK_METHOD, recipe.cook_method)}</dd>
+        </div>
+        <div>
+          <dt>Тип блюда</dt>
+          <dd>{labelOf(DISH_TYPE, recipe.dish_type)}</dd>
+        </div>
+        {time ? (
+          <div>
+            <dt>Время</dt>
+            <dd>{time}</dd>
+          </div>
+        ) : null}
+      </dl>
       {recipe.why && recipe.why.length > 0 && (
         <ul className="why-list">
           {recipe.why.map((line) => (
@@ -72,16 +70,22 @@ export function RecipeCard({ recipe }: { recipe: RecipeCardData }) {
           ))}
         </ul>
       )}
-      <AllergenDots recipe={recipe} />
+      <AllergenNotice allergens={recipe.allergens} compact />
     </article>
   );
 }
 
-export function RecipeGrid({ recipes }: { recipes: RecipeCardData[] }) {
+export function RecipeGrid({
+  recipes,
+  book,
+}: {
+  recipes: RecipeCardData[];
+  book?: BookCardContext;
+}) {
   return (
     <div className="recipe-grid">
       {recipes.map((recipe) => (
-        <RecipeCard key={recipe.slug} recipe={recipe} />
+        <RecipeCard key={recipe.slug} recipe={recipe} book={book} />
       ))}
     </div>
   );
@@ -105,6 +109,7 @@ export function SolutionBoard({
     featured.equipment && featured.equipment !== featured.cook_method
       ? equipmentLabel(featured.equipment)
       : null;
+  const time = minutesLabel(featured.time_profile?.total_minutes);
 
   return (
     <div className="solution-board">
@@ -113,12 +118,35 @@ export function SolutionBoard({
         <h2 id="featured-title">
           <Link href={href}>{featured.title}</Link>
         </h2>
-        <div className="recipe-meta">
-          <span className="tag">{labelOf(PROTEIN_BASE, featured.protein_base)}</span>
-          <span className="tag">{method}</span>
-          {gear ? <span className="tag">{gear}</span> : null}
-          {featured.step_count ? <span className="tag">{featured.step_count} шагов</span> : null}
-        </div>
+        <dl className="recipe-card__facts">
+          <div>
+            <dt>Категория</dt>
+            <dd>{labelOf(PROTEIN_BASE, featured.protein_base)}</dd>
+          </div>
+          <div>
+            <dt>Способ</dt>
+            <dd>{method}</dd>
+          </div>
+          {gear ? (
+            <div>
+              <dt>Посуда</dt>
+              <dd>{gear}</dd>
+            </div>
+          ) : null}
+          {time ? (
+            <div>
+              <dt>Время</dt>
+              <dd>{time}</dd>
+            </div>
+          ) : null}
+          {featured.step_count ? (
+            <div>
+              <dt>Шаги</dt>
+              <dd>{featured.step_count}</dd>
+            </div>
+          ) : null}
+        </dl>
+        <AllergenNotice allergens={featured.allergens} compact />
         {shopping.length === 0 && featured.bucket === 'now' ? (
           <p className="solution-featured__status">Всё основное уже есть</p>
         ) : null}

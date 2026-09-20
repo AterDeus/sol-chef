@@ -1,8 +1,9 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { fetchGuide, fetchRecommendations } from '@/lib/api';
+import { fetchCatalog, fetchGuide } from '@/lib/api';
 import { hasAnyQuery, queryString } from '@/lib/filters';
-import { pickRandomRecipes, pickRandomTips, tipSectionIcon } from '@/lib/home';
+import { HOME_SAMPLE_SIZE, pickRandomRecipes, pickRandomTips, tipSectionIcon } from '@/lib/home';
 import { tipHashHref } from '@/lib/tips';
 import type { SearchParamsRecord, TipsPayload } from '@/lib/types';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
@@ -11,7 +12,6 @@ import { RecipeGrid } from '@/components/RecipeCard';
 import { SpriteIcon } from '@/components/SpriteIcon';
 
 export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
 
 export default async function HomePage({
   searchParams,
@@ -22,12 +22,6 @@ export default async function HomePage({
   if (hasAnyQuery(sp)) {
     redirect(`/calculator?${queryString(sp)}`);
   }
-
-  const [rec, tips] = await Promise.all([fetchRecommendations(), fetchGuide('tips')]);
-  const recipes = rec.ok ? pickRandomRecipes(rec.data.results) : [];
-  const featuredTips = tips.ok
-    ? pickRandomTips((tips.data.payload ?? {}) as TipsPayload)
-    : [];
 
   return (
     <>
@@ -57,16 +51,44 @@ export default async function HomePage({
         <h2>Рецепты</h2>
         <Link href="/recipes">Все рецепты</Link>
       </div>
-      {!rec.ok && <ErrorBanner message={rec.detail} />}
-      {rec.ok && recipes.length === 0 && (
-        <EmptyState>Рецепты пока не загружены.</EmptyState>
-      )}
-      {recipes.length > 0 && <RecipeGrid recipes={recipes} />}
+      <Suspense fallback={<EmptyState>Загрузка рецептов…</EmptyState>}>
+        <HomeRecipes />
+      </Suspense>
 
       <div className="section-head">
         <h2>Советы</h2>
         <Link href="/tips">Все советы</Link>
       </div>
+      <Suspense fallback={<EmptyState>Загрузка советов…</EmptyState>}>
+        <HomeTips />
+      </Suspense>
+    </>
+  );
+}
+
+async function HomeRecipes() {
+  const rec = await fetchCatalog({ sample: String(HOME_SAMPLE_SIZE) });
+  const recipes = rec.ok ? pickRandomRecipes(rec.data.results) : [];
+
+  return (
+    <>
+      {!rec.ok && <ErrorBanner message={rec.detail} />}
+      {rec.ok && recipes.length === 0 && (
+        <EmptyState>Рецепты пока не загружены.</EmptyState>
+      )}
+      {recipes.length > 0 && <RecipeGrid recipes={recipes} />}
+    </>
+  );
+}
+
+async function HomeTips() {
+  const tips = await fetchGuide('tips');
+  const featuredTips = tips.ok
+    ? pickRandomTips((tips.data.payload ?? {}) as TipsPayload)
+    : [];
+
+  return (
+    <>
       {!tips.ok && tips.status === 404 && (
         <EmptyState>Советы пока не загружены.</EmptyState>
       )}

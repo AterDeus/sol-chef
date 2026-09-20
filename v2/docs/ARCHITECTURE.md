@@ -37,7 +37,7 @@
 `POST /_internal/revalidate` на Next — только из Docker-сети (Django, HMAC). Браузер туда не ходит.
 
 - Без JWT и CORS. Браузер вызывает `/api/` того же хоста.
-- Next SSR: `INTERNAL_API_URL=http://backend:8000`, клиент: `NEXT_PUBLIC_API_URL` пустой. Пробрасывать `Cookie` (и CSRF, когда появятся мутации). Не `fetch` на `localhost:8080` из контейнера.
+- Next SSR: `INTERNAL_API_URL=http://backend:8000`, клиент: `NEXT_PUBLIC_API_URL` пустой. Публичные GET без `cookies()` — иначе страница не кэшируется. Cookie и CSRF — когда появятся сессии и мутации. Не `fetch` на `localhost:8080` из контейнера.
 - ISR — только публичное тело. Персональные блоки и счётчики «приготовили N» / комментарии — клиентский `/api/` после гидрации ([ACCOUNTS.md](ACCOUNTS.md)). `community_confirmed` на `Recipe` можно в SSR.
 - Статика Django (админка): WhiteNoise у backend, чтобы `/static/` через Caddy работал и с gunicorn. В срезе достаточно runserver + WhiteNoise в deps.
 - `/admin/` на VPS закрывать авторизацией **до** cutover: Caddy basic auth + Django login. См. [CUTOVER.md](CUTOVER.md).

@@ -36,7 +36,7 @@ def _nutrition_from_ingredient(ing) -> dict:
     return {field: getattr(ing, field) for field in CANON_NUTRITION_FIELDS}
 
 
-def lines_from_recipe(recipe) -> list[dict]:
+def lines_from_recipe(recipe, *, include_nutrition: bool = True) -> list[dict]:
     rows = []
     for line in recipe.ingredients.all():
         ing = line.ingredient
@@ -58,8 +58,28 @@ def lines_from_recipe(recipe) -> list[dict]:
             "allergens_may_contain": list(ing.allergens_may_contain or []),
             "allergens_unknown": list(ing.allergens_unknown or []),
         }
-        row.update(_nutrition_from_ingredient(ing))
+        if include_nutrition:
+            row.update(_nutrition_from_ingredient(ing))
         rows.append(row)
+    return rows
+
+
+def allergen_lines_from_recipe(recipe) -> list[dict]:
+    """List/catalog worst-case allergens: no nutrition, no step payload."""
+    rows = []
+    for line in recipe.ingredients.all():
+        ing = line.ingredient
+        rows.append(
+            {
+                "canonical_id": ing.canonical_id,
+                "name": line.display_name or ing.title,
+                "position": line.position,
+                "optional": bool(line.optional),
+                "allergens_contains": list(ing.allergens_contains or []),
+                "allergens_may_contain": list(ing.allergens_may_contain or []),
+                "allergens_unknown": list(ing.allergens_unknown or []),
+            }
+        )
     return rows
 
 
@@ -296,6 +316,7 @@ class AssembledRecipe:
     high_risk_flags: list[str]
     caution_text: str | None
     cook_method: str
+    protein_base: str
     equipment: str | None
     applied_axes: dict[str, str | None]
     available_variants: list[dict]
@@ -318,9 +339,10 @@ def _variant_payload(item) -> dict:
         "step_delta": item.step_delta,
         "allergen_delta": item.allergen_delta,
         "high_risk_delta": item.high_risk_delta or {},
-        "cook_method_override": item.cook_method_override,
-        "equipment": item.equipment,
-        "caution_text_override": item.caution_text_override,
+        "cook_method_override": getattr(item, "cook_method_override", None),
+        "protein_base_override": getattr(item, "protein_base_override", None),
+        "equipment": getattr(item, "equipment", None),
+        "caution_text_override": getattr(item, "caution_text_override", None),
     }
 
 
@@ -384,14 +406,16 @@ def assemble_display(
     base_flags: list[str],
     base_caution: str | None,
     base_cook_method: str,
+    base_protein_base: str,
     addon: dict | None,
     equipment: dict | None,
-) -> tuple[list[dict], list[dict], dict[str, list[str]], list[str], str | None, str]:
+) -> tuple[list[dict], list[dict], dict[str, list[str]], list[str], str | None, str, str]:
     lines = [_copy_line(line) for line in base_lines]
     steps = [deepcopy(step) for step in base_steps]
     flags = list(base_flags or [])
     caution = base_caution
     cook_method = base_cook_method
+    protein_base = base_protein_base
     allergen_deltas: list[dict] = []
 
     for axis in (addon, equipment):
@@ -404,6 +428,8 @@ def assemble_display(
             allergen_deltas.append(axis["allergen_delta"])
         if axis.get("cook_method_override"):
             cook_method = axis["cook_method_override"]
+        if axis.get("protein_base_override"):
+            protein_base = axis["protein_base_override"]
         if axis.get("caution_text_override"):
             caution = axis["caution_text_override"]
 
@@ -413,7 +439,7 @@ def assemble_display(
     allergens = allergens_from_lines(lines)
     for delta in allergen_deltas:
         allergens = apply_allergen_delta(allergens, delta)
-    return lines, steps, allergens, flags, caution, cook_method
+    return lines, steps, allergens, flags, caution, cook_method, protein_base
 
 
 def assemble_recipe(
@@ -421,6 +447,7 @@ def assemble_recipe(
     *,
     variant_code: str | None = None,
     equipment_code: str | None = None,
+    enrich: bool = True,
 ) -> AssembledRecipe:
     variants = list(recipe.variants.all())
     addon_obj, equipment_obj, applied_equipment = resolve_axes(
@@ -431,17 +458,19 @@ def assemble_recipe(
     )
     addon = _variant_payload(addon_obj) if addon_obj else None
     equipment = _variant_payload(equipment_obj) if equipment_obj else None
-    lines, steps, allergens, flags, caution, cook_method = assemble_display(
-        base_lines=lines_from_recipe(recipe),
+    lines, steps, allergens, flags, caution, cook_method, protein_base = assemble_display(
+        base_lines=lines_from_recipe(recipe, include_nutrition=enrich),
         base_steps=steps_from_recipe(recipe),
         base_allergens={},
         base_flags=list(recipe.high_risk_flags or []),
         base_caution=recipe.caution_text,
         base_cook_method=recipe.cook_method,
+        base_protein_base=recipe.protein_base,
         addon=addon,
         equipment=equipment,
     )
-    lines = enrich_lines_from_db(lines)
+    if enrich:
+        lines = enrich_lines_from_db(lines)
     addons = [item for item in variants if item.axis == "addon"]
     notes = recipe.notes if isinstance(recipe.notes, list) else []
     prep = recipe.prep if isinstance(recipe.prep, list) else []
@@ -452,6 +481,7 @@ def assemble_recipe(
         high_risk_flags=flags,
         caution_text=caution,
         cook_method=cook_method,
+        protein_base=protein_base,
         equipment=applied_equipment,
         applied_axes={
             "variant": addon_obj.code if addon_obj else None,
@@ -463,6 +493,7 @@ def assemble_recipe(
                 "title": item.title,
                 "axis": "addon",
                 "has_delta": bool(item.has_delta),
+                "protein_base": getattr(item, "protein_base_override", None),
             }
             for item in addons
         ],
@@ -480,19 +511,20 @@ def assemble_recipe(
 
 def catalog_allergens(recipe) -> dict[str, list[str]]:
     """Worst case: base ∪ every addon with a real delta."""
-    base_lines = lines_from_recipe(recipe)
+    base_lines = allergen_lines_from_recipe(recipe)
     merged = [allergens_from_lines(base_lines)]
     for item in recipe.variants.all():
         if item.axis != "addon" or not item.has_delta:
             continue
         payload = _variant_payload(item)
-        lines, _steps, allergens, _flags, _caution, _method = assemble_display(
+        lines, _steps, allergens, _flags, _caution, _method, _protein = assemble_display(
             base_lines=base_lines,
             base_steps=[],
             base_allergens={},
             base_flags=[],
             base_caution=None,
             base_cook_method=recipe.cook_method,
+            base_protein_base=recipe.protein_base,
             addon=payload,
             equipment=None,
         )
@@ -507,3 +539,34 @@ def catalog_allergens(recipe) -> dict[str, list[str]]:
         for item in merged
     )
     return merge_allergen_lists(rows)
+
+
+def catalog_protein_bases(recipe) -> list[str]:
+    ordered: list[str] = []
+
+    def add(code: str | None) -> None:
+        if code and code not in ordered:
+            ordered.append(code)
+
+    add(getattr(recipe, "protein_base", None))
+    for code in getattr(recipe, "protein_bases_extra", None) or []:
+        add(code)
+    for item in recipe.variants.all():
+        if getattr(item, "axis", None) != "addon" or not getattr(item, "has_delta", False):
+            continue
+        add(getattr(item, "protein_base_override", None))
+    return ordered
+
+
+def catalog_protein_variants(recipe) -> list[dict]:
+    rows: list[dict] = []
+    for item in recipe.variants.all():
+        if getattr(item, "axis", None) != "addon" or not getattr(item, "has_delta", False):
+            continue
+        override = getattr(item, "protein_base_override", None)
+        if not override:
+            continue
+        rows.append(
+            {"code": item.code, "title": item.title, "protein_base": override}
+        )
+    return rows

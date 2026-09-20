@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import type { SearchParamsRecord } from '@/lib/types';
 import { isSelected, toggleHref } from '@/lib/filters';
+import { FilterChip } from '@/components/FilterChip';
 
 export function ChipGroup({
   legend,
@@ -28,14 +28,13 @@ export function ChipGroup({
         {entries.map(([code, label]) => {
           const selected = isSelected(sp, param, code);
           return (
-            <Link
+            <FilterChip
               key={code}
               href={toggleHref(pathname, sp, param, code)}
-              className={selected ? 'chip is-active' : 'chip'}
-              aria-current={selected ? 'true' : undefined}
+              pressed={selected}
             >
               {label}
-            </Link>
+            </FilterChip>
           );
         })}
       </div>

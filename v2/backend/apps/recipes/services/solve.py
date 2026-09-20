@@ -10,6 +10,7 @@ from apps.recipes.constants import (
     BEST_BUCKET_LIMIT,
     COMPONENT_DISH_TYPES,
     COOK_METHOD_LABEL_RU,
+    PROTEIN_BASE_LABEL_RU,
     label_equipment_axis,
 )
 from apps.recipes.pantry_vocab import (
@@ -48,6 +49,8 @@ class CookingSolution:
     step_count: int = 0
     have_used: int = 0
     have_all: bool = False
+    protein_bases: list[str] = field(default_factory=list)
+    protein_variants: list[dict] = field(default_factory=list)
 
 
 def is_core_line(line: dict) -> bool:
@@ -112,12 +115,37 @@ def intent_adjust(recipe, assembled, intents: list[str], step_count: int) -> tup
     return score, why
 
 
-def combo_fits(recipe, addon, equipment_variant, methods: list[str], equipments: list[str]) -> bool:
+def combo_protein_bases(recipe, addon) -> list[str]:
+    override = getattr(addon, "protein_base_override", None) if addon is not None else None
+    if override:
+        return [override]
+    ordered: list[str] = []
+    home = getattr(recipe, "protein_base", None)
+    if home:
+        ordered.append(home)
+    for code in getattr(recipe, "protein_bases_extra", None) or []:
+        if code and code not in ordered:
+            ordered.append(code)
+    return ordered
+
+
+def combo_fits(
+    recipe,
+    addon,
+    equipment_variant,
+    methods: list[str],
+    equipments: list[str],
+    proteins: list[str] | None = None,
+) -> bool:
     method, equipment = combo_method_equipment(recipe, addon, equipment_variant)
     if methods and method not in methods:
         return False
     if equipments and equipment not in equipments:
         return False
+    if proteins:
+        bases = combo_protein_bases(recipe, addon)
+        if not any(code in proteins for code in bases):
+            return False
     return True
 
 
@@ -224,6 +252,7 @@ def protein_from_pantry(
     *,
     covered_ids: set[str],
     titles: dict[str, str] | None = None,
+    protein_base: str | None = None,
 ) -> tuple[int, list[str]]:
     """Bonus only if a core line from `have` actually covers this recipe.
 
@@ -237,10 +266,11 @@ def protein_from_pantry(
     covered = set(covered_ids)
     fresh = bool(covered & FISH_FRESH)
     canned = bool(covered & FISH_CANNED)
-    if fresh and recipe.protein_base in FISH_PROTEIN:
+    base = protein_base or recipe.protein_base
+    if fresh and base in FISH_PROTEIN:
         score += 8
         why.append("есть рыба")
-    elif canned and not fresh and recipe.protein_base in FISH_PROTEIN:
+    elif canned and not fresh and base in FISH_PROTEIN:
         score += 3
         why.append("есть рыбные консервы")
     preference = (
@@ -258,7 +288,7 @@ def protein_from_pantry(
         if not bases:
             continue
         matched = covered & set(HAVE_GROUPS[group])
-        if matched and recipe.protein_base in bases:
+        if matched and base in bases:
             score += 6
             label = shopping_label(sorted(matched)[0], titles)
             why.append(f"есть {label}")
@@ -266,8 +296,18 @@ def protein_from_pantry(
     return score, why
 
 
-def axes_why(recipe, assembled, methods: list[str], equipments: list[str]) -> list[str]:
+def axes_why(
+    recipe, assembled, methods: list[str], equipments: list[str], proteins: list[str] | None = None
+) -> list[str]:
     extra: list[str] = []
+    proteins = proteins or []
+    if (
+        proteins
+        and assembled.protein_base in proteins
+        and assembled.protein_base != recipe.protein_base
+    ):
+        label = PROTEIN_BASE_LABEL_RU.get(assembled.protein_base, assembled.protein_base)
+        extra.append(f"{label} — вариант")
     if methods and assembled.cook_method in methods and assembled.cook_method != recipe.cook_method:
         label = COOK_METHOD_LABEL_RU.get(assembled.cook_method, assembled.cook_method)
         extra.append(f"{label} — вариант посуды")
@@ -303,14 +343,16 @@ def solve_recipe(
     intents = intents or []
     explicit = [cid for cid in (explicit_have or []) if cid]
     explicit_set = set(explicit)
-    explore = bool(have or filter_method or filter_equipment or intents)
+    explore = bool(have or filter_method or filter_equipment or filter_protein or intents)
     best: CookingSolution | None = None
     best_key: tuple | None = None
     recipe_rules = rules_for_recipe(recipe.slug, rules)
     titles = titles or {}
 
     for addon, equipment_variant in axis_combos(recipe, explore=explore):
-        if not combo_fits(recipe, addon, equipment_variant, filter_method, filter_equipment):
+        if not combo_fits(
+            recipe, addon, equipment_variant, filter_method, filter_equipment, filter_protein
+        ):
             continue
         variant_code = addon.code if addon is not None else None
         equipment_code = None
@@ -320,16 +362,30 @@ def solve_recipe(
             equipment_code = recipe.equipment
         try:
             assembled = assemble_recipe(
-                recipe, variant_code=variant_code, equipment_code=equipment_code
+                recipe,
+                variant_code=variant_code,
+                equipment_code=equipment_code,
+                enrich=False,
             )
         except VariantError:
             continue
 
-        shopping, substitutions, hits, missing, desirable, covered_ids, used_have = match_pantry(
-            assembled.ingredients, have, recipe_rules, titles
-        )
+        if have:
+            (
+                shopping,
+                substitutions,
+                hits,
+                missing,
+                desirable,
+                covered_ids,
+                used_have,
+            ) = match_pantry(assembled.ingredients, have, recipe_rules, titles)
+        else:
+            shopping, substitutions, desirable = [], [], []
+            hits = missing = 0
+            covered_ids, used_have = set(), set()
         chip_score, chip_why = score_and_why(
-            protein_base=recipe.protein_base,
+            protein_base=assembled.protein_base,
             cook_method=assembled.cook_method,
             dish_type=recipe.dish_type,
             equipment=assembled.equipment,
@@ -338,9 +394,14 @@ def solve_recipe(
             filter_method=filter_method,
             filter_dish=filter_dish,
             filter_equipment=filter_equipment,
+            protein_bases=combo_protein_bases(recipe, addon),
         )
         why = list(chip_why)
-        axis_lines = axes_why(recipe, assembled, filter_method, filter_equipment)
+        axis_lines = axes_why(
+            recipe, assembled, filter_method, filter_equipment, filter_protein
+        )
+        if any(line.endswith(" — вариант") for line in axis_lines):
+            why = [line for line in why if not line.startswith("основа — ")]
         if any("вариант посуды" in line for line in axis_lines):
             why = [line for line in why if line != "совпал метод"]
         if any(" (вариант)" in line for line in axis_lines):
@@ -348,7 +409,11 @@ def solve_recipe(
         why.extend(axis_lines)
         why.extend(pantry_why(shopping, substitutions, has_have=bool(have), desirable=desirable))
         protein_pts, protein_why = protein_from_pantry(
-            recipe, have, covered_ids=covered_ids, titles=titles
+            recipe,
+            have,
+            covered_ids=covered_ids,
+            titles=titles,
+            protein_base=assembled.protein_base,
         )
         why.extend(protein_why)
         step_count = len(assembled.steps)
@@ -374,7 +439,7 @@ def solve_recipe(
         solution = CookingSolution(
             slug=recipe.slug,
             title=recipe.title,
-            protein_base=recipe.protein_base,
+            protein_base=assembled.protein_base,
             cook_method=assembled.cook_method,
             dish_type=recipe.dish_type,
             equipment=assembled.equipment,
@@ -398,6 +463,8 @@ def solve_recipe(
             step_count=step_count,
             have_used=have_used,
             have_all=have_all,
+            protein_bases=list(catalog_item.get("protein_bases") or [recipe.protein_base]),
+            protein_variants=list(catalog_item.get("protein_variants") or []),
         )
         key = (
             -int(have_all),
@@ -515,6 +582,8 @@ def serialize_solution(item: CookingSolution) -> dict:
         "slug": item.slug,
         "title": item.title,
         "protein_base": item.protein_base,
+        "protein_bases": item.protein_bases or [item.protein_base],
+        "protein_variants": item.protein_variants,
         "cook_method": item.cook_method,
         "dish_type": item.dish_type,
         "equipment": item.equipment,

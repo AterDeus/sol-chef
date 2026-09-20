@@ -23,6 +23,8 @@ export type RecipeCardData = {
   slug: string;
   title: string;
   protein_base: string;
+  protein_bases?: string[];
+  protein_variants?: Array<{ code: string; title: string; protein_base: string }>;
   cook_method: string;
   dish_type: string;
   equipment?: string | null;
@@ -109,6 +111,7 @@ export type NutritionLine = {
 export type RecipeNutrition = {
   basis: 'raw_input';
   incomplete: boolean;
+  omitted?: string[];
   total: NutritionMacros | null;
   per_100g_input: NutritionMacros | null;
   per_100g_cooked: NutritionMacros | null;
@@ -163,6 +166,7 @@ export type RecipeVariantOption = {
   title: string;
   axis: 'addon' | 'equipment' | 'energy';
   has_delta: boolean;
+  protein_base?: string | null;
 };
 
 export type RecipeAdaptation = {
@@ -177,6 +181,7 @@ export type RecipeDetail = {
   slug: string;
   title: string;
   protein_base: string;
+  home_protein_base?: string;
   cook_method: string;
   dish_type: string;
   equipment?: string | null;

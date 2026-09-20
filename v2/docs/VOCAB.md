@@ -86,8 +86,9 @@ Whitelist культивируемых грибов и сырые мясо/ры�
 | `vegetables` | Овощи | Картофель, капуста, кабачок, баклажан, тыква, свёкла, морковь, томат, перец, лук как основа блюда |
 | `mushrooms` | Грибы | Шампиньоны, вешенки, шиитаке, эринги. Иные → `wild_mushrooms` + человек |
 | `legumes` | Бобовые | Чечевица, нут, фасоль, горох, маш — когда это основа, не гарнир в мясе |
+| `fruits` | Фрукты и ягоды | Желе, кисель, компот, фруктовый салат — когда фрукты или ягоды это основа блюда, не гарнир к мясу |
 
-Омлет / сырники → `eggs_dairy`, не `vegetables`. Креветки → `seafood`, не рыба. Печень куриная → `offal`, не `poultry`. Рагу из кабачков → `vegetables`. Нут с томатом → `legumes`. Жульен → `mushrooms`.
+Омлет / сырники → `eggs_dairy`, не `vegetables`. Креветки → `seafood`, не рыба. Печень куриная → `offal`, не `poultry`. Рагу из кабачков → `vegetables`. Нут с томатом → `legumes`. Жульен → `mushrooms`. Желе и кисель → `fruits`, не `vegetables`.
 
 Книга `/recipes`: первый уровень — группы по смыслу (мясо / птица / овощи / рыба и морепродукты / гарниры / завтраки / десерты / другое), не алфавит `protein_base`. Завтрак (`dish_type=breakfast`) важнее основы: яичница не в «другом». Состав групп — [UX-PROPOSAL.md](UX-PROPOSAL.md) §4. Коды в JSON и API не меняются.
 
@@ -210,7 +211,7 @@ ETL каталога V1: `allowed_cuts=[]`, не угадывать из title. 
 | `other` | очередь человеку (часто `main` или `appetizer`) |
 | `soup`, `salad`, `breakfast`, `side`, `sauce`, `dessert` | без изменений |
 
-`protein_base` V1 плюс новые коды без предка: `seafood`, `offal`, `eggs_dairy`, `vegetables`, `mushrooms`, `legumes`, `fish_canned`.
+`protein_base` V1 плюс новые коды без предка: `seafood`, `offal`, `eggs_dairy`, `vegetables`, `mushrooms`, `legumes`, `fish_canned`, `fruits`.
 
 ETL V1: папка/category «крупы без мяса», салат, овощной суп → пока `vegetarian`. После волны можно переразметить вручную.
 

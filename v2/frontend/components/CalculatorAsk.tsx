@@ -5,6 +5,7 @@ import { ALLERGEN, EQUIPMENT, INTENT } from '@/lib/vocab';
 import { ChipGroup } from '@/components/FilterPanel';
 import { PantryTextForm } from '@/components/PantryTextForm';
 import { SpriteIcon } from '@/components/SpriteIcon';
+import { FilterChip } from '@/components/FilterChip';
 import Link from 'next/link';
 
 const INTENT_ORDER = ['fast', 'pantry', 'easy', 'batch', 'light', 'oven'] as const;
@@ -23,14 +24,9 @@ function ChipRow({
   return (
     <div className="chip-row">
       {items.map((item) => (
-        <Link
-          key={item.id}
-          href={item.href}
-          className={item.selected ? 'chip is-active' : 'chip'}
-          aria-current={item.selected ? 'true' : undefined}
-        >
+        <FilterChip key={item.id} href={item.href} pressed={item.selected}>
           {item.title}
-        </Link>
+        </FilterChip>
       ))}
     </div>
   );
@@ -133,23 +129,25 @@ export function CalculatorAsk({
 
   return (
     <section className="calc-ask" aria-label="Ситуация">
-      <PantryTextForm sp={sp} />
+      <PantryTextForm sp={sp} groups={groups} />
 
       <fieldset className="filter-block">
         <legend className="filter-legend">Что есть</legend>
-        <p className="calc-ask__hint">Сначала группа, внутри неё — уточнение. Несколько групп не смешиваются.</p>
+        <p className="calc-ask__hint">
+          Можно выбрать несколько групп сразу: курица, овощи, крупу и сценарий. Сначала группа,
+          внутри неё — уточнение.
+        </p>
         <div className="chip-row">
           {groups.map((group) => {
             const selected = groupOpen(sp, group);
             return (
-              <Link
+              <FilterChip
                 key={group.id}
                 href={toggleHaveGroupHref('/calculator', sp, group.id, groups)}
-                className={selected ? 'chip is-active' : 'chip'}
-                aria-current={selected ? 'true' : undefined}
+                pressed={selected}
               >
                 {group.title}
-              </Link>
+              </FilterChip>
             );
           })}
         </div>
@@ -223,23 +221,24 @@ export function CalculatorAsk({
           {INTENT_ORDER.map((code) => {
             const selected = isSelected(sp, 'intent', code);
             return (
-              <Link
+              <FilterChip
                 key={code}
                 href={toggleHref('/calculator', sp, 'intent', code)}
-                className={selected ? 'chip is-active' : 'chip'}
-                aria-current={selected ? 'true' : undefined}
+                pressed={selected}
               >
                 {INTENT[code]}
-              </Link>
+              </FilterChip>
             );
           })}
         </div>
       </fieldset>
 
       <details className="calc-extra" open={extraOpen || undefined}>
-        <summary>Ещё условия</summary>
-        <ChipGroup legend="Без чего" map={ALLERGEN} param="without" pathname="/calculator" sp={sp} />
-        <ChipGroup legend="Посуда" map={EQUIPMENT} param="equipment" pathname="/calculator" sp={sp} />
+        <summary aria-controls="calc-extra-panel">Ещё условия</summary>
+        <div id="calc-extra-panel">
+          <ChipGroup legend="Без чего" map={ALLERGEN} param="without" pathname="/calculator" sp={sp} />
+          <ChipGroup legend="Посуда" map={EQUIPMENT} param="equipment" pathname="/calculator" sp={sp} />
+        </div>
       </details>
     </section>
   );

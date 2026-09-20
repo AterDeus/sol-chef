@@ -28,6 +28,7 @@ def recipe_to_draft(recipe: Recipe) -> dict:
         "equipment": recipe.equipment,
         "energy_profile": recipe.energy_profile or "standard",
         "allowed_cuts": list(recipe.allowed_cuts or []),
+        "protein_bases_extra": list(recipe.protein_bases_extra or []),
         "scale_mode": recipe.scale_mode or "linear",
         "scalable": recipe.scalable,
         "source_type": recipe.source_type,
@@ -117,6 +118,8 @@ def recipe_to_draft(recipe: Recipe) -> dict:
             row["high_risk_delta"] = variant.high_risk_delta
         if variant.cook_method_override:
             row["cook_method_override"] = variant.cook_method_override
+        if variant.protein_base_override:
+            row["protein_base_override"] = variant.protein_base_override
         if variant.equipment:
             row["equipment"] = variant.equipment
         if variant.caution_text_override:

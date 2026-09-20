@@ -4,18 +4,21 @@ import { notFound } from 'next/navigation';
 import { fetchRecipe } from '@/lib/api';
 import { recipeHref, valuesOf } from '@/lib/filters';
 import {
-  ALLERGEN,
   COOK_METHOD,
   DISH_TYPE,
-  HIGH_RISK,
   PROTEIN_BASE,
+  baseAddonChipLabel,
   equipmentLabel,
   labelOf,
 } from '@/lib/vocab';
 import { IngredientsBlock } from '@/components/IngredientsBlock';
+import { AllergenNotice } from '@/components/AllergenNotice';
 import { RecipeActions } from '@/components/RecipeActions';
 import { RecipeAxisLink, RecipeAxisSwitch } from '@/components/RecipeAxisSwitch';
+import { RecipeSteps } from '@/components/RecipeSteps';
 import { ErrorBanner } from '@/components/Feedback';
+import { minutesLabel } from '@/lib/catalog';
+import { applyStepChoice, rewriteSafetyCopy } from '@/lib/steps';
 import type { RecipeDetail, RecipeNote, SearchParamsRecord } from '@/lib/types';
 import { PREP_DAY_RU, PREP_MEAL_RU, PREP_MODE_RU, PREP_PLACE_RU, kitHref } from '@/lib/prep';
 
@@ -124,6 +127,15 @@ export default async function RecipePage({ params, searchParams }: Props) {
   const hasTimers = (recipe.steps ?? []).some((step) => (step.timer_seconds ?? 0) > 0);
   const appliedVariant = recipe.applied_axes?.variant ?? variant;
   const appliedEquipment = recipe.applied_axes?.equipment ?? recipe.equipment ?? equipment;
+  const piece = valuesOf(sp, 'piece')[0] || null;
+  const cookSteps = applyStepChoice(
+    (recipe.steps ?? []).map((step) => ({
+      ...step,
+      text: rewriteSafetyCopy(step.text),
+    })),
+    piece,
+  );
+  const cookPrep = prep.map((item) => ({ ...item, text: rewriteSafetyCopy(item.text) }));
 
   return (
     <article className="recipe-page">
@@ -135,19 +147,32 @@ export default async function RecipePage({ params, searchParams }: Props) {
         {recipe.title}
         {recipe.editorial_tested && <span className="tested-badge">Готовил сам</span>}
       </h1>
-      <div className="recipe-meta" style={{ marginBottom: 16 }}>
-        <span className="tag">{labelOf(PROTEIN_BASE, recipe.protein_base)}</span>
-        <span className="tag">{labelOf(COOK_METHOD, recipe.cook_method)}</span>
-        <span className="tag">{labelOf(DISH_TYPE, recipe.dish_type)}</span>
-        {recipe.equipment && recipe.equipment !== recipe.cook_method && (
-          <span className="tag">{equipmentLabel(recipe.equipment)}</span>
-        )}
-        {flags.map((flag) => (
-          <span key={flag} className="tag">
-            {labelOf(HIGH_RISK, flag)}
-          </span>
-        ))}
-      </div>
+      <dl className="recipe-card__facts recipe-card__facts--page">
+        <div>
+          <dt>Категория</dt>
+          <dd>{labelOf(PROTEIN_BASE, recipe.protein_base)}</dd>
+        </div>
+        <div>
+          <dt>Способ</dt>
+          <dd>{labelOf(COOK_METHOD, recipe.cook_method)}</dd>
+        </div>
+        <div>
+          <dt>Тип блюда</dt>
+          <dd>{labelOf(DISH_TYPE, recipe.dish_type)}</dd>
+        </div>
+        {recipe.equipment && recipe.equipment !== recipe.cook_method ? (
+          <div>
+            <dt>Посуда</dt>
+            <dd>{equipmentLabel(recipe.equipment)}</dd>
+          </div>
+        ) : null}
+        {minutesLabel(recipe.time_profile?.total_minutes) ? (
+          <div>
+            <dt>Время</dt>
+            <dd>{minutesLabel(recipe.time_profile?.total_minutes)}</dd>
+          </div>
+        ) : null}
+      </dl>
 
       {prepContext && (
         <div className="prep-recipe-banner">
@@ -188,36 +213,16 @@ export default async function RecipePage({ params, searchParams }: Props) {
       )}
 
       {hasRisk && (
-        <div className="caution" role="status">
+        <div className="caution" role="alert">
           <strong>Осторожно</strong>
-          {recipe.caution_text || flags.map((flag) => labelOf(HIGH_RISK, flag)).join(' · ')}
+          <p>
+            {recipe.caution_text ||
+              'Соблюдайте температуру готовности и гигиену при работе с этим блюдом.'}
+          </p>
         </div>
       )}
 
-      {((allergens.contains?.length ?? 0) > 0 ||
-        (allergens.may_contain?.length ?? 0) > 0 ||
-        (allergens.unknown?.length ?? 0) > 0) && (
-        <div className="allergen-dots" style={{ marginBottom: 20 }} aria-label="Аллергены">
-          {(allergens.contains ?? []).map((code) => (
-            <span key={`c-${code}`} className="allergen-dot allergen-dot--contains">
-              <i aria-hidden />
-              {labelOf(ALLERGEN, code)}
-            </span>
-          ))}
-          {(allergens.may_contain ?? []).map((code) => (
-            <span key={`m-${code}`} className="allergen-dot allergen-dot--may">
-              <i aria-hidden />
-              следы: {labelOf(ALLERGEN, code)}
-            </span>
-          ))}
-          {(allergens.unknown ?? []).map((code) => (
-            <span key={`u-${code}`} className="allergen-dot allergen-dot--unknown">
-              <i aria-hidden />
-              неизвестно: {labelOf(ALLERGEN, code)}
-            </span>
-          ))}
-        </div>
-      )}
+      <AllergenNotice allergens={allergens} />
 
       {recipe.summary && <p className="recipe-lead">{recipe.summary}</p>}
       {(recipe.source_name || recipe.source_url) && (
@@ -244,7 +249,8 @@ export default async function RecipePage({ params, searchParams }: Props) {
           <ul className="recipe-prep-list">
             {prep.map((item, i) => (
               <li key={`${item.type}-${i}`}>
-                <strong>{PREP_LABELS[item.type || 'custom'] || 'Подготовка'}.</strong> {item.text}
+                <strong>{PREP_LABELS[item.type || 'custom'] || 'Подготовка'}.</strong>{' '}
+                {rewriteSafetyCopy(item.text)}
               </li>
             ))}
           </ul>
@@ -263,7 +269,10 @@ export default async function RecipePage({ params, searchParams }: Props) {
                     className={!appliedVariant ? 'chip is-active' : 'chip'}
                     current={!appliedVariant}
                   >
-                    Как в рецепте
+                    {baseAddonChipLabel(
+                      recipe.home_protein_base || recipe.protein_base,
+                      deltaVariants,
+                    )}
                   </RecipeAxisLink>
                   {deltaVariants.map((item) => (
                     <RecipeAxisLink
@@ -317,25 +326,7 @@ export default async function RecipePage({ params, searchParams }: Props) {
       )}
 
       {(recipe.steps ?? []).length > 0 && (
-        <section className="recipe-section">
-          <h2>Шаги</h2>
-          <ol className="recipe-steps">
-            {(recipe.steps ?? []).map((step, index) => (
-              <li key={index} className="recipe-step">
-                <p>{step.text}</p>
-                {step.target_internal_temperature_c != null && (
-                  <span className="temp-chip">цель {step.target_internal_temperature_c} °C</span>
-                )}
-                {step.pull_internal_temperature_c != null && (
-                  <span className="temp-chip">снятие {step.pull_internal_temperature_c} °C</span>
-                )}
-                {step.hold_seconds != null && (
-                  <span className="temp-chip">выдержка {step.hold_seconds} с</span>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
+        <RecipeSteps slug={recipe.slug} steps={recipe.steps ?? []} sp={sp} />
       )}
 
       {(recipe.variations ?? []).some((item) => item.text?.trim()) && (
@@ -361,7 +352,7 @@ export default async function RecipePage({ params, searchParams }: Props) {
             {notes.map((item, index) => (
               <li key={index}>
                 {item.title ? <strong>{item.title}. </strong> : null}
-                {item.text}
+                {rewriteSafetyCopy(item.text)}
               </li>
             ))}
           </ul>
@@ -370,8 +361,8 @@ export default async function RecipePage({ params, searchParams }: Props) {
 
       <RecipeActions
         title={recipe.title}
-        steps={recipe.steps ?? []}
-        prep={prep}
+        steps={cookSteps}
+        prep={cookPrep}
         backHref={prepContext ? kitBack : '/recipes'}
         backLabel={prepContext ? '← На неделю' : '← Рецепты'}
       />

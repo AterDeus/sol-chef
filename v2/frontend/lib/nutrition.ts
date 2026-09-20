@@ -85,6 +85,7 @@ export function computeNutrition(
   let massG = 0;
   let anyContribution = false;
   let incomplete = false;
+  const omitted: string[] = [];
   const safeRatio = Number.isFinite(ratio) ? ratio : 1;
 
   for (const line of ingredients) {
@@ -92,6 +93,7 @@ export function computeNutrition(
     const part = contribute(line, safeRatio);
     if (part == null) {
       incomplete = true;
+      if (line.name) omitted.push(line.name);
       continue;
     }
     anyContribution = true;
@@ -103,6 +105,7 @@ export function computeNutrition(
     return {
       basis: 'raw_input',
       incomplete,
+      omitted,
       total: null,
       per_100g_input: null,
       per_100g_cooked: null,
@@ -123,6 +126,7 @@ export function computeNutrition(
   return {
     basis: 'raw_input',
     incomplete,
+    omitted,
     total,
     per_100g_input: per100,
     per_100g_cooked: perCooked,

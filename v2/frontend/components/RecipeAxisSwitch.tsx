@@ -68,6 +68,7 @@ export function RecipeAxisLink({
       scroll={false}
       className={className}
       aria-current={current ? 'true' : undefined}
+      aria-pressed={current}
       data-axis-href={href}
       onClick={(event: MouseEvent<HTMLAnchorElement>) => {
         if (

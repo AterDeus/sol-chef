@@ -2,20 +2,20 @@
 
 Живой план приложения (не чек-лист сессии). Задача сейчас: [../CURRENT_SPRINT.md](../CURRENT_SPRINT.md). Стек: [ARCHITECTURE.md](ARCHITECTURE.md). Модель: [DATA-MODEL.md](DATA-MODEL.md). API: [API.md](API.md). Дефолты: [DEFAULTS.md](DEFAULTS.md). Ответы человека: [HUMAN.md](HUMAN.md). Статус: [STATUS.md](STATUS.md) (не источник решений). Словари: [VOCAB.md](VOCAB.md). Безопасность: [SAFETY.md](SAFETY.md). Рецепты агентами — после среза: [RECIPE.md](RECIPE.md). Другого `.plan.md` нет.
 
-**V1** (корень репозитория) не трогать: GitHub Pages продолжает отдавать текущий сайт. **V2** живёт только в папке [`v2/`](../). Cutover — когда 2.0 готов и человек сказал переносить.
+**V2** — папка [`v2/`](../). **V1** — [`archive/v1/`](../../archive/v1/), не корень и не прод. Next/Django в корень не класть. Домен до смены DNS ещё может смотреть на GitHub Pages (`origin/main` со старым корнем). Операции: [CUTOVER.md](CUTOVER.md).
 
 ## 1. Две версии в одном репо
 
-| | V1 сейчас | V2 в `v2/` |
-|--|-----------|------------|
+| | Архив V1 | Приложение 2.0 |
+|--|----------|----------------|
 | Что | статический HTML + JSON | Next.js 15 + Django 5.2 + PostgreSQL |
-| Корень | `index.html`, `recipe.html`, `js/`, `css/`, `data/` | `v2/frontend`, `v2/backend`, `v2/infra` |
-| Как смотреть | `python -m http.server 3456` из корня | `docker compose -f v2/infra/docker-compose.yml up --build` → http://localhost:8080 |
-| Прод | GitHub Pages, `sol-chef.ru` | Timeweb, тот же домен **после** cutover |
+| Где | [`archive/v1/`](../../archive/v1/) | `v2/frontend`, `v2/backend`, `v2/infra` |
+| Как смотреть | `python -m http.server 3456` из `archive/v1/` | `docker compose -f v2/infra/docker-compose.yml up --build` → http://localhost:8080 |
+| Прод | GitHub Pages, пока DNS не сменён | ВМ, `sol-chef.ru` после [CUTOVER.md](CUTOVER.md) |
 
-Пока cutover не сделан: не удалять корневой сайт, не менять `data/` «под V2», не класть Next/Django в корень, не публиковать V2 на Pages.
+Не класть Next/Django в корень. JSON архива — сырьё ETL, не рантайм. `main` с архивом не пушить, пока домен не на V2.
 
-Cutover: DNS/Caddy на VPS, 301 со старых URL, JSON в архив, без dual-write. Корневой HTML можно оставить в git как архив.
+Cutover: дамп Postgres → Compose на ВМ → DNS на IP ВМ → HTTPS → выключить Pages. Dual-write нет. 301 со старых `recipe.html?id=`.
 
 ## 2. Продукт 2.0 (первый срез)
 
@@ -26,7 +26,7 @@ Read-only паритет с V1, без аккаунтов. Живой V1 (сни
 - 301 с `recipe.html?id=…`.
 - **Калькулятор** (имя временное, HUMAN 3.15): `/calculator` для подбора и шаринга. Главная `/` — витрина (вход + случайные рецепты и советы), не копия калькулятора. Считает Django. Не путать с «У меня» на рецепте. Разбор: [CALCULATOR.md](CALCULATOR.md).
 - Поиск: `to_tsvector('russian')` + `pg_trgm` + `ё`→`е`.
-- Токены — копия из [`css/global.css`](../../css/global.css), корень не перезаписывать.
+- Токены — копия из [`archive/v1/css/global.css`](../../archive/v1/css/global.css), архив не перезаписывать.
 - Навигация: **D+** в [UX-PROPOSAL.md](UX-PROPOSAL.md). Код только [`v2/`](../).
 
 ### 2.1. Экраны среза
@@ -49,7 +49,7 @@ Django владеет данными, сессией, CSRF, масштабом �
 
 Контракт: [DATA-MODEL.md](DATA-MODEL.md). Кратко: живые поля на `Recipe`, ревизии для истории, якорь `is_anchor`, аллергены с `canonical_id`, справочники — `ContentDocument`, `unknown` ≠ «нет». `gentle` = `ratio^0.7`, не формула V1 JS. Нет servings и якоря — масштаб выключен.
 
-ETL: dry-run / import / report; каталог V1 (DEFAULTS) **плюс** новая сотня, не «внутри 100» (HUMAN §5.1). Папки V1 `data/recipes/duhovka/` до cutover не переименовывать. Свободных тегов V1 — 85, не 76.
+ETL: dry-run / import / report; каталог V1 (DEFAULTS) **плюс** новая сотня, не «внутри 100» (HUMAN §5.1). JSON — [`archive/v1/data/`](../../archive/v1/data/), папки вроде `duhovka/` не переименовывать. Свободных тегов V1 — 85, не 76.
 
 ## 5. Калькулятор
 
@@ -96,7 +96,7 @@ ETL: dry-run / import / report; каталог V1 (DEFAULTS) **плюс** нов
 | **V2.1-C** | Оценки ≥3, комментарии, жалобы, `community_confirmed` | треды; ник; фото; LLM-модерация |
 | **V2.2** | Граммы кладовки, покупки, фото cook report | Госуслуги |
 | **Волны** | +100 рецептов по RECIPE.md | Без «стартуй волну» |
-| **Cutover** | Домен на VPS, 301, архив JSON | Dual-write |
+| **Cutover** | Чеклист [CUTOVER.md](CUTOVER.md): дамп → ВМ → DNS → HTTPS. Человек сказал переносить 2026-09-18 | Dual-write; пуш `main` до DNS; `import_v1` на проде |
 
 Ориентир 3–5 месяцев. Каждый релиз пригоден к эксплуатации.
 

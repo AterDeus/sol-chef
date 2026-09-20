@@ -90,6 +90,11 @@ class Recipe(models.Model):
         default=list,
         blank=True,
     )
+    protein_bases_extra = ArrayField(
+        models.CharField(max_length=32, choices=_choice(PROTEIN_BASE)),
+        default=list,
+        blank=True,
+    )
     notes = models.JSONField(default=list, blank=True)
     prep = models.JSONField(default=list, blank=True)
     time_total_minutes = models.PositiveIntegerField(null=True, blank=True)
@@ -168,6 +173,12 @@ class Recipe(models.Model):
             raise ValidationError(f"Неизвестный yield_kind: {self.yield_kind}")
         if self.yield_kind and self.yield_weight_g is None:
             raise ValidationError("yield_kind без yield_weight_g.")
+        extra = list(self.protein_bases_extra or [])
+        unknown_extra = set(extra) - PROTEIN_BASE
+        if unknown_extra:
+            raise ValidationError(f"Неизвестная extra-основа: {sorted(unknown_extra)}")
+        if self.protein_base in extra:
+            raise ValidationError("protein_bases_extra не дублирует protein_base.")
 
     def anchor_row(self) -> RecipeIngredient | None:
         return self.ingredients.filter(is_anchor=True).select_related("ingredient").first()
@@ -186,6 +197,9 @@ class RecipeVariant(models.Model):
     high_risk_delta = models.JSONField(default=dict, blank=True)
     cook_method_override = models.CharField(
         max_length=32, choices=_choice(COOK_METHOD), null=True, blank=True
+    )
+    protein_base_override = models.CharField(
+        max_length=32, choices=_choice(PROTEIN_BASE), null=True, blank=True
     )
     equipment = models.CharField(
         max_length=32, choices=_choice(EQUIPMENT), null=True, blank=True

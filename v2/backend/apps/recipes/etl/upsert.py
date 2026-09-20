@@ -18,6 +18,7 @@ def upsert_recipe(item: dict) -> Recipe:
         defaults={
             "title": item["title"],
             "protein_base": item["protein_base"],
+            "protein_bases_extra": item.get("protein_bases_extra") or [],
             "cook_method": item["cook_method"],
             "dish_type": item["dish_type"],
             "scale_mode": item.get("scale_mode") or "linear",
@@ -121,6 +122,7 @@ def upsert_recipe(item: dict) -> Recipe:
             allergen_delta=variant.get("allergen_delta"),
             high_risk_delta=variant.get("high_risk_delta") or {},
             cook_method_override=variant.get("cook_method_override"),
+            protein_base_override=variant.get("protein_base_override"),
             equipment=variant.get("equipment"),
             caution_text_override=variant.get("caution_text_override"),
         )

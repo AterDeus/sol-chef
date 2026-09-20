@@ -105,6 +105,19 @@ def validate_draft(
             err(f"ключ {key} на рецепте запрещён")
 
     _enum("protein_base", raw.get("protein_base"), PROTEIN_BASE, err)
+    extra_bases = raw.get("protein_bases_extra") or []
+    if extra_bases:
+        if not isinstance(extra_bases, list):
+            err("protein_bases_extra не список")
+        else:
+            seen_extra: set[str] = set()
+            for code in extra_bases:
+                _enum("protein_bases_extra", code, PROTEIN_BASE, err)
+                if code == raw.get("protein_base"):
+                    err("protein_bases_extra дублирует protein_base")
+                if code in seen_extra:
+                    err(f"дубль protein_bases_extra {code}")
+                seen_extra.add(code)
     _enum("cook_method", raw.get("cook_method"), COOK_METHOD, err)
     if raw.get("cook_method") in FORBIDDEN_METHOD_ALIASES:
         err("cook_method V1-алиас запрещён")
@@ -294,7 +307,17 @@ def validate_draft(
     cuts = set(raw.get("allowed_cuts") or [])
     if cook == "pan_fry" and protein in {"beef", "pork", "poultry", "lamb"} and not pan_note:
         err("pan_fry мяса: в шаге жарки нужна оговорка не перегружать сковороду")
-    if protein == "poultry":
+    ready_meat_no_cook = cook == "no_cook" and protein in {
+        "poultry",
+        "beef",
+        "pork",
+        "lamb",
+        "offal",
+    }
+    if ready_meat_no_cook:
+        # Копчёности, тушёнка, ветчина: не требовать target сырого куска.
+        pass
+    elif protein == "poultry":
         if "whole_bird" in cuts:
             if not ({72, 82} <= targets):
                 err("целая птица: нужны target 72 и 82")
@@ -370,6 +393,14 @@ def validate_draft(
                 _check_delta_nutrition(ing, err, code)
         if item.get("cook_method_override"):
             _enum("cook_method_override", item.get("cook_method_override"), COOK_METHOD, err)
+        if item.get("protein_base_override"):
+            _enum("protein_base_override", item.get("protein_base_override"), PROTEIN_BASE, err)
+            if item.get("protein_base_override") == raw.get("protein_base"):
+                err(f"{code}: protein_base_override совпадает с базой")
+            if axis != "addon":
+                err(f"{code}: protein_base_override только у addon")
+            if not has_delta:
+                err(f"{code}: protein_base_override без has_delta")
         if item.get("equipment"):
             _enum("variant.equipment", item.get("equipment"), EQUIPMENT, err)
 
@@ -663,6 +694,7 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
                 "allergen_delta": allergen,
                 "high_risk_delta": item.get("high_risk_delta") or {"add": [], "remove": []},
                 "cook_method_override": item.get("cook_method_override"),
+                "protein_base_override": item.get("protein_base_override"),
                 "equipment": item.get("equipment"),
                 "caution_text_override": item.get("caution_text_override"),
             }
@@ -670,10 +702,14 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
 
     url = (raw.get("source_url") or "").strip() or None
     profile = raw.get("time_profile") if isinstance(raw.get("time_profile"), dict) else {}
+    extra_bases = raw.get("protein_bases_extra") or []
+    if not isinstance(extra_bases, list):
+        extra_bases = []
     return {
         "slug": slug,
         "title": raw["title"],
         "protein_base": raw["protein_base"],
+        "protein_bases_extra": extra_bases if isinstance(extra_bases, list) else [],
         "cook_method": raw["cook_method"],
         "dish_type": raw["dish_type"],
         "scale_mode": raw.get("scale_mode") or "linear",

@@ -14,6 +14,7 @@ export const PROTEIN_BASE: Record<string, string> = {
   vegetables: 'Овощи',
   mushrooms: 'Грибы',
   legumes: 'Бобовые',
+  fruits: 'Фрукты и ягоды',
 };
 
 /**
@@ -45,6 +46,7 @@ export type BookChapterId = (typeof BOOK_CHAPTERS)[number]['id'];
 export type BookChapter = (typeof BOOK_CHAPTERS)[number];
 
 const ROLE_CHAPTER_IDS: readonly BookChapterId[] = ['breakfasts', 'desserts', 'sides'];
+const PROTEIN_CHAPTER_IDS: readonly BookChapterId[] = ['meat', 'poultry', 'vegetables', 'fish'];
 
 export function chapterIdForRecipe(proteinBase: string, dishType: string): BookChapterId {
   for (const chapter of BOOK_CHAPTERS) {
@@ -60,11 +62,68 @@ export function chapterIdForRecipe(proteinBase: string, dishType: string): BookC
 /** Infer a protein chapter from `?protein_base=` when `chapter` is absent. */
 export function chapterIdForBase(code: string): BookChapterId {
   if (code === 'eggs_dairy') return 'breakfasts';
+  if (code === 'fruits') return 'desserts';
   return chapterIdForRecipe(code, 'main');
 }
 
 export function bookChapterById(id: string | undefined): BookChapter | undefined {
   return BOOK_CHAPTERS.find((chapter) => chapter.id === id);
+}
+
+export type ProteinVariantLink = { code: string; title: string; protein_base: string };
+
+export function recipeProteinCodes(recipe: {
+  protein_base: string;
+  protein_bases?: string[];
+}): string[] {
+  if (recipe.protein_bases?.length) return [...recipe.protein_bases];
+  return recipe.protein_base ? [recipe.protein_base] : [];
+}
+
+/** Home chapter plus extra protein chapters from chips / extra bases. Role chapters do not leak. */
+export function chapterIdsForRecipe(recipe: {
+  protein_base: string;
+  dish_type: string;
+  protein_bases?: string[];
+}): BookChapterId[] {
+  const home = chapterIdForRecipe(recipe.protein_base, recipe.dish_type);
+  const ids: BookChapterId[] = [home];
+  if (ROLE_CHAPTER_IDS.includes(home)) return ids;
+  for (const code of recipeProteinCodes(recipe)) {
+    if (code === recipe.protein_base) continue;
+    const extra = chapterIdForRecipe(code, 'main');
+    if (extra !== home && PROTEIN_CHAPTER_IDS.includes(extra) && !ids.includes(extra)) {
+      ids.push(extra);
+    }
+  }
+  return ids;
+}
+
+export function pickGuestProteinVariant(
+  recipe: {
+    protein_base: string;
+    dish_type: string;
+    protein_variants?: ProteinVariantLink[];
+  },
+  opts: { chapterId?: string; proteinFilter?: string[] },
+): ProteinVariantLink | null {
+  const variants = recipe.protein_variants ?? [];
+  if (!variants.length) return null;
+  const filter = opts.proteinFilter ?? [];
+  if (filter.length === 1 && filter[0] !== recipe.protein_base) {
+    return variants.find((item) => item.protein_base === filter[0]) ?? null;
+  }
+  if (opts.chapterId) {
+    const home = chapterIdForRecipe(recipe.protein_base, recipe.dish_type);
+    if (home === opts.chapterId) return null;
+    const chapter = bookChapterById(opts.chapterId);
+    if (!chapter?.bases.length) return null;
+    return (
+      variants.find((item) => (chapter.bases as readonly string[]).includes(item.protein_base)) ??
+      null
+    );
+  }
+  return null;
 }
 
 export const COOK_METHOD: Record<string, string> = {
@@ -222,6 +281,31 @@ export const TIP_TAG: Record<string, string> = {
 
 export function labelOf(map: Record<string, string>, code: string): string {
   return map[code] ?? code;
+}
+
+/** Short chip for the home protein when addon chips swap meat/fish. */
+export const PROTEIN_CHIP_LABEL: Record<string, string> = {
+  beef: 'Говядина',
+  pork: 'Свинина',
+  poultry: 'Курица',
+  lamb: 'Баранина',
+  offal: 'Субпродукты',
+  seafood: 'Морепродукты',
+  fish_white_sea: 'Белая рыба',
+  fish_red_sea: 'Красная рыба',
+  fish_river: 'Речная рыба',
+  fish_canned: 'Консервы',
+};
+
+const ANIMAL_PROTEIN = new Set(Object.keys(PROTEIN_CHIP_LABEL));
+
+export function baseAddonChipLabel(
+  homeProtein: string,
+  variants: Array<{ has_delta?: boolean; protein_base?: string | null }>,
+): string {
+  const hasOverride = variants.some((item) => item.has_delta && item.protein_base);
+  if (!hasOverride || !ANIMAL_PROTEIN.has(homeProtein)) return 'Как в рецепте';
+  return PROTEIN_CHIP_LABEL[homeProtein] ?? labelOf(PROTEIN_BASE, homeProtein);
 }
 
 /** Vessel, or method-only family code (`air_fryer`, `steam`) on the equipment axis. */

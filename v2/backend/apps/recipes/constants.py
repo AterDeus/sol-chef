@@ -19,6 +19,7 @@ PROTEIN_BASE = frozenset(
         "vegetables",
         "mushrooms",
         "legumes",
+        "fruits",
     }
 )
 
@@ -200,6 +201,7 @@ PROTEIN_BASE_LABEL_RU = {
     "vegetables": "овощи",
     "mushrooms": "грибы",
     "legumes": "бобовые",
+    "fruits": "фрукты",
 }
 
 COOK_METHOD_LABEL_RU = {

@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers';
 import type {
   CatalogResponse,
   GuideDocument,
@@ -14,6 +13,8 @@ import { queryString } from './filters';
 const INTERNAL_API_URL = process.env.INTERNAL_API_URL || 'http://backend:8000';
 const FETCH_MS = 8000;
 const DOWN = 'Не удалось связаться с сервером. Попробуйте позже.';
+export const CATALOG_PAGE_SIZE_ALL = 500;
+const PUBLIC_REVALIDATE = 60;
 
 export type ApiOk<T> = { ok: true; data: T; status: number };
 export type ApiErr = { ok: false; status: number; detail: string };
@@ -43,18 +44,12 @@ async function readJson(res: Response): Promise<unknown> {
 }
 
 export async function serverFetch(path: string, init: RequestInit = {}): Promise<Response> {
-  const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
-  const headers = new Headers(init.headers);
-  if (cookieHeader && !headers.has('Cookie')) {
-    headers.set('Cookie', cookieHeader);
-  }
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_MS);
   try {
     return await fetch(serverApiUrl(path), {
+      next: { revalidate: PUBLIC_REVALIDATE },
       ...init,
-      headers,
       signal: init.signal ?? controller.signal,
     });
   } finally {
@@ -62,9 +57,13 @@ export async function serverFetch(path: string, init: RequestInit = {}): Promise
   }
 }
 
-async function getJson<T>(path: string, fallback: string): Promise<ApiResult<T>> {
+async function getJson<T>(
+  path: string,
+  fallback: string,
+  init: RequestInit = {},
+): Promise<ApiResult<T>> {
   try {
-    const res = await serverFetch(path, { cache: 'no-store' });
+    const res = await serverFetch(path, init);
     const body = await readJson(res);
     if (!res.ok) {
       return {
@@ -117,10 +116,14 @@ export async function fetchPantryOptions(): Promise<ApiResult<PantryOptionsRespo
 
 export async function fetchCatalog(
   sp: SearchParamsRecord = {},
+  opts?: { all?: boolean },
 ): Promise<ApiResult<CatalogResponse>> {
-  const qs = queryString(sp);
+  const next: SearchParamsRecord = { ...sp };
+  if (opts?.all) next.page_size = String(CATALOG_PAGE_SIZE_ALL);
+  const qs = queryString(next);
   const path = qs ? `/api/recipes/?${qs}` : '/api/recipes/';
-  return getJson<CatalogResponse>(path, 'Не удалось загрузить каталог.');
+  const init = next.sample ? { cache: 'no-store' as const } : {};
+  return getJson<CatalogResponse>(path, 'Не удалось загрузить каталог.', init);
 }
 
 export async function fetchRecipe(

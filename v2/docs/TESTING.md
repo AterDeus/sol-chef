@@ -25,6 +25,7 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | U13 | масштаб **после** дельты: якорь базы, добавленный ингредиент × ratio |
 | U14 | строка «для подачи» / «по желанию» (`optional`) не входит в `allergens` блюда; обязательный йогурт — входит |
 | U15 | способ `oven` у семейства-тушения с `cook_method_override` → решение с этой посудой, не база |
+| U15b | основа `beef` у семьи-птицы с addon `protein_base_override=beef` → решение с этим чипом, не база |
 | U16 | `have` закрывает ядро → `bucket=now`; одна нехватка → `almost`; `score` не попадает в `why` |
 | U17 | замена `quality` ≥ 0.50 подставляется; `forbidden` и низкий quality — нет |
 | U18 | неизвестный `have` → отказ как `400` |
@@ -72,6 +73,7 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | I6 | 5 `ContentDocument` (grains, tips, beef, pork, poultry) |
 | I7 | `GET /api/recipes/?protein_base=poultry&cook_method=oven` — AND между ключами |
 | I8 | два `protein_base` — OR внутри ключа |
+| I8b | `GET /api/recipes/?protein_base=beef` отдаёт шаурму с `protein_base=poultry` и чипом `protein_base_override=beef` |
 | I9 | `GET /api/recipes/<slug>/?anchor_weight=` меняет `display_amount`, не шаги/температуры |
 | I10 | FTS: запрос с `е` находит заголовок с `ё` и наоборот |
 | I11 | каталог не использует `__icontains` (grep по коду поиска) |
@@ -79,6 +81,7 @@ Compose в `v2/infra`. Unit — без него; E2E/acceptance — на под�
 | I13 | рецепт с только legacy-вариациями: `available_variants[].has_delta=false`, ингредиенты базы |
 | I14 | `import_draft --check --path` зелёный на эталоне `tests/fixtures/gold_overlay.json` |
 | I15 | `import_draft --accepted` без JSON — «Черновиков нет», код 0; битый файл в пачке пропускает; `--path` падает |
+| I16 | `GET /api/recipes/?page_size=` сужает страницу; без параметра размер **20**; больше 500 режется до 500; `sample=` отдаёт N случайных, неверный sample → 400 |
 
 ## E2E (Playwright, через Caddy `:8080`)
 

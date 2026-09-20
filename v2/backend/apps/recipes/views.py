@@ -1,26 +1,34 @@
+import random
+
 from django.db.models import Exists, OuterRef, Prefetch, Q
 from rest_framework.exceptions import NotFound
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.recipes.models import Ingredient, Recipe, RecipeIngredient, RecipeVariant
+from apps.recipes.pantry_vocab import CANONICAL_INGREDIENT_LABEL_RU, groups_to_expand
 from apps.recipes.query import (
     parse_codes,
     parse_have,
     parse_have_groups,
     parse_intent,
     parse_optional_decimal,
+    parse_sample,
     parse_without_allergens,
 )
 from apps.recipes.serializers import serialize_recipe_detail, serialize_recipe_list_item
-from apps.recipes.services.assemble import assemble_recipe, catalog_allergens, pick_anchor
-from apps.recipes.services.scale import resolve_scale
-from apps.recipes.services.search import apply_catalog_search
-from apps.recipes.pantry_vocab import CANONICAL_INGREDIENT_LABEL_RU, groups_to_expand
+from apps.recipes.services.assemble import (
+    assemble_recipe,
+    catalog_allergens,
+    pick_anchor,
+)
 from apps.recipes.services.pantry import (
     expand_have_group,
     resolve_pantry_text,
 )
+from apps.recipes.services.scale import resolve_scale
+from apps.recipes.services.search import apply_catalog_search
 from apps.recipes.services.solve import (
     assign_buckets,
     build_board,
@@ -29,6 +37,12 @@ from apps.recipes.services.solve import (
     solve_recipe,
 )
 from apps.recipes.services.substitutions import stored_rules_from_db
+
+
+class CatalogPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = "page_size"
+    max_page_size = 500
 
 
 def _published():
@@ -44,6 +58,18 @@ def _published():
     )
 
 
+def _list_cards():
+    return Recipe.objects.filter(status="published").prefetch_related(
+        Prefetch(
+            "ingredients",
+            queryset=RecipeIngredient.objects.select_related("ingredient").order_by(
+                "position"
+            ),
+        ),
+        "variants",
+    )
+
+
 def _apply_filters(qs, request, *, with_search: bool):
     protein = parse_codes(request, "protein_base")
     method = parse_codes(request, "cook_method")
@@ -51,7 +77,18 @@ def _apply_filters(qs, request, *, with_search: bool):
     equipment = parse_codes(request, "equipment")
     cuts = parse_codes(request, "cuts")
     if protein:
-        qs = qs.filter(protein_base__in=protein)
+        qs = qs.filter(
+            Q(protein_base__in=protein)
+            | Q(protein_bases_extra__overlap=protein)
+            | Exists(
+                RecipeVariant.objects.filter(
+                    recipe_id=OuterRef("pk"),
+                    axis="addon",
+                    has_delta=True,
+                    protein_base_override__in=protein,
+                )
+            )
+        )
     if method:
         qs = qs.filter(
             Q(cook_method__in=method)
@@ -105,15 +142,26 @@ def _exclude_allergens(recipes: list[Recipe], codes: list[str]) -> list[Recipe]:
 
 class RecipeListView(APIView):
     def get(self, request):
-        qs, _, _, _, _, _ = _apply_filters(_published(), request, with_search=True)
-        qs = qs.order_by("title")
+        qs, _, _, _, _, _ = _apply_filters(_list_cards(), request, with_search=True)
         without = parse_without_allergens(request)
-        recipes = _exclude_allergens(list(qs), without)
-        from rest_framework.pagination import PageNumberPagination
-
-        paginator = PageNumberPagination()
-        paginator.page_size = 20
-        page = paginator.paginate_queryset(recipes, request, view=self)
+        sample_n = parse_sample(request)
+        if sample_n is not None:
+            if without:
+                recipes = _exclude_allergens(list(qs), without)
+                recipes = random.sample(recipes, min(sample_n, len(recipes)))
+            else:
+                pks = list(qs.order_by("?").values_list("pk", flat=True)[:sample_n])
+                by_id = {recipe.pk: recipe for recipe in _list_cards().filter(pk__in=pks)}
+                recipes = [by_id[pk] for pk in pks if pk in by_id]
+            data = [serialize_recipe_list_item(recipe) for recipe in recipes]
+            return Response({"count": len(data), "next": None, "previous": None, "results": data})
+        qs = qs.order_by("title")
+        paginator = CatalogPagination()
+        if without:
+            recipes = _exclude_allergens(list(qs), without)
+            page = paginator.paginate_queryset(recipes, request, view=self)
+        else:
+            page = paginator.paginate_queryset(qs, request, view=self)
         data = [serialize_recipe_list_item(recipe) for recipe in page]
         return paginator.get_paginated_response(data)
 
@@ -254,11 +302,11 @@ class RecommendationListView(APIView):
         )
         buckets = assign_buckets(solutions, has_have=bool(have))
         featured, alternatives = build_board(solutions, buckets, has_have=bool(have))
-        visible = (
-            buckets["now"] + buckets["almost"] + buckets["best"]
-            if have
-            else solutions
-        )
+        if have:
+            visible = buckets["now"] + buckets["almost"] + buckets["best"]
+        else:
+            visible = [featured] if featured else []
+            visible.extend(item for _, item in alternatives)
         return Response(
             {
                 "filters": {

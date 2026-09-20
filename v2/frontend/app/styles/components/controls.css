@@ -17,6 +17,10 @@
     color: var(--text-dim);
     font-size: var(--fs-14);
     font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    text-decoration: none;
     transition:
       color var(--duration-fast) var(--ease),
       border-color var(--duration-fast) var(--ease),
@@ -35,6 +39,104 @@
         background: var(--gold-soft);
       }
     }
+  }
+
+  .filter-help {
+    margin: 0 0 var(--space-3);
+    color: var(--text-dim);
+    font-size: var(--fs-13);
+  }
+
+  .catalog-active {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-5);
+  }
+
+  .catalog-active__count {
+    margin: 0;
+    font-size: var(--fs-14);
+    color: var(--text);
+  }
+
+  .catalog-active__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .catalog-active__reset {
+    appearance: none;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--gold);
+    font-size: var(--fs-14);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .catalog-crumb {
+    margin-bottom: 16px;
+  }
+
+  .allergen-notice {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-5);
+  }
+
+  .allergen-notice--compact {
+    margin: 0;
+    gap: var(--space-2);
+  }
+
+  .allergen-notice__kicker {
+    margin: 0;
+    font-size: var(--fs-12);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .allergen-notice ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .allergen-chip {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    font-size: var(--fs-13);
+    line-height: 1.35;
+    color: var(--text);
+    background: var(--ember-soft);
+    border: 1px solid var(--ember);
+    border-radius: var(--radius-md);
+    padding: 0.35rem 0.65rem;
+  }
+
+  .allergen-chip--may {
+    background: var(--gold-soft);
+    border-color: var(--gold);
+  }
+
+  .allergen-chip--unknown {
+    background: var(--bird-soft);
+    border-color: var(--bird);
   }
 
   .filter-block {
@@ -200,6 +302,11 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-block-end: 6px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--text);
     }
   }
 

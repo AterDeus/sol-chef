@@ -26,7 +26,8 @@
 | `id` | PK | нет | внутренний |
 | `slug` | slug, unique | нет | URL `/recipes/<slug>`; из V1 `id` |
 | `title` | text | нет | заголовок |
-| `protein_base` | VOCAB | нет | основа блюда |
+| `protein_base` | VOCAB | нет | домашняя основа блюда (глава книги) |
+| `protein_bases_extra` | VOCAB[] | нет | дополнительные основы **той же** карточки без чипа (солянка: говядина + свинина). Не дублировать `protein_base`. ETL без поля: `[]` |
 | `cook_method` | VOCAB | нет | способ |
 | `dish_type` | VOCAB | нет | роль на столе |
 | `scale_mode` | enum | нет | дефолт рецепта; строка ингредиента может переопределить |
@@ -98,6 +99,7 @@
 | `allergen_delta` | JSON | да | `contains_add/remove`, `may_contain_*`, `unknown_*` |
 | `high_risk_delta` | JSON | нет | `{ "add": [], "remove": [] }` |
 | `cook_method_override` | VOCAB | да | ось equipment, если метод тоже меняется |
+| `protein_base_override` | VOCAB | да | ось addon с дельтой, если чип меняет основу (шаурма с говядиной). Не равен `Recipe.protein_base`. Не угадывать по ингредиенту |
 | `equipment` | VOCAB | да | только `axis=equipment` |
 | `caution_text_override` | text | да | |
 
@@ -109,7 +111,7 @@
 
 ### Сборка display (Django, не Next)
 
-Порядок: база → дельта `variant` (если `has_delta`) → дельта `equipment` (если не дефолт базы) → дельта `energy` (если когда-нибудь примут query) → **затем** `servings` XOR `anchor_weight`. `ratio` от уже собранного якоря.
+Порядок: база → дельта `variant` (если `has_delta`) → дельта `equipment` (если не дефолт базы) → дельта `energy` (если когда-нибудь примут query) → **затем** `servings` XOR `anchor_weight`. `ratio` от уже собранного якоря. Display-`protein_base` после addon с `protein_base_override` — код чипа, не колонка семьи.
 
 `has_delta=false`: состав базы, `legacy_text` только для блока «Вариации». Нельзя отдать те же ингредиенты под видом выбранного чипа с дельтой.
 

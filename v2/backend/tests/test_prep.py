@@ -210,6 +210,22 @@ def test_u52_list_published_order():
     assert draft.status == "draft"
 
 
+def test_prep_list_keeps_stored_kcal():
+    soup, wrap, extra = _trio("kcal")
+    kit = upsert_kit(
+        _payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug, kit_id="kit-kcal")
+    )
+    assert kit is not None
+    stored = dict(kit.metrics or {})
+    stored["kcal_avg_per_serving"] = 432
+    kit.metrics = stored
+    kit.save(update_fields=["metrics"])
+    client = APIClient()
+    res = client.get("/api/prep-kits/")
+    row = next(item for item in res.json()["results"] if item["slug"] == kit.slug)
+    assert row["metrics"]["kcal_avg_per_serving"] == 432
+
+
 def test_u53_import_fourteen_slots():
     soup, wrap, extra = _trio("b")
     kit = upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))

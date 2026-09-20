@@ -315,6 +315,7 @@ export function TipsView({
   );
   const tagCodes = useMemo(() => tagsInSet(beforeTag), [beforeTag]);
   const filtering = Boolean(qLive.trim() || kind || tag);
+  const activeFilters = Boolean(qLive.trim() || kind || section || tag);
   const counts = useMemo(
     () => sectionCounts(all, query, sections.map((item) => item.id)),
     [all, qLive, kind, tag, section, sections],
@@ -425,7 +426,8 @@ export function TipsView({
 
       <fieldset className="filter-block">
         <legend className="filter-legend">Тип</legend>
-        <div className="chip-row tips-chips">
+        <p className="filter-help">Выберите один тип совета. Повторное нажатие снимает фильтр.</p>
+        <div className="chip-row tips-chips" role="group" aria-label="Тип совета">
           {Object.entries(TIP_KIND).map(([code, label]) => (
             <ChipButton
               key={code}
@@ -440,7 +442,8 @@ export function TipsView({
       {tagCodes.length > 0 ? (
         <fieldset className="filter-block">
           <legend className="filter-legend">Тема</legend>
-          <div className="chip-row tips-chips">
+          <p className="filter-help">Тема сужает список внутри выбранного раздела.</p>
+          <div className="chip-row tips-chips" role="group" aria-label="Тема совета">
             {tagCodes.map((code) => (
               <ChipButton
                 key={code}
@@ -453,6 +456,28 @@ export function TipsView({
         </fieldset>
       ) : null}
 
+      <div className="catalog-active">
+        <p className="catalog-active__count">
+          {filtered.length}{' '}
+          {filtered.length === 1 ? 'совет' : filtered.length < 5 ? 'совета' : 'советов'}
+        </p>
+        {activeFilters ? (
+          <button
+            type="button"
+            className="catalog-active__reset"
+            onClick={() => {
+              setQ('');
+              setQLive('');
+              setKind('');
+              setSection('');
+              setTag('');
+            }}
+          >
+            Сбросить
+          </button>
+        ) : null}
+      </div>
+
       {filtered.length === 0 ? (
         <EmptyState>Ничего не найдено</EmptyState>
       ) : (
@@ -461,26 +486,40 @@ export function TipsView({
             <span className="tips-loader__spin" aria-hidden="true" />
             Загружаем советы
           </div>
-          {groups.map((group) => (
-            <section
+          {groups.map((group) => {
+            const panelId = `tips-panel-${group.id}`;
+            return (
+            <details
               key={group.id}
               id={`tip-${group.id}`}
               className="tips-section"
-              aria-labelledby={`tips-h-${group.id}`}
+              open={filtering || undefined}
             >
-              <h2 id={`tips-h-${group.id}`}>
+              <summary
+                aria-controls={panelId}
+                id={`tips-h-${group.id}`}
+              >
                 {group.title}
                 {filtering ? <span className="tips-section__n">{group.items.length}</span> : null}
-              </h2>
+              </summary>
+              <div id={panelId}>
               <TipsMasonry layoutKey={group.items.map((item) => item.id).join(',')}>
                 {group.items.map((item) => (
                   <TipCard key={item.id} tip={item} onOpen={closeOtherTips} />
                 ))}
               </TipsMasonry>
-            </section>
-          ))}
+              </div>
+            </details>
+            );
+          })}
         </div>
       )}
+      <p className="tips-legal">
+        Советы по безопасности еды носят общий характер и не заменяют официальные правила.{' '}
+        <a href="https://www.rospotrebnadzor.ru/" rel="noopener noreferrer">
+          Роспотребнадзор
+        </a>
+      </p>
     </div>
   );
 }

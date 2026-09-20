@@ -100,13 +100,21 @@ export function Footer() {
 
   return (
     <footer className="site-footer">
-      <Link href="/grains">Крупы</Link>
-      <Link href="/meat/beef">Говядина</Link>
-      <Link href="/meat/pork">Свинина</Link>
-      <Link href="/meat/poultry">Птица</Link>
-      <Link href="/tips">Советы шеф-поваров</Link>
-      <Link href="/prep">На неделю</Link>
-      <Link href="/recipes">Все рецепты</Link>
+      <nav className="site-footer__nav" aria-label="Справочник">
+        <div className="site-footer__group">
+          <p className="site-footer__label">Справочник</p>
+          <Link href="/grains">Крупы</Link>
+          <Link href="/meat/beef">Говядина</Link>
+          <Link href="/meat/pork">Свинина</Link>
+          <Link href="/meat/poultry">Птица</Link>
+        </div>
+        <div className="site-footer__group">
+          <p className="site-footer__label">Книга</p>
+          <Link href="/recipes">Все рецепты</Link>
+          <Link href="/prep">На неделю</Link>
+          <Link href="/tips">Советы шеф-поваров</Link>
+        </div>
+      </nav>
     </footer>
   );
 }

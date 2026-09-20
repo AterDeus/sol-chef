@@ -3,7 +3,13 @@ from __future__ import annotations
 from decimal import Decimal
 
 from apps.recipes.models import Recipe
-from apps.recipes.services.assemble import AssembledRecipe, catalog_allergens, pick_anchor
+from apps.recipes.services.assemble import (
+    AssembledRecipe,
+    catalog_allergens,
+    catalog_protein_bases,
+    catalog_protein_variants,
+    pick_anchor,
+)
 from apps.recipes.services.nutrition import (
     compute_recipe_nutrition,
     nutrition_line_projection,
@@ -38,6 +44,8 @@ def serialize_recipe_list_item(recipe: Recipe) -> dict:
         "slug": recipe.slug,
         "title": recipe.title,
         "protein_base": recipe.protein_base,
+        "protein_bases": catalog_protein_bases(recipe),
+        "protein_variants": catalog_protein_variants(recipe),
         "cook_method": recipe.cook_method,
         "dish_type": recipe.dish_type,
         "equipment": recipe.equipment,
@@ -140,7 +148,8 @@ def serialize_recipe_detail(
     return {
         "slug": recipe.slug,
         "title": recipe.title,
-        "protein_base": recipe.protein_base,
+        "protein_base": assembled.protein_base,
+        "home_protein_base": recipe.protein_base,
         "cook_method": assembled.cook_method,
         "dish_type": recipe.dish_type,
         "equipment": assembled.equipment,

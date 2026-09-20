@@ -234,6 +234,83 @@ def test_cooked_fish_still_requires_target_63():
     assert any("63" in item for item in errors)
 
 
+def test_ready_poultry_no_cook_does_not_require_target():
+    payload = _overlay_min()
+    payload["protein_base"] = "poultry"
+    payload["cook_method"] = "no_cook"
+    payload["equipment"] = None
+    payload["steps"] = [
+        {"text": "С копчёной курицы снять кожу и нарезать кубиком. Не греть."}
+    ]
+    errors = validate_draft(payload, overlay=True)
+    assert errors == []
+
+
+def test_ready_pork_no_cook_does_not_require_target():
+    payload = _overlay_min()
+    payload["protein_base"] = "pork"
+    payload["cook_method"] = "no_cook"
+    payload["equipment"] = None
+    payload["ingredients"] = [
+        {
+            "canonical_id": "pork",
+            "amount": 300,
+            "unit": "g",
+            "scale_mode": "linear",
+            "is_anchor": True,
+        }
+    ]
+    payload["steps"] = [{"text": "Открыть тушёнку, размять, смешать с гарниром. Не кипятить."}]
+    errors = validate_draft(payload, overlay=True)
+    assert errors == []
+
+
+def test_protein_base_override_must_differ_and_be_addon():
+    payload = _overlay_min()
+    payload["protein_base"] = "poultry"
+    payload["steps"] = [
+        {
+            "text": "Обжарить порциями, не перегружать сковороду.",
+            "equipment_note": "Порциями.",
+            "target_internal_temperature_c": 74,
+        }
+    ]
+    payload["variants"] = [
+        {
+            "axis": "addon",
+            "code": "beef",
+            "title": "С говядиной",
+            "has_delta": True,
+            "protein_base_override": "beef",
+            "ingredient_delta": {
+                "replace": [
+                    {
+                        "canonical_id": "beef",
+                        "amount": 400,
+                        "unit": "g",
+                        "scale_mode": "linear",
+                        "is_anchor": True,
+                    }
+                ]
+            },
+            "allergen_delta": {},
+        }
+    ]
+    assert validate_draft(payload, overlay=True) == []
+    payload["protein_base"] = "beef"
+    errors = validate_draft(payload, overlay=True)
+    assert any("совпадает с базой" in item for item in errors)
+
+
+def test_protein_bases_extra_rejects_home_duplicate():
+    payload = _overlay_min()
+    payload["protein_bases_extra"] = ["beef"]
+    errors = validate_draft(payload, overlay=True)
+    assert any("дублирует protein_base" in item for item in errors)
+    payload["protein_bases_extra"] = ["pork"]
+    assert validate_draft(payload, overlay=True) == []
+
+
 def test_import_draft_accepted_empty_is_ok(tmp_path):
     out = StringIO()
     with patch(

@@ -1,10 +1,10 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 import { NutritionBlock } from '@/components/NutritionBlock';
 import { SpriteIcon } from '@/components/SpriteIcon';
 import { computeNutrition } from '@/lib/nutrition';
-import { scaleIngredients } from '@/lib/scale';
+import { formatDisplayAmount, scaleIngredients } from '@/lib/scale';
 import type { RecipeIngredient, Scaling } from '@/lib/types';
 
 type UnitPair = { small: string; large: string; factor: number };
@@ -93,6 +93,7 @@ export function IngredientsBlock({
   const [servings, setServings] = useState(scaling.applied?.servings ?? servingsBase ?? 1);
   const pair = useMemo(() => unitPairOf(baseAnchor?.unit), [baseAnchor?.unit]);
   const [useLarge, setUseLarge] = useState(baseAnchor?.unit === 'kg' || baseAnchor?.unit === 'l');
+  const unitGroup = useId();
 
   const ratio = showServings
     ? servings / (servingsBase || 1)
@@ -130,7 +131,7 @@ export function IngredientsBlock({
               <button
                 type="button"
                 className="btn-secondary recipe-scale__step"
-                aria-label="Меньше"
+                aria-label="Уменьшить количество"
                 onClick={() => setAnchorWeight((n) => Math.max(step, n - step))}
               >
                 −
@@ -149,29 +150,35 @@ export function IngredientsBlock({
                 }}
               />
               {pair && (
-                <label className={`recipe-scale__unit-switch${useLarge ? ' is-large' : ''}`}>
-                  <span className="recipe-scale__unit-opt" data-unit-side="small">
-                    {pair.small}
-                  </span>
-                  <span className="recipe-scale__unit-track">
+                <div
+                  className={`recipe-scale__units${useLarge ? ' is-large' : ''}`}
+                  role="radiogroup"
+                  aria-label="Единица измерения"
+                >
+                  <label className="recipe-scale__unit">
                     <input
-                      type="checkbox"
-                      className="recipe-scale__unit-check"
-                      checked={useLarge}
-                      aria-label={`Переключить ${pair.small} и ${pair.large}`}
-                      onChange={(e) => setUseLarge(e.target.checked)}
+                      type="radio"
+                      name={unitGroup}
+                      checked={!useLarge}
+                      onChange={() => setUseLarge(false)}
                     />
-                    <span className="recipe-scale__unit-thumb" aria-hidden />
-                  </span>
-                  <span className="recipe-scale__unit-opt" data-unit-side="large">
+                    {pair.small}
+                  </label>
+                  <label className="recipe-scale__unit">
+                    <input
+                      type="radio"
+                      name={unitGroup}
+                      checked={useLarge}
+                      onChange={() => setUseLarge(true)}
+                    />
                     {pair.large}
-                  </span>
-                </label>
+                  </label>
+                </div>
               )}
               <button
                 type="button"
                 className="btn-secondary recipe-scale__step"
-                aria-label="Больше"
+                aria-label="Увеличить количество"
                 onClick={() => setAnchorWeight((n) => n + step)}
               >
                 +
@@ -180,7 +187,9 @@ export function IngredientsBlock({
             <p className="recipe-scale__meta">
               <span>
                 {baseAnchor.name}
-                {baseAnchor.unit ? ` · в рецепте ${baseAnchor.amount} ${baseAnchor.unit}` : null}
+                {baseAnchor.unit
+                  ? ` · в рецепте ${formatDisplayAmount(baseAnchor.amount, baseAnchor.unit)}`
+                  : null}
               </span>
               {showReset && (
                 <button

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { fetchPantryOptions, fetchRecommendations } from '@/lib/api';
-import { hasAnyQuery } from '@/lib/filters';
+import { hasCalculatorQuery } from '@/lib/filters';
 import type { SearchParamsRecord } from '@/lib/types';
 import { CalculatorAsk } from '@/components/CalculatorAsk';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
@@ -15,7 +15,7 @@ export default async function CalculatorPage({
   searchParams: Promise<SearchParamsRecord>;
 }) {
   const sp = await searchParams;
-  const asked = hasAnyQuery(sp);
+  const asked = hasCalculatorQuery(sp);
   const [rec, pantry] = await Promise.all([
     asked ? fetchRecommendations(sp) : Promise.resolve(null),
     fetchPantryOptions(),

@@ -10,7 +10,7 @@
 
 - Без JWT, без CORS.
 - JSON, ключи английские, тексты для UI — русские.
-- Пагинация каталога: DRF page (`count`, `next`, `previous`, `results`). Размер страницы по умолчанию **20**.
+- Пагинация каталога: DRF page (`count`, `next`, `previous`, `results`). Размер страницы по умолчанию **20**. Query `page_size` — до **500** (оглавление книги). Query `sample=` (1–24) — случайные N карточек без пагинации (витрина); не сочетать с `page`.
 - Ошибки: `{ "detail": "…" }` или `{ "errors": { "field": ["…"] } }`. `400` — плохой запрос, `404` — нет сущности.
 - `healthz`: `GET /healthz` → `200` `{ "status": "ok" }` (не под `/api/`).
 
@@ -25,7 +25,7 @@ Caddy: браузер → `http://localhost:8080/api/...`.
 | `INTERNAL_API_URL` | сервер Next | `http://backend:8000` |
 | `NEXT_PUBLIC_API_URL` | браузер | пустая строка (относительный `/api`) |
 
-SSR: `fetch(`${INTERNAL_API_URL}/api/recipes/${slug}/`)` + `headers: { Cookie }`. CSRF на мутации (в срезе мутаций нет).
+SSR: `fetch(`${INTERNAL_API_URL}/api/recipes/${slug}/`)`. Публичные GET без Cookie (иначе Next не кэширует). CSRF и Cookie — на мутациях (в срезе мутаций нет).
 
 Не звать `http://localhost:8080` из контейнера frontend — лишний круг через хост.
 
@@ -38,6 +38,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 - Неизвестный код: `400`, не молчаливый ignore.
 - `equipment=`: попадание, если код у базы **или** у `RecipeVariant` `axis=equipment` с `has_delta`.
 - `cook_method=`: база **или** `cook_method_override` у варианта посуды с дельтой (семейство-тушение видно в «духовке», если есть такая ось).
+- `protein_base=`: база **или** код ∈ `protein_bases_extra` **или** `protein_base_override` у addon с `has_delta` (шаурма из курицы видна в «говядине», если чип так помечен).
 - `cuts=`: код ∈ `Recipe.allowed_cuts` (поле базы, не дельта).
 - `without=`: аллерген; на **карточке каталога** — объединение базы и всех addon-дельт с `has_delta` (`contains` и `unknown`). Строки `optional` (гарнир / «для подачи») в это объединение не входят. Страница рецепта — аллергены **текущего** display.
 - Пустая выдача — `200` и `results: []`, не `404`.
@@ -91,7 +92,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 ### `GET /api/recipes/`
 
-Каталог. Query: фильтры + `q` + `page`.
+Каталог. Query: фильтры + `q` + `page` + `page_size` (1–500, по умолчанию 20) или `sample` (1–24, случайные карточки, без `page`).
 
 ```json
 {
@@ -103,6 +104,8 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
       "slug": "stejk-na-skovorode-pan-searing",
       "title": "Стейк на сковороде (Pan-Searing)",
       "protein_base": "beef",
+      "protein_bases": ["beef"],
+      "protein_variants": [],
       "cook_method": "pan_fry",
       "dish_type": "main",
       "equipment": "skillet",
@@ -122,7 +125,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 }
 ```
 
-`allergens` на карточке каталога — худший случай: база ∪ addon-дельт с `has_delta`. `unknown` не опускать. `has_delta_variants` — есть ли хотя бы один addon с `has_delta=true` (для бейджа, не для переключателя в сетке).
+`allergens` на карточке каталога — худший случай: база ∪ addon-дельт с `has_delta`. `unknown` не опускать. `has_delta_variants` — есть ли хотя бы один addon с `has_delta=true` (для бейджа, не для переключателя в сетке). `protein_bases` — домашняя основа ∪ `protein_bases_extra` ∪ override чипов с дельтой. `protein_variants` — `{code, title, protein_base}` только у тех addon, где задан override (книга ставит `?variant=`).
 
 Каталог **не** отдаёт `nutrition` и `nutrition_line`.
 
@@ -135,12 +138,13 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
   "slug": "barhatnaya-govyadina-po-kitajski",
   "title": "Бархатная говядина по-китайски",
   "protein_base": "beef",
+  "home_protein_base": "beef",
   "cook_method": "pan_fry",
   "dish_type": "main",
   "equipment": "skillet",
   "allowed_cuts": [],
   "applied_axes": { "variant": null, "equipment": "skillet" },
-  "available_variants": [{ "code": "with_green_butter", "title": "С зелёным маслом", "axis": "addon", "has_delta": false }],
+  "available_variants": [{ "code": "with_green_butter", "title": "С зелёным маслом", "axis": "addon", "has_delta": false, "protein_base": null }],
   "available_equipment": ["skillet"],
   "summary": "…",
   "source_name": "Личный повар",
@@ -239,7 +243,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 `applied_axes` — какие оси собраны в этом ответе. `ingredients` / `steps` / `allergens` / `cook_method` / `high_risk_flags` / `nutrition` — уже display.
 
-`available_variants` — ось addon. Переключатель состава только если `has_delta=true`. Иначе клиент показывает свёртку `variations` (`title` + `legacy_text`) и не меняет список.
+`available_variants` — ось addon. Переключатель состава только если `has_delta=true`. Иначе клиент показывает свёртку `variations` (`title` + `legacy_text`) и не меняет список. `protein_base` на варианте — `protein_base_override`, если чип меняет основу. `home_protein_base` — колонка семьи (чип «Курица»), `protein_base` в корне — display после сборки.
 
 `available_equipment` — дефолт базы плюс коды вариантов посуды с дельтой. Один код — ряда посуды нет.
 
@@ -323,7 +327,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 ### `GET /api/recommendations/`
 
-Калькулятор. Фильтры каталога плюс `have=`, `have_group=`, `intent=`. Без `q`. Без `kcal_max`. КБЖУ не отдаёт. Как считает — [CALCULATOR.md](CALCULATOR.md).
+Калькулятор. Фильтры каталога плюс `have=`, `have_group=`, `intent=`. Без `q`. Без `kcal_max`. КБЖУ не отдаёт. Как считает — [CALCULATOR.md](CALCULATOR.md). На `featured` / `results` те же `protein_bases` и `protein_variants`, что у карточки каталога: книга без этого не покажет шаурму в говядине.
 
 Неизвестный `have` / `have_group` / `intent` → **400**. `intent=` **не** отсекает рецепт (вес). `have=` не отсекает блюда, которые **используют** продукт из кладовки (нехватка — корзины). Блюда, которые «Есть» не берут, на `featured` / `alternatives` не попадают; если таких нет — `featured: null`. Жёсткий отсев — оси и «без чего».
 
@@ -340,6 +344,8 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
     "slug": "classic-roast-chicken",
     "title": "…",
     "protein_base": "poultry",
+    "protein_bases": ["poultry"],
+    "protein_variants": [],
     "cook_method": "pan_fry",
     "dish_type": "main",
     "equipment": "skillet",
@@ -372,7 +378,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 }
 ```
 
-`score` для тестов; карточка Next его не показывает. Экран калькулятора рисует `featured` + `alternatives`, не сетку `results`. Витрина `/` по-прежнему берёт `results` без фильтров (случайная шестёрка).
+`score` для тестов; карточка Next его не показывает. Экран калькулятора рисует `featured` + `alternatives`, не сетку `results`. JSON `results` — доска (featured/альтернативы или корзины при `have=`), не все семейства каталога. Витрина `/` берёт случайную шестёрку из `GET /api/recipes/?sample=6`, не этот endpoint.
 
 Без `have=` `buckets` пустые, `featured` — лучшее из ranked `results`. Заготовки (`dish_type` `sauce` / `preserve`) не featured, пока есть обычное блюдо. Клик: `/recipes/<slug>?equipment=&variant=` из `applied_axes`.
 
@@ -452,7 +458,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 }
 ```
 
-У слота в ответе: `day`, `meal`, `slug`, `title`, `plate_title`, `plate_composition`, `mode`, `flavor`, `source`, `container_ids`, `containers` (развёрнутые боксы), `alternatives` (`slug`, `label`, `mode`, `container_ids`), минуты, `servings_cooked`, `feeds_slots`. `metrics.kcal_avg_per_serving` считает приложение (ориентир по основным рецептам). Тела `steps` слота на каталоге набора можно отдать (cook открывается с карточки рецепта).
+У слота в ответе: `day`, `meal`, `slug`, `title`, `plate_title`, `plate_composition`, `mode`, `flavor`, `source`, `container_ids`, `containers` (развёрнутые боксы), `alternatives` (`slug`, `label`, `mode`, `container_ids`), минуты, `servings_cooked`, `feeds_slots`. `metrics.kcal_avg_per_serving` — ориентир по основным рецептам: из `kit.metrics`, если поле уже есть; иначе приложение считает один раз и записывает. Тела `steps` слота на каталоге набора можно отдать (cook открывается с карточки рецепта).
 
 ## Не в гостевом срезе (спринт 4)
 

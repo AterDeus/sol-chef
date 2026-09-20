@@ -129,6 +129,19 @@ def parse_without_allergens(request) -> list[str]:
     return values
 
 
+def parse_sample(request) -> int | None:
+    raw = request.query_params.get("sample")
+    if raw is None or raw == "":
+        return None
+    try:
+        n = int(raw)
+    except (TypeError, ValueError):
+        raise BadQuery("Некорректный sample") from None
+    if n < 1 or n > 24:
+        raise BadQuery("sample должен быть от 1 до 24")
+    return n
+
+
 def parse_optional_decimal(request, key: str):
     raw = request.query_params.get(key)
     if raw is None or raw == "":

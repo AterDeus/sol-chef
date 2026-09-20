@@ -28,8 +28,12 @@ export default async function TipsPage({
       <PageIntro
         scene="tips"
         eyebrow="Советы шеф-поваров"
-        title={result.ok ? result.data.title : 'Советы'}
-        lede={payload?.intro ? <p className="lede">{payload.intro}</p> : undefined}
+        title="Советы"
+        lede={
+          <p className="lede">
+            Советы сгруппированы по темам. По умолчанию разделы свёрнуты.
+          </p>
+        }
       />
       {!result.ok && result.status === 404 && (
         <EmptyState>Советы пока не загружены.</EmptyState>

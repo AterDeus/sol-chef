@@ -211,15 +211,29 @@
       z-index: 3;
     }
 
-    h2 {
+    summary {
       display: flex;
       align-items: baseline;
       gap: 0.5rem;
       font-size: var(--fs-15);
+      font-weight: 600;
       margin: 0 0 0.625rem;
       padding-block-end: 0.4rem;
       border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      list-style: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
     }
+  }
+
+  .tips-legal {
+    margin: var(--space-7) 0 0;
+    font-size: var(--fs-13);
+    color: var(--text-dim);
+    max-width: 62ch;
   }
 
   .tips-section__n {
@@ -386,15 +400,6 @@
     inset: auto;
   }
 
-  /* UA: details:not([open])::details-content { display: none; content-visibility: hidden }.
-     Same specificity so closed content stays in layout and can animate both ways. */
-  .tip-card:not([open])::details-content,
-  .tip-card[open]::details-content {
-    display: block;
-    content-visibility: visible;
-    overflow: hidden;
-  }
-
   .tip-card__reveal {
     display: grid;
     grid-template-rows: 0fr;
@@ -424,46 +429,16 @@
     .tip-card {
       interpolate-size: allow-keywords;
     }
-
-    .tip-card:not([open])::details-content,
-    .tip-card[open]::details-content {
-      height: 0;
-      transition:
-        height var(--duration) var(--ease),
-        content-visibility var(--duration) allow-discrete;
-    }
-
-    .tip-card[open]::details-content {
-      height: auto;
-    }
-
-    @starting-style {
-      .tip-card[open]::details-content {
-        height: 0;
-      }
-    }
-
-    .tip-card__reveal,
-    .tip-card[open] .tip-card__reveal {
-      grid-template-rows: 1fr;
-      transition: none;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .tip-card,
-    .tip-card__reveal,
-    .tip-card:not([open])::details-content,
-    .tip-card[open]::details-content {
+    .tip-card__reveal {
       transition: none;
     }
 
     .tip-card[open] .tip-card__reveal {
       grid-template-rows: 1fr;
-    }
-
-    .tip-card[open]::details-content {
-      height: auto;
     }
   }
 }

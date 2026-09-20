@@ -53,6 +53,51 @@ def test_u15_oven_override_not_base_stew():
     assert not combo_fits(recipe, None, None, ["oven"], [])
 
 
+def test_u15b_protein_override_not_base_poultry():
+    beef = SimpleNamespace(
+        axis="addon",
+        has_delta=True,
+        code="beef",
+        protein_base_override="beef",
+    )
+    garnish = SimpleNamespace(
+        axis="addon",
+        has_delta=True,
+        code="spicy",
+        protein_base_override=None,
+    )
+    recipe = SimpleNamespace(
+        protein_base="poultry",
+        protein_bases_extra=[],
+        cook_method="pan_fry",
+        equipment="skillet",
+        variants=FakeRelated([beef, garnish]),
+    )
+    combos = axis_combos(recipe, explore=True)
+    matching = [
+        combo
+        for combo in combos
+        if combo_fits(recipe, combo[0], combo[1], [], [], ["beef"])
+    ]
+    assert matching
+    assert all(combo[0] is beef for combo in matching)
+    assert not combo_fits(recipe, None, None, [], [], ["beef"])
+    assert combo_fits(recipe, None, None, [], [], ["poultry"])
+
+
+def test_combo_fits_extra_protein_without_chip():
+    recipe = SimpleNamespace(
+        protein_base="beef",
+        protein_bases_extra=["pork"],
+        cook_method="boil",
+        equipment="pot",
+        variants=FakeRelated([]),
+    )
+    assert combo_fits(recipe, None, None, [], [], ["pork"])
+    assert combo_fits(recipe, None, None, [], [], ["beef"])
+    assert not combo_fits(recipe, None, None, [], [], ["poultry"])
+
+
 def test_u16_pantry_buckets_and_why_has_no_score():
     lines = [
         {

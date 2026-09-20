@@ -1,5 +1,6 @@
 'use client';
 
+import { useId, useState } from 'react';
 import { formatKcal, formatMacro } from '@/lib/nutrition';
 import type { NutritionMacros, RecipeNutrition } from '@/lib/types';
 
@@ -8,6 +9,9 @@ type Cell = {
   label: string;
   macros: NutritionMacros;
 };
+
+const METHOD_TEXT =
+  'Суммируем белки, жиры, углеводы и ккал продуктов с известной пищевой ценностью до готовки. Соль, специи «по вкусу» и строки «по желанию» не входят. Цифры ориентировочные: масло, бульон и конкретный бренд могут отличаться от справочника.';
 
 function MacroCell({ label, macros }: { label: string; macros: NutritionMacros }) {
   return (
@@ -31,6 +35,8 @@ export function NutritionBlock({
   nutrition: RecipeNutrition;
   yieldKind?: 'estimated' | 'exact' | null;
 }) {
+  const methodId = useId();
+  const [methodOpen, setMethodOpen] = useState(false);
   const cells: Cell[] = [];
   if (nutrition.total) {
     cells.push({ key: 'total', label: 'На рецепт', macros: nutrition.total });
@@ -54,16 +60,38 @@ export function NutritionBlock({
     cells.push({ key: 'serving', label: 'На порцию', macros: nutrition.per_serving });
   }
   if (cells.length === 0) return null;
+  const omitted = (nutrition.omitted ?? []).filter(Boolean);
+  const omittedText =
+    omitted.length > 0
+      ? omitted.join(', ')
+      : 'масло, соль или бульон конкретного бренда';
 
   return (
     <section className="recipe-nutrition" aria-label="КБЖУ ориентировочно">
       <h2>КБЖУ ориентировочно</h2>
       {nutrition.incomplete && (
-        <p className="recipe-nutrition__incomplete">Неполный расчёт</p>
+        <p className="recipe-nutrition__incomplete">
+          Неполный расчёт: не учтены {omittedText}. Цифрам можно доверять как ориентиру, не как
+          точной этикетке.
+        </p>
       )}
       <p className="recipe-nutrition__disclaimer">
-        Ориентировочно. Зависит от продукта и способа приготовления.
+        Ориентировочно. Зависит от продукта и способа приготовления.{' '}
+        <button
+          type="button"
+          className="recipe-nutrition__method-btn"
+          aria-expanded={methodOpen}
+          aria-controls={methodId}
+          onClick={() => setMethodOpen((value) => !value)}
+        >
+          Как считаем
+        </button>
       </p>
+      {methodOpen ? (
+        <p className="recipe-nutrition__method" id={methodId}>
+          {METHOD_TEXT}
+        </p>
+      ) : null}
       <div
         className="recipe-nutrition__grid"
         data-cols={cells.length}

@@ -327,6 +327,7 @@ def _parse_legacy_variants(raw_variations: list) -> list[dict]:
                 "allergen_delta": None,
                 "high_risk_delta": {},
                 "cook_method_override": None,
+                "protein_base_override": None,
                 "equipment": None,
                 "caution_text_override": None,
             }

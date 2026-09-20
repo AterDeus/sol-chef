@@ -18,13 +18,16 @@ def score_and_why(
     filter_method: list[str],
     filter_dish: list[str],
     filter_equipment: list[str],
+    protein_bases: list[str] | None = None,
 ) -> tuple[int, list[str]]:
     weights = settings.RANKING_WEIGHTS
     score = 0
     why: list[str] = []
-    if filter_protein and protein_base in filter_protein:
+    candidates = protein_bases or [protein_base]
+    matched_protein = next((code for code in filter_protein if code in candidates), None)
+    if filter_protein and matched_protein:
         score += int(weights["protein_base"])
-        label = PROTEIN_BASE_LABEL_RU.get(protein_base, protein_base)
+        label = PROTEIN_BASE_LABEL_RU.get(matched_protein, matched_protein)
         why.append(f"основа — {label}")
     if filter_method and cook_method in filter_method:
         score += int(weights["cook_method"])

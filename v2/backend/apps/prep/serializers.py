@@ -128,9 +128,15 @@ def average_slot_kcal(kit: PrepKit) -> int | None:
 
 def metrics_for_api(kit: PrepKit) -> dict:
     metrics = dict(kit.metrics or {})
+    if metrics.get("kcal_avg_per_serving") is not None:
+        return metrics
     kcal = average_slot_kcal(kit)
     if kcal is not None:
         metrics["kcal_avg_per_serving"] = kcal
+        stored = dict(kit.metrics or {})
+        stored["kcal_avg_per_serving"] = kcal
+        PrepKit.objects.filter(pk=kit.pk).update(metrics=stored)
+        kit.metrics = stored
     return metrics
 
 
