@@ -32,6 +32,17 @@ function timerAdjustStep(seconds: number): number {
   return 30;
 }
 
+function stepOutline(text: string): string {
+  const trimmed = text.replace(/\s+/g, ' ').trim();
+  const sentenceEnd = trimmed.search(/[.!?](\s|$)/);
+  const sentence = sentenceEnd === -1 ? trimmed : trimmed.slice(0, sentenceEnd + 1);
+  if (sentence.length <= 96) return sentence;
+  const cut = sentence.slice(0, 96);
+  const word = cut.lastIndexOf(' ');
+  const base = (word > 40 ? cut.slice(0, word) : cut).trimEnd();
+  return `${base}…`;
+}
+
 function normalizePrep(prep: RecipePrep[] | undefined): Array<{
   text: string;
   before_min: number;
@@ -231,7 +242,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
       {steps.map((item, i) => (
         <li
           key={`${i}-${item.text.slice(0, 24)}`}
-          className={`${i === index ? 'is-current' : ''} ${done.has(i) ? 'is-done' : ''}`}
+          className={`${phase === 'steps' && i === index ? 'is-current' : ''} ${done.has(i) ? 'is-done' : ''}`}
         >
           <button
             type="button"
@@ -241,8 +252,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
               setIndex(i);
             }}
           >
-            {item.text.slice(0, 80)}
-            {item.text.length > 80 ? '…' : ''}
+            {stepOutline(item.text)}
           </button>
         </li>
       ))}
@@ -296,7 +306,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
           </div>
         ) : phase === 'setup' ? (
           <div className="cook-setup">
-            <section className="cook-setup__section">
+            <section className="cook-setup__section cook-setup__when">
               <h2 className="cook-setup__heading">Когда начнёте?</h2>
               <div className="cook-start-options">
                 <button
@@ -337,34 +347,41 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                 </label>
               )}
             </section>
-            {prep.length > 0 && (
-              <section className="cook-setup__section">
-                <h2 className="cook-setup__heading">Заранее</h2>
-                <p className="cook-setup__hint">
-                  Напоминания о разморозке, достаньте из холодильника, маринаде
-                </p>
-                <ul className="cook-prep-list">
-                  {prep.map((item, i) => (
-                    <li key={`${i}-${item.type}-${item.text.slice(0, 24)}`} className="cook-prep-item">
-                      <div className="cook-prep-item__body">
-                        <span className="cook-prep-item__type">
-                          {PREP_LABELS[item.type] || 'Подготовка'}
-                        </span>
-                        <p className="cook-prep-item__text">{item.text}</p>
-                        <span className="cook-prep-item__when">
-                          за {formatDuration(item.before_min * 60)} до старта ·{' '}
-                          {new Date(startMs - item.before_min * 60 * 1000).toLocaleString('ru-RU', {
-                            day: 'numeric',
-                            month: 'short',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </section>
+            {prep.length > 0 ? (
+              <aside className="cook-setup__aside" aria-label="Заранее">
+                <section className="cook-setup__section">
+                  <h2 className="cook-setup__heading">Заранее</h2>
+                  <p className="cook-setup__hint">
+                    Напоминания о разморозке, достаньте из холодильника, маринаде
+                  </p>
+                  <ul className="cook-prep-list">
+                    {prep.map((item, i) => (
+                      <li key={`${i}-${item.type}-${item.text.slice(0, 24)}`} className="cook-prep-item">
+                        <div className="cook-prep-item__body">
+                          <span className="cook-prep-item__type">
+                            {PREP_LABELS[item.type] || 'Подготовка'}
+                          </span>
+                          <p className="cook-prep-item__text">{item.text}</p>
+                          <span className="cook-prep-item__when">
+                            за {formatDuration(item.before_min * 60)} до старта ·{' '}
+                            {new Date(startMs - item.before_min * 60 * 1000).toLocaleString('ru-RU', {
+                              day: 'numeric',
+                              month: 'short',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </aside>
+            ) : (
+              <aside className="cook-setup__aside cook-setup__aside--outline" aria-label="Шаги">
+                <h2 className="cook-setup__heading">Шаги</h2>
+                {stepList}
+              </aside>
             )}
             <section className="cook-setup__section cook-setup__summary">
               <div className="cook-summary-stat">
@@ -407,7 +424,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                 Шаг {index + 1} из {steps.length}
               </div>
               <article className={`cook-step-card${done.has(index) ? ' is-done' : ''}`}>
-                <p>{step?.text}</p>
+                <p className="cook-step-card__text">{step?.text}</p>
                 {step?.target_internal_temperature_c != null && (
                   <span className="temp-chip">цель {step.target_internal_temperature_c} °C</span>
                 )}

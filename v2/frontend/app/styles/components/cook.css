@@ -125,6 +125,12 @@
     }
   }
 
+  .cook-step-card__text {
+    margin: 0;
+    font-size: var(--fs-18);
+    line-height: 1.45;
+  }
+
   .cook-step-timer {
     margin-block-start: var(--space-4);
     padding-block-start: var(--space-3);
@@ -251,6 +257,10 @@
     gap: 10px;
   }
 
+  .cook-setup__aside--outline {
+    display: none;
+  }
+
   .cook-prep-list {
     margin: 0;
     padding-left: 1.25rem;
@@ -302,12 +312,15 @@
 
   .cook-step-jump {
     appearance: none;
+    display: block;
+    width: 100%;
     border: 0;
     background: none;
-    padding: 6px 0;
+    padding: 8px 0;
     color: var(--text-dim);
     text-align: left;
     font: inherit;
+    line-height: 1.35;
     cursor: pointer;
   }
 
@@ -322,14 +335,66 @@
   }
 
   @media (min-width: 769px) {
+    .cook-mode__header,
     .cook-mode__body {
-      padding: var(--space-6) var(--space-6) var(--space-8);
+      padding-inline: max(var(--space-6), calc((100% - var(--page-max)) / 2));
+    }
+
+    .cook-mode__body {
+      padding-block: var(--space-8);
+    }
+
+    .cook-mode__title {
+      font-size: var(--fs-20);
+    }
+
+    .cook-setup {
+      display: grid;
+      grid-template-columns: minmax(0, 28rem) minmax(16rem, 1fr);
+      grid-template-areas:
+        'when aside'
+        'summary aside'
+        'actions aside';
+      column-gap: var(--space-8);
+      row-gap: var(--space-5);
+      align-items: start;
+    }
+
+    .cook-setup__when {
+      grid-area: when;
+      margin-bottom: 0;
+    }
+
+    .cook-setup__summary {
+      grid-area: summary;
+      margin-bottom: 0;
+    }
+
+    .cook-setup__actions {
+      grid-area: actions;
+    }
+
+    .cook-setup__aside {
+      grid-area: aside;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    .cook-setup__aside--outline {
+      display: block;
+    }
+
+    .cook-setup__aside .cook-setup__section {
+      margin-bottom: 0;
     }
 
     .cook-steps {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 18rem;
-      gap: var(--space-6);
+      grid-template-columns: minmax(0, 42rem) minmax(16rem, 1fr);
+      justify-content: start;
+      gap: var(--space-8);
       align-items: start;
     }
 
@@ -341,6 +406,21 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       padding: var(--space-4);
+    }
+
+    .cook-step-card__text {
+      font-size: var(--fs-22);
+    }
+
+    .cook-step-timer__display {
+      font-size: clamp(3.25rem, 2.2rem + 2vw, 4.5rem);
+      line-height: 1;
+    }
+
+    .cook-complete {
+      max-width: 32rem;
+      margin-inline: auto;
+      padding-block-start: 4.5rem;
     }
 
     .cook-step-overview--mobile {
