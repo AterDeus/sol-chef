@@ -5,6 +5,7 @@ from __future__ import annotations
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 
+from apps.core.numbers import decimal_api
 from apps.recipes.services.scale import apply_mode
 
 SKIP_UNITS = frozenset({"to_taste", "pinch"})
@@ -44,18 +45,20 @@ def _d(value: Any) -> Decimal | None:
     return Decimal(str(value))
 
 
-def _json_num(value: Decimal) -> int | float:
-    if value == value.to_integral_value():
-        return int(value)
-    return float(value)
+def _json_num(value: Decimal | None) -> int | float | str | None:
+    return decimal_api(value)
 
 
 def _round_kcal(value: Decimal) -> int:
     return int(value.quantize(KCAL_QUANT, rounding=ROUND_HALF_UP))
 
 
-def _round_macro(value: Decimal) -> float:
-    return float(value.quantize(MACRO_QUANT, rounding=ROUND_HALF_UP))
+def _round_macro(value: Decimal) -> int | float | str:
+    rounded = value.quantize(MACRO_QUANT, rounding=ROUND_HALF_UP)
+    out = decimal_api(rounded)
+    if out is None:
+        raise ValueError("decimal must be finite")
+    return out
 
 
 def _macros_payload(kcal: Decimal, protein: Decimal, fat: Decimal, carbs: Decimal) -> dict:

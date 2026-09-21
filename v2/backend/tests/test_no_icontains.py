@@ -14,3 +14,17 @@ def test_i11_catalog_search_has_no_icontains():
         encoding="utf-8"
     )
     assert "normalize_ru" in search_py
+
+
+def test_short_query_skips_similarity():
+    from apps.recipes.services.search import apply_catalog_search
+
+    class _QS:
+        def annotate(self, *args, **kwargs):
+            raise AssertionError("short query must not run similarity")
+
+    qs = _QS()
+    assert apply_catalog_search(qs, "") is qs
+    assert apply_catalog_search(qs, "а") is qs
+    assert apply_catalog_search(qs, "ё") is qs
+    assert apply_catalog_search(qs, " ") is qs

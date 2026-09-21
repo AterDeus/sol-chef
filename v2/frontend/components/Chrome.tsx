@@ -58,11 +58,16 @@ export function Header() {
           ))}
         </nav>
       </header>
-      {!isRecipeDetail(pathname) && (
-        <div className="mobile-brand">
-          <Link href="/">Кухонная шпаргалка</Link>
-        </div>
-      )}
+      <div className="mobile-brand">
+        <Link
+          href="/"
+          aria-label="На главную"
+          aria-current={pathname === '/' ? 'page' : undefined}
+        >
+          <SpriteIcon name="chef-hat" size={22} />
+          Кухонная шпаргалка
+        </Link>
+      </div>
     </>
   );
 }
@@ -110,6 +115,7 @@ export function Footer() {
         </div>
         <div className="site-footer__group">
           <p className="site-footer__label">Книга</p>
+          <Link href="/">Главная</Link>
           <Link href="/recipes">Все рецепты</Link>
           <Link href="/prep">На неделю</Link>
           <Link href="/tips">Советы шеф-поваров</Link>

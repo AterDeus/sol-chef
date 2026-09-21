@@ -72,6 +72,14 @@ export function bookChapterById(id: string | undefined): BookChapter | undefined
 
 export type ProteinVariantLink = { code: string; title: string; protein_base: string };
 
+export function recipeCookMethods(recipe: {
+  cook_method: string;
+  cook_methods?: string[];
+}): string[] {
+  if (recipe.cook_methods?.length) return [...recipe.cook_methods];
+  return recipe.cook_method ? [recipe.cook_method] : [];
+}
+
 export function recipeProteinCodes(recipe: {
   protein_base: string;
   protein_bases?: string[];
@@ -163,6 +171,15 @@ export const EQUIPMENT: Record<string, string> = {
   grill: 'Гриль',
 };
 
+/** cook_method codes that appear on the equipment axis (no vessel field). */
+export const METHOD_ONLY_EQUIPMENT = new Set(['air_fryer', 'steam']);
+
+/** Extra-conditions cookware row: vessels plus аэрогриль. */
+export const EQUIPMENT_FILTER: Record<string, string> = {
+  ...EQUIPMENT,
+  air_fryer: 'Аэрогриль',
+};
+
 export const CUT: Record<string, string> = {
   shank: 'голяшка',
   shoulder: 'лопатка',
@@ -251,6 +268,34 @@ export const HAVE_GROUP: Record<string, string> = {
   dairy: 'Молочное',
   other: 'Другое',
 };
+
+/** Calculator pantry group → book chapter. Catalog does not accept have=. */
+export const HAVE_GROUP_TO_BOOK: Record<
+  string,
+  { chapter: BookChapterId; protein_base?: string }
+> = {
+  chicken: { chapter: 'poultry', protein_base: 'poultry' },
+  pork: { chapter: 'meat', protein_base: 'pork' },
+  beef: { chapter: 'meat', protein_base: 'beef' },
+  lamb: { chapter: 'meat', protein_base: 'lamb' },
+  offal: { chapter: 'meat', protein_base: 'offal' },
+  fish: { chapter: 'fish' },
+  veg: { chapter: 'vegetables' },
+  eggs: { chapter: 'breakfasts', protein_base: 'eggs_dairy' },
+  legumes: { chapter: 'vegetables', protein_base: 'legumes' },
+};
+
+export const HAVE_GROUP_BOOK_PRIORITY = [
+  'chicken',
+  'pork',
+  'beef',
+  'lamb',
+  'offal',
+  'fish',
+  'eggs',
+  'legumes',
+  'veg',
+] as const;
 
 export const TIP_KIND: Record<string, string> = {
   technique: 'Приём',

@@ -121,3 +121,21 @@ def test_u9_no_anchor_no_servings_does_not_invent_portions():
         anchor_weight=None,
     )
     assert unscalable.enabled is False
+
+
+def test_scale_json_numbers_are_not_float():
+    result = resolve_scale(
+        recipe_scalable=True,
+        recipe_servings=4,
+        anchor_amount=Decimal("500"),
+        anchor_unit="g",
+        servings=Decimal("2.5"),
+        anchor_weight=None,
+    )
+    assert result.enabled is True
+    assert result.applied is not None
+    assert result.applied["servings"] == 2.5
+    assert not isinstance(result.applied["servings"], str)
+    assert result.base_anchor is not None
+    assert result.base_anchor["amount"] == 500
+    assert not isinstance(result.base_anchor["amount"], float)

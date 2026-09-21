@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 from pathlib import Path
 
 from apps.recipes.constants import (
@@ -22,6 +22,12 @@ from apps.recipes.constants import (
     USE_CASE,
     VARIANT_AXIS,
     YIELD_KIND,
+)
+from apps.recipes.etl.normalizers import (
+    DraftValidationError,
+    as_bool,
+    as_decimal,
+    as_int,
 )
 from apps.recipes.etl.taxonomy import TEMP_REQUIRED_SLUGS
 
@@ -66,6 +72,37 @@ class DraftError(Exception):
     pass
 
 
+def _typed_bool(value, *, field: str, default: bool, err) -> bool:
+    try:
+        return as_bool(value, field=field, default=default)
+    except DraftValidationError as exc:
+        err(str(exc))
+        return default
+
+
+def _typed_int(
+    value,
+    *,
+    field: str,
+    err,
+    min_value: int | None = None,
+    max_value: int | None = None,
+    nullable: bool = False,
+    fallback=None,
+):
+    try:
+        return as_int(
+            value,
+            field=field,
+            min_value=min_value,
+            max_value=max_value,
+            nullable=nullable,
+        )
+    except DraftValidationError as exc:
+        err(str(exc))
+        return fallback
+
+
 def load_json(path: Path) -> dict:
     if not path.is_file():
         raise DraftError(f"Нет файла {path}")
@@ -96,8 +133,12 @@ def validate_draft(
     title = (raw.get("title") or "").strip()
     if not title:
         err("нет title")
-    if raw.get("editorial_tested") is True:
-        err("агент не ставит editorial_tested")
+    if "editorial_tested" in raw:
+        tested = _typed_bool(
+            raw.get("editorial_tested"), field="editorial_tested", default=False, err=err
+        )
+        if tested:
+            err("агент не ставит editorial_tested")
     if raw.get("tags") or raw.get("category"):
         err("tags/category — поля V1, не писать")
     for key in FORBIDDEN_RECIPE_NUTRITION_KEYS:
@@ -133,6 +174,9 @@ def validate_draft(
         _enum("scale_mode", raw.get("scale_mode"), SCALE_MODE, err)
     if raw.get("scale_mode") == "fixed":
         err("scale_mode=fixed нет; это scalable=false")
+    _typed_bool(raw.get("scalable"), field="scalable", default=True, err=err)
+    if "servings" in raw and raw.get("servings") is not None:
+        _typed_int(raw.get("servings"), field="servings", err=err, min_value=1)
     _check_yield(raw, err)
 
     if overlay:
@@ -217,11 +261,15 @@ def validate_draft(
             err(f"{cid or index}: unit {unit!r} не из VOCAB")
         if unit in {"cup", "стакан", "стакана"}:
             err(f"{cid}: стакан/cup запрещён")
-        pos = line.get("position", index)
-        try:
-            pos = int(pos)
-        except (TypeError, ValueError):
-            err(f"{cid}: position не число")
+        if "position" in line:
+            pos = _typed_int(
+                line.get("position"),
+                field=f"{cid}:position",
+                err=err,
+                min_value=0,
+                fallback=index,
+            )
+        else:
             pos = index
         if pos in positions:
             err(f"дубль position ингредиента {pos}")
@@ -231,18 +279,40 @@ def validate_draft(
             err(f"{cid}: scale_mode {mode!r}")
         if cid in MANUAL_CANONICALS and mode == "gentle":
             err(f"{cid}: сода/дрожжи/желатин — не gentle; linear или manual")
-        scalable = bool(line.get("scalable", True))
+        scalable = _typed_bool(
+            line.get("scalable"), field=f"{cid}:scalable", default=True, err=err
+        )
         amount = line.get("amount")
+        try:
+            amount_dec = as_decimal(amount, field=f"{cid}:amount", min_value=Decimal("0"))
+        except DraftValidationError as exc:
+            err(str(exc))
+            amount_dec = amount
+        if "amount_max" in line:
+            try:
+                as_decimal(
+                    line.get("amount_max"),
+                    field=f"{cid}:amount_max",
+                    min_value=Decimal("0"),
+                )
+            except DraftValidationError as exc:
+                err(str(exc))
         if unit in {"to_taste", "pinch"}:
             if amount is not None:
                 err(f"{cid}: to_taste/pinch — amount null")
             if scalable:
                 err(f"{cid}: to_taste/pinch — scalable=false")
-        if line.get("is_anchor"):
+        is_anchor = _typed_bool(
+            line.get("is_anchor"), field=f"{cid}:is_anchor", default=False, err=err
+        )
+        _typed_bool(
+            line.get("optional"), field=f"{cid}:optional", default=False, err=err
+        )
+        if is_anchor:
             anchors += 1
-            if unit not in WEIGHT_VOLUME or amount is None:
+            if unit not in WEIGHT_VOLUME or amount_dec is None:
                 err(f"{cid}: якорь только с количеством г/мл/кг/л")
-        if scalable and unit in WEIGHT_VOLUME and amount is not None:
+        if scalable and unit in WEIGHT_VOLUME and amount_dec is not None:
             weight_lines += 1
         if "timer_min" in line:
             err("timer_min у ингредиента")
@@ -274,33 +344,58 @@ def validate_draft(
             err(f"шаг {index}: пустой text")
         if step.get("timer_min") is not None:
             err(f"шаг {index}: timer_min — пишите timer_seconds")
-        pos = step.get("position", index)
-        try:
-            pos = int(pos)
-        except (TypeError, ValueError):
-            err(f"шаг {index}: position не число")
+        if "position" in step:
+            pos = _typed_int(
+                step.get("position"),
+                field=f"шаг {index}:position",
+                err=err,
+                min_value=0,
+                fallback=index,
+            )
+        else:
             pos = index
         if pos in step_pos:
             err(f"дубль position шага {pos}")
         step_pos.add(pos)
-        pull = step.get("pull_internal_temperature_c")
-        target = step.get("target_internal_temperature_c")
-        hold = step.get("hold_seconds")
+        pull = _typed_int(
+            step.get("pull_internal_temperature_c"),
+            field=f"шаг {pos}:pull",
+            err=err,
+            min_value=0,
+            nullable=True,
+        )
+        target = _typed_int(
+            step.get("target_internal_temperature_c"),
+            field=f"шаг {pos}:target",
+            err=err,
+            min_value=0,
+            nullable=True,
+        )
+        _typed_int(
+            step.get("hold_seconds"),
+            field=f"шаг {pos}:hold",
+            err=err,
+            min_value=0,
+            nullable=True,
+        )
+        if "timer_seconds" in step:
+            _typed_int(
+                step.get("timer_seconds"),
+                field=f"шаг {pos}:timer_seconds",
+                err=err,
+                min_value=0,
+                nullable=True,
+            )
         if pull is not None and target is None:
             err(f"шаг {pos}: pull без target")
         if target is not None:
-            try:
-                targets.add(int(target))
-            except (TypeError, ValueError):
-                err(f"шаг {pos}: target не число")
+            targets.add(target)
         text = (step.get("text") or "").lower()
         note = (step.get("equipment_note") or "").lower()
         if "порци" in text or "не перегруз" in text or "не перегруз" in note or "порци" in note:
             pan_note = True
         if step.get("equipment_note"):
             pan_note = True
-        if hold is not None and int(hold) < 0:
-            err(f"шаг {pos}: hold отрицательный")
 
     cook = raw.get("cook_method")
     protein = raw.get("protein_base")
@@ -348,11 +443,16 @@ def validate_draft(
             err("свинина: нет target")
         else:
             t = min(targets)
-            holds = [
-                int(s.get("hold_seconds") or 0)
-                for s in steps
-                if isinstance(s, dict) and s.get("hold_seconds") is not None
-            ]
+            holds = []
+            for step in steps:
+                if not isinstance(step, dict) or step.get("hold_seconds") is None:
+                    continue
+                try:
+                    holds.append(
+                        as_int(step.get("hold_seconds"), field="hold_seconds", min_value=0)
+                    )
+                except DraftValidationError:
+                    continue
             ok = t >= 71 or (t >= 63 and (max(holds) if holds else 0) >= 180)
             if not ok:
                 err("свинина: 63 °C + hold ≥ 180 с или 71 °C")
@@ -380,7 +480,9 @@ def validate_draft(
         codes.add(code)
         if axis == "energy" and code not in {"light", "rich"}:
             err(f"energy code {code!r} — только light/rich")
-        has_delta = bool(item.get("has_delta"))
+        has_delta = _typed_bool(
+            item.get("has_delta"), field=f"{code}:has_delta", default=False, err=err
+        )
         ing = item.get("ingredient_delta")
         step_delta = item.get("step_delta")
         if item.get("text") and not has_delta:
@@ -435,14 +537,12 @@ def _check_overlay_profile(raw: dict, err) -> None:
         err("оверлей: нужен time_profile {total_minutes, active_minutes}")
     else:
         try:
-            total_i = int(total)
-            active_i = int(active)
-        except (TypeError, ValueError):
-            err("time_profile: минуты — целые")
+            total_i = as_int(total, field="time_profile.total_minutes", min_value=1)
+            active_i = as_int(active, field="time_profile.active_minutes", min_value=0)
+        except DraftValidationError as exc:
+            err(str(exc))
         else:
-            if total_i < 1 or active_i < 0:
-                err("time_profile: total ≥ 1, active ≥ 0")
-            elif active_i > total_i:
+            if active_i > total_i:
                 err("active_minutes больше total_minutes")
     effort = raw.get("effort_level", raw.get("effort"))
     washing = raw.get("washing_level", raw.get("washing"))
@@ -451,12 +551,10 @@ def _check_overlay_profile(raw: dict, err) -> None:
             err(f"оверлей: нужен {name} 1–5")
             continue
         try:
-            level = int(value)
-        except (TypeError, ValueError):
-            err(f"{name} должен быть 1–5")
+            as_int(value, field=name, min_value=1, max_value=5)
+        except DraftValidationError as exc:
+            err(str(exc))
             continue
-        if not 1 <= level <= 5:
-            err(f"{name} должен быть 1–5")
     cases = raw.get("use_cases")
     if not isinstance(cases, list):
         err("use_cases должен быть списком (можно [])")
@@ -544,26 +642,35 @@ def _check_yield(raw: dict, err) -> None:
             err("yield_kind без yield_weight_g")
         return
     try:
-        value = Decimal(str(weight))
-    except (InvalidOperation, TypeError, ValueError):
-        err("yield_weight_g не число")
+        value = as_decimal(weight, field="yield_weight_g", nullable=False)
+    except DraftValidationError as exc:
+        err(str(exc))
         return
     if value <= 0:
         err("yield_weight_g должен быть > 0")
 
 
 def _check_line_nutrition(line: dict, cid: str, err) -> None:
-    if "nutrition_exclude" in line and not isinstance(line.get("nutrition_exclude"), bool):
-        err(f"{cid}: nutrition_exclude должен быть bool")
-    if line.get("nutrition_exclude") and line.get("nutrition_factor") is not None:
+    _typed_bool(
+        line.get("nutrition_exclude"),
+        field=f"{cid}:nutrition_exclude",
+        default=False,
+        err=err,
+    )
+    if line.get("nutrition_exclude") is True and line.get("nutrition_factor") is not None:
         err(f"{cid}: nutrition_factor не вместе с nutrition_exclude")
     if "nutrition_factor" in line and line.get("nutrition_factor") is not None:
         try:
-            factor = Decimal(str(line.get("nutrition_factor")))
-        except (InvalidOperation, TypeError, ValueError):
-            err(f"{cid}: nutrition_factor не число")
+            factor = as_decimal(
+                line.get("nutrition_factor"),
+                field=f"{cid}:nutrition_factor",
+                min_value=Decimal("0.01"),
+                max_value=Decimal("1"),
+            )
+        except DraftValidationError as exc:
+            err(str(exc))
             return
-        if not (Decimal("0.01") <= factor <= Decimal("1")):
+        if factor is not None and not (Decimal("0.01") <= factor <= Decimal("1")):
             err(f"{cid}: nutrition_factor должен быть 0.01–1")
 
 
@@ -587,13 +694,38 @@ def _check_allergen_delta(delta, err, code: str) -> None:
                 err(f"{code}: allergen_delta {key} код {item!r}")
 
 
-def _dec(value) -> Decimal | None:
-    if value is None or value == "":
-        return None
+def _parse_bool(value, *, field: str, default: bool) -> bool:
     try:
-        return Decimal(str(value))
-    except (InvalidOperation, ValueError) as exc:
-        raise DraftError(f"Некорректное число {value!r}") from exc
+        return as_bool(value, field=field, default=default)
+    except DraftValidationError as exc:
+        raise DraftError(str(exc)) from exc
+
+
+def _parse_int(
+    value,
+    *,
+    field: str,
+    min_value: int | None = None,
+    max_value: int | None = None,
+    nullable: bool = False,
+) -> int | None:
+    try:
+        return as_int(
+            value,
+            field=field,
+            min_value=min_value,
+            max_value=max_value,
+            nullable=nullable,
+        )
+    except DraftValidationError as exc:
+        raise DraftError(str(exc)) from exc
+
+
+def _parse_dec(value, *, field: str, min_value: Decimal | None = None) -> Decimal | None:
+    try:
+        return as_decimal(value, field=field, min_value=min_value)
+    except DraftValidationError as exc:
+        raise DraftError(str(exc)) from exc
 
 
 def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict:
@@ -625,15 +757,18 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
         if meta is None:
             raise DraftError(f"{slug}: нет канона {cid} (сид или new_ingredients)")
         unit = line["unit"]
-        amount = _dec(line.get("amount"))
-        amount_max = _dec(line.get("amount_max"))
-        scalable = bool(line.get("scalable", True))
+        amount = _parse_dec(line.get("amount"), field=f"{cid}:amount", min_value=Decimal("0"))
+        amount_max = _parse_dec(
+            line.get("amount_max"), field=f"{cid}:amount_max", min_value=Decimal("0")
+        )
+        scalable = _parse_bool(line.get("scalable"), field=f"{cid}:scalable", default=True)
         if unit in {"to_taste", "pinch"}:
             amount = None
             amount_max = None
             scalable = False
         display = line.get("display_name") or meta.get("title") or cid
         titles.append(display)
+        position = line.get("position", index)
         lines.append(
             {
                 "canonical_id": cid,
@@ -642,17 +777,27 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
                 "contains": meta.get("contains") or [],
                 "may_contain": meta.get("may_contain") or [],
                 "unknown": meta.get("unknown") or [],
-                "position": int(line.get("position", index)),
+                "position": _parse_int(position, field=f"{cid}:position", min_value=0),
                 "amount": amount,
                 "amount_max": amount_max,
                 "unit": unit,
                 "detail": line.get("detail"),
                 "scale_mode": line.get("scale_mode") or "linear",
                 "scalable": scalable,
-                "is_anchor": bool(line.get("is_anchor")),
-                "optional": bool(line.get("optional", False)),
-                "nutrition_exclude": bool(line.get("nutrition_exclude", False)),
-                "nutrition_factor": _dec(line.get("nutrition_factor")),
+                "is_anchor": _parse_bool(
+                    line.get("is_anchor"), field=f"{cid}:is_anchor", default=False
+                ),
+                "optional": _parse_bool(
+                    line.get("optional"), field=f"{cid}:optional", default=False
+                ),
+                "nutrition_exclude": _parse_bool(
+                    line.get("nutrition_exclude"),
+                    field=f"{cid}:nutrition_exclude",
+                    default=False,
+                ),
+                "nutrition_factor": _parse_dec(
+                    line.get("nutrition_factor"), field=f"{cid}:nutrition_factor"
+                ),
                 "choice_group": line.get("choice_group"),
                 "display_name": display,
             }
@@ -660,19 +805,37 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
 
     steps = []
     for index, step in enumerate(raw["steps"]):
-        pull = step.get("pull_internal_temperature_c")
-        target = step.get("target_internal_temperature_c")
-        hold = step.get("hold_seconds")
+        position = step.get("position", index)
         steps.append(
             {
-                "position": int(step.get("position", index)),
+                "position": _parse_int(position, field=f"step[{index}]:position", min_value=0),
                 "text": step["text"],
-                "timer_seconds": step.get("timer_seconds"),
+                "timer_seconds": _parse_int(
+                    step.get("timer_seconds"),
+                    field=f"step[{index}]:timer_seconds",
+                    min_value=0,
+                    nullable=True,
+                ),
                 "timer_label": step.get("timer_label"),
                 "timer_note": step.get("timer_note"),
-                "pull_internal_temperature_c": int(pull) if pull is not None else None,
-                "target_internal_temperature_c": int(target) if target is not None else None,
-                "hold_seconds": int(hold) if hold is not None else None,
+                "pull_internal_temperature_c": _parse_int(
+                    step.get("pull_internal_temperature_c"),
+                    field=f"step[{index}]:pull",
+                    min_value=0,
+                    nullable=True,
+                ),
+                "target_internal_temperature_c": _parse_int(
+                    step.get("target_internal_temperature_c"),
+                    field=f"step[{index}]:target",
+                    min_value=0,
+                    nullable=True,
+                ),
+                "hold_seconds": _parse_int(
+                    step.get("hold_seconds"),
+                    field=f"step[{index}]:hold",
+                    min_value=0,
+                    nullable=True,
+                ),
                 "equipment_note": step.get("equipment_note"),
             }
         )
@@ -680,14 +843,17 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
     variants = []
     for item in raw.get("variants") or []:
         allergen = item.get("allergen_delta")
-        if item.get("has_delta") and item.get("ingredient_delta") is not None and allergen is None:
+        has_delta = _parse_bool(
+            item.get("has_delta"), field=f"{item.get('code')}:has_delta", default=False
+        )
+        if has_delta and item.get("ingredient_delta") is not None and allergen is None:
             allergen = dict(EMPTY_ALLERGEN_DELTA)
         variants.append(
             {
                 "axis": item.get("axis") or "addon",
                 "code": item["code"],
                 "title": item["title"],
-                "has_delta": bool(item.get("has_delta")),
+                "has_delta": has_delta,
                 "legacy_text": item.get("legacy_text"),
                 "ingredient_delta": item.get("ingredient_delta"),
                 "step_delta": item.get("step_delta"),
@@ -713,9 +879,11 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
         "cook_method": raw["cook_method"],
         "dish_type": raw["dish_type"],
         "scale_mode": raw.get("scale_mode") or "linear",
-        "scalable": raw.get("scalable", True),
-        "servings": raw.get("servings"),
-        "yield_weight_g": _dec(raw.get("yield_weight_g")),
+        "scalable": _parse_bool(raw.get("scalable"), field="scalable", default=True),
+        "servings": _parse_int(
+            raw.get("servings"), field="servings", min_value=1, nullable=True
+        ),
+        "yield_weight_g": _parse_dec(raw.get("yield_weight_g"), field="yield_weight_g"),
         "yield_kind": (raw.get("yield_kind") or None)
         or ("estimated" if raw.get("yield_weight_g") not in (None, "") else None),
         "summary": raw.get("summary"),
@@ -729,10 +897,32 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
         "allowed_cuts": raw.get("allowed_cuts") or [],
         "notes": raw.get("notes") or [],
         "prep": raw.get("prep") or [],
-        "time_total_minutes": profile.get("total_minutes", raw.get("time_minutes")),
-        "time_active_minutes": profile.get("active_minutes", raw.get("active_minutes")),
-        "effort_level": raw.get("effort_level", raw.get("effort")),
-        "washing_level": raw.get("washing_level", raw.get("washing")),
+        "time_total_minutes": _parse_int(
+            profile.get("total_minutes", raw.get("time_minutes")),
+            field="time_profile.total_minutes",
+            min_value=1,
+            nullable=True,
+        ),
+        "time_active_minutes": _parse_int(
+            profile.get("active_minutes", raw.get("active_minutes")),
+            field="time_profile.active_minutes",
+            min_value=0,
+            nullable=True,
+        ),
+        "effort_level": _parse_int(
+            raw.get("effort_level", raw.get("effort")),
+            field="effort_level",
+            min_value=1,
+            max_value=5,
+            nullable=True,
+        ),
+        "washing_level": _parse_int(
+            raw.get("washing_level", raw.get("washing")),
+            field="washing_level",
+            min_value=1,
+            max_value=5,
+            nullable=True,
+        ),
         "use_cases": raw.get("use_cases") or [],
         "adaptations": raw.get("adaptations") or [],
         "new_canons": new_canons,
@@ -741,7 +931,6 @@ def parse_draft(raw: dict, *, known_ingredients: dict[str, dict] | None) -> dict
         "steps": steps,
         "variants": variants,
         "origin": "draft",
-        "status": "published",
         "raw": raw,
     }
 

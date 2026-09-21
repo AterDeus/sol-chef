@@ -185,6 +185,10 @@ function TipCard({
   return <ExpandableTipCard tip={tip} onOpen={onOpen} />;
 }
 
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function ExpandableTipCard({
   tip,
   onOpen,
@@ -194,9 +198,9 @@ function ExpandableTipCard({
 }) {
   const slotRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDetailsElement>(null);
-  const raiseTimer = useRef(0);
+  const motionTimer = useRef(0);
 
-  useEffect(() => () => window.clearTimeout(raiseTimer.current), []);
+  useEffect(() => () => window.clearTimeout(motionTimer.current), []);
 
   useLayoutEffect(() => {
     const slot = slotRef.current;
@@ -211,7 +215,17 @@ function ExpandableTipCard({
     observer.observe(slot);
     if (summary) observer.observe(summary);
 
-    return () => observer.disconnect();
+    const finishClose = (event: TransitionEvent) => {
+      if (event.propertyName !== 'block-size' && event.propertyName !== 'height') return;
+      if (!card.classList.contains('tip-card--closing')) return;
+      card.open = false;
+    };
+    card.addEventListener('transitionend', finishClose);
+
+    return () => {
+      observer.disconnect();
+      card.removeEventListener('transitionend', finishClose);
+    };
   }, [tip.hint, tip.kind, tip.tags.join(',')]);
 
   return (
@@ -224,22 +238,44 @@ function ExpandableTipCard({
           const card = event.currentTarget;
           const slot = slotRef.current;
           if (slot) syncTipSlotHeight(slot, card);
-          window.clearTimeout(raiseTimer.current);
           if (card.open) {
             card.classList.add('tip-card--raised');
             onOpen?.(card);
             return;
           }
-          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          raiseTimer.current = window.setTimeout(
-            () => {
-              if (!card.open) card.classList.remove('tip-card--raised');
-            },
-            reduce ? 0 : tipMotionMs(card) + 20,
-          );
+          window.clearTimeout(motionTimer.current);
+          card.classList.remove('tip-card--closing', 'tip-card--raised');
         }}
       >
-        <summary>
+        <summary
+          onClick={(event) => {
+            event.preventDefault();
+            const card = event.currentTarget.parentElement;
+            if (!(card instanceof HTMLDetailsElement)) return;
+
+            window.clearTimeout(motionTimer.current);
+            if (!card.open) {
+              card.classList.remove('tip-card--closing');
+              card.open = true;
+              return;
+            }
+            if (card.classList.contains('tip-card--closing')) {
+              card.classList.remove('tip-card--closing');
+              return;
+            }
+            card.classList.add('tip-card--closing');
+            if (prefersReducedMotion()) {
+              card.open = false;
+              return;
+            }
+            motionTimer.current = window.setTimeout(
+              () => {
+                if (card.classList.contains('tip-card--closing')) card.open = false;
+              },
+              tipMotionMs(card) + 40,
+            );
+          }}
+        >
           <div className="tip-card__face">
             <TipBadges tip={tip} />
             <p className="tip-card__hint">{tip.hint}</p>
@@ -329,7 +365,14 @@ export function TipsView({
       .closest('.tips-handbook')
       ?.querySelectorAll('details.tip-card')
       .forEach((node) => {
-        if (node instanceof HTMLDetailsElement && node !== opened) node.open = false;
+        if (!(node instanceof HTMLDetailsElement) || node === opened || !node.open) return;
+        if (node.classList.contains('tip-card--closing')) return;
+        const summary = node.querySelector(':scope > summary');
+        if (summary instanceof HTMLElement) {
+          summary.click();
+        } else {
+          node.open = false;
+        }
       });
   };
 
@@ -493,7 +536,7 @@ export function TipsView({
               key={group.id}
               id={`tip-${group.id}`}
               className="tips-section"
-              open={filtering || undefined}
+              open={activeFilters || undefined}
             >
               <summary
                 aria-controls={panelId}

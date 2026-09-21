@@ -25,18 +25,36 @@ const ART_SRC: Record<ArtScene, string> = {
   recipes: '/art/recipes.png',
 };
 
+const ART_SRC_MOBILE: Record<ArtScene, string> = {
+  home: '/art/main-bg-m.png',
+  calculator: '/art/pantry-m.png',
+  grains: '/art/grains-m.png',
+  meat: '/art/main-bg-m.png',
+  beef: '/art/main-bg-m.png',
+  pork: '/art/pork-m.png',
+  poultry: '/art/poultry-m.png',
+  tips: '/art/tools-m.png',
+  prep: '/art/prep-m.png',
+  recipes: '/art/recipes-m.png',
+};
+
+const ART_VERSION = '10';
+
 export function PageArt({ scene }: { scene: ArtScene }) {
   return (
     <div className="page-art" aria-hidden>
-      <img
-        className="page-art__paint"
-        src={`${ART_SRC[scene]}?v=9`}
-        alt=""
-        width={1024}
-        height={518}
-        decoding="async"
-        loading={scene === 'home' ? 'eager' : 'lazy'}
-      />
+      <picture>
+        <source media="(max-width: 768px)" srcSet={`${ART_SRC_MOBILE[scene]}?v=${ART_VERSION}`} />
+        <img
+          className="page-art__paint"
+          src={`${ART_SRC[scene]}?v=${ART_VERSION}`}
+          alt=""
+          width={1024}
+          height={518}
+          decoding="async"
+          loading={scene === 'home' ? 'eager' : 'lazy'}
+        />
+      </picture>
     </div>
   );
 }
@@ -61,10 +79,14 @@ export function PageIntro({
       <div className="page-intro__copy">
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
-        {lede}
-        {actions}
       </div>
       {showArt ? <PageArt scene={scene} /> : null}
+      {lede || actions ? (
+        <div className="page-intro__body">
+          {lede}
+          {actions}
+        </div>
+      ) : null}
     </header>
   );
 }

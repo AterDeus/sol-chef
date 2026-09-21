@@ -1,13 +1,5 @@
-from rest_framework.views import exception_handler
+"""Compatibility re-export. New code should import from apps.core.exceptions."""
 
-from apps.prep.exceptions import PrepError
-from apps.recipes.services.assemble import VariantError
-from apps.recipes.services.scale import ScaleConflict
+from apps.core.exceptions import DomainValidationError, api_exception_handler
 
-
-def api_exception_handler(exc, context):
-    if isinstance(exc, (ScaleConflict, VariantError, PrepError)):
-        from rest_framework.response import Response
-
-        return Response({"detail": str(exc)}, status=400)
-    return exception_handler(exc, context)
+__all__ = ["DomainValidationError", "api_exception_handler"]

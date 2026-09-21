@@ -20,9 +20,12 @@ class Similarity(Func):
     arity = 2
 
 
+MIN_SEARCH_LENGTH = 2
+
+
 def apply_catalog_search(queryset, raw_q: str):
     qn = normalize_ru(raw_q).strip()
-    if not qn:
+    if len(qn) < MIN_SEARCH_LENGTH:
         return queryset
     query = SearchQuery(qn, config="russian", search_type="plain")
     return (

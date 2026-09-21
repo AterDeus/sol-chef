@@ -5,8 +5,14 @@ import type { SearchParamsRecord, TipsPayload } from '@/lib/types';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
 import { TipsView } from '@/components/TipsView';
 import { PageIntro } from '@/components/PageArt';
+import type { Metadata } from 'next';
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Советы',
+  description: 'Практические советы по темам: техника, продукты, организация.',
+};
 
 export default async function TipsPage({
   searchParams,

@@ -24,17 +24,44 @@ async function readJson(res: Response): Promise<unknown> {
   }
 }
 
+export function isAbortError(error: unknown): boolean {
+  return error instanceof DOMException && error.name === 'AbortError';
+}
+
+export class ApiError extends Error {
+  constructor(
+    public readonly status: number,
+    message: string,
+  ) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
+
 export async function clientFetch(path: string, init: RequestInit = {}): Promise<Response> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), FETCH_MS);
+  const timeout = new AbortController();
+  const timer = setTimeout(() => timeout.abort(), FETCH_MS);
+  const onAbort = () => timeout.abort();
+  init.signal?.addEventListener('abort', onAbort);
+  if (init.signal?.aborted) timeout.abort();
   try {
     return await fetch(clientApiUrl(path), {
       ...init,
-      signal: init.signal ?? controller.signal,
+      signal: timeout.signal,
     });
   } finally {
     clearTimeout(timer);
+    init.signal?.removeEventListener('abort', onAbort);
   }
+}
+
+export async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
+  const res = await clientFetch(path, init);
+  const body = await readJson(res);
+  if (!res.ok) {
+    throw new ApiError(res.status, parseDetail(body, `Запрос не удался: ${res.status}`));
+  }
+  return body as T;
 }
 
 export type ClientResult<T> =

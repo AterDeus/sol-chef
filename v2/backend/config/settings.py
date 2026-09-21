@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "rest_framework",
     "drf_spectacular",
+    "apps.core.apps.CoreConfig",
     "apps.recipes.apps.RecipesConfig",
     "apps.content.apps.ContentConfig",
     "apps.prep.apps.PrepConfig",
@@ -127,6 +128,13 @@ RANKING_WEIGHTS = {
     "substitution_friction": -3,
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "solchef-default",
+    }
+}
+
 
 def _database_from_url(url: str) -> dict:
     parsed = urlparse(url)
@@ -171,7 +179,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "EXCEPTION_HANDLER": "apps.recipes.exceptions.api_exception_handler",
+    "EXCEPTION_HANDLER": "apps.core.exceptions.api_exception_handler",
 }
 
 SPECTACULAR_SETTINGS = {

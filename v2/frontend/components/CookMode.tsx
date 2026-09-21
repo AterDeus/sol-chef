@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { RecipePrep, RecipeStep } from '@/lib/types';
+import { useCountdown } from '@/lib/countdown';
 import { formatClock, formatDuration } from '@/lib/time';
 import { SpriteIcon } from './SpriteIcon';
 
@@ -19,9 +20,6 @@ const PREP_LABELS: Record<string, string> = {
   soak: 'Замачивание',
   custom: 'Подготовка',
 };
-
-const FOCUSABLE =
-  'a[href], button:not(:disabled), input:not(:disabled), select, textarea, summary, [tabindex]:not([tabindex="-1"])';
 
 function toDatetimeLocal(date: Date): string {
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -51,6 +49,26 @@ function normalizePrep(prep: RecipePrep[] | undefined): Array<{
     .sort((a, b) => b.before_min - a.before_min);
 }
 
+function useToast() {
+  const [message, setMessage] = useState<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
+
+  const show = useCallback((next: string) => {
+    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    setMessage(next);
+    timeoutRef.current = window.setTimeout(() => setMessage(null), 4000);
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    },
+    [],
+  );
+
+  return { message, show };
+}
+
 type Props = {
   title: string;
   steps: RecipeStep[];
@@ -64,27 +82,24 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
   const [phase, setPhase] = useState<'setup' | 'steps' | 'done'>('setup');
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState<Set<number>>(new Set());
-  const [remaining, setRemaining] = useState<number | null>(null);
-  const [running, setRunning] = useState(false);
   const [duration, setDuration] = useState(0);
   const [plan, setPlan] = useState(false);
   const [startMs, setStartMs] = useState(() => Date.now());
-  const [toast, setToast] = useState<string | null>(null);
   const [wakeOn, setWakeOn] = useState(false);
-  const wakeRef = useRef<WakeLockSentinelLike | null>(null);
-  const intervalRef = useRef<number | null>(null);
-  const wantWake = useRef(false);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-  const restoreFocusRef = useRef<HTMLElement | null>(null);
-
+  const { message: toast, show: showToast } = useToast();
   const step = steps[index];
-  const timerSec = duration || step?.timer_seconds || 0;
+  const countdown = useCountdown(() => {
+    showToast(`Таймер: ${step?.timer_label || 'готово'}`);
+    if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
+  });
+  const wakeRef = useRef<WakeLockSentinelLike | null>(null);
+  const wantWake = useRef(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
-  const showToast = (message: string) => {
-    setToast(message);
-    window.setTimeout(() => setToast(null), 4000);
-  };
+  const timerSec = duration || step?.timer_seconds || 0;
+  const remainingSeconds = countdown.remainingSeconds;
+  const shownSeconds = remainingSeconds ?? timerSec;
 
   const releaseWake = useCallback(async () => {
     if (wakeRef.current) {
@@ -117,19 +132,40 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
     } catch {
       showToast('Не удалось удержать экран включённым');
     }
-  }, []);
+  }, [showToast]);
 
   useEffect(() => {
-    if (!open) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (open && !dialog.open) {
+      dialog.showModal();
+      closeBtnRef.current?.focus();
+    }
+    if (!open && dialog.open) dialog.close();
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return undefined;
     document.body.classList.add('cook-mode-open');
     wantWake.current = true;
     void requestWake();
     return () => {
       document.body.classList.remove('cook-mode-open');
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      wantWake.current = false;
+      countdown.stop();
       void releaseWake();
     };
-  }, [open, requestWake, releaseWake]);
+  }, [open, requestWake, releaseWake, countdown.stop]);
+
+  useEffect(() => {
+    if (open) return;
+    setPhase('setup');
+    setIndex(0);
+    setDone(new Set());
+    setPlan(false);
+    setStartMs(Date.now());
+    setDuration(0);
+  }, [open]);
 
   useEffect(() => {
     const onVis = () => {
@@ -142,86 +178,15 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
   }, [requestWake]);
 
   useEffect(() => {
-    if (!running) return;
-    intervalRef.current = window.setInterval(() => {
-      setRemaining((prev) => {
-        if (prev == null) return prev;
-        if (prev <= 1) {
-          setRunning(false);
-          showToast(`Таймер: ${step?.timer_label || 'готово'}`);
-          if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
-    };
-  }, [running, step?.timer_label]);
-
-  useEffect(() => {
     setDuration(step?.timer_seconds ?? 0);
-    setRemaining(null);
-    setRunning(false);
-  }, [index, step?.timer_seconds]);
+    countdown.stop();
+  }, [index, step?.timer_seconds, countdown.stop]);
 
   const close = useCallback(() => {
     wantWake.current = false;
-    setRunning(false);
-    setPhase('setup');
-    setIndex(0);
-    setDone(new Set());
+    countdown.stop();
     onClose();
-  }, [onClose]);
-  const closeRef = useRef(close);
-  closeRef.current = close;
-
-  useEffect(() => {
-    if (!open) return;
-
-    restoreFocusRef.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-    const frame = window.requestAnimationFrame(() => {
-      closeBtnRef.current?.focus();
-    });
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeRef.current();
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      const root = dialogRef.current;
-      if (!root) return;
-      const nodes = Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-        (el) => el.getClientRects().length > 0,
-      );
-      if (nodes.length === 0) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      if (event.shiftKey) {
-        if (document.activeElement === first || document.activeElement === root) {
-          event.preventDefault();
-          last.focus();
-        }
-      } else if (document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-      window.cancelAnimationFrame(frame);
-      document.removeEventListener('keydown', onKeyDown);
-      restoreFocusRef.current?.focus();
-    };
-  }, [open]);
-
-  if (!open) return null;
+  }, [countdown.stop, onClose]);
 
   const toggleWake = () => {
     if (wakeOn) {
@@ -234,23 +199,38 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
   };
 
   const startTimer = () => {
-    setRemaining(remaining == null || remaining === 0 ? timerSec : remaining);
-    setRunning(true);
+    const ms =
+      countdown.remainingMs == null || countdown.remainingMs === 0
+        ? timerSec * 1000
+        : countdown.remainingMs;
+    countdown.startMs(ms);
   };
 
   const resetTimer = () => {
-    setRunning(false);
-    setRemaining(timerSec);
+    countdown.reset(timerSec * 1000);
+  };
+
+  const beginCooking = () => {
+    if (steps.length === 0) {
+      showToast('В этом рецепте нет шагов для режима готовки');
+      return;
+    }
+    if (plan && startMs < Date.now() - 60_000) {
+      showToast('Время начала уже прошло — выберите другое или нажмите «Сейчас»');
+      return;
+    }
+    setPhase('steps');
   };
 
   const adjust = timerAdjustStep(step?.timer_seconds || 0);
   const timedCount = steps.filter((item) => (item.timer_seconds ?? 0) > 0).length;
+  const progressPct = steps.length > 0 ? ((index + 1) / steps.length) * 100 : 0;
 
   const stepList = (
     <ol className="cook-step-overview__list">
       {steps.map((item, i) => (
         <li
-          key={i}
+          key={`${i}-${item.text.slice(0, 24)}`}
           className={`${i === index ? 'is-current' : ''} ${done.has(i) ? 'is-done' : ''}`}
         >
           <button
@@ -270,12 +250,14 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
   );
 
   return (
-    <div
+    <dialog
       ref={dialogRef}
       className="cook-root"
-      role="dialog"
-      aria-modal="true"
       aria-labelledby="cook-dialog-title"
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
     >
       <header className="cook-mode__header">
         <button
@@ -287,7 +269,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
         >
           <SpriteIcon name="x" size={22} />
         </button>
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="cook-mode__title-wrap">
           <div className="cook-mode__eyebrow">Режим готовки</div>
           <div className="cook-mode__title" id="cook-dialog-title">
             {title}
@@ -346,7 +328,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                   <input
                     type="datetime-local"
                     className="cook-datetime"
-                    defaultValue={toDatetimeLocal(new Date(Date.now() + 3600000))}
+                    value={toDatetimeLocal(new Date(startMs))}
                     onChange={(e) => {
                       const parsed = new Date(e.target.value);
                       if (!Number.isNaN(parsed.getTime())) setStartMs(parsed.getTime());
@@ -362,8 +344,8 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                   Напоминания о разморозке, достаньте из холодильника, маринаде
                 </p>
                 <ul className="cook-prep-list">
-                  {prep.map((item) => (
-                    <li key={`${item.type}-${item.text}`} className="cook-prep-item">
+                  {prep.map((item, i) => (
+                    <li key={`${i}-${item.type}-${item.text.slice(0, 24)}`} className="cook-prep-item">
                       <div className="cook-prep-item__body">
                         <span className="cook-prep-item__type">
                           {PREP_LABELS[item.type] || 'Подготовка'}
@@ -393,7 +375,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
               </div>
             </section>
             <div className="cook-setup__actions">
-              <button type="button" className="btn-primary" onClick={() => setPhase('steps')}>
+              <button type="button" className="btn-primary" onClick={beginCooking}>
                 Начать готовку
               </button>
               {prep.length > 0 && (
@@ -407,14 +389,19 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
               )}
             </div>
           </div>
+        ) : steps.length === 0 ? (
+          <div className="cook-complete">
+            <h2>Нет шагов</h2>
+            <p>У этого рецепта нет шагов для режима готовки.</p>
+            <button type="button" className="btn-primary" onClick={close}>
+              Закрыть
+            </button>
+          </div>
         ) : (
           <div className="cook-steps">
             <div className="cook-steps__main">
               <div className="cook-progress" aria-hidden>
-                <div
-                  className="cook-progress__bar"
-                  style={{ width: `${((index + 1) / steps.length) * 100}%` }}
-                />
+                <div className="cook-progress__bar" style={{ width: `${progressPct}%` }} />
               </div>
               <div className="cook-progress__label" aria-live="polite">
                 Шаг {index + 1} из {steps.length}
@@ -428,13 +415,13 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                   <span className="temp-chip">снятие {step.pull_internal_temperature_c} °C</span>
                 )}
                 {timerSec > 0 && (
-                  <div className={`cook-step-timer${running ? ' is-running' : ''}`}>
+                  <div className={`cook-step-timer${countdown.running ? ' is-running' : ''}`}>
                     <div>{step.timer_label || formatDuration(timerSec)}</div>
                     <div className="cook-step-timer__display" aria-live="polite">
-                      {formatClock(remaining ?? timerSec)}
+                      {formatClock(shownSeconds)}
                     </div>
                     {step.timer_note && <p className="note">{step.timer_note}</p>}
-                    {!running && (
+                    {!countdown.running && (
                       <div className="cook-step-timer__adjust">
                         <button
                           type="button"
@@ -454,10 +441,10 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                         </button>
                       </div>
                     )}
-                    <div className="recipe-actions" style={{ border: 'none', marginTop: 12, paddingTop: 0 }}>
-                      {running ? (
+                    <div className="cook-timer-actions">
+                      {countdown.running ? (
                         <>
-                          <button type="button" className="btn-secondary" onClick={() => setRunning(false)}>
+                          <button type="button" className="btn-secondary" onClick={countdown.pause}>
                             Пауза
                           </button>
                           <button type="button" className="btn-secondary" onClick={resetTimer}>
@@ -466,7 +453,9 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                         </>
                       ) : (
                         <button type="button" className="btn-primary" onClick={startTimer}>
-                          {remaining != null && remaining < timerSec && remaining > 0
+                          {remainingSeconds != null &&
+                          remainingSeconds < timerSec &&
+                          remainingSeconds > 0
                             ? 'Продолжить'
                             : `Старт ${formatDuration(timerSec)}`}
                         </button>
@@ -475,7 +464,7 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
                   </div>
                 )}
               </article>
-              <label className="cook-step-check" style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+              <label className="cook-step-check">
                 <input
                   type="checkbox"
                   checked={done.has(index)}
@@ -528,6 +517,6 @@ export function CookMode({ title, steps, prep: rawPrep, open, onClose }: Props) 
           {toast}
         </div>
       )}
-    </div>
+    </dialog>
   );
 }

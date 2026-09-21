@@ -13,10 +13,11 @@ export type ExclusiveStepGroup = {
 
 function choiceFromText(text: string, index: number): StepChoice | null {
   if (!/пропуст/i.test(text)) return null;
-  if (/грудк/i.test(text)) {
+  const head = text.split(/Если\s/i)[0];
+  if (/грудк/i.test(head)) {
     return { id: 'breast', label: 'Грудка', indexes: [index] };
   }
-  if (/бедр/i.test(text)) {
+  if (/бедр/i.test(head)) {
     return { id: 'thigh', label: 'Бедро', indexes: [index] };
   }
   return {

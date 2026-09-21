@@ -5,6 +5,9 @@ export function unknownAllergenLabel(code: string): string {
   if (code === 'celery') {
     return 'Проверьте состав бульона: возможен сельдерей';
   }
+  if (code === 'egg') {
+    return 'Проверьте состав печенья и готовых смесей: возможно яйцо';
+  }
   return `Возможно содержит ${labelOf(ALLERGEN, code)} — зависит от покупного продукта`;
 }
 

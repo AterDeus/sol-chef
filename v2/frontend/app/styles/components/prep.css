@@ -158,13 +158,23 @@
     gap: 0.4rem 0.75rem;
     margin: 0;
     font-size: var(--fs-15);
+    text-decoration: none;
+    color: inherit;
 
-    input {
+    .prep-toggle__mark {
       inline-size: 1.1rem;
       block-size: 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 0.2rem;
+      background: var(--surface-2);
     }
 
-    span {
+    &.is-on .prep-toggle__mark {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    span:not(.prep-toggle__mark) {
       flex-basis: 100%;
       color: var(--text-dim);
       font-size: var(--fs-13);

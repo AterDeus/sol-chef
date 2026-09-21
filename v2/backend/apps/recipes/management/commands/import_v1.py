@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 from decimal import Decimal
 from pathlib import Path
@@ -60,19 +61,26 @@ class Command(BaseCommand):
             action="store_true",
             help="Print a report and write nothing.",
         )
+        parser.add_argument(
+            "--publish",
+            action=argparse.BooleanOptionalAction,
+            default=True,
+            help="Публиковать импортированные рецепты V1 (по умолчанию да).",
+        )
 
     def handle(self, *args, **options):
         data_root = resolve_v1_root(Path(settings.V1_DATA_ROOT))
         dry_run = options["dry_run"]
+        publish = bool(options.get("publish", True))
         try:
-            report = run_import(data_root, dry_run=dry_run)
+            report = run_import(data_root, dry_run=dry_run, publish=publish)
         except V1ImportError as exc:
             raise CommandError(str(exc)) from exc
         for line in report:
             self.stdout.write(line)
 
 
-def run_import(data_root: Path, *, dry_run: bool) -> list[str]:
+def run_import(data_root: Path, *, dry_run: bool, publish: bool = True) -> list[str]:
     recipes = load_recipe_objects(data_root)
     ingredient_map = _load_json(FIXTURES / "v1_ingredient_map.json")
     temp_seed = _load_json(FIXTURES / "v1_step_temperatures.json")
@@ -99,7 +107,7 @@ def run_import(data_root: Path, *, dry_run: bool) -> list[str]:
             if _is_v2_overlay(item["slug"]):
                 skipped_overlay += 1
                 continue
-            _upsert_recipe(item)
+            _upsert_recipe(item, publish=publish)
         docs = ContentDocument.objects.count()
         if docs != EXPECTED_CONTENT_DOCUMENTS:
             raise V1ImportError(
@@ -353,7 +361,7 @@ def _is_v2_overlay(slug: str) -> bool:
     return Recipe.objects.filter(slug=slug, time_total_minutes__isnull=False).exists()
 
 
-def _upsert_recipe(item: dict) -> None:
-    upsert_recipe(item)
+def _upsert_recipe(item: dict, *, publish: bool = True) -> None:
+    upsert_recipe(item, publish=publish)
 
 

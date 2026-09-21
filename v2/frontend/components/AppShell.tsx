@@ -1,8 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Footer, GuideStrip, Header, TabBar, isRecipeDetail } from './Chrome';
+import { KeepScrollOnQuery } from '@/lib/keep-scroll';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -15,6 +16,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <KeepScrollOnQuery />
+      </Suspense>
       <a className="skip-link" href="#main">
         К содержимому
       </a>

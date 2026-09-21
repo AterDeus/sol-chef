@@ -17,42 +17,27 @@ export function AllergenNotice({
   const contains = allergens?.contains ?? [];
   const mayContain = allergens?.may_contain ?? [];
   const unknown = allergens?.unknown ?? [];
+  const confirmed = [
+    ...contains.map((code) => ({ key: `c-${code}`, text: containsAllergenLabel(code) })),
+    ...mayContain.map((code) => ({ key: `m-${code}`, text: mayContainAllergenLabel(code) })),
+  ];
 
   return (
-    <div
-      className={compact ? 'allergen-notice allergen-notice--compact' : 'allergen-notice'}
-      aria-label="Аллергены"
-    >
-      {contains.length > 0 || mayContain.length > 0 ? (
-        <div className="allergen-notice__group">
-          {!compact ? <p className="allergen-notice__kicker">Аллергены рецепта</p> : null}
-          <ul>
-            {contains.map((code) => (
-              <li key={`c-${code}`} className="allergen-chip allergen-chip--contains">
-                {containsAllergenLabel(code)}
-              </li>
-            ))}
-            {mayContain.map((code) => (
-              <li key={`m-${code}`} className="allergen-chip allergen-chip--may">
-                {mayContainAllergenLabel(code)}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className={compact ? 'allergen-notice allergen-notice--compact' : 'allergen-notice'}>
+      <p className="allergen-notice__title">Аллергены:</p>
+      {confirmed.length > 0 ? (
+        <ul className="allergen-notice__list">
+          {confirmed.map((item) => (
+            <li key={item.key}>{item.text}</li>
+          ))}
+        </ul>
       ) : null}
       {unknown.length > 0 ? (
-        <div className="allergen-notice__group">
-          {!compact ? (
-            <p className="allergen-notice__kicker">Возможные аллергены в покупных продуктах</p>
-          ) : null}
-          <ul>
-            {unknown.map((code) => (
-              <li key={`u-${code}`} className="allergen-chip allergen-chip--unknown">
-                {unknownAllergenLabel(code)}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="allergen-notice__notes">
+          {unknown.map((code) => (
+            <li key={`u-${code}`}>{unknownAllergenLabel(code)}</li>
+          ))}
+        </ul>
       ) : null}
     </div>
   );

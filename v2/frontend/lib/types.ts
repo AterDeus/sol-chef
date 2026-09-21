@@ -26,6 +26,7 @@ export type RecipeCardData = {
   protein_bases?: string[];
   protein_variants?: Array<{ code: string; title: string; protein_base: string }>;
   cook_method: string;
+  cook_methods?: string[];
   dish_type: string;
   equipment?: string | null;
   allowed_cuts?: string[];
@@ -39,6 +40,7 @@ export type RecipeCardData = {
   effort_level?: number | null;
   washing_level?: number | null;
   use_cases?: string[];
+  requires_prep?: boolean;
   why?: string[];
   score?: number;
   applied_axes?: { variant: string | null; equipment: string | null };
@@ -211,6 +213,7 @@ export type RecipeDetail = {
   washing_level?: number | null;
   use_cases?: string[];
   adaptations?: RecipeAdaptation[];
+  requires_prep?: boolean;
   prep_context?: PrepContext | null;
 };
 

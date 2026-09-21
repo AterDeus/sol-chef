@@ -189,7 +189,8 @@ def test_u52_list_published_order():
     upsert_kit(
         _payload(
             soup=soup.slug, wrap=wrap.slug, extra=extra.slug, kit_id="kit-b", position=2
-        )
+        ),
+        publish=True,
     )
     upsert_kit(
         _payload(
@@ -199,7 +200,8 @@ def test_u52_list_published_order():
             kit_id="kit-a",
             position=2,
             title="A",
-        )
+        ),
+        publish=True,
     )
     draft = PrepKit.objects.create(slug="hidden", title="no", status="draft", position=0)
     client = APIClient()
@@ -213,7 +215,8 @@ def test_u52_list_published_order():
 def test_prep_list_keeps_stored_kcal():
     soup, wrap, extra = _trio("kcal")
     kit = upsert_kit(
-        _payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug, kit_id="kit-kcal")
+        _payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug, kit_id="kit-kcal"),
+        publish=True,
     )
     assert kit is not None
     stored = dict(kit.metrics or {})
@@ -228,10 +231,16 @@ def test_prep_list_keeps_stored_kcal():
 
 def test_u53_import_fourteen_slots():
     soup, wrap, extra = _trio("b")
-    kit = upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    payload = _payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug)
+    kit = upsert_kit(payload)
     assert kit is not None
-    assert kit.status == "published"
+    assert kit.status == "draft"
     assert kit.slots.count() == 14
+    published = upsert_kit(payload, publish=True)
+    assert published is not None
+    assert published.status == "published"
+    assert published.pk == kit.pk
+    assert published.slots.count() == 14
 
 
 def test_u54_import_rejects_bad_refs():
@@ -268,7 +277,7 @@ def test_u54_import_rejects_bad_refs():
 
 def test_u55_recipe_without_prep_keeps_book_steps():
     soup, wrap, extra = _trio("d")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug), publish=True)
     client = APIClient()
     res = client.get(f"/api/recipes/{soup.slug}/")
     assert res.status_code == 200
@@ -278,7 +287,7 @@ def test_u55_recipe_without_prep_keeps_book_steps():
 
 def test_u56_ambiguous_prep_without_day_meal():
     soup, wrap, extra = _trio("e")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug), publish=True)
     client = APIClient()
     res = client.get(f"/api/recipes/{wrap.slug}/", {"prep": "nedelya-test"})
     assert res.status_code == 400
@@ -286,7 +295,7 @@ def test_u56_ambiguous_prep_without_day_meal():
 
 def test_u57_prep_slot_steps_and_mode():
     soup, wrap, extra = _trio("f")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug), publish=True)
     client = APIClient()
     res = client.get(
         f"/api/recipes/{soup.slug}/",
@@ -301,7 +310,7 @@ def test_u57_prep_slot_steps_and_mode():
 
 def test_u58_servings_scales_qty_not_box_count():
     soup, wrap, extra = _trio("g")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug), publish=True)
     client = APIClient()
     base = client.get("/api/prep-kits/nedelya-test/").json()
     scaled = client.get("/api/prep-kits/nedelya-test/", {"servings": "4"}).json()
@@ -318,7 +327,10 @@ def test_u58_servings_scales_qty_not_box_count():
 def test_u59_alternative_uses_own_steps():
     soup, wrap, extra = _trio("h")
     alt = _recipe("wrap-alt")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug, alt=alt.slug))
+    upsert_kit(
+        _payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug, alt=alt.slug),
+        publish=True,
+    )
     client = APIClient()
     res = client.get(
         f"/api/recipes/{alt.slug}/",
@@ -331,7 +343,7 @@ def test_u59_alternative_uses_own_steps():
 
 def test_u60_anchor_weight_with_prep_rejected():
     soup, wrap, extra = _trio("i")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug), publish=True)
     client = APIClient()
     res = client.get(
         f"/api/recipes/{soup.slug}/",
@@ -342,7 +354,7 @@ def test_u60_anchor_weight_with_prep_rejected():
 
 def test_u61_no_leftover_replaces_reheat():
     soup, wrap, extra = _trio("j")
-    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug))
+    upsert_kit(_payload(soup=soup.slug, wrap=wrap.slug, extra=extra.slug), publish=True)
     client = APIClient()
     base = client.get("/api/prep-kits/nedelya-test/").json()
     reheat = next(row for row in base["slots"] if row["mode"] == "reheat")

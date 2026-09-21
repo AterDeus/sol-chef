@@ -12,6 +12,7 @@ App Router, TypeScript. Прод-сборка: `output: 'standalone'`. Срез 
 |------------|-----|---------|
 | `INTERNAL_API_URL` | сервер Next | `http://backend:8000` |
 | `NEXT_PUBLIC_API_URL` | браузер | пустая строка → относительный `/api` |
+| `SITE_URL` | сервер Next | публичный origin sitemap / canonical. Локально `http://localhost:8080` |
 
 SSR ходит на Django напрямую. Браузер — на `/api/` того же origin (Caddy). Не `localhost:8080` из контейнера frontend.
 
@@ -21,9 +22,11 @@ SSR ходит на Django напрямую. Браузер — на `/api/` т�
 
 ## Скрипты
 
+При работающем локальном Compose frontend уже запущен в Docker как `next dev`. Не выполняйте на хосте `npm run build`: папка `.next` смонтирована в контейнер, и production-сборка ломает ссылки dev-сервера на чанки. Для проверки типов используйте `npx tsc --noEmit`; production-сборка выполняется в образе из `Dockerfile.prod`.
+
 ```bash
 npm install
 npm run dev    # :3000
-npm run build
+npm run build  # только вне запущенного local Compose
 npm start
 ```

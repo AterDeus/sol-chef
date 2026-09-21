@@ -1,22 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useId, useState } from 'react';
-import { clientFetch } from '@/lib/client-api';
+import { useEffect, useId, useRef, useState } from 'react';
+import { fetchJson, isAbortError } from '@/lib/client-api';
 import { FILTER_KEYS, toURLSearchParams, valuesOf } from '@/lib/filters';
+import { pantryItemPath } from '@/lib/pantry';
 import type { PantryGroup, PantryResolveResponse, SearchParamsRecord } from '@/lib/types';
-
-function pathForHave(groups: PantryGroup[], canonicalId: string): string {
-  for (const group of groups) {
-    const own = group.items?.find((item) => item.canonical_id === canonicalId);
-    if (own) return own.title;
-    for (const child of group.children ?? []) {
-      const nested = child.items?.find((item) => item.canonical_id === canonicalId);
-      if (nested) return nested.title;
-    }
-  }
-  return canonicalId;
-}
 
 export function PantryTextForm({
   sp,
@@ -26,8 +15,11 @@ export function PantryTextForm({
   groups: PantryGroup[];
 }) {
   const router = useRouter();
+  const fieldId = useId();
   const hintId = useId();
   const resultId = useId();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const controllerRef = useRef<AbortController | null>(null);
   const initialText = valuesOf(sp, 'pantry')[0] ?? '';
   const [text, setText] = useState(initialText);
   const [unknown, setUnknown] = useState<string[]>(valuesOf(sp, 'missed'));
@@ -38,16 +30,28 @@ export function PantryTextForm({
   const missed = unknown.length ? unknown : valuesOf(sp, 'missed');
   const showResult = recognized.length > 0 || missed.length > 0 || Boolean(error);
 
+  useEffect(
+    () => () => {
+      controllerRef.current?.abort();
+    },
+    [],
+  );
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const raw = text.trim();
     if (!raw) return;
+    controllerRef.current?.abort();
+    const controller = new AbortController();
+    controllerRef.current = controller;
     setBusy(true);
     setError('');
     setUnknown([]);
     try {
-      const res = await clientFetch(`/api/ingredients/?text=${encodeURIComponent(raw)}`);
-      const body = (await res.json()) as PantryResolveResponse;
+      const body = await fetchJson<PantryResolveResponse>(
+        `/api/ingredients/?text=${encodeURIComponent(raw)}`,
+        { signal: controller.signal },
+      );
       const items = body.items ?? [];
       const missedItems = body.unknown ?? [];
       setUnknown(missedItems);
@@ -67,18 +71,20 @@ export function PantryTextForm({
       for (const item of items) qs.append('have', item.canonical_id);
       for (const item of missedItems) qs.append('missed', item);
       router.push(qs.toString() ? `/calculator?${qs.toString()}` : '/calculator');
-    } catch {
+    } catch (err) {
+      if (isAbortError(err)) return;
       setError('Не удалось связаться с сервером. Попробуйте позже.');
     } finally {
-      setBusy(false);
+      if (controllerRef.current === controller) setBusy(false);
     }
   }
 
   return (
     <form className="calc-pantry" action="/calculator" method="get" onSubmit={onSubmit}>
-      <label htmlFor="pantry-text">Что есть дома</label>
+      <label htmlFor={fieldId}>Что есть дома</label>
       <textarea
-        id="pantry-text"
+        ref={textareaRef}
+        id={fieldId}
         name="pantry"
         rows={2}
         value={text}
@@ -105,7 +111,7 @@ export function PantryTextForm({
           {recognized.length > 0 ? (
             <p>
               <strong>Распознали:</strong>{' '}
-              {recognized.map((id) => pathForHave(groups, id)).join(', ')}
+              {recognized.map((id) => pantryItemPath(groups, id)).join(', ')}
             </p>
           ) : null}
           {missed.length > 0 ? (
@@ -118,7 +124,7 @@ export function PantryTextForm({
           <button
             type="button"
             className="calc-pantry__edit"
-            onClick={() => document.getElementById('pantry-text')?.focus()}
+            onClick={() => textareaRef.current?.focus()}
           >
             Изменить запрос
           </button>

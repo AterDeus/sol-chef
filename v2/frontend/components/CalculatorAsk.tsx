@@ -1,7 +1,11 @@
+'use client';
+
 import type { ReactNode } from 'react';
 import type { PantryGroup, SearchParamsRecord } from '@/lib/types';
 import { isSelected, toggleHaveGroupHref, toggleHref, valuesOf } from '@/lib/filters';
-import { ALLERGEN, EQUIPMENT, INTENT } from '@/lib/vocab';
+import { pantryItemPath } from '@/lib/pantry';
+import { captureScrollClick } from '@/lib/keep-scroll';
+import { ALLERGEN, EQUIPMENT_FILTER, INTENT } from '@/lib/vocab';
 import { ChipGroup } from '@/components/FilterPanel';
 import { PantryTextForm } from '@/components/PantryTextForm';
 import { SpriteIcon } from '@/components/SpriteIcon';
@@ -24,24 +28,12 @@ function ChipRow({
   return (
     <div className="chip-row">
       {items.map((item) => (
-        <FilterChip key={item.id} href={item.href} pressed={item.selected}>
+        <FilterChip key={item.id} href={item.href} selected={item.selected}>
           {item.title}
         </FilterChip>
       ))}
     </div>
   );
-}
-
-function pathForHave(groups: PantryGroup[], canonicalId: string): string {
-  for (const group of groups) {
-    const own = group.items?.find((item) => item.canonical_id === canonicalId);
-    if (own) return `${group.title} · ${own.title}`;
-    for (const child of group.children ?? []) {
-      const nested = child.items?.find((item) => item.canonical_id === canonicalId);
-      if (nested) return `${group.title} · ${child.title} · ${nested.title}`;
-    }
-  }
-  return canonicalId;
 }
 
 function PickedBar({
@@ -61,10 +53,12 @@ function PickedBar({
           <li key={id}>
             <Link
               href={toggleHref('/calculator', sp, 'have', id)}
+              scroll={false}
               className="calc-picked__chip"
-              aria-label={`Убрать: ${pathForHave(groups, id)}`}
+              aria-label={`Убрать: ${pantryItemPath(groups, id)}`}
+              onClick={captureScrollClick}
             >
-              <span>{pathForHave(groups, id)}</span>
+              <span>{pantryItemPath(groups, id)}</span>
               <SpriteIcon name="x" size={14} />
             </Link>
           </li>
@@ -102,7 +96,13 @@ function Branch({
           <h3 className="calc-branch__title">{title}</h3>
           {hint ? <p className="calc-branch__hint">{hint}</p> : null}
         </div>
-        <Link href={closeHref} className="calc-branch__close" aria-label={closeLabel}>
+        <Link
+          href={closeHref}
+          scroll={false}
+          className="calc-branch__close"
+          aria-label={closeLabel}
+          onClick={captureScrollClick}
+        >
           <SpriteIcon name="x" size={18} />
           <span>Убрать</span>
         </Link>
@@ -144,7 +144,7 @@ export function CalculatorAsk({
               <FilterChip
                 key={group.id}
                 href={toggleHaveGroupHref('/calculator', sp, group.id, groups)}
-                pressed={selected}
+                selected={selected}
               >
                 {group.title}
               </FilterChip>
@@ -165,9 +165,11 @@ export function CalculatorAsk({
             closeHref={toggleHaveGroupHref('/calculator', sp, group.id, groups)}
             closeLabel={`Убрать: ${group.title}`}
             hint={
-              children.length > 0
-                ? 'Сначала вид, потом отруб с витрины'
-                : 'Отметьте, что лежит дома'
+              children.length === 0
+                ? 'Отметьте, что лежит дома'
+                : group.id === 'meat'
+                  ? 'Сначала вид, потом отруб. Заготовки — отдельно'
+                  : 'Сначала полка, потом продукт'
             }
           >
             {children.length > 0 ? (
@@ -188,7 +190,9 @@ export function CalculatorAsk({
                     path={`${group.title} → ${child.title}`}
                     closeHref={toggleHaveGroupHref('/calculator', sp, child.id, groups)}
                     closeLabel={`Убрать: ${child.title}`}
-                    hint="Что именно купили"
+                    hint={
+                      child.id === 'prep' ? 'Что уже готово дома' : 'Что именно купили'
+                    }
                   >
                     <ChipRow
                       items={(child.items ?? []).map((item) => ({
@@ -224,7 +228,10 @@ export function CalculatorAsk({
               <FilterChip
                 key={code}
                 href={toggleHref('/calculator', sp, 'intent', code)}
-                pressed={selected}
+                selected={selected}
+                hint={
+                  code === 'light' ? 'Полегче по составу, не по калориям' : undefined
+                }
               >
                 {INTENT[code]}
               </FilterChip>
@@ -237,7 +244,7 @@ export function CalculatorAsk({
         <summary aria-controls="calc-extra-panel">Ещё условия</summary>
         <div id="calc-extra-panel">
           <ChipGroup legend="Без чего" map={ALLERGEN} param="without" pathname="/calculator" sp={sp} />
-          <ChipGroup legend="Посуда" map={EQUIPMENT} param="equipment" pathname="/calculator" sp={sp} />
+          <ChipGroup legend="Посуда" map={EQUIPMENT_FILTER} param="equipment" pathname="/calculator" sp={sp} />
         </div>
       </details>
     </section>

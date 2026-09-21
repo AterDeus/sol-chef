@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from apps.core.numbers import decimal_json
 from apps.recipes.models import Recipe
 
 
@@ -11,9 +12,7 @@ def _num(value):
     if value is None:
         return None
     if isinstance(value, Decimal):
-        if value == value.to_integral_value():
-            return int(value)
-        return float(value)
+        return decimal_json(value)
     return value
 
 

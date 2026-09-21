@@ -31,7 +31,7 @@ export function ChipGroup({
             <FilterChip
               key={code}
               href={toggleHref(pathname, sp, param, code)}
-              pressed={selected}
+              selected={selected}
             >
               {label}
             </FilterChip>

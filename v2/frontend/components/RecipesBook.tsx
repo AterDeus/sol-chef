@@ -13,10 +13,12 @@ import {
 import {
   BOOK_CHAPTERS,
   COOK_METHOD,
+  METHOD_ONLY_EQUIPMENT,
   PROTEIN_BASE,
   chapterIdsForRecipe,
   equipmentLabel,
   labelOf,
+  recipeCookMethods,
   recipeProteinCodes,
 } from '@/lib/vocab';
 import {
@@ -73,6 +75,27 @@ function matchesProteinFilter(recipe: RecipeCardData, proteinFilter: string[]): 
   return recipeProteinCodes(recipe).some((code) => proteinFilter.includes(code));
 }
 
+function countCookMethods(recipes: RecipeCardData[]): Map<string, number> {
+  const map = new Map<string, number>();
+  for (const recipe of recipes) {
+    for (const code of recipeCookMethods(recipe)) {
+      map.set(code, (map.get(code) || 0) + 1);
+    }
+  }
+  return map;
+}
+
+function matchesMethodFilter(recipe: RecipeCardData, method: string): boolean {
+  return recipeCookMethods(recipe).includes(method);
+}
+
+function matchesEquipmentFilter(recipe: RecipeCardData, equipment: string): boolean {
+  if (METHOD_ONLY_EQUIPMENT.has(equipment)) {
+    return recipeCookMethods(recipe).includes(equipment);
+  }
+  return recipe.equipment === equipment;
+}
+
 function sortByVocab(codes: string[], order: readonly string[]): string[] {
   const rank = new Map(order.map((code, index) => [code, index]));
   return [...codes].sort((a, b) => (rank.get(a) ?? 99) - (rank.get(b) ?? 99));
@@ -99,6 +122,13 @@ export function RecipesBook({
   const [qLive, setQLive] = useState(urlQ);
 
   useEffect(() => {
+    setQLive(urlQ);
+    const active = document.activeElement;
+    if (active instanceof HTMLInputElement && active.name === 'q') return;
+    setQ(urlQ);
+  }, [urlQ]);
+
+  useEffect(() => {
     const timer = window.setTimeout(() => {
       setQLive(q);
       const qs = new URLSearchParams(window.location.search);
@@ -115,8 +145,17 @@ export function RecipesBook({
 
   const liveSp: SearchParamsRecord = { ...sp, q: qLive || undefined };
   const { chapter, selectedBases } = resolveBookChapter(liveSp);
-  const method = valuesOf(liveSp, 'cook_method')[0];
-  const equipment = valuesOf(liveSp, 'equipment')[0];
+  const requestedMethod = valuesOf(liveSp, 'cook_method')[0];
+  const requestedEquipment = valuesOf(liveSp, 'equipment')[0];
+  const method =
+    requestedMethod ||
+    (requestedEquipment && METHOD_ONLY_EQUIPMENT.has(requestedEquipment)
+      ? requestedEquipment
+      : undefined);
+  const equipment =
+    requestedEquipment && !METHOD_ONLY_EQUIPMENT.has(requestedEquipment)
+      ? requestedEquipment
+      : undefined;
   const proteinFilter = selectedBases.length === 1 ? selectedBases : [];
   const extrasOn = hasQuickFilters(liveSp);
   const filteredExtras = useMemo(
@@ -137,9 +176,11 @@ export function RecipesBook({
       ? pool.filter((item) => matchesProteinFilter(item, proteinFilter))
       : pool;
   const book = chapter ? { chapterId: chapter.id, proteinFilter } : undefined;
-  const methodCounts = inChapter ? countBy(afterProtein, 'cook_method') : new Map<string, number>();
+  const methodCounts = inChapter ? countCookMethods(afterProtein) : new Map<string, number>();
   const afterMethod =
-    inChapter && method ? afterProtein.filter((item) => item.cook_method === method) : afterProtein;
+    inChapter && method
+      ? afterProtein.filter((item) => matchesMethodFilter(item, method))
+      : afterProtein;
   const equipmentPool = inChapter ? (method ? afterMethod : afterProtein) : [];
   const equipmentCounts = inChapter ? countBy(equipmentPool, 'equipment') : new Map<string, number>();
   const showProtein =
@@ -148,8 +189,8 @@ export function RecipesBook({
   const showEquipment = [...equipmentCounts.keys()].filter(Boolean).length > 1;
   const cards = inChapter
     ? afterProtein.filter((item) => {
-        if (method && item.cook_method !== method) return false;
-        if (equipment && item.equipment !== equipment) return false;
+        if (method && !matchesMethodFilter(item, method)) return false;
+        if (equipment && !matchesEquipmentFilter(item, equipment)) return false;
         return true;
       })
     : extrasOn
@@ -192,7 +233,7 @@ export function RecipesBook({
             <FilterChip
               key={item.id}
               href={toggleHref('/recipes', liveSp, item.param, item.value)}
-              pressed={valuesOf(liveSp, item.param).includes(item.value)}
+              selected={valuesOf(liveSp, item.param).includes(item.value)}
             >
               {item.label}
             </FilterChip>
@@ -208,7 +249,7 @@ export function RecipesBook({
               <li key={`${chip.key}-${chip.value}`}>
                 <FilterChip
                   href={toggleHref('/recipes', liveSp, chip.key, chip.value)}
-                  pressed
+                  selected
                   ariaLabel={`Снять фильтр: ${chip.label}`}
                 >
                   {chip.label}
@@ -266,7 +307,7 @@ export function RecipesBook({
                     <FilterChip
                       key={code}
                       href={setHref('/recipes', chapterSp, 'protein_base', active ? null : code)}
-                      pressed={active}
+                      selected={active}
                     >
                       {labelOf(PROTEIN_BASE, code)} · {n}
                     </FilterChip>
@@ -287,7 +328,7 @@ export function RecipesBook({
                     <FilterChip
                       key={code}
                       href={setHref('/recipes', chapterSp, 'cook_method', method === code ? null : code)}
-                      pressed={method === code}
+                      selected={method === code}
                     >
                       {labelOf(COOK_METHOD, code)} · {n}
                     </FilterChip>
@@ -306,7 +347,7 @@ export function RecipesBook({
                     <FilterChip
                       key={code}
                       href={setHref('/recipes', chapterSp, 'equipment', equipment === code ? null : code)}
-                      pressed={equipment === code}
+                      selected={equipment === code}
                     >
                       {equipmentLabel(code)} · {n}
                     </FilterChip>

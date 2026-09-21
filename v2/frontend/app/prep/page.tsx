@@ -3,8 +3,14 @@ import { fetchPrepKits } from '@/lib/api';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
 import { PageIntro } from '@/components/PageArt';
 import { formatMinutes, kitDurationMinutes, savingsMinutes } from '@/lib/prep';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'На неделю',
+  description: 'Один выходной на заготовки — будни собрать тарелку за 10–20 минут.',
+};
 
 export default async function PrepCatalogPage() {
   const result = await fetchPrepKits();

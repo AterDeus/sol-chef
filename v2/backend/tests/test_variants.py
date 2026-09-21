@@ -9,9 +9,15 @@ import pytest
 from apps.recipes.query import BadQuery, parse_codes
 from apps.recipes.services.assemble import (
     VariantError,
+    VariantSelection,
     apply_ingredient_delta,
+    assemble,
     assemble_display,
+    assemble_recipe,
     available_equipment_codes,
+    build_read_model,
+    catalog_allergens,
+    catalog_cook_methods,
     catalog_protein_bases,
     catalog_protein_variants,
     count_anchors,
@@ -87,6 +93,33 @@ def test_u10_addon_delta_changes_display_legacy_does_not():
     assert [row["canonical_id"] for row in lines_legacy] == ["beef"]
 
 
+def test_combo_allergens_follow_assembled_lines():
+    base = [
+        _line(
+            canonical_id="yogurt",
+            name="йогурт",
+            is_anchor=False,
+            allergens_contains=["milk"],
+        )
+    ]
+    _lines, _steps, allergens, *_rest = assemble_display(
+        base_lines=base,
+        base_steps=[],
+        base_allergens={},
+        base_flags=[],
+        base_caution=None,
+        base_cook_method="pan_fry",
+        base_protein_base="eggs_dairy",
+        addon={
+            "has_delta": True,
+            "ingredient_delta": {"remove": [{"canonical_id": "yogurt"}]},
+            "allergen_delta": {"contains_remove": ["milk"]},
+        },
+        equipment=None,
+    )
+    assert "milk" not in allergens.get("contains", [])
+
+
 def test_u11_unknown_variant_equipment_cuts():
     recipe = SimpleNamespace(equipment="skillet")
     try:
@@ -144,6 +177,56 @@ def test_air_fryer_method_variant_on_equipment_axis():
         )
         raise AssertionError("expected VariantError")
     except VariantError:
+        pass
+
+
+def test_catalog_cook_methods_include_override():
+    class Related:
+        def __init__(self, items):
+            self._items = items
+
+        def all(self):
+            return self._items
+
+    recipe = SimpleNamespace(
+        cook_method="oven",
+        variants=Related(
+            [
+                SimpleNamespace(
+                    axis="equipment",
+                    has_delta=True,
+                    cook_method_override="air_fryer",
+                ),
+                SimpleNamespace(
+                    axis="equipment",
+                    has_delta=True,
+                    cook_method_override=None,
+                ),
+                SimpleNamespace(
+                    axis="addon",
+                    has_delta=True,
+                    cook_method_override="grill",
+                ),
+            ]
+        ),
+    )
+    assert catalog_cook_methods(recipe) == ["oven", "air_fryer"]
+
+
+def test_equipment_query_accepts_air_fryer_rejects_unknown():
+    class DummyRequest:
+        def __init__(self, values):
+            self.query_params = type(
+                "Q",
+                (),
+                {"getlist": staticmethod(lambda key, vals=values: vals if key == "equipment" else [])},
+            )()
+
+    assert parse_codes(DummyRequest(["air_fryer"]), "equipment") == ["air_fryer"]
+    try:
+        parse_codes(DummyRequest(["toaster"]), "equipment")
+        raise AssertionError("expected BadQuery")
+    except BadQuery:
         pass
 
 
@@ -320,6 +403,50 @@ def test_i8b_protein_filter_matches_override():
     ]
 
 
+@pytest.mark.skipif(
+    not (os.environ.get("POSTGRES_HOST") or os.environ.get("DATABASE_URL")),
+    reason="нет POSTGRES_HOST/DATABASE_URL",
+)
+@pytest.mark.django_db
+def test_i12b_equipment_filter_matches_air_fryer_axis_code():
+    from rest_framework.test import APIClient
+
+    from apps.recipes.models import RecipeVariant
+
+    recipe = _card(
+        slug="kartofel-po-derevenski-air",
+        title="Картофель по-деревенски",
+        cook_method="oven",
+        equipment="oven",
+    )
+    RecipeVariant.objects.create(
+        recipe=recipe,
+        axis="equipment",
+        code="air_fryer",
+        title="В аэрогриле",
+        has_delta=True,
+        cook_method_override="air_fryer",
+    )
+    other = _card(
+        slug="sup-bez-aerogrilya",
+        title="Суп без аэрогриля",
+        cook_method="boil",
+        equipment="pot",
+        dish_type="soup",
+    )
+    client = APIClient()
+    listed = client.get("/api/recipes/", {"equipment": "air_fryer"})
+    assert listed.status_code == 200
+    slugs = [item["slug"] for item in listed.json()["results"]]
+    assert recipe.slug in slugs
+    assert other.slug not in slugs
+    card = next(item for item in listed.json()["results"] if item["slug"] == recipe.slug)
+    assert card["cook_method"] == "oven"
+    assert card["cook_methods"] == ["oven", "air_fryer"]
+    unknown = client.get("/api/recipes/", {"equipment": "toaster"})
+    assert unknown.status_code == 400
+
+
 def _card(**kwargs):
     from apps.recipes.models import Recipe
 
@@ -370,3 +497,154 @@ def test_i16_catalog_page_size():
     assert client.get("/api/recipes/", {"sample": 0}).status_code == 400
     assert client.get("/api/recipes/", {"sample": 99}).status_code == 400
     assert client.get("/api/recipes/", {"sample": "x"}).status_code == 400
+
+
+def test_delta_missing_remove_target_raises():
+    try:
+        apply_ingredient_delta([_line()], {"remove": [{"canonical_id": "nope"}]})
+    except VariantError as exc:
+        assert "не найден" in str(exc)
+        return
+    raise AssertionError("expected VariantError")
+
+
+def test_delta_missing_replace_target_raises():
+    try:
+        apply_ingredient_delta(
+            [_line()],
+            {"replace": [{"canonical_id": "mushroom", "amount": Decimal("10")}]},
+        )
+    except VariantError as exc:
+        assert "не найден" in str(exc)
+        return
+    raise AssertionError("expected VariantError")
+
+
+def test_delta_double_replace_raises():
+    try:
+        apply_ingredient_delta(
+            [_line()],
+            {
+                "replace": [
+                    {"canonical_id": "beef", "amount": Decimal("100")},
+                    {"canonical_id": "beef", "amount": Decimal("200")},
+                ]
+            },
+        )
+    except VariantError as exc:
+        assert "более одного раза" in str(exc)
+        return
+    raise AssertionError("expected VariantError")
+
+
+def test_delta_remove_and_replace_same_line_raises():
+    try:
+        apply_ingredient_delta(
+            [_line()],
+            {
+                "remove": [{"canonical_id": "beef"}],
+                "replace": [{"canonical_id": "beef", "amount": Decimal("80")}],
+            },
+        )
+    except VariantError as exc:
+        assert "более одного раза" in str(exc)
+        return
+    raise AssertionError("expected VariantError")
+
+
+def test_catalog_allergens_ignores_step_delta_without_steps():
+    recipe = _recipe_stub()
+    recipe.variants = _Related(
+        [
+            SimpleNamespace(
+                code="chip",
+                title="чип",
+                axis="addon",
+                has_delta=True,
+                legacy_text=None,
+                ingredient_delta=None,
+                step_delta={"replace": [{"position": 99, "text": "другое"}]},
+                allergen_delta=None,
+                high_risk_delta={},
+                cook_method_override=None,
+                protein_base_override=None,
+                equipment=None,
+                caution_text_override=None,
+            )
+        ]
+    )
+    merged = catalog_allergens(recipe)
+    assert merged["contains"] == []
+    assert merged["unknown"] == []
+
+
+class _Related:
+    def __init__(self, items):
+        self._items = items
+
+    def all(self):
+        return self._items
+
+
+def _recipe_stub(line=None):
+    ing = SimpleNamespace(
+        canonical_id="beef",
+        title="говядина",
+        allergens_contains=[],
+        allergens_may_contain=[],
+        allergens_unknown=[],
+    )
+    row = line or SimpleNamespace(
+        ingredient=ing,
+        display_name=None,
+        amount=Decimal("500"),
+        amount_max=None,
+        unit="g",
+        detail=None,
+        scalable=True,
+        scale_mode="linear",
+        is_anchor=True,
+        optional=False,
+        nutrition_exclude=False,
+        nutrition_factor=None,
+        position=0,
+    )
+    return SimpleNamespace(
+        slug="x",
+        protein_base="beef",
+        cook_method="pan_fry",
+        equipment="skillet",
+        high_risk_flags=[],
+        caution_text=None,
+        notes=[],
+        prep=[],
+        ingredients=_Related([row]),
+        steps=_Related([]),
+        variants=_Related([]),
+    )
+
+
+def test_assemble_enrich_false_skips_nutrition_query(monkeypatch):
+    from apps.recipes.services import assemble as assemble_mod
+
+    def boom(*_args, **_kwargs):
+        raise AssertionError("enrich_lines_from_db must not run when enrich=False")
+
+    monkeypatch.setattr(assemble_mod, "enrich_lines_from_db", boom)
+    assembled = assemble_recipe(_recipe_stub(), enrich=False)
+    assert assembled.ingredients[0]["canonical_id"] == "beef"
+
+
+def test_assemble_from_read_model_is_pure(monkeypatch):
+    from apps.recipes.services import assemble as assemble_mod
+
+    def boom(*_args, **_kwargs):
+        raise AssertionError("assemble() must not touch ORM helpers")
+
+    recipe = _recipe_stub()
+    read_model = build_read_model(recipe, include_nutrition=False)
+    monkeypatch.setattr(assemble_mod, "lines_from_recipe", boom)
+    monkeypatch.setattr(assemble_mod, "enrich_lines_from_db", boom)
+    assembled = assemble(read_model, VariantSelection())
+    assert assembled.cook_method == "pan_fry"
+    assert [row["canonical_id"] for row in assembled.ingredients] == ["beef"]

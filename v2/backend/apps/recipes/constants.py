@@ -1,175 +1,56 @@
-"""VOCAB codes and display labels (API UI strings in Russian)."""
+"""VOCAB codes and display labels (API UI strings in Russian).
+
+Frozensets re-export domain.enums values so existing imports keep working.
+Pantry taxonomy lives in pantry_vocab; constants only lazy-reexports for
+callers that still import HAVE_GROUPS from here.
+"""
 
 from __future__ import annotations
 
-PROTEIN_BASE = frozenset(
-    {
-        "beef",
-        "pork",
-        "poultry",
-        "lamb",
-        "fish_white_sea",
-        "fish_red_sea",
-        "fish_river",
-        "fish_canned",
-        "seafood",
-        "offal",
-        "eggs_dairy",
-        "vegetarian",
-        "vegetables",
-        "mushrooms",
-        "legumes",
-        "fruits",
-    }
+from apps.recipes.domain.enums import (
+    AdaptationType,
+    Allergen,
+    CookMethod,
+    Cut,
+    DishType,
+    EnergyProfile,
+    Equipment,
+    HighRisk,
+    NutritionBasis,
+    NutritionSource,
+    ProteinBase,
+    RecipeStatus,
+    ScaleMode,
+    Unit,
+    UseCase,
+    VariantAxis,
+    YieldKind,
 )
 
-COOK_METHOD = frozenset(
-    {
-        "oven",
-        "pan_fry",
-        "stew",
-        "boil",
-        "grill",
-        "steam",
-        "no_cook",
-        "air_fryer",
-        "deep_fry",
-    }
-)
-
-DISH_TYPE = frozenset(
-    {
-        "main",
-        "soup",
-        "salad",
-        "appetizer",
-        "breakfast",
-        "side",
-        "pasta_grains",
-        "bakery",
-        "dessert",
-        "sauce",
-        "drink",
-        "preserve",
-    }
-)
+PROTEIN_BASE = frozenset(ProteinBase.values)
+COOK_METHOD = frozenset(CookMethod.values)
+DISH_TYPE = frozenset(DishType.values)
+SCALE_MODE = frozenset(ScaleMode.values)
+UNIT = frozenset(Unit.values)
+ALLERGEN = frozenset(Allergen.values)
+HIGH_RISK = frozenset(HighRisk.values)
+ENERGY_PROFILE = frozenset(EnergyProfile.values)
+NUTRITION_BASIS = frozenset(NutritionBasis.values)
+YIELD_KIND = frozenset(YieldKind.values)
+NUTRITION_SOURCE = frozenset(NutritionSource.values)
+EQUIPMENT = frozenset(Equipment.values)
+# Vessel plus method-only family codes that live on the equipment axis
+# (air_fryer / steam: VOCAB cook_method, no Equipment column).
+EQUIPMENT_AXIS = EQUIPMENT | frozenset({CookMethod.AIR_FRYER, CookMethod.STEAM})
+CUT = frozenset(Cut.values)
+VARIANT_AXIS = frozenset(VariantAxis.values)
+USE_CASE = frozenset(UseCase.values)
+ADAPTATION_TYPE = frozenset(AdaptationType.values)
+RECIPE_STATUS = frozenset(RecipeStatus.values)
 
 # Not a plate of food: compound butter, flavored oil, fried onions, jam.
 # Calculator "what should I cook" skips these while a standalone dish exists.
-COMPONENT_DISH_TYPES = frozenset({"sauce", "preserve"})
-
-SCALE_MODE = frozenset({"linear", "gentle", "whole", "manual"})
-
-UNIT = frozenset(
-    {
-        "g",
-        "kg",
-        "ml",
-        "l",
-        "pcs",
-        "tsp",
-        "tbsp",
-        "pinch",
-        "clove",
-        "bunch",
-        "slice",
-        "to_taste",
-    }
-)
-
-ALLERGEN = frozenset(
-    {
-        "gluten",
-        "milk",
-        "egg",
-        "fish",
-        "crustacean",
-        "mollusc",
-        "peanut",
-        "tree_nut",
-        "soy",
-        "sesame",
-        "mustard",
-        "celery",
-        "sulfite",
-        "lupin",
-    }
-)
-
-HIGH_RISK = frozenset(
-    {
-        "raw_egg",
-        "raw_meat",
-        "raw_fish",
-        "raw_milk",
-        "wild_mushrooms",
-        "ground_meat",
-        "preservation",
-        "fermentation",
-        "child_food",
-        "fire_hazard",
-        "poultry_temp",
-    }
-)
-
-ENERGY_PROFILE = frozenset({"standard", "light", "rich"})
-
-NUTRITION_BASIS = frozenset({"raw_100g"})
-
-YIELD_KIND = frozenset({"estimated", "exact"})
-
-NUTRITION_SOURCE = frozenset(
-    {"fooddata_central", "ru_table", "packaging_typical", "editorial"}
-)
-
-EQUIPMENT = frozenset(
-    {
-        "pot",
-        "oven",
-        "kazan",
-        "skillet",
-        "saucepan",
-        "baking_dish",
-        "grill",
-    }
-)
-
-CUT = frozenset(
-    {
-        "shank",
-        "shoulder",
-        "neck",
-        "rump",
-        "brisket",
-        "thick_rib",
-        "tenderloin",
-        "loin",
-        "belly",
-        "ribs",
-        "mince",
-        "breast",
-        "thigh",
-        "drumstick",
-        "wing",
-        "whole_bird",
-    }
-)
-
-VARIANT_AXIS = frozenset({"addon", "equipment", "energy"})
-
-USE_CASE = frozenset(
-    {
-        "fast",
-        "easy",
-        "pantry",
-        "one_pan",
-        "batch",
-        "budget",
-        "light",
-    }
-)
-
-ADAPTATION_TYPE = frozenset({"substitution", "omission", "equipment", "method"})
+COMPONENT_DISH_TYPES = frozenset({DishType.SAUCE, DishType.PRESERVE})
 
 USE_CASE_LABEL_RU = {
     "fast": "быстро",
@@ -182,8 +63,6 @@ USE_CASE_LABEL_RU = {
 }
 
 MAX_VARIANTS = 10
-
-RECIPE_STATUS = frozenset({"draft", "in_review", "approved", "published"})
 
 PROTEIN_BASE_LABEL_RU = {
     "beef": "говядина",
@@ -370,25 +249,38 @@ MEAT_CUTS = frozenset({"beef", "pork", "poultry"})
 SUBSTITUTION_QUALITY_MIN = 0.50
 BEST_BUCKET_LIMIT = 5
 
-from apps.recipes.pantry_vocab import (  # noqa: E402
-    CANONICAL_INGREDIENT_LABEL_RU,
-    HAVE_GROUP_LABEL_RU,
-    HAVE_GROUPS,
-    HAVE_TEXT_ALIASES,
-    HAVE_UI_GROUPS,
-    PANTRY_ASSUMED,
-    PANTRY_COMMON,
-    PANTRY_EXOTIC,
-    PANTRY_LEGACY_OR,
-    PANTRY_SPICES,
-    SHOPPING_GROUPS,
-    SHOPPING_GROUP_LABEL_RU,
+INTENT = frozenset({"fast", "pantry", "oven", "light", "easy", "batch"})
+
+_PANTRY_EXPORTS = frozenset(
+    {
+        "CANONICAL_INGREDIENT_LABEL_RU",
+        "HAVE_GROUP_LABEL_RU",
+        "HAVE_GROUPS",
+        "HAVE_TEXT_ALIASES",
+        "HAVE_UI_GROUPS",
+        "PANTRY_ASSUMED",
+        "PANTRY_COMMON",
+        "PANTRY_EXOTIC",
+        "PANTRY_LEGACY_OR",
+        "PANTRY_PREP",
+        "PANTRY_SPICES",
+        "SHOPPING_GROUPS",
+        "SHOPPING_GROUP_LABEL_RU",
+    }
 )
 
-# Old name: shopping taxonomy, not the first-screen chips.
-PANTRY_CHIP_GROUPS = SHOPPING_GROUPS
 
-INTENT = frozenset({"fast", "pantry", "oven", "light", "easy", "batch"})
+def __getattr__(name: str):
+    """Lazy pantry re-export so query.py/solve imports keep working."""
+    if name == "PANTRY_CHIP_GROUPS":
+        from apps.recipes.pantry_vocab import SHOPPING_GROUPS
+
+        return SHOPPING_GROUPS
+    if name in _PANTRY_EXPORTS:
+        from apps.recipes import pantry_vocab
+
+        return getattr(pantry_vocab, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 INTENT_LABEL_RU = {
     "fast": "Быстро",

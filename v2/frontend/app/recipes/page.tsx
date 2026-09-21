@@ -5,8 +5,14 @@ import { ErrorBanner } from '@/components/Feedback';
 import { PageIntro } from '@/components/PageArt';
 import { RecipesBook } from '@/components/RecipesBook';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Рецепты',
+  description: 'Книга рецептов: сначала основа, затем способ и посуда.',
+};
 
 export default async function RecipesPage({
   searchParams,

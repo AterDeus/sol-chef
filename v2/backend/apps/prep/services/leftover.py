@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from apps.prep.constants import NO_LEFTOVER_FALSE, NO_LEFTOVER_TRUE, PrepMode
 from apps.prep.exceptions import PrepError
-from apps.prep.models import PrepKit
+from apps.prep.models import PrepSlot
+from apps.prep.services.graph import source_key
+from apps.prep.services.read_model import KitData
 from apps.recipes.models import Recipe
-
-TRUE = frozenset({"1", "true", "yes", "on"})
-FALSE = frozenset({"0", "false", "no", "off", ""})
 
 
 def parse_no_leftover(request) -> bool:
@@ -17,9 +17,9 @@ def parse_no_leftover(request) -> bool:
     if raw is None or raw == "":
         return False
     value = str(raw).strip().lower()
-    if value in TRUE:
+    if value in NO_LEFTOVER_TRUE:
         return True
-    if value in FALSE:
+    if value in NO_LEFTOVER_FALSE:
         return False
     raise PrepError("no_leftover: 1 или 0.")
 
@@ -29,21 +29,17 @@ def no_leftover_payload(slot: PrepSlot) -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def leftover_qty_factors(kit: PrepKit) -> tuple[dict[str, Decimal], dict[str, Decimal]]:
+def leftover_qty_factors(data: KitData) -> tuple[dict[str, Decimal], dict[str, Decimal]]:
     """Box code → factor, exclusive shopping canonical_id → factor."""
-    slots = list(kit.slots.all())
-    boxes = list(kit.containers.select_related("component").all())
+    slots = list(data.slots)
+    boxes = list(data.containers)
     reheat_sources: set[tuple[int, str]] = set()
     source_feeds: dict[tuple[int, str], int] = {}
     for slot in slots:
-        if slot.mode != "reheat":
+        if slot.mode != PrepMode.REHEAT:
             continue
-        source = slot.source or {}
-        if source.get("kind") != "slot":
-            continue
-        try:
-            key = (int(source["day"]), str(source["meal"]))
-        except (KeyError, TypeError, ValueError):
+        key = source_key(slot)
+        if key is None:
             continue
         reheat_sources.add(key)
     for slot in slots:
@@ -53,7 +49,7 @@ def leftover_qty_factors(kit: PrepKit) -> tuple[dict[str, Decimal], dict[str, De
 
     weekend_users: dict[str, set[tuple[int, str]]] = {}
     for slot in slots:
-        if slot.mode == "reheat":
+        if slot.mode == PrepMode.REHEAT:
             continue
         for code in slot.container_ids or []:
             weekend_users.setdefault(str(code), set()).add((slot.day, slot.meal))
@@ -89,7 +85,6 @@ def leftover_qty_factors(kit: PrepKit) -> tuple[dict[str, Decimal], dict[str, De
             factor = min(box_factor[row.code] for row in group)
             for row in group:
                 scaled_boxes[row.code] = factor
-        # mixed leftover/shared component: do not scale (sum qty must hold)
 
     exclusive = leftover_canonical - other_canonical
     shop_factor: dict[str, Decimal] = {}
@@ -104,9 +99,9 @@ def leftover_qty_factors(kit: PrepKit) -> tuple[dict[str, Decimal], dict[str, De
     return scaled_boxes, shop_factor
 
 
-def replacement_slugs(kit: PrepKit) -> set[str]:
+def replacement_slugs(data: KitData) -> set[str]:
     slugs: set[str] = set()
-    for slot in kit.slots.all():
+    for slot in data.slots:
         payload = no_leftover_payload(slot)
         slug = str(payload.get("slug") or "").strip()
         if slug:
@@ -114,28 +109,30 @@ def replacement_slugs(kit: PrepKit) -> set[str]:
     return slugs
 
 
-def recipes_for_replacements(kit: PrepKit) -> dict[str, Recipe]:
-    slugs = replacement_slugs(kit)
+def recipes_for_replacements(data: KitData) -> dict[str, Recipe]:
+    slugs = replacement_slugs(data)
     if not slugs:
         return {}
-    return {row.slug: row for row in Recipe.objects.filter(slug__in=slugs, status="published")}
+    return {
+        row.slug: row
+        for row in Recipe.objects.filter(slug__in=slugs, status="published")
+    }
 
 
-def leftover_plan_cost(kit: PrepKit) -> dict[str, int]:
+def leftover_plan_cost(data: KitData) -> dict[str, int]:
     """Цена переключателя «Без вчерашнего»: N блюд и M уникальных позиций закупки."""
-    dishes = sum(1 for slot in kit.slots.all() if slot.mode == "reheat")
+    dishes = sum(1 for slot in data.slots if slot.mode == PrepMode.REHEAT)
     canonicals = {
-        str(row.get("canonical_id") or "").strip()
-        for row in shopping_additions(kit)
+        str(row.get("canonical_id") or "").strip() for row in shopping_additions(data)
     }
     canonicals.discard("")
     return {"dishes": dishes, "shopping_add": len(canonicals)}
 
 
-def shopping_additions(kit: PrepKit) -> list[dict]:
+def shopping_additions(data: KitData) -> list[dict]:
     rows: list[dict] = []
-    for slot in kit.slots.all():
-        if slot.mode != "reheat":
+    for slot in data.slots:
+        if slot.mode != PrepMode.REHEAT:
             continue
         payload = no_leftover_payload(slot)
         extra = payload.get("shopping_add") or []
@@ -149,26 +146,28 @@ def shopping_additions(kit: PrepKit) -> list[dict]:
 
 def merge_shopping(base: list, additions: list[dict]) -> list[dict]:
     merged: list[dict] = []
-    index: dict[str, int] = {}
-    for row in base:
+    index: dict[tuple[str, str], int] = {}
+
+    for row in [*base, *additions]:
         if not isinstance(row, dict):
             continue
-        cid = str(row.get("canonical_id") or "").strip()
-        item = dict(row)
-        if cid:
-            index[cid] = len(merged)
-        merged.append(item)
-    for row in additions:
-        cid = str(row.get("canonical_id") or "").strip()
-        if not cid:
+        canonical_id = str(row.get("canonical_id") or "").strip()
+        unit = str(row.get("unit") or "").strip()
+        if not canonical_id or not unit:
             continue
+
+        key = canonical_id, unit
         qty = Decimal(str(row.get("qty") or 0))
-        if cid in index:
-            target = merged[index[cid]]
-            target["qty"] = Decimal(str(target.get("qty") or 0)) + qty
-        else:
-            merged.append(dict(row))
-            index[cid] = len(merged) - 1
+        if key not in index:
+            index[key] = len(merged)
+            item = dict(row)
+            item["qty"] = qty
+            merged.append(item)
+            continue
+
+        target = merged[index[key]]
+        target["qty"] = Decimal(str(target["qty"])) + qty
+
     return merged
 
 

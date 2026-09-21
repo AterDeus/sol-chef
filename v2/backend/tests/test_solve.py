@@ -4,6 +4,7 @@ from types import SimpleNamespace
 
 from apps.recipes.query import BadQuery, parse_have, parse_have_groups, parse_intent
 from apps.recipes.services.pantry import resolve_pantry_text
+from apps.recipes.services.snapshots import snapshot_fits
 from apps.recipes.services.solve import (
     CookingSolution,
     assign_buckets,
@@ -11,10 +12,13 @@ from apps.recipes.services.solve import (
     build_board,
     combo_fits,
     combo_method_equipment,
+    intent_adjust,
     is_core_line,
     match_pantry,
     pantry_why,
     protein_from_pantry,
+    serialize_solution,
+    solve_recipe,
 )
 from apps.recipes.services.substitutions import SubRule, cover_need
 
@@ -333,6 +337,7 @@ def _sol(
     have_used: int = 0,
     have_all: bool = False,
     dish_type: str = "main",
+    time_total: int | None = None,
 ) -> CookingSolution:
     shopping = [{"canonical_id": "x", "title": "x"}] * missing
     return CookingSolution(
@@ -355,13 +360,14 @@ def _sol(
         step_count=steps,
         have_used=have_used,
         have_all=have_all,
+        time_total_minutes=time_total,
     )
 
 
 def test_build_board_featured_and_alts():
-    stew = _sol("a", "stew", 8, "Тушёное")
-    pan = _sol("b", "pan_fry", 4, "На сковороде")
-    oven = _sol("c", "oven", 6, "В духовке")
+    stew = _sol("a", "stew", 8, "Тушёное", time_total=90)
+    pan = _sol("b", "pan_fry", 4, "На сковороде", time_total=20)
+    oven = _sol("c", "oven", 6, "В духовке", time_total=45)
     featured, alts = build_board(
         [stew, pan, oven],
         {"now": [stew, pan, oven], "almost": [], "best": []},
@@ -371,7 +377,24 @@ def test_build_board_featured_and_alts():
     assert featured.slug == "a"
     labels = [label for label, _item in alts]
     assert "Быстрее" in labels
-    assert "Проще" in labels
+    assert "В духовке" in labels
+    assert "Проще" not in labels
+    faster = next(item for label, item in alts if label == "Быстрее")
+    assert faster.slug == "b"
+
+
+def test_build_board_no_faster_without_minutes():
+    stew = _sol("a", "stew", 8, "Тушёное")
+    pan = _sol("b", "pan_fry", 2, "На сковороде")
+    featured, alts = build_board(
+        [stew, pan],
+        {"now": [stew, pan], "almost": [], "best": []},
+        has_have=True,
+    )
+    assert featured is not None
+    labels = [label for label, _item in alts]
+    assert "Быстрее" not in labels
+    assert "На плите" in labels
 
 
 def test_salt_is_not_core():
@@ -393,6 +416,17 @@ def test_salt_is_not_core():
     assert not is_core_line(
         {"canonical_id": "water_or_stock", "optional": False, "unit": "ml"}
     )
+    assert not is_core_line(
+        {"canonical_id": "", "name": "хвостик", "optional": False, "unit": "g"}
+    )
+    shopping, _subs, hits, missing, _des, _cov, _used = match_pantry(
+        [{"canonical_id": "", "name": "хвостик", "optional": False, "unit": "g"}],
+        ["onion"],
+        [],
+    )
+    assert shopping == []
+    assert hits == 0
+    assert missing == 0
 
 
 def test_u20_mince_is_not_steak_or_butter():
@@ -411,6 +445,43 @@ def test_u20_mince_is_not_steak_or_butter():
     )
     assert pts == 6
     assert why == ["есть говяжий фарш"]
+
+    cases = (
+        ("poultry", "chicken_breast", "куриная грудка", "chicken_thighs", "куриные бёдра"),
+        ("beef", "steak", "стейк", "ribeye", "рибай"),
+        ("beef", "beef", "говядина", "beef_chuck", "говяжья лопатка"),
+        ("vegetables", "onion", "лук", "shallot", "лук-шалот"),
+        ("eggs_dairy", "eggs", "яйца", "egg", "яйцо"),
+    )
+    for base, need, need_title, have_id, have_title in cases:
+        titles = {need: need_title, have_id: have_title}
+        rules = [SubRule(frm=need, to=have_id, quality=0.88, forbidden=False)]
+        lines = [
+            {
+                "canonical_id": need,
+                "name": need_title,
+                "optional": False,
+                "unit": "g",
+            }
+        ]
+        _shop, subs, hits, missing, _des, covered, used = match_pantry(
+            lines, [have_id], rules, titles
+        )
+        assert missing == 0
+        assert hits == 1
+        assert covered == {need}
+        assert used == {have_id}
+        assert subs[0]["to_id"] == have_id
+        pts, why = protein_from_pantry(
+            SimpleNamespace(protein_base=base),
+            [have_id],
+            covered_ids=covered,
+            used_have=used,
+            titles=titles,
+        )
+        assert pts == 6, (base, need, have_id, pts, why)
+        assert why == [f"есть {have_title}"], (base, need, have_id, why)
+        assert f"есть {need_title}" not in why
 
     steak = _sol("stejk-reverse-sear", "oven", 8, "Reverse sear", hits=0, missing=1, protein="beef")
     butter = _sol(
@@ -531,18 +602,462 @@ def test_u22_helpers_not_featured_when_a_dish_exists():
 def test_meat_tree_and_parent_skip():
     from apps.recipes.pantry_vocab import (
         HAVE_GROUP_CHILDREN,
+        HAVE_GROUP_LABEL_RU,
         HAVE_GROUPS,
         groups_to_expand,
         items_for_have_group,
     )
 
-    assert HAVE_GROUP_CHILDREN["meat"] == ("pork", "beef", "lamb", "offal")
+    assert HAVE_GROUP_CHILDREN["meat"] == ("pork", "beef", "lamb", "offal", "prep")
     beef = items_for_have_group("beef")
+    assert beef[0] == "beef"
     assert "beef_tenderloin" in beef
     assert "beef_ribs" in beef
     assert "beef_round" in beef
     assert "beef_mince" in beef
     assert len(beef) > 5
     assert "rabbit" in HAVE_GROUPS["offal"]
+    assert HAVE_GROUP_LABEL_RU["offal"] == "Субпродукты"
+    assert items_for_have_group("prep") == ("shredded_beef",)
     assert groups_to_expand(["meat", "beef"]) == ["beef"]
-    assert groups_to_expand(["meat"]) == ["meat"]
+    assert groups_to_expand(["meat", "prep"]) == ["prep"]
+    assert groups_to_expand(["meat"]) == []
+    assert groups_to_expand(["veg"]) == []
+    assert groups_to_expand(["chicken"]) == []
+    assert groups_to_expand(["chicken", "veg"]) == []
+    assert groups_to_expand(["fish"]) == []
+    assert groups_to_expand(["eggs"]) == []
+    assert groups_to_expand(["other"]) == []
+    assert groups_to_expand(["other", "canned"]) == ["canned"]
+    assert HAVE_GROUP_CHILDREN["other"] == (
+        "legumes",
+        "canned",
+        "frozen",
+        "bakery",
+        "sauces",
+        "fats",
+    )
+    assert "canned_tuna" not in HAVE_GROUPS["canned"]
+    assert "canned_beans" not in HAVE_GROUPS["legumes"]
+    assert "canned_beans" in HAVE_GROUPS["canned"]
+    assert "sour_cream" not in HAVE_GROUPS["sauces"]
+    assert "butter" not in HAVE_GROUPS["fats"]
+    assert "beetroot" in HAVE_GROUPS["veg"]
+    assert "cabbage" in HAVE_GROUPS["veg"]
+
+    from apps.recipes.services.pantry import fill_have_from_groups
+
+    assert fill_have_from_groups([], ["veg"]) == []
+    assert fill_have_from_groups([], ["chicken"]) == []
+    assert fill_have_from_groups(["chicken_breast"], ["veg"]) == ["chicken_breast"]
+    assert fill_have_from_groups(["chicken_breast"], ["chicken"]) == ["chicken_breast"]
+    beef_pantry = fill_have_from_groups([], ["beef"])
+    assert "beef_tenderloin" in beef_pantry
+    assert "beef_mince" in beef_pantry
+    assert "shredded_beef" not in beef_pantry
+    assert "shredded_beef" not in HAVE_GROUPS["beef"]
+    assert fill_have_from_groups(["beef_tenderloin"], ["beef"]) == ["beef_tenderloin"]
+    assert fill_have_from_groups([], ["prep"]) == ["shredded_beef"]
+    canned_pantry = fill_have_from_groups([], ["canned"])
+    assert "canned_tomatoes" in canned_pantry
+    assert "canned_tuna" not in canned_pantry
+    assert fill_have_from_groups([], ["other"]) == []
+
+
+def test_u21c_prep_leftover_is_not_raw_species():
+    from apps.recipes.pantry_vocab import HAVE_GROUPS, availability_class
+    from apps.recipes.services.solver_scoring import unmet_prep_core
+
+    assert availability_class("shredded_beef") == "prep"
+    lines = [
+        {
+            "canonical_id": "shredded_beef",
+            "name": "говядина на волокна",
+            "optional": False,
+            "unit": "g",
+            "is_anchor": True,
+        }
+    ]
+    assert unmet_prep_core(lines, []) is True
+    assert unmet_prep_core(lines, list(HAVE_GROUPS["beef"])) is True
+    assert unmet_prep_core(lines, ["shredded_beef"]) is False
+
+    recipe = SimpleNamespace(
+        slug="govyadina-na-volokna-s-garnirom",
+        title="Говядина на волокна с гарниром",
+        dish_type="main",
+        editorial_tested=False,
+        protein_base="beef",
+        cook_method="pan_fry",
+        equipment="skillet",
+        energy_profile="standard",
+        variants=FakeRelated([]),
+        content_version=1,
+        snapshot_version=1,
+        axis_snapshots=[
+            {
+                "variant": None,
+                "equipment": "skillet",
+                "home": True,
+                "protein_base": "beef",
+                "protein_bases": ["beef"],
+                "cook_method": "pan_fry",
+                "lines": lines,
+                "allergens": {"contains": [], "may_contain": [], "unknown": []},
+                "high_risk_flags": [],
+                "step_count": 4,
+                "time_total_minutes": 20,
+                "time_active_minutes": 15,
+                "addon_penalty": 0,
+                "equipment_penalty": 0,
+            }
+        ],
+    )
+    catalog = {
+        "has_delta_variants": False,
+        "allowed_cuts": [],
+        "protein_bases": ["beef"],
+        "protein_variants": [],
+    }
+    kwargs = dict(
+        filter_protein=[],
+        filter_method=[],
+        filter_dish=[],
+        filter_equipment=[],
+        catalog_item=catalog,
+        rules=[],
+        titles={"shredded_beef": "говядина на волокна"},
+        intents=["fast"],
+    )
+    assert solve_recipe(recipe, have=list(HAVE_GROUPS["beef"]), **kwargs) is None
+    assert solve_recipe(recipe, have=[], **kwargs) is None
+    solved = solve_recipe(recipe, have=["shredded_beef"], **kwargs)
+    assert solved is not None
+    assert solved.requires_prep is True
+    assert solved.slug == "govyadina-na-volokna-s-garnirom"
+
+    from apps.recipes.services.pantry import fill_have_from_groups
+
+    prep_have = fill_have_from_groups([], ["prep"])
+    assert solve_recipe(recipe, have=prep_have, **kwargs) is not None
+
+
+def test_calculator_chip_titles_drop_species_and_capitalize():
+    from apps.recipes.pantry_vocab import chip_title
+
+    assert chip_title("beef") == "Любая говядина"
+    assert chip_title("beef_neck") == "Шея"
+    assert chip_title("beef_mince") == "Фарш"
+    assert chip_title("pork_neck") == "Шея"
+    assert chip_title("chicken_breast") == "Грудка"
+    assert chip_title("shredded_beef") == "Говядина на волокна"
+    assert chip_title("onion") == "Лук"
+    assert chip_title("beef_liver") == "Печень говяжья"
+    assert chip_title("canned_tomatoes") == "Томаты"
+    assert chip_title("canned_beans") == "Фасоль в банке"
+    assert chip_title("sunflower_oil") == "Подсолнечное"
+
+
+def test_u16b_substitution_status_is_not_now_copy():
+    why = pantry_why(
+        [],
+        [{"from_title": "лук", "to_title": "шалот"}],
+        has_have=True,
+    )
+    assert "можно приготовить с заменой" in why
+    assert "можно приготовить сейчас" not in why
+
+
+def test_u39_fast_uses_minutes_without_dropping():
+    assembled = SimpleNamespace(cook_method="stew")
+    recipe = SimpleNamespace(energy_profile="standard")
+    short, short_why = intent_adjust(
+        recipe, assembled, ["fast"], 4, time_total_minutes=20
+    )
+    long, long_why = intent_adjust(
+        recipe, assembled, ["fast"], 4, time_total_minutes=90
+    )
+    assert short > long
+    assert "быстрее по времени" in short_why
+    assert "быстрее по времени" not in long_why
+
+
+def test_u40_serialize_time_and_combo_allergens():
+    item = _sol("x", "pan_fry", 3, time_total=35)
+    item.time_active_minutes = 15
+    item.allergens = {"contains": [], "may_contain": [], "unknown": []}
+    payload = serialize_solution(item)
+    assert payload["time_profile"] == {"total_minutes": 35, "active_minutes": 15}
+    assert payload["allergens"]["contains"] == []
+    assert "milk" not in payload["allergens"]["contains"]
+
+
+def test_snapshot_fits_axes():
+    snap = {
+        "cook_method": "oven",
+        "equipment": "dutch_oven",
+        "protein_bases": ["beef"],
+        "home": False,
+    }
+    assert snapshot_fits(snap, ["oven"], [], ["beef"])
+    assert not snapshot_fits(snap, ["pan_fry"], [], ["beef"])
+    assert not snapshot_fits(snap, [], ["skillet"], ["beef"])
+    assert not snapshot_fits(snap, ["oven"], [], ["poultry"])
+
+
+def test_u42_snapshots_skip_assemble(monkeypatch):
+    from apps.recipes.services import solve as solve_mod
+    from apps.recipes.services.solve import solve_recipe
+
+    def boom(*_args, **_kwargs):
+        raise AssertionError("assemble should not run when snapshots exist")
+
+    monkeypatch.setattr(solve_mod, "assemble_recipe", boom)
+    recipe = SimpleNamespace(
+        slug="grudka",
+        title="Грудка",
+        dish_type="main",
+        editorial_tested=False,
+        protein_base="poultry",
+        cook_method="pan_fry",
+        equipment="skillet",
+        energy_profile="standard",
+        variants=FakeRelated([]),
+        content_version=1,
+        snapshot_version=1,
+        axis_snapshots=[
+            {
+                "variant": None,
+                "equipment": "skillet",
+                "home": True,
+                "protein_base": "poultry",
+                "protein_bases": ["poultry"],
+                "cook_method": "pan_fry",
+                "lines": [
+                    {
+                        "canonical_id": "chicken_breast",
+                        "name": "грудка",
+                        "optional": False,
+                        "unit": "g",
+                        "is_anchor": True,
+                    }
+                ],
+                "allergens": {"contains": [], "may_contain": [], "unknown": []},
+                "high_risk_flags": [],
+                "step_count": 4,
+                "time_total_minutes": 25,
+                "time_active_minutes": 15,
+                "addon_penalty": 0,
+                "equipment_penalty": 0,
+            }
+        ],
+    )
+    solved = solve_recipe(
+        recipe,
+        filter_protein=[],
+        filter_method=[],
+        filter_dish=[],
+        filter_equipment=[],
+        have=["chicken_breast"],
+        catalog_item={
+            "has_delta_variants": False,
+            "allowed_cuts": [],
+            "protein_bases": ["poultry"],
+            "protein_variants": [],
+        },
+        rules=[],
+        titles={"chicken_breast": "грудка"},
+        intents=["fast"],
+        explicit_have=["chicken_breast"],
+    )
+    assert solved is not None
+    assert solved.time_total_minutes == 25
+    assert solved.allergens["contains"] == []
+    assert solved.applied_axes["variant"] is None
+
+
+def test_pre_versioning_snapshots_are_fresh(monkeypatch):
+    from apps.recipes.services import solve as solve_mod
+    from apps.recipes.services.solve import solve_recipe
+
+    def boom(*_args, **_kwargs):
+        raise AssertionError("assemble should not run for pre-0013 snapshots")
+
+    monkeypatch.setattr(solve_mod, "assemble_recipe", boom)
+    recipe = SimpleNamespace(
+        slug="grudka",
+        title="Грудка",
+        dish_type="main",
+        editorial_tested=False,
+        protein_base="poultry",
+        cook_method="pan_fry",
+        equipment="skillet",
+        energy_profile="standard",
+        variants=FakeRelated([]),
+        content_version=1,
+        snapshot_version=0,
+        axis_snapshots=[
+            {
+                "variant": None,
+                "equipment": "skillet",
+                "home": True,
+                "protein_base": "poultry",
+                "protein_bases": ["poultry"],
+                "cook_method": "pan_fry",
+                "lines": [
+                    {
+                        "canonical_id": "chicken_breast",
+                        "name": "грудка",
+                        "optional": False,
+                        "unit": "g",
+                        "is_anchor": True,
+                    }
+                ],
+                "allergens": {"contains": [], "may_contain": [], "unknown": []},
+                "high_risk_flags": [],
+                "step_count": 4,
+                "time_total_minutes": 25,
+                "time_active_minutes": 15,
+                "addon_penalty": 0,
+                "equipment_penalty": 0,
+            }
+        ],
+    )
+    solved = solve_recipe(
+        recipe,
+        filter_protein=[],
+        filter_method=[],
+        filter_dish=[],
+        filter_equipment=[],
+        have=["chicken_breast"],
+        catalog_item={
+            "has_delta_variants": False,
+            "allowed_cuts": [],
+            "protein_bases": ["poultry"],
+            "protein_variants": [],
+        },
+        rules=[],
+        titles={"chicken_breast": "грудка"},
+        intents=["fast"],
+        explicit_have=["chicken_breast"],
+    )
+    assert solved is not None
+    assert solved.time_total_minutes == 25
+
+
+def test_stale_snapshots_fall_back_to_assemble(monkeypatch):
+    from apps.recipes.services import solve as solve_mod
+    from apps.recipes.services.assemble import AssembledRecipe
+    from apps.recipes.services.solve import solve_recipe
+
+    calls: list[int] = []
+
+    def fake_assemble(_recipe, **_kwargs):
+        calls.append(1)
+        return AssembledRecipe(
+            ingredients=[
+                {
+                    "canonical_id": "chicken_breast",
+                    "name": "грудка",
+                    "optional": False,
+                    "unit": "g",
+                    "is_anchor": True,
+                }
+            ],
+            steps=[{}, {}, {}, {}],
+            allergens={"contains": [], "may_contain": [], "unknown": []},
+            high_risk_flags=[],
+            caution_text=None,
+            cook_method="pan_fry",
+            protein_base="poultry",
+            equipment="skillet",
+            applied_axes={"variant": None, "equipment": "skillet"},
+            available_variants=[],
+            available_equipment=["skillet"],
+            variations=[],
+            notes=[],
+            prep=[],
+        )
+
+    monkeypatch.setattr(solve_mod, "assemble_recipe", fake_assemble)
+    recipe = SimpleNamespace(
+        slug="grudka",
+        title="Грудка",
+        dish_type="main",
+        editorial_tested=False,
+        protein_base="poultry",
+        cook_method="pan_fry",
+        equipment="skillet",
+        energy_profile="standard",
+        variants=FakeRelated([]),
+        content_version=2,
+        snapshot_version=1,
+        axis_snapshots=[
+            {
+                "variant": None,
+                "equipment": "skillet",
+                "home": True,
+                "protein_base": "poultry",
+                "protein_bases": ["poultry"],
+                "cook_method": "pan_fry",
+                "lines": [
+                    {
+                        "canonical_id": "stale_only",
+                        "name": "устарело",
+                        "optional": False,
+                        "unit": "g",
+                        "is_anchor": True,
+                    }
+                ],
+                "allergens": {"contains": [], "may_contain": [], "unknown": []},
+                "high_risk_flags": [],
+                "step_count": 4,
+                "time_total_minutes": 25,
+                "time_active_minutes": 15,
+                "addon_penalty": 0,
+                "equipment_penalty": 0,
+            }
+        ],
+    )
+    solved = solve_recipe(
+        recipe,
+        filter_protein=[],
+        filter_method=[],
+        filter_dish=[],
+        filter_equipment=[],
+        have=["chicken_breast"],
+        catalog_item={
+            "has_delta_variants": False,
+            "allowed_cuts": [],
+            "protein_bases": ["poultry"],
+            "protein_variants": [],
+        },
+        rules=[],
+        titles={"chicken_breast": "грудка"},
+        intents=[],
+        explicit_have=["chicken_breast"],
+    )
+    assert calls
+    assert solved is not None
+    assert solved.shopping_delta == []
+
+
+def test_idle_recommendations_skip_solver():
+    from apps.recipes.views import _idle_recommendations
+
+    payload = _idle_recommendations(
+        {
+            "protein_base": [],
+            "cook_method": [],
+            "dish_type": [],
+            "equipment": [],
+            "cuts": [],
+            "have": [],
+            "have_group": [],
+            "intent": [],
+        }
+    )
+    assert payload["featured"] is None
+    assert payload["alternatives"] == []
+    assert payload["results"] == []
+    assert payload["buckets"]["now"] == []

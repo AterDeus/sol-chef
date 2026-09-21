@@ -20,7 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const result = await fetchPrepKit(slug);
   if (!result.ok) return { title: 'Набор' };
-  return { title: result.data.title, description: result.data.summary ?? undefined };
+  return {
+    title: result.data.title,
+    description: result.data.summary ?? undefined,
+    alternates: { canonical: `/prep/${slug}` },
+  };
 }
 
 function num(raw: string | undefined): number | null {

@@ -211,7 +211,7 @@
       z-index: 3;
     }
 
-    summary {
+    & > summary {
       display: flex;
       align-items: baseline;
       gap: 0.5rem;
@@ -286,7 +286,7 @@
   }
 
   .tips-masonry {
-    --tips-gap: 0.65rem;
+    --tips-gap: 0.85rem;
     --tips-col-min: 16.5rem;
     position: relative;
     isolation: isolate;
@@ -367,12 +367,18 @@
     border-radius: var(--radius-lg);
     background: var(--surface);
     scroll-margin-top: 5rem;
+    overflow: hidden;
+    interpolate-size: allow-keywords;
     transition: border-color var(--duration) var(--ease);
 
     summary {
+      display: block;
       list-style: none;
       cursor: pointer;
+      margin: 0;
       padding: 0;
+      border: 0;
+      font: inherit;
 
       &::-webkit-details-marker {
         display: none;
@@ -400,23 +406,43 @@
     inset: auto;
   }
 
-  .tip-card__reveal {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows var(--duration) var(--ease);
+  .tip-card::details-content {
+    overflow: hidden;
+    transition-property: block-size, content-visibility;
+    transition-duration: var(--duration);
+    transition-timing-function: var(--ease);
+    transition-behavior: allow-discrete;
   }
 
-  .tip-card[open] .tip-card__reveal {
-    grid-template-rows: 1fr;
+  .tip-card:not([open])::details-content {
+    block-size: 0;
+    content-visibility: hidden;
+  }
+
+  .tip-card[open]::details-content {
+    block-size: auto;
+    content-visibility: visible;
+  }
+
+  .tip-card[open].tip-card--closing::details-content {
+    block-size: 0;
+    content-visibility: hidden;
+  }
+
+  @starting-style {
+    .tip-card[open]::details-content {
+      block-size: 0;
+    }
   }
 
   .tip-card__clip {
-    min-height: 0;
     overflow: hidden;
   }
 
   .tip-card__panel {
-    padding: 0 0.85rem 0.8rem;
+    margin-block-start: 0.15rem;
+    padding: 0.7rem 0.85rem 0.8rem;
+    border-top: 1px solid var(--line);
   }
 
   .tip-card__body {
@@ -425,20 +451,10 @@
     font-size: var(--fs-14);
   }
 
-  @supports (interpolate-size: allow-keywords) {
-    .tip-card {
-      interpolate-size: allow-keywords;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .tip-card,
-    .tip-card__reveal {
+    .tip-card::details-content {
       transition: none;
-    }
-
-    .tip-card[open] .tip-card__reveal {
-      grid-template-rows: 1fr;
     }
   }
 }

@@ -43,7 +43,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: result.data.title,
     description: result.data.summary ?? undefined,
+    alternates: { canonical: `/recipes/${slug}` },
+    openGraph: {
+      title: result.data.title,
+      description: result.data.summary ?? undefined,
+      type: 'article',
+      locale: 'ru_RU',
+    },
   };
+}
+
+function isoDurationMinutes(total: number | null | undefined): string | undefined {
+  if (total == null || !Number.isFinite(total) || total <= 0) return undefined;
+  return `PT${Math.round(total)}M`;
 }
 
 function RecipeJsonLd({ recipe }: { recipe: RecipeDetail }) {
@@ -52,6 +64,9 @@ function RecipeJsonLd({ recipe }: { recipe: RecipeDetail }) {
     '@type': 'Recipe',
     name: recipe.title,
     description: recipe.summary ?? undefined,
+    totalTime: isoDurationMinutes(recipe.time_profile?.total_minutes),
+    recipeYield: recipe.servings != null && recipe.servings > 0 ? recipe.servings : undefined,
+    recipeCategory: labelOf(DISH_TYPE, recipe.dish_type) || undefined,
     recipeIngredient: (recipe.ingredients ?? []).map((item) =>
       [item.display_amount, item.name].filter(Boolean).join(' '),
     ),
@@ -173,6 +188,12 @@ export default async function RecipePage({ params, searchParams }: Props) {
           </div>
         ) : null}
       </dl>
+
+      {recipe.requires_prep ? (
+        <p className="recipe-prep-needed">
+          Нужна заготовка. Время на карточке — разогрев уже готового мяса, не три часа томления.
+        </p>
+      ) : null}
 
       {prepContext && (
         <div className="prep-recipe-banner">

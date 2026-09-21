@@ -9,30 +9,26 @@ from django.contrib.postgres.indexes import GinIndex, OpClass
 from django.contrib.postgres.search import SearchVectorField
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import F, GeneratedField, Value
+from django.db.models import F, GeneratedField, Q, Value
 from django.db.models.functions import Coalesce, Concat
 
-from apps.recipes.constants import (
-    COOK_METHOD,
-    CUT,
-    DISH_TYPE,
-    ENERGY_PROFILE,
-    EQUIPMENT,
-    HIGH_RISK,
-    NUTRITION_BASIS,
-    NUTRITION_SOURCE,
-    PROTEIN_BASE,
-    RECIPE_STATUS,
-    SCALE_MODE,
-    UNIT,
-    USE_CASE,
-    VARIANT_AXIS,
-    YIELD_KIND,
+from apps.recipes.domain.enums import (
+    CookMethod,
+    Cut,
+    DishType,
+    EnergyProfile,
+    Equipment,
+    HighRisk,
+    NutritionBasis,
+    NutritionSource,
+    ProteinBase,
+    RecipeStatus,
+    ScaleMode,
+    Unit,
+    UseCase,
+    VariantAxis,
+    YieldKind,
 )
-
-
-def _choice(codes: frozenset[str]) -> list[tuple[str, str]]:
-    return [(code, code) for code in sorted(codes)]
 
 
 class NormalizeRu(models.Func):
@@ -54,11 +50,11 @@ class ToTsVector(models.Func):
 class Recipe(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     title = models.TextField()
-    protein_base = models.CharField(max_length=32, choices=_choice(PROTEIN_BASE))
-    cook_method = models.CharField(max_length=32, choices=_choice(COOK_METHOD))
-    dish_type = models.CharField(max_length=32, choices=_choice(DISH_TYPE))
+    protein_base = models.CharField(max_length=32, choices=ProteinBase.choices)
+    cook_method = models.CharField(max_length=32, choices=CookMethod.choices)
+    dish_type = models.CharField(max_length=32, choices=DishType.choices)
     scale_mode = models.CharField(
-        max_length=16, choices=_choice(SCALE_MODE), default="linear"
+        max_length=16, choices=ScaleMode.choices, default=ScaleMode.LINEAR
     )
     scalable = models.BooleanField(default=True)
     servings = models.PositiveIntegerField(null=True, blank=True)
@@ -66,7 +62,7 @@ class Recipe(models.Model):
         max_digits=8, decimal_places=1, null=True, blank=True
     )
     yield_kind = models.CharField(
-        max_length=16, choices=_choice(YIELD_KIND), null=True, blank=True
+        max_length=16, choices=YieldKind.choices, null=True, blank=True
     )
     summary = models.TextField(null=True, blank=True)
     source_name = models.TextField(null=True, blank=True)
@@ -74,24 +70,24 @@ class Recipe(models.Model):
     source_type = models.TextField(null=True, blank=True)
     editorial_tested = models.BooleanField(default=False)
     high_risk_flags = ArrayField(
-        models.CharField(max_length=32, choices=_choice(HIGH_RISK)),
+        models.CharField(max_length=32, choices=HighRisk.choices),
         default=list,
         blank=True,
     )
     caution_text = models.TextField(null=True, blank=True)
     energy_profile = models.CharField(
-        max_length=16, choices=_choice(ENERGY_PROFILE), default="standard"
+        max_length=16, choices=EnergyProfile.choices, default=EnergyProfile.STANDARD
     )
     equipment = models.CharField(
-        max_length=32, choices=_choice(EQUIPMENT), null=True, blank=True
+        max_length=32, choices=Equipment.choices, null=True, blank=True
     )
     allowed_cuts = ArrayField(
-        models.CharField(max_length=32, choices=_choice(CUT)),
+        models.CharField(max_length=32, choices=Cut.choices),
         default=list,
         blank=True,
     )
     protein_bases_extra = ArrayField(
-        models.CharField(max_length=32, choices=_choice(PROTEIN_BASE)),
+        models.CharField(max_length=32, choices=ProteinBase.choices),
         default=list,
         blank=True,
     )
@@ -102,13 +98,13 @@ class Recipe(models.Model):
     effort_level = models.PositiveSmallIntegerField(null=True, blank=True)
     washing_level = models.PositiveSmallIntegerField(null=True, blank=True)
     use_cases = ArrayField(
-        models.CharField(max_length=32, choices=_choice(USE_CASE)),
+        models.CharField(max_length=32, choices=UseCase.choices),
         default=list,
         blank=True,
     )
     adaptations = models.JSONField(default=list, blank=True)
     status = models.CharField(
-        max_length=16, choices=_choice(RECIPE_STATUS), default="published"
+        max_length=16, choices=RecipeStatus.choices, default=RecipeStatus.DRAFT
     )
     # Denormalized for generated FTS: title + ingredient_titles + summary.
     ingredient_titles = models.TextField(default="", blank=True)
@@ -133,6 +129,10 @@ class Recipe(models.Model):
         db_persist=True,
     )
     updated_at = models.DateTimeField(auto_now=True)
+    axis_snapshots = models.JSONField(default=list, blank=True)
+    content_version = models.PositiveIntegerField(default=1)
+    snapshot_version = models.PositiveIntegerField(default=0)
+    snapshots_updated_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ["title"]
@@ -143,20 +143,47 @@ class Recipe(models.Model):
                 name="recipe_title_trgm",
             ),
         ]
+        constraints = [
+            models.CheckConstraint(
+                condition=Q(servings__isnull=True) | Q(servings__gte=1),
+                name="recipe_servings_positive",
+            ),
+            models.CheckConstraint(
+                condition=Q(yield_weight_g__isnull=True) | Q(yield_weight_g__gt=0),
+                name="recipe_yield_weight_positive",
+            ),
+            models.CheckConstraint(
+                condition=Q(time_total_minutes__isnull=True) | Q(time_total_minutes__gte=1),
+                name="recipe_total_time_positive",
+            ),
+            models.CheckConstraint(
+                condition=Q(time_active_minutes__isnull=True)
+                | Q(time_active_minutes__gte=0),
+                name="recipe_active_time_nonnegative",
+            ),
+            models.CheckConstraint(
+                condition=Q(time_total_minutes__isnull=True)
+                | Q(time_active_minutes__isnull=True)
+                | Q(time_active_minutes__lte=F("time_total_minutes")),
+                name="recipe_active_time_not_greater_total",
+            ),
+        ]
 
     def __str__(self) -> str:
         return self.slug
 
     def clean(self) -> None:
         flags = list(self.high_risk_flags or [])
-        if self.status == "published" and flags and not (self.caution_text or "").strip():
+        if self.status == RecipeStatus.PUBLISHED and flags and not (
+            self.caution_text or ""
+        ).strip():
             raise ValidationError(
                 "Нельзя публиковать high-risk рецепт без текста «Осторожно»."
             )
-        unknown_flags = set(flags) - HIGH_RISK
+        unknown_flags = set(flags) - set(HighRisk.values)
         if unknown_flags:
             raise ValidationError(f"Неизвестный high-risk флаг: {sorted(unknown_flags)}")
-        unknown_cases = set(self.use_cases or []) - USE_CASE
+        unknown_cases = set(self.use_cases or []) - set(UseCase.values)
         if unknown_cases:
             raise ValidationError(f"Неизвестный use_case: {sorted(unknown_cases)}")
         for field in ("effort_level", "washing_level"):
@@ -169,12 +196,12 @@ class Recipe(models.Model):
             raise ValidationError("active_minutes не больше total_minutes.")
         if self.yield_weight_g is not None and self.yield_weight_g <= 0:
             raise ValidationError("yield_weight_g должен быть > 0.")
-        if self.yield_kind and self.yield_kind not in YIELD_KIND:
+        if self.yield_kind and self.yield_kind not in YieldKind.values:
             raise ValidationError(f"Неизвестный yield_kind: {self.yield_kind}")
         if self.yield_kind and self.yield_weight_g is None:
             raise ValidationError("yield_kind без yield_weight_g.")
         extra = list(self.protein_bases_extra or [])
-        unknown_extra = set(extra) - PROTEIN_BASE
+        unknown_extra = set(extra) - set(ProteinBase.values)
         if unknown_extra:
             raise ValidationError(f"Неизвестная extra-основа: {sorted(unknown_extra)}")
         if self.protein_base in extra:
@@ -186,7 +213,7 @@ class Recipe(models.Model):
 
 class RecipeVariant(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="variants")
-    axis = models.CharField(max_length=16, choices=_choice(VARIANT_AXIS))
+    axis = models.CharField(max_length=16, choices=VariantAxis.choices)
     code = models.SlugField(max_length=80)
     title = models.TextField()
     has_delta = models.BooleanField(default=False)
@@ -196,13 +223,13 @@ class RecipeVariant(models.Model):
     allergen_delta = models.JSONField(null=True, blank=True)
     high_risk_delta = models.JSONField(default=dict, blank=True)
     cook_method_override = models.CharField(
-        max_length=32, choices=_choice(COOK_METHOD), null=True, blank=True
+        max_length=32, choices=CookMethod.choices, null=True, blank=True
     )
     protein_base_override = models.CharField(
-        max_length=32, choices=_choice(PROTEIN_BASE), null=True, blank=True
+        max_length=32, choices=ProteinBase.choices, null=True, blank=True
     )
     equipment = models.CharField(
-        max_length=32, choices=_choice(EQUIPMENT), null=True, blank=True
+        max_length=32, choices=Equipment.choices, null=True, blank=True
     )
     caution_text_override = models.TextField(null=True, blank=True)
 
@@ -223,12 +250,20 @@ class RecipeRevision(models.Model):
     recipe = models.ForeignKey(
         Recipe, on_delete=models.CASCADE, related_name="revisions"
     )
+    number = models.PositiveIntegerField()
     payload_json = models.JSONField()
-    status = models.CharField(max_length=16, choices=_choice(RECIPE_STATUS))
+    payload_hash = models.CharField(max_length=64, blank=True, default="")
+    status = models.CharField(max_length=16, choices=RecipeStatus.choices)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["-number", "-created_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["recipe", "number"],
+                name="recipe_revision_number_unique",
+            ),
+        ]
 
 
 class Ingredient(models.Model):
@@ -251,10 +286,10 @@ class Ingredient(models.Model):
         max_digits=8, decimal_places=2, null=True, blank=True
     )
     nutrition_basis = models.CharField(
-        max_length=16, choices=_choice(NUTRITION_BASIS), null=True, blank=True
+        max_length=16, choices=NutritionBasis.choices, null=True, blank=True
     )
     nutrition_source = models.CharField(
-        max_length=32, choices=_choice(NUTRITION_SOURCE), null=True, blank=True
+        max_length=32, choices=NutritionSource.choices, null=True, blank=True
     )
     nutrition_source_id = models.TextField(null=True, blank=True)
     g_per_tsp = models.DecimalField(max_digits=8, decimal_places=3, null=True, blank=True)
@@ -283,10 +318,10 @@ class RecipeIngredient(models.Model):
     position = models.PositiveIntegerField()
     amount = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     amount_max = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
-    unit = models.CharField(max_length=16, choices=_choice(UNIT))
+    unit = models.CharField(max_length=16, choices=Unit.choices)
     detail = models.TextField(null=True, blank=True)
     scale_mode = models.CharField(
-        max_length=16, choices=_choice(SCALE_MODE), default="linear"
+        max_length=16, choices=ScaleMode.choices, default=ScaleMode.LINEAR
     )
     scalable = models.BooleanField(default=True)
     is_anchor = models.BooleanField(default=False)
@@ -306,10 +341,22 @@ class RecipeIngredient(models.Model):
                 condition=models.Q(is_anchor=True),
                 name="recipes_one_anchor_per_recipe",
             ),
+            models.UniqueConstraint(
+                fields=["recipe", "position"],
+                name="recipe_ingredient_position_unique",
+            ),
+            models.CheckConstraint(
+                condition=Q(amount__isnull=True) | Q(amount__gte=0),
+                name="recipe_ingredient_amount_nonnegative",
+            ),
+            models.CheckConstraint(
+                condition=Q(amount_max__isnull=True) | Q(amount_max__gte=0),
+                name="recipe_ingredient_amount_max_nonnegative",
+            ),
         ]
 
     def clean(self) -> None:
-        if self.unit in {"to_taste", "pinch"}:
+        if self.unit in {Unit.TO_TASTE, Unit.PINCH}:
             if self.amount is not None:
                 raise ValidationError("Для «по вкусу»/щепотки amount должен быть пустым.")
             if self.scalable:
@@ -373,6 +420,12 @@ class RecipeStep(models.Model):
 
     class Meta:
         ordering = ["position"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["recipe", "position"],
+                name="recipe_step_position_unique",
+            ),
+        ]
 
     def clean(self) -> None:
         if (

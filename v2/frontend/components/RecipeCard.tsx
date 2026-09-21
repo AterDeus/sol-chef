@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { AlternativeSolution, RecipeCardData } from '@/lib/types';
-import { minutesLabel } from '@/lib/catalog';
+import { effortLabel, minutesLabel, solutionTimeLabel } from '@/lib/catalog';
 import { recipeHref } from '@/lib/filters';
 import {
   COOK_METHOD,
@@ -27,6 +27,7 @@ export function RecipeCard({
   const guest = book ? pickGuestProteinVariant(recipe, book) : null;
   const proteinCode = guest?.protein_base ?? recipe.protein_base;
   const time = minutesLabel(recipe.time_profile?.total_minutes);
+  const effort = effortLabel(recipe.effort_level);
   const href = recipeHref(recipe.slug, {
     variant: guest?.code ?? recipe.applied_axes?.variant,
     equipment: recipe.applied_axes?.equipment,
@@ -35,8 +36,11 @@ export function RecipeCard({
   return (
     <article className="recipe-card">
       <h3>
-        <Link href={href}>{recipe.title}</Link>
+        <Link href={href} className="recipe-card__hit">
+          {recipe.title}
+        </Link>
       </h3>
+      {recipe.summary ? <p className="recipe-card__summary">{recipe.summary}</p> : null}
       <dl className="recipe-card__facts">
         <div>
           <dt>Категория</dt>
@@ -60,6 +64,18 @@ export function RecipeCard({
           <div>
             <dt>Время</dt>
             <dd>{time}</dd>
+          </div>
+        ) : null}
+        {effort ? (
+          <div>
+            <dt>Сложность</dt>
+            <dd>{effort}</dd>
+          </div>
+        ) : null}
+        {recipe.requires_prep ? (
+          <div>
+            <dt>Заготовка</dt>
+            <dd>Нужна готовая</dd>
           </div>
         ) : null}
       </dl>
@@ -94,9 +110,11 @@ export function RecipeGrid({
 export function SolutionBoard({
   featured,
   alternatives,
+  catalogHref,
 }: {
   featured: RecipeCardData;
   alternatives: AlternativeSolution[];
+  catalogHref?: string | null;
 }) {
   const href = recipeHref(featured.slug, {
     variant: featured.applied_axes?.variant,
@@ -109,7 +127,9 @@ export function SolutionBoard({
     featured.equipment && featured.equipment !== featured.cook_method
       ? equipmentLabel(featured.equipment)
       : null;
-  const time = minutesLabel(featured.time_profile?.total_minutes);
+  const time = solutionTimeLabel(featured.time_profile);
+  const variantApplied = Boolean(featured.applied_axes?.variant);
+  const nowComplete = shopping.length === 0 && featured.bucket === 'now';
 
   return (
     <div className="solution-board">
@@ -118,6 +138,11 @@ export function SolutionBoard({
         <h2 id="featured-title">
           <Link href={href}>{featured.title}</Link>
         </h2>
+        {variantApplied ? (
+          <p className="solution-featured__axis">
+            Основа: {labelOf(PROTEIN_BASE, featured.protein_base)}
+          </p>
+        ) : null}
         <dl className="recipe-card__facts">
           <div>
             <dt>Категория</dt>
@@ -146,9 +171,17 @@ export function SolutionBoard({
             </div>
           ) : null}
         </dl>
+        {featured.requires_prep ? (
+          <p className="recipe-prep-needed">
+            Нужна заготовка. Время на карточке — разогрев, не томление сырого мяса.
+          </p>
+        ) : null}
         <AllergenNotice allergens={featured.allergens} compact />
-        {shopping.length === 0 && featured.bucket === 'now' ? (
-          <p className="solution-featured__status">Всё основное уже есть</p>
+        {nowComplete && substitutions.length === 0 ? (
+          <p className="solution-featured__status">Можно приготовить сейчас</p>
+        ) : null}
+        {nowComplete && substitutions.length > 0 ? (
+          <p className="solution-featured__status">Можно приготовить с заменой</p>
         ) : null}
         {shopping.length > 0 ? (
           <p className="solution-featured__status">
@@ -186,16 +219,30 @@ export function SolutionBoard({
                 variant: item.applied_axes?.variant,
                 equipment: item.applied_axes?.equipment,
               });
+              const altTime = solutionTimeLabel(item.time_profile);
               return (
                 <li key={`${item.label}-${item.slug}`}>
                   <span className="tag">{item.label}</span>
                   <Link href={altHref}>{item.title}</Link>
-                  {item.why?.[0] ? <span className="solution-alts__why">{item.why[0]}</span> : null}
+                  {altTime ? (
+                    <span className="solution-alts__why">{altTime}</span>
+                  ) : item.why?.[0] ? (
+                    <span className="solution-alts__why">{item.why[0]}</span>
+                  ) : null}
                 </li>
               );
             })}
           </ul>
+          {catalogHref ? (
+            <p className="solution-alts__more">
+              <Link href={catalogHref}>Посмотреть все подходящие</Link>
+            </p>
+          ) : null}
         </section>
+      ) : catalogHref ? (
+        <p className="solution-alts__more">
+          <Link href={catalogHref}>Посмотреть все подходящие</Link>
+        </p>
       ) : null}
     </div>
   );

@@ -3,8 +3,14 @@ import { fetchMeatGuide } from '@/lib/api';
 import { MEAT_CUTS, MEAT_CUT_LABEL } from '@/lib/vocab';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
 import { PageIntro } from '@/components/PageArt';
+import type { Metadata } from 'next';
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Мясо',
+  description: 'Температуры и типичные ошибки по говядине, свинине и птице.',
+};
 
 export default async function MeatHubPage() {
   const results = await Promise.all(

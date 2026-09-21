@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from apps.core.numbers import decimal_api
+from apps.prep.constants import PrepMode
 from apps.prep.models import PrepComponent, PrepContainer, PrepKit, PrepSlot
 from apps.prep.services.graph import kit_graph
 from apps.prep.services.leftover import (
@@ -13,6 +15,8 @@ from apps.prep.services.leftover import (
     recipes_for_replacements,
     shopping_additions,
 )
+from apps.prep.services.read_model import KitData
+from apps.prep.services.scale import kit_ratio, qty_payload
 from apps.prep.services.thaw import (
     container_number,
     thaw_already_in_fridge_text,
@@ -20,9 +24,6 @@ from apps.prep.services.thaw import (
     thaw_prep_item_text,
     thaw_pull_for,
 )
-from apps.prep.services.scale import kit_ratio, qty_payload
-from apps.recipes.services.assemble import assemble_recipe
-from apps.recipes.services.nutrition import compute_recipe_nutrition
 
 
 def serialize_container(
@@ -98,46 +99,8 @@ def thaw_prep_items(
     return items
 
 
-def average_slot_kcal(kit: PrepKit) -> int | None:
-    """Ориентир по основным рецептам слотов, не по полной тарелке с companion."""
-    values: list[int] = []
-    slots = kit.slots.select_related("recipe").prefetch_related(
-        "recipe__ingredients__ingredient",
-        "recipe__steps",
-        "recipe__variants",
-    )
-    for slot in slots:
-        recipe = slot.recipe
-        assembled = assemble_recipe(recipe)
-        servings = recipe.servings or kit.servings_base or 2
-        nut = compute_recipe_nutrition(
-            assembled.ingredients,
-            servings=int(servings),
-            ratio=Decimal("1"),
-            scaling_enabled=False,
-            yield_weight_g=recipe.yield_weight_g,
-        )
-        per = nut.get("per_serving") or {}
-        kcal = per.get("kcal")
-        if kcal:
-            values.append(int(kcal))
-    if not values:
-        return None
-    return int(round(sum(values) / len(values)))
-
-
 def metrics_for_api(kit: PrepKit) -> dict:
-    metrics = dict(kit.metrics or {})
-    if metrics.get("kcal_avg_per_serving") is not None:
-        return metrics
-    kcal = average_slot_kcal(kit)
-    if kcal is not None:
-        metrics["kcal_avg_per_serving"] = kcal
-        stored = dict(kit.metrics or {})
-        stored["kcal_avg_per_serving"] = kcal
-        PrepKit.objects.filter(pk=kit.pk).update(metrics=stored)
-        kit.metrics = stored
-    return metrics
+    return dict(kit.metrics or {})
 
 
 def serialize_kit_list_item(kit: PrepKit) -> dict:
@@ -194,11 +157,11 @@ def _serialize_slot(
     time_from = slot.time_active_from_prep_min
     time_scratch = slot.time_active_scratch_min
 
-    if no_leftover and slot.mode == "reheat" and payload.get("slug"):
+    if no_leftover and slot.mode == PrepMode.REHEAT and payload.get("slug"):
         repl = recipes.get(str(payload["slug"]))
         if repl is not None:
             recipe = repl
-        mode = payload.get("mode") or "finish"
+        mode = payload.get("mode") or PrepMode.FINISH
         ids = [str(code) for code in (payload.get("container_ids") or [])]
         source = {"kind": "weekend"}
         flavor = payload.get("flavor") or flavor
@@ -259,8 +222,9 @@ def _serialize_slot(
 
 
 def serialize_kit_detail(
-    kit: PrepKit, servings: Decimal | None, no_leftover: bool = False
+    data: KitData, servings: Decimal | None, no_leftover: bool = False
 ) -> dict:
+    kit = data.kit
     ratio, enabled = kit_ratio(kit.servings_base, servings)
     if servings is None and kit.servings_base is not None:
         enabled = True
@@ -269,14 +233,12 @@ def serialize_kit_detail(
     if kit.servings_base is None:
         enabled = False
         ratio = Decimal("1")
-    boxes = {
-        row.code: row for row in kit.containers.select_related("component").all()
-    }
-    box_factor, shop_factor = leftover_qty_factors(kit) if no_leftover else ({}, {})
-    recipes = recipes_for_replacements(kit) if no_leftover else {}
+    boxes = data.containers_by_code
+    box_factor, shop_factor = leftover_qty_factors(data) if no_leftover else ({}, {})
+    recipes = recipes_for_replacements(data) if no_leftover else {}
     raw_shopping = list(kit.shopping or [])
     if no_leftover:
-        raw_shopping = merge_shopping(raw_shopping, shopping_additions(kit))
+        raw_shopping = merge_shopping(raw_shopping, shopping_additions(data))
         for row in raw_shopping:
             cid = str(row.get("canonical_id") or "")
             extra = shop_factor.get(cid)
@@ -296,7 +258,6 @@ def serialize_kit_detail(
             }
         )
     applied = int(servings) if servings is not None else kit.servings_base
-    components = list(kit.components.all())
     comp_factor: dict[str, Decimal] = {}
     boxes_by_comp: dict[str, list] = {}
     for box in boxes.values():
@@ -304,8 +265,7 @@ def serialize_kit_detail(
     for code, group in boxes_by_comp.items():
         if group and all(row.code in box_factor for row in group):
             comp_factor[code] = min(box_factor[row.code] for row in group)
-    slot_rows = list(kit.slots.select_related("recipe").all())
-    has_leftovers = any(row.mode == "reheat" for row in slot_rows)
+    has_leftovers = any(row.mode == PrepMode.REHEAT for row in data.slots)
     return {
         "slug": kit.slug,
         "title": kit.title,
@@ -313,11 +273,11 @@ def serialize_kit_detail(
         "servings_base": kit.servings_base,
         "no_leftover": bool(no_leftover),
         "has_leftovers": has_leftovers,
-        "leftover_cost": leftover_plan_cost(kit),
+        "leftover_cost": leftover_plan_cost(data),
         "scaling": {
             "enabled": bool(kit.servings_base),
             "mode": "servings" if kit.servings_base else "off",
-            "ratio": float(ratio),
+            "ratio": decimal_api(ratio),
             "applied": {"servings": applied},
         },
         "caution_text": kit.caution_text,
@@ -329,13 +289,13 @@ def serialize_kit_detail(
             _serialize_component(
                 row, ratio, enabled, extra=comp_factor.get(row.code, Decimal("1"))
             )
-            for row in components
+            for row in data.components
         ],
         "containers": [
             serialize_container(
                 row, ratio, enabled, extra=box_factor.get(row.code, Decimal("1"))
             )
-            for row in boxes.values()
+            for row in data.containers
         ],
         "weekend_timeline": kit.weekend_timeline or [],
         "slots": [
@@ -349,8 +309,7 @@ def serialize_kit_detail(
                 recipes=recipes,
                 servings_base=kit.servings_base,
             )
-            for row in slot_rows
+            for row in data.slots
         ],
-        "graph": kit_graph(kit),
+        "graph": kit_graph(data),
     }
-

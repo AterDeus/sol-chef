@@ -1,5 +1,11 @@
 import type { PantryGroup, SearchParamsRecord } from './types';
-import { bookChapterById, chapterIdForBase, type BookChapter } from './vocab';
+import {
+  bookChapterById,
+  chapterIdForBase,
+  HAVE_GROUP_BOOK_PRIORITY,
+  HAVE_GROUP_TO_BOOK,
+  type BookChapter,
+} from './vocab';
 
 export const FILTER_KEYS = [
   'protein_base',
@@ -13,6 +19,18 @@ export const FILTER_KEYS = [
   'intent',
 ] as const;
 export type FilterKey = (typeof FILTER_KEYS)[number];
+
+/** First-level pantry chips. Keep in sync with HAVE_UI_GROUPS. Opens a picker, not inventory. */
+const PICKER_ONLY_HAVE_GROUPS = new Set([
+  'chicken',
+  'meat',
+  'fish',
+  'veg',
+  'grains',
+  'eggs',
+  'dairy',
+  'other',
+]);
 
 const CSV_KEYS = new Set([
   'protein_base',
@@ -58,7 +76,14 @@ export function hasAnyQuery(sp: SearchParamsRecord): boolean {
 }
 
 export function hasCalculatorQuery(sp: SearchParamsRecord): boolean {
-  return FILTER_KEYS.some((key) => valuesOf(sp, key).length > 0);
+  return FILTER_KEYS.some((key) => {
+    const values = valuesOf(sp, key);
+    if (values.length === 0) return false;
+    if (key === 'have_group') {
+      return values.some((id) => !PICKER_ONLY_HAVE_GROUPS.has(id));
+    }
+    return true;
+  });
 }
 
 export function queryString(sp: SearchParamsRecord): string {
@@ -141,6 +166,75 @@ export function withPage(pathname: string, sp: SearchParamsRecord, page: number)
   else qs.set('page', String(page));
   const next = qs.toString();
   return next ? `${pathname}?${next}` : pathname;
+}
+
+const CATALOG_FROM_CALCULATOR_KEYS = [
+  'protein_base',
+  'cook_method',
+  'dish_type',
+  'equipment',
+  'cuts',
+  'without',
+] as const;
+
+function groupIdsForHave(groups: PantryGroup[], canonicalId: string): string[] {
+  const ids: string[] = [];
+  for (const group of groups) {
+    if (group.items?.some((item) => item.canonical_id === canonicalId)) {
+      ids.push(group.id);
+    }
+    for (const child of group.children ?? []) {
+      if (child.items?.some((item) => item.canonical_id === canonicalId)) {
+        ids.push(child.id);
+        ids.push(group.id);
+      }
+    }
+  }
+  return ids;
+}
+
+function bookFromHave(
+  sp: SearchParamsRecord,
+  groups: PantryGroup[],
+): { chapter: string; protein_base?: string } | null {
+  const ids = new Set<string>();
+  for (const haveId of valuesOf(sp, 'have')) {
+    for (const groupId of groupIdsForHave(groups, haveId)) ids.add(groupId);
+  }
+  for (const groupId of valuesOf(sp, 'have_group')) ids.add(groupId);
+  for (const groupId of HAVE_GROUP_BOOK_PRIORITY) {
+    if (ids.has(groupId) && HAVE_GROUP_TO_BOOK[groupId]) {
+      return HAVE_GROUP_TO_BOOK[groupId];
+    }
+  }
+  return null;
+}
+
+/** Book URL for «Посмотреть все подходящие». Drops have/intent; catalog rejects those. */
+export function catalogHrefFromCalculator(
+  sp: SearchParamsRecord,
+  groups: PantryGroup[],
+): string | null {
+  const qs = new URLSearchParams();
+  for (const key of CATALOG_FROM_CALCULATOR_KEYS) {
+    for (const value of valuesOf(sp, key)) {
+      qs.append(key, value);
+    }
+  }
+  const mapped = bookFromHave(sp, groups);
+  if (mapped) {
+    if (!qs.has('chapter')) qs.set('chapter', mapped.chapter);
+    const chapter = bookChapterById(mapped.chapter);
+    const alreadyProtein = valuesOf(sp, 'protein_base').length > 0;
+    if (mapped.protein_base && !alreadyProtein) {
+      const n = chapter?.bases.length ?? 0;
+      if (n !== 1) qs.append('protein_base', mapped.protein_base);
+    }
+  } else if (valuesOf(sp, 'protein_base').length && !qs.has('chapter')) {
+    qs.set('chapter', chapterIdForBase(valuesOf(sp, 'protein_base')[0]));
+  }
+  const next = qs.toString();
+  return next ? `/recipes?${next}` : null;
 }
 
 export function recipeHref(

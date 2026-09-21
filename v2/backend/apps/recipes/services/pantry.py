@@ -6,6 +6,7 @@ from apps.recipes.pantry_vocab import (
     CANONICAL_INGREDIENT_LABEL_RU,
     HAVE_GROUPS,
     HAVE_TEXT_ALIASES,
+    groups_to_expand,
     shopping_ids,
 )
 
@@ -21,6 +22,20 @@ def split_pantry_text(text: str) -> list[str]:
 
 def expand_have_group(code: str) -> list[str]:
     return list(HAVE_GROUPS.get(code, ()))
+
+
+def fill_have_from_groups(have: list[str], have_groups: list[str]) -> list[str]:
+    """Append expanded species ids. First-level aisle chips stay out of inventory."""
+    chosen = set(have)
+    filled = list(have)
+    for group in groups_to_expand(have_groups):
+        group_ids = expand_have_group(group)
+        if chosen & set(group_ids):
+            continue
+        for cid in group_ids:
+            if cid not in filled:
+                filled.append(cid)
+    return filled
 
 
 def pantry_universe(known: set[str] | None = None, titles: dict[str, str] | None = None):

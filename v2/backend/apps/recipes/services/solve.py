@@ -3,28 +3,56 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from types import SimpleNamespace
 
-from django.conf import settings
-
-from apps.recipes.constants import (
-    BEST_BUCKET_LIMIT,
-    COMPONENT_DISH_TYPES,
-    COOK_METHOD_LABEL_RU,
-    PROTEIN_BASE_LABEL_RU,
-    label_equipment_axis,
-)
-from apps.recipes.pantry_vocab import (
-    FISH_CANNED,
-    FISH_FRESH,
-    FISH_PROTEIN,
-    HAVE_GROUP_PROTEIN,
-    HAVE_GROUPS,
-    availability_class,
-    shopping_label,
-)
+from apps.recipes.constants import BEST_BUCKET_LIMIT, COMPONENT_DISH_TYPES
 from apps.recipes.services.assemble import VariantError, assemble_recipe
+from apps.recipes.services.combinations import (
+    MAX_CANDIDATES,
+    axis_combos,
+    combo_fits,
+    combo_method_equipment,
+    combo_protein_bases,
+    combo_tie_key,
+    combo_time_minutes,
+)
 from apps.recipes.services.ranking import score_and_why
-from apps.recipes.services.substitutions import SubRule, cover_need, rules_for_recipe
+from apps.recipes.services.snapshots import snapshot_fits, snapshots_are_fresh
+from apps.recipes.services.solver_scoring import (
+    axes_why,
+    intent_adjust,
+    is_core_line,
+    is_desirable_line,
+    match_pantry,
+    pantry_score,
+    pantry_why,
+    protein_from_pantry,
+    requires_prep as lines_require_prep,
+    unmet_prep_core,
+)
+from apps.recipes.services.substitutions import SubRule, rules_for_recipe
+
+__all__ = [
+    "MAX_CANDIDATES",
+    "CookingSolution",
+    "assign_buckets",
+    "axis_combos",
+    "build_board",
+    "combo_fits",
+    "combo_method_equipment",
+    "combo_protein_bases",
+    "combo_time_minutes",
+    "intent_adjust",
+    "is_core_line",
+    "is_desirable_line",
+    "is_standalone_dish",
+    "match_pantry",
+    "pantry_score",
+    "pantry_why",
+    "protein_from_pantry",
+    "serialize_solution",
+    "solve_recipe",
+]
 
 
 @dataclass
@@ -51,279 +79,9 @@ class CookingSolution:
     have_all: bool = False
     protein_bases: list[str] = field(default_factory=list)
     protein_variants: list[dict] = field(default_factory=list)
-
-
-def is_core_line(line: dict) -> bool:
-    if line.get("optional"):
-        return False
-    cid = line.get("canonical_id") or ""
-    klass = availability_class(cid)
-    if klass in {"assumed", "common", "exotic"}:
-        return False
-    if line.get("is_anchor"):
-        return True
-    if line.get("unit") in {"pinch", "tsp"}:
-        return False
-    return True
-
-
-def is_desirable_line(line: dict) -> bool:
-    if line.get("optional"):
-        return False
-    cid = line.get("canonical_id") or ""
-    return availability_class(cid) == "common"
-
-
-def combo_method_equipment(recipe, addon, equipment_variant) -> tuple[str, str | None]:
-    method = recipe.cook_method
-    equipment = recipe.equipment
-    if equipment_variant is not None:
-        if equipment_variant.cook_method_override:
-            method = equipment_variant.cook_method_override
-        equipment = equipment_variant.equipment or equipment_variant.code
-    return method, equipment
-
-
-def intent_adjust(recipe, assembled, intents: list[str], step_count: int) -> tuple[int, list[str]]:
-    if not intents:
-        return 0, []
-    score = 0
-    why: list[str] = []
-    method = assembled.cook_method
-    if "fast" in intents:
-        if method in {"pan_fry", "no_cook", "grill"}:
-            score += 8
-            why.append("быстрее на плите")
-        elif method in {"stew", "oven"}:
-            score -= 3
-        score -= min(step_count, 6)
-    if "oven" in intents:
-        if method == "oven":
-            score += 10
-            why.append("духовка")
-    if "light" in intents and getattr(recipe, "energy_profile", "standard") == "light":
-        score += 8
-        why.append("профиль полегче")
-    if "easy" in intents:
-        score -= min(step_count, 8)
-        if method in {"oven", "stew", "no_cook"}:
-            score += 4
-            why.append("меньше стоять у плиты")
-    if "batch" in intents and method in {"stew", "oven"}:
-        score += 8
-        why.append("можно на несколько дней")
-    return score, why
-
-
-def combo_protein_bases(recipe, addon) -> list[str]:
-    override = getattr(addon, "protein_base_override", None) if addon is not None else None
-    if override:
-        return [override]
-    ordered: list[str] = []
-    home = getattr(recipe, "protein_base", None)
-    if home:
-        ordered.append(home)
-    for code in getattr(recipe, "protein_bases_extra", None) or []:
-        if code and code not in ordered:
-            ordered.append(code)
-    return ordered
-
-
-def combo_fits(
-    recipe,
-    addon,
-    equipment_variant,
-    methods: list[str],
-    equipments: list[str],
-    proteins: list[str] | None = None,
-) -> bool:
-    method, equipment = combo_method_equipment(recipe, addon, equipment_variant)
-    if methods and method not in methods:
-        return False
-    if equipments and equipment not in equipments:
-        return False
-    if proteins:
-        bases = combo_protein_bases(recipe, addon)
-        if not any(code in proteins for code in bases):
-            return False
-    return True
-
-
-def axis_combos(recipe, *, explore: bool) -> list[tuple[object | None, object | None]]:
-    variants = list(recipe.variants.all())
-    if not explore:
-        return [(None, None)]
-    addons: list[object | None] = [None]
-    addons.extend(item for item in variants if item.axis == "addon" and item.has_delta)
-    equipments: list[object | None] = [None]
-    equipments.extend(item for item in variants if item.axis == "equipment" and item.has_delta)
-    return [(addon, eq) for addon in addons for eq in equipments]
-
-
-def match_pantry(
-    lines: list[dict],
-    have: list[str],
-    rules: list[SubRule],
-    titles: dict[str, str] | None = None,
-) -> tuple[list[dict], list[dict], int, int, list[dict], set[str], set[str]]:
-    """Return shopping, substitutions, hits, missing, desirable, covered needs, used have ids."""
-    have_set = set(have)
-    titles = titles or {}
-    shopping: list[dict] = []
-    substitutions: list[dict] = []
-    desirable: list[dict] = []
-    covered_ids: set[str] = set()
-    used_have: set[str] = set()
-    hits = 0
-    for line in lines:
-        need = line.get("canonical_id") or ""
-        title = line.get("name") or shopping_label(need, titles)
-        if is_desirable_line(line):
-            if need not in have_set:
-                desirable.append({"canonical_id": need, "title": title})
-            continue
-        if not is_core_line(line):
-            continue
-        covered, quality = cover_need(need, have_set, rules)
-        if covered is None:
-            shopping.append({"canonical_id": need, "title": title})
-            continue
-        hits += 1
-        covered_ids.add(need)
-        if need in have_set:
-            used_have.add(need)
-        if covered in have_set:
-            used_have.add(covered)
-        if covered != need and quality is not None:
-            to_title = shopping_label(covered, titles)
-            substitutions.append(
-                {
-                    "from_id": need,
-                    "from_title": title,
-                    "to_id": covered,
-                    "to_title": to_title,
-                    "quality": quality,
-                }
-            )
-    return shopping, substitutions, hits, len(shopping), desirable, covered_ids, used_have
-
-
-def pantry_score(hits: int, missing: int, substitutions: list[dict], *, has_have: bool) -> int:
-    if not has_have:
-        return 0
-    weights = settings.RANKING_WEIGHTS
-    score = hits * int(weights["pantry_hit"])
-    score += missing * int(weights["pantry_missing"])
-    score += len(substitutions) * int(weights["substitution_friction"])
-    if missing == 0:
-        score += int(weights["pantry_complete"])
-    return score
-
-
-def pantry_why(
-    shopping: list[dict],
-    substitutions: list[dict],
-    *,
-    has_have: bool,
-    desirable: list[dict] | None = None,
-) -> list[str]:
-    if not has_have:
-        return []
-    why: list[str] = []
-    if not shopping:
-        why.append("можно приготовить сейчас")
-    elif len(shopping) == 1:
-        why.append(f"нужно докупить: {shopping[0]['title']}")
-    else:
-        names = ", ".join(item["title"] for item in shopping[:3])
-        extra = f" и ещё {len(shopping) - 3}" if len(shopping) > 3 else ""
-        why.append(f"нужно докупить: {names}{extra}")
-    for item in substitutions:
-        why.append(f"вместо {item['from_title']} — {item['to_title']}")
-    if desirable:
-        names = ", ".join(item["title"] for item in desirable[:3])
-        why.append(f"желательно: {names}, но можно без этого")
-    return why
-
-
-def protein_from_pantry(
-    recipe,
-    have: list[str],
-    *,
-    covered_ids: set[str],
-    titles: dict[str, str] | None = None,
-    protein_base: str | None = None,
-) -> tuple[int, list[str]]:
-    """Bonus only if a core line from `have` actually covers this recipe.
-
-    Ground beef in the cupboard is not a steak, a chuck roast, or butter.
-    """
-    if not have or not covered_ids:
-        return 0, []
-    score = 0
-    why: list[str] = []
-    titles = titles or {}
-    covered = set(covered_ids)
-    fresh = bool(covered & FISH_FRESH)
-    canned = bool(covered & FISH_CANNED)
-    base = protein_base or recipe.protein_base
-    if fresh and base in FISH_PROTEIN:
-        score += 8
-        why.append("есть рыба")
-    elif canned and not fresh and base in FISH_PROTEIN:
-        score += 3
-        why.append("есть рыбные консервы")
-    preference = (
-        "chicken",
-        "pork",
-        "beef",
-        "lamb",
-        "eggs",
-        "veg",
-        "legumes",
-        "meat",
-    )
-    for group in preference:
-        bases = HAVE_GROUP_PROTEIN.get(group)
-        if not bases:
-            continue
-        matched = covered & set(HAVE_GROUPS[group])
-        if matched and base in bases:
-            score += 6
-            label = shopping_label(sorted(matched)[0], titles)
-            why.append(f"есть {label}")
-            break
-    return score, why
-
-
-def axes_why(
-    recipe, assembled, methods: list[str], equipments: list[str], proteins: list[str] | None = None
-) -> list[str]:
-    extra: list[str] = []
-    proteins = proteins or []
-    if (
-        proteins
-        and assembled.protein_base in proteins
-        and assembled.protein_base != recipe.protein_base
-    ):
-        label = PROTEIN_BASE_LABEL_RU.get(assembled.protein_base, assembled.protein_base)
-        extra.append(f"{label} — вариант")
-    if methods and assembled.cook_method in methods and assembled.cook_method != recipe.cook_method:
-        label = COOK_METHOD_LABEL_RU.get(assembled.cook_method, assembled.cook_method)
-        extra.append(f"{label} — вариант посуды")
-    if (
-        equipments
-        and assembled.equipment in equipments
-        and assembled.equipment
-        and assembled.equipment != recipe.equipment
-    ):
-        extra.append(f"посуда — {label_equipment_axis(assembled.equipment)} (вариант)")
-    return extra
-
-
-def _combo_key(addon, equipment_variant) -> tuple[int, int]:
-    """Prefer base (no addon, no equipment variant) on ties."""
-    return (0 if addon is None else 1, 0 if equipment_variant is None else 1)
+    time_total_minutes: int | None = None
+    time_active_minutes: int | None = None
+    requires_prep: bool = False
 
 
 def solve_recipe(
@@ -349,27 +107,79 @@ def solve_recipe(
     recipe_rules = rules_for_recipe(recipe.slug, rules)
     titles = titles or {}
 
-    for addon, equipment_variant in axis_combos(recipe, explore=explore):
-        if not combo_fits(
-            recipe, addon, equipment_variant, filter_method, filter_equipment, filter_protein
-        ):
-            continue
-        variant_code = addon.code if addon is not None else None
-        equipment_code = None
-        if equipment_variant is not None:
-            equipment_code = equipment_variant.equipment or equipment_variant.code
-        elif filter_equipment and recipe.equipment in filter_equipment:
-            equipment_code = recipe.equipment
-        try:
-            assembled = assemble_recipe(
-                recipe,
-                variant_code=variant_code,
-                equipment_code=equipment_code,
-                enrich=False,
+    scored: list[tuple] = []
+    snaps = list(getattr(recipe, "axis_snapshots", None) or [])
+    if snaps and snapshots_are_fresh(recipe):
+        for snap in snaps:
+            if len(scored) >= MAX_CANDIDATES:
+                break
+            if not explore and not snap.get("home"):
+                continue
+            if not snapshot_fits(snap, filter_method, filter_equipment, filter_protein):
+                continue
+            assembled = SimpleNamespace(
+                ingredients=list(snap.get("lines") or []),
+                allergens=snap.get("allergens") or {},
+                high_risk_flags=list(snap.get("high_risk_flags") or []),
+                cook_method=snap.get("cook_method") or recipe.cook_method,
+                protein_base=snap.get("protein_base") or recipe.protein_base,
+                equipment=snap.get("equipment"),
+                applied_axes={
+                    "variant": snap.get("variant"),
+                    "equipment": snap.get("equipment"),
+                },
             )
-        except VariantError:
-            continue
+            protein_bases = list(snap.get("protein_bases") or [assembled.protein_base])
+            combo_key = (
+                int(snap.get("addon_penalty") or 0),
+                int(snap.get("equipment_penalty") or 0),
+            )
+            step_count = int(snap.get("step_count") or 0)
+            time_total = snap.get("time_total_minutes")
+            time_active = snap.get("time_active_minutes")
+            scored.append(
+                (assembled, protein_bases, combo_key, step_count, time_total, time_active)
+            )
+    else:
+        for addon, equipment_variant in axis_combos(recipe, explore=explore):
+            if len(scored) >= MAX_CANDIDATES:
+                break
+            if not combo_fits(
+                recipe, addon, equipment_variant, filter_method, filter_equipment, filter_protein
+            ):
+                continue
+            variant_code = addon.code if addon is not None else None
+            equipment_code = None
+            if equipment_variant is not None:
+                equipment_code = equipment_variant.equipment or equipment_variant.code
+            elif filter_equipment and recipe.equipment in filter_equipment:
+                equipment_code = recipe.equipment
+            try:
+                assembled = assemble_recipe(
+                    recipe,
+                    variant_code=variant_code,
+                    equipment_code=equipment_code,
+                    enrich=False,
+                )
+            except VariantError:
+                continue
+            protein_bases = combo_protein_bases(recipe, addon)
+            combo_key = combo_tie_key(addon, equipment_variant)
+            time_total, time_active = combo_time_minutes(recipe)
+            scored.append(
+                (
+                    assembled,
+                    protein_bases,
+                    combo_key,
+                    len(assembled.steps),
+                    time_total,
+                    time_active,
+                )
+            )
 
+    for assembled, protein_bases, combo_key, step_count, time_total, time_active in scored:
+        if unmet_prep_core(assembled.ingredients, have):
+            continue
         if have:
             (
                 shopping,
@@ -394,7 +204,7 @@ def solve_recipe(
             filter_method=filter_method,
             filter_dish=filter_dish,
             filter_equipment=filter_equipment,
-            protein_bases=combo_protein_bases(recipe, addon),
+            protein_bases=protein_bases,
         )
         why = list(chip_why)
         axis_lines = axes_why(
@@ -414,15 +224,24 @@ def solve_recipe(
             covered_ids=covered_ids,
             titles=titles,
             protein_base=assembled.protein_base,
+            used_have=used_have,
         )
         why.extend(protein_why)
-        step_count = len(assembled.steps)
-        intent_pts, intent_why = intent_adjust(recipe, assembled, intents, step_count)
+        intent_pts, intent_why = intent_adjust(
+            recipe,
+            assembled,
+            intents,
+            step_count,
+            time_total_minutes=time_total,
+        )
         why.extend(intent_why)
         if "pantry" in intents and have:
             if missing == 0:
                 intent_pts += 12
-                why.append("из того, что есть")
+                if substitutions:
+                    why.append("из того, что есть, с заменой")
+                else:
+                    why.append("из того, что есть")
             else:
                 intent_pts -= missing * 3
         have_used = len(used_have & explicit_set) if explicit_set else 0
@@ -455,8 +274,8 @@ def solve_recipe(
                 {key: item[key] for key in ("from_id", "from_title", "to_id", "to_title")}
                 for item in substitutions
             ],
-            allergens=catalog_item["allergens"],
-            high_risk_flags=list(catalog_item["high_risk_flags"]),
+            allergens=dict(assembled.allergens),
+            high_risk_flags=list(assembled.high_risk_flags),
             has_delta_variants=bool(catalog_item["has_delta_variants"]),
             allowed_cuts=list(catalog_item.get("allowed_cuts") or []),
             pantry_hits=hits,
@@ -465,6 +284,9 @@ def solve_recipe(
             have_all=have_all,
             protein_bases=list(catalog_item.get("protein_bases") or [recipe.protein_base]),
             protein_variants=list(catalog_item.get("protein_variants") or []),
+            time_total_minutes=time_total,
+            time_active_minutes=time_active,
+            requires_prep=lines_require_prep(assembled.ingredients),
         )
         key = (
             -int(have_all),
@@ -472,7 +294,7 @@ def solve_recipe(
             -score,
             missing,
             len(substitutions),
-            *_combo_key(addon, equipment_variant),
+            *combo_key,
             recipe.title,
         )
         if best_key is None or key < best_key:
@@ -496,7 +318,9 @@ def _board_sort(item: CookingSolution) -> tuple:
     )
 
 
-def assign_buckets(solutions: list[CookingSolution], *, has_have: bool) -> dict[str, list[CookingSolution]]:
+def assign_buckets(
+    solutions: list[CookingSolution], *, has_have: bool
+) -> dict[str, list[CookingSolution]]:
     if not has_have:
         for item in solutions:
             item.bucket = "match"
@@ -565,12 +389,18 @@ def build_board(
                 rest.pop(index)
                 return
 
+    feat_time = featured.time_total_minutes
     take(
         "Быстрее",
-        lambda item: item.cook_method in {"pan_fry", "no_cook", "grill"}
-        and item.step_count <= featured.step_count,
+        lambda item: feat_time is not None
+        and item.time_total_minutes is not None
+        and item.time_total_minutes < feat_time,
     )
-    take("Проще", lambda item: item.cook_method in {"oven", "stew"})
+    take(
+        "На плите",
+        lambda item: item.cook_method in {"pan_fry", "no_cook", "grill"},
+    )
+    take("В духовке", lambda item: item.cook_method == "oven")
     take("На несколько дней", lambda item: item.cook_method == "stew")
     while len(alts) < 3 and rest:
         alts.append(("Ещё вариант", rest.pop(0)))
@@ -598,5 +428,9 @@ def serialize_solution(item: CookingSolution) -> dict:
         "high_risk_flags": item.high_risk_flags,
         "has_delta_variants": item.has_delta_variants,
         "step_count": item.step_count,
+        "time_profile": {
+            "total_minutes": item.time_total_minutes,
+            "active_minutes": item.time_active_minutes,
+        },
+        "requires_prep": item.requires_prep,
     }
-

@@ -9,7 +9,7 @@ from apps.recipes.constants import (
     COOK_METHOD,
     CUT,
     DISH_TYPE,
-    EQUIPMENT,
+    EQUIPMENT_AXIS,
     HAVE_GROUPS,
     INTENT,
     PROTEIN_BASE,
@@ -25,7 +25,7 @@ FILTER_VOCAB = {
     "protein_base": PROTEIN_BASE,
     "cook_method": COOK_METHOD,
     "dish_type": DISH_TYPE,
-    "equipment": EQUIPMENT,
+    "equipment": EQUIPMENT_AXIS,
     "cuts": CUT,
 }
 

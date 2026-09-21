@@ -36,3 +36,7 @@
 ## Проверка
 
 Команды — в TESTING и CURRENT_SPRINT. Нет Compose — срез не готов. Архив V1: `python -m http.server 3456` из `archive/v1/`.
+
+## Локальный Next
+
+При запущенном `v2/infra/docker-compose.yml` не запускать на хосте `npm run build` / `next build` из `v2/frontend`: bind-mount делает `.next` общей с `next dev`, из-за чего сервер начинает отдавать 404 на старые чанки. Для быстрой проверки клиента использовать `npx tsc --noEmit`; production-сборку проверять только отдельным Docker-образом через `docker-compose.prod.yml`. Если `.next` уже перезаписана, перезапустить контейнер `frontend`.

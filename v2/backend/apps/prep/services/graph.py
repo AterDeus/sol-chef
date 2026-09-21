@@ -1,63 +1,90 @@
 from __future__ import annotations
 
-from apps.prep.models import PrepKit, PrepSlot
+from collections import defaultdict, deque
+from collections.abc import Iterable
 
-MEAL_RANK = {"lunch": 0, "dinner": 1}
+from apps.prep.constants import MEAL_RANK
+from apps.prep.models import PrepSlot
+from apps.prep.services.read_model import KitData
+
+SlotKey = tuple[int, str]
 
 
-def _key(slot: PrepSlot) -> tuple[int, int]:
-    return (slot.day, MEAL_RANK[slot.meal])
+def slot_key(slot: PrepSlot) -> SlotKey:
+    return slot.day, slot.meal
 
 
-def kit_graph(kit: PrepKit) -> list[dict]:
-    slots = list(kit.slots.select_related("recipe").all())
-    boxes = {row.code: row for row in kit.containers.select_related("component").all()}
+def slot_sort_key(slot: PrepSlot) -> tuple[int, int]:
+    return slot.day, MEAL_RANK.get(slot.meal, 99)
 
-    def cascade_from(starts: list[PrepSlot]) -> list[PrepSlot]:
-        seen = {(row.day, row.meal) for row in starts}
-        out = list(starts)
-        changed = True
-        while changed:
-            changed = False
-            for slot in slots:
-                if slot.mode != "reheat" or (slot.day, slot.meal) in seen:
-                    continue
-                source = slot.source or {}
-                if source.get("kind") != "slot":
-                    continue
-                origin = (int(source["day"]), source["meal"])
-                if origin in seen:
-                    seen.add((slot.day, slot.meal))
-                    out.append(slot)
-                    changed = True
-        return sorted(out, key=_key)
+
+def source_key(slot: PrepSlot) -> SlotKey | None:
+    source = slot.source if isinstance(slot.source, dict) else {}
+    if source.get("kind") != "slot":
+        return None
+    try:
+        day = int(source.get("day"))
+    except (TypeError, ValueError):
+        return None
+    meal = source.get("meal")
+    return (day, meal) if meal in MEAL_RANK else None
+
+
+def descendants(
+    starts: Iterable[PrepSlot],
+    reheat_by_source: dict[SlotKey, list[PrepSlot]],
+) -> list[PrepSlot]:
+    result: list[PrepSlot] = []
+    queue = deque(starts)
+    seen: set[SlotKey] = set()
+
+    while queue:
+        slot = queue.popleft()
+        key = slot_key(slot)
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(slot)
+        queue.extend(reheat_by_source.get(key, ()))
+
+    return sorted(result, key=slot_sort_key)
+
+
+def kit_graph(data: KitData) -> list[dict]:
+    slot_rows = data.slots
+    boxes_by_component: dict[int, set[str]] = defaultdict(set)
+    for box in data.containers:
+        boxes_by_component[box.component_id].add(box.code)
+
+    reheat_by_source: dict[SlotKey, list[PrepSlot]] = defaultdict(list)
+    for slot in slot_rows:
+        if slot.mode != "reheat":
+            continue
+        if key := source_key(slot):
+            reheat_by_source[key].append(slot)
 
     graph: list[dict] = []
-    for component in kit.components.all():
-        weekend: list[PrepSlot] = []
-        component_boxes = {
-            code for code, box in boxes.items() if box.component_id == component.pk
-        }
-        for slot in slots:
-            if slot.mode == "reheat":
-                continue
-            ids = set(slot.container_ids or [])
-            if ids & component_boxes:
-                weekend.append(slot)
-        eaten = cascade_from(weekend)
+    for component in data.components:
+        component_boxes = boxes_by_component[component.pk]
+        starts = [
+            slot
+            for slot in slot_rows
+            if slot.mode != "reheat"
+            and component_boxes.intersection(map(str, slot.container_ids or []))
+        ]
         graph.append(
             {
                 "code": component.code,
                 "title": component.title,
                 "slots": [
                     {
-                        "day": row.day,
-                        "meal": row.meal,
-                        "slug": row.recipe.slug,
-                        "title": row.recipe.title,
-                        "mode": row.mode,
+                        "day": slot.day,
+                        "meal": slot.meal,
+                        "slug": slot.recipe.slug,
+                        "title": slot.recipe.title,
+                        "mode": slot.mode,
                     }
-                    for row in eaten
+                    for slot in descendants(starts, reheat_by_source)
                 ],
             }
         )

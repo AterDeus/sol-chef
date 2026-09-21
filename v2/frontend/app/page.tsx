@@ -10,8 +10,15 @@ import { EmptyState, ErrorBanner } from '@/components/Feedback';
 import { PageIntro } from '@/components/PageArt';
 import { RecipeGrid } from '@/components/RecipeCard';
 import { SpriteIcon } from '@/components/SpriteIcon';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: { absolute: 'Кухонная шпаргалка — рецепты и практические советы' },
+  description:
+    'Что приготовить из того, что есть: калькулятор, книга рецептов, заготовки на неделю и справочник.',
+};
 
 export default async function HomePage({
   searchParams,

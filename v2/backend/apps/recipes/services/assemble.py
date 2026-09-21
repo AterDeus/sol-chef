@@ -5,13 +5,15 @@ from __future__ import annotations
 from copy import deepcopy
 from dataclasses import dataclass, field
 from decimal import Decimal
+from types import SimpleNamespace
 from typing import Any
 
+from apps.core.exceptions import DomainValidationError
 from apps.recipes.services.allergens import merge_allergen_lists
 from apps.recipes.services.nutrition import CANON_NUTRITION_FIELDS, enrich_lines_from_db
 
 
-class VariantError(Exception):
+class VariantError(DomainValidationError):
     """Unknown or illegal variant / equipment query — API 400."""
 
 
@@ -99,38 +101,77 @@ def steps_from_recipe(recipe) -> list[dict]:
     ]
 
 
-def _find_line(lines: list[dict], spec: dict) -> int | None:
+def _matching_line_indexes(lines: list[dict], spec: dict) -> list[int]:
     if spec.get("position") is not None:
         pos = int(spec["position"])
-        for i, line in enumerate(lines):
-            if line.get("position") == pos:
-                return i
+        hits = [i for i, line in enumerate(lines) if line.get("position") == pos]
+        if hits:
+            return hits
         if 0 <= pos < len(lines):
-            return pos
-        return None
+            return [pos]
+        return []
     cid = spec.get("canonical_id")
     if not cid:
-        return None
-    hits = [i for i, line in enumerate(lines) if line.get("canonical_id") == cid]
-    if len(hits) == 1:
-        return hits[0]
+        return []
+    return [i for i, line in enumerate(lines) if line.get("canonical_id") == cid]
+
+
+def require_line_index(lines: list[dict], spec: dict, *, action: str) -> int:
+    hits = _matching_line_indexes(lines, spec)
+    if not hits:
+        raise VariantError(f"{action}: целевой ингредиент не найден")
     if len(hits) > 1:
-        return None
-    return None
+        raise VariantError(f"{action}: целевой ингредиент неоднозначен")
+    return hits[0]
+
+
+def validate_ingredient_delta(base_lines: list[dict], delta: dict | None) -> None:
+    if not delta:
+        return
+    touched: set[int] = set()
+    for action in ("remove", "replace"):
+        for spec in delta.get(action) or []:
+            index = require_line_index(base_lines, spec, action=action)
+            if index in touched:
+                raise VariantError(f"{action}: линия изменяется более одного раза")
+            touched.add(index)
+
+
+def _matching_step_indexes(steps: list[dict], spec: dict) -> list[int]:
+    pos = spec.get("position")
+    if pos is None:
+        return []
+    return [i for i, step in enumerate(steps) if step.get("position") == pos]
+
+
+def validate_step_delta(base_steps: list[dict], delta: dict | None) -> None:
+    if not delta:
+        return
+    touched: set[int] = set()
+    for spec in delta.get("replace") or []:
+        if spec.get("position") is None:
+            raise VariantError("replace: целевой шаг не найден")
+        hits = _matching_step_indexes(base_steps, spec)
+        if not hits:
+            raise VariantError("replace: целевой шаг не найден")
+        if len(hits) > 1:
+            raise VariantError("replace: целевой шаг неоднозначен")
+        index = hits[0]
+        if index in touched:
+            raise VariantError("replace: шаг изменяется более одного раза")
+        touched.add(index)
 
 
 def apply_ingredient_delta(lines: list[dict], delta: dict | None) -> list[dict]:
     if not delta:
         return [_copy_line(line) for line in lines]
+    validate_ingredient_delta(lines, delta)
     out = [_copy_line(line) for line in lines]
     for spec in delta.get("remove") or []:
-        idx = _find_line(out, spec)
-        if idx is not None:
-            out.pop(idx)
+        idx = require_line_index(out, spec, action="remove")
+        out.pop(idx)
     for spec in delta.get("replace") or []:
-        idx = _find_line(out, spec)
-        if idx is None:
-            continue
+        idx = require_line_index(out, spec, action="replace")
         current = out[idx]
         merged = _copy_line(current)
         old_cid = current.get("canonical_id")
@@ -212,25 +253,29 @@ def apply_ingredient_delta(lines: list[dict], delta: dict | None) -> list[dict]:
 def apply_step_delta(steps: list[dict], delta: dict | None) -> list[dict]:
     if not delta:
         return [deepcopy(step) for step in steps]
+    validate_step_delta(steps, delta)
     out = [deepcopy(step) for step in steps]
     for spec in delta.get("replace") or []:
         pos = spec.get("position")
-        if pos is None:
-            continue
-        for step in out:
+        idx = None
+        for i, step in enumerate(out):
             if step.get("position") == pos:
-                for key in (
-                    "text",
-                    "timer_seconds",
-                    "timer_label",
-                    "timer_note",
-                    "pull_internal_temperature_c",
-                    "target_internal_temperature_c",
-                    "hold_seconds",
-                ):
-                    if key in spec:
-                        step[key] = spec[key]
+                idx = i
                 break
+        if idx is None:
+            raise VariantError("replace: целевой шаг не найден")
+        step = out[idx]
+        for key in (
+            "text",
+            "timer_seconds",
+            "timer_label",
+            "timer_note",
+            "pull_internal_temperature_c",
+            "target_internal_temperature_c",
+            "hold_seconds",
+        ):
+            if key in spec:
+                step[key] = spec[key]
     for spec in delta.get("insert") or []:
         after = spec.get("after_position", len(out))
         inserted = {
@@ -328,21 +373,80 @@ class AssembledRecipe:
     extra: dict = field(default_factory=dict)
 
 
+@dataclass(frozen=True, slots=True)
+class VariantData:
+    code: str
+    title: str
+    axis: str
+    has_delta: bool
+    legacy_text: str | None = None
+    ingredient_delta: dict | None = None
+    step_delta: dict | None = None
+    allergen_delta: dict | None = None
+    high_risk_delta: dict = field(default_factory=dict)
+    cook_method_override: str | None = None
+    protein_base_override: str | None = None
+    equipment: str | None = None
+    caution_text_override: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class VariantSelection:
+    variant_code: str | None = None
+    equipment_code: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class RecipeReadModel:
+    slug: str
+    protein_base: str
+    cook_method: str
+    equipment: str | None
+    high_risk_flags: tuple[str, ...]
+    caution_text: str | None
+    ingredients: tuple[dict, ...]
+    steps: tuple[dict, ...]
+    variants: tuple[VariantData, ...]
+    notes: tuple
+    prep: tuple
+
+
+def _variant_data(item) -> VariantData:
+    if isinstance(item, VariantData):
+        return item
+    return VariantData(
+        code=item.code,
+        title=item.title,
+        axis=item.axis,
+        has_delta=bool(item.has_delta),
+        legacy_text=item.legacy_text,
+        ingredient_delta=item.ingredient_delta,
+        step_delta=item.step_delta,
+        allergen_delta=item.allergen_delta,
+        high_risk_delta=item.high_risk_delta or {},
+        cook_method_override=getattr(item, "cook_method_override", None),
+        protein_base_override=getattr(item, "protein_base_override", None),
+        equipment=getattr(item, "equipment", None),
+        caution_text_override=getattr(item, "caution_text_override", None),
+    )
+
+
 def _variant_payload(item) -> dict:
+    data = _variant_data(item)
     return {
-        "code": item.code,
-        "title": item.title,
-        "axis": item.axis,
-        "has_delta": bool(item.has_delta),
-        "legacy_text": item.legacy_text,
-        "ingredient_delta": item.ingredient_delta,
-        "step_delta": item.step_delta,
-        "allergen_delta": item.allergen_delta,
-        "high_risk_delta": item.high_risk_delta or {},
-        "cook_method_override": getattr(item, "cook_method_override", None),
-        "protein_base_override": getattr(item, "protein_base_override", None),
-        "equipment": getattr(item, "equipment", None),
-        "caution_text_override": getattr(item, "caution_text_override", None),
+        "code": data.code,
+        "title": data.title,
+        "axis": data.axis,
+        "has_delta": data.has_delta,
+        "legacy_text": data.legacy_text,
+        "ingredient_delta": data.ingredient_delta,
+        "step_delta": data.step_delta,
+        "allergen_delta": data.allergen_delta,
+        "high_risk_delta": data.high_risk_delta or {},
+        "cook_method_override": data.cook_method_override,
+        "protein_base_override": data.protein_base_override,
+        "equipment": data.equipment,
+        "caution_text_override": data.caution_text_override,
     }
 
 
@@ -422,7 +526,8 @@ def assemble_display(
         if not axis or not axis.get("has_delta"):
             continue
         lines = apply_ingredient_delta(lines, axis.get("ingredient_delta"))
-        steps = apply_step_delta(steps, axis.get("step_delta"))
+        if steps:
+            steps = apply_step_delta(steps, axis.get("step_delta"))
         flags = apply_high_risk(flags, axis.get("high_risk_delta"))
         if axis.get("allergen_delta"):
             allergen_deltas.append(axis["allergen_delta"])
@@ -442,38 +547,53 @@ def assemble_display(
     return lines, steps, allergens, flags, caution, cook_method, protein_base
 
 
-def assemble_recipe(
-    recipe,
-    *,
-    variant_code: str | None = None,
-    equipment_code: str | None = None,
-    enrich: bool = True,
+def build_read_model(recipe, *, include_nutrition: bool = True) -> RecipeReadModel:
+    """Snapshot a prefetched Recipe into an in-memory read model (no extra queries)."""
+    notes = recipe.notes if isinstance(recipe.notes, list) else []
+    prep = recipe.prep if isinstance(recipe.prep, list) else []
+    return RecipeReadModel(
+        slug=getattr(recipe, "slug", "") or "",
+        protein_base=recipe.protein_base,
+        cook_method=recipe.cook_method,
+        equipment=recipe.equipment,
+        high_risk_flags=tuple(recipe.high_risk_flags or []),
+        caution_text=recipe.caution_text,
+        ingredients=tuple(lines_from_recipe(recipe, include_nutrition=include_nutrition)),
+        steps=tuple(steps_from_recipe(recipe)),
+        variants=tuple(_variant_data(item) for item in recipe.variants.all()),
+        notes=tuple(notes),
+        prep=tuple(prep),
+    )
+
+
+def assemble(
+    read_model: RecipeReadModel,
+    selection: VariantSelection | None = None,
 ) -> AssembledRecipe:
-    variants = list(recipe.variants.all())
+    """Pure assemble from a read model. No ORM."""
+    selection = selection or VariantSelection()
+    variants = list(read_model.variants)
+    host = SimpleNamespace(equipment=read_model.equipment)
     addon_obj, equipment_obj, applied_equipment = resolve_axes(
-        recipe=recipe,
+        recipe=host,
         variants=variants,
-        variant_code=variant_code,
-        equipment_code=equipment_code,
+        variant_code=selection.variant_code,
+        equipment_code=selection.equipment_code,
     )
     addon = _variant_payload(addon_obj) if addon_obj else None
     equipment = _variant_payload(equipment_obj) if equipment_obj else None
     lines, steps, allergens, flags, caution, cook_method, protein_base = assemble_display(
-        base_lines=lines_from_recipe(recipe, include_nutrition=enrich),
-        base_steps=steps_from_recipe(recipe),
+        base_lines=list(read_model.ingredients),
+        base_steps=list(read_model.steps),
         base_allergens={},
-        base_flags=list(recipe.high_risk_flags or []),
-        base_caution=recipe.caution_text,
-        base_cook_method=recipe.cook_method,
-        base_protein_base=recipe.protein_base,
+        base_flags=list(read_model.high_risk_flags),
+        base_caution=read_model.caution_text,
+        base_cook_method=read_model.cook_method,
+        base_protein_base=read_model.protein_base,
         addon=addon,
         equipment=equipment,
     )
-    if enrich:
-        lines = enrich_lines_from_db(lines)
     addons = [item for item in variants if item.axis == "addon"]
-    notes = recipe.notes if isinstance(recipe.notes, list) else []
-    prep = recipe.prep if isinstance(recipe.prep, list) else []
     return AssembledRecipe(
         ingredients=lines,
         steps=steps,
@@ -497,16 +617,33 @@ def assemble_recipe(
             }
             for item in addons
         ],
-        available_equipment=available_equipment_codes(recipe, variants),
+        available_equipment=available_equipment_codes(host, variants),
         variations=[
             {"title": item.title, "text": item.legacy_text or ""}
             for item in addons
             if not item.has_delta
         ],
-        notes=notes,
-        prep=prep,
+        notes=list(read_model.notes),
+        prep=list(read_model.prep),
         has_delta_variants=any(item.has_delta for item in addons),
     )
+
+
+def assemble_recipe(
+    recipe,
+    *,
+    variant_code: str | None = None,
+    equipment_code: str | None = None,
+    enrich: bool = True,
+) -> AssembledRecipe:
+    read_model = build_read_model(recipe, include_nutrition=enrich)
+    assembled = assemble(
+        read_model,
+        VariantSelection(variant_code=variant_code, equipment_code=equipment_code),
+    )
+    if enrich:
+        assembled.ingredients = enrich_lines_from_db(assembled.ingredients)
+    return assembled
 
 
 def catalog_allergens(recipe) -> dict[str, list[str]]:
@@ -517,17 +654,20 @@ def catalog_allergens(recipe) -> dict[str, list[str]]:
         if item.axis != "addon" or not item.has_delta:
             continue
         payload = _variant_payload(item)
-        lines, _steps, allergens, _flags, _caution, _method, _protein = assemble_display(
-            base_lines=base_lines,
-            base_steps=[],
-            base_allergens={},
-            base_flags=[],
-            base_caution=None,
-            base_cook_method=recipe.cook_method,
-            base_protein_base=recipe.protein_base,
-            addon=payload,
-            equipment=None,
-        )
+        try:
+            lines, _steps, allergens, _flags, _caution, _method, _protein = assemble_display(
+                base_lines=base_lines,
+                base_steps=[],
+                base_allergens={},
+                base_flags=[],
+                base_caution=None,
+                base_cook_method=recipe.cook_method,
+                base_protein_base=recipe.protein_base,
+                addon=payload,
+                equipment=None,
+            )
+        except VariantError:
+            continue
         merged.append(allergens)
         merged.append(allergens_from_lines(lines))
     rows = (
@@ -539,6 +679,21 @@ def catalog_allergens(recipe) -> dict[str, list[str]]:
         for item in merged
     )
     return merge_allergen_lists(rows)
+
+
+def catalog_cook_methods(recipe) -> list[str]:
+    ordered: list[str] = []
+
+    def add(code: str | None) -> None:
+        if code and code not in ordered:
+            ordered.append(code)
+
+    add(getattr(recipe, "cook_method", None))
+    for item in recipe.variants.all():
+        if getattr(item, "axis", None) != "equipment" or not getattr(item, "has_delta", False):
+            continue
+        add(getattr(item, "cook_method_override", None))
+    return ordered
 
 
 def catalog_protein_bases(recipe) -> list[str]:

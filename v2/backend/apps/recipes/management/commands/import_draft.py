@@ -57,6 +57,16 @@ class Command(BaseCommand):
             action="store_true",
             help="Только валидатор, без записи",
         )
+        parser.add_argument(
+            "--publish",
+            action="store_true",
+            help="Опубликовать рецепт после успешного импорта",
+        )
+        parser.add_argument(
+            "--draft",
+            action="store_true",
+            help="Записать как draft, даже если карточка уже published",
+        )
 
     def handle(self, *args, **options):
         root = drafts_root()
@@ -65,6 +75,24 @@ class Command(BaseCommand):
             known = known_from_v1_map(json.loads(v1_map_path().read_text(encoding="utf-8")))
         except OSError as exc:
             raise CommandError(f"Нет сида ингредиентов: {exc}") from exc
+        from apps.recipes.models import Ingredient
+
+        for row in Ingredient.objects.all():
+            known.setdefault(
+                row.canonical_id,
+                {
+                    "canonical_id": row.canonical_id,
+                    "title": row.title,
+                    "aliases": list(row.aliases or []),
+                    "contains": list(row.allergens_contains or []),
+                    "may_contain": list(row.allergens_may_contain or []),
+                    "unknown": list(row.allergens_unknown or []),
+                },
+            )
+
+        if options.get("publish") and options.get("draft"):
+            raise CommandError("Укажите либо --publish, либо --draft")
+        publish = True if options.get("publish") else False if options.get("draft") else None
 
         paths: list[Path] = []
         if options.get("path"):
@@ -116,8 +144,9 @@ class Command(BaseCommand):
                 self.stdout.write(f"пропуск {slug}: {exc}")
                 continue
             with transaction.atomic():
-                upsert_recipe(item)
-                load_ingredient_nutrition()
+                upsert_recipe(item, publish=publish)
             imported += 1
             self.stdout.write(f"записан {slug}")
+        if imported:
+            load_ingredient_nutrition()
         self.stdout.write(f"готово imported={imported} skipped={skipped}")

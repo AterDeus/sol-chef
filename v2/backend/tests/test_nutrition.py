@@ -88,7 +88,7 @@ def test_u23_sum_grams_kcal_from_canon_not_atwater():
     assert nut["total"]["kcal"] == 322
     assert nut["total"]["protein_g"] == 40.3
     assert nut["total"]["fat_g"] == 10.3
-    assert nut["total"]["carbs_g"] == 9.0
+    assert nut["total"]["carbs_g"] == 9
     assert nut["total"]["kcal"] != int(atwater)
     assert nut["incomplete"] is False
 
@@ -146,12 +146,12 @@ def test_u26_water_in_mass_zero_macros_meat_kcal():
     )
     nut = _compute([meat, water])
     assert nut["total"]["kcal"] == 187
-    assert nut["total"]["protein_g"] == 21.0
+    assert nut["total"]["protein_g"] == 21
     assert nut["per_100g_input"] is not None
     assert nut["per_100g_input"]["kcal"] == 62
-    assert nut["per_100g_input"]["protein_g"] == 7.0
+    assert nut["per_100g_input"]["protein_g"] == 7
     assert nut["per_100g_input"]["fat_g"] == 3.7
-    assert nut["per_100g_input"]["carbs_g"] == 0.0
+    assert nut["per_100g_input"]["carbs_g"] == 0
 
 
 def test_u27_nutrition_exclude_out_of_sum_and_mass():
@@ -398,6 +398,7 @@ def test_u35_keys_per_100g_input_not_aliases():
         high_risk_flags=[],
         caution_text=None,
         cook_method="pan_fry",
+        protein_base="beef",
         equipment="skillet",
         applied_axes={"variant": None, "equipment": "skillet"},
         available_variants=[],
@@ -489,28 +490,46 @@ def test_seed_row_defaults_map_kcal_fields():
 def test_load_ingredient_nutrition_updates_oil_kcal(monkeypatch):
     from apps.recipes.etl import nutrition as nutrition_etl
 
-    updates: dict[str, dict] = {}
-
-    class _Query:
+    class _Ing:
         def __init__(self, cid: str):
-            self.cid = cid
+            self.canonical_id = cid
+            self.kcal_per_100g = None
+            self.protein_g_per_100g = None
+            self.fat_g_per_100g = None
+            self.carbs_g_per_100g = None
+            self.nutrition_basis = None
+            self.nutrition_source = None
+            self.nutrition_source_id = None
+            self.density_g_per_ml = None
+            self.g_per_tsp = None
+            self.g_per_tbsp = None
+            self.g_per_pcs = None
+            self.g_per_clove = None
+            self.g_per_bunch = None
+            self.g_per_slice = None
+            self.title = "масло"
+            self.allergens_contains = ["should_not_be_written"]
 
-        def update(self, **kwargs):
-            updates[self.cid] = kwargs
-            return 1
+    oil = _Ing("vegetable_oil")
+    bulk: list[object] = []
 
     class _Manager:
-        def filter(self, *, canonical_id):
-            return _Query(canonical_id)
+        def filter(self, *, canonical_id__in):
+            return [oil] if "vegetable_oil" in canonical_id__in else []
+
+        def bulk_update(self, rows, fields, batch_size=None):
+            bulk.extend(rows)
+            return len(rows)
 
     monkeypatch.setattr(nutrition_etl.Ingredient, "objects", _Manager())
-    count = nutrition_etl.load_ingredient_nutrition()
-    assert count >= 1
-    oil = updates["vegetable_oil"]
-    assert oil["kcal_per_100g"] == Decimal("884")
-    assert oil["nutrition_basis"] == "raw_100g"
-    assert "title" not in oil
-    assert "allergens_contains" not in oil
+    report = nutrition_etl.load_ingredient_nutrition()
+    assert report["updated"] >= 1
+    assert bulk == [oil]
+    assert oil.kcal_per_100g == Decimal("884")
+    assert oil.nutrition_basis == "raw_100g"
+    assert oil.g_per_tbsp == Decimal("13.6")
+    assert oil.title == "масло"
+    assert oil.allergens_contains == ["should_not_be_written"]
 
 
 @pytest.mark.skipif(

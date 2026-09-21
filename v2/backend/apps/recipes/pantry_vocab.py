@@ -34,6 +34,11 @@ PANTRY_COMMON = frozenset(
     }
 )
 
+# Homemade leftover/component. Not supermarket raw meat.
+# Species chips (beef, pork…) mean raw cuts unless the person names this id.
+_PREP = ("shredded_beef",)
+PANTRY_PREP = frozenset(_PREP)
+
 # Not ordinary cupboard, not assumed, do not fail a recipe.
 PANTRY_EXOTIC = frozenset(
     {
@@ -311,6 +316,7 @@ _PORK = (
     "ham",
 )
 _BEEF = (
+    "beef",
     "beef_mince",
     "beef_tenderloin",
     "steak",
@@ -319,7 +325,6 @@ _BEEF = (
     "beef_thin_rib",
     "beef_chuck",
     "beef_neck",
-    "beef",
     "beef_round",
     "beef_rump",
     "beef_brisket",
@@ -356,18 +361,35 @@ HAVE_GROUPS: dict[str, tuple[str, ...]] = {
     "beef": _BEEF,
     "lamb": _LAMB,
     "offal": _OFFAL,
+    "prep": _PREP,
     "meat": _PORK + _BEEF + _LAMB + _OFFAL,
     "fish": SHOPPING_GROUP_IDS["fish"],
     "veg": SHOPPING_GROUP_IDS["veg"] + SHOPPING_GROUP_IDS["potatoes"],
     "grains": SHOPPING_GROUP_IDS["grains"],
     "dairy": tuple(cid for cid in SHOPPING_GROUP_IDS["dairy"] if cid not in {"eggs", "egg"}),
     "eggs": ("eggs", "egg"),
-    "legumes": SHOPPING_GROUP_IDS["legumes"],
-    "canned": SHOPPING_GROUP_IDS["canned"],
+    "legumes": ("beans", "chickpeas", "lentils", "peas"),
+    "canned": (
+        "canned_tomatoes",
+        "tomato_paste",
+        "tomato_puree",
+        "canned_corn",
+        "canned_green_peas",
+        "canned_beans",
+        "canned_chickpeas",
+        "olives",
+        "pickles",
+    ),
     "frozen": SHOPPING_GROUP_IDS["frozen"],
     "bakery": SHOPPING_GROUP_IDS["bakery"],
-    "sauces": SHOPPING_GROUP_IDS["sauces"],
-    "fats": SHOPPING_GROUP_IDS["fats"],
+    "sauces": (
+        "tomato_sauce",
+        "ketchup",
+        "mayonnaise",
+        "soy_sauce",
+        "mustard",
+    ),
+    "fats": ("sunflower_oil", "vegetable_oil", "olive_oil"),
 }
 
 HAVE_GROUPS["other"] = tuple(
@@ -386,7 +408,8 @@ HAVE_GROUP_LABEL_RU = {
     "pork": "Свинина",
     "beef": "Говядина",
     "lamb": "Баранина",
-    "offal": "Другое",
+    "offal": "Субпродукты",
+    "prep": "Полуфабрикаты",
     "meat": "Мясо",
     "fish": "Рыба",
     "veg": "Овощи",
@@ -404,9 +427,69 @@ HAVE_GROUP_LABEL_RU = {
 
 HAVE_UI_GROUPS = ("chicken", "meat", "fish", "veg", "grains", "eggs", "dairy", "other")
 
+# First-level chips only open a picker. Not "I have every SKU in this aisle".
+HAVE_GROUP_PICKER_ONLY = frozenset(HAVE_UI_GROUPS)
+
 # First screen: coarse chips. Meat opens species, then supermarket cuts.
+# Leftovers are a sibling of species, not mixed into raw beef/pork.
 HAVE_GROUP_CHILDREN: dict[str, tuple[str, ...]] = {
-    "meat": ("pork", "beef", "lamb", "offal"),
+    "meat": ("pork", "beef", "lamb", "offal", "prep"),
+    "other": ("legumes", "canned", "frozen", "bakery", "sauces", "fats"),
+}
+
+# Calculator chips: species already in the heading, so drop «говяжья/свиная».
+HAVE_CHIP_LABEL_RU: dict[str, str] = {
+    "chicken_breast": "Грудка",
+    "chicken_thighs": "Бёдра",
+    "chicken_drumsticks": "Голени",
+    "chicken_wings": "Крылья",
+    "whole_chicken": "Целиком",
+    "chicken_mince": "Фарш",
+    "pork_mince": "Фарш",
+    "pork_neck": "Шея",
+    "pork_shoulder": "Лопатка",
+    "pork_loin": "Корейка",
+    "pork_tenderloin": "Вырезка",
+    "pork_chops": "Отбивные",
+    "pork_ribs": "Рёбра",
+    "pork_belly": "Грудинка",
+    "beef": "Любая говядина",
+    "beef_mince": "Фарш",
+    "beef_tenderloin": "Вырезка",
+    "beef_chuck": "Лопатка",
+    "beef_neck": "Шея",
+    "beef_rump": "Огузок",
+    "beef_brisket": "Грудинка",
+    "beef_ribs": "Рёбра",
+    "beef_shank": "Голяшка",
+    "beef_tail": "Хвост",
+    "lamb_mince": "Фарш",
+    "lamb_shoulder": "Лопатка",
+    "lamb_neck": "Шея",
+    "lamb_chops": "Отбивные",
+    "lamb_ribs": "Рёбра",
+    "lamb_shank": "Голяшка",
+    "lamb_leg": "Окорок",
+    "canned_tomatoes": "Томаты",
+    "tomato_paste": "Томатная паста",
+    "tomato_puree": "Томатное пюре",
+    "canned_corn": "Кукуруза",
+    "canned_green_peas": "Горошек",
+    "canned_beans": "Фасоль в банке",
+    "canned_chickpeas": "Нут в банке",
+    "frozen_vegetables": "Овощная смесь",
+    "frozen_peas": "Горошек",
+    "frozen_corn": "Кукуруза",
+    "frozen_green_beans": "Стручковая фасоль",
+    "frozen_spinach": "Шпинат",
+    "sunflower_oil": "Подсолнечное",
+    "vegetable_oil": "Растительное",
+    "olive_oil": "Оливковое",
+    "tomato_sauce": "Томатный",
+    "soy_sauce": "Соевый",
+    "white_bread": "Белый",
+    "rye_bread": "Чёрный",
+    "breadcrumbs": "Сухари",
 }
 
 HAVE_GROUP_PROTEIN = {
@@ -427,6 +510,8 @@ SHOPPING_LIKELY: dict[str, tuple[str, ...]] = {
     "meat": ("beef_mince", "pork_mince", "pork_neck", "steak", "bacon"),
     "pork": ("pork_neck", "pork_mince", "pork_chops", "bacon"),
     "beef": ("beef_mince", "beef_chuck", "steak"),
+    "lamb": ("lamb_shoulder", "lamb_mince"),
+    "prep": ("shredded_beef",),
     "fish": ("pollock", "hake", "mackerel", "canned_tuna"),
     "veg": (
         "onion",
@@ -443,7 +528,6 @@ SHOPPING_LIKELY: dict[str, tuple[str, ...]] = {
     "dairy": ("milk", "sour_cream", "cottage_cheese", "butter", "hard_cheese"),
     "other": (
         "canned_tomatoes",
-        "canned_tuna",
         "beans",
         "bread",
         "sunflower_oil",
@@ -472,6 +556,7 @@ CANONICAL_INGREDIENT_LABEL_RU: dict[str, str] = {
     "beef_mince": "говяжий фарш",
     "beef_tenderloin": "говяжья вырезка",
     "beef": "говядина",
+    "shredded_beef": "говядина на волокна",
     "beef_thick_rib": "толстый край",
     "beef_thin_rib": "тонкий край",
     "beef_chuck": "говяжья лопатка",
@@ -599,10 +684,21 @@ HAVE_TEXT_ALIASES = {
     "курицы": "chicken",
     "курятина": "chicken",
     "курятину": "chicken",
+    "любая курица": "chicken",
     "свинина": "pork",
     "свинину": "pork",
+    "любая свинина": "pork",
     "говядина": "beef",
     "говядину": "beef",
+    "любая говядина": "beef",
+    "говядина на волокна": "shredded_beef",
+    "томленая говядина": "shredded_beef",
+    "говядина томеная": "shredded_beef",
+    "рваная говядина": "shredded_beef",
+    "рваную говядину": "shredded_beef",
+    "полуфабрикаты": "prep",
+    "заготовка": "prep",
+    "заготовки": "prep",
     "говяжий фарш": "beef_mince",
     "говяжья вырезка": "beef_tenderloin",
     "вырезка говяжья": "beef_tenderloin",
@@ -618,6 +714,7 @@ HAVE_TEXT_ALIASES = {
     "окорок": "pork_leg",
     "баранина": "lamb",
     "баранину": "lamb",
+    "любая баранина": "lamb",
     "бараний фарш": "lamb_mince",
     "печень говяжья": "beef_liver",
     "язык говяжий": "beef_tongue",
@@ -682,6 +779,10 @@ HAVE_TEXT_ALIASES = {
     "хлеб": "bread",
     "молочное": "dairy",
     "молочка": "dairy",
+    "бобовые": "legumes",
+    "консервы": "canned",
+    "заморозка": "frozen",
+    "соусы": "sauces",
 }
 
 
@@ -700,6 +801,19 @@ def shopping_label(cid: str, titles: dict[str, str] | None = None) -> str:
     return CANONICAL_INGREDIENT_LABEL_RU.get(cid, cid)
 
 
+def title_case_ru(label: str) -> str:
+    if not label:
+        return label
+    return label[0].upper() + label[1:]
+
+
+def chip_title(cid: str, titles: dict[str, str] | None = None) -> str:
+    """Calculator chip: short inside a species, first letter capital."""
+    if cid in HAVE_CHIP_LABEL_RU:
+        return HAVE_CHIP_LABEL_RU[cid]
+    return title_case_ru(shopping_label(cid, titles))
+
+
 def likely_items_for_have_group(code: str) -> tuple[str, ...]:
     return SHOPPING_LIKELY.get(code, ())
 
@@ -709,13 +823,19 @@ def items_for_have_group(code: str) -> tuple[str, ...]:
 
 
 def groups_to_expand(have_groups: list[str]) -> list[str]:
-    """Skip parent group if a child species is already selected."""
+    """Species chips may expand; first-level aisle chips never do.
+
+    Skip parent `meat` / `other` if a child shelf is already selected.
+    Picker-only chips (chicken, meat, veg, other…) only open the next
+    choice — not inventory.
+    """
     selected = set(have_groups)
     skip = {
         parent
         for parent, children in HAVE_GROUP_CHILDREN.items()
         if selected & set(children)
     }
+    skip |= HAVE_GROUP_PICKER_ONLY
     return [code for code in have_groups if code not in skip]
 
 
@@ -726,4 +846,6 @@ def availability_class(canonical_id: str) -> str:
         return "common"
     if canonical_id in PANTRY_EXOTIC:
         return "exotic"
+    if canonical_id in PANTRY_PREP:
+        return "prep"
     return "explicit"

@@ -6,13 +6,15 @@ from dataclasses import dataclass
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 
+from apps.core.exceptions import DomainValidationError
+from apps.core.numbers import decimal_api
 from apps.recipes.constants import UNIT_LABEL_RU
 
 GENTLE_EXPONENT = Decimal("0.7")
 # V1 used 1+(ratio-1)*0.5 — never use that here.
 
 
-class ScaleConflict(Exception):
+class ScaleConflict(DomainValidationError):
     """Both servings and anchor_weight were provided — API 400."""
 
 
@@ -118,10 +120,11 @@ def base_anchor_amount(amount: Decimal, unit: str) -> tuple[Decimal, str] | None
     return None
 
 
-def _json_number(value: Decimal) -> int | float:
-    if value == value.to_integral_value():
-        return int(value)
-    return float(value)
+def _json_number(value: Decimal) -> int | float | str:
+    out = decimal_api(value)
+    if out is None:
+        raise ValueError("decimal must be finite")
+    return out
 
 
 def resolve_scale(

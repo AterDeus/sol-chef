@@ -23,7 +23,8 @@ ENV NODE_ENV=production \
     PORT=3000 \
     TZ=Europe/Moscow \
     INTERNAL_API_URL=http://backend:8000 \
-    NEXT_PUBLIC_API_URL=
+    NEXT_PUBLIC_API_URL= \
+    SITE_URL=
 
 RUN apk add --no-cache libc6-compat tzdata \
     && cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime \

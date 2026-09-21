@@ -2,14 +2,17 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from apps.core.numbers import decimal_api
 from apps.recipes.models import Recipe
 from apps.recipes.services.assemble import (
     AssembledRecipe,
     catalog_allergens,
+    catalog_cook_methods,
     catalog_protein_bases,
     catalog_protein_variants,
     pick_anchor,
 )
+from apps.recipes.services.solver_scoring import requires_prep
 from apps.recipes.services.nutrition import (
     compute_recipe_nutrition,
     nutrition_line_projection,
@@ -22,14 +25,8 @@ from apps.recipes.services.scale import (
 )
 
 
-def _num(value: Decimal | None) -> int | float | None:
-    if value is None:
-        return None
-    if not isinstance(value, Decimal):
-        value = Decimal(str(value))
-    if value == value.to_integral_value():
-        return int(value)
-    return float(value)
+def _num(value: Decimal | None) -> int | float | str | None:
+    return decimal_api(value)
 
 
 def catalog_scaling(recipe: Recipe) -> dict:
@@ -47,6 +44,7 @@ def serialize_recipe_list_item(recipe: Recipe) -> dict:
         "protein_bases": catalog_protein_bases(recipe),
         "protein_variants": catalog_protein_variants(recipe),
         "cook_method": recipe.cook_method,
+        "cook_methods": catalog_cook_methods(recipe),
         "dish_type": recipe.dish_type,
         "equipment": recipe.equipment,
         "allowed_cuts": list(recipe.allowed_cuts or []),
@@ -65,6 +63,7 @@ def serialize_recipe_list_item(recipe: Recipe) -> dict:
         "effort_level": recipe.effort_level,
         "washing_level": recipe.washing_level,
         "use_cases": list(recipe.use_cases or []),
+        "requires_prep": requires_prep(recipe.ingredients.all()),
     }
 
 
@@ -134,7 +133,7 @@ def serialize_recipe_detail(
         scaling = {
             "enabled": True,
             "mode": scale.mode,
-            "ratio": float(scale.ratio),
+            "ratio": decimal_api(scale.ratio),
             "base_anchor": base_anchor,
             "applied": scale.applied,
         }
@@ -182,4 +181,5 @@ def serialize_recipe_detail(
         "washing_level": recipe.washing_level,
         "use_cases": list(recipe.use_cases or []),
         "adaptations": recipe.adaptations if isinstance(recipe.adaptations, list) else [],
+        "requires_prep": requires_prep(assembled.ingredients),
     }

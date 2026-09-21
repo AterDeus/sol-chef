@@ -87,56 +87,44 @@
   }
 
   .allergen-notice {
+    --allergen-ink: #e4a198;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: 0.15rem;
     margin: 0 0 var(--space-5);
   }
 
   .allergen-notice--compact {
-    margin: 0;
-    gap: var(--space-2);
+    margin: var(--space-3) 0 0;
   }
 
-  .allergen-notice__kicker {
+  .allergen-notice__title {
     margin: 0;
     font-size: var(--fs-12);
     font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
     color: var(--text-dim);
   }
 
-  .allergen-notice ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+  .allergen-notice__list,
+  .allergen-notice__notes {
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: var(--fs-12);
+    line-height: 1.4;
+    color: var(--allergen-ink);
   }
 
-  .allergen-chip {
-    display: inline-flex;
-    align-items: center;
-    max-width: 100%;
-    font-size: var(--fs-13);
-    line-height: 1.35;
-    color: var(--text);
-    background: var(--ember-soft);
-    border: 1px solid var(--ember);
-    border-radius: var(--radius-md);
-    padding: 0.35rem 0.65rem;
+  .allergen-notice__list li {
+    display: inline;
   }
 
-  .allergen-chip--may {
-    background: var(--gold-soft);
-    border-color: var(--gold);
+  .allergen-notice__list li:not(:last-child)::after {
+    content: ', ';
   }
 
-  .allergen-chip--unknown {
-    background: var(--bird-soft);
-    border-color: var(--bird);
+  .allergen-notice__notes li + li {
+    margin-block-start: 0.1rem;
   }
 
   .filter-block {
@@ -556,6 +544,7 @@
   }
 
   .solution-featured__status,
+  .solution-featured__axis,
   .solution-alts__why {
     margin: 0;
     color: var(--text-dim);
@@ -612,6 +601,15 @@
         color: var(--wal);
         font-weight: 600;
       }
+    }
+  }
+
+  .solution-alts__more {
+    margin: var(--space-4) 0 0;
+    font-size: var(--fs-14);
+
+    a {
+      color: var(--wal);
     }
   }
 

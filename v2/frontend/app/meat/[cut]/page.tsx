@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { fetchMeatGuide } from '@/lib/api';
 import type { MeatPayload } from '@/lib/types';
 import { MEAT_CUTS, MEAT_CUT_LABEL, type MeatCut } from '@/lib/vocab';
@@ -10,6 +11,20 @@ export const revalidate = 60;
 
 function isCut(value: string): value is MeatCut {
   return (MEAT_CUTS as readonly string[]).includes(value);
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ cut: string }>;
+}): Promise<Metadata> {
+  const { cut } = await params;
+  if (!isCut(cut)) return { title: 'Мясо' };
+  const result = await fetchMeatGuide(cut);
+  return {
+    title: result.ok ? result.data.title : MEAT_CUT_LABEL[cut],
+    description: 'Температуры и типичные ошибки по отрубам.',
+  };
 }
 
 export default async function MeatCutPage({

@@ -1,18 +1,15 @@
 'use client';
 
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { NutritionBlock } from '@/components/NutritionBlock';
 import { SpriteIcon } from '@/components/SpriteIcon';
 import { computeNutrition } from '@/lib/nutrition';
 import { formatDisplayAmount, scaleIngredients } from '@/lib/scale';
 import type { RecipeIngredient, Scaling } from '@/lib/types';
 
-type UnitPair = { small: string; large: string; factor: number };
-
-function unitPairOf(unit?: string): UnitPair | null {
-  if (unit === 'g' || unit === 'kg') return { small: 'г', large: 'кг', factor: 1000 };
-  if (unit === 'ml' || unit === 'l') return { small: 'мл', large: 'л', factor: 1000 };
-  return null;
+function unitLabelOf(unit?: string): string {
+  if (unit === 'ml' || unit === 'l') return 'мл';
+  return 'г';
 }
 
 function formatFactor(ratio: number): string {
@@ -29,20 +26,72 @@ function formatInput(value: number): string {
   return String(Math.round(value * 1000) / 1000);
 }
 
-function displayOf(base: number, pair: UnitPair | null, large: boolean): number {
-  if (!pair || !large) return base;
-  return Math.round((base / pair.factor) * 1000) / 1000;
-}
-
-function baseFromInput(raw: string, pair: UnitPair | null, large: boolean): number | null {
+function parsePositive(raw: string): number | null {
   const n = Number(raw.replace(',', '.'));
   if (!Number.isFinite(n) || n <= 0) return null;
-  if (!pair || !large) return n;
-  return n * pair.factor;
+  return n;
 }
 
 function stepForBase(base: number): number {
   return base >= 500 ? 250 : 50;
+}
+
+function DecimalField({
+  value,
+  parse,
+  className,
+  onCommit,
+  ...inputProps
+}: {
+  value: number;
+  parse: (raw: string) => number | null;
+  onCommit: (next: number) => void;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'onBlur'>) {
+  const [raw, setRaw] = useState(() => formatInput(value));
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setRaw(formatInput(value));
+    setError(null);
+  }, [value]);
+
+  const commit = () => {
+    const next = parse(raw);
+    if (next == null) {
+      setError('Введите число больше нуля');
+      setRaw(formatInput(value));
+      return;
+    }
+    setError(null);
+    onCommit(next);
+  };
+
+  return (
+    <div className="recipe-scale__field">
+      <input
+        {...inputProps}
+        className={className}
+        value={raw}
+        aria-invalid={error ? true : undefined}
+        onChange={(event) => {
+          setRaw(event.target.value);
+          setError(null);
+        }}
+        onBlur={commit}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            commit();
+          }
+        }}
+      />
+      {error ? (
+        <p className="recipe-scale__error" role="alert">
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
 }
 
 const KBJU_SKIP_TIP = 'КБЖУ для этой строки не считается.';
@@ -91,9 +140,6 @@ export function IngredientsBlock({
     scaling.applied?.anchor_weight ?? defaultWeight,
   );
   const [servings, setServings] = useState(scaling.applied?.servings ?? servingsBase ?? 1);
-  const pair = useMemo(() => unitPairOf(baseAnchor?.unit), [baseAnchor?.unit]);
-  const [useLarge, setUseLarge] = useState(baseAnchor?.unit === 'kg' || baseAnchor?.unit === 'l');
-  const unitGroup = useId();
 
   const ratio = showServings
     ? servings / (servingsBase || 1)
@@ -114,8 +160,7 @@ export function IngredientsBlock({
   const factorLabel = showAnchor ? formatFactor(ratio) : '';
   const showReset = showAnchor && Math.abs(ratio - 1) >= 0.01;
   const step = stepForBase(anchorWeight || defaultWeight);
-  const displayValue = displayOf(anchorWeight, pair, useLarge);
-  const displayStep = pair && useLarge ? step / pair.factor : step;
+  const unitLabel = unitLabelOf(baseAnchor?.unit);
 
   return (
     <>
@@ -136,45 +181,16 @@ export function IngredientsBlock({
               >
                 −
               </button>
-              <input
+              <DecimalField
                 className="recipe-scale__input"
-                type="number"
+                type="text"
                 inputMode="decimal"
-                min={pair && useLarge ? step / pair.factor : step}
-                step={displayStep}
-                value={formatInput(displayValue)}
-                aria-label={`Количество: ${baseAnchor.name}`}
-                onChange={(e) => {
-                  const next = baseFromInput(e.target.value, pair, useLarge);
-                  if (next != null) setAnchorWeight(next);
-                }}
+                aria-label={`Количество, ${unitLabel}: ${baseAnchor.name}`}
+                value={anchorWeight}
+                parse={parsePositive}
+                onCommit={setAnchorWeight}
               />
-              {pair && (
-                <div
-                  className={`recipe-scale__units${useLarge ? ' is-large' : ''}`}
-                  role="radiogroup"
-                  aria-label="Единица измерения"
-                >
-                  <label className="recipe-scale__unit">
-                    <input
-                      type="radio"
-                      name={unitGroup}
-                      checked={!useLarge}
-                      onChange={() => setUseLarge(false)}
-                    />
-                    {pair.small}
-                  </label>
-                  <label className="recipe-scale__unit">
-                    <input
-                      type="radio"
-                      name={unitGroup}
-                      checked={useLarge}
-                      onChange={() => setUseLarge(true)}
-                    />
-                    {pair.large}
-                  </label>
-                </div>
-              )}
+              <span className="recipe-scale__unit-label">{unitLabel}</span>
               <button
                 type="button"
                 className="btn-secondary recipe-scale__step"
@@ -195,10 +211,7 @@ export function IngredientsBlock({
                 <button
                   type="button"
                   className="recipe-scale__reset"
-                  onClick={() => {
-                    setAnchorWeight(defaultWeight);
-                    setUseLarge(false);
-                  }}
+                  onClick={() => setAnchorWeight(defaultWeight)}
                 >
                   Сброс
                 </button>
@@ -226,17 +239,18 @@ export function IngredientsBlock({
               >
                 −
               </button>
-              <input
+              <DecimalField
                 className="recipe-scale__input"
-                type="number"
-                min={1}
-                step={1}
-                value={servings}
+                type="text"
+                inputMode="numeric"
                 aria-label="Число порций"
-                onChange={(e) => {
-                  const next = Number(e.target.value);
-                  if (Number.isFinite(next) && next > 0) setServings(next);
+                value={servings}
+                parse={(raw) => {
+                  const next = Number(raw.replace(',', '.'));
+                  if (!Number.isFinite(next) || next <= 0) return null;
+                  return next;
                 }}
+                onCommit={setServings}
               />
               <button
                 type="button"

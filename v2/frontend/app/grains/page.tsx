@@ -3,8 +3,14 @@ import type { GrainsPayload } from '@/lib/types';
 import { EmptyState, ErrorBanner } from '@/components/Feedback';
 import { GrainsView } from '@/components/Guides';
 import { PageIntro } from '@/components/PageArt';
+import type { Metadata } from 'next';
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Крупы',
+  description: 'Соотношения воды, время и типичные ошибки по крупам.',
+};
 
 export default async function GrainsPage() {
   const result = await fetchGuide('grains');

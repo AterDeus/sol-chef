@@ -53,6 +53,26 @@ export function minutesLabel(total: number | null | undefined): string | null {
   return `~${Math.round(total)} мин`;
 }
 
+export function effortLabel(level: number | null | undefined): string | null {
+  if (level == null || !Number.isInteger(level) || level < 1 || level > 5) return null;
+  if (level <= 2) return 'просто';
+  if (level === 3) return 'средне';
+  return 'сложнее';
+}
+
+export function solutionTimeLabel(
+  profile?: { total_minutes: number | null; active_minutes: number | null } | null,
+): string | null {
+  const total = profile?.total_minutes;
+  if (total == null || !Number.isFinite(total) || total <= 0) return null;
+  const rounded = Math.round(total);
+  const active = profile?.active_minutes;
+  if (active != null && Number.isFinite(active) && active > 0 && active < total) {
+    return `${rounded} мин, из них ${Math.round(active)} у плиты`;
+  }
+  return `${rounded} мин`;
+}
+
 export function hasQuickFilters(sp: SearchParamsRecord): boolean {
   return (
     valuesOf(sp, 'max_minutes').length > 0 ||

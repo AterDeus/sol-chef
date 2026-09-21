@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { PrepKitDetail, PrepSlot } from '@/lib/types';
 import { recipeHref } from '@/lib/filters';
 import { SpriteIcon } from '@/components/SpriteIcon';
@@ -78,7 +77,6 @@ export function PrepKitView({
   servings: number | null;
   noLeftover: boolean;
 }) {
-  const router = useRouter();
   const [tab, setTab] = useState<(typeof TABS)[number]['id']>('shop');
   const applied = servings ?? kit.servings_base ?? 2;
   const servingOptions = kit.servings_base ? PREP_SERVING_OPTIONS : [];
@@ -87,6 +85,15 @@ export function PrepKitView({
   const boxCaption = coldContainerCaption(kit.containers);
   const intro = kit.weekend_timeline.filter((row) => row.kind === 'intro');
   const recipeSteps = kit.weekend_timeline.filter((row) => row.kind !== 'intro');
+  const slotsByDay = useMemo(() => {
+    const map = new Map<number, Partial<Record<'lunch' | 'dinner', PrepSlot>>>();
+    for (const slot of kit.slots) {
+      const day = map.get(slot.day) ?? {};
+      day[slot.meal] = slot;
+      map.set(slot.day, day);
+    }
+    return map;
+  }, [kit.slots]);
   const planHref = (nextServings: number | null, nextNoLeftover: boolean) =>
     kitHref(kit.slug, {
       servings: nextServings,
@@ -112,19 +119,19 @@ export function PrepKitView({
             </div>
           )}
           {showLeftoverToggle && (
-            <label className="prep-toggle">
-              <input
-                type="checkbox"
-                checked={noLeftover}
-                onChange={() => router.push(planHref(servings, !noLeftover))}
-              />
+            <Link
+              href={planHref(servings, !noLeftover)}
+              className={`prep-toggle${noLeftover ? ' is-on' : ''}`}
+              aria-current={noLeftover ? 'true' : undefined}
+            >
+              <span className="prep-toggle__mark" aria-hidden />
               Без вчерашнего
               <span>
                 Блюдо на один приём; вместо разогрева — другое из набора. Меняет закупку и
                 воскресенье.
                 {leftoverCaption ? ` ${leftoverCaption}` : ''}
               </span>
-            </label>
+            </Link>
           )}
         </div>
       )}
@@ -135,7 +142,10 @@ export function PrepKitView({
             key={item.id}
             type="button"
             role="tab"
+            id={`prep-tab-${item.id}`}
+            aria-controls={`prep-panel-${item.id}`}
             aria-selected={tab === item.id}
+            tabIndex={tab === item.id ? 0 : -1}
             className={tab === item.id ? 'chip is-active' : 'chip'}
             onClick={() => setTab(item.id)}
           >
@@ -146,7 +156,7 @@ export function PrepKitView({
       </div>
 
       {tab === 'shop' && (
-        <section>
+        <section id="prep-panel-shop" role="tabpanel" aria-labelledby="prep-tab-shop">
           <h2>Что купить</h2>
           {kit.shopping.length === 0 ? (
             <p>Список закупки пуст.</p>
@@ -172,7 +182,7 @@ export function PrepKitView({
       )}
 
       {tab === 'sunday' && (
-        <section>
+        <section id="prep-panel-sunday" role="tabpanel" aria-labelledby="prep-tab-sunday">
           <h2>Рецепт воскресенья</h2>
           {intro.map((row, index) => (
             <SundayIntro key={`intro-${index}`} row={row} index={index} />
@@ -182,7 +192,7 @@ export function PrepKitView({
               {recipeSteps.map((row, index) => {
                 const text = typeof row.hands === 'string' ? row.hands : '';
                 return (
-                  <li key={index}>
+                  <li key={`${index}-${text.slice(0, 24)}`}>
                     <span>{text}</span>
                   </li>
                 );
@@ -222,9 +232,10 @@ export function PrepKitView({
                     <strong>{item.title}</strong> · {item.display_amount}
                   </p>
                   <ul>
-                    {(item.weekend_steps ?? []).map((step, index) => (
-                      <li key={index}>{typeof step === 'string' ? step : String(step)}</li>
-                    ))}
+                    {(item.weekend_steps ?? []).map((step, index) => {
+                      const text = typeof step === 'string' ? step : String(step);
+                      return <li key={`${index}-${text.slice(0, 24)}`}>{text}</li>;
+                    })}
                   </ul>
                 </div>
               ))}
@@ -234,12 +245,12 @@ export function PrepKitView({
       )}
 
       {tab === 'meals' && (
-        <section>
+        <section id="prep-panel-meals" role="tabpanel" aria-labelledby="prep-tab-meals">
           <h2>Блюда на неделю</h2>
           <div className="prep-slot-grid">
             {[1, 2, 3, 4, 5, 6, 7].map((day) => {
-              const lunch = kit.slots.find((slot) => slot.day === day && slot.meal === 'lunch');
-              const dinner = kit.slots.find((slot) => slot.day === day && slot.meal === 'dinner');
+              const lunch = slotsByDay.get(day)?.lunch;
+              const dinner = slotsByDay.get(day)?.dinner;
               const thawLines = thawRemindersForDay(day, kit.containers);
               return (
                 <div key={day} className="prep-day">

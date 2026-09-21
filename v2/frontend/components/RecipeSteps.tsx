@@ -38,7 +38,7 @@ export function RecipeSteps({
               <FilterChip
                 key={choice.id}
                 href={pieceHref(slug, sp, choice.id)}
-                pressed={selected === choice.id}
+                selected={selected === choice.id}
               >
                 {choice.label}
               </FilterChip>

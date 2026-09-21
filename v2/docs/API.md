@@ -24,6 +24,7 @@ Caddy: браузер → `http://localhost:8080/api/...`.
 |------------|-----|-------------------|
 | `INTERNAL_API_URL` | сервер Next | `http://backend:8000` |
 | `NEXT_PUBLIC_API_URL` | браузер | пустая строка (относительный `/api`) |
+| `SITE_URL` | сервер Next | публичный origin для sitemap / canonical / Open Graph. Локально `http://localhost:8080`. После HTTPS: `https://sol-chef.ru` |
 
 SSR: `fetch(`${INTERNAL_API_URL}/api/recipes/${slug}/`)`. Публичные GET без Cookie (иначе Next не кэширует). CSRF и Cookie — на мутациях (в срезе мутаций нет).
 
@@ -36,7 +37,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 - Несколько значений **одного** ключа (повторы или CSV): **OR**.
 - Разные ключи между собой: **AND**.
 - Неизвестный код: `400`, не молчаливый ignore.
-- `equipment=`: попадание, если код у базы **или** у `RecipeVariant` `axis=equipment` с `has_delta`.
+- `equipment=`: попадание, если код у базы **или** у `RecipeVariant` `axis=equipment` с `has_delta`. Код оси — поле `equipment` сосуда, а если оно пустое — `code` (семейство-метод: `air_fryer`, `steam`). Query принимает сосуды VOCAB **и** эти коды; неизвестный → `400`.
 - `cook_method=`: база **или** `cook_method_override` у варианта посуды с дельтой (семейство-тушение видно в «духовке», если есть такая ось).
 - `protein_base=`: база **или** код ∈ `protein_bases_extra` **или** `protein_base_override` у addon с `has_delta` (шаурма из курицы видна в «говядине», если чип так помечен).
 - `cuts=`: код ∈ `Recipe.allowed_cuts` (поле базы, не дельта).
@@ -107,6 +108,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
       "protein_bases": ["beef"],
       "protein_variants": [],
       "cook_method": "pan_fry",
+      "cook_methods": ["pan_fry"],
       "dish_type": "main",
       "equipment": "skillet",
       "allowed_cuts": ["thick_rib", "tenderloin"],
@@ -119,13 +121,16 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
         "unknown": []
       },
       "has_delta_variants": false,
-      "scaling": { "enabled": false }
+      "scaling": { "enabled": false },
+      "requires_prep": false
     }
   ]
 }
 ```
 
-`allergens` на карточке каталога — худший случай: база ∪ addon-дельт с `has_delta`. `unknown` не опускать. `has_delta_variants` — есть ли хотя бы один addon с `has_delta=true` (для бейджа, не для переключателя в сетке). `protein_bases` — домашняя основа ∪ `protein_bases_extra` ∪ override чипов с дельтой. `protein_variants` — `{code, title, protein_base}` только у тех addon, где задан override (книга ставит `?variant=`).
+`requires_prep` — в ядре есть канон из `PANTRY_PREP` (сейчас `shredded_beef`): это полуфабрикат, не сырое мясо с витрины. Карточка показывает «Нужна заготовка».
+
+`allergens` на карточке каталога — худший случай: база ∪ addon-дельт с `has_delta`. `unknown` не опускать. `has_delta_variants` — есть ли хотя бы один addon с `has_delta=true` (для бейджа, не для переключателя в сетке). `protein_bases` — домашняя основа ∪ `protein_bases_extra` ∪ override чипов с дельтой. `protein_variants` — `{code, title, protein_base}` только у тех addon, где задан override (книга ставит `?variant=`). `cook_methods` — база ∪ `cook_method_override` у вариантов посуды с дельтой (аэрогриль виден в «Способ», хотя база — духовка).
 
 Каталог **не** отдаёт `nutrition` и `nutrition_line`.
 
@@ -209,6 +214,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
   "washing_level": 2,
   "use_cases": ["one_pan", "budget"],
   "adaptations": [],
+  "requires_prep": false,
   "nutrition": {
     "basis": "raw_input",
     "incomplete": false,
@@ -247,7 +253,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 `available_equipment` — дефолт базы плюс коды вариантов посуды с дельтой. Один код — ряда посуды нет.
 
-`notes` — список, не строка. `variations` в ответе — только legacy (`has_delta=false`), чтобы не дублировать дельты. `prep` — напоминания «Заранее»; нет действий — `[]`, ключа в JSON автора нет. `time_profile` / `effort_level` / `washing_level` / `use_cases` / `adaptations` — профиль и разрешённые операции; у ETL V1 минуты `null`, списки пустые. Ranking калькулятора эти поля в этом спринте не читает.
+`notes` — список, не строка. `variations` в ответе — только legacy (`has_delta=false`), чтобы не дублировать дельты. `prep` — напоминания «Заранее»; нет действий — `[]`, ключа в JSON автора нет. `time_profile` / `effort_level` / `washing_level` / `use_cases` / `adaptations` — профиль и разрешённые операции; у ETL V1 минуты `null`, списки пустые. Ranking калькулятора читает `time_profile.total_minutes` как **мягкий** сигнал `intent=fast` и отдаёт профиль на доске; пустые минуты не выдумывает.
 
 `scaling.mode`: `anchor` \| `servings` \| `off`.
 
@@ -278,7 +284,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 Грубые группы кладовки для первого экрана калькулятора. Не склад с граммами. Не полный VOCAB осей.
 
-Без query: дерево. Первый ряд — грубые группы. У `meat` есть `children` (свинина / говядина / баранина / другое) и пустой `items`; отрубы витрины — в `children[].items`. Остальные группы сразу отдают полный список группы, не «likely 5».
+Без query: дерево. Первый ряд — грубые группы. У `meat` есть `children` (свинина / говядина / баранина / **субпродукты** / полуфабрикаты) и пустой `items`; сырые отруба — в `children[].items` вида; заготовки — в `prep.items`. У `other` — `children` (бобовые / консервы / заморозка / хлеб / соусы / масло) и пустой `items`. Подписи чипов — короткие внутри полки («Шея», «Любая говядина», «Фасоль в банке»), с большой буквы. Остальные группы сразу отдают полный список группы, не «likely 5».
 
 ```json
 {
@@ -286,7 +292,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
     {
       "id": "chicken",
       "title": "Курица",
-      "items": [{ "canonical_id": "chicken_thighs", "title": "куриные бёдра" }]
+      "items": [{ "canonical_id": "chicken_thighs", "title": "Бёдра" }]
     },
     {
       "id": "meat",
@@ -297,9 +303,10 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
           "id": "beef",
           "title": "Говядина",
           "items": [
-            { "canonical_id": "beef_tenderloin", "title": "говяжья вырезка" },
-            { "canonical_id": "beef_ribs", "title": "говяжьи рёбра" },
-            { "canonical_id": "beef_round", "title": "мякоть" }
+            { "canonical_id": "beef", "title": "Любая говядина" },
+            { "canonical_id": "beef_tenderloin", "title": "Вырезка" },
+            { "canonical_id": "beef_ribs", "title": "Рёбра" },
+            { "canonical_id": "beef_round", "title": "Мякоть" }
           ]
         }
       ]
@@ -329,7 +336,7 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
 
 Калькулятор. Фильтры каталога плюс `have=`, `have_group=`, `intent=`. Без `q`. Без `kcal_max`. КБЖУ не отдаёт. Как считает — [CALCULATOR.md](CALCULATOR.md). На `featured` / `results` те же `protein_bases` и `protein_variants`, что у карточки каталога: книга без этого не покажет шаурму в говядине.
 
-Неизвестный `have` / `have_group` / `intent` → **400**. `intent=` **не** отсекает рецепт (вес). `have=` не отсекает блюда, которые **используют** продукт из кладовки (нехватка — корзины). Блюда, которые «Есть» не берут, на `featured` / `alternatives` не попадают; если таких нет — `featured: null`. Жёсткий отсев — оси и «без чего».
+Неизвестный `have` / `have_group` / `intent` → **400**. `intent=` **не** отсекает рецепт (вес; `fast` учитывает минуты комбо, если они есть). Пустой query (нет осей, `have`, раскрываемого `have_group`, `intent`, `without`) → `featured: null`, `results: []`, солвер **не** бежит. Первый уровень `have_group` (курица / мясо / овощи…) **не** раскрывается и сам по себе солвер не запускает — карточка уточнения. Вид `beef` / `pork` / `lamb` / `offal` раскрывается в **сырые** отруба, пока нет конкретного `have=` из этой группы. Полка `canned` / `legumes` / `frozen` / `bakery` / `sauces` / `fats` раскрывается так же. `have_group=prep` раскрывается в `PANTRY_PREP` (`shredded_beef`). Ядро-заготовка на доску не попадает без этого канона в `have=`. `have=` не отсекает блюда, которые **используют** продукт из кладовки (нехватка — корзины). Блюда, которые «Есть» не берут, на `featured` / `alternatives` не попадают; если таких нет — `featured: null`. Жёсткий отсев — оси и «без чего». Аллергены и `time_profile` на решении — **собранный комбо**. Ранжирование читает предрасчитанные `axis_snapshots` семьи, если они есть (сборка состава — при импорте/сохранении). Ответ с непустым query кэшируется в Django locmem **45 с** (`rec:v4:` + хеш канонического query).
 
 ```json
 {
@@ -358,11 +365,13 @@ Query-ключи: `protein_base`, `cook_method`, `dish_type`, `equipment`, `cuts
     "allergens": { "contains": [], "may_contain": [], "unknown": [] },
     "high_risk_flags": ["poultry_temp"],
     "has_delta_variants": false,
-    "step_count": 6
+    "step_count": 6,
+    "time_profile": { "total_minutes": 35, "active_minutes": 15 },
+    "requires_prep": false
   },
   "alternatives": [
     {
-      "label": "Проще",
+      "label": "Быстрее",
       "slug": "…",
       "title": "…",
       "why": ["меньше стоять у плиты"],

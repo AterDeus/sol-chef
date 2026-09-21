@@ -11,22 +11,22 @@
     margin-block-end: var(--space-6);
   }
 
-  .page-intro__copy {
+  .page-intro__copy,
+  .page-intro__body {
     min-width: 0;
   }
 
   .page-intro--home h1 {
     font-size: clamp(2.15rem, 1.35rem + 3vw, 3.4rem);
     letter-spacing: -0.02em;
-    max-width: 12ch;
     line-height: 1.1;
   }
 
-  .page-intro__copy .lede {
+  .page-intro__body .lede {
     margin-block-end: var(--space-6);
   }
 
-  .page-intro__copy .home-actions {
+  .page-intro__body .home-actions {
     margin-block-end: 0;
   }
 
@@ -48,40 +48,54 @@
   @media (width >= 769px) {
     .page-intro:not(.page-intro--no-art) {
       grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 1.05fr);
+      grid-template-areas:
+        'copy art'
+        'body art';
       gap: var(--space-6);
+      align-items: center;
     }
 
-    .page-art {
+    .page-intro:not(.page-intro--no-art) .page-intro__copy {
+      grid-area: copy;
+      align-self: end;
+    }
+
+    .page-intro:not(.page-intro--no-art) .page-intro__body {
+      grid-area: body;
+      align-self: start;
+    }
+
+    .page-intro:not(.page-intro--no-art) .page-art {
+      grid-area: art;
       width: 100%;
       max-width: none;
+      align-self: center;
+    }
+
+    .page-intro--home h1 {
+      max-width: 12ch;
     }
   }
 
   @media (width < 769px) {
     .page-intro:not(.page-intro--no-art) {
-      display: block;
+      gap: var(--space-4);
       margin-block-end: var(--space-6);
-      min-height: 11rem;
-    }
-
-    .page-intro:not(.page-intro--no-art) .page-intro__copy {
-      position: relative;
-      z-index: 1;
-      padding-inline-end: min(44%, 11.5rem);
     }
 
     .page-intro:not(.page-intro--no-art) .page-art {
-      position: absolute;
-      top: -0.4rem;
-      right: -0.75rem;
-      width: min(58%, 14.5rem);
-      max-width: 14.5rem;
+      width: calc(100% + (2 * var(--page-pad-x)));
+      max-width: none;
+      justify-self: stretch;
+      margin-inline: calc(-1 * var(--page-pad-x));
     }
 
     .page-intro:not(.page-intro--no-art) .page-art__paint {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
-      object-position: 72% 46%;
-      aspect-ratio: 1 / 1;
+      object-position: center;
     }
   }
 }

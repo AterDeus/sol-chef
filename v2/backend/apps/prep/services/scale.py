@@ -3,6 +3,7 @@ from __future__ import annotations
 from decimal import Decimal
 from typing import Any
 
+from apps.core.numbers import decimal_api
 from apps.recipes.services.scale import apply_mode, format_display_amount, round_scaled
 
 
@@ -20,10 +21,8 @@ def scale_qty(qty: Any, unit: str, ratio: Decimal, enabled: bool) -> Decimal:
 
 def qty_payload(qty: Any, unit: str, ratio: Decimal, enabled: bool) -> dict:
     scaled = scale_qty(qty, unit, ratio, enabled)
-    as_int = scaled == scaled.to_integral_value()
-    number: int | float = int(scaled) if as_int else float(scaled)
     return {
-        "qty": number,
+        "qty": decimal_api(scaled),
         "unit": unit,
         "display_amount": format_display_amount(scaled, unit),
     }

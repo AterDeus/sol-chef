@@ -242,10 +242,11 @@ cd /opt/sol-chef/v2/infra
 CADDYFILE=./Caddyfile.prod
 DJANGO_ALLOWED_HOSTS=sol-chef.ru,www.sol-chef.ru,backend,localhost,127.0.0.1
 DJANGO_CSRF_TRUSTED_ORIGINS=https://sol-chef.ru,https://www.sol-chef.ru
+SITE_URL=https://sol-chef.ru
 ```
 
 ```bash
-docker compose -f docker-compose.prod.yml --env-file .env up -d caddy backend
+docker compose -f docker-compose.prod.yml --env-file .env up -d caddy backend frontend
 docker compose -f docker-compose.prod.yml --env-file .env logs caddy
 ```
 

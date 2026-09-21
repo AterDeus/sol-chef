@@ -1,29 +1,33 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { captureScrollClick } from '@/lib/keep-scroll';
 
 export function FilterChip({
   href,
-  pressed,
+  selected,
   children,
   ariaLabel,
+  hint,
 }: {
   href: string;
-  pressed: boolean;
+  selected: boolean;
   children: ReactNode;
   ariaLabel?: string;
+  hint?: string;
 }) {
-  const router = useRouter();
   return (
-    <button
-      type="button"
-      className={pressed ? 'chip is-active' : 'chip'}
-      aria-pressed={pressed}
+    <Link
+      href={href}
+      scroll={false}
+      className={selected ? 'chip is-active' : 'chip'}
       aria-label={ariaLabel}
-      onClick={() => router.push(href)}
+      aria-current={selected ? 'page' : undefined}
+      title={hint}
+      onClick={captureScrollClick}
     >
       {children}
-    </button>
+    </Link>
   );
 }
